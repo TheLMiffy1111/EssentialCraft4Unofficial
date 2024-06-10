@@ -205,7 +205,7 @@ publishMods {
 	file = remapJar.archiveFile
 	version = displayName = "${mcVersion}-${project.version}"
 	changelog = file("changelog.md").text
-	type = STABLE
+	type = BETA
 	modLoaders.add("forge")
 	additionalFiles.from(remapSourcesJar.archiveFile)
 
