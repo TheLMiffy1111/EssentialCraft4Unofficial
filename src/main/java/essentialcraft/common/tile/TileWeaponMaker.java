@@ -338,7 +338,7 @@ public class TileWeaponMaker extends TileMRUGeneric {
 	public boolean areIngridientsCorrect() {
 		//If output is empty
 		if(getStackInSlot(0).isEmpty()) {
-			if(!getStackInSlot(1).isEmpty() && isOreDict(getStackInSlot(1),"coreMagic")) {
+			if(!getStackInSlot(1).isEmpty() && isOreDict(getStackInSlot(1), "coreMagic")) {
 				if(!getStackInSlot(2).isEmpty() && getStackInSlot(2).getItem() instanceof ItemMRUStorageEC && getStackInSlot(2).getItemDamage() >= 1) {
 					String base = getBase();
 					String handle = getHandle();

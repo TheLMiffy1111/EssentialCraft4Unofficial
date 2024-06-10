@@ -34,11 +34,11 @@ public class TileMonsterHolder extends TileMRUGeneric {
 					if(!(e instanceof EntityPlayer)) {
 						if(mruStorage.getMRU() >= mruUsage) {
 							mruStorage.extractMRU(mruUsage, true);
-							Coord3D tilePos = new Coord3D(pos.getX()+0.5D,pos.getY()+0.5D,pos.getZ()+0.5D);
-							Coord3D mobPosition = new Coord3D(e.posX,e.posY,e.posZ);
-							DummyDistance dist = new DummyDistance(tilePos,mobPosition);
+							Coord3D tilePos = new Coord3D(pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D);
+							Coord3D mobPosition = new Coord3D(e.posX, e.posY, e.posZ);
+							DummyDistance dist = new DummyDistance(tilePos, mobPosition);
 							if(dist.getDistance() < rad && dist.getDistance() >= rad - 3) {
-								Vec3d posVector = new Vec3d(tilePos.x-mobPosition.x,tilePos.y-mobPosition.y ,tilePos.z-mobPosition.z);
+								Vec3d posVector = new Vec3d(tilePos.x-mobPosition.x, tilePos.y-mobPosition.y , tilePos.z-mobPosition.z);
 								e.setPositionAndRotation(tilePos.x-posVector.x/1.1D, tilePos.y-posVector.y/1.1D, tilePos.z-posVector.z/1.1D, e.rotationYaw, e.rotationPitch);
 							}
 						}

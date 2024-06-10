@@ -28,7 +28,7 @@ public class RenderPlayerClone extends RenderBiped<EntityPlayerClone> {
 	}
 
 	public RenderPlayerClone(RenderManager rm) {
-		super(rm, new ModelBiped(0,0,64,64), 0.5F);
+		super(rm, new ModelBiped(0, 0, 64, 64), 0.5F);
 		model = (ModelBiped)super.mainModel;
 		this.addLayer(new LayerBipedArmor(this));
 	}

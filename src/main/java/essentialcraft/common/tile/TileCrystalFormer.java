@@ -61,7 +61,7 @@ public class TileCrystalFormer extends TileMRUGeneric {
 		decrStackSize(5, 1);
 		decrStackSize(6, 1);
 		decrStackSize(7, 1);
-		ItemStack crystal = new ItemStack(BlocksCore.elementalCrystal,1,0);
+		ItemStack crystal = new ItemStack(BlocksCore.elementalCrystal, 1, 0);
 		MiscUtils.getStackTag(crystal).setFloat("size", 1);
 		MiscUtils.getStackTag(crystal).setFloat("fire", 0);
 		MiscUtils.getStackTag(crystal).setFloat("water", 0);

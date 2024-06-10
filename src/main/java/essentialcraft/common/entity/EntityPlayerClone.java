@@ -65,7 +65,7 @@ public class EntityPlayerClone extends EntityZombie {
 	@Override
 	public void onUpdate() {
 		if(!isPotionActive(MobEffects.SPEED)) {
-			addPotionEffect(new PotionEffect(MobEffects.SPEED,200,3,true,true));
+			addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 3, true, true));
 		}
 
 		if(deathTime > 0) {
@@ -161,6 +161,6 @@ public class EntityPlayerClone extends EntityZombie {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

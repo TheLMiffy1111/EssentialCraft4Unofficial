@@ -21,7 +21,7 @@ public class RenderCorruptionCleaner extends TileEntitySpecialRenderer<TileCorru
 		if(tile.cleared == null) {}
 		else {
 			GlStateManager.pushMatrix();
-			float[] o = {tile.cleared.getX(),tile.cleared.getY()+1.45F,tile.cleared.getZ()};
+			float[] o = {tile.cleared.getX(), tile.cleared.getY()+1.45F, tile.cleared.getZ()};
 			GlStateManager.popMatrix();
 
 			float f21 = 0 + partialTicks;
@@ -43,7 +43,7 @@ public class RenderCorruptionCleaner extends TileEntitySpecialRenderer<TileCorru
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
 			GlStateManager.disableCull();
-			DrawUtils.bindTexture("essentialcraft","textures/special/mru_beam.png");
+			DrawUtils.bindTexture("essentialcraft", "textures/special/mru_beam.png");
 			GlStateManager.shadeModel(GL11.GL_SMOOTH);
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);

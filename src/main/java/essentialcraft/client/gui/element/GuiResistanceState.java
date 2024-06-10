@@ -12,7 +12,7 @@ public class GuiResistanceState extends GuiTextElement{
 
 	public GuiResistanceState(int i, int j, TileEntity t)
 	{
-		super(i,j);
+		super(i, j);
 		tile = t;
 	}
 

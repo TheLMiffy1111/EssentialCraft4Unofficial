@@ -11,7 +11,7 @@ public class GuiWeatherState extends GuiTextElement {
 	public TileWeatherController tile;
 
 	public GuiWeatherState(int i, int j, TileWeatherController t) {
-		super(i,j);
+		super(i, j);
 		tile = t;
 	}
 

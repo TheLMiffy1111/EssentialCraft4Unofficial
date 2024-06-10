@@ -43,7 +43,7 @@ public class EntityShadowKnife extends EntityThrowable {
 				setDead();
 				if(mop.entityHit instanceof EntityPlayer)
 				{
-					ShadeUtils.attackPlayerWithShade((EntityPlayer)mop.entityHit, getThrower(), new ItemStack(ItemsCore.shadeKnife,1,0));
+					ShadeUtils.attackPlayerWithShade((EntityPlayer)mop.entityHit, getThrower(), new ItemStack(ItemsCore.shadeKnife, 1, 0));
 				}
 			}
 		}
@@ -54,10 +54,10 @@ public class EntityShadowKnife extends EntityThrowable {
 		double d0 = e.posX + (rand.nextDouble() - 0.5D) * 64.0D;
 		double d1 = e.posY + (rand.nextInt(64) - 32);
 		double d2 = e.posZ + (rand.nextDouble() - 0.5D) * 64.0D;
-		return teleport(e,d0, d1, d2);
+		return teleport(e, d0, d1, d2);
 	}
 
-	protected boolean teleport(Entity e,double x, double y, double z)
+	protected boolean teleport(Entity e, double x, double y, double z)
 	{
 		double d3 = e.posX;
 		double d4 = e.posY;
@@ -126,6 +126,6 @@ public class EntityShadowKnife extends EntityThrowable {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

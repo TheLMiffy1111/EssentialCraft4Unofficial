@@ -216,9 +216,9 @@ public class TileMRUCoil extends TileMRUGeneric {
 			}
 			b.attackEntityFrom(DamageSource.MAGIC, damage);
 			if(getWorld().isRemote && monsterLightning == null) {
-				getWorld().playSound(pos.getX()+0.5F,pos.getY()+0.5F,pos.getZ()+0.5F, SoundRegistry.machineLightningHit, SoundCategory.BLOCKS, 2F, 2F, false);
+				getWorld().playSound(pos.getX()+0.5F, pos.getY()+0.5F, pos.getZ()+0.5F, SoundRegistry.machineLightningHit, SoundCategory.BLOCKS, 2F, 2F, false);
 			}
-			monsterLightning = new Lightning(getWorld().rand, new Coord3D(0.5F,0.8F,0.5F), new Coord3D(b.posX-pos.getX()+0.5D, b.posY-pos.getY()+0.8D, b.posZ-pos.getZ()+0.5D), 0.1F, 1F, 0.0F, 0.7F);
+			monsterLightning = new Lightning(getWorld().rand, new Coord3D(0.5F, 0.8F, 0.5F), new Coord3D(b.posX-pos.getX()+0.5D, b.posY-pos.getY()+0.8D, b.posZ-pos.getZ()+0.5D), 0.1F, 1F, 0.0F, 0.7F);
 			mruStorage.extractMRU(mruUsage, true);
 		}
 	}

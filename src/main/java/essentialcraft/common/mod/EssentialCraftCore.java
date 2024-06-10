@@ -55,7 +55,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 		modid = EssentialCraftCore.MODID,
 		name = "EssentialCraftIVUnofficial",
 		version = EssentialCraftCore.VERSION,
-		dependencies = "required-after:dummycore@[2.4.112.5,);required-after:baubles",
+		dependencies = "required-after:dummycore@[2.4.112.5, );required-after:baubles",
 		guiFactory = "essentialcraft.client.gui.ModConfigGuiHandler"
 		)
 public class EssentialCraftCore {

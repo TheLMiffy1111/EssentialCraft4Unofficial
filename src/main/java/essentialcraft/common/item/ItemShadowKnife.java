@@ -57,7 +57,7 @@ public class ItemShadowKnife extends ItemSwordEC {
 
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem) {
-		toggleActivity(entityItem.getItem(),false);
+		toggleActivity(entityItem.getItem(), false);
 		return super.onEntityItemUpdate(entityItem);
 	}
 
@@ -70,16 +70,16 @@ public class ItemShadowKnife extends ItemSwordEC {
 			}
 		}
 		if(e instanceof IShadeHandlerEntity) {
-			toggleActivity(sword,true);
+			toggleActivity(sword, true);
 		}
 
 		if(e instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer)e;
 			if(ECUtils.getData(p).getMatrixTypeID() == 4) {
-				toggleActivity(sword,true);
+				toggleActivity(sword, true);
 			}
 			else {
-				toggleActivity(sword,false);
+				toggleActivity(sword, false);
 			}
 		}
 	}

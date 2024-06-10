@@ -88,7 +88,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 	@Override
 	public void onUpdate() {
 		if(!getEntityWorld().isRemote) {
-			getDataManager().set(DESIRED,desiredItem);
+			getDataManager().set(DESIRED, desiredItem);
 		}
 
 		super.onUpdate();
@@ -102,9 +102,9 @@ public class EntityDemon extends EntityLiving implements IInventory {
 					double d1 = rand.nextGaussian() * 0.02D;
 					getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + rand.nextFloat() * width * 2.0F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, d2, d0, d1);
 				}
-				getEntityWorld().playSound(posX,posY,posZ,SoundRegistry.entityDemonDoom,SoundCategory.HOSTILE, getSoundVolume(), getSoundPitch(),false);
-				ItemStack result = new ItemStack(ItemsCore.genericItem,3+getEntityWorld().rand.nextInt(6),52);
-				EntityItem itm = new EntityItem(getEntityWorld(),posX,posY,posZ,result);
+				getEntityWorld().playSound(posX, posY, posZ, SoundRegistry.entityDemonDoom, SoundCategory.HOSTILE, getSoundVolume(), getSoundPitch(), false);
+				ItemStack result = new ItemStack(ItemsCore.genericItem, 3+getEntityWorld().rand.nextInt(6), 52);
+				EntityItem itm = new EntityItem(getEntityWorld(), posX, posY, posZ, result);
 				if(!getEntityWorld().isRemote) {
 					getEntityWorld().spawnEntity(itm);
 				}
@@ -144,7 +144,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 		if(getEntityWorld().isRemote)
 		 {
 			desiredItem = getDataManager().get(DESIRED);
-		//EssentialCraftCore.proxy.SmokeFX(posX,posY+1.5D+MathUtils.randomDouble(getRNG()),posZ,MathUtils.randomDouble(getRNG())/18,-0.09D+MathUtils.randomDouble(getRNG())/18,MathUtils.randomDouble(getRNG())/18,3,1,0.6D-this.getEntityWorld().rand.nextDouble()/3D,0.2D);
+		//EssentialCraftCore.proxy.SmokeFX(posX, posY+1.5D+MathUtils.randomDouble(getRNG()), posZ, MathUtils.randomDouble(getRNG())/18, -0.09D+MathUtils.randomDouble(getRNG())/18, MathUtils.randomDouble(getRNG())/18, 3, 1, 0.6D-this.getEntityWorld().rand.nextDouble()/3D, 0.2D);
 		}
 	}
 
@@ -153,7 +153,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(DESIRED, new ItemStack(Items.APPLE,1,0));
+		dataManager.register(DESIRED, new ItemStack(Items.APPLE, 1, 0));
 	}
 
 	@Override
@@ -298,7 +298,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 
 	@Override

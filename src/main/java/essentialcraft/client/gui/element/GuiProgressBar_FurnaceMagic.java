@@ -10,7 +10,7 @@ public class GuiProgressBar_FurnaceMagic extends GuiTextElement{
 
 	public GuiProgressBar_FurnaceMagic(int i, int j, TileFurnaceMagic table)
 	{
-		super(i,j);
+		super(i, j);
 		tile = table;
 	}
 

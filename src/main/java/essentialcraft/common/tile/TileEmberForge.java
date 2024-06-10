@@ -56,7 +56,7 @@ public class TileEmberForge extends TileMRUGeneric {
 				boolean flag = false;
 				if(world.isRemote) {
 					for(int i = 0; i < 2; ++i) {
-						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+getWorld().rand.nextDouble(),pos.getY()+1.1,pos.getZ()+getWorld().rand.nextDouble(),0,0,0);
+						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+getWorld().rand.nextDouble(), pos.getY()+1.1, pos.getZ()+getWorld().rand.nextDouble(), 0, 0, 0);
 					}
 				}
 				List<EntityItem> list = null;
@@ -80,7 +80,7 @@ public class TileEmberForge extends TileMRUGeneric {
 					ember_2 = list.get(0);
 				}
 
-				list = getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add( 0, 1,-2)),
+				list = getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add( 0, 1, -2)),
 						ei->ei.getItem().getItem() instanceof ItemEmber);
 				if(!list.isEmpty()) {
 					ember_3 = list.get(0);
@@ -332,22 +332,22 @@ public class TileEmberForge extends TileMRUGeneric {
 			}, (world, pos)->
 			testBlock(world, pos.add( 2, 0, 2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add(-2, 0, 2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 2, 0,-2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-2, 0,-2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add( 2, 0, -2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-2, 0, -2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add( 2, 0, 0), BlocksCore.platingPale) &&
 			testBlock(world, pos.add( 0, 0, 2), BlocksCore.platingPale) &&
 			testBlock(world, pos.add(-2, 0, 0), BlocksCore.platingPale) &&
-			testBlock(world, pos.add( 0, 0,-2), BlocksCore.platingPale) &&
+			testBlock(world, pos.add( 0, 0, -2), BlocksCore.platingPale) &&
 			testBlock(world, pos.add( 2, 1, 2), BlocksCore.magicPlating) &&
 			testBlock(world, pos.add(-2, 1, 2), BlocksCore.magicPlating) &&
-			testBlock(world, pos.add(-2, 1,-2), BlocksCore.magicPlating) &&
-			testBlock(world, pos.add( 2, 1,-2), BlocksCore.magicPlating)
+			testBlock(world, pos.add(-2, 1, -2), BlocksCore.magicPlating) &&
+			testBlock(world, pos.add( 2, 1, -2), BlocksCore.magicPlating)
 			);
 
 	public void spawnParticles() {
 		if(world.isRemote && structureChecker.test(getWorld(), getPos())) {
 			/*for(int i = 0; i < 100; ++i)*/ {
-				EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, pos.getY(), pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, 0,2, 0);
+				EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, pos.getY(), pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, 0, 2, 0);
 			}
 		}
 	}

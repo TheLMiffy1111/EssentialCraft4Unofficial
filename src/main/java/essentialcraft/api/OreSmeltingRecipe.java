@@ -17,7 +17,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreSmeltingRecipe {
 
 	public static final ArrayList<OreSmeltingRecipe> RECIPES = Lists.<OreSmeltingRecipe>newArrayList();
-	public static final HashMap<String, OreSmeltingRecipe> RECIPE_MAP = Maps.<String,OreSmeltingRecipe>newHashMap();
+	public static final HashMap<String, OreSmeltingRecipe> RECIPE_MAP = Maps.<String, OreSmeltingRecipe>newHashMap();
 
 	public String oreName;
 	public String outputName;
@@ -74,7 +74,7 @@ public class OreSmeltingRecipe {
 	}
 
 	public static boolean removeRecipe(OreSmeltingRecipe rec) {
-		return RECIPES.remove(rec) && RECIPE_MAP.remove(rec.oreName,rec);
+		return RECIPES.remove(rec) && RECIPE_MAP.remove(rec.oreName, rec);
 	}
 
 	public static int getColorFromItemStack(ItemStack stk) {

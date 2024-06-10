@@ -75,12 +75,12 @@ public class TileMagicalFurnace extends TileMRUGeneric {
 			}, (world, pos)->
 			testBlock(world, pos.add( 2, 0, 2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add(-2, 0, 2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 2, 0,-2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-2, 0,-2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add( 2, 0, -2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-2, 0, -2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add( 2, 1, 2), BlocksCore.heatGenerator) &&
 			testBlock(world, pos.add(-2, 1, 2), BlocksCore.heatGenerator) &&
-			testBlock(world, pos.add( 2, 1,-2), BlocksCore.heatGenerator) &&
-			testBlock(world, pos.add(-2, 1,-2), BlocksCore.heatGenerator)
+			testBlock(world, pos.add( 2, 1, -2), BlocksCore.heatGenerator) &&
+			testBlock(world, pos.add(-2, 1, -2), BlocksCore.heatGenerator)
 			);
 
 	public void smelt() {
@@ -111,21 +111,21 @@ public class TileMagicalFurnace extends TileMRUGeneric {
 					getWorld().spawnEntity(smelted);
 				}
 				if(!getWorld().isRemote) {
-					EntityItem smelted = new EntityItem(getWorld(),pos.getX()+2.5, pos.getY()+2.15, pos.getZ()+2.5, s.copy());
+					EntityItem smelted = new EntityItem(getWorld(), pos.getX()+2.5, pos.getY()+2.15, pos.getZ()+2.5, s.copy());
 					smelted.motionX = 0;
 					smelted.motionY = 0;
 					smelted.motionZ = 0;
 					getWorld().spawnEntity(smelted);
 				}
 				if(!getWorld().isRemote && getWorld().rand.nextDouble() < chanceToDoubleSlags) {
-					EntityItem slag = new EntityItem(getWorld(),pos.getX()-1.5, pos.getY()+2.15, pos.getZ()+2.5, new ItemStack(ItemsCore.magicalSlag));
+					EntityItem slag = new EntityItem(getWorld(), pos.getX()-1.5, pos.getY()+2.15, pos.getZ()+2.5, new ItemStack(ItemsCore.magicalSlag));
 					slag.motionX = 0;
 					slag.motionY = 0;
 					slag.motionZ = 0;
 					getWorld().spawnEntity(slag);
 				}
 				if(!getWorld().isRemote) {
-					EntityItem slag = new EntityItem(getWorld(),pos.getX()+2.5,pos.getY()+2.15,pos.getZ()-1.5,new ItemStack(ItemsCore.magicalSlag));
+					EntityItem slag = new EntityItem(getWorld(), pos.getX()+2.5, pos.getY()+2.15, pos.getZ()-1.5, new ItemStack(ItemsCore.magicalSlag));
 					slag.motionX = 0;
 					slag.motionY = 0;
 					slag.motionZ = 0;
@@ -152,7 +152,7 @@ public class TileMagicalFurnace extends TileMRUGeneric {
 	public void spawnParticles() {
 		if(getWorld().isRemote && structureChecker.test(getWorld(), getPos())) {
 			/*for(int i = 0; i < 100; ++i) */ {
-				EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, pos.getY(), pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, 0,2, 0);
+				EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, pos.getY(), pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, 0, 2, 0);
 			}
 		}
 	}

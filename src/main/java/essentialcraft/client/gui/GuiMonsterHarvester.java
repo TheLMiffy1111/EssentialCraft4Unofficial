@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiMonsterHarvester extends GuiCommon{
 
 	public GuiMonsterHarvester(Container c, TileEntity tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(25, 22, tile));
 		elementList.add(new GuiBoundGemState(25, 40, tile, 0));

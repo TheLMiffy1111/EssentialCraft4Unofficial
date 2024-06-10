@@ -35,7 +35,7 @@ public class GuiMagicalChest extends GuiContainer{
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks,int mX, int mY) {
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mX, int mY) {
 		int k = (width - xSize)/2;
 		int l = (height - ySize)/2;
 		if(tile.getBlockMetadata() == 0) {

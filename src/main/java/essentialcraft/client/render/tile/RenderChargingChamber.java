@@ -27,7 +27,7 @@ public class RenderChargingChamber extends TileEntitySpecialRenderer<TileChargin
 		rotation = rotation + 360F/(tile.getWorld().getWorldTime()+partialTicks) % 360;
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.65F+upperIndex/500F,0.5F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.65F+upperIndex/500F, 0.5F);
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 	}

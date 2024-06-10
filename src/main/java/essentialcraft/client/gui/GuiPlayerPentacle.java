@@ -30,12 +30,12 @@ public class GuiPlayerPentacle extends GuiScreen {
 	public static class EffectButton extends GuiButton {
 		public int listIndex;
 
-		public EffectButton(int id, int x, int y,int sX, int sY, String name) {
-			super(id,x,y,sX,sY,name);
+		public EffectButton(int id, int x, int y, int sX, int sY, String name) {
+			super(id, x, y, sX, sY, name);
 		}
 
-		public EffectButton(int id, int x, int y,int sX, int sY, String name, int index) {
-			super(id,x,y,sX,sY,name);
+		public EffectButton(int id, int x, int y, int sX, int sY, String name, int index) {
+			super(id, x, y, sX, sY, name);
 			listIndex = index;
 			PlayerGenericData data = ECUtils.getData(Minecraft.getMinecraft().player);
 			ArrayList<ICorruptionEffect> effects = (ArrayList<ICorruptionEffect>) data.getEffects();
@@ -154,7 +154,7 @@ public class GuiPlayerPentacle extends GuiScreen {
 				ICorruptionEffect effect = effects.get(eb.listIndex);
 				if(effect.getType().ordinal() <= pentacle.tier || GuiScreen.isShiftKeyDown() && Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
 					if(GuiScreen.isShiftKeyDown() && Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
-						MiscUtils.handleButtonPress(eb.listIndex, getClass(), eb.getClass(), Minecraft.getMinecraft().player, pentacle.getPos().getX(), pentacle.getPos().getY(), pentacle.getPos().getZ(),"||isCreative:true");
+						MiscUtils.handleButtonPress(eb.listIndex, getClass(), eb.getClass(), Minecraft.getMinecraft().player, pentacle.getPos().getX(), pentacle.getPos().getY(), pentacle.getPos().getZ(), "||isCreative:true");
 					}
 					else {
 						pentacle.consumeEnderstarEnergy(effects.get(button.id).getStickiness());
@@ -169,21 +169,21 @@ public class GuiPlayerPentacle extends GuiScreen {
 	public void initGui() {
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
-		buttonList.add(new EffectButton(0,k + 76,l - 40,20,20,"0",0));
-		buttonList.add(new EffectButton(1,k - 36 ,l + 40,20,20,"1",1));
-		buttonList.add(new EffectButton(2,k + 186 ,l + 40,20,20,"2",2));
-		buttonList.add(new EffectButton(3,k + 76 ,l + 16,20,20,"3",3));
-		buttonList.add(new EffectButton(4,k + 30 ,l + 10,20,20,"4",4));
-		buttonList.add(new EffectButton(5,k + 126 ,l + 10,20,20,"5",5));
-		buttonList.add(new EffectButton(6,k + 20 ,l + 57,20,20,"6",6));
-		buttonList.add(new EffectButton(7,k + 132 ,l + 57,20,20,"7",7));
-		buttonList.add(new EffectButton(8,k + 0 ,l + 101,20,20,"8",8));
-		buttonList.add(new EffectButton(9,k + 150 ,l + 101,20,20,"9",9));
-		buttonList.add(new EffectButton(10,k + 42 ,l + 126,20,20,"10",10));
-		buttonList.add(new EffectButton(11,k + 110 ,l + 126,20,20,"11",11));
-		buttonList.add(new EffectButton(12,k + 76 ,l + 156,20,20,"12",12));
-		buttonList.add(new EffectButton(13,k + 0 ,l + 174,20,20,"13",13));
-		buttonList.add(new EffectButton(14,k + 150 ,l + 174,20,20,"14",14));
+		buttonList.add(new EffectButton(0, k + 76, l - 40, 20, 20, "0", 0));
+		buttonList.add(new EffectButton(1, k - 36 , l + 40, 20, 20, "1", 1));
+		buttonList.add(new EffectButton(2, k + 186 , l + 40, 20, 20, "2", 2));
+		buttonList.add(new EffectButton(3, k + 76 , l + 16, 20, 20, "3", 3));
+		buttonList.add(new EffectButton(4, k + 30 , l + 10, 20, 20, "4", 4));
+		buttonList.add(new EffectButton(5, k + 126 , l + 10, 20, 20, "5", 5));
+		buttonList.add(new EffectButton(6, k + 20 , l + 57, 20, 20, "6", 6));
+		buttonList.add(new EffectButton(7, k + 132 , l + 57, 20, 20, "7", 7));
+		buttonList.add(new EffectButton(8, k + 0 , l + 101, 20, 20, "8", 8));
+		buttonList.add(new EffectButton(9, k + 150 , l + 101, 20, 20, "9", 9));
+		buttonList.add(new EffectButton(10, k + 42 , l + 126, 20, 20, "10", 10));
+		buttonList.add(new EffectButton(11, k + 110 , l + 126, 20, 20, "11", 11));
+		buttonList.add(new EffectButton(12, k + 76 , l + 156, 20, 20, "12", 12));
+		buttonList.add(new EffectButton(13, k + 0 , l + 174, 20, 20, "13", 13));
+		buttonList.add(new EffectButton(14, k + 150 , l + 174, 20, 20, "14", 14));
 	}
 
 	@Override

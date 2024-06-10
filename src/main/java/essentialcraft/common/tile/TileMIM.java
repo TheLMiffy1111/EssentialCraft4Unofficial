@@ -183,7 +183,7 @@ public class TileMIM extends TileMRUGeneric {
 		return times;
 	}
 
-	public int retrieveItemStackFromSystem(ItemStack is, boolean oreDict,boolean doRetrieve) {
+	public int retrieveItemStackFromSystem(ItemStack is, boolean oreDict, boolean doRetrieve) {
 		if(is.isEmpty()) {
 			return 0;
 		}
@@ -198,7 +198,7 @@ public class TileMIM extends TileMRUGeneric {
 				if(getWorld().isBlockLoaded(new BlockPos(c[0], c[1], c[2]))) {
 					TileEntity t = getWorld().getTileEntity(new BlockPos(c[0], c[1], c[2]));
 					if(t != null && t instanceof TileMIMInventoryStorage) {
-						int newLeft = ((TileMIMInventoryStorage)t).retrieveStack(is,oreDict,doRetrieve);
+						int newLeft = ((TileMIMInventoryStorage)t).retrieveStack(is, oreDict, doRetrieve);
 						if(newLeft != 0) {
 							left = newLeft;
 							is.setCount(newLeft);
@@ -275,8 +275,8 @@ public class TileMIM extends TileMRUGeneric {
 
 	public void rebuildAllItems() {
 		current.clear();
-		HashMap<String,Integer> allItems = new HashMap<>();
-		HashMap<String,ItemStack> foundByID = new HashMap<>();
+		HashMap<String, Integer> allItems = new HashMap<>();
+		HashMap<String, ItemStack> foundByID = new HashMap<>();
 		ArrayList<String> ids = new ArrayList<>();
 
 		for(int i = 1; i < 7; ++i) {

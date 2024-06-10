@@ -18,23 +18,23 @@ public class RenderMonsterHarvester extends TileEntitySpecialRenderer<TileMonste
 		float rotation = (tile.getWorld().getWorldTime()+partialTicks) % 360;
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(2), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.95F,0.5F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(2), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.95F, 0.5F);
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation,0F, 1, 1, 1, 0.3F, 1.15F,0.3F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation, 0F, 1, 1, 1, 0.3F, 1.15F, 0.3F);
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(3), x, y, z, rotation,0F, 1, 1, 1, 0.7F, 1.15F,0.3F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(3), x, y, z, rotation, 0F, 1, 1, 1, 0.7F, 1.15F, 0.3F);
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(4), x, y, z, rotation,0F, 1, 1, 1, 0.3F, 1.15F,0.7F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(4), x, y, z, rotation, 0F, 1, 1, 1, 0.3F, 1.15F, 0.7F);
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(5), x, y, z, rotation,0F, 1, 1, 1, 0.7F, 1.15F,0.7F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(5), x, y, z, rotation, 0F, 1, 1, 1, 0.7F, 1.15F, 0.7F);
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 	}

@@ -21,7 +21,7 @@ public class WorldGenElementalDrops extends WorldGenerator {
 	public boolean isNether;
 	public int generationSteps;
 	public Random rnd;
-	public int x,y,z;
+	public int x, y, z;
 	public World w;
 
 	public WorldGenElementalDrops selectValidAABBGen() {
@@ -93,22 +93,22 @@ public class WorldGenElementalDrops extends WorldGenerator {
 		for(int element : selection) {
 			switch(element) {
 			case 0:
-				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta),16,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x, y, z));
+				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta), 16, BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x, y, z));
 				break;
 			case 1:
-				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+1),8,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
+				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+1), 8, BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
 				break;
 			case 2:
-				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+2),8,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
+				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+2), 8, BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
 				break;
 			case 3:
-				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+3),8,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
+				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+3), 8, BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
 				break;
 			case 4:
-				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+4),8,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
+				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta+4), 8, BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
 				break;
 			case 5:
-				new WorldGenMinable(BlocksCore.oreMithriline.getStateFromMeta(meta/5),8,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
+				new WorldGenMinable(BlocksCore.oreMithriline.getStateFromMeta(meta/5), 8, BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x+rnd.nextInt(6)-rnd.nextInt(6), y+rnd.nextInt(6)-rnd.nextInt(6), z+rnd.nextInt(6)-rnd.nextInt(6)));
 				break;
 			}
 		}
@@ -122,7 +122,7 @@ public class WorldGenElementalDrops extends WorldGenerator {
 			int y = random.nextInt(world.getHeight());
 			int z = chunkZ*16 + random.nextInt(16);
 			int type = world.provider.isSurfaceWorld() ? 0 : world.provider.doesWaterVaporize() ? -1 : 1;
-			new WorldGenElementalDrops(world,type,x,y,z).selectValidAABBGen().generate(world, random, new BlockPos(x,y,z));
+			new WorldGenElementalDrops(world, type, x, y, z).selectValidAABBGen().generate(world, random, new BlockPos(x, y, z));
 		}
 	}
 }

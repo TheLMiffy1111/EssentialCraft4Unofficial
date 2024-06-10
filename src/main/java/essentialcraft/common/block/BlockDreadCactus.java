@@ -29,7 +29,7 @@ public class BlockDreadCactus extends BlockCactus implements IModelRegisterer {
 		super.onEntityCollision(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_5_);
 		if(p_149670_5_ instanceof EntityLivingBase) {
 			EntityLivingBase base = (EntityLivingBase) p_149670_5_;
-			base.addPotionEffect(new PotionEffect(MobEffects.POISON,100,0));
+			base.addPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0));
 		}
 	}
 

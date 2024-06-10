@@ -38,7 +38,7 @@ public class TileSolarPrism extends TileEntity implements ITickable {
 					--y;
 					p.setY(y);
 					if(!getWorld().isAirBlock(p)) {
-						EntitySolarBeam beam = new EntitySolarBeam(getWorld(),pos.getX()+0.5,y,pos.getZ()+0.5);
+						EntitySolarBeam beam = new EntitySolarBeam(getWorld(), pos.getX()+0.5, y, pos.getZ()+0.5);
 						getWorld().spawnEntity(beam);
 					}
 				}

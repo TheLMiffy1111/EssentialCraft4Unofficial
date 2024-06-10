@@ -25,7 +25,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockPlayerPentacle extends BlockContainer implements IModelRegisterer {
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0,0,0,1,0.0625F,1);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.0625F, 1);
 
 	public BlockPlayerPentacle() {
 		super(Material.ROCK, MapColor.AIR);

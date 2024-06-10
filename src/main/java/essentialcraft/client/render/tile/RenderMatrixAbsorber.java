@@ -27,7 +27,7 @@ public class RenderMatrixAbsorber extends TileEntitySpecialRenderer<TileMatrixAb
 		rotation = rotation + 360F/(tile.getWorld().getWorldTime()+partialTicks) % 360;
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(0), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.25F+upperIndex/500F, 0.5F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(0), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.25F+upperIndex/500F, 0.5F);
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 	}

@@ -44,7 +44,7 @@ public class ItemBoundGem extends Item implements IModelRegisterer {
 			pos = pos.down();
 		}
 		ItemStack is = createTag(stack);
-		MiscUtils.getStackTag(is).setIntArray("pos", new int[]{pos.getX(),pos.getY(),pos.getZ()});
+		MiscUtils.getStackTag(is).setIntArray("pos", new int[]{pos.getX(), pos.getY(), pos.getZ()});
 		MiscUtils.getStackTag(is).setInteger("dim", player.dimension);
 		MiscUtils.getStackTag(is).setBoolean("created", !player.isSneaking());
 		if(stack.getCount() <= 0) {
@@ -112,7 +112,7 @@ public class ItemBoundGem extends Item implements IModelRegisterer {
 
 		if(retStk.getTagCompound() == null) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setIntArray("pos", new int[]{0,0,0});
+			tag.setIntArray("pos", new int[]{0, 0, 0});
 			retStk.setTagCompound(tag);
 			return retStk;
 		}

@@ -158,44 +158,44 @@ public class TileWindRune extends TileEntity implements ITickable {
 	testBlock(w, cp.add( 1, 0, 0), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-1, 0, 0), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 0, 0, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 0, 0,-1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 1, 1,-1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 0, 0, -1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 1, 1, -1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 1, 1, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add(-1, 1,-1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add(-1, 1, -1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-1, 1, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 1, 2,-1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 1, 2, -1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 1, 2, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add(-1, 2,-1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add(-1, 2, -1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-1, 2, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 1, 0,-1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 2, 0,-1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-2, 0,-1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 1, 0, -1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 2, 0, -1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-2, 0, -1), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 2, 0, 1), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-2, 0, 1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 1, 0,-2), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-1, 0,-2), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 1, 0, -2), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-1, 0, -2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 1, 0, 2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-1, 0, 2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-2, 0, 0), BlocksCore.magicPlating) &&
 	testBlock(w, cp.add(-2, 1, 0), BlocksCore.magicPlating) &&
 	testBlock(w, cp.add( 2, 0, 0), BlocksCore.magicPlating) &&
 	testBlock(w, cp.add( 2, 1, 0), BlocksCore.magicPlating) &&
-	testBlock(w, cp.add( 0, 0,-2), BlocksCore.magicPlating) &&
-	testBlock(w, cp.add( 0, 1,-2), BlocksCore.magicPlating) &&
+	testBlock(w, cp.add( 0, 0, -2), BlocksCore.magicPlating) &&
+	testBlock(w, cp.add( 0, 1, -2), BlocksCore.magicPlating) &&
 	testBlock(w, cp.add( 0, 0, 2), BlocksCore.magicPlating) &&
 	testBlock(w, cp.add( 0, 1, 2), BlocksCore.magicPlating) &&
 	testBlock(w, cp.add( 1, 0, 1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-1, 0,-1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-1, 0, -1), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-1, 0, 1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 1, 0,-1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 1, 0, -1), BlocksCore.platingPale) &&
 	testESPEHandler(w, cp.add(-1, 3, 1), 0) &&
 	testESPEHandler(w, cp.add( 1, 3, 1), 0) &&
-	testESPEHandler(w, cp.add(-1, 3,-1), 0) &&
-	testESPEHandler(w, cp.add( 1, 3,-1), 0) &&
+	testESPEHandler(w, cp.add(-1, 3, -1), 0) &&
+	testESPEHandler(w, cp.add( 1, 3, -1), 0) &&
 	testESPEHandler(w, cp.add(-2, 1, 2), 0) &&
 	testESPEHandler(w, cp.add( 2, 1, 2), 0) &&
-	testESPEHandler(w, cp.add(-2, 1,-2), 0) &&
-	testESPEHandler(w, cp.add( 2, 1,-2), 0);
+	testESPEHandler(w, cp.add(-2, 1, -2), 0) &&
+	testESPEHandler(w, cp.add( 2, 1, -2), 0);
 
 	public void checkStructureAndTier() {
 		World w = getWorld();

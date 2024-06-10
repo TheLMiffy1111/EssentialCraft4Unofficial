@@ -13,7 +13,7 @@ public class GuiRepairState extends GuiTextElement{
 
 	public GuiRepairState(int i, int j, TileEntity t, int slot)
 	{
-		super(i,j);
+		super(i, j);
 		tile = t;
 		slotNum = slot;
 	}

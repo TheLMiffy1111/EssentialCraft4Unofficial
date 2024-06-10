@@ -20,7 +20,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockHologramSpawner extends Block implements IModelRegisterer {
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0,0,0,1,0.5F,1);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.5F, 1);
 
 	public BlockHologramSpawner()
 	{

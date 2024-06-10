@@ -15,7 +15,7 @@ public class ItemMagicalChisel extends Item implements IModelRegisterer {
 		{
 			return ItemStack.EMPTY;
 		}
-		return new ItemStack(itemStack.getItem(),itemStack.getCount(),itemStack.getItemDamage()+1);
+		return new ItemStack(itemStack.getItem(), itemStack.getCount(), itemStack.getItemDamage()+1);
 	}
 
 	@Override

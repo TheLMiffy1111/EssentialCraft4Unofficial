@@ -123,7 +123,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 				{
 					setFirstPoint(is, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
 					if(p.getEntityWorld().isRemote) {
-						p.sendMessage(new TextComponentString("[Magical Builder] First position: "+mop.getBlockPos().getX()+","+mop.getBlockPos().getY()+","+mop.getBlockPos().getZ()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+						p.sendMessage(new TextComponentString("[Magical Builder] First position: "+mop.getBlockPos().getX()+", "+mop.getBlockPos().getY()+", "+mop.getBlockPos().getZ()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 					}
 					return super.onItemRightClick(w, p, hand);
 				}
@@ -132,7 +132,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 				{
 					Coord3D first = getFirstPoint(is);
 					Coord3D second = new Coord3D(mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
-					DummyDistance dist = new DummyDistance(first,second);
+					DummyDistance dist = new DummyDistance(first, second);
 					if(dist.getDistance() > 48)
 					{
 						if(p.getEntityWorld().isRemote) {
@@ -142,7 +142,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 					}
 					setSecondPoint(is, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
 					if(p.getEntityWorld().isRemote) {
-						p.sendMessage(new TextComponentString("[Magical Builder] Second position: "+mop.getBlockPos().getX()+","+mop.getBlockPos().getY()+","+mop.getBlockPos().getZ()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+						p.sendMessage(new TextComponentString("[Magical Builder] Second position: "+mop.getBlockPos().getX()+", "+mop.getBlockPos().getY()+", "+mop.getBlockPos().getZ()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 					}
 					return super.onItemRightClick(w, p, hand);
 				}
@@ -187,12 +187,12 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 
 	public Coord3D getFirstPoint(ItemStack is)
 	{
-		return new Coord3D(MiscUtils.getStackTag(is).getInteger("p1_x"),MiscUtils.getStackTag(is).getInteger("p1_y"),MiscUtils.getStackTag(is).getInteger("p1_z"));
+		return new Coord3D(MiscUtils.getStackTag(is).getInteger("p1_x"), MiscUtils.getStackTag(is).getInteger("p1_y"), MiscUtils.getStackTag(is).getInteger("p1_z"));
 	}
 
 	public Coord3D getSecondPoint(ItemStack is)
 	{
-		return new Coord3D(MiscUtils.getStackTag(is).getInteger("p2_x"),MiscUtils.getStackTag(is).getInteger("p2_y"),MiscUtils.getStackTag(is).getInteger("p2_z"));
+		return new Coord3D(MiscUtils.getStackTag(is).getInteger("p2_x"), MiscUtils.getStackTag(is).getInteger("p2_y"), MiscUtils.getStackTag(is).getInteger("p2_z"));
 	}
 
 	public boolean resetPoints(ItemStack is)
@@ -259,7 +259,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 	{
 		if(!w.isAirBlock(new BlockPos(x, y, z)))
 		{
-			ItemStack stored = new ItemStack(w.getBlockState(new BlockPos(x, y, z)).getBlock(),1,w.getBlockState(new BlockPos(x, y, z)).getBlock().getMetaFromState(w.getBlockState(new BlockPos(x, y, z))));
+			ItemStack stored = new ItemStack(w.getBlockState(new BlockPos(x, y, z)).getBlock(), 1, w.getBlockState(new BlockPos(x, y, z)).getBlock().getMetaFromState(w.getBlockState(new BlockPos(x, y, z))));
 			NBTTagCompound tag = new NBTTagCompound();
 			stored.writeToNBT(tag);
 			MiscUtils.getStackTag(is).setTag("storedStackTag", tag);
@@ -296,7 +296,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 
 		e.inventory.decrStackSize(slot, 1);
 		if(e.inventory.getStackInSlot(slot).isEmpty() || e.inventory.getStackInSlot(slot).getCount() <= 0) {
-			return findPlayerISSlot(e,is);
+			return findPlayerISSlot(e, is);
 		}
 
 		return slot;
@@ -310,7 +310,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 		int diffY = MathHelper.floor(MathUtils.module(end.y-start.y));
 		int diffZ = MathHelper.floor(MathUtils.module(end.z-start.z));
 		ItemStack setTo = retrieveStackFromNBT(is);
-		int slotNum = findPlayerISSlot(e,setTo);
+		int slotNum = findPlayerISSlot(e, setTo);
 		int itemsSet = 0;
 		if(is.getItemDamage() == 1) {
 			slotNum = Integer.MAX_VALUE;
@@ -422,7 +422,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 
 							if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote)
 							{
-								ItemStack worldStack = new ItemStack(e.getEntityWorld().getBlockState(dp).getBlock(),1,e.getEntityWorld().getBlockState(dp).getBlock().getMetaFromState(e.getEntityWorld().getBlockState(dp)));
+								ItemStack worldStack = new ItemStack(e.getEntityWorld().getBlockState(dp).getBlock(), 1, e.getEntityWorld().getBlockState(dp).getBlock().getMetaFromState(e.getEntityWorld().getBlockState(dp)));
 								if(!worldStack.isEmpty() && setTo.isItemEqual(worldStack))
 								{
 									if(!ECUtils.playerUseMRU(e, is, 250)) {
@@ -455,7 +455,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 
 							if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote)
 							{
-								ItemStack worldStack = new ItemStack(e.getEntityWorld().getBlockState(dp).getBlock(),1,e.getEntityWorld().getBlockState(dp).getBlock().getMetaFromState(e.getEntityWorld().getBlockState(dp)));
+								ItemStack worldStack = new ItemStack(e.getEntityWorld().getBlockState(dp).getBlock(), 1, e.getEntityWorld().getBlockState(dp).getBlock().getMetaFromState(e.getEntityWorld().getBlockState(dp)));
 								if(!worldStack.isEmpty() && !setTo.isItemEqual(worldStack))
 								{
 									if(!ECUtils.playerUseMRU(e, is, 250)) {

@@ -152,7 +152,7 @@ public class GunInitialization {
 		;
 
 
-		new ScopeMaterial("mru",false).setRecipe(ItemGenericEC.getStkByName("magicPurifyedGlassAlloy"))
+		new ScopeMaterial("mru", false).setRecipe(ItemGenericEC.getStkByName("magicPurifyedGlassAlloy"))
 		.appendData("scope.zoom", 1.2F)
 		.setTextures(new String[] {
 				"essentialcraft:items/guns/pistol/scope/mru",
@@ -161,33 +161,33 @@ public class GunInitialization {
 		})
 		.register();
 
-		new ScopeMaterial("mru",true).setRecipe(ItemGenericEC.getStkByName("magicalIngot"))
+		new ScopeMaterial("mru", true).setRecipe(ItemGenericEC.getStkByName("magicalIngot"))
 		.appendData("scope.zoom", 3F)
 		.setTexture("essentialcraft:items/guns/sniper/scope/mru")
 		.register();
 
-		new ScopeMaterial("pale",true).setRecipe(ItemGenericEC.getStkByName("paleIngot"))
+		new ScopeMaterial("pale", true).setRecipe(ItemGenericEC.getStkByName("paleIngot"))
 		.appendData("scope.zoom", 5F)
 		.setTexture("essentialcraft:items/guns/sniper/scope/pale")
 		.register();
 
-		new ScopeMaterial("mithriline",true).setRecipe(ItemGenericEC.getStkByName("mithrilineIngot"))
+		new ScopeMaterial("mithriline", true).setRecipe(ItemGenericEC.getStkByName("mithrilineIngot"))
 		.appendData("scope.zoom", 7F)
 		.setTexture("essentialcraft:items/guns/sniper/scope/mithriline")
 		.register();
 
-		new ScopeMaterial("void",true).setRecipe(ItemGenericEC.getStkByName("voidPlating"))
+		new ScopeMaterial("void", true).setRecipe(ItemGenericEC.getStkByName("voidPlating"))
 		.appendData("scope.zoom", 12F)
 		.setTexture("essentialcraft:items/guns/sniper/scope/void")
 		.register();
 
-		new ScopeMaterial("demonic",true).setRecipe(ItemGenericEC.getStkByName("ackroniteIngot"))
+		new ScopeMaterial("demonic", true).setRecipe(ItemGenericEC.getStkByName("ackroniteIngot"))
 		.appendData("scope.zoom", 16F)
 		.setTexture("essentialcraft:items/guns/sniper/scope/demonic")
 		.register();
 
 
-		new LenseMaterial("chaos").setRecipe(new ItemStack(ItemsCore.matrixProj,1,1))
+		new LenseMaterial("chaos").setRecipe(new ItemStack(ItemsCore.matrixProj, 1, 1))
 		.appendData("balance", 1F)
 		.setTextures(new String[] {
 				"essentialcraft:items/guns/pistol/lense/chaos",
@@ -197,7 +197,7 @@ public class GunInitialization {
 		})
 		.register();
 
-		new LenseMaterial("frozen").setRecipe(new ItemStack(ItemsCore.matrixProj,1,2))
+		new LenseMaterial("frozen").setRecipe(new ItemStack(ItemsCore.matrixProj, 1, 2))
 		.appendData("balance", 2F)
 		.setTextures(new String[] {
 				"essentialcraft:items/guns/pistol/lense/frozen",
@@ -207,7 +207,7 @@ public class GunInitialization {
 		})
 		.register();
 
-		new LenseMaterial("pure").setRecipe(new ItemStack(ItemsCore.matrixProj,1,3))
+		new LenseMaterial("pure").setRecipe(new ItemStack(ItemsCore.matrixProj, 1, 3))
 		.appendData("balance", 3F)
 		.setTextures(new String[] {
 				"essentialcraft:items/guns/pistol/lense/pure",
@@ -217,7 +217,7 @@ public class GunInitialization {
 		})
 		.register();
 
-		new LenseMaterial("shade").setRecipe(new ItemStack(ItemsCore.matrixProj,1,4))
+		new LenseMaterial("shade").setRecipe(new ItemStack(ItemsCore.matrixProj, 1, 4))
 		.appendData("balance", 4F)
 		.setTextures(new String[] {
 				"essentialcraft:items/guns/pistol/lense/shade",

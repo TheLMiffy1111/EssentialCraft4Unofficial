@@ -29,7 +29,7 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 			if(crafting != null && crafting.getItem() instanceof ItemCraftingFrame && crafting.hasTagCompound()) {
 				InventoryCraftingFrame frame = new InventoryCraftingFrame(crafting);
 				if(frame != null && !frame.getStackInSlot(9).isEmpty() && !frame.isEmpty()) {
-					ItemStack[] is = new ItemStack[]{frame.getStackInSlot(0),frame.getStackInSlot(1),frame.getStackInSlot(2),frame.getStackInSlot(3),frame.getStackInSlot(4),frame.getStackInSlot(5),frame.getStackInSlot(6),frame.getStackInSlot(7),frame.getStackInSlot(8)};
+					ItemStack[] is = new ItemStack[]{frame.getStackInSlot(0), frame.getStackInSlot(1), frame.getStackInSlot(2), frame.getStackInSlot(3), frame.getStackInSlot(4), frame.getStackInSlot(5), frame.getStackInSlot(6), frame.getStackInSlot(7), frame.getStackInSlot(8)};
 					result = frame.getStackInSlot(9);
 					crafter = crafting;
 					input = is;
@@ -153,8 +153,8 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 
 		for(int i = 0; i < (times+result.getCount()-1)/result.getCount(); ++i) {
 			ItemStack[] required = findCraftingComponentsByRecipe(result);
-			if(canCraft(required,stk)) {
-				if(craft(required,stk)) {
+			if(canCraft(required, stk)) {
+				if(craft(required, stk)) {
 					parent.addItemStackToSystem(result.copy());
 					crafted+=result.getCount();
 				}

@@ -31,7 +31,7 @@ public class RenderMagicalRepairer extends TileEntitySpecialRenderer<TileMagical
 		float rotation = (tile.getWorld().getWorldTime()+partialTicks) % 360;
 
 		GlStateManager.pushMatrix();
-		DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.65F, 0.5F);
+		DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.65F, 0.5F);
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 	}

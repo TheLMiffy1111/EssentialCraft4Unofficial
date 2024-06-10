@@ -172,7 +172,7 @@ public class TileMRUReactor extends TileMRUGeneric {
 			}
 			if(getWorld().isRemote) {
 				if(getWorld().rand.nextFloat() < 0.05F) {
-					getWorld().playSound(pos.getX()+0.5F,pos.getY()+1.0F,pos.getZ()+0.5F, SoundRegistry.machineGenElectricity, SoundCategory.BLOCKS, 1F, 1F, true);
+					getWorld().playSound(pos.getX()+0.5F, pos.getY()+1.0F, pos.getZ()+0.5F, SoundRegistry.machineGenElectricity, SoundCategory.BLOCKS, 1F, 1F, true);
 				}
 				if(lightnings.size() <= 20) {
 					Lightning l = new Lightning(getWorld().rand, new Coord3D(0.5F, 1.0F, 0.5F), new Coord3D(0.5F+MathUtils.randomFloat(getWorld().rand), 1.0F+MathUtils.randomFloat(getWorld().rand), 0.5F+MathUtils.randomFloat(getWorld().rand)), 0.2F, 1.0F, 0.2F, 1.0F);

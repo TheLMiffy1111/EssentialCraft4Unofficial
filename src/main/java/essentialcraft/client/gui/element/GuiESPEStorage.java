@@ -9,7 +9,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class GuiESPEStorage extends GuiElement {
 
-	private ResourceLocation rec = new ResourceLocation("essentialcraft","textures/gui/mithrilinefurnaceelements.png");
+	private ResourceLocation rec = new ResourceLocation("essentialcraft", "textures/gui/mithrilinefurnaceelements.png");
 
 	public int x;
 	public int y;

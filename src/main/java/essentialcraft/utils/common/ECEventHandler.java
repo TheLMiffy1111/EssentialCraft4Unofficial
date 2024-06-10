@@ -159,34 +159,34 @@ public class ECEventHandler {
 	public ItemStack findShearItem(Entity e) {
 		int rN = 1+e.getEntityWorld().rand.nextInt(3);
 		if(e instanceof EntityCow) {
-			return new ItemStack(Items.LEATHER,rN,0);
+			return new ItemStack(Items.LEATHER, rN, 0);
 		}
 		if(e instanceof EntityChicken) {
-			return new ItemStack(Items.FEATHER,rN,0);
+			return new ItemStack(Items.FEATHER, rN, 0);
 		}
 		if(e instanceof EntitySquid) {
-			return new ItemStack(Items.DYE,rN,0);
+			return new ItemStack(Items.DYE, rN, 0);
 		}
 		if(e instanceof EntitySpider) {
-			return new ItemStack(Items.STRING,rN,0);
+			return new ItemStack(Items.STRING, rN, 0);
 		}
 		if(e instanceof EntityCreeper) {
-			return new ItemStack(Items.GUNPOWDER,rN,0);
+			return new ItemStack(Items.GUNPOWDER, rN, 0);
 		}
 		if(e instanceof EntitySkeleton) {
-			return new ItemStack(Items.DYE,rN,15);
+			return new ItemStack(Items.DYE, rN, 15);
 		}
 		if(e instanceof EntityMagmaCube) {
-			return new ItemStack(Items.MAGMA_CREAM,rN,0);
+			return new ItemStack(Items.MAGMA_CREAM, rN, 0);
 		}
 		if(e instanceof EntitySlime) {
-			return new ItemStack(Items.SLIME_BALL,rN,0);
+			return new ItemStack(Items.SLIME_BALL, rN, 0);
 		}
 		if(e instanceof EntityZombie) {
-			return new ItemStack(Items.ROTTEN_FLESH,rN,0);
+			return new ItemStack(Items.ROTTEN_FLESH, rN, 0);
 		}
 		if(e instanceof EntitySnowman) {
-			return new ItemStack(Blocks.SNOW,rN,0);
+			return new ItemStack(Blocks.SNOW, rN, 0);
 		}
 		return ItemStack.EMPTY;
 	}
@@ -268,7 +268,7 @@ public class ECEventHandler {
 				stk.damageItem(32, player);
 				ItemStack is = findShearItem(base);
 				if(!is.isEmpty()) {
-					EntityItem ent = new EntityItem(base.getEntityWorld(),base.posX,base.posY,base.posZ,is);
+					EntityItem ent = new EntityItem(base.getEntityWorld(), base.posX, base.posY, base.posZ, is);
 					Random rand = base.getEntityWorld().rand;
 					ent.motionY += rand.nextFloat() * 0.05F;
 					ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
@@ -653,7 +653,7 @@ public class ECEventHandler {
 			}
 
 			//If the player is using an improper tool, or the current stack is a sword
-			if (!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(),event.getPos(),currentTool) || currentToolClass.equalsIgnoreCase("sword"))
+			if (!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(), event.getPos(), currentTool) || currentToolClass.equalsIgnoreCase("sword"))
 			{
 				//Getting the proper tool type
 				String clazz = event.getState().getBlock().getHarvestTool(event.getState());
@@ -818,19 +818,19 @@ public class ECEventHandler {
 					{
 						//Another hard-coded tool initialization.
 						if(clazz.equalsIgnoreCase("pickaxe")) {
-							efficent = new ItemStack(ItemsCore.wind_elemental_pick,1,currentTool.getItemDamage());
+							efficent = new ItemStack(ItemsCore.wind_elemental_pick, 1, currentTool.getItemDamage());
 						}
 						if(clazz.equalsIgnoreCase("shovel")) {
-							efficent = new ItemStack(ItemsCore.wind_elemental_shovel,1,currentTool.getItemDamage());
+							efficent = new ItemStack(ItemsCore.wind_elemental_shovel, 1, currentTool.getItemDamage());
 						}
 						if(clazz.equalsIgnoreCase("hoe")) { //Will that ever happen?
-							efficent = new ItemStack(ItemsCore.wind_elemental_hoe,1,currentTool.getItemDamage());
+							efficent = new ItemStack(ItemsCore.wind_elemental_hoe, 1, currentTool.getItemDamage());
 						}
 						if(clazz.equalsIgnoreCase("sword")) {
-							efficent = new ItemStack(ItemsCore.wind_elemental_sword,1,currentTool.getItemDamage());
+							efficent = new ItemStack(ItemsCore.wind_elemental_sword, 1, currentTool.getItemDamage());
 						}
 						if(clazz.equalsIgnoreCase("axe")) {
-							efficent = new ItemStack(ItemsCore.wind_elemental_axe,1,currentTool.getItemDamage());
+							efficent = new ItemStack(ItemsCore.wind_elemental_axe, 1, currentTool.getItemDamage());
 						}
 					}
 
@@ -839,7 +839,7 @@ public class ECEventHandler {
 					{
 						//Getting the tag of our new-made item.
 						//IMPORTANT! This is already a 'tag' tag. I mean, println the efficent's NBT, and you will see
-						//{id:6666s,Damage:0s,Count:1b,tag:{}}
+						//{id:6666s, Damage:0s, Count:1b, tag:{}}
 						//That tag{} == this tag!
 
 						//Also, the most creative name ever award goes to me, I guess.
@@ -1157,7 +1157,7 @@ public class ECEventHandler {
 						if(bStk.getItem() instanceof IUBMRUGainModifyHandler)
 						{
 							IUBMRUGainModifyHandler gmod = (IUBMRUGainModifyHandler)bStk.getItem();
-							addedEnergy = MathHelper.floor(gmod.getModifiedValue(addedEnergy, bStk, player.getEntityWorld().rand,player));
+							addedEnergy = MathHelper.floor(gmod.getModifiedValue(addedEnergy, bStk, player.getEntityWorld().rand, player));
 						}
 					}
 				}
@@ -1180,7 +1180,7 @@ public class ECEventHandler {
 				{
 					if(player.getEntityWorld().rand.nextFloat() < 0.05F)
 					{
-						ItemStack emberStack = new ItemStack(ItemsCore.ember,1,player.getEntityWorld().rand.nextInt(8));
+						ItemStack emberStack = new ItemStack(ItemsCore.ember, 1, player.getEntityWorld().rand.nextInt(8));
 						EntityItem emberItem = new EntityItem(base.getEntityWorld(), base.posX, base.posY, base.posZ, emberStack);
 						if(!base.getEntityWorld().isRemote) {
 							base.getEntityWorld().spawnEntity(emberItem);
@@ -1211,7 +1211,7 @@ public class ECEventHandler {
 					double mY = Double.parseDouble(packetData[5].fieldValue);
 					double mZ = Double.parseDouble(packetData[6].fieldValue);
 					if(event.effectiveSide == Side.CLIENT) {
-						EssentialCraftCore.proxy.ItemFX(sX,sY,sZ,mX,mY,mZ);
+						EssentialCraftCore.proxy.ItemFX(sX, sY, sZ, mX, mY, mZ);
 					}
 				}
 				else if(modData.fieldName.equalsIgnoreCase("mod") && modData.fieldValue.equalsIgnoreCase("essentialcraft.item.wings")) {

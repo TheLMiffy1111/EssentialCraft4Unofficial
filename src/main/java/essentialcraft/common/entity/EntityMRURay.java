@@ -34,7 +34,7 @@ public class EntityMRURay extends Entity {
 	public float balance;
 	public float damage;
 	public EntityLivingBase shootingEntity;
-	public double pX,pY,pZ;
+	public double pX, pY, pZ;
 	List<EntityLivingBase> hitEntities = new ArrayList<>();
 
 	public EntityMRURay(World w)
@@ -106,7 +106,7 @@ public class EntityMRURay extends Entity {
 		pZ = shootingEntity.posZ;
 		if(!getEntityWorld().isRemote)
 		{
-			shoot(rY,rP);
+			shoot(rY, rP);
 		}
 	}
 
@@ -207,6 +207,6 @@ public class EntityMRURay extends Entity {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

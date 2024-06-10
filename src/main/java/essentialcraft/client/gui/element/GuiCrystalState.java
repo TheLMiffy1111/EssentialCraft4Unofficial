@@ -14,7 +14,7 @@ public class GuiCrystalState extends GuiTextElement{
 
 	public GuiCrystalState(int i, int j, TileEntity t)
 	{
-		super(i,j);
+		super(i, j);
 		tile = (TileCrystalController) t;
 	}
 
@@ -44,7 +44,7 @@ public class GuiCrystalState extends GuiTextElement{
 			GlStateManager.pushMatrix();
 
 			GlStateManager.popMatrix();
-			drawText(posX,posY);
+			drawText(posX, posY);
 		}
 	}
 

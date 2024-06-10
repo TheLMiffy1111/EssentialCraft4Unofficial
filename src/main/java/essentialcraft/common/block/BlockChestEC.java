@@ -55,7 +55,7 @@ public class BlockChestEC extends BlockContainer implements IModelRegisterer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this,1,state.getValue(TYPE).getIndex());
+		return new ItemStack(this, 1, state.getValue(TYPE).getIndex());
 	}
 
 	@Override

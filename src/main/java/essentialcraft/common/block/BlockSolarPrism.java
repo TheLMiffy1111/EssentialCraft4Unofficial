@@ -19,7 +19,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockSolarPrism extends BlockContainer implements IModelRegisterer {
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(-1,0.4D,-1,2,0.6D,2);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(-1, 0.4D, -1, 2, 0.6D, 2);
 
 	protected BlockSolarPrism() {
 		super(Material.ROCK, MapColor.GOLD);

@@ -44,12 +44,12 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 			if(FluidUtil.getFluidContained(getStackInSlot(1)) != null && getStackInSlot(2).isEmpty()) {
 				if(lavaTank.getFluid() == null) {
 					lavaTank.fill(FluidUtil.getFluidContained(getStackInSlot(1)), true);
-					setInventorySlotContents(2,consumeItem(getStackInSlot(1)));
+					setInventorySlotContents(2, consumeItem(getStackInSlot(1)));
 					decrStackSize(1, 1);
 				}
 				else if(lavaTank.getFluidAmount() != 8000 && lavaTank.getFluid().isFluidEqual(FluidUtil.getFluidContained(getStackInSlot(1)))) {
 					lavaTank.fill(FluidUtil.getFluidContained(getStackInSlot(1)), true);
-					setInventorySlotContents(2,consumeItem(getStackInSlot(1)));
+					setInventorySlotContents(2, consumeItem(getStackInSlot(1)));
 					decrStackSize(1, 1);
 				}
 			}
@@ -90,7 +90,7 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 								int suggestedStackSize = OreSmeltingRecipe.RECIPES.get(metadata).dropAmount * 2;
 								setInventorySlotContents(4, OreSmeltingRecipe.getAlloyStack(OreSmeltingRecipe.RECIPES.get(metadata), suggestedStackSize));
 								if(getStackInSlot(7).isEmpty()) {
-									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag,1,0));
+									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag, 1, 0));
 								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);
@@ -176,7 +176,7 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 								setInventorySlotContents(6, ingotStk);
 								smeltingLevel = 0;
 								if(getStackInSlot(7).isEmpty()) {
-									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag,1,0));
+									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag, 1, 0));
 								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);
@@ -207,7 +207,7 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 								setInventorySlotContents(6, is);
 								smeltingLevel = 0;
 								if(getStackInSlot(7).isEmpty()) {
-									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag,1,0));
+									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag, 1, 0));
 								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);

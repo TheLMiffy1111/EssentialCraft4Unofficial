@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 @ChannelHandler.Sharable
-public class ECPacketDispatcher implements IMessageHandler<PacketNBT,IMessage>{
+public class ECPacketDispatcher implements IMessageHandler<PacketNBT, IMessage>{
 
 	@Override
 	public IMessage onMessage(PacketNBT message, MessageContext ctx) {
@@ -96,7 +96,7 @@ public class ECPacketDispatcher implements IMessageHandler<PacketNBT,IMessage>{
 				TileMIM mim = (TileMIM)tile;
 
 				if(!message.theTag.getBoolean("craft")) {
-					int left = mim.retrieveItemStackFromSystem(retrieved,false,true);
+					int left = mim.retrieveItemStackFromSystem(retrieved, false, true);
 					if(left == 0) {
 
 					}

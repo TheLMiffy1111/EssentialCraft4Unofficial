@@ -12,7 +12,7 @@ import net.minecraft.inventory.Container;
 public class GuiMagicianTable extends GuiCommon{
 
 	public GuiMagicianTable(Container c, TileMagicianTable tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiProgressBar_MagicianTable(25, 4, tile));
 		elementList.add(new GuiMRUState(25, 58, tile, 0));

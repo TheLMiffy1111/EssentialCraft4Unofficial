@@ -43,7 +43,7 @@ public class ItemShadeSlasher extends ItemSwordEC {
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem)
 	{
-		toggleActivity(entityItem.getItem(),false);
+		toggleActivity(entityItem.getItem(), false);
 		return super.onEntityItemUpdate(entityItem);
 	}
 
@@ -51,20 +51,20 @@ public class ItemShadeSlasher extends ItemSwordEC {
 	public void onUpdate(ItemStack sword, World w, Entity e, int slotNum, boolean held)
 	{
 		if(e instanceof EntityLivingBase && !w.isRemote && held) {
-			((EntityLivingBase)e).addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,3,3,true,true));
+			((EntityLivingBase)e).addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 3, 3, true, true));
 		}
 		if(e instanceof IShadeHandlerEntity) {
-			toggleActivity(sword,true);
+			toggleActivity(sword, true);
 		}
 
 		if(e instanceof EntityPlayer)
 		{
 			EntityPlayer p = (EntityPlayer)e;
 			if(ECUtils.getData(p).getMatrixTypeID() == 4) {
-				toggleActivity(sword,true);
+				toggleActivity(sword, true);
 			}
 			else {
-				toggleActivity(sword,false);
+				toggleActivity(sword, false);
 			}
 		}
 	}
@@ -110,7 +110,7 @@ public class ItemShadeSlasher extends ItemSwordEC {
 				if(attacker.getEntityWorld().rand.nextFloat() <= 0.01F)
 				{
 					//instagib
-					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH,20,20,true,true));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 20, true, true));
 				}
 			}
 		}

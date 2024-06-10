@@ -52,39 +52,39 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 	public static Capability<IMRUHandlerItem> MRU_HANDLER_ITEM_CAPABILITY = CapabilityMRUHandler.MRU_HANDLER_ITEM_CAPABILITY;
 
 	public static String[] names = {
-			"portableMD",//0
-			"ringOfStability",//1
-			"ringOfExperience",//2
-			"ringOfResistance",//3
-			"lifePendant",//4
-			"windCatcher",//5
-			"windMagesTalisman",//6
-			"doctorsBelt",//7
-			"alphaRing",//8
-			"betaRing",//9
-			"gammaRing",//10
-			"deltaRing",//11
-			"epsilonBelt",//12
-			"dzetaAmulet",//13
-			"etaAmulet",//14
-			"thetaBelt",//15
-			"iotaRing",//16
-			"kappaRing",//17
-			"lambdaRing",//18
-			"muRing",//19
-			"nuAmulet",//20
-			"xiBelt",//21
-			"omicronAmulet",//22
-			"piBelt",//23
-			"rhoRing",//24
-			"sigmaRing",//25
-			"tauRing",//26
-			"upsilonRing",//27
-			"phiRing",//28
-			"chiRing",//29
-			"psiRing",//30
-			"omegaRing",//31
-			"unknown",//fallback
+			"portableMD", //0
+			"ringOfStability", //1
+			"ringOfExperience", //2
+			"ringOfResistance", //3
+			"lifePendant", //4
+			"windCatcher", //5
+			"windMagesTalisman", //6
+			"doctorsBelt", //7
+			"alphaRing", //8
+			"betaRing", //9
+			"gammaRing", //10
+			"deltaRing", //11
+			"epsilonBelt", //12
+			"dzetaAmulet", //13
+			"etaAmulet", //14
+			"thetaBelt", //15
+			"iotaRing", //16
+			"kappaRing", //17
+			"lambdaRing", //18
+			"muRing", //19
+			"nuAmulet", //20
+			"xiBelt", //21
+			"omicronAmulet", //22
+			"piBelt", //23
+			"rhoRing", //24
+			"sigmaRing", //25
+			"tauRing", //26
+			"upsilonRing", //27
+			"phiRing", //28
+			"chiRing", //29
+			"psiRing", //30
+			"omegaRing", //31
+			"unknown", //fallback
 	};
 
 	public BaubleType[] btALST = {
@@ -298,27 +298,27 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 		while(s.indexOf("|") != -1) {
 			int index = s.indexOf("|");
 			String charType = s.substring(index+1, index+2);
-			s = s.substring(0,index)+s.substring(index+2);
+			s = s.substring(0, index)+s.substring(index+2);
 			if(charType.equals("n")) {
 				int nextIndex = s.indexOf("|n");
 				if(nextIndex != -1) {
-					addedString = s.substring(0,index);
+					addedString = s.substring(0, index);
 					ret.add(addedString);
 					addedString = "";
 					s = s.substring(index);
 				}
 				else {
-					addedString = s.substring(0,index);
+					addedString = s.substring(0, index);
 					ret.add(addedString);
 					addedString = "";
 					s = s.substring(index);
 				}
 			}
 			else if(charType.equals("r")) {
-				s = s.substring(0,index)+TextFormatting.RESET+s.substring(index);
+				s = s.substring(0, index)+TextFormatting.RESET+s.substring(index);
 			}
 			else {
-				s = s.substring(0,index)+findByChar(charType.charAt(0))+s.substring(index);
+				s = s.substring(0, index)+findByChar(charType.charAt(0))+s.substring(index);
 			}
 		}
 		addedString += s;

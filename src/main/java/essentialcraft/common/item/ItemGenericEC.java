@@ -107,7 +107,7 @@ public class ItemGenericEC extends Item implements IModelRegisterer {
 			"magicPurifyedBlazeAlloy", //79
 			"silkyUpgrade", //80
 			"voidUpgrade", //81
-			"unknown",//fallback
+			"unknown", //fallback
 	};
 
 	public ItemGenericEC() {
@@ -180,7 +180,7 @@ public class ItemGenericEC extends Item implements IModelRegisterer {
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
 		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < names.length-1; ++i) {
-				list.add(new ItemStack(this,1,i));
+				list.add(new ItemStack(this, 1, i));
 			}
 		}
 	}

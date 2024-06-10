@@ -24,7 +24,7 @@ public class PotionMindfoldParadox extends Potion {
 		int duration = entity.getActivePotionEffect(this).getDuration();
 		if(duration == 2000) {
 			if(entity.getEntityWorld().isRemote) {
-				entity.getEntityWorld().playSound(entity.posX,entity.posY,entity.posZ, SoundRegistry.potionTinnitus, SoundCategory.PLAYERS, 100, 1, true);
+				entity.getEntityWorld().playSound(entity.posX, entity.posY, entity.posZ, SoundRegistry.potionTinnitus, SoundCategory.PLAYERS, 100, 1, true);
 			}
 			MiscUtils.setShaders(2);
 		}

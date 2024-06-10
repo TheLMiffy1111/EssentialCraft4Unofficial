@@ -89,7 +89,7 @@ public class EntityPoisonFume extends EntityMob {
 			}
 			if(!p.getEntityWorld().isRemote && !ignorePoison) {
 				RadiationManager.increasePlayerRadiation(p, 10);
-				p.addPotionEffect(new PotionEffect(MobEffects.POISON,200,1));
+				p.addPotionEffect(new PotionEffect(MobEffects.POISON, 200, 1));
 			}
 		}
 		super.onLivingUpdate();
@@ -128,6 +128,6 @@ public class EntityPoisonFume extends EntityMob {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

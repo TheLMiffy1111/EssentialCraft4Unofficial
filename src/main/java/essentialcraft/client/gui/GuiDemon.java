@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiDemon extends GuiCommon{
 
-	public ResourceLocation DguiGenLocation = new ResourceLocation("essentialcraft","textures/gui/demon.png");
+	public ResourceLocation DguiGenLocation = new ResourceLocation("essentialcraft", "textures/gui/demon.png");
 
 	public GuiDemon(Container c)
 	{
@@ -32,7 +32,7 @@ public class GuiDemon extends GuiCommon{
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2)
+	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2)
 	{
 		GlStateManager.color(1, 1, 1);
 		int k = (width - xSize) / 2;

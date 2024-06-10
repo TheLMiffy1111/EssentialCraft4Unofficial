@@ -28,7 +28,7 @@ import net.minecraftforge.client.model.ModelLoader;
 public class BlockDrops extends Block implements IModelRegisterer {
 
 	public static final PropertyEnum<EnumDropType> TYPE = PropertyEnum.<EnumDropType>create("type", EnumDropType.class, EnumDropType.CAN_BE_FARMED);
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0,0,0,1,0.1F,1);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.1F, 1);
 
 	protected BlockDrops() {
 		super(Material.CLOTH, MapColor.AIR);
@@ -81,7 +81,7 @@ public class BlockDrops extends Block implements IModelRegisterer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this,1,state.getValue(TYPE).getIndex());
+		return new ItemStack(this, 1, state.getValue(TYPE).getIndex());
 	}
 
 	@Override

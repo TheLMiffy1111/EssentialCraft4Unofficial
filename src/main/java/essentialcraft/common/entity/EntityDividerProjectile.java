@@ -23,7 +23,7 @@ public class EntityDividerProjectile extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult p_70184_1_) {
 		if (p_70184_1_.typeOfHit == Type.BLOCK) {
-			EntityDivider div = new EntityDivider(getEntityWorld(),posX,posY,posZ,0,2,getThrower());
+			EntityDivider div = new EntityDivider(getEntityWorld(), posX, posY, posZ, 0, 2, getThrower());
 			if(!getEntityWorld().isRemote) {
 				getEntityWorld().spawnEntity(div);
 			}
@@ -34,6 +34,6 @@ public class EntityDividerProjectile extends EntityThrowable {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

@@ -68,17 +68,17 @@ public class ContainerMIM extends ContainerInventory {
 		Class<TileMIMExportNode> enc = TileMIMExportNode.class;
 		Class<TileMIMImportNode> inc = TileMIMImportNode.class;
 
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 1, 28, 20,isc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 2, 46, 20,isc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 3, 64, 20,isc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 4, 28, 38,isc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 5, 46, 38,isc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 6, 64, 38,isc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 1, 28, 20, isc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 2, 46, 20, isc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 3, 64, 20, isc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 4, 28, 38, isc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 5, 46, 38, isc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 6, 64, 38, isc));
 
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 7, 91, 20,msc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 8, 109, 20,msc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 9, 91, 38,msc));
-		addSlotToContainer(new SlotBGTEClassDepenant(inv, 10, 109, 38,msc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 7, 91, 20, msc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 8, 109, 20, msc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 9, 91, 38, msc));
+		addSlotToContainer(new SlotBGTEClassDepenant(inv, 10, 109, 38, msc));
 
 		addSlotToContainer(new SlotBGTEClassDepenant(inv, 11, 136, 20, cmc));
 		addSlotToContainer(new SlotBGTEClassDepenant(inv, 12, 154, 20, cmc));
@@ -88,11 +88,11 @@ public class ContainerMIM extends ContainerInventory {
 		addSlotToContainer(new SlotBGTEClassDepenant(inv, 16, 172, 38, cmc));
 
 		for(int i = 0; i < 18; ++i) {
-			addSlotToContainer(new SlotBGTEClassDepenant(inv, 17+i, 28+i%9*18, 74+i/9*18,inc));
+			addSlotToContainer(new SlotBGTEClassDepenant(inv, 17+i, 28+i%9*18, 74+i/9*18, inc));
 		}
 
 		for(int i = 0; i < 18; ++i) {
-			addSlotToContainer(new SlotBGTEClassDepenant(inv, 35+i, 28+i%9*18, 128+i/9*18,enc));
+			addSlotToContainer(new SlotBGTEClassDepenant(inv, 35+i, 28+i%9*18, 128+i/9*18, enc));
 		}
 		setupPlayerInventory();
 	}

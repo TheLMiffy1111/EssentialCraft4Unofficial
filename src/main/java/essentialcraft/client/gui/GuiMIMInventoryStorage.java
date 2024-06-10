@@ -27,7 +27,7 @@ public class GuiMIMInventoryStorage extends GuiContainer{
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks,int mX, int mY) {
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mX, int mY) {
 		int k = (width - xSize)/2;
 		int l = (height - ySize)/2;
 

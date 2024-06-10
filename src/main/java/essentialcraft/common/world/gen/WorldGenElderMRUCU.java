@@ -46,7 +46,7 @@ public class WorldGenElderMRUCU extends WorldGenerator {
 					}
 					if(x == 2 && z == 2) {
 						world.setBlockState(pos.add(x, 1, z), Blocks.STONEBRICK.getStateFromMeta(3), 2);
-						ECUtils.createMRUCUAt(world, new Coord3D(pos.getX()+x+0.5F,pos.getY()+1.5F,pos.getZ()+z+0.5F), 5000+rand.nextInt(5000), MathUtils.randomFloat(rand)+1.0F, false, false);
+						ECUtils.createMRUCUAt(world, new Coord3D(pos.getX()+x+0.5F, pos.getY()+1.5F, pos.getZ()+z+0.5F), 5000+rand.nextInt(5000), MathUtils.randomFloat(rand)+1.0F, false, false);
 					}
 				}
 			}
@@ -60,7 +60,7 @@ public class WorldGenElderMRUCU extends WorldGenerator {
 					}
 					if(x == 4 && z == 4) {
 						world.setBlockState(pos.add(x, 1, z), Blocks.STONEBRICK.getStateFromMeta(3), 2);
-						ECUtils.createMRUCUAt(world, new Coord3D(pos.getX()+x+0.5F,pos.getY()+1.5F,pos.getZ()+z+0.5F), 5000+rand.nextInt(5000), MathUtils.randomFloat(rand)+1.0F, false, false);
+						ECUtils.createMRUCUAt(world, new Coord3D(pos.getX()+x+0.5F, pos.getY()+1.5F, pos.getZ()+z+0.5F), 5000+rand.nextInt(5000), MathUtils.randomFloat(rand)+1.0F, false, false);
 					}
 					if(x == 1 && z == 1 || x == 7 && z == 1 || x == 7 && z == 7 || x == 1 && z == 7) {
 						world.setBlockState(pos.add(x, 1, z), Blocks.CHEST.getStateFromMeta(4), 2);
@@ -135,7 +135,7 @@ public class WorldGenElderMRUCU extends WorldGenerator {
 	public boolean canGenerateAt(int minX, int minZ, int maxX, int maxZ, int y, boolean requiresSolidBlocks, World w) {
 		for(int dx = minX; dx <= maxX; ++dx) {
 			for(int dz = minZ; dz <= maxZ; ++dz) {
-				BlockPos dp = new BlockPos(dx,y,dz);
+				BlockPos dp = new BlockPos(dx, y, dz);
 				Block b = w.getBlockState(dp).getBlock();
 				if(b.isAir(w.getBlockState(dp), w, dp) || !w.getBlockState(dp).isBlockNormalCube()) {
 					return false;

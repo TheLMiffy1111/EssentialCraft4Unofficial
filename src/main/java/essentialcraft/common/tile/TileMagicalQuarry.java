@@ -271,7 +271,7 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 				getWorld().setBlockToAir(mining);
 				return true;
 			}
-			double required = b.getBlockHardness(getWorld().getBlockState(mining),getWorld(), mining)*blockHardnessModifier;
+			double required = b.getBlockHardness(getWorld().getBlockState(mining), getWorld(), mining)*blockHardnessModifier;
 			if(mruStorage.getMRU() >= (int)(mruUsage/4*getEfficency())) {
 				mruStorage.extractMRU((int)(mruUsage/4*getEfficency()), true);
 				progressLevel += getEfficency();
@@ -311,7 +311,7 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 		int r = 3;
 		while(++r <= pos.getY()-2) {
 			Block b = getWorld().getBlockState(pos.down(r)).getBlock();
-			if(b != null && b.getBlockHardness(getWorld().getBlockState(pos.down(r)),getWorld(),pos.down(r)) >= 0 && b != Blocks.AIR && !(b instanceof BlockLiquid && ignoreLiquids) && !(b instanceof IFluidBlock && ignoreLiquids) && canMineBlock(b) && canMineBlock(b)) {
+			if(b != null && b.getBlockHardness(getWorld().getBlockState(pos.down(r)), getWorld(), pos.down(r)) >= 0 && b != Blocks.AIR && !(b instanceof BlockLiquid && ignoreLiquids) && !(b instanceof IFluidBlock && ignoreLiquids) && canMineBlock(b) && canMineBlock(b)) {
 				return false;
 			}
 		}
@@ -322,7 +322,7 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 		int r = 3;
 		while(++r <= pos.getY()-2) {
 			Block b = getWorld().getBlockState(pos.down(r)).getBlock();
-			if(b != null && b.getBlockHardness(getWorld().getBlockState(pos.down(r)),getWorld(),pos.down(r)) >= 0 && b != Blocks.AIR && !(b instanceof BlockLiquid && ignoreLiquids) && !(b instanceof IFluidBlock && ignoreLiquids) && canMineBlock(b)) {
+			if(b != null && b.getBlockHardness(getWorld().getBlockState(pos.down(r)), getWorld(), pos.down(r)) >= 0 && b != Blocks.AIR && !(b instanceof BlockLiquid && ignoreLiquids) && !(b instanceof IFluidBlock && ignoreLiquids) && canMineBlock(b)) {
 				return pos.getY()-r;
 			}
 		}
@@ -334,7 +334,7 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 		for(int x = -rad; x <= rad; ++x) {
 			for(int z = -rad; z <= rad; ++z) {
 				Block b = getWorld().getBlockState(new BlockPos(pos.getX()+x, miningY, pos.getZ()+z)).getBlock();
-				if(b != null && b.getBlockHardness(getWorld().getBlockState(new BlockPos(pos.getX()+x, miningY, pos.getZ()+z)),getWorld(),new BlockPos(pos.getX()+x, miningY, pos.getZ()+z)) != -1 && b != Blocks.AIR && !(b instanceof BlockLiquid && ignoreLiquids) && !(b instanceof IFluidBlock && ignoreLiquids) && canMineBlock(b)) {
+				if(b != null && b.getBlockHardness(getWorld().getBlockState(new BlockPos(pos.getX()+x, miningY, pos.getZ()+z)), getWorld(), new BlockPos(pos.getX()+x, miningY, pos.getZ()+z)) != -1 && b != Blocks.AIR && !(b instanceof BlockLiquid && ignoreLiquids) && !(b instanceof IFluidBlock && ignoreLiquids) && canMineBlock(b)) {
 					return false;
 				}
 			}
@@ -365,7 +365,7 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 							for(int z = -rad; z <= rad; ++z)
 							{
 								BlockPos cp = new BlockPos(pos.getX()+x, miningY, pos.getZ()+z);
-								if(getWorld().isAreaLoaded(new StructureBoundingBox(pos.getX()+x-1, miningY-1, pos.getZ()+z-1, pos.getX()+x+1, miningY+1, pos.getZ()+z+1)) && getWorld().isBlockLoaded(cp) && getWorld().getBlockState(cp).getBlock() != null && getWorld().getBlockState(cp).getBlockHardness(getWorld(),cp) != -1 && getWorld().getBlockState(cp).getBlock() != Blocks.AIR && !(getWorld().getBlockState(cp).getBlock() instanceof BlockLiquid) && !(getWorld().getBlockState(cp).getBlock() instanceof IFluidBlock))
+								if(getWorld().isAreaLoaded(new StructureBoundingBox(pos.getX()+x-1, miningY-1, pos.getZ()+z-1, pos.getX()+x+1, miningY+1, pos.getZ()+z+1)) && getWorld().isBlockLoaded(cp) && getWorld().getBlockState(cp).getBlock() != null && getWorld().getBlockState(cp).getBlockHardness(getWorld(), cp) != -1 && getWorld().getBlockState(cp).getBlock() != Blocks.AIR && !(getWorld().getBlockState(cp).getBlock() instanceof BlockLiquid) && !(getWorld().getBlockState(cp).getBlock() instanceof IFluidBlock))
 								{
 									miningX = pos.getX()+x;
 									miningZ = pos.getZ()+z;

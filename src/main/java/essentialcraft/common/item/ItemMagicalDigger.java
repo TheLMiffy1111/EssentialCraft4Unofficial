@@ -108,7 +108,7 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 	{
 		if(par7EntityLivingBase instanceof EntityPlayer && !par7EntityLivingBase.isSneaking() && canBreak(stack))
 		{
-			break3x3x3Blocks((EntityPlayer)par7EntityLivingBase, new Coord3D(par4.getX(),par4.getY(),par4.getZ()),stack,world.getBlockState(par4).getBlock());
+			break3x3x3Blocks((EntityPlayer)par7EntityLivingBase, new Coord3D(par4.getX(), par4.getY(), par4.getZ()), stack, world.getBlockState(par4).getBlock());
 		}
 		return true;
 	}
@@ -121,12 +121,12 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 			{
 				for(int z = -1; z <= 1; ++z)
 				{
-					Coord3D c00rd = new Coord3D(c.x+x,c.y+y,c.z+z);
+					Coord3D c00rd = new Coord3D(c.x+x, c.y+y, c.z+z);
 					for(int v = 0; v < 10; ++v) {
-						e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, c.x+x+e.getEntityWorld().rand.nextFloat(),c.y+y+e.getEntityWorld().rand.nextFloat(),c.z+z+e.getEntityWorld().rand.nextFloat(), 1.0D, 0.0D, 1.0D);
+						e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, c.x+x+e.getEntityWorld().rand.nextFloat(), c.y+y+e.getEntityWorld().rand.nextFloat(), c.z+z+e.getEntityWorld().rand.nextFloat(), 1.0D, 0.0D, 1.0D);
 					}
 					e.getEntityWorld().playSound(e, e.getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.2F, 6.0F);
-					Block b = e.getEntityWorld().getBlockState(new BlockPos((int)c.x+x,(int)c.y+y,(int)c.z+z)).getBlock();
+					Block b = e.getEntityWorld().getBlockState(new BlockPos((int)c.x+x, (int)c.y+y, (int)c.z+z)).getBlock();
 					if(b != null && b == id)
 					{
 						if(ECUtils.playerUseMRU(e, s, 9) && !e.getEntityWorld().isRemote)
@@ -144,7 +144,7 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 		int x = (int) coord.x;
 		int y = (int) coord.y;
 		int z = (int) coord.z;
-		BlockPos p = new BlockPos(x,y,z);
+		BlockPos p = new BlockPos(x, y, z);
 		if(canBreak(s))
 		{
 			Block b = e.getEntityWorld().getBlockState(p).getBlock();

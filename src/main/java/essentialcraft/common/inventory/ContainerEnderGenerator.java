@@ -14,7 +14,7 @@ public class ContainerEnderGenerator extends Container {
 
 		for(i = 0; i < 3; ++i) {
 			for(int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18,84+ i * 18));
+				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84+ i * 18));
 			}
 		}
 

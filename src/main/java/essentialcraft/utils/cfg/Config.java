@@ -23,7 +23,7 @@ public class Config implements IDummyConfig {
 	public void loadMisc() {
 		enablePersonalityShatter = config.get("misc", "EnablePersonalityShatter", true).getBoolean();
 		renderStructuresFromAbove = config.get("misc", "RenderStructuresFromAbove", true).getBoolean();
-		dimensionID = config.get("misc", "HoannaID", 53).getInt();
+		dimensionID = config.get("misc", "HoannaID", 54).getInt();
 		String[] cfgCustomOreParsing = config.get("misc", "CustomMagmaticAlloys", new String[0], "Allows to add custom ores to Magmatic Alloys, where this is an array list, where first part is the ore name in OreDictionary, int after : is the color, int after | is the amount of drops you get from the ore and String after ? is the OreDictionary name of the result.").getStringList();
 		for(String s : cfgCustomOreParsing) {
 			int index_0 = s.indexOf(":");
@@ -37,7 +37,7 @@ public class Config implements IDummyConfig {
 			int oreOutput = Integer.parseInt(s.substring(index_1+1, index_2));
 			String oredResultName = s.substring(index_2+1, s.length());
 
-			OreSmeltingRecipe.addRecipe(oredOreName,oredResultName,oreColor,oreOutput);
+			OreSmeltingRecipe.addRecipe(oredOreName, oredResultName, oreColor, oreOutput);
 		}
 		oreGenAttempts = config.get("misc", "OreGenAttempts", 4, "The amount of tries to generate the elemental ore cluster in a chunk. Set to 0 to disable worldgen.").setMinValue(0).getInt();
 		eMRUCUGenAttempts = config.get("misc", "ElderMRUCUGenAttempts", 1, "The amount of tries to generate the Elder MRUCU Structure in a chunk. Set to 0 to disable worldgen.").setMinValue(0).getInt();

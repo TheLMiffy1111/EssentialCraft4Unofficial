@@ -42,7 +42,7 @@ import thaumcraft.api.items.IRevealer;
 import thaumcraft.api.items.IVisDiscountGear;
 
 @DCASMCheck
-@ExistenceCheck(classPath = {"thaumcraft.api.items.IVisDiscountGear", "thaumcraft.api.items.IRevealer","thaumcraft.api.items.IGoggles"})
+@ExistenceCheck(classPath = {"thaumcraft.api.items.IVisDiscountGear", "thaumcraft.api.items.IRevealer", "thaumcraft.api.items.IGoggles"})
 public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IRevealer, IGoggles, ISpecialArmor, IModelRegisterer {
 
 	public static Capability<IMRUHandlerItem> MRU_HANDLER_ITEM_CAPABILITY = CapabilityMRUHandler.MRU_HANDLER_ITEM_CAPABILITY;
@@ -148,7 +148,7 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 		return type == EntityEquipmentSlot.HEAD;
 	}
 
-	public static int[] discount = {18,25,12,15};
+	public static int[] discount = {18, 25, 12, 15};
 
 	@Override
 	public int getVisDiscount(ItemStack stack, EntityPlayer player) {
@@ -157,7 +157,7 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 	}
 
 	@Override
-	public ArmorProperties getProperties(EntityLivingBase player,ItemStack armor, DamageSource source, double damage, int slot) {
+	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
 		if(armor.getItem() == ItemsCore.computer_chestplate && player instanceof EntityPlayer) {
 			boolean hasFullSet = true;
 			EntityPlayer p = (EntityPlayer) player;

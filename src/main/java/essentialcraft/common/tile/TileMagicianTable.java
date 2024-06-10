@@ -139,7 +139,7 @@ public class TileMagicianTable extends TileMRUGeneric {
 				setInventorySlotContents(6, copied);
 			}
 			else if(getStackInSlot(6).getItem() == stk.getItem()) {
-				setInventorySlotContents(6, new ItemStack(stk.getItem(),stk.getCount()+getStackInSlot(6).getCount(),stk.getItemDamage()));
+				setInventorySlotContents(6, new ItemStack(stk.getItem(), stk.getCount()+getStackInSlot(6).getCount(), stk.getItemDamage()));
 			}
 			for(int i = 1; i < 6; ++i) {
 				decrStackSize(i, 1);

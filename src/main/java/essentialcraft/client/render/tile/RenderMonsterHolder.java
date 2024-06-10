@@ -34,13 +34,13 @@ public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHo
 			for(EntityLivingBase e : lst) {
 				if(!(e instanceof EntityPlayer))
 				{
-					Coord3D tilePos = new Coord3D(tile.getPos().getX()+0.5D,tile.getPos().getY()+0.5D,tile.getPos().getZ()+0.5D);
-					Coord3D mobPosition = new Coord3D(e.posX,e.posY,e.posZ);
-					DummyDistance dist = new DummyDistance(tilePos,mobPosition);
+					Coord3D tilePos = new Coord3D(tile.getPos().getX()+0.5D, tile.getPos().getY()+0.5D, tile.getPos().getZ()+0.5D);
+					Coord3D mobPosition = new Coord3D(e.posX, e.posY, e.posZ);
+					DummyDistance dist = new DummyDistance(tilePos, mobPosition);
 					if(dist.getDistance() < 10)
 					{
 						GlStateManager.pushMatrix();
-						double[] o = {e.posX-0.5D,e.posY+e.getEyeHeight()+0.5D,e.posZ-0.5D};
+						double[] o = {e.posX-0.5D, e.posY+e.getEyeHeight()+0.5D, e.posZ-0.5D};
 						float f21 = 0 + partialTicks;
 						float f31 = MathHelper.sin(f21 * 0.2F) / 2.0F + 0.5F;
 						f31 = (f31 * f31 + f31) * 0.2F;
@@ -59,7 +59,7 @@ public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHo
 						RenderHelper.disableStandardItemLighting();
 						GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
 						GlStateManager.disableCull();
-						DrawUtils.bindTexture("essentialcraft","textures/special/mru_beam.png");
+						DrawUtils.bindTexture("essentialcraft", "textures/special/mru_beam.png");
 						GlStateManager.shadeModel(GL11.GL_SMOOTH);
 						GlStateManager.enableBlend();
 						GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);

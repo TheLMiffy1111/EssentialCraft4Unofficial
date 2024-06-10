@@ -65,7 +65,7 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this,1,0);
+		return new ItemStack(this, 1, 0);
 	}
 
 	@Override

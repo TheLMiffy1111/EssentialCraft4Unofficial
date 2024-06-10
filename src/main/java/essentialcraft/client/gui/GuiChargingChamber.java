@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiChargingChamber extends GuiCommon{
 
 	public GuiChargingChamber(Container c, TileEntity tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(25, 4, tile));
 		elementList.add(new GuiBoundGemState(25, 22, tile, 0));

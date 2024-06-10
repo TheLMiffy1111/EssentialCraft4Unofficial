@@ -29,7 +29,7 @@ public class RenderSolarBeam extends Render<EntitySolarBeam> {
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
 		DrawUtils.bindTexture("minecraft", "textures/entity/beacon_beam.png");
 		GlStateManager.translate(-0.5F, 0, -0.5F);
-		TileEntityBeaconRenderer.renderBeamSegment(screenX, screenY, screenZ, 0, 1, entity.getEntityWorld().getTotalWorldTime(), 0, (int)(255D-entity.posY), new float[] {1,1,0}, 0D, 0.5D);
+		TileEntityBeaconRenderer.renderBeamSegment(screenX, screenY, screenZ, 0, 1, entity.getEntityWorld().getTotalWorldTime(), 0, (int)(255D-entity.posY), new float[] {1, 1, 0}, 0D, 0.5D);
 		GlStateManager.enableLighting();
 		GlStateManager.enableFog();
 		GlStateManager.popMatrix();

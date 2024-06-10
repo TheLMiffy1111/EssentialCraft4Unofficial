@@ -334,7 +334,7 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
-	ResourceLocation villagerSkin = new ResourceLocation("essentialcraft","textures/entities/magician.png");
+	ResourceLocation villagerSkin = new ResourceLocation("essentialcraft", "textures/entities/magician.png");
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -485,7 +485,7 @@ public class ClientProxy extends CommonProxy {
 				return new GuiCommon(new ContainerMIMSimpleNode(player.inventory, tile), tile);
 			}
 			if(tile instanceof TileCrafter) {
-				return new GuiCrafter(new ContainerCrafter(player.inventory, tile),(TileCrafter) tile);
+				return new GuiCrafter(new ContainerCrafter(player.inventory, tile), (TileCrafter) tile);
 			}
 			if(tile instanceof TileAnimalSeparator) {
 				return new GuiRayTower(new ContainerRayTower(player.inventory, tile), tile);
@@ -755,7 +755,7 @@ public class ClientProxy extends CommonProxy {
 		float yaw = Float.parseFloat(packetData[4].fieldValue);
 		float pitch = Float.parseFloat(packetData[5].fieldValue);
 		EntityPlayer player = Minecraft.getMinecraft().player;
-		player.setPositionAndRotation(sX, sY, sZ,yaw,pitch);
+		player.setPositionAndRotation(sX, sY, sZ, yaw, pitch);
 		player.rotationYawHead = player.rotationYaw;
 	}
 

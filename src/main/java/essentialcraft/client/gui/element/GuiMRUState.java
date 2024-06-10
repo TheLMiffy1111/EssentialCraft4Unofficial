@@ -13,12 +13,12 @@ public class GuiMRUState extends GuiTextElement {
 	public int mru;
 
 	public GuiMRUState(int i, int j, IMRUHandler t, int mruToSearch) {
-		super(i,j);
+		super(i, j);
 		tile = t;
 	}
 
 	public GuiMRUState(int i, int j, TileEntity t, int mruToSearch) {
-		super(i,j);
+		super(i, j);
 		if(t.hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 			tile = t.getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
 		}
@@ -46,7 +46,7 @@ public class GuiMRUState extends GuiTextElement {
 		this.drawTexturedModalRect(posX+17+80, posY, 1, 0, 16, 18);
 		this.drawTexturedModalRect(posX+17+96, posY, 1, 0, 16, 18);
 		this.drawTexturedModalRect(posX+17+111, posY, 1, 0, 17, 18);
-		drawText(posX,posY);
+		drawText(posX, posY);
 	}
 
 	@Override

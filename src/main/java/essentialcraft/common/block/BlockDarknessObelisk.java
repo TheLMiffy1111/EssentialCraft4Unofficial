@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.Loader;
 
 public class BlockDarknessObelisk extends BlockContainer implements IModelRegisterer {
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0,0,0,1,2,1);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0, 0, 0, 1, 2, 1);
 
 	public BlockDarknessObelisk() {
 		super(Material.ROCK, MapColor.BLACK);

@@ -12,7 +12,7 @@ import net.minecraft.inventory.Container;
 public class GuiMagicalEnchanter extends GuiCommon{
 
 	public GuiMagicalEnchanter(Container c, TileMagicalEnchanter tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(25, 4, tile));
 		elementList.add(new GuiBoundGemState(90, 4, tile, 0));

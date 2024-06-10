@@ -90,7 +90,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 			List<ItemStack> items = e.onSheared(new ItemStack(Items.SHEARS), en.getEntityWorld(), en.getPosition(), 2);
 			for(ItemStack is : items) {
 				if(!is.isEmpty()) {
-					EntityItem itm = new EntityItem(en.getEntityWorld(),en.posX,en.posY,en.posZ,is);
+					EntityItem itm = new EntityItem(en.getEntityWorld(), en.posX, en.posY, en.posZ, is);
 					if(!en.getEntityWorld().isRemote) {
 						en.getEntityWorld().spawnEntity(itm);
 					}
@@ -102,7 +102,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 	public void breed(EntityItem e) {
 		if(!e.getItem().isEmpty()) {
 			AxisAlignedBB aabb = new AxisAlignedBB(e.posX-0.5D, e.posY-0.5D, e.posZ-0.5D, e.posX+0.5D, e.posY+0.5D, e.posZ+0.5D).expand(3, 3, 3);
-			List<EntityAnimal> animals = e.getEntityWorld().getEntitiesWithinAABB(EntityAnimal.class,aabb);
+			List<EntityAnimal> animals = e.getEntityWorld().getEntitiesWithinAABB(EntityAnimal.class, aabb);
 			for(EntityAnimal animal : animals) {
 				if(animal.isBreedingItem(e.getItem()) && animal.getGrowingAge() == 0 && !animal.isInLove()) {
 					FakePlayer fake = new FakePlayer((WorldServer) e.getEntityWorld(), breederFakePlayerProfile);
@@ -138,7 +138,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 			}
 			else if(stk.getItem() instanceof IPlantable) {//seeds
 				if(e.getEntityWorld().isAirBlock(p) && e.getEntityWorld().getBlockState(p.down()).getBlock().canSustainPlant(e.getEntityWorld().getBlockState(p.down()), e.getEntityWorld(), p.down(), EnumFacing.UP, (IPlantable)stk.getItem())) {
-					FakePlayer user = new FakePlayer((WorldServer) e.getEntityWorld(),planterFakePlayerProfile);
+					FakePlayer user = new FakePlayer((WorldServer) e.getEntityWorld(), planterFakePlayerProfile);
 					stk.getItem().onItemUse(user, e.getEntityWorld(), p.down(), EnumHand.MAIN_HAND, EnumFacing.UP, 0, 0, 0);
 					invalidate(e);
 				}
@@ -147,7 +147,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 				Block b = ((ItemBlockSpecial)stk.getItem()).getBlock();
 				if(b instanceof IPlantable) {
 					if(e.getEntityWorld().isAirBlock(p) && e.getEntityWorld().getBlockState(p.down()).getBlock().canSustainPlant(e.getEntityWorld().getBlockState(p.down()), e.getEntityWorld(), p.down(), EnumFacing.UP, (IPlantable)b)) {
-						FakePlayer user = new FakePlayer((WorldServer)e.getEntityWorld(),planterFakePlayerProfile);
+						FakePlayer user = new FakePlayer((WorldServer)e.getEntityWorld(), planterFakePlayerProfile);
 						stk.getItem().onItemUse(user, e.getEntityWorld(), p.down(), EnumHand.MAIN_HAND, EnumFacing.UP, 0, 0, 0);
 						invalidate(e);
 					}

@@ -92,7 +92,7 @@ public class TileHeatGenerator extends TileMRUGeneric {
 									setInventorySlotContents(1, stk);
 								}
 								if(getStackInSlot(1).isEmpty()) {
-									ItemStack stk = new ItemStack(ItemsCore.magicalSlag,1,0);
+									ItemStack stk = new ItemStack(ItemsCore.magicalSlag, 1, 0);
 									setInventorySlotContents(1, stk);
 								}
 							}

@@ -120,7 +120,7 @@ public class GunRegistry {
 		public HashMap<GunType, ArrayList<DummyData>> materialData = new HashMap<>();
 		public String id;
 		public ItemStack recipe = ItemStack.EMPTY;
-		public HashMap<String,String> textures = new HashMap<>();
+		public HashMap<String, String> textures = new HashMap<>();
 
 		public LenseMaterial(String id) {
 			this.id = id;

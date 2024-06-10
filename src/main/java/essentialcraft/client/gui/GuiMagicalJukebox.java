@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiMagicalJukebox extends GuiCommon{
 
 	public GuiMagicalJukebox(Container c, TileEntity tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(25, 40, tile));
 		elementList.add(new GuiBoundGemState(25, 22, tile, 0));

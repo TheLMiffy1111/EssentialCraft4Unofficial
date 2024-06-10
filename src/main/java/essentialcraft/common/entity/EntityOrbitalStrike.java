@@ -46,7 +46,7 @@ public class EntityOrbitalStrike extends Entity {
 	}
 
 	public EntityOrbitalStrike(World w, double x, double y, double z, double damage, double delay, EntityLivingBase base) {
-		this(w,x,y,z);
+		this(w, x, y, z);
 		this.damage = damage;
 		this.delay = delay;
 		attacker = base;
@@ -80,7 +80,7 @@ public class EntityOrbitalStrike extends Entity {
 			getDataManager().set(DATA, String.valueOf(delay));
 		}
 		if(ticksExisted == 3) {
-			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.orbital_strike", 1, 1F, 16,dimension);
+			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.orbital_strike", 1, 1F, 16, dimension);
 		}
 		if(delay <= 0 && !isDead) {
 			if(!getEntityWorld().isRemote) {
@@ -125,7 +125,7 @@ public class EntityOrbitalStrike extends Entity {
 									}
 									continue;
 								}
-								ItemStack is = new ItemStack(b.getBlock(),1,b.getBlock().getMetaFromState(b));
+								ItemStack is = new ItemStack(b.getBlock(), 1, b.getBlock().getMetaFromState(b));
 								ItemStack result = FurnaceRecipes.instance().getSmeltingResult(is);
 								if(!result.isEmpty()) {
 									if(result.getItem() instanceof ItemBlock) {
@@ -138,7 +138,7 @@ public class EntityOrbitalStrike extends Entity {
 										if(!getEntityWorld().isRemote) {
 											getEntityWorld().setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState(), 3);
 										}
-										EntityItem itm = new EntityItem(getEntityWorld(),x,y,z,result.copy());
+										EntityItem itm = new EntityItem(getEntityWorld(), x, y, z, result.copy());
 										if(!getEntityWorld().isRemote) {
 											getEntityWorld().spawnEntity(itm);
 										}
@@ -162,6 +162,6 @@ public class EntityOrbitalStrike extends Entity {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

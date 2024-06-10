@@ -86,9 +86,9 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 	}
 
 	@Override
-	public Multimap<String,AttributeModifier> getAttributeModifiers(EntityEquipmentSlot s, ItemStack stack)
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot s, ItemStack stack)
 	{
-		Multimap<String,AttributeModifier> mods = HashMultimap.<String,AttributeModifier>create();
+		Multimap<String, AttributeModifier> mods = HashMultimap.<String, AttributeModifier>create();
 
 		if(this == ItemsCore.magicArmorItems[5] && s == EntityEquipmentSlot.CHEST) {
 			mods.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "hp", 20D, 0));
@@ -191,7 +191,7 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 		return discount[aType][5-type.ordinal()];
 	}
 
-	public static int[][] discount = {{5,5,3,2},{8,10,7,5},{10,15,8,7},{2,3,2,1}};
+	public static int[][] discount = {{5, 5, 3, 2}, {8, 10, 7, 5}, {10, 15, 8, 7}, {2, 3, 2, 1}};
 
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
@@ -201,7 +201,7 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 				return new ArmorProperties(0, aarmor.damageReduceAmount / 25D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
 			}
 			else {
-				return new ArmorProperties(0,0,armor.getMaxDamage() + 1 - armor.getItemDamage());
+				return new ArmorProperties(0, 0, armor.getMaxDamage() + 1 - armor.getItemDamage());
 			}
 		}
 		int mru = armor.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU();
@@ -210,7 +210,7 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 			return new ArmorProperties(0, aarmor.damageReduceAmount / 20D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
 		}
 		else {
-			return new ArmorProperties(0,0,armor.getMaxDamage() + 1 - armor.getItemDamage());
+			return new ArmorProperties(0, 0, armor.getMaxDamage() + 1 - armor.getItemDamage());
 		}
 	}
 

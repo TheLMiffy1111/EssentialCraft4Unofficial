@@ -24,7 +24,7 @@ public class GuiCrafter extends GuiCommon{
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2) {
+	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
 		GlStateManager.color(1, 1, 1);
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
@@ -45,7 +45,7 @@ public class GuiCrafter extends GuiCommon{
 		RenderHelper.enableStandardItemLighting();
 		for(GuiElement element : elementList) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(element.getElementTexture());
-			element.draw(k+element.getX(),l+element.getY(),i1,i2);
+			element.draw(k+element.getX(), l+element.getY(), i1, i2);
 			GlStateManager.color(1, 1, 1);
 		}
 	}

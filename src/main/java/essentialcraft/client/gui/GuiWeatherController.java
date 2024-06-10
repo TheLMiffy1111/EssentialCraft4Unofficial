@@ -12,7 +12,7 @@ import net.minecraft.inventory.Container;
 public class GuiWeatherController extends GuiCommon {
 
 	public GuiWeatherController(Container c, TileWeatherController tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(25, 4, tile));
 		elementList.add(new GuiBoundGemState(25, 22, tile, 0));

@@ -275,8 +275,8 @@ public class GuiResearchBook extends GuiScreen {
 		int l = (height - 168) / 2;
 		GuiButtonNoSound back = new GuiButtonNoSound(0, k+236, l+7, 14, 18, "");
 		buttonList.add(back);
-		GuiButtonNoSound page_left = new GuiButtonNoSound(1,k+7,l+158,24,13,"");
-		GuiButtonNoSound page_right = new GuiButtonNoSound(2,k+227,l+158,24,13,"");
+		GuiButtonNoSound page_left = new GuiButtonNoSound(1, k+7, l+158, 24, 13, "");
+		GuiButtonNoSound page_right = new GuiButtonNoSound(2, k+227, l+158, 24, 13, "");
 		int discAmount = currentCategory.discoveries.size();
 		if(discAmount - 48*(currentDiscoveryPage+1) <= 0) {
 			page_left.enabled = false;
@@ -331,8 +331,8 @@ public class GuiResearchBook extends GuiScreen {
 		int l = (height - 168) / 2;
 		GuiButtonNoSound back = new GuiButtonNoSound(0, k+236, l+7, 14, 18, "");
 		buttonList.add(back);
-		GuiButtonNoSound page_left = new GuiButtonNoSound(1,k+7,l+158,24,13,"");
-		GuiButtonNoSound page_right = new GuiButtonNoSound(2,k+227,l+158,24,13,"");
+		GuiButtonNoSound page_left = new GuiButtonNoSound(1, k+7, l+158, 24, 13, "");
+		GuiButtonNoSound page_right = new GuiButtonNoSound(2, k+227, l+158, 24, 13, "");
 		int pagesMax = currentDiscovery.pages.size();
 		if(currentPage <= 0) {
 			page_left.enabled = false;
@@ -545,23 +545,23 @@ public class GuiResearchBook extends GuiScreen {
 	public int drawRecipe(int mouseX, int mouseZ, int k, int l, IRecipe toDraw) {
 		//2
 		if(toDraw instanceof ShapedOreRecipe) {
-			return drawShapedOreRecipe(mouseX,mouseZ,k,l,(ShapedOreRecipe) toDraw);
+			return drawShapedOreRecipe(mouseX, mouseZ, k, l, (ShapedOreRecipe) toDraw);
 		}
 		//3
 		if(toDraw instanceof ShapelessOreRecipe) {
-			return drawShapelessOreRecipe(mouseX,mouseZ,k,l,(ShapelessOreRecipe) toDraw);
+			return drawShapelessOreRecipe(mouseX, mouseZ, k, l, (ShapelessOreRecipe) toDraw);
 		}
 		//5
 		if(toDraw instanceof RadiatingChamberRecipe) {
-			return drawRadiatingChamberRecipe(mouseX,mouseZ,k,l,(RadiatingChamberRecipe) toDraw);
+			return drawRadiatingChamberRecipe(mouseX, mouseZ, k, l, (RadiatingChamberRecipe) toDraw);
 		}
 		//6
 		if(toDraw instanceof MagicianTableRecipe) {
-			return drawMagicianTableRecipe(mouseX,mouseZ,k,l,(MagicianTableRecipe) toDraw);
+			return drawMagicianTableRecipe(mouseX, mouseZ, k, l, (MagicianTableRecipe) toDraw);
 		}
 		//?7?
 		if(toDraw instanceof StructureRecipe) {
-			return drawStructureRecipe(mouseX,mouseZ,k,l,(StructureRecipe) toDraw);
+			return drawStructureRecipe(mouseX, mouseZ, k, l, (StructureRecipe) toDraw);
 		}
 		return 0;
 	}
@@ -575,7 +575,7 @@ public class GuiResearchBook extends GuiScreen {
 		RenderHelper.enableGUIStandardItemLighting();
 		GlStateManager.color(1, 1, 1);
 		DrawUtils.bindTexture("essentialcraft", "textures/gui/mrustorage.png");
-		DrawUtils.drawTexturedModalRect(k+7, l+20, 0, 0, 18, 72,1);
+		DrawUtils.drawTexturedModalRect(k+7, l+20, 0, 0, 18, 72, 1);
 		int percentageScaled = MathUtils.pixelatedTextureSize(toDraw.mruRequired, 5000, 72);
 		TextureAtlasSprite icon = (TextureAtlasSprite)EssentialCraftCore.proxy.getClientIcon("mru");
 		DrawUtils.drawTexture(k+8, l-1+74-percentageScaled+20, icon, 16, percentageScaled-2, 2);
@@ -674,7 +674,7 @@ public class GuiResearchBook extends GuiScreen {
 		RenderHelper.enableGUIStandardItemLighting();
 		GlStateManager.color(1, 1, 1);
 		DrawUtils.bindTexture("essentialcraft", "textures/gui/mrustorage.png");
-		DrawUtils.drawTexturedModalRect(k+7, l+20, 0, 0, 18, 72,1);
+		DrawUtils.drawTexturedModalRect(k+7, l+20, 0, 0, 18, 72, 1);
 		int percentageScaled = MathUtils.pixelatedTextureSize((int) (toDraw.mruRequired*toDraw.costModifier), 5000, 72);
 		TextureAtlasSprite icon = (TextureAtlasSprite) EssentialCraftCore.proxy.getClientIcon("mru");
 		DrawUtils.drawTexture(k+8, l-1+74-percentageScaled+20, icon, 16, percentageScaled-2, 2);
@@ -780,9 +780,9 @@ public class GuiResearchBook extends GuiScreen {
 		fontRenderer.drawString(I18n.translateToLocal("essentialcraft.txt.shapedRecipe"), k+8, l+12, 0x222222);
 		ShapedOreRecipe recipe = toDraw;
 		for(int i = 0; i < 9; ++i) {
-			drawSlotInRecipe(k,l+6,i%3*18,i/3*18);
+			drawSlotInRecipe(k, l+6, i%3*18, i/3*18);
 		}
-		drawSlotInRecipe(k,l+6,80,1*18);
+		drawSlotInRecipe(k, l+6, 80, 1*18);
 		DrawUtils.bindTexture("minecraft", "textures/gui/container/crafting_table.png");
 
 		GlStateManager.color(1, 1, 1);
@@ -839,9 +839,9 @@ public class GuiResearchBook extends GuiScreen {
 		}
 
 		for(int i = 0; i < 9; ++i) {
-			drawSlotInRecipe(k,l+6,i%3*18,i/3*18);
+			drawSlotInRecipe(k, l+6, i%3*18, i/3*18);
 		}
-		drawSlotInRecipe(k,l+6,80,1*18);
+		drawSlotInRecipe(k, l+6, 80, 1*18);
 
 		DrawUtils.bindTexture("minecraft", "textures/gui/container/crafting_table.png");
 
@@ -904,7 +904,7 @@ public class GuiResearchBook extends GuiScreen {
 		String added = "";
 		for(int i = 0; i < s.length(); ++i) {
 			if(i+1 < s.length()) {
-				String substr = s.substring(i,i+1);
+				String substr = s.substring(i, i+1);
 				if(substr.equals("|")) {
 					rtLst.add(added);
 					rtLst.add("");
@@ -1166,7 +1166,7 @@ public class GuiResearchBook extends GuiScreen {
 					if(ds != null && ds != currentDiscovery) {
 						catStr.add(TextFormatting.ITALIC + I18n.translateToLocal("essentialcraft.txt.is.press"));
 						if(Mouse.isButtonDown(0) && !isLeftMouseKeyPressed) {
-							prevState.add(new Object[]{currentDiscovery,currentPage,currentDiscoveryPage});
+							prevState.add(new Object[]{currentDiscovery, currentPage, currentDiscoveryPage});
 							isLeftMouseKeyPressed = true;
 							currentPage = 0;
 							currentDiscoveryPage = 0;
@@ -1241,7 +1241,7 @@ public class GuiResearchBook extends GuiScreen {
 				if(ApiCore.findDiscoveryByIS(toDraw) != null) {
 					catStr.add(TextFormatting.ITALIC + I18n.translateToLocal("essentialcraft.txt.is.press"));
 					if(Mouse.isButtonDown(0) && !isLeftMouseKeyPressed) {
-						prevState.add(new Object[]{currentDiscovery,currentPage,currentDiscoveryPage});
+						prevState.add(new Object[]{currentDiscovery, currentPage, currentDiscoveryPage});
 						isLeftMouseKeyPressed = true;
 						DiscoveryEntry switchTo = ApiCore.findDiscoveryByIS(toDraw);
 						currentPage = 0;

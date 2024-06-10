@@ -13,15 +13,15 @@ import net.minecraft.util.ResourceLocation;
 public class GuiMIM extends GuiCommon{
 
 	public GuiMIM(Container c, TileEntity tile) {
-		super(c,tile);
-		guiGenLocation = new ResourceLocation("essentialcraft","textures/gui/mim.png");
+		super(c, tile);
+		guiGenLocation = new ResourceLocation("essentialcraft", "textures/gui/mim.png");
 		elementList.add(new GuiMRUStorage(4, 72, tile));
 		xSize = 196;
 		ySize = 256;
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2) {
+	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
 		GlStateManager.color(1, 1, 1);
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
@@ -33,7 +33,7 @@ public class GuiMIM extends GuiCommon{
 		}
 		for(GuiElement element : elementList) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(element.getElementTexture());
-			element.draw(k+element.getX(),l+element.getY(),i1,i2);
+			element.draw(k+element.getX(), l+element.getY(), i1, i2);
 			GlStateManager.color(1, 1, 1);
 		}
 	}

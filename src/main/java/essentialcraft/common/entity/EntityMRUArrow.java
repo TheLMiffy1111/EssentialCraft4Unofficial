@@ -18,7 +18,7 @@ public class EntityMRUArrow extends EntityArrow {
 		super(p_i1753_1_);
 	}
 
-	public EntityMRUArrow(World p_i1756_1_, EntityLivingBase p_i1756_2_,float p_i1756_3_)
+	public EntityMRUArrow(World p_i1756_1_, EntityLivingBase p_i1756_2_, float p_i1756_3_)
 	{
 		super(p_i1756_1_, p_i1756_2_);
 		pickupStatus = PickupStatus.DISALLOWED;
@@ -36,7 +36,7 @@ public class EntityMRUArrow extends EntityArrow {
 		//this.motionZ *= 0.9F;
 		for(int i = 0; i < 2; ++i)
 		{
-			EssentialCraftCore.proxy.spawnParticle("cSpellFX",(float)posX+MathUtils.randomFloat(rand)/10, (float)posY+MathUtils.randomFloat(rand)/10, (float)posZ+MathUtils.randomFloat(rand)/10, motionX*10, motionY*10, motionZ*10);
+			EssentialCraftCore.proxy.spawnParticle("cSpellFX", (float)posX+MathUtils.randomFloat(rand)/10, (float)posY+MathUtils.randomFloat(rand)/10, (float)posZ+MathUtils.randomFloat(rand)/10, motionX*10, motionY*10, motionZ*10);
 		}
 	}
 
@@ -47,6 +47,6 @@ public class EntityMRUArrow extends EntityArrow {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

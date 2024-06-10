@@ -156,8 +156,8 @@ public class ApiCore {
 	public static boolean tryToDecreaseMRUInStorage(EntityPlayer player, int amount) {
 		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
-			Method tryToDecreaseMRUInStorage = ecUtilsClass.getMethod("tryToDecreaseMRUInStorage", EntityPlayer.class,int.class);
-			return Boolean.parseBoolean(tryToDecreaseMRUInStorage.invoke(null, player,-amount).toString());
+			Method tryToDecreaseMRUInStorage = ecUtilsClass.getMethod("tryToDecreaseMRUInStorage", EntityPlayer.class, int.class);
+			return Boolean.parseBoolean(tryToDecreaseMRUInStorage.invoke(null, player, -amount).toString());
 		}
 		catch(Exception e) {
 			return false;
@@ -167,7 +167,7 @@ public class ApiCore {
 	public static void increaseCorruptionAt(World world, float x, float y, float z, int amount) {
 		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
-			Method increaseCorruptionAt = ecUtilsClass.getMethod("increaseCorruptionAt", World.class,float.class,float.class,float.class,int.class);
+			Method increaseCorruptionAt = ecUtilsClass.getMethod("increaseCorruptionAt", World.class, float.class, float.class, float.class, int.class);
 			increaseCorruptionAt.setAccessible(true);
 			increaseCorruptionAt.invoke(null, world, x, y, z, amount);
 		}

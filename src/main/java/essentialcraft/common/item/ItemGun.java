@@ -70,7 +70,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		{
 			if(entity instanceof EntityLivingBase)
 			{
-				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,3,3,true,true));
+				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 3, 3, true, true));
 			}
 		}
 		if(MiscUtils.getStackTag(itemStack).hasKey("cool"))
@@ -189,7 +189,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 
 					MiscUtils.getStackTag(gun).setFloat("cool", stats.getFloat("speed")*2);
 					w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
-					EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
+					EntityMRURay ray = new EntityMRURay(w, p, stats.getFloat("damage"), stats.getFloat("spread")/2, balance);
 					if(!w.isRemote) {
 						w.spawnEntity(ray);
 					}
@@ -554,7 +554,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 
 						MiscUtils.getStackTag(gun).setFloat("cool", stats.getFloat("speed")*2);
 						w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
-						EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
+						EntityMRURay ray = new EntityMRURay(w, p, stats.getFloat("damage"), stats.getFloat("spread")/2, balance);
 						if(!w.isRemote) {
 							w.spawnEntity(ray);
 						}
@@ -624,7 +624,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 								MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
 							}
 							//w.playSound(p.posX, p.posY, p.posZ, "essentialcraft:sound.beam", 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
-							EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
+							EntityMRURay ray = new EntityMRURay(w, p, stats.getFloat("damage"), stats.getFloat("spread")/2, balance);
 							if(!w.isRemote) {
 								w.spawnEntity(ray);
 							}

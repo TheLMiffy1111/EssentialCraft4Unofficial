@@ -102,7 +102,7 @@ public class TileWorldMerger extends TileMRUGeneric {
 	public void spawnParticles() {
 		if(world.isRemote && structureChecker.test(getWorld(), getPos())) {
 			/*for(int i = 0; i < 100; ++i)*/ {
-				EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, pos.getY(), pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, 0,2, 0);
+				EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, pos.getY(), pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*3, 0, 2, 0);
 			}
 		}
 	}
@@ -123,13 +123,13 @@ public class TileWorldMerger extends TileMRUGeneric {
 				return true;
 			}, (world, pos)->
 			testBlock(world, pos.add( 2, 0, 2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 2, 0,-2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add( 2, 0, -2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add(-2, 0, 2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-2, 0,-2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-2, 0, -2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add( 2, 1, 2), Blocks.GLOWSTONE) &&
-			testBlock(world, pos.add( 2, 1,-2), Blocks.GLOWSTONE) &&
+			testBlock(world, pos.add( 2, 1, -2), Blocks.GLOWSTONE) &&
 			testBlock(world, pos.add(-2, 1, 2), Blocks.GLOWSTONE) &&
-			testBlock(world, pos.add(-2, 1,-2), Blocks.GLOWSTONE)
+			testBlock(world, pos.add(-2, 1, -2), Blocks.GLOWSTONE)
 			);
 
 	@Override

@@ -8,13 +8,13 @@ public class GuiProgressBar_MithrilineFurnace extends GuiTextElement{
 	public TileMithrilineFurnace tile;
 
 	public GuiProgressBar_MithrilineFurnace(int i, int j, TileMithrilineFurnace furnace) {
-		super(i,j);
+		super(i, j);
 		tile = furnace;
 	}
 
 	@Override
 	public void draw(int posX, int posY, int mouseX, int mouseY) {
-		DrawUtils.bindTexture("essentialcraft","textures/gui/mithrilinefurnaceelements.png");
+		DrawUtils.bindTexture("essentialcraft", "textures/gui/mithrilinefurnaceelements.png");
 		double current = tile.progress;
 		double max = tile.reqProgress;
 		if(max > 0) {

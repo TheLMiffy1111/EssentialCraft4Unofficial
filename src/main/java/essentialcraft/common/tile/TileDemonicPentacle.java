@@ -154,60 +154,60 @@ public class TileDemonicPentacle extends TileEntity implements ITickable {
 	testBlock(w, cp.add( 0, 0, 0), BlocksCore.voidStone) &&
 	testBlock(w, cp.add( 2, 0, 0), BlocksCore.voidStone) &&
 	testBlock(w, cp.add(-2, 0, 0), BlocksCore.voidStone) &&
-	testBlock(w, cp.add( 0, 0,-2), BlocksCore.voidStone) &&
+	testBlock(w, cp.add( 0, 0, -2), BlocksCore.voidStone) &&
 	testBlock(w, cp.add( 0, 0, 2), BlocksCore.voidStone) &&
 	testBlock(w, cp.add( 3, 0, 1), BlocksCore.voidStone) &&
-	testBlock(w, cp.add( 3, 0,-1), BlocksCore.voidStone) &&
+	testBlock(w, cp.add( 3, 0, -1), BlocksCore.voidStone) &&
 	testBlock(w, cp.add(-3, 0, 1), BlocksCore.voidStone) &&
-	testBlock(w, cp.add(-3, 0,-1), BlocksCore.voidStone) &&
+	testBlock(w, cp.add(-3, 0, -1), BlocksCore.voidStone) &&
 	testBlock(w, cp.add( 1, 0, 3), BlocksCore.voidStone) &&
 	testBlock(w, cp.add(-1, 0, 3), BlocksCore.voidStone) &&
-	testBlock(w, cp.add( 1, 0,-3), BlocksCore.voidStone) &&
-	testBlock(w, cp.add(-1, 0,-3), BlocksCore.voidStone) &&
+	testBlock(w, cp.add( 1, 0, -3), BlocksCore.voidStone) &&
+	testBlock(w, cp.add(-1, 0, -3), BlocksCore.voidStone) &&
 	testBlock(w, cp.add( 3, 1, 0), Blocks.GLOWSTONE) &&
 	testBlock(w, cp.add(-3, 1, 0), Blocks.GLOWSTONE) &&
 	testBlock(w, cp.add( 0, 1, 3), Blocks.GLOWSTONE) &&
-	testBlock(w, cp.add( 0, 1,-3), Blocks.GLOWSTONE) &&
+	testBlock(w, cp.add( 0, 1, -3), Blocks.GLOWSTONE) &&
 	testBlock(w, cp.add( 2, 1, 2), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-2, 1, 2), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 2, 1,-2), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add(-2, 1,-2), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 2, 1, -2), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add(-2, 1, -2), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 1, 0, 0), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-1, 0, 0), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 0, 0, 1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 0, 0,-1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 0, 0, -1), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 2, 0, 1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 2, 0,-1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 2, 0, -1), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-2, 0, 1), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-2, 0,-1), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-2, 0, -1), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 1, 0, 2), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 1, 0,-2), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 1, 0, -2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-1, 0, 2), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-1, 0,-2), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-1, 0, -2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 3, 0, 2), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 3, 0,-2), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 3, 0, -2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-3, 0, 2), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-3, 0,-2), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-3, 0, -2), BlocksCore.platingPale) &&
 	testBlock(w, cp.add( 2, 0, 3), BlocksCore.platingPale) &&
-	testBlock(w, cp.add( 2, 0,-3), BlocksCore.platingPale) &&
+	testBlock(w, cp.add( 2, 0, -3), BlocksCore.platingPale) &&
 	testBlock(w, cp.add(-2, 0, 3), BlocksCore.platingPale) &&
-	testBlock(w, cp.add(-2, 0,-3), BlocksCore.platingPale) &&
+	testBlock(w, cp.add(-2, 0, -3), BlocksCore.platingPale) &&
 	testESPEHandler(w, cp.add( 2, 2, 2), 0) &&
 	testESPEHandler(w, cp.add(-2, 2, 2), 0) &&
-	testESPEHandler(w, cp.add( 2, 2,-2), 0) &&
-	testESPEHandler(w, cp.add(-2, 2,-2), 0) &&
+	testESPEHandler(w, cp.add( 2, 2, -2), 0) &&
+	testESPEHandler(w, cp.add(-2, 2, -2), 0) &&
 	testESPEHandler(w, cp.add( 3, 1, 2), 1) &&
-	testESPEHandler(w, cp.add( 3, 1,-2), 1) &&
+	testESPEHandler(w, cp.add( 3, 1, -2), 1) &&
 	testESPEHandler(w, cp.add(-3, 1, 2), 1) &&
-	testESPEHandler(w, cp.add(-3, 1,-2), 1) &&
+	testESPEHandler(w, cp.add(-3, 1, -2), 1) &&
 	testESPEHandler(w, cp.add( 2, 1, 3), 1) &&
-	testESPEHandler(w, cp.add( 2, 1,-3), 1) &&
+	testESPEHandler(w, cp.add( 2, 1, -3), 1) &&
 	testESPEHandler(w, cp.add(-2, 1, 3), 1) &&
-	testESPEHandler(w, cp.add(-2, 1,-3), 1) &&
+	testESPEHandler(w, cp.add(-2, 1, -3), 1) &&
 	testESPEHandler(w, cp.add( 3, 2, 0), 2) &&
 	testESPEHandler(w, cp.add(-3, 2, 0), 2) &&
 	testESPEHandler(w, cp.add( 0, 2, 3), 2) &&
-	testESPEHandler(w, cp.add( 0, 2,-3), 2);
+	testESPEHandler(w, cp.add( 0, 2, -3), 2);
 
 	public void checkStructureAndTier() {
 		World w = getWorld();

@@ -155,12 +155,12 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 	@Override
 	public void registerModels() {
 		for(int i = 0; i < 6; i++) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:rightclicker", "facing=north,type=" + ActivatorType.fromIndex(i)));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:rightclicker", "facing=north, type=" + ActivatorType.fromIndex(i)));
 			for(int j = 0; j < 6; j++) {
 				if(j == 2) {
 					continue;
 				}
-				ModelBakery.registerItemVariants(Item.getItemFromBlock(this), new ModelResourceLocation("essentialcraft:rightclicker", "facing="+ EnumFacing.byIndex(j).getName() +",type=" + ActivatorType.fromIndex(i)));
+				ModelBakery.registerItemVariants(Item.getItemFromBlock(this), new ModelResourceLocation("essentialcraft:rightclicker", "facing="+ EnumFacing.byIndex(j).getName() +", type=" + ActivatorType.fromIndex(i)));
 			}
 		}
 		ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(FACING, TYPE).build());

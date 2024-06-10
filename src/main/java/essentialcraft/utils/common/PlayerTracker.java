@@ -86,7 +86,7 @@ public class PlayerTracker {
 				}
 
 				if(addBuff) {
-					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST,100,12));
+					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 100, 12));
 				}
 				player.sendMessage(new TextComponentString("The wind pushes you upwards...").setStyle(new Style().setColor(TextFormatting.DARK_AQUA).setItalic(true)));
 
@@ -155,9 +155,9 @@ public class PlayerTracker {
 			}
 			if(player.getActivePotionEffect(PotionRegistry.frozenMind) != null)
 			{
-				ECUtils.calculateAndAddPE(player, MobEffects.SLOWNESS, 400,100);
-				ECUtils.calculateAndAddPE(player, MobEffects.WEAKNESS, 400,100);
-				ECUtils.calculateAndAddPE(player, MobEffects.MINING_FATIGUE, 400,100);
+				ECUtils.calculateAndAddPE(player, MobEffects.SLOWNESS, 400, 100);
+				ECUtils.calculateAndAddPE(player, MobEffects.WEAKNESS, 400, 100);
+				ECUtils.calculateAndAddPE(player, MobEffects.MINING_FATIGUE, 400, 100);
 			}
 		}
 	}

@@ -49,8 +49,8 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 				b[1] = getWorld().getBlockState(pos.west(2)).getBlock();
 				b[2] = getWorld().getBlockState(pos.south(2)).getBlock();
 				b[3] = getWorld().getBlockState(pos.north(2)).getBlock();
-				int[] ox = {2,-2, 0, 0};
-				int[] oz = {0, 0, 2,-2};
+				int[] ox = {2, -2, 0, 0};
+				int[] oz = {0, 0, 2, -2};
 				for(int i = 0; i < 4; ++i) {
 					if(b[i] == Blocks.AIR) {
 						mruFactor*=0;
@@ -114,7 +114,7 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 									setInventorySlotContents(1, stk);
 								}
 								if(getStackInSlot(1).isEmpty()) {
-									ItemStack stk = new ItemStack(ItemsCore.magicalSlag,1,0);
+									ItemStack stk = new ItemStack(ItemsCore.magicalSlag, 1, 0);
 									setInventorySlotContents(1, stk);
 								}
 							}

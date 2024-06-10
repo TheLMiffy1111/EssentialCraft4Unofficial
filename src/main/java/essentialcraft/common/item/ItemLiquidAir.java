@@ -25,7 +25,7 @@ public class ItemLiquidAir extends Item implements IModelRegisterer {
 	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_)
 	{
 		if(p_77654_3_ instanceof EntityPlayer && !p_77654_2_.isRemote) {
-			((EntityPlayer)p_77654_3_).inventory.decrStackSize(((EntityPlayer)p_77654_3_).inventory.currentItem,1);
+			((EntityPlayer)p_77654_3_).inventory.decrStackSize(((EntityPlayer)p_77654_3_).inventory.currentItem, 1);
 			ECUtils.calculateAndAddPE((EntityPlayer)p_77654_3_, PotionRegistry.paranormalLightness, 8*60*20, 2*60*20);
 			WindRelations.increasePlayerWindRelations((EntityPlayer) p_77654_3_, 100);
 		}

@@ -8,7 +8,7 @@ public class GuiProgressBar_MagicianTable extends GuiTextElement{
 	public TileMagicianTable tile;
 
 	public GuiProgressBar_MagicianTable(int i, int j, TileMagicianTable table) {
-		super(i,j);
+		super(i, j);
 		tile = table;
 	}
 

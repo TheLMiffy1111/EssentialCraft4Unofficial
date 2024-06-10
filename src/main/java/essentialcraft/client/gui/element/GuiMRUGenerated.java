@@ -30,7 +30,7 @@ public class GuiMRUGenerated extends GuiTextElement{
 	public String tileValue;
 
 	public GuiMRUGenerated(int i, int j, TileEntity t, String tileType) {
-		super(i,j);
+		super(i, j);
 		tile = t;
 		tileValue = tileType;
 	}
@@ -56,8 +56,8 @@ public class GuiMRUGenerated extends GuiTextElement{
 				b[1] = furnace.getWorld().getBlockState(furnace.getPos().add(-2, 0, 0)).getBlock();
 				b[2] = furnace.getWorld().getBlockState(furnace.getPos().add(0, 0, 2)).getBlock();
 				b[3] = furnace.getWorld().getBlockState(furnace.getPos().add(0, 0, -2)).getBlock();
-				int[] ox = {2,-2,0,0};
-				int[] oz = {0,0,2,-2};
+				int[] ox = {2, -2, 0, 0};
+				int[] oz = {0, 0, 2, -2};
 				for(int i = 0; i < 4; ++i) {
 					if(b[i] == Blocks.AIR) {
 						mruFactor*=0;
@@ -127,7 +127,7 @@ public class GuiMRUGenerated extends GuiTextElement{
 				this.drawTexturedModalRect(posX+82, posY, 0, 0, 18, 18);
 				RenderItem renderitem = Minecraft.getMinecraft().getRenderItem();
 				if(furnace.burnedFlower != null) {
-					BlockPos pos = new BlockPos(furnace.burnedFlower.getX(),furnace.burnedFlower.getY(), furnace.burnedFlower.getZ());
+					BlockPos pos = new BlockPos(furnace.burnedFlower.getX(), furnace.burnedFlower.getY(), furnace.burnedFlower.getZ());
 					IBlockState b = furnace.getWorld().getBlockState(pos);
 					if(b != null && b.getBlock() != Blocks.AIR && Item.getItemFromBlock(b.getBlock()) != null) {
 						renderitem.renderItemIntoGUI(b.getBlock().getPickBlock(b, new RayTraceResult(Vec3d.ZERO, EnumFacing.DOWN, pos), furnace.getWorld(), furnace.burnedFlower, Minecraft.getMinecraft().player), posX+83, posY+1);

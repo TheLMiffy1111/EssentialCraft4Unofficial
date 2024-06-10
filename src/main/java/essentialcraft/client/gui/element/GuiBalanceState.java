@@ -13,13 +13,13 @@ public class GuiBalanceState extends GuiTextElement{
 
 	public GuiBalanceState(int i, int j, IMRUHandler t)
 	{
-		super(i,j);
+		super(i, j);
 		tile = t;
 	}
 
 	public GuiBalanceState(int i, int j, TileEntity t)
 	{
-		super(i,j);
+		super(i, j);
 		if(t.hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 			tile = t.getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
 		}

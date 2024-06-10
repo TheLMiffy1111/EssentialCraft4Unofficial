@@ -180,57 +180,57 @@ public class TilePlayerPentacle extends TileEntity implements ITickable {
 	testBlock(w, cp.add( 1, 0, 0), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-1, 0, 0), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 0, 0, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 0, 0,-1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 2, 0,-1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 0, 0, -1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 2, 0, -1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 2, 0, 1), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add(-2, 0,-1), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add(-2, 0, -1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-2, 0, 1), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add(-1, 0, 2), BlocksCore.invertedBlock) &&
 	testBlock(w, cp.add( 1, 0, 2), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add(-1, 0,-2), BlocksCore.invertedBlock) &&
-	testBlock(w, cp.add( 1, 0,-2), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add(-1, 0, -2), BlocksCore.invertedBlock) &&
+	testBlock(w, cp.add( 1, 0, -2), BlocksCore.invertedBlock) &&
 	testESPEHandler(w, cp.add(-1, 1, 2), 0) &&
 	testESPEHandler(w, cp.add( 1, 1, 2), 0) &&
-	testESPEHandler(w, cp.add(-1, 1,-2), 0) &&
-	testESPEHandler(w, cp.add( 1, 1,-2), 0) &&
-	testESPEHandler(w, cp.add( 2, 1,-1), 0) &&
+	testESPEHandler(w, cp.add(-1, 1, -2), 0) &&
+	testESPEHandler(w, cp.add( 1, 1, -2), 0) &&
+	testESPEHandler(w, cp.add( 2, 1, -1), 0) &&
 	testESPEHandler(w, cp.add( 2, 1, 1), 0) &&
-	testESPEHandler(w, cp.add(-2, 1,-1), 0) &&
+	testESPEHandler(w, cp.add(-2, 1, -1), 0) &&
 	testESPEHandler(w, cp.add(-2, 1, 1), 0);
 
 	protected static BiPredicate<IBlockAccess, BlockPos> tier1Checker = (w, cp)->
 	testBlock(w, cp.add( 1, 1, 1), BlocksCore.blockPale) &&
 	testBlock(w, cp.add(-1, 1, 1), BlocksCore.blockPale) &&
-	testBlock(w, cp.add( 1, 1,-1), BlocksCore.blockPale) &&
-	testBlock(w, cp.add(-1, 1,-1), BlocksCore.blockPale) &&
+	testBlock(w, cp.add( 1, 1, -1), BlocksCore.blockPale) &&
+	testBlock(w, cp.add(-1, 1, -1), BlocksCore.blockPale) &&
 	testESPEHandler(w, cp.add( 1, 2, 1), 1) &&
 	testESPEHandler(w, cp.add(-1, 2, 1), 1) &&
-	testESPEHandler(w, cp.add( 1, 2,-1), 1) &&
-	testESPEHandler(w, cp.add(-1, 2,-1), 1);
+	testESPEHandler(w, cp.add( 1, 2, -1), 1) &&
+	testESPEHandler(w, cp.add(-1, 2, -1), 1);
 
 	protected static BiPredicate<IBlockAccess, BlockPos> tier2Checker = (w, cp)->
 	testBlock(w, cp.add( 2, 1, 2), BlocksCore.voidStone) &&
 	testBlock(w, cp.add(-2, 1, 2), BlocksCore.voidStone) &&
-	testBlock(w, cp.add( 2, 1,-2), BlocksCore.voidStone) &&
-	testBlock(w, cp.add(-2, 1,-2), BlocksCore.voidStone) &&
+	testBlock(w, cp.add( 2, 1, -2), BlocksCore.voidStone) &&
+	testBlock(w, cp.add(-2, 1, -2), BlocksCore.voidStone) &&
 	testBlock(w, cp.add( 2, 2, 2), BlocksCore.voidStone) &&
 	testBlock(w, cp.add(-2, 2, 2), BlocksCore.voidStone) &&
-	testBlock(w, cp.add( 2, 2,-2), BlocksCore.voidStone) &&
-	testBlock(w, cp.add(-2, 2,-2), BlocksCore.voidStone) &&
+	testBlock(w, cp.add( 2, 2, -2), BlocksCore.voidStone) &&
+	testBlock(w, cp.add(-2, 2, -2), BlocksCore.voidStone) &&
 	testESPEHandler(w, cp.add( 2, 3, 2), 2) &&
 	testESPEHandler(w, cp.add(-2, 3, 2), 2) &&
-	testESPEHandler(w, cp.add( 2, 3,-2), 2) &&
-	testESPEHandler(w, cp.add(-2, 3,-2), 2);
+	testESPEHandler(w, cp.add( 2, 3, -2), 2) &&
+	testESPEHandler(w, cp.add(-2, 3, -2), 2);
 
 	protected static BiPredicate<IBlockAccess, BlockPos> tier3Checker = (w, cp)->
 	testBlock(w, cp.add( 2, 0, 0), BlocksCore.demonicPlating) &&
 	testBlock(w, cp.add(-2, 0, 0), BlocksCore.demonicPlating) &&
 	testBlock(w, cp.add( 0, 0, 2), BlocksCore.demonicPlating) &&
-	testBlock(w, cp.add( 0, 0,-2), BlocksCore.demonicPlating) &&
+	testBlock(w, cp.add( 0, 0, -2), BlocksCore.demonicPlating) &&
 	testESPEHandler(w, cp.add( 2, 4, 0), 3) &&
 	testESPEHandler(w, cp.add(-2, 4, 0), 3) &&
 	testESPEHandler(w, cp.add( 0, 4, 2), 3) &&
-	testESPEHandler(w, cp.add( 0, 4,-2), 3);
+	testESPEHandler(w, cp.add( 0, 4, -2), 3);
 
 	public void checkStructureAndTier() {
 		World w = getWorld();

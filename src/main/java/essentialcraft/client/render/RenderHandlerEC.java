@@ -102,8 +102,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderHandlerEC {
 
-	public static final ResourceLocation iconsEC = new ResourceLocation("essentialcraft","textures/special/icons.png");
-	public static final ResourceLocation whitebox = new ResourceLocation("essentialcraft","textures/special/whitebox.png");
+	public static final ResourceLocation iconsEC = new ResourceLocation("essentialcraft", "textures/special/icons.png");
+	public static final ResourceLocation whitebox = new ResourceLocation("essentialcraft", "textures/special/whitebox.png");
 	public static final Minecraft mc = Minecraft.getMinecraft();
 
 	public static boolean isParadoxActive;
@@ -122,10 +122,10 @@ public class RenderHandlerEC {
 	public static boolean isNightVisionKeyDown;
 	public static boolean isNightVisionActive;
 
-	public static final IModelCustom board = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft","models/item/board.obj"));
-	public static final ResourceLocation boardTextures = new ResourceLocation("essentialcraft","textures/models/board.png");
+	public static final IModelCustom board = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft", "models/item/board.obj"));
+	public static final ResourceLocation boardTextures = new ResourceLocation("essentialcraft", "textures/models/board.png");
 
-	public static HashMap<IInventory, HashMap<Integer,List<EnumFacing>>> slotsTable = new HashMap<>();
+	public static HashMap<IInventory, HashMap<Integer, List<EnumFacing>>> slotsTable = new HashMap<>();
 
 	public void renderParadox()
 	{
@@ -135,7 +135,7 @@ public class RenderHandlerEC {
 		int l = scaledresolution.getScaledHeight();
 		if(currentParadoxTicks >= 190)
 		{
-			renderImage(whitebox, k, l, 1,0,0,0);
+			renderImage(whitebox, k, l, 1, 0, 0, 0);
 
 		}
 		if(paradoxID == 0)
@@ -151,7 +151,7 @@ public class RenderHandlerEC {
 			if(currentParadoxTicks <= 10)
 			{
 				MiscUtils.setShaders(-1);
-				renderImage(whitebox, k, l, 1,1,1,1);
+				renderImage(whitebox, k, l, 1, 1, 1, 1);
 			}
 			if(currentParadoxTicks >= 10) {
 				for(int i = 0; i < 20; ++i)
@@ -164,7 +164,7 @@ public class RenderHandlerEC {
 		{
 			if(currentParadoxTicks >= 190)
 			{
-				renderImage(whitebox, k, l, 1,0,0,0);
+				renderImage(whitebox, k, l, 1, 0, 0, 0);
 			}
 			if(currentParadoxTicks == 190)
 			{
@@ -180,7 +180,7 @@ public class RenderHandlerEC {
 			if(currentParadoxTicks <= 10)
 			{
 				MiscUtils.setShaders(-1);
-				renderImage(whitebox, k, l, 1,1,1,1);
+				renderImage(whitebox, k, l, 1, 1, 1, 1);
 				World w = mc.world;
 				WorldProvider prov = w.provider;
 				prov.setSkyRenderer(skyRenderer);
@@ -190,7 +190,7 @@ public class RenderHandlerEC {
 		{
 			if(currentParadoxTicks >= 190)
 			{
-				renderImage(whitebox, k, l, 1,0,0,0);
+				renderImage(whitebox, k, l, 1, 0, 0, 0);
 			}
 			if(currentParadoxTicks == 190)
 			{
@@ -217,14 +217,14 @@ public class RenderHandlerEC {
 			if(currentParadoxTicks <= 10)
 			{
 				MiscUtils.setShaders(-1);
-				renderImage(whitebox, k, l, 1,1,1,1);
+				renderImage(whitebox, k, l, 1, 1, 1, 1);
 			}
 		}
 		if(paradoxID == 3)
 		{
 			if(currentParadoxTicks >= 190)
 			{
-				renderImage(whitebox, k, l, 1,0,0,0);
+				renderImage(whitebox, k, l, 1, 0, 0, 0);
 			}
 			if(currentParadoxTicks == 190)
 			{
@@ -234,7 +234,7 @@ public class RenderHandlerEC {
 			if(currentParadoxTicks <= 10)
 			{
 				MiscUtils.setShaders(-1);
-				renderImage(whitebox, k, l, 1,1,1,1);
+				renderImage(whitebox, k, l, 1, 1, 1, 1);
 			}
 		}
 	}
@@ -307,8 +307,8 @@ public class RenderHandlerEC {
 						GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
 						GlStateManager.disableFog();
 						DrawUtils.bindTexture("minecraft", "textures/entity/beacon_beam.png");
-						GlStateManager.translate(mop.getBlockPos().getX()-TileEntityRendererDispatcher.staticPlayerX,mop.getBlockPos().getY()+1-TileEntityRendererDispatcher.staticPlayerY, mop.getBlockPos().getZ()-TileEntityRendererDispatcher.staticPlayerZ);
-						TileEntityBeaconRenderer.renderBeamSegment(0, 0, 0, evt.getRenderPartialTicks(), 1, p.getEntityWorld().getTotalWorldTime(), 0, 255-mop.getBlockPos().getY(), new float[] {1,0,1}, 0.2D, 0.499D);
+						GlStateManager.translate(mop.getBlockPos().getX()-TileEntityRendererDispatcher.staticPlayerX, mop.getBlockPos().getY()+1-TileEntityRendererDispatcher.staticPlayerY, mop.getBlockPos().getZ()-TileEntityRendererDispatcher.staticPlayerZ);
+						TileEntityBeaconRenderer.renderBeamSegment(0, 0, 0, evt.getRenderPartialTicks(), 1, p.getEntityWorld().getTotalWorldTime(), 0, 255-mop.getBlockPos().getY(), new float[] {1, 0, 1}, 0.2D, 0.499D);
 						GlStateManager.enableFog();
 						GlStateManager.enableCull();
 						GlStateManager.disableBlend();
@@ -403,7 +403,7 @@ public class RenderHandlerEC {
 		if(!is.isEmpty()) {
 			if(is.getTagCompound() != null && is.getItem() instanceof ItemBoundGem && is.getTagCompound().hasKey("pos") && is.getTagCompound().getInteger("dim") == p.dimension) {
 				int[] coords = ItemBoundGem.getCoords(is);
-				Coord3D c = new Coord3D(coords[0],coords[1],coords[2]);
+				Coord3D c = new Coord3D(coords[0], coords[1], coords[2]);
 				float mx = c.x;
 				float my = c.y;
 				float mz = c.z;
@@ -414,7 +414,7 @@ public class RenderHandlerEC {
 					return;
 				}
 
-				AxisAlignedBB aabb = p.getEntityWorld().getBlockState(new BlockPos((int)mx, (int)my, (int)mz)).getBlock().getSelectedBoundingBox(p.getEntityWorld().getBlockState(new BlockPos((int)mx, (int)my, (int)mz)),p.getEntityWorld(), new BlockPos((int)mx, (int)my, (int)mz));
+				AxisAlignedBB aabb = p.getEntityWorld().getBlockState(new BlockPos((int)mx, (int)my, (int)mz)).getBlock().getSelectedBoundingBox(p.getEntityWorld().getBlockState(new BlockPos((int)mx, (int)my, (int)mz)), p.getEntityWorld(), new BlockPos((int)mx, (int)my, (int)mz));
 
 				GlStateManager.pushMatrix();
 
@@ -768,7 +768,7 @@ public class RenderHandlerEC {
 					isNightVisionKeyDown = true;
 					isNightVisionActive = !isNightVisionActive;
 					if(isNightVisionActive) {
-						PotionEffect effect = new PotionEffect(MobEffects.NIGHT_VISION,Integer.MAX_VALUE,0,false,false);
+						PotionEffect effect = new PotionEffect(MobEffects.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false);
 						effect.setPotionDurationMax(true);
 						Minecraft.getMinecraft().player.addPotionEffect(effect);
 					}
@@ -856,7 +856,7 @@ public class RenderHandlerEC {
 						renderTime = 40 - renderTime;
 					}
 
-					GlStateManager.color(0, 1, 1, MathHelper.clamp(renderTime/20,0.1F,0.8F));
+					GlStateManager.color(0, 1, 1, MathHelper.clamp(renderTime/20, 0.1F, 0.8F));
 
 					GL11.glVertex2f(k, h);
 
@@ -864,7 +864,7 @@ public class RenderHandlerEC {
 						float x2 = (float) (k+Math.sin(angle)*r);
 						float y2 = (float) (h+Math.cos(angle)*r);
 
-						GL11.glVertex2f(x2,y2);
+						GL11.glVertex2f(x2, y2);
 					}
 
 					GlStateManager.color(1, 1, 1);
@@ -882,7 +882,7 @@ public class RenderHandlerEC {
 					GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GlStateManager.disableAlpha();
 
-					GlStateManager.color(1, 1, 1, MathHelper.clamp(renderTime/20,0.1F,0.8F));
+					GlStateManager.color(1, 1, 1, MathHelper.clamp(renderTime/20, 0.1F, 0.8F));
 
 					DrawUtils.drawTexture_Items((int)k-8, (int)h-8, TextureUtils.fromItem(Items.FIREWORKS), 16, 16, 100);
 
@@ -924,7 +924,7 @@ public class RenderHandlerEC {
 						cB = 1F;
 					}
 
-					GlStateManager.color(0, 0, cB, MathHelper.clamp(renderTime/20,0.1F,0.8F));
+					GlStateManager.color(0, 0, cB, MathHelper.clamp(renderTime/20, 0.1F, 0.8F));
 
 					GL11.glVertex2f(k, h);
 
@@ -932,7 +932,7 @@ public class RenderHandlerEC {
 						float x2 = (float) (k+Math.sin(angle)*r);
 						float y2 = (float) (h+Math.cos(angle)*r);
 
-						GL11.glVertex2f(x2,y2);
+						GL11.glVertex2f(x2, y2);
 					}
 
 					GlStateManager.color(1, 1, 1);
@@ -950,7 +950,7 @@ public class RenderHandlerEC {
 					GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GlStateManager.disableAlpha();
 
-					GlStateManager.color(1, 1, 1, MathHelper.clamp(renderTime/20,0.1F,0.8F));
+					GlStateManager.color(1, 1, 1, MathHelper.clamp(renderTime/20, 0.1F, 0.8F));
 
 					DrawUtils.drawTexture_Items((int)k-8, (int)h-8, TextureUtils.fromItem(ItemsCore.computer_helmet), 16, 16, 100);
 
@@ -1073,13 +1073,13 @@ public class RenderHandlerEC {
 				if(mc.player.getActivePotionEffect(PotionRegistry.paradox) != null) {
 					/*
 			    	int duration = mc.player.getActivePotionEffect(PotionRegistry.paradox).getDuration();
-			    	renderImage(whitebox, k, l, (float)(duration-1800)/200,1,1,1);
+			    	renderImage(whitebox, k, l, (float)(duration-1800)/200, 1, 1, 1);
 			    	if(duration == 1700)MiscUtils.setShaders(-1);
 			    	if(duration <= 1600)
 			    	{
 			    		int rDur = duration % 200;
 			    		if((rDur < 18 && rDur > 15) || (rDur > 20 && rDur < 25))
-			    			renderImage(whitebox, k, l, 1,0,0,0);
+			    			renderImage(whitebox, k, l, 1, 0, 0, 0);
 			    	}
 			    	renderParadox();
 			    	if(duration == 1)
@@ -1138,7 +1138,7 @@ public class RenderHandlerEC {
 		}
 	}
 
-	ResourceLocation loc = new ResourceLocation("essentialcraft","textures/hud/sniper_scope.png");
+	ResourceLocation loc = new ResourceLocation("essentialcraft", "textures/hud/sniper_scope.png");
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

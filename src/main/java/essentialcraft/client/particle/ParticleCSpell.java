@@ -10,9 +10,9 @@ public class ParticleCSpell extends Particle{
 	private double mruPosX;
 	private double mruPosY;
 	private double mruPosZ;
-	public ParticleCSpell(World w, double x, double y,double z, double i, double j,double k)
+	public ParticleCSpell(World w, double x, double y, double z, double i, double j, double k)
 	{
-		super(w, x, y, z, i, j,k);
+		super(w, x, y, z, i, j, k);
 		motionX = i;
 		motionY = j;
 		motionZ = k;

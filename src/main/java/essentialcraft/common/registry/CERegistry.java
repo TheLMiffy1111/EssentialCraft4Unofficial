@@ -10,31 +10,31 @@ import essentialcraft.utils.common.CorruptionEffectECNBTBased;
 public class CERegistry {
 
 	public static void register() {
-		effect(BODY,6000);
-		effect(BODY,6000);
-		effect(BODY,6000);
-		effect(BODY,6000);
-		effect(BODY,6000);
-		effect(MIND,36000);
-		effect(MIND,36000);
-		effect(MIND,14400);
-		effect(MIND,18000);
-		effect(MIND,8000);
-		effect(MIND,8000);
-		effect(MATRIX,20000);
-		effect(MATRIX,72000);
-		effect(MATRIX,20000);
-		effect(MATRIX,4000);
-		effect(MATRIX,8000);
-		effect(MATRIX,2000);
-		effect(MATRIX,36000);
-		effect(MATRIX,14400);
-		effect(MATRIX,72000);
-		effect(MATRIX,72000);
-		effect(MATRIX,36000);
-		effect(MATRIX,36000);
-		effect(MATRIX,8000);
-		effect(MATRIX,4000);
+		effect(BODY, 6000);
+		effect(BODY, 6000);
+		effect(BODY, 6000);
+		effect(BODY, 6000);
+		effect(BODY, 6000);
+		effect(MIND, 36000);
+		effect(MIND, 36000);
+		effect(MIND, 14400);
+		effect(MIND, 18000);
+		effect(MIND, 8000);
+		effect(MIND, 8000);
+		effect(MATRIX, 20000);
+		effect(MATRIX, 72000);
+		effect(MATRIX, 20000);
+		effect(MATRIX, 4000);
+		effect(MATRIX, 8000);
+		effect(MATRIX, 2000);
+		effect(MATRIX, 36000);
+		effect(MATRIX, 14400);
+		effect(MATRIX, 72000);
+		effect(MATRIX, 72000);
+		effect(MATRIX, 36000);
+		effect(MATRIX, 36000);
+		effect(MATRIX, 8000);
+		effect(MATRIX, 4000);
 	}
 
 	public static CorruptionEffectECNBTBased effect(EnumCorruptionEffect effect, int cost) {

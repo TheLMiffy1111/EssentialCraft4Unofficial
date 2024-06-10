@@ -29,29 +29,29 @@ public class ItemWindTablet extends ItemMRUGeneric implements IModelRegisterer {
 
 	//24
 	public static String[] windMessages = {
-			"A wind blow rotates around you...",//0
-			"The wind howls...",//1
-			"The wind ruffles your hair...",//2
-			"The wind blows around your fingers...",//3
-			"The wind says something...",//4
-			"The wind makes you sneeze!",//5
-			"You hear something similar to laugh...",//6
-			"The wind rotates around your legs...",//7
-			"The wind tickles you...",//8
-			"The wind stops all other sounds...",//9
-			"The wind whispers 'Owethanna'...",//10
-			"The wind whispers your name...",//11
-			"The wind brings a very nostalgic smell...",//12
-			"The wind creates a miniature tornado...",//13
-			"The wind thows some leaves around...",//14
-			"The wind says 'Owethanna Else '...",//15
-			"The wind pushes you upwards...",//16
-			"The wind rotates very fast around you...",//17
-			"The wind goes into your lungs...",//18
-			"You feel very powerfull!",//19
-			"You fly up using the wind!",//20
-			"You start seeing other worlds!",//21
-			"You and the wind laugh...",//22
+			"A wind blow rotates around you...", //0
+			"The wind howls...", //1
+			"The wind ruffles your hair...", //2
+			"The wind blows around your fingers...", //3
+			"The wind says something...", //4
+			"The wind makes you sneeze!", //5
+			"You hear something similar to laugh...", //6
+			"The wind rotates around your legs...", //7
+			"The wind tickles you...", //8
+			"The wind stops all other sounds...", //9
+			"The wind whispers 'Owethanna'...", //10
+			"The wind whispers your name...", //11
+			"The wind brings a very nostalgic smell...", //12
+			"The wind creates a miniature tornado...", //13
+			"The wind thows some leaves around...", //14
+			"The wind says 'Owethanna Else '...", //15
+			"The wind pushes you upwards...", //16
+			"The wind rotates very fast around you...", //17
+			"The wind goes into your lungs...", //18
+			"You feel very powerfull!", //19
+			"You fly up using the wind!", //20
+			"You start seeing other worlds!", //21
+			"You and the wind laugh...", //22
 			"The wind and you shout:"//23
 	};
 

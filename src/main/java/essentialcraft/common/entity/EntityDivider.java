@@ -36,7 +36,7 @@ public class EntityDivider extends Entity {
 	}
 
 	public EntityDivider(World w, double x, double y, double z, double damage, double delay, EntityLivingBase base) {
-		this(w,x,y,z);
+		this(w, x, y, z);
 		this.damage = damage;
 		this.delay = delay;
 	}
@@ -94,10 +94,10 @@ public class EntityDivider extends Entity {
 				}
 
 				elb.setHealth(elb.getHealth()/2);
-				elb.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS,200,4,true,true));
-				elb.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,200,4,true,true));
-				elb.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,200,4,true,true));
-				elb.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,100,0,true,true));
+				elb.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 4, true, true));
+				elb.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 4, true, true));
+				elb.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 4, true, true));
+				elb.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0, true, true));
 			}
 			setDead();
 
@@ -106,6 +106,6 @@ public class EntityDivider extends Entity {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 }

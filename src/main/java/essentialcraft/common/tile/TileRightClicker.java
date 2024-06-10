@@ -189,7 +189,7 @@ public class TileRightClicker extends TileMRUGeneric {
 
 			ItemStack stack = fakePlayer.getHeldItemMainhand();
 			if(stack.isEmpty()) {
-				stack = new ItemStack(Items.STICK,1,0);
+				stack = new ItemStack(Items.STICK, 1, 0);
 			}
 			if(stack.getItem().itemInteractionForEntity(stack, fakePlayer, (EntityLivingBase)entity, EnumHand.MAIN_HAND) || (entity instanceof EntityAnimal && ((EntityAnimal)entity).processInteract(fakePlayer, EnumHand.MAIN_HAND)) || (stack.getItem().onItemUseFirst(fakePlayer, getWorld(), p, faceDir, dx, dy, dz, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS)) {
 				return true;

@@ -25,7 +25,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockDemonicPentacle extends BlockContainer implements IModelRegisterer {
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0,0,0,1,0.0625D,1);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.0625D, 1);
 
 	public BlockDemonicPentacle() {
 		super(Material.ROCK, MapColor.AIR);

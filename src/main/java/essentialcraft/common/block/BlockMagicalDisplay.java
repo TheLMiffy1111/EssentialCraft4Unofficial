@@ -62,7 +62,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(ItemsCore.genericItem,1,27);
+		return new ItemStack(ItemsCore.genericItem, 1, 27);
 	}
 
 	@Override

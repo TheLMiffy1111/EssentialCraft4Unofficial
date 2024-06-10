@@ -13,7 +13,7 @@ public class DimensionRegistry {
 	public static DimensionType hoanna;
 	public static void register() {
 		hoanna = DimensionType.register("hoanna", "_hoanna", Config.dimensionID, WorldProviderHoanna.class, false);
-		DimensionManager.registerDimension(Config.dimensionID,hoanna);
+		DimensionManager.registerDimension(Config.dimensionID, hoanna);
 		DummyPortalHandler.registerPortal(BlocksCore.portal, Config.dimensionID, 0, 200, false, PortalGeneratorHoanna.INSTANCE, new ResourceLocation("essentialcraft:blocks/portal"), 0xFFFFFF);
 	}
 }

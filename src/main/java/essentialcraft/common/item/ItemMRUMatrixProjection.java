@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 
-	public static String[] names = {"empty","chaos","frozen","magic","shade"};
+	public static String[] names = {"empty", "chaos", "frozen", "magic", "shade"};
 
 	public ItemMRUMatrixProjection() {
 		super();
@@ -40,7 +40,7 @@ public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 
 	@Override
 	public String getTranslationKey(ItemStack stack) {
-		return super.getTranslationKey(stack)+"_"+names[Math.min(stack.getItemDamage(),names.length-1)];
+		return super.getTranslationKey(stack)+"_"+names[Math.min(stack.getItemDamage(), names.length-1)];
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 		if(isInCreativeTab(p_150895_2_)) {
 			for(int i = 0; i < 5; ++i)
 			{
-				p_150895_3_.add(new ItemStack(this,1,i));
+				p_150895_3_.add(new ItemStack(this, 1, i));
 			}
 		}
 	}
@@ -97,10 +97,10 @@ public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 			player.playSound(SoundEvents.BLOCK_PORTAL_TRIGGER, 0.3F, 2);
 		}
 		if(count == 100) {
-			player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA,200,0,true,true));
+			player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0, true, true));
 		}
 		if(count <= 50) {
-			player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,2000,0,true,true));
+			player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 2000, 0, true, true));
 		}
 	}
 

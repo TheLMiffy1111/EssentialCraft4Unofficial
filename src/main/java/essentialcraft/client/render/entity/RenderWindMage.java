@@ -15,9 +15,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWindMage extends RenderLiving<EntityWindMage> {
-	private static final ResourceLocation APPRENTICE_TEXTURES = new ResourceLocation("essentialcraft","textures/entities/windMage_apprentice.png");
-	private static final ResourceLocation NORMAL_TEXTURES = new ResourceLocation("essentialcraft","textures/entities/windMage.png");
-	private static final ResourceLocation ARCHMAGE_TEXTURES = new ResourceLocation("essentialcraft","textures/entities/windMage_archmage.png");
+	private static final ResourceLocation APPRENTICE_TEXTURES = new ResourceLocation("essentialcraft", "textures/entities/windMage_apprentice.png");
+	private static final ResourceLocation NORMAL_TEXTURES = new ResourceLocation("essentialcraft", "textures/entities/windMage.png");
+	private static final ResourceLocation ARCHMAGE_TEXTURES = new ResourceLocation("essentialcraft", "textures/entities/windMage_archmage.png");
 
 	protected ModelBiped villagerModel;
 

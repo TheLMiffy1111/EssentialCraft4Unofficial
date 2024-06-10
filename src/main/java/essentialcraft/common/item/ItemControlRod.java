@@ -45,7 +45,7 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile != null) {
 				if(tile instanceof TileMagicalMirror) {
-					MiscUtils.getStackTag(stack).setIntArray("pos", new int[]{pos.getX(),pos.getY(),pos.getZ()});
+					MiscUtils.getStackTag(stack).setIntArray("pos", new int[]{pos.getX(), pos.getY(), pos.getZ()});
 					player.sendMessage(new TextComponentString("Mirror linked to the wand!").setStyle(new Style().setColor(TextFormatting.GREEN)));
 					return EnumActionResult.SUCCESS;
 				}
@@ -56,9 +56,9 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 			if(tile != null) {
 				if(tile instanceof IInventory) {
 					int[] o = MiscUtils.getStackTag(stack).getIntArray("pos");
-					float distance = new DummyDistance(new Coord3D(pos.getX(),pos.getY(),pos.getZ()),new Coord3D(o[0],o[1],o[2])).getDistance();
+					float distance = new DummyDistance(new Coord3D(pos.getX(), pos.getY(), pos.getZ()), new Coord3D(o[0], o[1], o[2])).getDistance();
 					if(distance <= TileMagicalMirror.cfgMaxDistance) {
-						TileEntity tile1 = world.getTileEntity(new BlockPos(o[0],o[1],o[2]));
+						TileEntity tile1 = world.getTileEntity(new BlockPos(o[0], o[1], o[2]));
 						if(tile1 != null && tile1 instanceof TileMagicalMirror) {
 							((TileMagicalMirror)tile1).inventoryPos = pos;
 							player.sendMessage(new TextComponentString("Mirror linked to the inventory!").setStyle(new Style().setColor(TextFormatting.GREEN)));
@@ -99,7 +99,7 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 		if(stack.getTagCompound() == null)
 		{
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setIntArray("pos", new int[]{0,0,0});
+			tag.setIntArray("pos", new int[]{0, 0, 0});
 			return true;
 		}
 		return false;

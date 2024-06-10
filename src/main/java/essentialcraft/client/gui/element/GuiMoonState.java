@@ -8,7 +8,7 @@ public class GuiMoonState extends GuiTextElement{
 
 	public GuiMoonState(int i, int j)
 	{
-		super(i,j);
+		super(i, j);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class GuiMoonState extends GuiTextElement{
 		DrawUtils.bindTexture("essentialcraft", "textures/gui/gui_moon_phases.png");
 		int moonPhase = Minecraft.getMinecraft().world.getMoonPhase();
 		this.drawTexturedModalRect(posX+1, posY+1, 16*moonPhase, 0, 16, 16);
-		drawText(posX,posY);
+		drawText(posX, posY);
 	}
 
 	@Override

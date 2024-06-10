@@ -46,12 +46,12 @@ public class GuiMIMScreen extends GuiContainer{
 	int lastPressedTime;
 	GuiTextField search;
 	GuiTextField stackSize;
-	int[] btnActions = {1,-1,2,-2,4,-4,5,-5,8,-8,10,-10,16,-16,32,-32,50,-50,64,-64,100,-100,128,-128,Integer.MAX_VALUE,-Integer.MAX_VALUE};
-	HashMap<ItemStack,CraftingPattern> craftsByItemStack = new HashMap<>();
+	int[] btnActions = {1, -1, 2, -2, 4, -4, 5, -5, 8, -8, 10, -10, 16, -16, 32, -32, 50, -50, 64, -64, 100, -100, 128, -128, Integer.MAX_VALUE, -Integer.MAX_VALUE};
+	HashMap<ItemStack, CraftingPattern> craftsByItemStack = new HashMap<>();
 
 	public static boolean packetArrived = true;
-	final ResourceLocation textures = new ResourceLocation("essentialcraft","textures/gui/mimScreen.png");
-	final ResourceLocation stextures = new ResourceLocation("essentialcraft","textures/gui/mimScreenSlider.png");
+	final ResourceLocation textures = new ResourceLocation("essentialcraft", "textures/gui/mimScreen.png");
+	final ResourceLocation stextures = new ResourceLocation("essentialcraft", "textures/gui/mimScreenSlider.png");
 	boolean isLeftMouseButtonPressed;
 
 	public GuiMIMScreen(TileMIMScreen par1, EntityPlayer par2)
@@ -93,7 +93,7 @@ public class GuiMIMScreen extends GuiContainer{
 	protected void keyTyped(char c, int keyID)
 	{
 		try {
-			if (search.textboxKeyTyped(c, keyID) || isValidInt(c,keyID) && stackSize.textboxKeyTyped(c, keyID))
+			if (search.textboxKeyTyped(c, keyID) || isValidInt(c, keyID) && stackSize.textboxKeyTyped(c, keyID))
 			{
 				setupMaxInt();
 			}
@@ -130,7 +130,7 @@ public class GuiMIMScreen extends GuiContainer{
 
 	public static class GuiRequestButton extends GuiButton
 	{
-		public GuiRequestButton(int id, int x, int y,int sizeX, int sizeY, String string) {
+		public GuiRequestButton(int id, int x, int y, int sizeX, int sizeY, String string) {
 			super(id, x, y, sizeX, sizeY, string);
 		}
 
@@ -215,12 +215,12 @@ public class GuiMIMScreen extends GuiContainer{
 				}else
 				{
 					String s = neg ? "<<<" : ">>>";
-					GuiButton btn = new GuiButton(i, neg ? k+4 : k+235,l+154, 16, 16, s);
+					GuiButton btn = new GuiButton(i, neg ? k+4 : k+235, l+154, 16, 16, s);
 					buttonList.add(btn);
 				}
 			}
 		}
-		GuiRequestButton request = new GuiRequestButton(26,k+3,l+46,27,10,"Request");
+		GuiRequestButton request = new GuiRequestButton(26, k+3, l+46, 27, 10, "Request");
 		buttonList.add(request);
 	}
 
@@ -307,7 +307,7 @@ public class GuiMIMScreen extends GuiContainer{
 		{
 			GuiElement element = elementList.get(i);
 			Minecraft.getMinecraft().renderEngine.bindTexture(element.getElementTexture());
-			element.draw(k+element.getX(),l+element.getY(),mX,mY);
+			element.draw(k+element.getX(), l+element.getY(), mX, mY);
 			GlStateManager.color(1, 1, 1);
 		}
 

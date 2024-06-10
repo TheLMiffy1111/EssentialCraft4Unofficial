@@ -139,7 +139,7 @@ public class BlocksCore {
 		registerBlockSimple(invertedBlock, "invertedPlating");
 		mithrilineCrystal = new BlockMithrilineCrystal().setTranslationKey("essentialcraft.mithrilineCrystal").setHardness(1).setResistance(1).setLightOpacity(1);
 		registerBlockSimple(mithrilineCrystal, "mithrilineCrystal", ItemBlockMithrilineCrystal.class);
-		mithrilineFurnace = registerBlockSimple(new BlockMithrilineFurnace(), "mithrilineFurnace",1,1,1);
+		mithrilineFurnace = registerBlockSimple(new BlockMithrilineFurnace(), "mithrilineFurnace", 1, 1, 1);
 
 		demonicPlating = new BlockDyeable(Material.ROCK, MapColor.RED).setHardness(3.0F).setResistance(100.0F).setTranslationKey("essentialcraft.demonicPlating");
 		registerBlockSimple(demonicPlating, "demonicPlating");
@@ -148,7 +148,7 @@ public class BlocksCore {
 		rightClicker = registerBlockSimple(new BlockRightClicker(), "rightClicker", 1, 1, 15);
 		redstoneTransmitter = registerBlockSimple(new BlockRedstoneTransmitter(), "redstoneTransmitter", 0, 0, 0);
 		magicalHopper = registerBlockSimple(new BlockMagicalHopper(), "magicalHopper", 1, 1, 15);
-		metadataManager = registerBlockSimple(new BlockMetadataManager(), "metadataManager",1, 1, 15);
+		metadataManager = registerBlockSimple(new BlockMetadataManager(), "metadataManager", 1, 1, 15);
 		blockBreaker = registerBlockSimple(new BlockBlockBreaker(), "blockBreaker", 1, 1, 15);
 		compressed = new BlockCompressedDrops().setTranslationKey("essentialcraft.compressed").setHardness(0.4F).setResistance(1).setLightOpacity(15);
 		registerBlockSimple(new ItemBlockMeta(compressed), "compressed");
@@ -199,7 +199,7 @@ public class BlocksCore {
 		createFancyBlock(Material.ROCK, "fortifiedStone", "fortifiedStone", 1.5F, 8, new ItemStack(fortifiedStone));
 		createFancyBlock(Material.GLASS, "coldStone", "coldStone", 0.7F, 1, new ItemStack(coldStone));
 		createFancyBlock(Material.ROCK, "magicPlating", "magicPlating", 2F, 8, new ItemStack(magicPlating));
-		createFancyBlock(Material.ROCK, "palePlating", "palePlating", 2F, 8,new ItemStack(platingPale));
+		createFancyBlock(Material.ROCK, "palePlating", "palePlating", 2F, 8, new ItemStack(platingPale));
 		createFancyBlock(Material.ROCK, "voidStone", "voidStone", 3F, 28, new ItemStack(voidStone));
 		createFancyBlock(Material.ROCK, "mithrilinePlating", "mithrilinePlating", 3F, 100, new ItemStack(invertedBlock));
 		createFancyBlock(Material.ROCK, "demonicPlating", "demonicPlating", 3F, 100, new ItemStack(demonicPlating));

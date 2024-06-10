@@ -137,7 +137,7 @@ public class PlayerTickHandler {
 				Vec3d itemSearchVec = new Vec3d(playerLookVec.x, playerLookVec.y, playerLookVec.z);
 				//Searching for EntityItem
 				s:for(int o = 0; o < 4; ++o) {
-					itemSearchVec = new Vec3d(itemSearchVec.x*(o+1),itemSearchVec.y*(o+1),itemSearchVec.z*(o+1));
+					itemSearchVec = new Vec3d(itemSearchVec.x*(o+1), itemSearchVec.y*(o+1), itemSearchVec.z*(o+1));
 					List<EntityItem> lst = e.getEntityWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(e.posX+itemSearchVec.x-0.5D, e.posY+itemSearchVec.y-0.5D, e.posZ+itemSearchVec.z-0.5D, e.posX+itemSearchVec.x+0.5D, e.posY+itemSearchVec.y+0.5D, e.posZ+itemSearchVec.z+0.5D));
 					if(!lst.isEmpty()) {
 						for(EntityItem itm : lst) {
@@ -187,7 +187,7 @@ public class PlayerTickHandler {
 					Vec3d blockSearchVec = new Vec3d(playerLookVec.x, playerLookVec.y, playerLookVec.z);
 					//Searching for Block
 					s:for(int o = 0; o < 4; ++o) {
-						blockSearchVec = new Vec3d(blockSearchVec.x*(o+1),blockSearchVec.y*(o+1),blockSearchVec.z*(o+1));
+						blockSearchVec = new Vec3d(blockSearchVec.x*(o+1), blockSearchVec.y*(o+1), blockSearchVec.z*(o+1));
 						BlockPos pos = new BlockPos(MathHelper.floor(blockSearchVec.x+e.posX), MathHelper.floor(blockSearchVec.y+e.posY), MathHelper.floor(blockSearchVec.z+e.posZ));
 						IBlockState state = e.getEntityWorld().getBlockState(pos);
 						Block blk = state.getBlock();
@@ -245,12 +245,12 @@ public class PlayerTickHandler {
 				((WorldProviderHoanna)e.getEntityWorld().provider).generateLightBrightnessTable();
 				if(ECUtils.isEventActive("essentialcraft.event.darkness")) {
 					if(e.getEntityWorld().rand.nextFloat() < 0.01F) {
-						e.getEntityWorld().playSound(e.posX,e.posY,e.posZ, SoundEvents.AMBIENT_CAVE,SoundCategory.AMBIENT, 1, e.getEntityWorld().rand.nextFloat()*2, true);
+						e.getEntityWorld().playSound(e.posX, e.posY, e.posZ, SoundEvents.AMBIENT_CAVE, SoundCategory.AMBIENT, 1, e.getEntityWorld().rand.nextFloat()*2, true);
 					}
 					if(e.getEntityWorld().rand.nextFloat() < 0.001F) {
-						SoundEvent[] sound = {SoundEvents.ENTITY_ZOMBIE_DEATH,SoundEvents.ENTITY_ZOMBIE_AMBIENT,SoundEvents.ENTITY_BLAZE_DEATH,SoundEvents.ENTITY_SKELETON_STEP,SoundEvents.ENTITY_ENDERMEN_STARE,SoundEvents.ENTITY_SPIDER_STEP,SoundEvents.ENTITY_SPIDER_DEATH,SoundEvents.ENTITY_SPIDER_AMBIENT,SoundEvents.ENTITY_CREEPER_DEATH};
+						SoundEvent[] sound = {SoundEvents.ENTITY_ZOMBIE_DEATH, SoundEvents.ENTITY_ZOMBIE_AMBIENT, SoundEvents.ENTITY_BLAZE_DEATH, SoundEvents.ENTITY_SKELETON_STEP, SoundEvents.ENTITY_ENDERMEN_STARE, SoundEvents.ENTITY_SPIDER_STEP, SoundEvents.ENTITY_SPIDER_DEATH, SoundEvents.ENTITY_SPIDER_AMBIENT, SoundEvents.ENTITY_CREEPER_DEATH};
 
-						e.getEntityWorld().playSound(e.posX+MathUtils.randomDouble(e.getEntityWorld().rand)*16,e.posY,e.posZ+MathUtils.randomDouble(e.getEntityWorld().rand)*16, sound[e.getEntityWorld().rand.nextInt(sound.length)], SoundCategory.HOSTILE, 1, 0.01F, true);
+						e.getEntityWorld().playSound(e.posX+MathUtils.randomDouble(e.getEntityWorld().rand)*16, e.posY, e.posZ+MathUtils.randomDouble(e.getEntityWorld().rand)*16, sound[e.getEntityWorld().rand.nextInt(sound.length)], SoundCategory.HOSTILE, 1, 0.01F, true);
 					}
 
 				}
@@ -279,7 +279,7 @@ public class PlayerTickHandler {
 								e.motionY += MathUtils.randomFloat(e.getEntityWorld().rand)*3;
 								e.motionZ += MathUtils.randomFloat(e.getEntityWorld().rand)*3;
 							}
-							e.getEntityWorld().playSound(e.posX,e.posY,e.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 0.1F, 0.1F, true);
+							e.getEntityWorld().playSound(e.posX, e.posY, e.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 0.1F, 0.1F, true);
 						}
 					}
 				}
@@ -435,7 +435,7 @@ public class PlayerTickHandler {
 
 			if(!e.inventory.armorInventory.get(1).isEmpty() && e.inventory.armorInventory.get(1).getItem() instanceof ItemComputerArmor) {
 				if(e.isBurning() && !e.getEntityWorld().isRemote && e.ticksExisted%20 == 0) {
-					e.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE,100,0,true,true));
+					e.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 100, 0, true, true));
 				}
 			}
 
@@ -582,7 +582,7 @@ public class PlayerTickHandler {
 				}
 
 				World wrd = e.getEntityWorld();
-				List<EntityItem> itemList = wrd.<EntityItem>getEntitiesWithinAABB(EntityItem.class,new AxisAlignedBB(e.posX-0.5D, e.posY-0.5D, e.posZ-0.5D, e.posX+0.5D, e.posY+0.5D, e.posZ+0.5D).grow(2, 1, 2));
+				List<EntityItem> itemList = wrd.<EntityItem>getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(e.posX-0.5D, e.posY-0.5D, e.posZ-0.5D, e.posX+0.5D, e.posY+0.5D, e.posZ+0.5D).grow(2, 1, 2));
 				for(EntityItem element : itemList) {
 					doGroundItemChecks(element);
 				}
@@ -737,7 +737,7 @@ public class PlayerTickHandler {
 					}
 					MiscUtils.spawnParticlesOnServer("explosion_normal", (float)item.posX, (float)item.posY, (float)item.posZ, 0D, 0D, 0D);
 					if(item.getEntityWorld().rand.nextFloat() <= 0.5F) {
-						EntityItem soulStone = new EntityItem(item.getEntityWorld(),(float)item.posX, (float)item.posY, (float)item.posZ,new ItemStack(ItemsCore.soulStone,1,0));
+						EntityItem soulStone = new EntityItem(item.getEntityWorld(), (float)item.posX, (float)item.posY, (float)item.posZ, new ItemStack(ItemsCore.soulStone, 1, 0));
 						item.getEntityWorld().spawnEntity(soulStone);
 					}
 				}

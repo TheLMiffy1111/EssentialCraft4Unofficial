@@ -41,7 +41,7 @@ public class BlockRayTower extends BlockContainer implements IModelRegisterer {
 		{
 			if(s.getValue(LAYER) == EnumLayer.BOTTOM)
 			{
-				w.setBlockState(p.up(), getDefaultState().withProperty(LAYER, EnumLayer.TOP),3);
+				w.setBlockState(p.up(), getDefaultState().withProperty(LAYER, EnumLayer.TOP), 3);
 			}
 		}
 	}

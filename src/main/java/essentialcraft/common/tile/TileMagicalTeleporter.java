@@ -97,14 +97,14 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 			testBlock(world, pos.add(-2, 2, 1), BlocksCore.voidStone) &&
 			testBlock(world, pos.add(-1, 1, 2), BlocksCore.voidStone) &&
 			testBlock(world, pos.add(-1, 2, 2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 2, 1,-1), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 2, 2,-1), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 1, 1,-2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add( 1, 2,-2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-1, 1,-2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-1, 2,-2), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-2, 1,-1), BlocksCore.voidStone) &&
-			testBlock(world, pos.add(-2, 2,-1), BlocksCore.voidStone)
+			testBlock(world, pos.add( 2, 1, -1), BlocksCore.voidStone) &&
+			testBlock(world, pos.add( 2, 2, -1), BlocksCore.voidStone) &&
+			testBlock(world, pos.add( 1, 1, -2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add( 1, 2, -2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-1, 1, -2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-1, 2, -2), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-2, 1, -1), BlocksCore.voidStone) &&
+			testBlock(world, pos.add(-2, 2, -1), BlocksCore.voidStone)
 			);
 
 	public void tryTeleport() {
@@ -129,7 +129,7 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 							MinecraftServer mcServer = getWorld().getMinecraftServer();
 							EntityPlayerMP playerMP = (EntityPlayerMP)player;
 							WorldServer transferTo = mcServer.getWorld(newDim);
-							DummyTeleporter teleporter = new DummyTeleporter(transferTo, tpCoords[0]+0.5, tpCoords[1]+1.5, tpCoords[2]+0.5,DummyPortalGenerator.TELEPORT_ONLY, false);
+							DummyTeleporter teleporter = new DummyTeleporter(transferTo, tpCoords[0]+0.5, tpCoords[1]+1.5, tpCoords[2]+0.5, DummyPortalGenerator.TELEPORT_ONLY, false);
 							DummyPortalHandler.transferPlayerToDimension(playerMP, newDim, teleporter);
 						}
 						if(!player.world.isRemote) {
@@ -201,16 +201,16 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 				EntityPlayer p = getPlayer();
 				for(int i = 0; i < progressLevel/5; ++i) {
 					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, p.posX+MathUtils.randomFloat(getWorld().rand)/2, p.posY+MathUtils.randomFloat(getWorld().rand)*2-1, p.posZ+MathUtils.randomFloat(getWorld().rand)/2, 0, 0, 1);
-					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+MathUtils.randomFloat(getWorld().rand)*2, pos.getY()+3,pos.getZ()+0.5+MathUtils.randomFloat(getWorld().rand)*2, 0, 0, 1);
-					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand),pos.getZ()+0.5+MathUtils.randomFloat(getWorld().rand)*2, 0, 0, 1);
-					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5-2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand),pos.getZ()+0.5+MathUtils.randomFloat(getWorld().rand)*2, 0, 0, 1);
-					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+MathUtils.randomFloat(getWorld().rand)*2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand),pos.getZ()+0.5-2, 0, 0, 1);
-					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+MathUtils.randomFloat(getWorld().rand)*2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand),pos.getZ()+0.5+2, 0, 0, 1);
+					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+MathUtils.randomFloat(getWorld().rand)*2, pos.getY()+3, pos.getZ()+0.5+MathUtils.randomFloat(getWorld().rand)*2, 0, 0, 1);
+					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand), pos.getZ()+0.5+MathUtils.randomFloat(getWorld().rand)*2, 0, 0, 1);
+					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5-2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand), pos.getZ()+0.5+MathUtils.randomFloat(getWorld().rand)*2, 0, 0, 1);
+					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+MathUtils.randomFloat(getWorld().rand)*2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand), pos.getZ()+0.5-2, 0, 0, 1);
+					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5+MathUtils.randomFloat(getWorld().rand)*2, pos.getY()+2+MathUtils.randomFloat(getWorld().rand), pos.getZ()+0.5+2, 0, 0, 1);
 				}
 			}
 			if(structureChecker.test(getWorld(), getPos())) {
 				/*for(int i = 0; i < 100; ++i)*/ {
-					EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F+MathUtils.randomFloat(getWorld().rand)*3, pos.getY()+1, pos.getZ()+0.5F+MathUtils.randomFloat(getWorld().rand)*3, 0,2, 0);
+					EssentialCraftCore.proxy.spawnParticle("cSpellFX", pos.getX()+0.5F+MathUtils.randomFloat(getWorld().rand)*3, pos.getY()+1, pos.getZ()+0.5F+MathUtils.randomFloat(getWorld().rand)*3, 0, 2, 0);
 				}
 			}
 		}

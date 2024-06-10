@@ -20,7 +20,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockMRUSpreader extends Block implements IModelRegisterer {
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0.3D,0D,0.3D,0.7D,0.8D,0.7D);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0.3D, 0D, 0.3D, 0.7D, 0.8D, 0.7D);
 
 	public BlockMRUSpreader() {
 		super(Material.ROCK, MapColor.PURPLE);

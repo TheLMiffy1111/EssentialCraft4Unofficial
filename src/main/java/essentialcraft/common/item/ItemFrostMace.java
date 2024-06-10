@@ -103,12 +103,12 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 						PotionEffect eff = p_77644_2_.getActivePotionEffect(MobEffects.SLOWNESS);
 						if(eff != null && p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15 && eff != null)
 						{
-							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,1000,eff.getAmplifier()+1));
+							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, eff.getAmplifier()+1));
 							return true;
 						}
 						if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15)
 						{
-							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,1000,0));
+							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, 0));
 							return true;
 						}
 					}

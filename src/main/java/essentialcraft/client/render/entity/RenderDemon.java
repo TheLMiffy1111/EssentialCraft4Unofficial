@@ -18,19 +18,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDemon extends RenderLiving<EntityDemon>
 {
-	private static final ResourceLocation endermanEyesTexture = new ResourceLocation("essentialcraft","textures/entities/demon_eyes.png");
-	private static final ResourceLocation endermanTextures = new ResourceLocation("essentialcraft","textures/entities/demon.png");
+	private static final ResourceLocation endermanEyesTexture = new ResourceLocation("essentialcraft", "textures/entities/demon_eyes.png");
+	private static final ResourceLocation endermanTextures = new ResourceLocation("essentialcraft", "textures/entities/demon.png");
 	/** The model of the enderman */
 	private ModelDemon endermanModel;
 	public RenderDemon()
 	{
-		super(Minecraft.getMinecraft().getRenderManager(), new ModelDemon(1,0,64,32), 0.5F);
+		super(Minecraft.getMinecraft().getRenderManager(), new ModelDemon(1, 0, 64, 32), 0.5F);
 		endermanModel = (ModelDemon)super.mainModel;
 	}
 
 	public RenderDemon(RenderManager rm)
 	{
-		super(rm, new ModelDemon(1,0,64,32), 0.5F);
+		super(rm, new ModelDemon(1, 0, 64, 32), 0.5F);
 		endermanModel = (ModelDemon)super.mainModel;
 	}
 

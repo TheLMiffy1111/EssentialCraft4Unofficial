@@ -15,7 +15,7 @@ public class GuiPotionState extends GuiTextElement{
 
 	public GuiPotionState(int i, int j, TileEntity t)
 	{
-		super(i,j);
+		super(i, j);
 		tile = (TilePotionSpreader) t;
 	}
 
@@ -52,7 +52,7 @@ public class GuiPotionState extends GuiTextElement{
 			DrawUtils.drawTexture_Items(posX+9, posY+9+scaledPos, icon, 18, 18-scale, 10);
 		}
 		GlStateManager.popMatrix();
-		drawText(posX,posY);
+		drawText(posX, posY);
 	}
 
 	@Override

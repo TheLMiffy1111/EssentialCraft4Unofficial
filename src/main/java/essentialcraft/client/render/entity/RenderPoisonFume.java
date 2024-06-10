@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderPoisonFume extends RenderLiving<EntityPoisonFume> {
-	private static final ResourceLocation villagerTextures = new ResourceLocation("essentialcraft","textures/entities/windMage_apprentice.png");
+	private static final ResourceLocation villagerTextures = new ResourceLocation("essentialcraft", "textures/entities/windMage_apprentice.png");
 
 	public RenderPoisonFume() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(0.0F), 0.5F);

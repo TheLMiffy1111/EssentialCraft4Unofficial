@@ -42,7 +42,7 @@ public class MRUTileRangelessStorage extends MRUTileStorage {
 		if(world.isRemote) {
 			if(boundGem.getItem() instanceof ItemBoundGem && boundGem.getTagCompound() != null) {
 				int[] o = ItemBoundGem.getCoords(boundGem);
-				new BlockPos(o[0],o[1],o[2]);
+				new BlockPos(o[0], o[1], o[2]);
 				BlockPos pos1 = new BlockPos(o[0], o[1], o[2]);
 				doSpawnMRUParticles(pos, pos1, world);
 			}

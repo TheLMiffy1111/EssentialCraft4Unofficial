@@ -12,7 +12,7 @@ public class RadiatingChamberRecipe extends IForgeRegistryEntry.Impl<IRecipe> im
 	public Ingredient[] recipeItems = {Ingredient.EMPTY, Ingredient.EMPTY};
 	public ItemStack result = ItemStack.EMPTY;
 	public int mruRequired;
-	public float upperBalanceLine,lowerBalanceLine;
+	public float upperBalanceLine, lowerBalanceLine;
 	public float costModifier;
 
 	public RadiatingChamberRecipe(Ingredient[] ingred, ItemStack res, int mruReq, float balancePoint1, float balancePoint2) {

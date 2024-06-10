@@ -19,11 +19,11 @@ public class ParticleFog extends Particle{
 	private double mruPosY;
 	private double mruPosZ;
 	public double red, green, blue;
-	public static final ResourceLocation rec = new ResourceLocation("essentialcraft","textures/items/particles/fog.png");
+	public static final ResourceLocation rec = new ResourceLocation("essentialcraft", "textures/items/particles/fog.png");
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
-	public ParticleFog(World w, double x, double y,double z, double i, double j,double k)
+	public ParticleFog(World w, double x, double y, double z, double i, double j, double k)
 	{
-		super(w, x, y, z, i, j,k);
+		super(w, x, y, z, i, j, k);
 		if(w != null && w.rand != null) {
 			motionX = MathUtils.randomDouble(w.rand);
 			motionY = MathUtils.randomDouble(w.rand);

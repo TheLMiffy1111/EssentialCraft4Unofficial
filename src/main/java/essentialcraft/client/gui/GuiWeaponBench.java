@@ -26,7 +26,7 @@ public class GuiWeaponBench extends GuiCommon {
 		super.initGui();
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
-		buttonList.add(new GuiButton(0, k+145, l+20, 28,12, "Done"));
+		buttonList.add(new GuiButton(0, k+145, l+20, 28, 12, "Done"));
 	}
 
 	@Override
@@ -35,10 +35,10 @@ public class GuiWeaponBench extends GuiCommon {
 		MiscUtils.handleButtonPress(par1GuiButton.id, this.getClass(), GuiButton.class, Minecraft.getMinecraft().player, genericTile.getPos().getX(), genericTile.getPos().getY(), genericTile.getPos().getZ());
 	}
 
-	public ResourceLocation guiGenLocation_0 = new ResourceLocation("essentialcraft","textures/gui/pistol_maker.png");
-	public ResourceLocation guiGenLocation_1 = new ResourceLocation("essentialcraft","textures/gui/rifle_maker.png");
-	public ResourceLocation guiGenLocation_2 = new ResourceLocation("essentialcraft","textures/gui/sniper_maker.png");
-	public ResourceLocation guiGenLocation_3 = new ResourceLocation("essentialcraft","textures/gui/gatling_maker.png");
+	public ResourceLocation guiGenLocation_0 = new ResourceLocation("essentialcraft", "textures/gui/pistol_maker.png");
+	public ResourceLocation guiGenLocation_1 = new ResourceLocation("essentialcraft", "textures/gui/rifle_maker.png");
+	public ResourceLocation guiGenLocation_2 = new ResourceLocation("essentialcraft", "textures/gui/sniper_maker.png");
+	public ResourceLocation guiGenLocation_3 = new ResourceLocation("essentialcraft", "textures/gui/gatling_maker.png");
 
 	private void drawItemStack(ItemStack p_146982_1_, int p_146982_2_, int p_146982_3_, String p_146982_4_)
 	{
@@ -54,7 +54,7 @@ public class GuiWeaponBench extends GuiCommon {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2)
+	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2)
 	{
 		GlStateManager.color(1, 1, 1);
 		int k = (width - xSize) / 2;

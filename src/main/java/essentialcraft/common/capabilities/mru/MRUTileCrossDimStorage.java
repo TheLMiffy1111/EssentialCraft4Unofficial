@@ -21,7 +21,7 @@ public class MRUTileCrossDimStorage extends MRUTileStorage {
 	public void mruIn(BlockPos pos, World world, ItemStack boundGem) {
 		if(boundGem.getItem() instanceof ItemBoundGem && boundGem.getTagCompound() != null) {
 			int[] o = ItemBoundGem.getCoords(boundGem);
-			BlockPos o1 = new BlockPos(o[0],o[1],o[2]);
+			BlockPos o1 = new BlockPos(o[0], o[1], o[2]);
 			if(getDimension(boundGem) == world.provider.getDimension()) {
 				if(!pos.equals(o1) && world.getTileEntity(o1) != null && world.getTileEntity(o1).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 					IMRUHandler other = world.getTileEntity(o1).getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);

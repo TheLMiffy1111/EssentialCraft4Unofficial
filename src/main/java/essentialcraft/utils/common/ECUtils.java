@@ -76,11 +76,11 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ECUtils {
-	public static final HashMultimap<EnumStructureType,Block> STRUCTURE_TO_BLOCKS_MAP = HashMultimap.<EnumStructureType, Block>create();
+	public static final HashMultimap<EnumStructureType, Block> STRUCTURE_TO_BLOCKS_MAP = HashMultimap.<EnumStructureType, Block>create();
 	public static final HashMap<String, Float> MRU_RESISTANCES = new HashMap<>();
 	public static final HashMap<String, Boolean> IGNORE_META = new HashMap<>();
 	public static final List<SpellEntry> SPELL_LIST = new ArrayList<>();
-	public static final HashMap<UUID,PlayerGenericData> PLAYER_DATA_MAP = new HashMap<>();
+	public static final HashMap<UUID, PlayerGenericData> PLAYER_DATA_MAP = new HashMap<>();
 	private static final List<ScheduledServerAction> ACTION_LIST = new ArrayList<>();
 	public static NBTTagCompound ec3WorldTag = new NBTTagCompound();
 
@@ -139,11 +139,11 @@ public class ECUtils {
 	{
 		if(!e.getEntityWorld().isRemote)
 		{
-			DummyData aaa = new DummyData("x",e.posX);
-			DummyData aab = new DummyData("y",e.posY);
-			DummyData aac = new DummyData("z",e.posZ);
-			DummyData aad = new DummyData("yaw",e.rotationYaw);
-			DummyData aae = new DummyData("pitch",e.rotationPitch);
+			DummyData aaa = new DummyData("x", e.posX);
+			DummyData aab = new DummyData("y", e.posY);
+			DummyData aac = new DummyData("z", e.posZ);
+			DummyData aad = new DummyData("yaw", e.rotationYaw);
+			DummyData aae = new DummyData("pitch", e.rotationPitch);
 			DummyPacketIMSG pkt = new DummyPacketIMSG("||mod:essentialcraft.player.position"+aaa+""+aab+""+aac+""+aad+""+aae);
 			DummyPacketHandler.sendToPlayer(pkt, (EntityPlayerMP) e);
 		}
@@ -151,12 +151,12 @@ public class ECUtils {
 
 	public static void playSoundToAllNearby(double x, double y, double z, String sound, float volume, float pitch, double radius, int dim)
 	{
-		DummyData aaa = new DummyData("x",x);
-		DummyData aab = new DummyData("y",y);
-		DummyData aac = new DummyData("z",z);
-		DummyData aad = new DummyData("vol",volume);
-		DummyData aae = new DummyData("pitch",pitch);
-		DummyData aaf = new DummyData("sound",sound);
+		DummyData aaa = new DummyData("x", x);
+		DummyData aab = new DummyData("y", y);
+		DummyData aac = new DummyData("z", z);
+		DummyData aad = new DummyData("vol", volume);
+		DummyData aae = new DummyData("pitch", pitch);
+		DummyData aaf = new DummyData("sound", sound);
 		DummyPacketIMSG pkt = new DummyPacketIMSG("||mod:essentialcraft.sound"+aaa+""+aab+""+aac+""+aad+""+aae+""+aaf);
 		DummyPacketHandler.sendToAllAround(pkt, new TargetPoint(dim, x, y, z, radius));
 	}
@@ -224,7 +224,7 @@ public class ECUtils {
 				offhandItem.getItem() instanceof IMRUVisibilityHandler && ((IMRUVisibilityHandler)offhandItem.getItem()).canSeeMRU(offhandItem);
 	}
 
-	public static boolean canSpellWork(ItemStack spell, ISpell spell_2, int ubmru, int attune,EntityPlayer player)
+	public static boolean canSpellWork(ItemStack spell, ISpell spell_2, int ubmru, int attune, EntityPlayer player)
 	{
 		NBTTagCompound tag = MiscUtils.getStackTag(spell);
 		if(tag.hasKey("cooldown"))
@@ -378,10 +378,10 @@ public class ECUtils {
 			int newDuration = currentDuration+2;
 			int newModifier = currentDuration/2000;
 			player.removeActivePotionEffect(PotionRegistry.mruCorruption);
-			player.addPotionEffect(new PotionEffect(PotionRegistry.mruCorruption,newDuration,newModifier,true,true));
+			player.addPotionEffect(new PotionEffect(PotionRegistry.mruCorruption, newDuration, newModifier, true, true));
 		}
 		else {
-			player.addPotionEffect(new PotionEffect(PotionRegistry.mruCorruption,200,0,true,true));
+			player.addPotionEffect(new PotionEffect(PotionRegistry.mruCorruption, 200, 0, true, true));
 		}
 	}
 
@@ -392,10 +392,10 @@ public class ECUtils {
 			int newDuration = currentDuration+index2;
 			int newModifier = currentDuration/index;
 			player.removeActivePotionEffect(potion);
-			player.addPotionEffect(new PotionEffect(potion,newDuration,newModifier,true,true));
+			player.addPotionEffect(new PotionEffect(potion, newDuration, newModifier, true, true));
 		}
 		else {
-			player.addPotionEffect(new PotionEffect(potion,index2,0,true,true));
+			player.addPotionEffect(new PotionEffect(potion, index2, 0, true, true));
 		}
 	}
 
@@ -509,7 +509,7 @@ public class ECUtils {
 		return ec3WorldTag.getString("currentEvent").equalsIgnoreCase(id);
 	}
 
-	public static void sendChatMessageToAllPlayersInDim(int dimID,String msg) {
+	public static void sendChatMessageToAllPlayersInDim(int dimID, String msg) {
 		for(EntityPlayer player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
 			if(player.dimension == dimID) {
 				player.sendMessage(new TextComponentString(msg));
@@ -541,7 +541,7 @@ public class ECUtils {
 					ShapedRecipes mRecipe = (ShapedRecipes) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
 					if(ItemStack.areItemStackTagsEqual(output, searched) && output.isItemEqual(searched)) {
-						return new ShapedRecipes(mRecipe.getGroup(),mRecipe.recipeWidth,mRecipe.recipeHeight,mRecipe.recipeItems,mRecipe.getRecipeOutput());
+						return new ShapedRecipes(mRecipe.getGroup(), mRecipe.recipeWidth, mRecipe.recipeHeight, mRecipe.recipeItems, mRecipe.getRecipeOutput());
 					}
 				}
 				if(recipe instanceof ShapelessRecipes)
@@ -549,7 +549,7 @@ public class ECUtils {
 					ShapelessRecipes mRecipe = (ShapelessRecipes) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
 					if(output.isItemEqual(searched)) {
-						return new ShapelessRecipes(mRecipe.getGroup(),mRecipe.getRecipeOutput(),mRecipe.recipeItems);
+						return new ShapelessRecipes(mRecipe.getGroup(), mRecipe.getRecipeOutput(), mRecipe.recipeItems);
 					}
 				}
 			}
@@ -574,11 +574,11 @@ public class ECUtils {
 			}
 		}
 		if(recipeType == 4) {
-			for(Entry<ItemStack,ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet()) {
+			for(Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet()) {
 				ItemStack key = entry.getKey();
 				ItemStack value = entry.getValue();
 				if(value.isItemEqual(searched)) {
-					return new ShapedFurnaceRecipe(key,value);
+					return new ShapedFurnaceRecipe(key, value);
 				}
 			}
 
@@ -593,12 +593,12 @@ public class ECUtils {
 	}
 
 	public static ShapelessOreRecipe copyShapelessOreRecipe(ShapelessOreRecipe recipe) {
-		ShapelessOreRecipe ret = new ShapelessOreRecipe(recipe.getGroup().isEmpty() ? null : new ResourceLocation(recipe.getGroup()),recipe.getIngredients(),recipe.getRecipeOutput());
+		ShapelessOreRecipe ret = new ShapelessOreRecipe(recipe.getGroup().isEmpty() ? null : new ResourceLocation(recipe.getGroup()), recipe.getIngredients(), recipe.getRecipeOutput());
 		return ret;
 	}
 
 	public static ShapedOreRecipe copyShapedOreRecipe(ShapedOreRecipe recipe) {
-		ShapedOreRecipe ret = new ShapedOreRecipe(recipe.getGroup().isEmpty() ? null : new ResourceLocation(recipe.getGroup()), recipe.getRecipeOutput(),new Object[]{"ooo","ooo","ooo",'o',Items.STICK});
+		ShapedOreRecipe ret = new ShapedOreRecipe(recipe.getGroup().isEmpty() ? null : new ResourceLocation(recipe.getGroup()), recipe.getRecipeOutput(), new Object[]{"ooo", "ooo", "ooo", 'o', Items.STICK});
 		try {
 			Class<ShapedOreRecipe> sorClazz = ShapedOreRecipe.class;
 			Field inputFld = sorClazz.getDeclaredField("input");
@@ -651,7 +651,7 @@ public class ECUtils {
 			for(int i = 0; i < filterInventory.getSizeInventory(); ++i) {
 				ItemStack f = filterInventory.getStackInSlot(i);
 				if(f.getItem() instanceof ItemFilter) {
-					if(canFilterAcceptItem(new InventoryMagicFilter(f),is,f)) {
+					if(canFilterAcceptItem(new InventoryMagicFilter(f), is, f)) {
 						return true;
 					}
 				}
@@ -675,13 +675,13 @@ public class ECUtils {
 				ItemStack f = filterInventory.getStackInSlot(i);
 				if(f.getItem() instanceof ItemFilter)
 				{
-					if(canFilterAcceptItem(new InventoryMagicFilter(f),is,f)) {
+					if(canFilterAcceptItem(new InventoryMagicFilter(f), is, f)) {
 						return true;
 					}
 				}
 				else if(filter.getItemDamage() == 1)
 				{
-					if(oreDictionaryCompare(is,f) || ignoreOreDict)
+					if(oreDictionaryCompare(is, f) || ignoreOreDict)
 					{
 						if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
 						{
@@ -699,7 +699,7 @@ public class ECUtils {
 					}
 				}else
 				{
-					if(!oreDictionaryCompare(is,f) || ignoreOreDict)
+					if(!oreDictionaryCompare(is, f) || ignoreOreDict)
 					{
 						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
 						{

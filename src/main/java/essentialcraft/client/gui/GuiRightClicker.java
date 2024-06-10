@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiRightClicker extends GuiCommon{
 
 	public GuiRightClicker(Container c, TileEntity tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiMRUState(25, 58, tile, 0));
 	}

@@ -29,7 +29,7 @@ public class ItemMagmaticWand extends ItemMRUGeneric implements IModelRegisterer
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		ItemStack ore = new ItemStack(world.getBlockState(pos).getBlock(),1,world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
+		ItemStack ore = new ItemStack(world.getBlockState(pos).getBlock(), 1, world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
 		if(!ore.isEmpty()) {
 			int[] oreIds = OreDictionary.getOreIDs(ore);
 

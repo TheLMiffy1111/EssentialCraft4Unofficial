@@ -100,7 +100,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}

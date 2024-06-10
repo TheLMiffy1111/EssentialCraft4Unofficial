@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 
-	public static final String[] overlays = {"ancientTile","bigTile","brick","fancyTile","pressuredTile","smallTiles","temple","tiles","futuristicTile","machine","runic","netherStar","plate","packedPlate","doublePlate","gem"};
+	public static final String[] overlays = {"ancientTile", "bigTile", "brick", "fancyTile", "pressuredTile", "smallTiles", "temple", "tiles", "futuristicTile", "machine", "runic", "netherStar", "plate", "packedPlate", "doublePlate", "gem"};
 
 	public static final PropertyEnum<FancyBlockType> TYPE = PropertyEnum.<FancyBlockType>create("type", FancyBlockType.class);
 
@@ -72,7 +72,7 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this,1,state.getValue(TYPE).getIndex());
+		return new ItemStack(this, 1, state.getValue(TYPE).getIndex());
 	}
 
 	@Override

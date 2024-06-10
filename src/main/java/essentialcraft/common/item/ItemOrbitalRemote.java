@@ -50,7 +50,7 @@ public class ItemOrbitalRemote extends ItemMRUGeneric implements IModelRegistere
 		RayTraceResult mop = p.getEntityWorld().rayTraceBlocks(lookVec, distanced, true, false, false);
 		if(mop != null && mop.typeOfHit == Type.BLOCK) {
 			if(ECUtils.playerUseMRU(p, stk, 10000)) {
-				EntityOrbitalStrike eos = new EntityOrbitalStrike(w,mop.getBlockPos().getX()+0.5D,mop.getBlockPos().getY()+1,mop.getBlockPos().getZ()+0.5D,128,3,p);
+				EntityOrbitalStrike eos = new EntityOrbitalStrike(w, mop.getBlockPos().getX()+0.5D, mop.getBlockPos().getY()+1, mop.getBlockPos().getZ()+0.5D, 128, 3, p);
 
 				if(!w.isRemote) {
 					w.spawnEntity(eos);

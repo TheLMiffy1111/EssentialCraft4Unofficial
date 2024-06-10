@@ -19,7 +19,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class TileElementalCrystal extends TileEntity implements ITickable {
 	public int syncTick = 10;
-	public double size,fire,water,earth,air;
+	public double size, fire, water, earth, air;
 	private TileStatTracker tracker;
 	public boolean requestSync = true;
 
@@ -166,7 +166,7 @@ public class TileElementalCrystal extends TileEntity implements ITickable {
 		}
 
 		if(size < 100) {
-			getWorld().spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX()+getWorld().rand.nextFloat(),pos.getY()+1,pos.getZ()+getWorld().rand.nextFloat(), 0, 0, 0);
+			getWorld().spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX()+getWorld().rand.nextFloat(), pos.getY()+1, pos.getZ()+getWorld().rand.nextFloat(), 0, 0, 0);
 			if(!getWorld().isRemote) {
 				size += 0.002D*growthModifier;
 				randomlyMutate();
@@ -176,7 +176,7 @@ public class TileElementalCrystal extends TileEntity implements ITickable {
 		//Sending the sync packets to the CLIENT.
 		if(syncTick == 0) {
 			if(tracker == null) {
-				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + ","  + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
+				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + ", " + pos.getY() + ", "  + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
 			}
 			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);

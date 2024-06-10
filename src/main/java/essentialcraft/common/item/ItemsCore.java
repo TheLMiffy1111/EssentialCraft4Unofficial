@@ -290,7 +290,7 @@ public class ItemsCore {
 		craftingFrame = registerItemSimple(new ItemCraftingFrame(), "craftingFrame", 0, false, 1);
 		collectedSpawner = registerItemSimple(new ItemCollectedMonsterSpawner(), "collectedSpawner", 0, false, 64);
 
-		balance_setter = registerItemSimple(new ItemBalanceSetter(), "balance_setter",0,true,1);
+		balance_setter = registerItemSimple(new ItemBalanceSetter(), "balance_setter", 0, true, 1);
 
 		clearing_catalyst = registerItemSimple(new ItemEC(), "clearing_catalyst", 0, false, 64);
 		raining_catalyst = registerItemSimple(new ItemEC(), "raining_catalyst", 0, false, 64);
@@ -298,7 +298,7 @@ public class ItemsCore {
 
 		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1, 1), 1.2D, loc("elementalcore"));
 		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1, 0), 5D, loc("combinedmagicalalloys"));
-		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1,8), 2.5D, loc("enderalloy"));
+		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1, 8), 2.5D, loc("enderalloy"));
 		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1, 23), 3D, loc("eyeofabsorbtion"));
 		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1, 35), 6D, loc("voidplating"));
 		MagicianTableUpgrades.addUpgrade(new ItemStack(genericItem, 1, 36), 7.5D, loc("voidcore"));

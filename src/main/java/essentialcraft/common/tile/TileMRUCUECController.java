@@ -333,7 +333,7 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 							if(ECUtils.IGNORE_META.containsKey(getWorld().getBlockState(cp).getBlock().getTranslationKey()) && ECUtils.IGNORE_META.get(getWorld().getBlockState(cp).getBlock().getTranslationKey())) {
 								meta = -1;
 							}
-							DummyData dt = new DummyData(getWorld().getBlockState(cp).getBlock().getTranslationKey(),meta);
+							DummyData dt = new DummyData(getWorld().getBlockState(cp).getBlock().getTranslationKey(), meta);
 							if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
 								resistance += ECUtils.MRU_RESISTANCES.get(dt.toString());
 							}

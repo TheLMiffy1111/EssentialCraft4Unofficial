@@ -11,7 +11,7 @@ public class GuiEnchantmentState extends GuiTextElement {
 	public TileMagicalEnchanter tile;
 
 	public GuiEnchantmentState(int i, int j, TileMagicalEnchanter t) {
-		super(i,j);
+		super(i, j);
 		tile = t;
 	}
 

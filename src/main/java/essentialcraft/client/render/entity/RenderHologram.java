@@ -20,18 +20,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderHologram extends RenderBiped<EntityHologram>
 {
-	private static final ResourceLocation textures = new ResourceLocation("essentialcraft","textures/entities/boss.png");
+	private static final ResourceLocation textures = new ResourceLocation("essentialcraft", "textures/entities/boss.png");
 	/** The model of the enderman */
 	private ModelBiped model;
 	public RenderHologram()
 	{
-		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(1,0,64,32), 0.5F);
+		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(1, 0, 64, 32), 0.5F);
 		model = (ModelBiped)super.mainModel;
 	}
 
 	public RenderHologram(RenderManager rm)
 	{
-		super(rm, new ModelBiped(0,0,64,32), 0.5F);
+		super(rm, new ModelBiped(0, 0, 64, 32), 0.5F);
 		model = (ModelBiped)super.mainModel;
 	}
 
@@ -78,7 +78,7 @@ public class RenderHologram extends RenderBiped<EntityHologram>
 			meta = 71;
 		}
 
-		DrawUtils.renderItemStack_Full(new ItemStack(ItemsCore.genericItem,1,meta), x, y, z, (h.ticksExisted+partialTicks)%360, 0, 1, 1, 1, 0, 2.4F, 0);
+		DrawUtils.renderItemStack_Full(new ItemStack(ItemsCore.genericItem, 1, meta), x, y, z, (h.ticksExisted+partialTicks)%360, 0, 1, 1, 1, 0, 2.4F, 0);
 	}
 
 	public static class Factory implements IRenderFactory<EntityHologram> {

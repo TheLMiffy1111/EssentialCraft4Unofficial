@@ -106,15 +106,15 @@ public class ItemChaosFork extends ItemSword implements IModelRegisterer {
 						if(eff != null && p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15 && eff != null)
 						{
 							int buffLevel = eff.getAmplifier();
-							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,100,eff.getAmplifier()+1));
-							p_77644_3_.addPotionEffect(new PotionEffect(MobEffects.STRENGTH,100,buffLevel));
+							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, eff.getAmplifier()+1));
+							p_77644_3_.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 100, buffLevel));
 							return true;
 						}
 						if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15)
 						{
 							int buffLevel = 0;
-							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,100,0));
-							p_77644_3_.addPotionEffect(new PotionEffect(MobEffects.STRENGTH,100,buffLevel));
+							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, 0));
+							p_77644_3_.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 100, buffLevel));
 							return true;
 						}
 					}

@@ -17,7 +17,7 @@ public class GuiHeightState extends GuiTextElement{
 
 	public GuiHeightState(int i, int j, TileEntity t)
 	{
-		super(i,j);
+		super(i, j);
 		tile = t;
 	}
 
@@ -68,8 +68,8 @@ public class GuiHeightState extends GuiTextElement{
 		}
 		GlStateManager.color(0, 1, 0);
 		DrawUtils.drawScaledTexturedRect(posX+1, posY+14-pos, TextureUtils.fromBlock(Blocks.EMERALD_BLOCK), 16, 1, 2);
-		GlStateManager.color(1,1,1);
-		drawText(posX,posY);
+		GlStateManager.color(1, 1, 1);
+		drawText(posX, posY);
 	}
 
 	@Override

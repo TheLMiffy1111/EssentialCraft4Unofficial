@@ -53,7 +53,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+rec+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+rec+" on side "+side);
 			return false;
 		}
 	}
@@ -65,7 +65,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -77,7 +77,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -93,7 +93,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -109,7 +109,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -125,7 +125,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -141,7 +141,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -157,7 +157,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -173,7 +173,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -189,7 +189,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -205,7 +205,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -217,7 +217,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe "+rec+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe "+rec+" on side "+side);
 			return false;
 		}
 	}
@@ -231,7 +231,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe "+Arrays.toString(input)+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe "+Arrays.toString(input)+" on side "+side);
 			return false;
 		}
 	}
@@ -243,7 +243,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe "+Arrays.toString(input)+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe "+Arrays.toString(input)+" on side "+side);
 			return false;
 		}
 	}
@@ -255,7 +255,7 @@ public class RadiatingChamberRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe with result"+ result +"on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe with result"+ result +"on side "+side);
 			return false;
 		}
 	}

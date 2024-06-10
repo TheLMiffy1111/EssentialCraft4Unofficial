@@ -17,7 +17,7 @@ public class GuiBoundGemStateDimTransciever extends GuiTextElement {
 
 	public GuiBoundGemStateDimTransciever(int i, int j, TileEntity t, int slot)
 	{
-		super(i,j);
+		super(i, j);
 		tile = t;
 		slotNum = slot;
 	}

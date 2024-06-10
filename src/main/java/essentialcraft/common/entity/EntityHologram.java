@@ -218,7 +218,7 @@ public class EntityHologram extends EntityLiving {
 							continue;
 						}
 						faceEntity(MiscUtils.getPlayerFromUUID(player), 360F, 180F);
-						EntityArmorDestroyer destr = new EntityArmorDestroyer(getEntityWorld(),this);
+						EntityArmorDestroyer destr = new EntityArmorDestroyer(getEntityWorld(), this);
 						destr.shoot(this, rotationPitch, rotationYaw, 0.0F, 1.5F, 0.5F);
 						rotationYaw = getEntityWorld().rand.nextFloat()*360;
 						rotationPitch = 90-getEntityWorld().rand.nextFloat()*180;

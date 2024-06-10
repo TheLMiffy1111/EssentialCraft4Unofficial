@@ -27,7 +27,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 public class TileMIMInventoryStorage extends TileMRUGeneric {
 
 	public int updateTime = 0;
-	ArrayList<Pair<BlockPos,IItemHandler>> counted = new ArrayList<>();
+	ArrayList<Pair<BlockPos, IItemHandler>> counted = new ArrayList<>();
 	ArrayList<IItemHandler> countedT = new ArrayList<>();
 	public ArrayList<ItemStack> items = new ArrayList<>();
 	ArrayList<EntityPlayerMP> plrs = new ArrayList<>();
@@ -57,7 +57,7 @@ public class TileMIMInventoryStorage extends TileMRUGeneric {
 	public ArrayList<IItemHandler> getInventories() {
 		ArrayList<IItemHandler> retLst = new ArrayList<>();
 
-		for(Pair<BlockPos,IItemHandler> p : counted) {
+		for(Pair<BlockPos, IItemHandler> p : counted) {
 			if(getWorld().isBlockLoaded(new BlockPos(p.getLeft())) && getWorld().getTileEntity(new BlockPos(p.getLeft())).hasCapability(ITEM_HANDLER_CAPABILITY, null)) {
 				retLst.add(p.getRight());
 			}
@@ -200,8 +200,8 @@ public class TileMIMInventoryStorage extends TileMRUGeneric {
 	 * Re-calculates all the items there are. I wish there would be a better way to do this. Especially, if I didn't have to do this every tick, since it is pretty resource-intensive. However, if I do not do this every tick then dupes are possible.
 	 */
 	public void rebuildItems() {
-		HashMap<String,Integer> found = new HashMap<>();
-		HashMap<String,ItemStack> foundByID = new HashMap<>();
+		HashMap<String, Integer> found = new HashMap<>();
+		HashMap<String, ItemStack> foundByID = new HashMap<>();
 		ArrayList<String> ids = new ArrayList<>();
 		ArrayList<ItemStack> oldCopy = new ArrayList<>();
 		oldCopy.addAll(items);

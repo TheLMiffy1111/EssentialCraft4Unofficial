@@ -57,7 +57,7 @@ public class TileCrystalExtractor extends TileMRUGeneric {
 			getChance[i] = (int)(s*baseChance[i%4]/essenceChance[i/4]);
 		}
 		for(int i = 1; i < 13; ++i) {
-			ItemStack st = new ItemStack(ItemsCore.essence,1,getWorld().rand.nextInt(16));
+			ItemStack st = new ItemStack(ItemsCore.essence, 1, getWorld().rand.nextInt(16));
 			if(getWorld().rand.nextInt(100) < getChance[st.getItemDamage()]) {
 				int sts = getWorld().rand.nextInt(1 + getChance[st.getItemDamage()]/4);
 				st.setCount(sts);

@@ -74,38 +74,38 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 			}
 			if(attrib.contains("Water")) {
 				if(ECUtils.playerUseMRU(player, stack, 50)) {
-					target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS,40,0));
-					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,40,0));
+					target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 40, 0));
+					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 0));
 				}
 			}
 			if(attrib.contains("Earth")) {
 				if(ECUtils.playerUseMRU(player, stack, 50)) {
-					target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,40,0));
-					target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,40,0));
+					target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40, 0));
+					target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 40, 0));
 				}
 			}
 			if(attrib.contains("Air")) {
 				if(ECUtils.playerUseMRU(player, stack, 50)) {
-					attacker.addPotionEffect(new PotionEffect(MobEffects.SPEED,50,0));
-					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH,50,0));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.SPEED, 50, 0));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 50, 0));
 				}
 			}
 			List<String> embers = getEmberEffects(stack);
 			if(ECUtils.playerUseMRU(player, stack, 50)) {
 				if(embers.contains("Slowness")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,60,0));
+					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 60, 0));
 				}
 				if(embers.contains("Greater Slowness")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,60,1));
+					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 60, 1));
 				}
 				if(embers.contains("Poison")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.POISON,60,0));
+					target.addPotionEffect(new PotionEffect(MobEffects.POISON, 60, 0));
 				}
 				if(embers.contains("Greater Poison")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.POISON,60,1));
+					target.addPotionEffect(new PotionEffect(MobEffects.POISON, 60, 1));
 				}
 				if(embers.contains("Damage Self")) {
-					attacker.attackEntityFrom(DamageSource.causeMobDamage(attacker),2);
+					attacker.attackEntityFrom(DamageSource.causeMobDamage(attacker), 2);
 				}
 				if(embers.contains("Lightning")) {
 					EntityLightningBolt bold = new EntityLightningBolt(target.getEntityWorld(), target.posX, target.posY, target.posZ, false);
@@ -113,7 +113,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 					if(!target.getEntityWorld().isRemote) {
 						target.getEntityWorld().spawnEntity(bold);
 					}
-					attacker.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE,60,1));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 60, 1));
 				}
 				if(embers.contains("Lifesteal")) {
 					attacker.heal(1);
@@ -122,29 +122,29 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 					attacker.heal(3);
 				}
 				if(embers.contains("Weakness")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS,60,0));
+					target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 60, 0));
 				}
 				if(embers.contains("Greater Weakness")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS,60,1));
+					target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 60, 1));
 				}
 				if(embers.contains("Greater Damage Boost")) {
-					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH,60,1));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60, 1));
 				}
 				if(embers.contains("Damage Boost")) {
-					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH,60,0));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60, 0));
 				}
 				if(embers.contains("Greater Speed Boost")) {
-					attacker.addPotionEffect(new PotionEffect(MobEffects.SPEED,60,1));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.SPEED, 60, 1));
 				}
 				if(embers.contains("Speed Boost")) {
-					attacker.addPotionEffect(new PotionEffect(MobEffects.SPEED,60,0));
+					attacker.addPotionEffect(new PotionEffect(MobEffects.SPEED, 60, 0));
 				}
 				if(embers.contains("Greater Hunger")) {
-					target.addPotionEffect(new PotionEffect(MobEffects.HUNGER,60,1));
+					target.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 60, 1));
 				}
 			}
 		}
-		//target.attackEntityFrom(DamageSource.causeMobDamage(attacker),damage);
+		//target.attackEntityFrom(DamageSource.causeMobDamage(attacker), damage);
 		return false;
 	}
 
@@ -220,7 +220,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 			s_1 = s_1.toLowerCase();
 			s_2 = s_2.toLowerCase();
 			s_3 = s_3.toLowerCase();
-			int fire = 0,water = 0,earth = 0,air = 0;
+			int fire = 0, water = 0, earth = 0, air = 0;
 			if(s_0.toLowerCase().contains("ffocus")) {
 				++fire;
 			}
@@ -492,7 +492,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 		ArrayList<ModelResourceLocation> locations = new ArrayList<>();
 		for(String name : names) {
 			for(String name2 : names) {
-				locations.add(new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + name + "," + "top=" + name2));
+				locations.add(new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + name + ", " + "top=" + name2));
 			}
 		}
 		ModelBakery.registerItemVariants(this, locations.toArray(new ModelResourceLocation[0]));
@@ -501,7 +501,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 	public static class MeshDefinitionElementalSword implements ItemMeshDefinition {
 		@Override
 		public ModelResourceLocation getModelLocation(ItemStack stack) {
-			return new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + getA(stack, 0) + "," + "top=" + getA(stack, 1));
+			return new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + getA(stack, 0) + ", " + "top=" + getA(stack, 1));
 		}
 	}
 }

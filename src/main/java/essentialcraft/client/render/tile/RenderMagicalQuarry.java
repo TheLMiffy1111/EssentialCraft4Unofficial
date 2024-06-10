@@ -23,7 +23,7 @@ public class RenderMagicalQuarry extends TileEntitySpecialRenderer<TileMagicalQu
 		{}else
 		{
 			GlStateManager.pushMatrix();
-			float[] o = {tile.miningX,tile.miningY+0.5F,tile.miningZ};
+			float[] o = {tile.miningX, tile.miningY+0.5F, tile.miningZ};
 			GlStateManager.popMatrix();
 			float f21 = 0 + partialTicks;
 			float f31 = MathHelper.sin(f21 * 0.2F) / 2.0F + 0.5F;
@@ -44,7 +44,7 @@ public class RenderMagicalQuarry extends TileEntitySpecialRenderer<TileMagicalQu
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
 			GlStateManager.disableCull();
-			DrawUtils.bindTexture("essentialcraft","textures/special/mru_beam.png");
+			DrawUtils.bindTexture("essentialcraft", "textures/special/mru_beam.png");
 			GlStateManager.shadeModel(GL11.GL_SMOOTH);
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);

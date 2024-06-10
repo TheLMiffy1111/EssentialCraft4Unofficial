@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiMagmaticSmeltery extends GuiCommon{
 
 	public GuiMagmaticSmeltery(Container c, TileEntity tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(43, 40, tile));
 		elementList.add(new GuiBoundGemState(43, 4, tile, 0));

@@ -34,14 +34,14 @@ public class ItemLifeStaff extends ItemMRUGeneric implements IModelRegisterer {
 		ItemStack stack = player.getHeldItem(hand);
 		if(ECUtils.playerUseMRU(player, stack, 100))
 		{
-			if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(),stack.getItemDamage(),stack.getCount()+1), world, pos, player, hand))
+			if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(), stack.getItemDamage(), stack.getCount()+1), world, pos, player, hand))
 			{
 				for(int px = -5; px <= 5; ++px)
 				{
 					for(int pz = -5; pz <= 5; ++pz)
 					{
 						if(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() >= 100) {
-							if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(),stack.getItemDamage(),stack.getCount()+1), world, pos.add(px, 0, pz), player, hand))
+							if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(), stack.getItemDamage(), stack.getCount()+1), world, pos.add(px, 0, pz), player, hand))
 							{
 								ECUtils.playerUseMRU(player, stack, 100);
 							}

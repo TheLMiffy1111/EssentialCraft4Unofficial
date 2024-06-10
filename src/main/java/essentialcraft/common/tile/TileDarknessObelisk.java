@@ -139,7 +139,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 		List<EntityPlayer> playerlist = getWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(8));
 		if(!playerlist.isEmpty()) {
 			if(world.rand.nextInt(10000) == 0) {
-				EntityItem ei = new EntityItem(world, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, new ItemStack(ItemsCore.secret,1,0));
+				EntityItem ei = new EntityItem(world, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, new ItemStack(ItemsCore.secret, 1, 0));
 				getWorld().spawnEntity(ei);
 			}
 		}

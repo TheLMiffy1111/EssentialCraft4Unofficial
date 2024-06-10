@@ -15,7 +15,7 @@ public class RenderMagicalJukebox extends TileEntitySpecialRenderer<TileMagicalJ
 
 	public void doRender(TileMagicalJukebox tile, double x, double y, double z, float partialTicks)
 	{
-		float[][] coloring = {{1,0,0},{1,0,1},{0,0,1},{0,1,1},{0,1,0},{1,1,0},{1,1,1}};
+		float[][] coloring = {{1, 0, 0}, {1, 0, 1}, {0, 0, 1}, {0, 1, 1}, {0, 1, 0}, {1, 1, 0}, {1, 1, 1}};
 
 		float rotation = 90;
 		int currentSupposedTimingColor = (int) (tile.getWorld().getWorldTime() % (7*30));
@@ -60,10 +60,10 @@ public class RenderMagicalJukebox extends TileEntitySpecialRenderer<TileMagicalJ
 
 		GlStateManager.pushMatrix();
 		if(is.getItem() == ItemsCore.record_secret && tile.recordCooldownTime > 0) {
-			DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.65F-upperIndex1/40F,0.5F);
+			DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.65F-upperIndex1/40F, 0.5F);
 		}
 		else {
-			DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.65F,0.5F);
+			DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation, 0F, 1, 1, 1, 0.5F, 0.65F, 0.5F);
 		}
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();

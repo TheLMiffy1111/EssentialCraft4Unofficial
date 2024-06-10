@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class GuiFluidTank extends GuiElement{
 
-	private ResourceLocation rec = new ResourceLocation("essentialcraft","textures/gui/mrustorage.png");
+	private ResourceLocation rec = new ResourceLocation("essentialcraft", "textures/gui/mrustorage.png");
 
 	public int x;
 	public int y;

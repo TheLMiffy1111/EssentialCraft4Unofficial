@@ -36,7 +36,7 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	public static final PropertyEnum<CrystalType> TYPE = PropertyEnum.<CrystalType>create("type", CrystalType.class);
 	public static final PropertyEnum<EnumLayer> LAYER = PropertyEnum.<EnumLayer>create("layer", EnumLayer.class, EnumLayer.LAYERTHREE);
 
-	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0.25D,0D,0.25D,0.75D,1D,0.75D);
+	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 1D, 0.75D);
 
 	public BlockMithrilineCrystal() {
 		super(Material.ROCK);

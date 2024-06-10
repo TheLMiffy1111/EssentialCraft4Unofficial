@@ -73,12 +73,12 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 			}else
 			{
 				int cbiome = Biome.getIdForBiome(world.getBiome(pos));
-				setBiomeID(stack,cbiome,false);
+				setBiomeID(stack, cbiome, false);
 				player.swingArm(hand);
 			}
 		}else
 		{
-			setBiomeID(stack,0,true);
+			setBiomeID(stack, 0, true);
 			player.swingArm(hand);
 		}
 		return EnumActionResult.PASS;

@@ -64,30 +64,30 @@ public class ModelGun implements IBakedModel {
 
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		BakedQuad baseNorth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(base.toString()),EnumFacing.NORTH);
-		BakedQuad baseSouth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(base.toString()),EnumFacing.SOUTH);
-		BakedQuad handleNorth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*2,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(handle.toString()),EnumFacing.NORTH);
-		BakedQuad handleSouth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*2,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(handle.toString()),EnumFacing.SOUTH);
-		BakedQuad deviceNorth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*3,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(device.toString()),EnumFacing.NORTH);
-		BakedQuad deviceSouth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*3,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(device.toString()),EnumFacing.SOUTH);
-		BakedQuad scopeNorth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*4,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(scope.toString()),EnumFacing.NORTH);
-		BakedQuad scopeSouth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*4,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(scope.toString()),EnumFacing.SOUTH);
-		BakedQuad lenseNorth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*5,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(lense.toString()),EnumFacing.NORTH);
-		BakedQuad lenseSouth = createBakedQuadForFace(0.5F,1,0.5F,1,-DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*5,0,
-				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(lense.toString()),EnumFacing.SOUTH);
+		BakedQuad baseNorth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(base.toString()), EnumFacing.NORTH);
+		BakedQuad baseSouth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(base.toString()), EnumFacing.SOUTH);
+		BakedQuad handleNorth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*2, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(handle.toString()), EnumFacing.NORTH);
+		BakedQuad handleSouth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*2, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(handle.toString()), EnumFacing.SOUTH);
+		BakedQuad deviceNorth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*3, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(device.toString()), EnumFacing.NORTH);
+		BakedQuad deviceSouth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*3, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(device.toString()), EnumFacing.SOUTH);
+		BakedQuad scopeNorth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*4, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(scope.toString()), EnumFacing.NORTH);
+		BakedQuad scopeSouth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*4, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(scope.toString()), EnumFacing.SOUTH);
+		BakedQuad lenseNorth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*5, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(lense.toString()), EnumFacing.NORTH);
+		BakedQuad lenseSouth = createBakedQuadForFace(0.5F, 1, 0.5F, 1, -DISTANCE_BEHIND_ITEM_FACE+DELTA_FOR_OVERLAP*5, 0,
+				Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(lense.toString()), EnumFacing.SOUTH);
 
 		ImmutableList.Builder<BakedQuad> builder = ImmutableList.<BakedQuad>builder();
 		builder.addAll(baseModel.getQuads(state, side, rand));
-		builder.add(baseNorth,baseSouth,handleNorth,handleSouth,deviceNorth,deviceSouth,scopeNorth,scopeSouth,lenseNorth,lenseSouth);
+		builder.add(baseNorth, baseSouth, handleNorth, handleSouth, deviceNorth, deviceSouth, scopeNorth, scopeSouth, lenseNorth, lenseSouth);
 		return builder.build();
 	}
 

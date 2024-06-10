@@ -104,7 +104,7 @@ public class ItemSecret extends Item implements IModelRegisterer {
 			Biome biome = wrld.getBiome(new BlockPos(MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)));
 			boolean canWork = wrld.getWorldTime() % 24000 >= 14000 && wrld.getWorldTime() % 24000 <= 16000 && player.rotationPitch <= -42 && player.rotationPitch >= -65 && playerLst.size() == 1 && !wrld.isRaining() && (biome.getTempCategory() == TempCategory.WARM || biome.getTempCategory() == TempCategory.MEDIUM);
 			if(canWork) {
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemsCore.record_everlastingSummer,1,0));
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ItemsCore.record_everlastingSummer, 1, 0));
 				if(wrld.isRemote) {
 					Style style = new Style().setColor(TextFormatting.WHITE);
 					player.sendMessage(new TextComponentString("You gase into the stars holding the ticket.").setStyle(style));
@@ -137,7 +137,7 @@ public class ItemSecret extends Item implements IModelRegisterer {
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
 		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 7; ++i) {
-				list.add(new ItemStack(this,1,i));
+				list.add(new ItemStack(this, 1, i));
 			}
 		}
 	}

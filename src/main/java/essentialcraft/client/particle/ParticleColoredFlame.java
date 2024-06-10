@@ -14,11 +14,11 @@ public class ParticleColoredFlame extends Particle {
 	private float flameScale;
 
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
-	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft","textures/special/particles.png");
+	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft", "textures/special/particles.png");
 
-	public ParticleColoredFlame(World w, double x,double y, double z, double mX,double mY, double mZ)
+	public ParticleColoredFlame(World w, double x, double y, double z, double mX, double mY, double mZ)
 	{
-		super(w, x, y, z, mX, mY,mZ);
+		super(w, x, y, z, mX, mY, mZ);
 		motionX = motionX * 0.009999999776482582D + mX;
 		motionY = motionY * 0.009999999776482582D + mY;
 		motionZ = motionZ * 0.009999999776482582D + mZ;
@@ -35,9 +35,9 @@ public class ParticleColoredFlame extends Particle {
 		return true;
 	}
 
-	public ParticleColoredFlame(World w, double x,double y, double z, double mX,double mY, double mZ, double r, double g, double b, double scale)
+	public ParticleColoredFlame(World w, double x, double y, double z, double mX, double mY, double mZ, double r, double g, double b, double scale)
 	{
-		super(w, x, y, z, mX, mY,mZ);
+		super(w, x, y, z, mX, mY, mZ);
 		motionX = motionX * 0.009999999776482582D + mX;
 		motionY = motionY * 0.009999999776482582D + mY;
 		motionZ = motionZ * 0.009999999776482582D + mZ;

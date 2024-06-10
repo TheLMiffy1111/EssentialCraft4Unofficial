@@ -24,7 +24,7 @@ public class ModelArmorEC extends ModelBiped {
 
 	public ModelArmorEC(float f)
 	{
-		super(f,0,128,64);
+		super(f, 0, 128, 64);
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -72,7 +72,7 @@ public class ModelArmorEC extends ModelBiped {
 		bipedBody.addChild(bodyCross1);
 		lal = new ModelRenderer(this, 0, 40);
 		lal.addBox(-1.233333F, -0.8666667F, -2.633333F, 1, 10, 1);
-		lal.setRotationPoint(0F, 0F,-1.25F);
+		lal.setRotationPoint(0F, 0F, -1.25F);
 		lal.setTextureSize(128, 64);
 		lal.mirror = true;
 		setRotation(lal, 0.1047198F, -0.7853982F, -0.1047198F);

@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiMRUStorage extends GuiElement{
-	private ResourceLocation rec = new ResourceLocation("essentialcraft","textures/gui/mrustorage.png");
+	private ResourceLocation rec = new ResourceLocation("essentialcraft", "textures/gui/mrustorage.png");
 
 	public int x;
 	public int y;

@@ -93,7 +93,7 @@ public class TileCrafter extends TileMRUGeneric {
 		ItemStack[] frame = getRecipeFromFrame();
 		for(int i = 0; i < 9; ++i) {
 			ItemStack stk = getStackInSlot(i);
-			if(!areStacksTheSame(frame[i],stk,hasOreDict())) {
+			if(!areStacksTheSame(frame[i], stk, hasOreDict())) {
 				return false;
 			}
 		}

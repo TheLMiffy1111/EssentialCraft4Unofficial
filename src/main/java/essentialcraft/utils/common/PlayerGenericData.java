@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerGenericData implements IPlayerData {
 
-	private int damage,radiation,wind,ubmru,matrixid;
+	private int damage, radiation, wind, ubmru, matrixid;
 	private boolean windbound;
 	private final List<ICorruptionEffect> effects = new ArrayList<>();
 	UUID playerUUID;

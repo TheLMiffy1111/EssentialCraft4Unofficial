@@ -60,7 +60,7 @@ public class ECExplosion extends Explosion {
 							int j1 = MathHelper.floor(d5);
 							int k1 = MathHelper.floor(d6);
 							int l1 = MathHelper.floor(d7);
-							BlockPos pos = new BlockPos(j1,k1,l1);
+							BlockPos pos = new BlockPos(j1, k1, l1);
 							IBlockState block = world.getBlockState(pos);
 
 							if(block.getMaterial() != Material.AIR) {

@@ -32,7 +32,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 	public int meta = 0;
 
 	public static final ResourceLocation loc(String s) {
-		return new ResourceLocation("essentialcraft","textures/special/corruptioneffects/"+s+".png");
+		return new ResourceLocation("essentialcraft", "textures/special/corruptioneffects/"+s+".png");
 	}
 
 	public ResourceLocation[] allLocs = {
@@ -155,14 +155,14 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 			case 0: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.001F) {
 					message(player, "essentialcraft.effect.desc_"+meta);
-					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,400,1,true,true));
+					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 400, 1, true, true));
 				}
 				break;
 			}
 			case 1: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.001F) {
 					message(player, "essentialcraft.effect.desc_"+meta);
-					player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS,400,1,true,true));
+					player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 400, 1, true, true));
 				}
 				break;
 			}
@@ -176,7 +176,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 			case 3: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.001F) {
 					message(player, "essentialcraft.effect.desc_"+meta);
-					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,400,1,true,true));
+					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 400, 1, true, true));
 				}
 				break;
 			}
@@ -189,7 +189,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 			case 5: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.001F && !player.isPotionActive(PotionRegistry.paradox)) {
 					message(player, "essentialcraft.effect.desc_"+meta);
-					player.addPotionEffect(new PotionEffect(PotionRegistry.paradox,2000,1,true,true));
+					player.addPotionEffect(new PotionEffect(PotionRegistry.paradox, 2000, 1, true, true));
 				}
 				break;
 			}
@@ -280,7 +280,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 			case 15: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.0007F) {
 					message(player, "essentialcraft.effect.desc_"+meta);
-					EntityLightningBolt bolt = new EntityLightningBolt(player.getEntityWorld(),player.posX,player.posY,player.posZ, false);
+					EntityLightningBolt bolt = new EntityLightningBolt(player.getEntityWorld(), player.posX, player.posY, player.posZ, false);
 					player.getEntityWorld().spawnEntity(bolt);
 					player.getEntityWorld().addWeatherEffect(bolt);
 					player.onStruckByLightning(bolt);
@@ -382,9 +382,9 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 	@Override
 	public ICorruptionEffect copy() {
 		NBTTagCompound tag = new NBTTagCompound();
-		writeToNBTTagCompound(tag,-1);
+		writeToNBTTagCompound(tag, -1);
 		CorruptionEffectECNBTBased effect = new CorruptionEffectECNBTBased();
-		effect.readFromNBTTagCompound(tag,-1);
+		effect.readFromNBTTagCompound(tag, -1);
 		return effect;
 	}
 

@@ -142,14 +142,14 @@ public class EntityMRUPresence extends EntityLivingBase {
 					for(int i = 0; i < mainMRUState; ++i) {
 						Vec3d vc = new Vec3d(vec.x*i, vec.y*i, vec.z*i);
 						Vec3d vc1 = new Vec3d(vec.x*(i+1), vec.y*(i+1), vec.z*(i+1));
-						Block blk = getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ))).getBlock();
-						Block blk1 = getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX),(int)(vc1.y+posY),(int)(vc1.z+posZ))).getBlock();
-						int meta = blk1.getMetaFromState(getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX),(int)(vc1.y+posY),(int)(vc1.z+posZ))));
+						Block blk = getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX), (int)(vc.y+posY), (int)(vc.z+posZ))).getBlock();
+						Block blk1 = getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX), (int)(vc1.y+posY), (int)(vc1.z+posZ))).getBlock();
+						int meta = blk1.getMetaFromState(getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX), (int)(vc1.y+posY), (int)(vc1.z+posZ))));
 						float resistance = 1F;
 						if(ECUtils.IGNORE_META.containsKey(blk1.getTranslationKey()) && ECUtils.IGNORE_META.get(blk1.getTranslationKey())) {
 							meta = -1;
 						}
-						DummyData dt = new DummyData(blk1.getTranslationKey(),meta);
+						DummyData dt = new DummyData(blk1.getTranslationKey(), meta);
 						if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
 							resistance = ECUtils.MRU_RESISTANCES.get(dt.toString());
 						}
@@ -159,14 +159,14 @@ public class EntityMRUPresence extends EntityLivingBase {
 						if(Config.isCorruptionAllowed) {
 							if(!(blk1 instanceof BlockCorruption) && !(blk instanceof BlockCorruption) && blk1 != Blocks.AIR && blk == Blocks.AIR) {
 								if(!getEntityWorld().isRemote && getEntityWorld().rand.nextInt((int) (1000*resistance)) <= mainMRUState) {
-									getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ)), id.getStateFromMeta(0), 3);
+									getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX), (int)(vc.y+posY), (int)(vc.z+posZ)), id.getStateFromMeta(0), 3);
 									break;
 								}
 							}
 							if(blk instanceof BlockCorruption) {
-								int metadata = blk.getMetaFromState(getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ))));
+								int metadata = blk.getMetaFromState(getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX), (int)(vc.y+posY), (int)(vc.z+posZ))));
 								if(metadata < 7 && getEntityWorld().rand.nextInt((int) (1000*resistance)) <= mainMRUState) {
-									getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ)), blk.getStateFromMeta(metadata+1), 3);
+									getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX), (int)(vc.y+posY), (int)(vc.z+posZ)), blk.getStateFromMeta(metadata+1), 3);
 								}
 							}
 						}
@@ -188,7 +188,7 @@ public class EntityMRUPresence extends EntityLivingBase {
 							if(ECUtils.IGNORE_META.containsKey(b.getTranslationKey()) && ECUtils.IGNORE_META.get(b.getTranslationKey())) {
 								meta = -1;
 							}
-							DummyData dt = new DummyData(b.getTranslationKey(),meta);
+							DummyData dt = new DummyData(b.getTranslationKey(), meta);
 							if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
 								if(resistance < ECUtils.MRU_RESISTANCES.get(dt.toString())) {
 									resistance = ECUtils.MRU_RESISTANCES.get(dt.toString());
@@ -300,7 +300,7 @@ public class EntityMRUPresence extends EntityLivingBase {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(ItemsCore.entityEgg,1,EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
+		return new ItemStack(ItemsCore.entityEgg, 1, EntitiesCore.REGISTERED_ENTITIES.indexOf(ForgeRegistries.ENTITIES.getValue(EntityList.getKey(this.getClass()))));
 	}
 
 	@Override

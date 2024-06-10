@@ -25,7 +25,7 @@ public class RenderMithrilineCrystalAsItem implements IItemRenderer {
 	public void renderItem(ItemStack item, TransformType type) {
 		int metadata = item.getItemDamage();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(0.5F,-0.5F,0.5F);
+		GlStateManager.translate(0.5F, -0.5F, 0.5F);
 		GlStateManager.scale(2, 2, 2);
 		Minecraft.getMinecraft().renderEngine.bindTexture(metadata == 0 ? RenderMithrilineCrystal.textures_mithriline : metadata == 3 ? RenderMithrilineCrystal.textures_pale : metadata == 6 ? RenderMithrilineCrystal.textures_void : metadata == 9 ? RenderMithrilineCrystal.textures_demonic : RenderMithrilineCrystal.textures_shade);
 		RenderMithrilineCrystal.model.renderAll();

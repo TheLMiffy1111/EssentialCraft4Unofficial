@@ -52,7 +52,7 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 		if(t != null && !world.isRemote) {
 			if(t.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null) && !world.isRemote) {
 				ItemStack is = createTag(stack);
-				MiscUtils.getStackTag(is).setIntArray("pos", new int[]{pos.getX(),pos.getY(),pos.getZ()});
+				MiscUtils.getStackTag(is).setIntArray("pos", new int[]{pos.getX(), pos.getY(), pos.getZ()});
 				MiscUtils.getStackTag(is).setInteger("dim", player.dimension);
 				MiscUtils.getStackTag(is).setBoolean("created", !player.isSneaking());
 				if(stack.getCount() <= 0) {
@@ -92,7 +92,7 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 		if(stack.getTagCompound() != null && world.isRemote && !player.isSneaking())
 		{
 			int[] c = MiscUtils.getStackTag(stack).getIntArray("pos");
-			currentlyClicked = new Coord3D(c[0],c[1],c[2]);
+			currentlyClicked = new Coord3D(c[0], c[1], c[2]);
 			clickTicks = 100;
 		}
 		return super.onItemRightClick(world, player, hand);
@@ -133,7 +133,7 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 		if(retStk.getTagCompound() == null)
 		{
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setIntArray("pos", new int[]{0,0,0});
+			tag.setIntArray("pos", new int[]{0, 0, 0});
 			return retStk;
 		}
 		return retStk;

@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiPotionSpreader extends GuiCommon{
 
 	public GuiPotionSpreader(Container c, TileEntity tile) {
-		super(c,tile);
+		super(c, tile);
 		elementList.add(new GuiMRUStorage(7, 4, tile));
 		elementList.add(new GuiBalanceState(25, 4, tile));
 		elementList.add(new GuiBoundGemState(90, 4, tile, 0));

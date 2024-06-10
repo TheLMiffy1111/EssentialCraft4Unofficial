@@ -20,11 +20,11 @@ public class ParticleMRU extends Particle{
 	private double mruPosZ;
 	public float tickPos;
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
-	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft","textures/special/particles.png");
+	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft", "textures/special/particles.png");
 
-	public ParticleMRU(World w, double x, double y,double z, double i, double j,double k)
+	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k)
 	{
-		super(w, x, y, z, i, j,k);
+		super(w, x, y, z, i, j, k);
 		motionX = i;
 		motionY = j;
 		motionZ = k;
@@ -42,9 +42,9 @@ public class ParticleMRU extends Particle{
 		setParticleTextureIndex((int)(Math.random() * 8.0D));
 	}
 
-	public ParticleMRU(World w, double x, double y,double z, double i, double j,double k, double cR, double cG, double cB)
+	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k, double cR, double cG, double cB)
 	{
-		this(w,x,y,z,i,j,k);
+		this(w, x, y, z, i, j, k);
 		particleRed = (float) cR;
 		particleGreen = (float) cG;
 		particleBlue = (float) cB;

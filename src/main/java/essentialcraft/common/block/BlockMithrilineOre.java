@@ -42,7 +42,7 @@ public class BlockMithrilineOre extends Block implements IModelRegisterer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this,1,state.getValue(DIMENSION).getIndex());
+		return new ItemStack(this, 1, state.getValue(DIMENSION).getIndex());
 	}
 
 	@Override

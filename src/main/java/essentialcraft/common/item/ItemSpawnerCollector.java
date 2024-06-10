@@ -42,9 +42,9 @@ public class ItemSpawnerCollector extends ItemMRUGeneric implements IModelRegist
 				TileEntityMobSpawner t = (TileEntityMobSpawner)world.getTileEntity(pos);
 				NBTTagCompound mobTag = new NBTTagCompound();
 				t.writeToNBT(mobTag);
-				ItemStack collectedSpawner = new ItemStack(ItemsCore.collectedSpawner,1,0);
+				ItemStack collectedSpawner = new ItemStack(ItemsCore.collectedSpawner, 1, 0);
 				MiscUtils.getStackTag(collectedSpawner).setTag("monsterSpawner", mobTag);
-				EntityItem item = new EntityItem(world,pos.getX()+0.5D,pos.getY()+0.5D,pos.getZ()+0.5D,collectedSpawner);
+				EntityItem item = new EntityItem(world, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, collectedSpawner);
 				if(!world.isRemote) {
 					world.spawnEntity(item);
 				}

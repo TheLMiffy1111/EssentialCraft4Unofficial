@@ -15,7 +15,7 @@ public class GuiBoundGemState extends GuiTextElement {
 	public int slotNum;
 
 	public GuiBoundGemState(int i, int j, TileEntity t, int slot) {
-		super(i,j);
+		super(i, j);
 		tile = t;
 		slotNum = slot;
 	}

@@ -19,7 +19,7 @@ public class RenderDivider extends Render<EntityDivider> {
 		super(renderManager);
 	}
 
-	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft","models/block/sphere.obj"));
+	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft", "models/block/sphere.obj"));
 
 	@Override
 	public void doRender(EntityDivider e, double x, double y, double z, float partial, float zero) {

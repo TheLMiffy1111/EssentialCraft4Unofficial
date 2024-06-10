@@ -59,7 +59,7 @@ public class RenderMRURay extends Render<EntityMRURay> {
 			g = 0.3F;
 			b = 0.3F;
 		}
-		renderBeam(partialTicks,x,y,z,1D-ray.ticksExisted/60D,0,0,ray.pX-ray.posX,ray.pY-ray.posY,ray.pZ-ray.posZ,r,g,b,r,g,b,(float) (0.1F * (1 + (double)ray.ticksExisted/60)));
+		renderBeam(partialTicks, x, y, z, 1D-ray.ticksExisted/60D, 0, 0, ray.pX-ray.posX, ray.pY-ray.posY, ray.pZ-ray.posZ, r, g, b, r, g, b, (float) (0.1F * (1 + (double)ray.ticksExisted/60)));
 
 	}
 
@@ -89,7 +89,7 @@ public class RenderMRURay extends Render<EntityMRURay> {
 		GlStateManager.rotate((float)-Math.atan2(f7, f5) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
 		Tessellator tessellator = Tessellator.getInstance();
 		RenderHelper.disableStandardItemLighting();
-		DrawUtils.bindTexture("essentialcraft","textures/special/mru_beam.png");
+		DrawUtils.bindTexture("essentialcraft", "textures/special/mru_beam.png");
 		GlStateManager.shadeModel(GL11.GL_SMOOTH);
 		float f9 = 1;
 		float f10 = MathHelper.sqrt(f4 * f4 + f5 * f5 + f6 * f6) / 32.0F - 1 * 0.0001F;
