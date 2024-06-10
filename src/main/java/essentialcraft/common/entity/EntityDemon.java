@@ -54,8 +54,8 @@ public class EntityDemon extends EntityLiving implements IInventory {
 		super(w);
 		DemonTrade trade = MathUtils.randomElement(DemonTrade.TRADES, w.rand);
 		if(trade.entityType != null) {
-			ItemStack stack = new ItemStack(ItemsCore.soul, w.rand.nextInt(7)+1, 0);
-			MiscUtils.getStackTag(stack).setString("entity", trade.entityType.getRegistryName().toString());
+			desiredItem = new ItemStack(ItemsCore.soul, w.rand.nextInt(7)+1, 0);
+			MiscUtils.getStackTag(desiredItem).setString("entity", trade.entityType.getRegistryName().toString());
 		}
 		else {
 			desiredItem = trade.desiredItem;
@@ -90,11 +90,12 @@ public class EntityDemon extends EntityLiving implements IInventory {
 		if(!getEntityWorld().isRemote) {
 			getDataManager().set(DESIRED, desiredItem);
 		}
-
 		super.onUpdate();
-
-		if(!getStackInSlot(0).isEmpty() && !desiredItem.isEmpty()) {
-			if(desiredItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && getStackInSlot(0).isItemEqual(desiredItem) && ItemStack.areItemsEqual(getStackInSlot(0), desiredItem) && getStackInSlot(0).getCount() >= desiredItem.getCount() || desiredItem.getItemDamage() == OreDictionary.WILDCARD_VALUE && getStackInSlot(0).getItem() == desiredItem.getItem() && getStackInSlot(0).getCount() >= desiredItem.getCount()) {
+		if(!getStackInSlot(0).isEmpty() && !desiredItem.isEmpty() && getStackInSlot(0).getCount() >= desiredItem.getCount()) {
+			if(desiredItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && (
+					!desiredItem.hasTagCompound() && ItemStack.areItemsEqual(desiredItem, getStackInSlot(0)) ||
+					desiredItem.hasTagCompound() && ItemStack.areItemStacksEqualUsingNBTShareTag(desiredItem, getStackInSlot(0))) ||
+					desiredItem.getItemDamage() == OreDictionary.WILDCARD_VALUE && getStackInSlot(0).getItem() == desiredItem.getItem()) {
 				setDead();
 				for(int i = 0; i < 400; ++i) {
 					double d2 = rand.nextGaussian() * 0.02D;
