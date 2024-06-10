@@ -95,7 +95,7 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 							++progressLevel;
 
 							if(generatesCorruption) {
-								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, genCorruption);
 							}
 
 							if(progressLevel >= time) {

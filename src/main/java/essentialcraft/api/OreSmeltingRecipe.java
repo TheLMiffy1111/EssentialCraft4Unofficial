@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import DummyCore.Utils.MiscUtils;
 import essentialcraft.common.item.ItemsCore;
 import net.minecraft.item.ItemStack;
@@ -16,8 +13,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class OreSmeltingRecipe {
 
-	public static final ArrayList<OreSmeltingRecipe> RECIPES = Lists.<OreSmeltingRecipe>newArrayList();
-	public static final HashMap<String, OreSmeltingRecipe> RECIPE_MAP = Maps.<String, OreSmeltingRecipe>newHashMap();
+	public static final ArrayList<OreSmeltingRecipe> RECIPES = new ArrayList<>();
+	public static final HashMap<String, OreSmeltingRecipe> RECIPE_MAP = new HashMap<>();
 
 	public String oreName;
 	public String outputName;
