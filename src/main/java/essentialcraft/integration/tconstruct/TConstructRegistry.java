@@ -12,7 +12,7 @@ public class TConstructRegistry {
 				ModMRUReinforced.register();
 				LogManager.getLogger().trace("Successfully registered TConstruct integration!");
 			}
-			catch(Exception e) {
+			catch(Throwable e) {
 				LogManager.getLogger().error("Unable to add TConstruct Integration.", e);
 			}
 		}
