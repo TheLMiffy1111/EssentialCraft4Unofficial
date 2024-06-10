@@ -72,8 +72,7 @@ public class ItemChaosFork extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_)
-	{
+	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_) {
 		Vec3d playerLookVec = p_77654_3_.getLookVec();
 		p_77654_3_.motionX += playerLookVec.x;
 		p_77654_3_.motionY += playerLookVec.y;
@@ -85,33 +84,26 @@ public class ItemChaosFork extends ItemSword implements IModelRegisterer {
 	 * How long it takes to use or consume an item
 	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
-	{
+	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 32;
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_)
-	{
+	public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
 		try {
-			if(p_77644_3_ instanceof EntityPlayer)
-			{
+			if(p_77644_3_ instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) p_77644_3_;
-				if(ECUtils.playerUseMRU(player, p_77644_1_, 250))
-				{
+				if(ECUtils.playerUseMRU(player, p_77644_1_, 250)) {
 					int att = ECUtils.getData(player).getMatrixTypeID();
-					if(att == 1)
-					{
+					if(att == 1) {
 						PotionEffect eff = p_77644_2_.getActivePotionEffect(MobEffects.MINING_FATIGUE);
-						if(eff != null && p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15 && eff != null)
-						{
+						if(eff != null && p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15 && eff != null) {
 							int buffLevel = eff.getAmplifier();
 							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, eff.getAmplifier()+1));
 							p_77644_3_.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 100, buffLevel));
 							return true;
 						}
-						if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15)
-						{
+						if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15) {
 							int buffLevel = 0;
 							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, 0));
 							p_77644_3_.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 100, buffLevel));
@@ -127,8 +119,7 @@ public class ItemChaosFork extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack)
-	{
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack) {
 		Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
 		if(equipmentSlot == EntityEquipmentSlot.MAINHAND) {
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 6, 0));
@@ -141,8 +132,7 @@ public class ItemChaosFork extends ItemSword implements IModelRegisterer {
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
-	{
+	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.BOW;
 	}
 
@@ -150,8 +140,7 @@ public class ItemChaosFork extends ItemSword implements IModelRegisterer {
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		playerIn.setActiveHand(hand);
 		return super.onItemRightClick(worldIn, playerIn, hand);
 	}

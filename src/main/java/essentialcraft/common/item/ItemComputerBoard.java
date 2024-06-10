@@ -12,8 +12,7 @@ import net.minecraftforge.client.model.ModelLoader;
 public class ItemComputerBoard extends Item implements IBauble, IModelRegisterer {
 
 	@Override
-	public BaubleType getBaubleType(ItemStack itemstack)
-	{
+	public BaubleType getBaubleType(ItemStack itemstack) {
 		return BaubleType.BELT;
 	}
 

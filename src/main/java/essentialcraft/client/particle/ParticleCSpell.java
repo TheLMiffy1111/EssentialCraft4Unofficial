@@ -10,8 +10,7 @@ public class ParticleCSpell extends Particle{
 	private double mruPosX;
 	private double mruPosY;
 	private double mruPosZ;
-	public ParticleCSpell(World w, double x, double y, double z, double i, double j, double k)
-	{
+	public ParticleCSpell(World w, double x, double y, double z, double i, double j, double k) {
 		super(w, x, y, z, i, j, k);
 		motionX = i;
 		motionY = j;
@@ -30,8 +29,7 @@ public class ParticleCSpell extends Particle{
 	}
 
 	@Override
-	public void renderParticle(BufferBuilder var1, Entity var2, float par2, float par3, float par4, float par5, float par6, float par7)
-	{
+	public void renderParticle(BufferBuilder var1, Entity var2, float par2, float par3, float par4, float par5, float par6, float par7) {
 		particleScale = 1F;
 		particleRed = 0;
 		particleGreen = 0F;
@@ -45,8 +43,7 @@ public class ParticleCSpell extends Particle{
 	}
 
 	@Override
-	public int getBrightnessForRender(float p_70070_1_)
-	{
+	public int getBrightnessForRender(float p_70070_1_) {
 		int i = super.getBrightnessForRender(p_70070_1_);
 		float f1 = (float)particleAge / (float)particleMaxAge;
 		f1 *= f1;
@@ -55,8 +52,7 @@ public class ParticleCSpell extends Particle{
 		int k = i >> 16 & 255;
 		k += (int)(f1 * 15F * 16F);
 
-		if (k > 240)
-		{
+		if (k > 240) {
 			k = 240;
 		}
 
@@ -66,8 +62,7 @@ public class ParticleCSpell extends Particle{
 	/**
 	 * Gets how bright this entity is.
 	 */
-	public float getBrightness(float p_70013_1_)
-	{
+	public float getBrightness(float p_70013_1_) {
 		float f1 = super.getBrightnessForRender(p_70013_1_);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
@@ -78,8 +73,7 @@ public class ParticleCSpell extends Particle{
 	 * Called to update the entity's position/logic.
 	 */
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
 		prevPosX = posX;
 		prevPosY = posY;
@@ -89,11 +83,9 @@ public class ParticleCSpell extends Particle{
 		posY = mruPosY + motionY * f;
 		posZ = mruPosZ + motionZ * f;
 
-		if (particleAge++ >= particleMaxAge)
-		{
+		if (particleAge++ >= particleMaxAge) {
 			setExpired();
-			for(int t = 0; t < 10; ++t)
-			{
+			for(int t = 0; t < 10; ++t) {
 				//this.getEntityWorld().spawnParticle("smoke", posX, posY, posZ, MathUtils.randomFloat(rand)/6, MathUtils.randomFloat(rand)/6, MathUtils.randomFloat(rand)/6);
 				//if(this.getEntityWorld().rand.nextFloat() < 0.01F)
 				//this.getEntityWorld().spawnParticle("explode", posX, posY, posZ, MathUtils.randomFloat(rand)/6, MathUtils.randomFloat(rand)/6, MathUtils.randomFloat(rand)/6);

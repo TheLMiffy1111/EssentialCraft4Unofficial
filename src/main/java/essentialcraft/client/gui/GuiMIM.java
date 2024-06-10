@@ -10,7 +10,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiMIM extends GuiCommon{
+public class GuiMIM extends GuiCommon {
 
 	public GuiMIM(Container c, TileEntity tile) {
 		super(c, tile);

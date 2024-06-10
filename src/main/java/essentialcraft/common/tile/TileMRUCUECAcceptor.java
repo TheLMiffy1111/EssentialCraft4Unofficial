@@ -111,15 +111,13 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 			items[par1] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		else {
-			itemstack = items[par1].splitStack(par2);
+		itemstack = items[par1].splitStack(par2);
 
-			if(items[par1].getCount() == 0) {
-				items[par1] = ItemStack.EMPTY;
-			}
-
-			return itemstack;
+		if(items[par1].getCount() == 0) {
+			items[par1] = ItemStack.EMPTY;
 		}
+
+		return itemstack;
 	}
 
 	@Override

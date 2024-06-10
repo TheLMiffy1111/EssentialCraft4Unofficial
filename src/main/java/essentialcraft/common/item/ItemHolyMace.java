@@ -54,8 +54,7 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
-	{
+	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
 		if(isInCreativeTab(par2CreativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
@@ -67,12 +66,9 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_)
-	{
-		if(p_77644_3_ instanceof EntityPlayer)
-		{
-			if(ECUtils.playerUseMRU((EntityPlayer)p_77644_3_, p_77644_1_, 250))
-			{
+	public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
+		if(p_77644_3_ instanceof EntityPlayer) {
+			if(ECUtils.playerUseMRU((EntityPlayer)p_77644_3_, p_77644_1_, 250)) {
 				return true;
 			}
 		}
@@ -80,8 +76,7 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot s, ItemStack stk)
-	{
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot s, ItemStack stk) {
 		Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
 		if(s == EntityEquipmentSlot.MAINHAND) {
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 12, 0));

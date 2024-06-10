@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiDarknessObelisk extends GuiCommon{
+public class GuiDarknessObelisk extends GuiCommon {
 
 	public GuiDarknessObelisk(Container c, TileEntity tile) {
 		super(c, tile);
@@ -17,7 +17,4 @@ public class GuiDarknessObelisk extends GuiCommon{
 		elementList.add(new GuiBoundGemState(25, 22, tile, 0));
 		elementList.add(new GuiMRUState(25, 58, tile, 0));
 	}
-
-
-
 }

@@ -9,7 +9,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import essentialcraft.common.tile.TileMagicalEnchanter;
 import net.minecraft.inventory.Container;
 
-public class GuiMagicalEnchanter extends GuiCommon{
+public class GuiMagicalEnchanter extends GuiCommon {
 
 	public GuiMagicalEnchanter(Container c, TileMagicalEnchanter tile) {
 		super(c, tile);

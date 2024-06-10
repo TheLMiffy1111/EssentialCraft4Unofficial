@@ -8,8 +8,7 @@ import net.minecraft.util.ResourceLocation;
 public class GuiProgressBar_FurnaceMagic extends GuiTextElement{
 	public TileFurnaceMagic tile;
 
-	public GuiProgressBar_FurnaceMagic(int i, int j, TileFurnaceMagic table)
-	{
+	public GuiProgressBar_FurnaceMagic(int i, int j, TileFurnaceMagic table) {
 		super(i, j);
 		tile = table;
 	}

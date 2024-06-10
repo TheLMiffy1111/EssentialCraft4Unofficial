@@ -46,14 +46,12 @@ public class BlockWeaponMaker extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
-	{
+	public int damageDropped(IBlockState state) {
 		return state.getValue(TYPE).getIndex();
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
@@ -70,8 +68,7 @@ public class BlockWeaponMaker extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 
@@ -101,8 +98,7 @@ public class BlockWeaponMaker extends BlockContainer implements IModelRegisterer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
 		switch(stack.getItemDamage()) {
 		case 0: {
 			list.add(new ItemStack(ItemsCore.pistol).getDisplayName());

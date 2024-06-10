@@ -10,18 +10,15 @@ public class GuiMagicalChest extends GuiContainer{
 
 	TileMagicalChest tile;
 
-	public GuiMagicalChest(InventoryPlayer inventoryPlayer, TileMagicalChest chest)
-	{
+	public GuiMagicalChest(InventoryPlayer inventoryPlayer, TileMagicalChest chest) {
 		super(new ContainerMagicalChest(inventoryPlayer, chest));
 		tile = chest;
 
-		if (tile.getBlockMetadata() == 0)
-		{
+		if(tile.getBlockMetadata() == 0) {
 			xSize = 176;
 			ySize = 222;
 		}
-		else if (tile.getBlockMetadata() == 1)
-		{
+		else if (tile.getBlockMetadata() == 1) {
 			xSize = 256;
 			ySize = 256;
 		}
@@ -45,6 +42,6 @@ public class GuiMagicalChest extends GuiContainer{
 			DrawUtils.bindTexture("essentialcraft", "textures/gui/void_chest.png");
 		}
 
-		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
 	}
 }

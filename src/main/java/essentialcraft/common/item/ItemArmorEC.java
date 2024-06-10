@@ -60,8 +60,7 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 		mat = p_i45325_1_;
 	}
 
-	public ItemArmorEC setArmorTexture(String path)
-	{
+	public ItemArmorEC setArmorTexture(String path) {
 		armorTexture = path;
 		return this;
 	}
@@ -73,21 +72,18 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag par4)
-	{
+	public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag par4) {
 		super.addInformation(stack, world, list, par4);
 		if(!desc.isEmpty()) {
 			list.add(desc);
 		}
-		if(aType == 1)
-		{
+		if(aType == 1) {
 			list.add(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() + "/" + stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMaxMRU() + " MRU");
 		}
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot s, ItemStack stack)
-	{
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot s, ItemStack stack) {
 		Multimap<String, AttributeModifier> mods = HashMultimap.<String, AttributeModifier>create();
 
 		if(this == ItemsCore.magicArmorItems[5] && s == EntityEquipmentSlot.CHEST) {
@@ -200,18 +196,14 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 				ItemArmor aarmor = (ItemArmor)armor.getItem();
 				return new ArmorProperties(0, aarmor.damageReduceAmount / 25D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
 			}
-			else {
-				return new ArmorProperties(0, 0, armor.getMaxDamage() + 1 - armor.getItemDamage());
-			}
+			return new ArmorProperties(0, 0, armor.getMaxDamage() + 1 - armor.getItemDamage());
 		}
 		int mru = armor.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU();
 		if(mru > 0) {
 			ItemArmor aarmor = (ItemArmor)armor.getItem();
 			return new ArmorProperties(0, aarmor.damageReduceAmount / 20D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
 		}
-		else {
-			return new ArmorProperties(0, 0, armor.getMaxDamage() + 1 - armor.getItemDamage());
-		}
+		return new ArmorProperties(0, 0, armor.getMaxDamage() + 1 - armor.getItemDamage());
 	}
 
 	@Override

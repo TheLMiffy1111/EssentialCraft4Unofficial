@@ -5,38 +5,32 @@ import net.minecraft.world.biome.Biome;
 
 public class BiomeShadowCorruption extends Biome
 {
-	public BiomeShadowCorruption(BiomeProperties par1)
-	{
+	public BiomeShadowCorruption(BiomeProperties par1) {
 		super(par1);
 	}
 
 	@Override
-	public int getGrassColorAtPos(BlockPos pos)
-	{
+	public int getGrassColorAtPos(BlockPos pos) {
 		return 0x222222;
 	}
 
 	@Override
-	public int getFoliageColorAtPos(BlockPos pos)
-	{
+	public int getFoliageColorAtPos(BlockPos pos) {
 		return 0x222222;
 	}
 
 	@Override
-	public int getWaterColorMultiplier()
-	{
+	public int getWaterColorMultiplier() {
 		return 0x222222;
 	}
 
 	@Override
-	public int getModdedBiomeGrassColor(int original)
-	{
+	public int getModdedBiomeGrassColor(int original) {
 		return 0x222222;
 	}
 
 	@Override
-	public int getModdedBiomeFoliageColor(int original)
-	{
+	public int getModdedBiomeFoliageColor(int original) {
 		return 0x222222;
 	}
 }

@@ -40,8 +40,7 @@ public class BlockMagicalTeleporter extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

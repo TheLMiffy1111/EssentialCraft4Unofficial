@@ -35,8 +35,7 @@ public class BlockMithrilineOre extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
-	{
+	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
 		return MathHelper.getInt(RANDOM, 0, 2);
 	}
 
@@ -73,8 +72,7 @@ public class BlockMithrilineOre extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
+	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<>();
 
 		int count = RANDOM.nextInt(8*(fortune+1))+3;

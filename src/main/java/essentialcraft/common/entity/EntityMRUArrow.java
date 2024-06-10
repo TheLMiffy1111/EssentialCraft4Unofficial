@@ -13,20 +13,17 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class EntityMRUArrow extends EntityArrow {
 
-	public EntityMRUArrow(World p_i1753_1_)
-	{
+	public EntityMRUArrow(World p_i1753_1_) {
 		super(p_i1753_1_);
 	}
 
-	public EntityMRUArrow(World p_i1756_1_, EntityLivingBase p_i1756_2_, float p_i1756_3_)
-	{
+	public EntityMRUArrow(World p_i1756_1_, EntityLivingBase p_i1756_2_, float p_i1756_3_) {
 		super(p_i1756_1_, p_i1756_2_);
 		pickupStatus = PickupStatus.DISALLOWED;
 	}
 
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		super.onUpdate();
 		if(ticksExisted > 60) {
 			setDead();
@@ -34,8 +31,7 @@ public class EntityMRUArrow extends EntityArrow {
 		//this.motionX *= 0.9F;
 		//this.motionY *= 0.9F;
 		//this.motionZ *= 0.9F;
-		for(int i = 0; i < 2; ++i)
-		{
+		for(int i = 0; i < 2; ++i) {
 			EssentialCraftCore.proxy.spawnParticle("cSpellFX", (float)posX+MathUtils.randomFloat(rand)/10, (float)posY+MathUtils.randomFloat(rand)/10, (float)posZ+MathUtils.randomFloat(rand)/10, motionX*10, motionY*10, motionZ*10);
 		}
 	}

@@ -23,23 +23,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemCraftingFrame extends Item implements IModelRegisterer {
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h) {
 		p.openGui(EssentialCraftCore.core, Config.guiID[0], w, 0, -2, 0);
 		return super.onItemRightClick(w, p, h);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
 		super.addInformation(stack, player, list, par4);
 		InventoryCraftingFrame inv = new InventoryCraftingFrame(stack);
-		if(inv != null)
-		{
+		if(inv != null) {
 			list.add("Current recipe:");
-			for(int i = 0; i < 9; ++i)
-			{
+			for(int i = 0; i < 9; ++i) {
 				ItemStack stk = inv.getStackInSlot(i);
 
 				if(stk.isEmpty()) {
@@ -62,8 +58,7 @@ public class ItemCraftingFrame extends Item implements IModelRegisterer {
 
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
-		if(!isCurrentItem || !(entity instanceof EntityPlayer) || ((EntityPlayer)entity).openContainer == null || !(((EntityPlayer)entity).openContainer instanceof ContainerCraftingFrame))
-		{
+		if(!isCurrentItem || !(entity instanceof EntityPlayer) || ((EntityPlayer)entity).openContainer == null || !(((EntityPlayer)entity).openContainer instanceof ContainerCraftingFrame)) {
 			return;
 		}
 		ContainerCraftingFrame c = (ContainerCraftingFrame)((EntityPlayer)entity).openContainer;

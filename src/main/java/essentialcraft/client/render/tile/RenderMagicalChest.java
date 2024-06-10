@@ -17,8 +17,7 @@ public class RenderMagicalChest extends TileEntitySpecialRenderer<TileMagicalChe
 	public static final ModelChest chest = new ModelChest();
 	public static final ModelChest inventoryChest = new ModelChest();
 
-	public void doRender(TileMagicalChest tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMagicalChest tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.pushMatrix();
 

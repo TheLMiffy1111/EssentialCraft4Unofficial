@@ -53,8 +53,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 
 	public String gunType;
 
-	public ItemGun(String s)
-	{
+	public ItemGun(String s) {
 		super();
 		setHasSubtypes(true);
 		setMaxStackSize(1);
@@ -64,28 +63,22 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem)
-	{
-		if(isCurrentItem && gunType.equalsIgnoreCase("gatling"))
-		{
-			if(entity instanceof EntityLivingBase)
-			{
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
+		if(isCurrentItem && gunType.equalsIgnoreCase("gatling")) {
+			if(entity instanceof EntityLivingBase) {
 				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 3, 3, true, true));
 			}
 		}
-		if(MiscUtils.getStackTag(itemStack).hasKey("cool"))
-		{
+		if(MiscUtils.getStackTag(itemStack).hasKey("cool")) {
 			MiscUtils.getStackTag(itemStack).setFloat("cool", MiscUtils.getStackTag(itemStack).getFloat("cool")-1);
 			if(MiscUtils.getStackTag(itemStack).getFloat("cool") <= 0) {
 				MiscUtils.getStackTag(itemStack).removeTag("cool");
 			}
 		}
-		if(MiscUtils.getStackTag(itemStack).hasKey("gunShots") && isCurrentItem)
-		{
+		if(MiscUtils.getStackTag(itemStack).hasKey("gunShots") && isCurrentItem) {
 			float current = MiscUtils.getStackTag(itemStack).getFloat("gunShots");
 			float max = MiscUtils.getStackTag(itemStack).getCompoundTag("stats").getFloat("shots");
-			if(current+1 >= max)
-			{
+			if(current+1 >= max) {
 				Vec3d look = entity.getLookVec();
 				look = look.rotatePitch(-0.5F);
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entity.posX+look.x, entity.posY-0.5D+look.y, entity.posZ+look.z, 0, 0, 0);
@@ -96,10 +89,8 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
-		if(MiscUtils.getStackTag(stack).hasKey("stats") && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
-		{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
+		if(MiscUtils.getStackTag(stack).hasKey("stats") && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			NBTTagCompound stats = MiscUtils.getStackTag(stack).getCompoundTag("stats");
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.damage")+" "+MathHelper.floor(stats.getFloat("damage")));
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.durability")+" "+MathHelper.floor(stats.getFloat("durability")));
@@ -110,41 +101,34 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.shots")+" "+MathHelper.floor(stats.getFloat("shots")));
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.zoom")+" "+MathHelper.floor(stats.getFloat("zoom")));
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.balance_"+""+MathHelper.floor(stats.getFloat("balance"))));
-		}else if(MiscUtils.getStackTag(stack).hasKey("stats"))
-		{
+		}
+else if(MiscUtils.getStackTag(stack).hasKey("stats")) {
 			list.add(TextFormatting.BLUE+""+TextFormatting.ITALIC+I18n.translateToLocal("essentialcraft.txt.viewInfoHotkey"));
 		}
 		super.addInformation(stack, player, list, par4);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h) {
 		ItemStack gun = p.getHeldItem(h);
-		if(!gun.getTagCompound().hasKey("base") && !w.isRemote)
-		{
+		if(!gun.getTagCompound().hasKey("base") && !w.isRemote) {
 			createRandomGun(gun);
 			return super.onItemRightClick(w, p, h);
 		}
 		if(p.isHandActive()) {
 			return super.onItemRightClick(w, p, h);
 		}
-		if(gunType.equalsIgnoreCase("rifle") || gunType.equalsIgnoreCase("gatling"))
-		{
+		if(gunType.equalsIgnoreCase("rifle") || gunType.equalsIgnoreCase("gatling")) {
 			p.setActiveHand(h);
 		}
-		else if(gun.getTagCompound().hasKey("base"))
-		{
+		else if(gun.getTagCompound().hasKey("base")) {
 			float balance = 0;
-			if(gun.getTagCompound().hasKey("lense"))
-			{
+			if(gun.getTagCompound().hasKey("lense")) {
 				String lenseID = gun.getTagCompound().getString("lense");
 				LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
 				for(GunType gt : GunType.values()) {
-					if(lense != null && lense.materialData.containsKey(gt))
-					{
-						for(DummyData d : lense.materialData.get(gt))
-						{
+					if(lense != null && lense.materialData.containsKey(gt)) {
+						for(DummyData d : lense.materialData.get(gt)) {
 							if(d.fieldName.equalsIgnoreCase("balance")) {
 								balance = (int)Float.parseFloat(d.fieldValue);
 							}
@@ -152,19 +136,15 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 					}
 				}
 			}
-			if(MiscUtils.getStackTag(gun).hasKey("stats"))
-			{
+			if(MiscUtils.getStackTag(gun).hasKey("stats")) {
 				NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
-				if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
-				{
+				if(!MiscUtils.getStackTag(gun).hasKey("gunDamage")) {
 					MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
 				}
-				if(!MiscUtils.getStackTag(gun).hasKey("gunShots"))
-				{
+				if(!MiscUtils.getStackTag(gun).hasKey("gunShots")) {
 					MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
 				}
-				if(MiscUtils.getStackTag(gun).hasKey("cool"))
-				{
+				if(MiscUtils.getStackTag(gun).hasKey("cool")) {
 					return super.onItemRightClick(w, p, h);
 				}
 				if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 > stats.getFloat("shots")) {
@@ -172,18 +152,13 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 					return super.onItemRightClick(w, p, h);
 				}
 				MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
-				if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*10)))
-				{
+				if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*10))) {
 					if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability")) {
 						MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
 					}
-					else
-					{
-						if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
-						{
-							w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
-							MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
-						}
+					else if(!w.isRemote && w.rand.nextFloat() <= 0.25F) {
+						w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
+						MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
 					}
 
 
@@ -200,8 +175,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		return super.onItemRightClick(w, p, h);
 	}
 
-	public static void createRandomGun(ItemStack gun)
-	{
+	public static void createRandomGun(ItemStack gun) {
 		Random rand = new Random();
 		NBTTagCompound tag = MiscUtils.getStackTag(gun);
 		tag.setString("base", GunRegistry.GUN_MATERIALS.get(rand.nextInt(GunRegistry.GUN_MATERIALS.size())).id);
@@ -209,20 +183,17 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		tag.setString("handle", GunRegistry.GUN_MATERIALS.get(rand.nextInt(GunRegistry.GUN_MATERIALS.size())).id);
 		tag.setString("lense", GunRegistry.LENSE_MATERIALS.get(rand.nextInt(GunRegistry.LENSE_MATERIALS.size())).id);
 		ItemGun g = (ItemGun)gun.getItem();
-		if(g.gunType.equalsIgnoreCase("sniper"))
-		{
+		if(g.gunType.equalsIgnoreCase("sniper")) {
 			tag.setString("scope", GunRegistry.SCOPE_MATERIALS_SNIPER.get(rand.nextInt(GunRegistry.SCOPE_MATERIALS_SNIPER.size())).id);
 		}
-		else if(!g.gunType.equalsIgnoreCase("gatling"))
-		{
+		else if(!g.gunType.equalsIgnoreCase("gatling")) {
 			tag.setString("scope", GunRegistry.SCOPE_MATERIALS.get(rand.nextInt(GunRegistry.SCOPE_MATERIALS.size())).id);
 		}
 		gun.setTagCompound(tag);
 		calculateGunStats(gun);
 	}
 
-	public static void calculateGunStats(ItemStack gun)
-	{
+	public static void calculateGunStats(ItemStack gun) {
 		NBTTagCompound gunTag = MiscUtils.getStackTag(gun);
 		if(gunTag.hasKey("stats")) {
 			gunTag.removeTag("stats");
@@ -253,42 +224,33 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 								GunType.PISTOL;
 
 
-		if(gunTag.hasKey("base"))
-		{
+		if(gunTag.hasKey("base")) {
 			base = GunRegistry.getGunFromID(gunTag.getString("base"));
 		}
 
-		if(gunTag.hasKey("device"))
-		{
+		if(gunTag.hasKey("device")) {
 			device = GunRegistry.getGunFromID(gunTag.getString("device"));
 		}
 
-		if(gunTag.hasKey("handle"))
-		{
+		if(gunTag.hasKey("handle")) {
 			handle = GunRegistry.getGunFromID(gunTag.getString("handle"));
 		}
 
-		if(gunTag.hasKey("lense"))
-		{
+		if(gunTag.hasKey("lense")) {
 			lense = GunRegistry.getLenseFromID(gunTag.getString("lense"));
 		}
 
-		if(gunTag.hasKey("scope"))
-		{
-			if(((ItemGun)gun.getItem()).gunType.equalsIgnoreCase("sniper"))
-			{
+		if(gunTag.hasKey("scope")) {
+			if(((ItemGun)gun.getItem()).gunType.equalsIgnoreCase("sniper")) {
 				scope = GunRegistry.getScopeSniperFromID(gunTag.getString("scope"));
 			}
-			else
-			{
+			else {
 				scope = GunRegistry.getScopeFromID(gunTag.getString("scope"));
 			}
 		}
 
-		if(base != null && base.materialData.containsKey(gt))
-		{
-			for(DummyData d : base.materialData.get(gt))
-			{
+		if(base != null && base.materialData.containsKey(gt)) {
+			for(DummyData d : base.materialData.get(gt)) {
 				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
 				}
@@ -313,10 +275,8 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			}
 		}
 
-		if(handle != null && handle.materialData.containsKey(gt))
-		{
-			for(DummyData d : handle.materialData.get(gt))
-			{
+		if(handle != null && handle.materialData.containsKey(gt)) {
+			for(DummyData d : handle.materialData.get(gt)) {
 				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue);
 				}
@@ -341,10 +301,8 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			}
 		}
 
-		if(device != null && device.materialData.containsKey(gt))
-		{
-			for(DummyData d : device.materialData.get(gt))
-			{
+		if(device != null && device.materialData.containsKey(gt)) {
+			for(DummyData d : device.materialData.get(gt)) {
 				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
 				}
@@ -369,10 +327,8 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			}
 		}
 
-		if(lense != null && lense.materialData.containsKey(gt))
-		{
-			for(DummyData d : lense.materialData.get(gt))
-			{
+		if(lense != null && lense.materialData.containsKey(gt)) {
+			for(DummyData d : lense.materialData.get(gt)) {
 				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
 				}
@@ -400,10 +356,8 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			}
 		}
 
-		if(scope != null && scope.materialData.containsKey(gt))
-		{
-			for(DummyData d : scope.materialData.get(gt))
-			{
+		if(scope != null && scope.materialData.containsKey(gt)) {
+			for(DummyData d : scope.materialData.get(gt)) {
 				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
 				}
@@ -431,29 +385,25 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			}
 		}
 
-		if(gt == GunType.GATLING)
-		{
+		if(gt == GunType.GATLING) {
 			speed = 0;
 			spread *= 4.5F;
 			shots *= 20;
 		}
 
-		if(gt == GunType.RIFLE)
-		{
+		if(gt == GunType.RIFLE) {
 			speed = 0;
 			spread *= 1.3F;
 			shots *= 6;
 		}
 
-		if(gt == GunType.SNIPER)
-		{
+		if(gt == GunType.SNIPER) {
 			speed *= 9;
 			spread /= 10;
 			damage *= 2;
 		}
 
-		if(gt == GunType.PISTOL)
-		{
+		if(gt == GunType.PISTOL) {
 			reload /= 2;
 		}
 
@@ -471,13 +421,10 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack gun, World w, EntityLivingBase p)
-	{
-		if(gun.hasTagCompound())
-		{
+	public ItemStack onItemUseFinish(ItemStack gun, World w, EntityLivingBase p) {
+		if(gun.hasTagCompound()) {
 			NBTTagCompound tag = MiscUtils.getStackTag(gun);
-			if(tag.hasKey("stats") && tag.getFloat("gunShots")+1 >= tag.getCompoundTag("stats").getFloat("shots"))
-			{
+			if(tag.hasKey("stats") && tag.getFloat("gunShots")+1 >= tag.getCompoundTag("stats").getFloat("shots")) {
 				tag.setFloat("gunShots", 0);
 				tag.setFloat("cool", 60);
 			}
@@ -486,35 +433,28 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-	{
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
 		if(!(player instanceof EntityPlayer)) {
 			return;
 		}
 		ItemStack gun = stack;
 		EntityPlayer p = (EntityPlayer)player;
 		World w = p.getEntityWorld();
-		if(getItemUseAction(stack) == EnumAction.BLOCK)
-		{
+		if(getItemUseAction(stack) == EnumAction.BLOCK) {
 			if(count % 20 == 0) {
 				player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.4F, 1+MathUtils.randomFloat(player.getEntityWorld().rand), false);
 			}
 			return;
 		}
-		if(gunType.equalsIgnoreCase("rifle") && count % 3 == 0)
-		{
-			if(gun.getTagCompound().hasKey("base"))
-			{
+		if(gunType.equalsIgnoreCase("rifle") && count % 3 == 0) {
+			if(gun.getTagCompound().hasKey("base")) {
 				float balance = 0;
-				if(gun.getTagCompound().hasKey("lense"))
-				{
+				if(gun.getTagCompound().hasKey("lense")) {
 					String lenseID = gun.getTagCompound().getString("lense");
 					LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
 					for(GunType gt : GunType.values()) {
-						if(lense != null && lense.materialData.containsKey(gt))
-						{
-							for(DummyData d : lense.materialData.get(gt))
-							{
+						if(lense != null && lense.materialData.containsKey(gt)) {
+							for(DummyData d : lense.materialData.get(gt)) {
 								if(d.fieldName.equalsIgnoreCase("balance")) {
 									balance = (int)Float.parseFloat(d.fieldValue);
 								}
@@ -522,32 +462,24 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 						}
 					}
 				}
-				if(MiscUtils.getStackTag(gun).hasKey("stats"))
-				{
+				if(MiscUtils.getStackTag(gun).hasKey("stats")) {
 					NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
-					if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
-					{
+					if(!MiscUtils.getStackTag(gun).hasKey("gunDamage")) {
 						MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
 					}
-					if(!MiscUtils.getStackTag(gun).hasKey("gunShots"))
-					{
+					if(!MiscUtils.getStackTag(gun).hasKey("gunShots")) {
 						MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
 					}
-					if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 <= stats.getFloat("shots")) {
-						MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
-					}
-					else
-					{
+					if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 > stats.getFloat("shots")) {
 						p.stopActiveHand();
 						return;
 					}
-					if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*3)))
-					{
+					MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
+					if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*3))) {
 						if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability")) {
 							MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
 						}
-						else if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
-						{
+						else if(!w.isRemote && w.rand.nextFloat() <= 0.25F) {
 							w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
 							MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
 						}
@@ -562,28 +494,21 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 				}
 			}
 		}
-		if(gunType.equalsIgnoreCase("gatling"))
-		{
+		if(gunType.equalsIgnoreCase("gatling")) {
 			int usingTicks = 10000-count;
-			if(count >= 10000-60 && count % 5 == 0)
-			{
+			if(count >= 10000-60 && count % 5 == 0) {
 				w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_MINECART_INSIDE, SoundCategory.PLAYERS, 0.1F, 0F+usingTicks/30F, false);
 			}
-			if(usingTicks >= 60)
-			{
+			if(usingTicks >= 60) {
 				ECUtils.playSoundToAllNearby(p.posX, p.posY, p.posZ, "essentialcraft:sound.beam", 1F, 2, 16, p.dimension);
-				if(gun.getTagCompound().hasKey("base"))
-				{
+				if(gun.getTagCompound().hasKey("base")) {
 					float balance = 0;
-					if(gun.getTagCompound().hasKey("lense"))
-					{
+					if(gun.getTagCompound().hasKey("lense")) {
 						String lenseID = gun.getTagCompound().getString("lense");
 						LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
 						for(GunType gt : GunType.values()) {
-							if(lense != null && lense.materialData.containsKey(gt))
-							{
-								for(DummyData d : lense.materialData.get(gt))
-								{
+							if(lense != null && lense.materialData.containsKey(gt)) {
+								for(DummyData d : lense.materialData.get(gt)) {
 									if(d.fieldName.equalsIgnoreCase("balance")) {
 										balance = (int)Float.parseFloat(d.fieldValue);
 									}
@@ -591,35 +516,26 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 							}
 						}
 					}
-					if(MiscUtils.getStackTag(gun).hasKey("stats"))
-					{
+					if(MiscUtils.getStackTag(gun).hasKey("stats")) {
 						NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
-						if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
-						{
+						if(!MiscUtils.getStackTag(gun).hasKey("gunDamage")) {
 							MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
 						}
-						if(!MiscUtils.getStackTag(gun).hasKey("gunShots") && !w.isRemote)
-						{
+						if(!MiscUtils.getStackTag(gun).hasKey("gunShots") && !w.isRemote) {
 							MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
 						}
-						if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 <= stats.getFloat("shots"))
-						{
-							if(!w.isRemote) {
-								MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
-							}
-						}
-						else
-						{
+						if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 > stats.getFloat("shots")) {
 							p.stopActiveHand();
 							return;
 						}
-						if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*2)))
-						{
+						if(!w.isRemote) {
+							MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
+						}
+						if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*2))) {
 							if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability")) {
 								MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
 							}
-							else if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
-							{
+							else if(!w.isRemote && w.rand.nextFloat() <= 0.25F) {
 								w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
 								MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
 							}
@@ -636,19 +552,15 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean showDurabilityBar(ItemStack stack)
-	{
+	public boolean showDurabilityBar(ItemStack stack) {
 		return stack.hasTagCompound() && MiscUtils.getStackTag(stack).hasKey("stats");
 	}
 
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack)
-	{
-		if(stack.hasTagCompound())
-		{
+	public double getDurabilityForDisplay(ItemStack stack) {
+		if(stack.hasTagCompound()) {
 			NBTTagCompound gunTag = MiscUtils.getStackTag(stack);
-			if(gunTag.hasKey("stats"))
-			{
+			if(gunTag.hasKey("stats")) {
 				float currentDamage = gunTag.getFloat("gunDamage");
 				float maxDamage = gunTag.getCompoundTag("stats").getFloat("durability");
 
@@ -659,13 +571,10 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
-	{
-		if(p_77661_1_.hasTagCompound())
-		{
+	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
+		if(p_77661_1_.hasTagCompound()) {
 			NBTTagCompound tag = MiscUtils.getStackTag(p_77661_1_);
-			if(tag.hasKey("stats"))
-			{
+			if(tag.hasKey("stats")) {
 				float current = tag.getFloat("gunShots")+1;
 				float max = tag.getCompoundTag("stats").getFloat("shots");
 				if(current >= max) {
@@ -678,13 +587,10 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
-	{
-		if(p_77626_1_.hasTagCompound())
-		{
+	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
+		if(p_77626_1_.hasTagCompound()) {
 			NBTTagCompound tag = MiscUtils.getStackTag(p_77626_1_);
-			if(tag.hasKey("stats"))
-			{
+			if(tag.hasKey("stats")) {
 				float current = tag.getFloat("gunShots")+1;
 				float max = tag.getCompoundTag("stats").getFloat("shots");
 				if(current >= max) {

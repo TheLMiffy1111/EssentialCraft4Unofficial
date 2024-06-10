@@ -22,14 +22,12 @@ public class BlockHologramSpawner extends Block implements IModelRegisterer {
 
 	public static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.5F, 1);
 
-	public BlockHologramSpawner()
-	{
+	public BlockHologramSpawner() {
 		super(Material.ROCK, MapColor.QUARTZ);
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return BLOCK_AABB;
 	}
 

@@ -17,8 +17,7 @@ public class RenderMRUCoilHardener extends TileEntitySpecialRenderer<TileMRUCoil
 	public static final ResourceLocation textures = new ResourceLocation("essentialcraft:textures/models/mrucoilhardener.png");
 	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/mrucoilhardener.obj"));
 
-	public void doRender(TileMRUCoilHardener tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMRUCoilHardener tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.pushMatrix();
 		if(tile.localLightning != null) {
@@ -31,8 +30,7 @@ public class RenderMRUCoilHardener extends TileEntitySpecialRenderer<TileMRUCoil
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
-	protected ResourceLocation getEntityTexture(TileEntity entity)
-	{
+	protected ResourceLocation getEntityTexture(TileEntity entity) {
 		return textures;
 	}
 

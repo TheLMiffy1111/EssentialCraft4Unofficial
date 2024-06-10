@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiMagicalQuarry extends GuiCommon{
+public class GuiMagicalQuarry extends GuiCommon {
 
 	public GuiMagicalQuarry(Container c, TileEntity tile) {
 		super(c, tile);
@@ -17,7 +17,4 @@ public class GuiMagicalQuarry extends GuiCommon{
 		elementList.add(new GuiBoundGemState(25, 22, tile, 0));
 		elementList.add(new GuiBalanceState(25, 40, tile));
 	}
-
-
-
 }

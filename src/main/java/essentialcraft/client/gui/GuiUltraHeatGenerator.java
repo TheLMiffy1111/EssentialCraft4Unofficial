@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiUltraHeatGenerator extends GuiCommon{
+public class GuiUltraHeatGenerator extends GuiCommon {
 
 	public GuiUltraHeatGenerator(Container c, TileEntity tile) {
 		super(c, tile);

@@ -24,18 +24,15 @@ public class GuiFilter extends GuiContainer{
 	}
 
 	@Override
-	protected boolean checkHotbarKeys(int slot)
-	{
+	protected boolean checkHotbarKeys(int slot) {
 		return false;
 	}
 
 	@Override
-	public void initGui()
-	{
+	public void initGui() {
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
-		if(filter.filterStack.getItemDamage() == 1 || filter.filterStack.getItemDamage() == 3)
-		{
+		if(filter.filterStack.getItemDamage() == 1 || filter.filterStack.getItemDamage() == 3) {
 			buttonList.add(new GuiButton(0, k+20, l+6, 20, 20, ""));
 			buttonList.add(new GuiButton(1, k+20, l+30, 20, 20, ""));
 			buttonList.add(new GuiButton(2, k+20, l+54, 20, 20, ""));
@@ -44,21 +41,18 @@ public class GuiFilter extends GuiContainer{
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton par1GuiButton)
-	{
+	protected void actionPerformed(GuiButton par1GuiButton) {
 		MiscUtils.handleButtonPress(par1GuiButton.id, this.getClass(), par1GuiButton.getClass(), mc.player, 0, 0, 0);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float p_146976_1_,
-			int p_146976_2_, int p_146976_3_) {
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		DrawUtils.bindTexture("minecraft", "textures/gui/container/dispenser.png");
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 
 	@Override
-	public void drawScreen(int mX, int mY, float partialTicks)
-	{
+	public void drawScreen(int mX, int mY, float partialTicks) {
 		drawDefaultBackground();
 		if(!filter.filterStack.isItemEqual(mc.player.getHeldItemMainhand())) {
 			filter.filterStack = mc.player.getHeldItemMainhand();
@@ -67,83 +61,68 @@ public class GuiFilter extends GuiContainer{
 			filter.filterStack = mc.player.getHeldItemMainhand();
 		}
 		super.drawScreen(mX, mY, partialTicks);
-		for (int ik = 0; ik < buttonList.size(); ++ik)
-		{
+		for(int ik = 0; ik < buttonList.size(); ++ik) {
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.color(1, 1, 1);
 			GuiButton btn  = buttonList.get(ik);
 			boolean hover = mX >= btn.x && mY >= btn.y && mX < btn.x + btn.width && mY < btn.y + btn.height;
 			int id = btn.id;
 
-			if(id == 0)
-			{
+			if(id == 0) {
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreMeta"))
-				{
-					this.drawTexturedModalRect(btn.x, btn.y, 20, 0, 20, 20);
-				}else
-				{
-					this.drawTexturedModalRect(btn.x, btn.y, 0, 0, 20, 20);
+				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreMeta")) {
+					drawTexturedModalRect(btn.x, btn.y, 20, 0, 20, 20);
+				}
+				else {
+					drawTexturedModalRect(btn.x, btn.y, 0, 0, 20, 20);
 				}
 			}
-			if(id == 1)
-			{
+			if(id == 1) {
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreNBT"))
-				{
-					this.drawTexturedModalRect(btn.x, btn.y, 20, 20, 20, 20);
-				}else
-				{
-					this.drawTexturedModalRect(btn.x, btn.y, 0, 20, 20, 20);
+				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreNBT")) {
+					drawTexturedModalRect(btn.x, btn.y, 20, 20, 20, 20);
+				}
+				else {
+					drawTexturedModalRect(btn.x, btn.y, 0, 20, 20, 20);
 				}
 			}
-			if(id == 2)
-			{
+			if(id == 2) {
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreOreDict"))
-				{
-					this.drawTexturedModalRect(btn.x, btn.y, 20, 40, 20, 20);
-				}else
-				{
-					this.drawTexturedModalRect(btn.x, btn.y, 0, 40, 20, 20);
+				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreOreDict")) {
+					drawTexturedModalRect(btn.x, btn.y, 20, 40, 20, 20);
+				}
+				else {
+					drawTexturedModalRect(btn.x, btn.y, 0, 40, 20, 20);
 				}
 			}
-			if(hover)
-			{
-				if(id == 0)
-				{
+			if(hover) {
+				if(id == 0) {
 					List<String> drawedLst = new ArrayList<>();
-					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreMeta"))
-					{
+					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreMeta")) {
 						drawedLst.add("Metadata: Ignored");
-					}else
-					{
+					}
+					else {
 						drawedLst.add("Metadata: Not Ignored");
 					}
 					drawHoveringText(drawedLst, mX, mY, fontRenderer);
-
 				}
-				if(id == 1)
-				{
+				if(id == 1) {
 					List<String> drawedLst = new ArrayList<>();
-					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreNBT"))
-					{
+					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreNBT")) {
 						drawedLst.add("NBT Tag: Ignored");
-					}else
-					{
+					}
+					else {
 						drawedLst.add("NBT Tag: Not Ignored");
 					}
 					drawHoveringText(drawedLst, mX, mY, fontRenderer);
 
 				}
-				if(id == 2)
-				{
+				if(id == 2) {
 					List<String> drawedLst = new ArrayList<>();
-					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreOreDict"))
-					{
+					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreOreDict")) {
 						drawedLst.add("Ore Dictionary: Ignored");
-					}else
-					{
+					}
+					else {
 						drawedLst.add("Ore Dictionary: Not Ignored");
 					}
 					drawHoveringText(drawedLst, mX, mY, fontRenderer);
@@ -155,11 +134,9 @@ public class GuiFilter extends GuiContainer{
 	}
 
 	@Override
-	protected void drawHoveringText(List<String> list, int x, int y, FontRenderer font)
-	{
+	protected void drawHoveringText(List<String> list, int x, int y, FontRenderer font) {
 		GlStateManager.disableLighting();
-		if (!list.isEmpty())
-		{
+		if(!list.isEmpty()) {
 			GlStateManager.disableRescaleNormal();
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableLighting();
@@ -167,9 +144,7 @@ public class GuiFilter extends GuiContainer{
 			int k = 0;
 			for(String s : list) {
 				int l = font.getStringWidth(s);
-
-				if (l > k)
-				{
+				if (l > k) {
 					k = l;
 				}
 			}
@@ -178,18 +153,15 @@ public class GuiFilter extends GuiContainer{
 			int k2 = y - 12;
 			int i1 = 8;
 
-			if (list.size() > 1)
-			{
+			if(list.size() > 1) {
 				i1 += 2 + (list.size() - 1) * 10;
 			}
 
-			if (j2 + k > width)
-			{
+			if(j2 + k > width) {
 				j2 -= 28 + k;
 			}
 
-			if (k2 + i1 + 6 > height)
-			{
+			if(k2 + i1 + 6 > height) {
 				k2 = height - i1 - 6;
 			}
 
@@ -208,13 +180,11 @@ public class GuiFilter extends GuiContainer{
 			drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 - 3 + 1, k1, k1);
 			drawGradientRect(j2 - 3, k2 + i1 + 2, j2 + k + 3, k2 + i1 + 3, l1, l1);
 
-			for (int i2 = 0; i2 < list.size(); ++i2)
-			{
+			for(int i2 = 0; i2 < list.size(); ++i2) {
 				String s1 = list.get(i2);
 				font.drawStringWithShadow(s1, j2, k2, -1);
 
-				if (i2 == 0)
-				{
+				if(i2 == 0) {
 					k2 += 2;
 				}
 
@@ -231,5 +201,4 @@ public class GuiFilter extends GuiContainer{
 		GlStateManager.enableLighting();
 		GlStateManager.color(1, 1, 1);
 	}
-
 }

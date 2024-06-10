@@ -9,7 +9,7 @@ import essentialcraft.client.gui.element.GuiProgressBar_FurnaceMagic;
 import essentialcraft.common.tile.TileFurnaceMagic;
 import net.minecraft.inventory.Container;
 
-public class GuiFurnaceMagic extends GuiCommon{
+public class GuiFurnaceMagic extends GuiCommon {
 
 	public GuiFurnaceMagic(Container c, TileFurnaceMagic tile) {
 		super(c, tile);

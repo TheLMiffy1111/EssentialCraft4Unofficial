@@ -22,8 +22,7 @@ import net.minecraft.world.World;
 public class ItemMRUMover extends Item implements IModelRegisterer {
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
-	{
+	public int getMaxItemUseDuration(ItemStack stack) {
 		return 72000;
 	}
 
@@ -33,23 +32,19 @@ public class ItemMRUMover extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
-	{
+	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-	{
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
 		NBTTagCompound tag = MiscUtils.getStackTag(stack);
 		tag.setBoolean("active", true);
 		Vec3d mainLookVec = player.getLookVec();
-		for(int i = 0; i < 20; ++i)
-		{
+		for(int i = 0; i < 20; ++i) {
 			Vec3d additionalVec = mainLookVec.add(mainLookVec.x*i, mainLookVec.y*i, mainLookVec.z*i);
 			List<EntityMRUPresence> entityList = player.getEntityWorld().getEntitiesWithinAABB(EntityMRUPresence.class, new AxisAlignedBB(player.posX+additionalVec.x-1, player.posY+additionalVec.y-2, player.posZ+additionalVec.z-1, player.posX+additionalVec.x+1, player.posY+additionalVec.y+2, player.posZ+additionalVec.z+1));
-			if(!entityList.isEmpty())
-			{
+			if(!entityList.isEmpty()) {
 				EntityMRUPresence presence = entityList.get(player.getEntityWorld().rand.nextInt(entityList.size()));
 				player.getEntityWorld().spawnParticle(EnumParticleTypes.PORTAL, player.posX, player.posY, player.posZ, presence.posX-player.posX, presence.posY-player.posY-1, presence.posZ-player.posZ);
 				float moveX = 0;
@@ -58,36 +53,28 @@ public class ItemMRUMover extends Item implements IModelRegisterer {
 				moveX = (float) -(mainLookVec.x/10);
 				moveY = (float) -(mainLookVec.y/10);
 				moveZ = (float) -(mainLookVec.z/10);
-				//if(!presence.getEntityWorld().isRemote)
-				{
-					if(!player.isSneaking()) {
-						presence.setPositionAndRotation(presence.posX+moveX, presence.posY+moveY, presence.posZ+moveZ, 0, 0);
-					}
-					else {
-						presence.setPositionAndRotation(presence.posX-moveX, presence.posY-moveY, presence.posZ-moveZ, 0, 0);
-					}
-					if(count % 20 == 0) {
-						stack.damageItem(1, player);
-					}
+				if(!player.isSneaking()) {
+					presence.setPositionAndRotation(presence.posX+moveX, presence.posY+moveY, presence.posZ+moveZ, 0, 0);
 				}
-
-				break;
+				else {
+					presence.setPositionAndRotation(presence.posX-moveX, presence.posY-moveY, presence.posZ-moveZ, 0, 0);
+				}
+				if(count % 20 == 0) {
+					stack.damageItem(1, player);
+				}
 			}
+			break;
 		}
 	}
 
-
-
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		player.setActiveHand(hand);
 		return super.onItemRightClick(world, player, hand);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
-	{
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		NBTTagCompound tag = MiscUtils.getStackTag(stack);
 		tag.setBoolean("active", false);
 		return stack;

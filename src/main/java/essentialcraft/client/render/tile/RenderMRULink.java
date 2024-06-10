@@ -11,8 +11,7 @@ public class RenderMRULink extends TileEntitySpecialRenderer<TileMRUCUECAcceptor
 {
 	private static final ResourceLocation enderDragonCrystalBeamTextures = new ResourceLocation("textures/entity/endercrystal/endercrystal_beam.png");
 
-	public void doRender(TileMRUCUECAcceptor tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMRUCUECAcceptor tile, double x, double y, double z, float partialTicks) {
 	}
 
 	@Override

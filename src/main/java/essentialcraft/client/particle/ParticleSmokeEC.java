@@ -16,14 +16,12 @@ public class ParticleSmokeEC extends ParticleSmokeNormal {
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
 	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft", "textures/special/particles.png");
 
-	public ParticleSmokeEC(World w, double x, double y,	double z, double mX, double mY,	double mZ, float scale)
-	{
+	public ParticleSmokeEC(World w, double x, double y,	double z, double mX, double mY,	double mZ, float scale) {
 		super(w, x, y, z, mX, mY, mZ, scale);
 		particleAlpha = 0.99F;
 	}
 
-	public ParticleSmokeEC(World w, double x, double y,	double z, double mX, double mY,	double mZ, float scale, double r, double g, double b)
-	{
+	public ParticleSmokeEC(World w, double x, double y,	double z, double mX, double mY,	double mZ, float scale, double r, double g, double b) {
 		this(w, x, y, z, mX, mY, mZ, scale);
 		particleRed = (float) r;
 		particleGreen = (float) g;

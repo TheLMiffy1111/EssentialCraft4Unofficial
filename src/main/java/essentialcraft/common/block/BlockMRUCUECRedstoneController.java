@@ -65,8 +65,7 @@ public class BlockMRUCUECRedstoneController extends BlockContainer implements IM
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

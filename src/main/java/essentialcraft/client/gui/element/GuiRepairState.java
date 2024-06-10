@@ -11,8 +11,7 @@ public class GuiRepairState extends GuiTextElement{
 	public TileEntity tile;
 	public int slotNum;
 
-	public GuiRepairState(int i, int j, TileEntity t, int slot)
-	{
+	public GuiRepairState(int i, int j, TileEntity t, int slot) {
 		super(i, j);
 		tile = t;
 		slotNum = slot;

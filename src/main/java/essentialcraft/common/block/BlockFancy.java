@@ -59,14 +59,12 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
@@ -76,8 +74,7 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		for(int i = 0; i < 16; ++i) {
 			list.add(new ItemStack(this, 1, i));
 		}

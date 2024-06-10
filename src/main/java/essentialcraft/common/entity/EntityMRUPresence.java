@@ -194,10 +194,8 @@ public class EntityMRUPresence extends EntityLivingBase {
 									resistance = ECUtils.MRU_RESISTANCES.get(dt.toString());
 								}
 							}
-							else {
-								if(resistance < 1) {
-									resistance = 1F;
-								}
+							else if(resistance < 1) {
+								resistance = 1F;
 							}
 						}
 						if(getEntityWorld().rand.nextInt(MathHelper.floor(resistance)) == 0) {

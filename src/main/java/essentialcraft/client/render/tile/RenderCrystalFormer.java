@@ -10,8 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderCrystalFormer extends TileEntitySpecialRenderer<TileCrystalFormer>
 {
-	public void doRender(TileCrystalFormer tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileCrystalFormer tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 
 		float scale = 0.5F;

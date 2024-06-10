@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiResistanceState;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiMRUInfo extends GuiCommon{
+public class GuiMRUInfo extends GuiCommon {
 
 	public GuiMRUInfo(Container c, TileEntity tile) {
 		super(c, tile);

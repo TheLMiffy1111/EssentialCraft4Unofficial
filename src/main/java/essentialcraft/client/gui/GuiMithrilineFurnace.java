@@ -6,7 +6,7 @@ import essentialcraft.client.gui.element.GuiProgressBar_MithrilineFurnace;
 import essentialcraft.common.tile.TileMithrilineFurnace;
 import net.minecraft.inventory.Container;
 
-public class GuiMithrilineFurnace extends GuiCommon{
+public class GuiMithrilineFurnace extends GuiCommon {
 
 	public GuiMithrilineFurnace(Container c, TileMithrilineFurnace tile) {
 		super(c, tile);

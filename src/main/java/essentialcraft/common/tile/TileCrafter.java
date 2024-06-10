@@ -177,15 +177,13 @@ public class TileCrafter extends TileMRUGeneric {
 				stackList[slot] = ItemStack.EMPTY;
 				return itemstack;
 			}
-			else {
-				itemstack = stackList[slot].splitStack(amount);
+			itemstack = stackList[slot].splitStack(amount);
 
-				if(stackList[slot].getCount() == 0) {
-					stackList[slot] = ItemStack.EMPTY;
-				}
-
-				return itemstack;
+			if(stackList[slot].getCount() == 0) {
+				stackList[slot] = ItemStack.EMPTY;
 			}
+
+			return itemstack;
 		}
 
 		@Override

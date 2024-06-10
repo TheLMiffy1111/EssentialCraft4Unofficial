@@ -36,46 +36,39 @@ public class BlockDrops extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return Block.NULL_AABB;
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return BLOCK_AABB.offset(pos);
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState s)
-	{
+	public boolean isFullCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		for(int i = 0; i < 4; ++i) {
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_)
-	{
+	public int damageDropped(IBlockState p_149692_1_) {
 		return p_149692_1_.getValue(TYPE).getIndex();
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_)
-	{
+	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		return ItemsCore.drops;
 	}
 
@@ -85,8 +78,7 @@ public class BlockDrops extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_)
-	{
+	public int quantityDropped(Random p_149745_1_) {
 		return 1+p_149745_1_.nextInt(6);
 	}
 
@@ -95,11 +87,9 @@ public class BlockDrops extends Block implements IModelRegisterer {
 		ArrayList<ItemStack> ret = new ArrayList<>();
 
 		int count = quantityDropped(state, fortune, world instanceof World ? ((World)world).rand : RANDOM);
-		for(int i = 0; i < count; i++)
-		{
+		for(int i = 0; i < count; i++) {
 			Item item = getItemDropped(state, world instanceof World ? ((World)world).rand : RANDOM, fortune);
-			if(item != null)
-			{
+			if(item != null) {
 				ret.add(new ItemStack(item, 1, damageDropped(state)));
 			}
 		}

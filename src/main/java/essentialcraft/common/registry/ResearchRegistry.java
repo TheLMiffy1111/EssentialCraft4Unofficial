@@ -26,8 +26,7 @@ public class ResearchRegistry {
 
 	public static HashMap<String, Integer> stringIDS = new HashMap<>();
 
-	public static void registerBasicCategory()
-	{
+	public static void registerBasicCategory() {
 		ItemStack book = new ItemStack(ItemsCore.research_book);
 		MiscUtils.getStackTag(book).setInteger("tier", 0);
 		ItemStack book_t1 = new ItemStack(ItemsCore.research_book);
@@ -458,8 +457,7 @@ public class ResearchRegistry {
 		;
 	}
 
-	public static void registerMruCategory()
-	{
+	public static void registerMruCategory() {
 		ItemStack book_t1 = new ItemStack(ItemsCore.research_book);
 		MiscUtils.getStackTag(book_t1).setInteger("tier", 1);
 		ItemStack book_t2 = new ItemStack(ItemsCore.research_book);
@@ -1504,8 +1502,7 @@ public class ResearchRegistry {
 		;
 	}
 
-	public static void registerHoannaCategory()
-	{
+	public static void registerHoannaCategory() {
 		ItemStack lootable = new ItemStack(ItemsCore.bauble, 1, 0);
 		ItemBaublesResistance.initRandomTag(lootable, new Random());
 		hoanna
@@ -1864,18 +1861,15 @@ public class ResearchRegistry {
 		;
 	}
 
-	public static ItemStack generic(int meta)
-	{
+	public static ItemStack generic(int meta) {
 		return new ItemStack(ItemsCore.genericItem, 1, meta);
 	}
 
-	public static ItemStack gen(int meta)
-	{
+	public static ItemStack gen(int meta) {
 		return new ItemStack(ItemsCore.genericItem, 1, meta);
 	}
 
-	public static void registerEnderCategory()
-	{
+	public static void registerEnderCategory() {
 		ender
 		.apendDiscovery(
 				new DiscoveryEntry("enderstar")
@@ -2306,8 +2300,7 @@ public class ResearchRegistry {
 				);
 	}
 
-	public static PageEntry next(String genID)
-	{
+	public static PageEntry next(String genID) {
 		if(!stringIDS.containsKey(genID)) {
 			stringIDS.put(genID, 0);
 		}
@@ -2316,8 +2309,7 @@ public class ResearchRegistry {
 		return new PageEntry("essentialcraft.page."+genID+"_"+ptt);
 	}
 
-	public static void init()
-	{
+	public static void init() {
 		stringIDS.clear();
 		ApiCore.CATEGORY_LIST.clear();
 		basic.discoveries.clear();

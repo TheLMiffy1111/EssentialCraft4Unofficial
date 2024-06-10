@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiUltraFlowerBurner extends GuiCommon{
+public class GuiUltraFlowerBurner extends GuiCommon {
 
 	public GuiUltraFlowerBurner(Container c, TileEntity tile) {
 		super(c, tile);

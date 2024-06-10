@@ -9,7 +9,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiMagmaticSmeltery extends GuiCommon{
+public class GuiMagmaticSmeltery extends GuiCommon {
 
 	public GuiMagmaticSmeltery(Container c, TileEntity tile) {
 		super(c, tile);

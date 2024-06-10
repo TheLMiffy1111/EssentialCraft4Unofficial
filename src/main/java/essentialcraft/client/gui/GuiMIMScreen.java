@@ -33,7 +33,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class GuiMIMScreen extends GuiContainer{
+public class GuiMIMScreen extends GuiContainer {
 
 	TileMIMScreen screen;
 	EntityPlayer player;
@@ -54,8 +54,7 @@ public class GuiMIMScreen extends GuiContainer{
 	final ResourceLocation stextures = new ResourceLocation("essentialcraft", "textures/gui/mimScreenSlider.png");
 	boolean isLeftMouseButtonPressed;
 
-	public GuiMIMScreen(TileMIMScreen par1, EntityPlayer par2)
-	{
+	public GuiMIMScreen(TileMIMScreen par1, EntityPlayer par2) {
 		super(new ContainerMIMScreen(par2.inventory, par1));
 		elementList.add(new GuiMRUStorage(7, 59, par1));
 		screen = par1;
@@ -66,8 +65,7 @@ public class GuiMIMScreen extends GuiContainer{
 	}
 
 	@Override
-	public void updateScreen()
-	{
+	public void updateScreen() {
 		if(lastPressedTime > 0) {
 			--lastPressedTime;
 		}
@@ -78,29 +76,23 @@ public class GuiMIMScreen extends GuiContainer{
 	}
 
 	@Override
-	public void onGuiClosed()
-	{
+	public void onGuiClosed() {
 		super.onGuiClosed();
 		Keyboard.enableRepeatEvents(false);
 	}
 
-	public boolean isValidInt(char c, int keyID)
-	{
+	public boolean isValidInt(char c, int keyID) {
 		return keyID == 1 || keyID == 3 || keyID == 22 || keyID == 24 || keyID == 14 || keyID == 199 || keyID == 203 || keyID == 205 || keyID == 207 || keyID == 211 || c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9';
 	}
 
 	@Override
-	protected void keyTyped(char c, int keyID)
-	{
+	protected void keyTyped(char c, int keyID) {
 		try {
-			if (search.textboxKeyTyped(c, keyID) || isValidInt(c, keyID) && stackSize.textboxKeyTyped(c, keyID))
-			{
+			if(search.textboxKeyTyped(c, keyID) || isValidInt(c, keyID) && stackSize.textboxKeyTyped(c, keyID)) {
 				setupMaxInt();
 			}
-			else
-			{
-				if(keyID == 28 && !selectedStack.isEmpty())
-				{
+			else {
+				if(keyID == 28 && !selectedStack.isEmpty()) {
 					actionPerformed(buttonList.get(26));
 				}
 				super.keyTyped(c, keyID);
@@ -110,8 +102,7 @@ public class GuiMIMScreen extends GuiContainer{
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
-	{
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
 		try {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
 			search.mouseClicked(mouseX, mouseY, mouseButton);
@@ -121,24 +112,20 @@ public class GuiMIMScreen extends GuiContainer{
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks)
-	{
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		renderHoveredToolTip(mouseX, mouseY);
 	}
 
-	public static class GuiRequestButton extends GuiButton
-	{
+	public static class GuiRequestButton extends GuiButton {
 		public GuiRequestButton(int id, int x, int y, int sizeX, int sizeY, String string) {
 			super(id, x, y, sizeX, sizeY, string);
 		}
 
 		@Override
-		public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_, float partial)
-		{
-			if (visible)
-			{
+		public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_, float partial) {
+			if(visible) {
 				FontRenderer fontrenderer = p_146112_1_.fontRenderer;
 				p_146112_1_.getTextureManager().bindTexture(BUTTON_TEXTURES);
 				GlStateManager.color(1F, 1F, 1F, 1F);
@@ -152,16 +139,13 @@ public class GuiMIMScreen extends GuiContainer{
 				mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
 				int l = 14737632;
 
-				if (packedFGColour != 0)
-				{
+				if (packedFGColour != 0) {
 					l = packedFGColour;
 				}
-				else if (!enabled)
-				{
+				else if(!enabled) {
 					l = 10526880;
 				}
-				else if (hovered)
-				{
+				else if(hovered) {
 					l = 16777120;
 				}
 
@@ -187,8 +171,7 @@ public class GuiMIMScreen extends GuiContainer{
 	}
 
 	@Override
-	public void initGui()
-	{
+	public void initGui() {
 		buttonList.clear();
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
@@ -197,23 +180,20 @@ public class GuiMIMScreen extends GuiContainer{
 		search = new GuiTextField(2934, fontRenderer, k+4, l+4, 248, 20);
 		stackSize = new GuiTextField(2935, fontRenderer, k+95, l+156, 64, 12);
 		setupMaxInt();
-		for(int i = 0; i < btnActions.length; ++i)
-		{
+		for(int i = 0; i < btnActions.length; ++i) {
 			boolean neg = i%2 == 1;
-			if(i < 8)
-			{
+			if(i < 8) {
 				GuiButton btn = new GuiButton(i, neg ? k-i/2*16 + 103 - 32 : k+i/2*16 + 103 + 64, l+154, 16, 16, neg ? String.valueOf(btnActions[i]) : "+"+btnActions[i]);
 				buttonList.add(btn);
-			}else
-			{
+			}
+			else {
 				int xIndex = i % 4 == 0 ? k + 212 : i % 4 == 1 ? k + 26 : i % 4 == 2 ? k + 235 : k + 4;
 				int yIndex = l + 140 + i/4*16;
-				if(btnActions[i] != Integer.MAX_VALUE && btnActions[i] != -Integer.MAX_VALUE)
-				{
+				if(btnActions[i] != Integer.MAX_VALUE && btnActions[i] != -Integer.MAX_VALUE) {
 					GuiButton btn = new GuiButton(i, xIndex, yIndex, 16, 16, neg ? ""+btnActions[i] : "+"+btnActions[i]);
 					buttonList.add(btn);
-				}else
-				{
+				}
+				else {
 					String s = neg ? "<<<" : ">>>";
 					GuiButton btn = new GuiButton(i, neg ? k+4 : k+235, l+154, 16, 16, s);
 					buttonList.add(btn);
@@ -303,9 +283,7 @@ public class GuiMIMScreen extends GuiContainer{
 
 		buttonList.get(26).enabled = !selectedStack.isEmpty() && packetArrived;
 
-		for(int i = 0; i < elementList.size(); ++i)
-		{
-			GuiElement element = elementList.get(i);
+		for(GuiElement element : elementList) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(element.getElementTexture());
 			element.draw(k+element.getX(), l+element.getY(), mX, mY);
 			GlStateManager.color(1, 1, 1);
@@ -313,12 +291,9 @@ public class GuiMIMScreen extends GuiContainer{
 
 		DrawUtils.bindTexture("essentialcraft", "textures/gui/mimScreenSlider.png");
 		this.drawTexturedModalRect(k+228, l+25, 0, 0, 12, 126);
-		if(Mouse.isButtonDown(0))
-		{
-			if(mX >= k+228 && mX <= k+228+12)
-			{
-				if(mY >= l+25 && mY < l+25+126)
-				{
+		if(Mouse.isButtonDown(0)) {
+			if(mX >= k+228 && mX <= k+228+12) {
+				if(mY >= l+25 && mY < l+25+126) {
 					int yIndex = mY - (l+25);
 					int percentage = MathHelper.floor((double)yIndex/126*100);
 					double dIndex = percentage/100D*maxScrollIndex;
@@ -335,10 +310,8 @@ public class GuiMIMScreen extends GuiContainer{
 			isLeftMouseButtonPressed = false;
 		}
 
-		if(screen!=null&&screen.parent!=null)
-		{
+		if(screen != null && screen.parent != null) {
 			ArrayList<ItemStack> drawnItems;
-
 
 			if(search.getText() != null && !search.getText().isEmpty()) {
 				drawnItems = screen.parent.getItemsByName(search.getText());
@@ -360,46 +333,37 @@ public class GuiMIMScreen extends GuiContainer{
 
 			int regSize = drawnItems.size();
 
-			for(CraftingPattern p : crafts)
-			{
+			for(CraftingPattern p : crafts) {
 				craftsByItemStack.put(p.result, p);
 				drawnItems.add(p.result);
 			}
 
-			if(drawnItems == null || drawnItems.isEmpty())
-			{
+			if(drawnItems == null || drawnItems.isEmpty()) {
 				selectedStack = ItemStack.EMPTY;
 				secondPress = false;
 				recipeSelected = -1;
 			}
-			if(!selectedStack.isEmpty())
-			{
+			if(!selectedStack.isEmpty()) {
 				boolean hasStack = false;
 
-				if(recipeSelected > -1)
-				{
-					for(ItemStack is : craftsByItemStack.keySet())
-					{
-						if(!is.isEmpty() && is.isItemEqual(selectedStack) && ItemStack.areItemStackTagsEqual(is, selectedStack) && is.getCount() == selectedStack.getCount())
-						{
+				if(recipeSelected > -1) {
+					for(ItemStack is : craftsByItemStack.keySet()) {
+						if(!is.isEmpty() && is.isItemEqual(selectedStack) && ItemStack.areItemStackTagsEqual(is, selectedStack) && is.getCount() == selectedStack.getCount()) {
 							hasStack = true;
 							break;
 						}
 					}
-				}else
-				{
-					for(ItemStack is : drawnItems)
-					{
-						if(!is.isEmpty() && is.isItemEqual(selectedStack) && ItemStack.areItemStackTagsEqual(is, selectedStack))
-						{
+				}
+				else {
+					for(ItemStack is : drawnItems) {
+						if(!is.isEmpty() && is.isItemEqual(selectedStack) && ItemStack.areItemStackTagsEqual(is, selectedStack)) {
 							hasStack = true;
 							break;
 						}
 					}
 				}
 
-				if(!hasStack)
-				{
+				if(!hasStack) {
 					selectedStack = ItemStack.EMPTY;
 					secondPress = false;
 					recipeSelected = -1;
@@ -424,8 +388,7 @@ public class GuiMIMScreen extends GuiContainer{
 				scrollIndex = 0;
 			}
 
-			for(int i = scrollIndex*10; i < drawnItems.size() && i < 60+scrollIndex*10; ++i)
-			{
+			for(int i = scrollIndex*10; i < drawnItems.size() && i < 60+scrollIndex*10; ++i) {
 				int x = k+32+i%10*19;
 				int y = l+28+i/10*19-scrollIndex*19;
 				if(!selectedStack.isEmpty()) {
@@ -488,20 +451,15 @@ public class GuiMIMScreen extends GuiContainer{
 				GlStateManager.enableDepth();
 				GlStateManager.enableBlend();
 
-				if(mX >= x && mX <= x + 16)
-				{
-					if(mY >= y && mY <= y + 16)
-					{
+				if(mX >= x && mX <= x + 16) {
+					if(mY >= y && mY <= y + 16) {
 						ttis = drawnItems.get(i);
-						if(i >= regSize)
-						{
+						if(i >= regSize) {
 							ttib = true;
 						}
-						if(Mouse.isButtonDown(0) && !isLeftMouseButtonPressed)
-						{
+						if(Mouse.isButtonDown(0) && !isLeftMouseButtonPressed) {
 							isLeftMouseButtonPressed = true;
-							if(selectedStack.isEmpty())
-							{
+							if(selectedStack.isEmpty()) {
 								selectedStack = drawnItems.get(i).copy();
 								secondPress = true;
 								lastPressedTime = 20;
@@ -512,16 +470,13 @@ public class GuiMIMScreen extends GuiContainer{
 									recipeSelected = -1;
 								}
 							}
-							else
-							{
-								if(isShiftKeyDown())
-								{
+							else {
+								if(isShiftKeyDown()) {
 									secondPress = true;
 									lastPressedTime = 20;
 								}
 
-								if(!drawnItems.get(i).isEmpty() && (!drawnItems.get(i).isItemEqual(selectedStack) || !ItemStack.areItemStackTagsEqual(drawnItems.get(i), selectedStack)))
-								{
+								if(!drawnItems.get(i).isEmpty() && (!drawnItems.get(i).isItemEqual(selectedStack) || !ItemStack.areItemStackTagsEqual(drawnItems.get(i), selectedStack))) {
 									selectedStack = drawnItems.get(i).copy();
 									if(i >= regSize) {
 										recipeSelected = i;
@@ -530,58 +485,44 @@ public class GuiMIMScreen extends GuiContainer{
 										recipeSelected = -1;
 									}
 
-									if(isShiftKeyDown())
-									{
+									if(isShiftKeyDown()) {
 										secondPress = false;
 										actionPerformed(buttonList.get(26));
 									}
 
 									setupMaxInt();
 								}
-								else if(i >= regSize)
-								{
-									if(i == recipeSelected)
-									{
-										if(!secondPress)
-										{
+								else if(i >= regSize) {
+									if(i == recipeSelected) {
+										if(!secondPress) {
 											secondPress = true;
 											lastPressedTime = 20;
 										}
-										else
-										{
+										else {
 											secondPress = false;
 											actionPerformed(buttonList.get(26));
 										}
 										setupMaxInt();
-									}else
-									{
+									}
+else {
 										selectedStack = drawnItems.get(i).copy();
 										recipeSelected = i;
 									}
 								}
-								else
-								{
-									if(i < regSize)
-									{
-										if(recipeSelected != -1)
-										{
-											recipeSelected = -1;
-											selectedStack = drawnItems.get(i).copy();
-										}else
-										{
-											if(!secondPress)
-											{
-												secondPress = true;
-												lastPressedTime = 20;
-											}
-											else
-											{
-												secondPress = false;
-												actionPerformed(buttonList.get(26));
-											}
-										}
-										setupMaxInt();
+								else if(i < regSize) {
+									if(recipeSelected != -1) {
+										recipeSelected = -1;
+										selectedStack = drawnItems.get(i).copy();
 									}
+									else if(!secondPress) {
+										secondPress = true;
+										lastPressedTime = 20;
+									}
+									else {
+										secondPress = false;
+										actionPerformed(buttonList.get(26));
+									}
+									setupMaxInt();
 								}
 							}
 						}
@@ -611,8 +552,7 @@ public class GuiMIMScreen extends GuiContainer{
 							drawGradientRect(pX+12+15, pY+16, pX+12+16, pY+16+16, 0xff990099, 0xff110011);
 							drawGradientRect(pX+12, pY+16, pX+12+16, pY+16+1, 0xff660066, 0xff990099);
 
-							if(!craftsByItemStack.get(ttis).input[j].isEmpty())
-							{
+							if(!craftsByItemStack.get(ttis).input[j].isEmpty()) {
 								GuiResearchBook.itemRender.renderItemAndEffectIntoGUI(craftsByItemStack.get(ttis).input[j], mX+j/3*17+12, mY+j%3*17+26);
 							}
 						}
@@ -627,10 +567,8 @@ public class GuiMIMScreen extends GuiContainer{
 		}
 	}
 
-	public void setupMaxInt()
-	{
-		if(selectedStack.isEmpty())
-		{
+	public void setupMaxInt() {
+		if(selectedStack.isEmpty()) {
 			if(!isCorrectInteger()) {
 				stackSize.setText("0");
 			}
@@ -640,8 +578,7 @@ public class GuiMIMScreen extends GuiContainer{
 		if(!isCorrectInteger()) {
 			stackSize.setText("1");
 		}
-		else
-		{
+		else {
 			int i = Integer.parseInt(stackSize.getText());
 			if(i <= 0) {
 				stackSize.setText("1");
@@ -653,14 +590,12 @@ public class GuiMIMScreen extends GuiContainer{
 		}
 	}
 
-	public boolean isCorrectInteger()
-	{
-		try
-		{
+	public boolean isCorrectInteger() {
+		try {
 			int i = Integer.parseInt(stackSize.getText());
 			return i >= 0;
-		}catch(NumberFormatException e)
-		{
+		}
+		catch(NumberFormatException e) {
 			return false;
 		}
 	}

@@ -48,20 +48,14 @@ public class PlayerTracker {
 	}
 
 	@SubscribeEvent
-	public void onPlayerJump(LivingJumpEvent event)
-	{
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote && event.getEntityLiving().getEntityWorld().rand.nextFloat() < 0.0003F)
-		{
+	public void onPlayerJump(LivingJumpEvent event) {
+		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote && event.getEntityLiving().getEntityWorld().rand.nextFloat() < 0.0003F) {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			boolean addBuff = true;
-			if(ECUtils.getData(player).isWindbound())
-			{
-				if(BaublesApi.getBaublesHandler(player) != null)
-				{
-					for(int i = 0; i < BaublesApi.getBaublesHandler(player).getSlots(); ++i)
-					{
-						if(BaublesApi.getBaublesHandler(player).getStackInSlot(i).getItem() instanceof IWindResistHandler)
-						{
+			if(ECUtils.getData(player).isWindbound()) {
+				if(BaublesApi.getBaublesHandler(player) != null) {
+					for(int i = 0; i < BaublesApi.getBaublesHandler(player).getSlots(); ++i) {
+						if(BaublesApi.getBaublesHandler(player).getStackInSlot(i).getItem() instanceof IWindResistHandler) {
 							if(addBuff) {
 								addBuff = !((IWindResistHandler)BaublesApi.getBaublesHandler(player).getStackInSlot(i).getItem()).resistWind(player, BaublesApi.getBaublesHandler(player).getStackInSlot(i));
 							}
@@ -69,14 +63,10 @@ public class PlayerTracker {
 					}
 				}
 
-				if(player.inventory != null)
-				{
-					for(int i = 0; i < player.inventory.armorInventory.size(); ++i)
-					{
-						if(!player.inventory.armorInventory.get(i).isEmpty())
-						{
-							if(player.inventory.armorInventory.get(i).getItem() instanceof IWindResistHandler)
-							{
+				if(player.inventory != null) {
+					for(int i = 0; i < player.inventory.armorInventory.size(); ++i) {
+						if(!player.inventory.armorInventory.get(i).isEmpty()) {
+							if(player.inventory.armorInventory.get(i).getItem() instanceof IWindResistHandler) {
 								if(addBuff) {
 									addBuff = !((IWindResistHandler)player.inventory.armorInventory.get(i).getItem()).resistWind(player, BaublesApi.getBaublesHandler(player).getStackInSlot(i));
 								}
@@ -94,15 +84,12 @@ public class PlayerTracker {
 			}
 
 		}
-		if(event.getEntityLiving() instanceof EntityPlayer)
-		{
+		if(event.getEntityLiving() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			if(!player.inventory.armorInventory.get(1).isEmpty() && player.inventory.armorInventory.get(1).getItem() instanceof ItemGenericArmor)
-			{
+			if(!player.inventory.armorInventory.get(1).isEmpty() && player.inventory.armorInventory.get(1).getItem() instanceof ItemGenericArmor) {
 				player.motionY += 0.2D;
 			}
-			if(!player.inventory.armorInventory.get(1).isEmpty() && player.inventory.armorInventory.get(1).getItem() instanceof ItemComputerArmor)
-			{
+			if(!player.inventory.armorInventory.get(1).isEmpty() && player.inventory.armorInventory.get(1).getItem() instanceof ItemComputerArmor) {
 				player.motionY += 0.3D;
 			}
 		}
@@ -110,51 +97,40 @@ public class PlayerTracker {
 	}
 
 	@SubscribeEvent
-	public void onPlayerHurt(LivingHurtEvent event)
-	{
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote)
-		{
+	public void onPlayerHurt(LivingHurtEvent event) {
+		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote) {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			ItemStack chestplate = player.inventory.armorInventory.get(2);
-			if(!chestplate.isEmpty() && chestplate.getItem() == ItemsCore.magicArmorItems[5] && event.getEntityLiving().getEntityWorld().rand.nextFloat() <= 0.2F)
-			{
+			if(!chestplate.isEmpty() && chestplate.getItem() == ItemsCore.magicArmorItems[5] && event.getEntityLiving().getEntityWorld().rand.nextFloat() <= 0.2F) {
 				event.setAmount(0F);
-				for(int i = 0; i < 100; ++i)
-				{
+				for(int i = 0; i < 100; ++i) {
 					MiscUtils.spawnParticlesOnServer("redstone", (float)(player.posX+MathUtils.randomDouble(event.getEntityLiving().getEntityWorld().rand)/2), (float)(player.posY+1+MathUtils.randomDouble(event.getEntityLiving().getEntityWorld().rand)), (float)(player.posZ+MathUtils.randomDouble(event.getEntityLiving().getEntityWorld().rand)/2), -1, 0, 0);
 				}
 				return;
 			}
-			if(!chestplate.isEmpty() && chestplate.getItem() == ItemsCore.computer_chestplate)
-			{
+			if(!chestplate.isEmpty() && chestplate.getItem() == ItemsCore.computer_chestplate) {
 				if(event.getSource() != null && (event.getSource() == DamageSource.WITHER || event.getSource() == DamageSource.MAGIC || event.getSource() == DamageSource.STARVE)) {
 					event.setCanceled(true);
 				}
 				return;
 			}
 			ItemStack boots = player.inventory.armorInventory.get(0);
-			if(!boots.isEmpty() && boots.getItem() == ItemsCore.magicArmorItems[7])
-			{
-				if(event.getSource() == DamageSource.FALL)
-				{
+			if(!boots.isEmpty() && boots.getItem() == ItemsCore.magicArmorItems[7]) {
+				if(event.getSource() == DamageSource.FALL) {
 					event.setAmount(event.getAmount() - event.getAmount()*0.9F);
 				}
 			}
-			if(!boots.isEmpty() && boots.getItem() == ItemsCore.computer_boots)
-			{
-				if(event.getSource() == DamageSource.FALL)
-				{
+			if(!boots.isEmpty() && boots.getItem() == ItemsCore.computer_boots) {
+				if(event.getSource() == DamageSource.FALL) {
 					event.setAmount(0);
 					return;
 				}
 			}
-			if(player.getActivePotionEffect(PotionRegistry.chaosInfluence) != null)
-			{
+			if(player.getActivePotionEffect(PotionRegistry.chaosInfluence) != null) {
 				int amplifier = player.getActivePotionEffect(PotionRegistry.chaosInfluence).getAmplifier();
 				event.setAmount(event.getAmount() * (1+amplifier));
 			}
-			if(player.getActivePotionEffect(PotionRegistry.frozenMind) != null)
-			{
+			if(player.getActivePotionEffect(PotionRegistry.frozenMind) != null) {
 				ECUtils.calculateAndAddPE(player, MobEffects.SLOWNESS, 400, 100);
 				ECUtils.calculateAndAddPE(player, MobEffects.WEAKNESS, 400, 100);
 				ECUtils.calculateAndAddPE(player, MobEffects.MINING_FATIGUE, 400, 100);

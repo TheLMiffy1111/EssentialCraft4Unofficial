@@ -15,8 +15,7 @@ public class ParticleItem extends Particle {
 	static final float HALF_SQRT_3 = 0.8660254F;
 	public double red, green, blue;
 
-	public ParticleItem(World w, double x, double y, double z, double r, double g, double b, double mX, double mY, double mZ)
-	{
+	public ParticleItem(World w, double x, double y, double z, double r, double g, double b, double mX, double mY, double mZ) {
 		super(w, x, y, z, 0, 0, 0);
 		red = r;
 		green = g;

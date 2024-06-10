@@ -38,29 +38,26 @@ public class BlockMIMExporter extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState s, IBlockAccess p_149719_1_, BlockPos p_149719_2_)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState s, IBlockAccess p_149719_1_, BlockPos p_149719_2_) {
 		int metadata = s.getValue(FACING).getIndex();
-		if(metadata == 0)
-		{
+		if(metadata == 0) {
 			return new AxisAlignedBB(0.35F, 0F, 0.35F, 0.65F, 0.2F, 0.65F);
 		}
-		if(metadata == 1)
-		{
+		if(metadata == 1) {
 			return new AxisAlignedBB(0.35F, 0.8F, 0.35F, 0.65F, 1F, 0.65F);
-		}else if(metadata == 2)
-		{
-			return new AxisAlignedBB(0.35F, 0.35F, 0F, 0.65F, 0.65F, 0.2F);
-		}else if(metadata == 3)
-		{
-			return new AxisAlignedBB(0.35F, 0.35F, 0.8F, 0.65F, 0.65F, 1F);
-		}else if(metadata == 4)
-		{
-			return new AxisAlignedBB(0F, 0.35F, 0.35F, 0.2F, 0.65F, 0.65F);
-		}else if(metadata == 5)
-		{
-			return new AxisAlignedBB(0.8F, 0.35F, 0.35F, 1F, 0.65F, 0.65F);
 		}
+		if(metadata == 2) {
+			return new AxisAlignedBB(0.35F, 0.35F, 0F, 0.65F, 0.65F, 0.2F);
+		}
+		if(metadata == 3) {
+					return new AxisAlignedBB(0.35F, 0.35F, 0.8F, 0.65F, 0.65F, 1F);
+				}
+		else if(metadata == 4) {
+					return new AxisAlignedBB(0F, 0.35F, 0.35F, 0.2F, 0.65F, 0.65F);
+				}
+		else if(metadata == 5) {
+					return new AxisAlignedBB(0.8F, 0.35F, 0.35F, 1F, 0.65F, 0.65F);
+				}
 		return super.getBoundingBox(s, p_149719_1_, p_149719_2_);
 	}
 
@@ -72,20 +69,17 @@ public class BlockMIMExporter extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState s)
-	{
+	public boolean isNormalCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

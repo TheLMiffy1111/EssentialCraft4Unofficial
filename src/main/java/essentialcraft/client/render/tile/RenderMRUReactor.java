@@ -21,20 +21,18 @@ public class RenderMRUReactor extends TileEntitySpecialRenderer<TileMRUReactor>
 	public static final ResourceLocation stextures = new ResourceLocation("essentialcraft:textures/models/sphere.png");
 	public static final IModelCustom smodel = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/sphere.obj"));
 
-	public void doRender(TileMRUReactor tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMRUReactor tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y, (float)z+0.5F);
 		bindTexture(stextures);
-		if(!tile.isStructureCorrect)
-		{
+		if(!tile.isStructureCorrect) {
 			GlStateManager.color(0.4F, 0.4F, 0.4F);
 			GlStateManager.scale(0.55F, 0.55F, 0.55F);
 			smodel.renderAll();
-		}else
-		{
+		}
+else {
 			float wTime = 0F;
 			GlStateManager.translate(0, 0.5F+wTime, 0);
 			GlStateManager.scale(0.55F, 0.55F, 0.55F);

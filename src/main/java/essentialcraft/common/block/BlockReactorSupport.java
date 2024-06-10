@@ -36,20 +36,17 @@ public class BlockReactorSupport extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState s)
-	{
+	public boolean isFullCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 
@@ -77,10 +74,8 @@ public class BlockReactorSupport extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
-	{
-		switch(rot)
-		{
+	public IBlockState withRotation(IBlockState state, Rotation rot) {
+		switch(rot) {
 		case CLOCKWISE_180:
 			return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
 		case COUNTERCLOCKWISE_90:
@@ -93,10 +88,8 @@ public class BlockReactorSupport extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-	{
-		switch (mirrorIn)
-		{
+	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+		switch (mirrorIn) {
 		case LEFT_RIGHT:
 			return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
 		case FRONT_BACK:

@@ -73,8 +73,7 @@ public class ECPacketDispatcher implements IMessageHandler<PacketNBT, IMessage>{
 		}
 		case 4: {
 			TileEntity tile = EssentialCraftCore.proxy.getClientPlayer().getEntityWorld().getTileEntity(new BlockPos(message.theTag.getInteger("x"), message.theTag.getInteger("y"), message.theTag.getInteger("z")));
-			if(tile != null && tile instanceof TileMagicalQuarry)
-			{
+			if(tile != null && tile instanceof TileMagicalQuarry) {
 				((TileMagicalQuarry)tile).miningX = message.theTag.getInteger("mx");
 				((TileMagicalQuarry)tile).miningY = message.theTag.getInteger("my");
 				((TileMagicalQuarry)tile).miningZ = message.theTag.getInteger("mz");

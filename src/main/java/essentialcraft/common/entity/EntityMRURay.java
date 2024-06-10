@@ -37,29 +37,23 @@ public class EntityMRURay extends Entity {
 	public double pX, pY, pZ;
 	List<EntityLivingBase> hitEntities = new ArrayList<>();
 
-	public EntityMRURay(World w)
-	{
+	public EntityMRURay(World w) {
 		super(w);
 	}
 
 	@Override
-	public void onEntityUpdate()
-	{
-		if(ticksExisted >= 60)
-		{
+	public void onEntityUpdate() {
+		if(ticksExisted >= 60) {
 			setDead();
 		}
 
-		if(!getEntityWorld().isRemote)
-		{
+		if(!getEntityWorld().isRemote) {
 			getDataManager().set(DATA, "||x:"+pX+"||y:"+pY+"||z:"+pZ+"||b:"+(double)balance);
 		}
 
-		if(getEntityWorld().isRemote)
-		{
+		if(getEntityWorld().isRemote) {
 			String dataStr = getDataManager().get(DATA);
-			if(dataStr != null && !dataStr.isEmpty())
-			{
+			if(dataStr != null && !dataStr.isEmpty()) {
 				DummyData[] posData = DataStorage.parseData(dataStr);
 				pX = Double.parseDouble(posData[0].fieldValue);
 				pY = Double.parseDouble(posData[1].fieldValue);
@@ -70,8 +64,7 @@ public class EntityMRURay extends Entity {
 
 	}
 
-	public EntityMRURay(World w, EntityLivingBase base)
-	{
+	public EntityMRURay(World w, EntityLivingBase base) {
 		super(w);
 		rotationYaw = base.rotationYawHead;
 		rotationPitch = base.rotationPitch;
@@ -84,8 +77,7 @@ public class EntityMRURay extends Entity {
 		posZ = base.posZ;
 	}
 
-	public EntityMRURay(World w, EntityLivingBase base, float damage, float offset, float balance)
-	{
+	public EntityMRURay(World w, EntityLivingBase base, float damage, float offset, float balance) {
 
 		super(w);
 		posX = base.posX;
@@ -93,8 +85,7 @@ public class EntityMRURay extends Entity {
 		posZ = base.posZ;
 		float rY = base.rotationYaw;
 		float rP = base.rotationPitch;
-		if(!w.isRemote)
-		{
+		if(!w.isRemote) {
 			base.rotationYaw = (float) (base.rotationYawHead + MathUtils.randomDouble(w.rand)*offset);
 			base.rotationPitch = (float) (base.rotationPitch + MathUtils.randomDouble(w.rand)*offset);
 		}
@@ -104,54 +95,45 @@ public class EntityMRURay extends Entity {
 		pX = shootingEntity.posX;
 		pY = shootingEntity.posY+shootingEntity.getEyeHeight();
 		pZ = shootingEntity.posZ;
-		if(!getEntityWorld().isRemote)
-		{
+		if(!getEntityWorld().isRemote) {
 			shoot(rY, rP);
 		}
 	}
 
-	public DamageSource causeMRUDamage(final EntityLivingBase attacker, EntityLivingBase attacked)
-	{
-		if(attacked instanceof EntityPlayer)
-		{
+	public DamageSource causeMRUDamage(final EntityLivingBase attacker, EntityLivingBase attacked) {
+		if(attacked instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer)attacked;
-			if(!player.getEntityWorld().isRemote && getEntityWorld().getMinecraftServer().isPVPEnabled())
-			{
-				if(attacker instanceof EntityPlayer)
-				{
+			if(!player.getEntityWorld().isRemote && getEntityWorld().getMinecraftServer().isPVPEnabled()) {
+				if(attacker instanceof EntityPlayer) {
 					EntityPlayer attackerPlayer = (EntityPlayer) attacker;
 					if(attackerPlayer.getTeam() == null || player == null || !player.getTeam().isSameTeam(attackerPlayer.getTeam())) {
 						if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
 							ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
 						}
 					}
-				}else
+				}
+else
 					if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
 						ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
 					}
 			}
-			if(balance == 4)
-			{
+			if(balance == 4) {
 				ShadeUtils.attackPlayerWithShade(player, attacker, ItemStack.EMPTY);
 			}
 		}
-		return new DamageSource("mru")
-		{
+		return new DamageSource("mru") {
 
 			@Override
-			public Entity getImmediateSource()
-			{
+			public Entity getImmediateSource() {
 				return attacker;
 			}
 		}
 		.setProjectile();
 	}
 
-	public void shoot(float f, float f1)
-	{
+	public void shoot(float f, float f1) {
 		Vec3d vec = shootingEntity.getLookVec();
-		for(int i = 0; i < 128; ++i)
-		{
+		for(int i = 0; i < 128; ++i) {
 			float vX = (float) (vec.x*i/2F+posX);
 			float vY = (float) (vec.y*i/2F+posY);
 			float vZ = (float) (vec.z*i/2F+posZ);
@@ -161,18 +143,15 @@ public class EntityMRURay extends Entity {
 			double d = 0.5D;
 			AxisAlignedBB aabb = new AxisAlignedBB(vX-d, vY-d, vZ-d, vX+d, vY+d, vZ+d);
 			List<EntityLivingBase> entities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, aabb);
-			for(int j = 0; j < entities.size(); ++j)
-			{
+			for(int j = 0; j < entities.size(); ++j) {
 				EntityLivingBase base = entities.get(j);
-				if(base != shootingEntity && !base.isDead && !hitEntities.contains(base))
-				{
+				if(base != shootingEntity && !base.isDead && !hitEntities.contains(base)) {
 					base.attackEntityFrom(causeMRUDamage(shootingEntity, base), damage);
 					hitEntities.add(base);
 				}
 			}
 			IBlockState b = getEntityWorld().getBlockState(new BlockPos(bVX, bVY, bVZ));
-			if(b.isNormalCube() || i == 127)
-			{
+			if(b.isNormalCube() || i == 127) {
 				setPositionAndRotation(vX, vY, vZ, 0, 0);
 				break;
 			}
@@ -182,14 +161,12 @@ public class EntityMRURay extends Entity {
 	}
 
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		getDataManager().register(DATA, "");
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound tag)
-	{
+	protected void readEntityFromNBT(NBTTagCompound tag) {
 		pX = tag.getDouble("pX");
 		pY = tag.getDouble("pY");
 		pZ = tag.getDouble("pZ");
@@ -197,8 +174,7 @@ public class EntityMRURay extends Entity {
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound tag)
-	{
+	protected void writeEntityToNBT(NBTTagCompound tag) {
 		tag.setDouble("pX", pX);
 		tag.setDouble("pY", pY);
 		tag.setDouble("pZ", pZ);

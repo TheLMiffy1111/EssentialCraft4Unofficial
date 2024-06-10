@@ -81,11 +81,7 @@ public class EntityDivider extends Entity {
 					continue;
 				}
 
-				if(elb instanceof EntityPlayer && (((EntityPlayer)elb).isCreative() || ((EntityPlayer)elb).isSpectator())) {
-					continue;
-				}
-
-				if(elb.getDistance(this) > 3) {
+				if((elb instanceof EntityPlayer && (((EntityPlayer)elb).isCreative() || ((EntityPlayer)elb).isSpectator())) || (elb.getDistance(this) > 3)) {
 					continue;
 				}
 

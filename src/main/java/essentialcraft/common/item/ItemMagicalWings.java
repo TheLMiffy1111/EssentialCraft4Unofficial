@@ -26,29 +26,23 @@ public class ItemMagicalWings extends ItemMRUGeneric implements IBauble, IModelR
 	}
 
 	@Override
-	public void onUpdate(ItemStack s, World world, Entity entity, int indexInInventory, boolean isCurrentItem)
-	{
+	public void onUpdate(ItemStack s, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
 		super.onUpdate(s, world, entity, indexInInventory, isCurrentItem);
-		if(entity instanceof EntityPlayer)
-		{
+		if(entity instanceof EntityPlayer) {
 			EntityPlayer e = (EntityPlayer)entity;
 			{
-				if((e.getHeldItemMainhand() == s || e.getHeldItemOffhand() == s) && ECUtils.playerUseMRU(e, s, 1))
-				{
-					if(!e.isSneaking())
-					{
+				if((e.getHeldItemMainhand() == s || e.getHeldItemOffhand() == s) && ECUtils.playerUseMRU(e, s, 1)) {
+					if(!e.isSneaking()) {
 						e.motionY += 0.1F;
 						e.fallDistance = 0F;
 					}
-					else
-					{
+					else {
 						e.motionY = -0.2F;
 						e.fallDistance = 0F;
 					}
 					world.spawnParticle(EnumParticleTypes.REDSTONE, e.posX+MathUtils.randomDouble(world.rand)/2, e.posY-1+MathUtils.randomDouble(world.rand), e.posZ+MathUtils.randomDouble(world.rand)/2, 0, 1, 1);
 				}
-				if(e.motionY < -.2F && e.isSneaking() && ECUtils.playerUseMRU(e, s, 1))
-				{
+				if(e.motionY < -.2F && e.isSneaking() && ECUtils.playerUseMRU(e, s, 1)) {
 					e.motionY = -.2F;
 					e.fallDistance = 0F;
 					world.spawnParticle(EnumParticleTypes.REDSTONE, e.posX+MathUtils.randomDouble(world.rand)/2, e.posY-1+MathUtils.randomDouble(world.rand), e.posZ+MathUtils.randomDouble(world.rand)/2, 0, 1, 1);
@@ -65,11 +59,9 @@ public class ItemMagicalWings extends ItemMRUGeneric implements IBauble, IModelR
 
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-		if(player instanceof EntityPlayer)
-		{
+		if(player instanceof EntityPlayer) {
 			EntityPlayer e = (EntityPlayer) player;
-			if(e.motionY < -.2F && !e.isSneaking() && ECUtils.playerUseMRU(e, itemstack, 1))
-			{
+			if(e.motionY < -.2F && !e.isSneaking() && ECUtils.playerUseMRU(e, itemstack, 1)) {
 				e.motionY = -.2F;
 				e.fallDistance = 0F;
 				e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, e.posX+MathUtils.randomDouble(e.getEntityWorld().rand)/2, e.posY-1+MathUtils.randomDouble(e.getEntityWorld().rand), e.posZ+MathUtils.randomDouble(e.getEntityWorld().rand)/2, 0, 1, 1);

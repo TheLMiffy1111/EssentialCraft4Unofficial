@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiCrystalController extends GuiCommon{
+public class GuiCrystalController extends GuiCommon {
 
 	public GuiCrystalController(Container c, TileEntity tile) {
 		super(c, tile);
@@ -17,7 +17,4 @@ public class GuiCrystalController extends GuiCommon{
 		elementList.add(new GuiMRUState(25, 58, tile, 0));
 		elementList.add(new GuiCrystalState(25, 22, tile));
 	}
-
-
-
 }

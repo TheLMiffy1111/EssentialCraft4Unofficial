@@ -21,44 +21,36 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class EntityShadowKnife extends EntityThrowable {
 
-	public EntityShadowKnife(World w, EntityLivingBase t)
-	{
+	public EntityShadowKnife(World w, EntityLivingBase t) {
 		super(w, t);
 	}
 
-	public EntityShadowKnife(World w)
-	{
+	public EntityShadowKnife(World w) {
 		super(w);
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult mop)
-	{
-		if(mop.entityHit != null)
-		{
-			if(mop.entityHit instanceof EntityLivingBase)
-			{
+	protected void onImpact(RayTraceResult mop) {
+		if(mop.entityHit != null) {
+			if(mop.entityHit instanceof EntityLivingBase) {
 				((EntityLivingBase)mop.entityHit).attackEntityFrom(DamageSource.causeMobDamage(getThrower()), 12);
 				teleportRandomly(mop.entityHit);
 				setDead();
-				if(mop.entityHit instanceof EntityPlayer)
-				{
+				if(mop.entityHit instanceof EntityPlayer) {
 					ShadeUtils.attackPlayerWithShade((EntityPlayer)mop.entityHit, getThrower(), new ItemStack(ItemsCore.shadeKnife, 1, 0));
 				}
 			}
 		}
 	}
 
-	protected boolean teleportRandomly(Entity e)
-	{
+	protected boolean teleportRandomly(Entity e) {
 		double d0 = e.posX + (rand.nextDouble() - 0.5D) * 64D;
 		double d1 = e.posY + (rand.nextInt(64) - 32);
 		double d2 = e.posZ + (rand.nextDouble() - 0.5D) * 64D;
 		return teleport(e, d0, d1, d2);
 	}
 
-	protected boolean teleport(Entity e, double x, double y, double z)
-	{
+	protected boolean teleport(Entity e, double x, double y, double z) {
 		double d3 = e.posX;
 		double d4 = e.posY;
 		double d5 = e.posZ;
@@ -70,45 +62,37 @@ public class EntityShadowKnife extends EntityThrowable {
 		int j = MathHelper.floor(e.posY);
 		int k = MathHelper.floor(e.posZ);
 
-		if (getEntityWorld().isBlockLoaded(new BlockPos(i, j, k)))
-		{
+		if (getEntityWorld().isBlockLoaded(new BlockPos(i, j, k))) {
 			boolean flag1 = false;
 
-			while (!flag1 && j > 0)
-			{
+			while (!flag1 && j > 0) {
 				IBlockState block = e.getEntityWorld().getBlockState(new BlockPos(i, j-1, k));
 
-				if (block.getMaterial().blocksMovement())
-				{
+				if (block.getMaterial().blocksMovement()) {
 					flag1 = true;
 				}
-				else
-				{
+				else {
 					--e.posY;
 					--j;
 				}
 			}
 
-			if (flag1)
-			{
+			if (flag1) {
 				e.setPosition(e.posX, e.posY, e.posZ);
 
-				if (e.getEntityWorld().getCollisionBoxes(e, e.getEntityBoundingBox()).isEmpty() && !e.getEntityWorld().containsAnyLiquid(e.getEntityBoundingBox()))
-				{
+				if (e.getEntityWorld().getCollisionBoxes(e, e.getEntityBoundingBox()).isEmpty() && !e.getEntityWorld().containsAnyLiquid(e.getEntityBoundingBox())) {
 					flag = true;
 				}
 			}
 		}
 
-		if (!flag)
-		{
+		if (!flag) {
 			e.setPosition(d3, d4, d5);
 			return false;
 		}
 		short short1 = 128;
 
-		for (int l = 0; l < short1; ++l)
-		{
+		for (int l = 0; l < short1; ++l) {
 			double d6 = l / (short1 - 1D);
 			float f = (rand.nextFloat() - 0.5F) * 0.2F;
 			float f1 = (rand.nextFloat() - 0.5F) * 0.2F;

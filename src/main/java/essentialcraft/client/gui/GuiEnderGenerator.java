@@ -8,7 +8,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiEnderGenerator extends GuiCommon{
+public class GuiEnderGenerator extends GuiCommon {
 
 	public GuiEnderGenerator(Container c, TileEntity tile) {
 		super(c, tile);
@@ -17,7 +17,4 @@ public class GuiEnderGenerator extends GuiCommon{
 		elementList.add(new GuiBalanceState(25, 22, tile));
 		elementList.add(new GuiMRUGenerated(25, 40, tile, "enderGenerator"));
 	}
-
-
-
 }

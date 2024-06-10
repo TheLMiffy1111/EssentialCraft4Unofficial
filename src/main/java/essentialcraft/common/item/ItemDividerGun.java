@@ -23,22 +23,19 @@ public class ItemDividerGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem)
-	{
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
 		super.onUpdate(itemStack, world, entity, indexInInventory, isCurrentItem);
 		if(entity instanceof EntityPlayer && entity.ticksExisted % 20 == 0) {}
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h) {
 		p.setActiveHand(h);
 		return super.onItemRightClick(w, p, h);
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
-	{
+	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.BOW;
 	}
 
@@ -46,8 +43,7 @@ public class ItemDividerGun extends ItemMRUGeneric implements IModelRegisterer {
 	 * How long it takes to use or consume an item
 	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
-	{
+	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 20;
 	}
 

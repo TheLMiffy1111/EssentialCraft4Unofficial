@@ -9,14 +9,12 @@ import net.minecraft.world.World;
 
 public class ItemWindSword extends ItemSwordEC {
 
-	public ItemWindSword(ToolMaterial m)
-	{
+	public ItemWindSword(ToolMaterial m) {
 		super(m);
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand p_77648_6_, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand p_77648_6_, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		return ItemsCore.wind_elemental_hoe.onItemUse(player, world, pos, p_77648_6_, facing, hitX, hitY, hitZ);
 	}
 }

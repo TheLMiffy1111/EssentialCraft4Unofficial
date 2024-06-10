@@ -16,13 +16,11 @@ public class RenderMRUCoil extends TileEntitySpecialRenderer<TileMRUCoil>
 	private static final ResourceLocation enderCrystalTextures = new ResourceLocation("essentialcraft:textures/entities/raycrystal.png");
 	private ModelFloatingCube model;
 
-	public RenderMRUCoil()
-	{
+	public RenderMRUCoil() {
 		model = new ModelFloatingCube(0F, true);
 	}
 
-	public void doRender(TileMRUCoil tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMRUCoil tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		float f2 = tile.innerRotation + partialTicks;
 		GlStateManager.pushMatrix();

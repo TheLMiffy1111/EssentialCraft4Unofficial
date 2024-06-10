@@ -32,8 +32,7 @@ public class BlockDropsOre extends Block implements IModelRegisterer {
 	public static final PropertyEnum<OreDimensionType> DIMENSION = PropertyEnum.<OreDimensionType>create("dimension", OreDimensionType.class);
 
 	@Override
-	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
-	{
+	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
 		return MathHelper.getInt(RANDOM, 0, 2);
 	}
 
@@ -58,37 +57,31 @@ public class BlockDropsOre extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		for(int i = 0; i < 15; ++i) {
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
-	{
+	public int damageDropped(IBlockState state) {
 		int value = state.getValue(TYPE).getIndexOre();
 		return value == 0 ? 4 : value-1;
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemsCore.drops;
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
+	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<>();
 
 		int count = RANDOM.nextInt(2*(fortune+1))+1;
-		for(int i = 0; i < count; i++)
-		{
+		for(int i = 0; i < count; i++) {
 			Item item = getItemDropped(state, RANDOM, fortune);
-			if(item != null)
-			{
+			if(item != null) {
 				ret.add(new ItemStack(item, 1, damageDropped(state)));
 			}
 		}

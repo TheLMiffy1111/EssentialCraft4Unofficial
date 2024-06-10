@@ -75,8 +75,7 @@ public class RadiatingChamberRecipe extends IForgeRegistryEntry.Impl<IRecipe> im
 	@Override
 	public String toString() {
 		String retStr = super.toString();
-		for(int i = 0; i < recipeItems.length; ++i)
-		{
+		for(int i = 0; i < recipeItems.length; ++i) {
 			retStr+="||item_"+i+":"+recipeItems[i];
 		}
 		retStr+="||output:"+result;

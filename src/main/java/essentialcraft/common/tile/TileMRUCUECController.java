@@ -327,29 +327,27 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				for(int z = minZ; z <= maxZ; ++z) {
 					if(z == minZ || z == maxZ || x == minX || x == maxX || y == minY || y == maxY) {
 						BlockPos cp = new BlockPos(pos.add(x, y, z));
-						if(allowedBlocks.contains(getWorld().getBlockState(cp).getBlock())) {
-							blocksInStructure.add(new BlockPosition(getWorld(), pos.getX()+x, pos.getY()+y, pos.getZ()+z));
-							int meta = getWorld().getBlockState(cp).getBlock().getMetaFromState(getWorld().getBlockState(cp));
-							if(ECUtils.IGNORE_META.containsKey(getWorld().getBlockState(cp).getBlock().getTranslationKey()) && ECUtils.IGNORE_META.get(getWorld().getBlockState(cp).getBlock().getTranslationKey())) {
-								meta = -1;
-							}
-							DummyData dt = new DummyData(getWorld().getBlockState(cp).getBlock().getTranslationKey(), meta);
-							if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
-								resistance += ECUtils.MRU_RESISTANCES.get(dt.toString());
-							}
-							else {
-								resistance += 1F;
-							}
-							if(getWorld().getTileEntity(cp) != null && getWorld().getTileEntity(cp) instanceof IStructurePiece) {
-								IStructurePiece piece = (IStructurePiece) getWorld().getTileEntity(cp);
-								piece.setStructureController(this, EnumStructureType.MRUCUEC);
-								if(getWorld().getTileEntity(cp) instanceof TileMRUCUECHoldingChamber) {
-									mruStorage.setMaxMRU(mruStorage.getMaxMRU()+cfgMRUPerStorage);
-								}
-							}
+						if(!allowedBlocks.contains(getWorld().getBlockState(cp).getBlock())) {
+							return false;
+						}
+						blocksInStructure.add(new BlockPosition(getWorld(), pos.getX()+x, pos.getY()+y, pos.getZ()+z));
+						int meta = getWorld().getBlockState(cp).getBlock().getMetaFromState(getWorld().getBlockState(cp));
+						if(ECUtils.IGNORE_META.containsKey(getWorld().getBlockState(cp).getBlock().getTranslationKey()) && ECUtils.IGNORE_META.get(getWorld().getBlockState(cp).getBlock().getTranslationKey())) {
+							meta = -1;
+						}
+						DummyData dt = new DummyData(getWorld().getBlockState(cp).getBlock().getTranslationKey(), meta);
+						if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
+							resistance += ECUtils.MRU_RESISTANCES.get(dt.toString());
 						}
 						else {
-							return false;
+							resistance += 1F;
+						}
+						if(getWorld().getTileEntity(cp) != null && getWorld().getTileEntity(cp) instanceof IStructurePiece) {
+							IStructurePiece piece = (IStructurePiece) getWorld().getTileEntity(cp);
+							piece.setStructureController(this, EnumStructureType.MRUCUEC);
+							if(getWorld().getTileEntity(cp) instanceof TileMRUCUECHoldingChamber) {
+								mruStorage.setMaxMRU(mruStorage.getMaxMRU()+cfgMRUPerStorage);
+							}
 						}
 					}
 				}

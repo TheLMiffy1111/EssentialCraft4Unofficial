@@ -11,8 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderMonsterHarvester extends TileEntitySpecialRenderer<TileMonsterHarvester> {
 
-	public void doRender(TileMonsterHarvester tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMonsterHarvester tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 
 		float rotation = (tile.getWorld().getWorldTime()+partialTicks) % 360;

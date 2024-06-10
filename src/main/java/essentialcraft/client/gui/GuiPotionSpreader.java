@@ -9,7 +9,7 @@ import essentialcraft.client.gui.element.GuiPotionState;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiPotionSpreader extends GuiCommon{
+public class GuiPotionSpreader extends GuiCommon {
 
 	public GuiPotionSpreader(Container c, TileEntity tile) {
 		super(c, tile);

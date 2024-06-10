@@ -23,8 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockMIMCraftingManager extends BlockContainer implements IModelRegisterer {
 
-	public BlockMIMCraftingManager()
-	{
+	public BlockMIMCraftingManager() {
 		super(Material.ROCK, MapColor.PURPLE);
 	}
 
@@ -34,8 +33,7 @@ public class BlockMIMCraftingManager extends BlockContainer implements IModelReg
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

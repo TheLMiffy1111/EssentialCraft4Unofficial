@@ -45,14 +45,12 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public int damageDropped(IBlockState s)
-	{
+	public int damageDropped(IBlockState s) {
 		return s.getValue(TYPE).getIndex()*3;
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-	{
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(this, 1, state.getValue(TYPE).getIndex()*3);
 	}
 
@@ -62,8 +60,7 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		list.add(new ItemStack(this, 1, 0));
 		list.add(new ItemStack(this, 1, 3));
 		list.add(new ItemStack(this, 1, 6));
@@ -75,51 +72,43 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	public void breakBlock(World world, BlockPos pos, IBlockState blockstate) {
 		super.breakBlock(world, pos, blockstate);
 		int par6 = blockstate.getValue(LAYER).getIndexThree();
-		if(par6 == 0)
-		{
+		if(par6 == 0) {
 			world.setBlockToAir(pos.up());
 			world.setBlockToAir(pos.up(2));
 		}
-		if(par6 == 1)
-		{
+		if(par6 == 1) {
 			world.setBlockToAir(pos.down());
 			world.setBlockToAir(pos.up());
 		}
-		if(par6 == 2)
-		{
+		if(par6 == 2) {
 			world.setBlockToAir(pos.down());
 			world.setBlockToAir(pos.down(2));
 		}
 	}
 
 	@Override
-	public void onBlockAdded(World w, BlockPos p, IBlockState s)
-	{
+	public void onBlockAdded(World w, BlockPos p, IBlockState s) {
 		super.onBlockAdded(w, p, s);
 		int meta = getMetaFromState(s);
-		if(meta%3 == 0)
-		{
+		if(meta%3 == 0) {
 			w.setBlockState(p.up(), getStateFromMeta(meta+1), 3);
 			w.setBlockState(p.up(2), getStateFromMeta(meta+1), 3);
 		}
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World p_149742_1_, BlockPos p_149742_2_)
-	{
+	public boolean canPlaceBlockAt(World p_149742_1_, BlockPos p_149742_2_) {
 		return p_149742_1_.getBlockState(p_149742_2_).getBlock().isReplaceable(p_149742_1_, p_149742_2_) && p_149742_1_.getBlockState(p_149742_2_.up()).getBlock().isReplaceable(p_149742_1_, p_149742_2_.up()) && p_149742_1_.getBlockState(p_149742_2_.up(2)).getBlock().isReplaceable(p_149742_1_, p_149742_2_.up(2));
 	}
 
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState s)
-	{
+	public boolean isFullCube(IBlockState s) {
 		return false;
 	}
 
@@ -134,8 +123,7 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public float getEnchantPowerBonus(World world, BlockPos pos)
-	{
+	public float getEnchantPowerBonus(World world, BlockPos pos) {
 		if(world.getBlockState(pos).getValue(LAYER) == EnumLayer.BOTTOM) {
 			int meta = world.getBlockState(pos).getValue(TYPE).getIndex();
 			return meta == 0 ? 7.5F : meta == 1 ? 15 : meta == 2 ? 30 : meta == 3 ? 60 : meta == 4 ? 120 : 0;

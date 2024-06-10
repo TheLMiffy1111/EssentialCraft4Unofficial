@@ -44,38 +44,32 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return Block.NULL_AABB;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
-	{
+	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		for(int i = 0; i < 8; ++i) {
 			list.add(new ItemStack(this, 1, i));
 		}
@@ -87,20 +81,17 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_)
-	{
+	public int damageDropped(IBlockState p_149692_1_) {
 		return p_149692_1_.getValue(LEVEL);
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_)
-	{
+	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		return null;
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_)
-	{
+	public int quantityDropped(Random p_149745_1_) {
 		return 0;
 	}
 

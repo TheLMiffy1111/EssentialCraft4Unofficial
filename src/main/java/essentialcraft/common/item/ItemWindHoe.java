@@ -18,24 +18,20 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemWindHoe extends ItemHoeEC {
 
-	public ItemWindHoe(ToolMaterial m)
-	{
+	public ItemWindHoe(ToolMaterial m) {
 		super(m);
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack weapon, EntityLivingBase attacked, EntityLivingBase attacker)
-	{
-		if(attacker instanceof EntityPlayer)
-		{
+	public boolean hitEntity(ItemStack weapon, EntityLivingBase attacked, EntityLivingBase attacker) {
+		if(attacker instanceof EntityPlayer) {
 			//Totally the same code as in
 			//#link essentialcraft.utils.common.ECEventHandler
 			EntityPlayer p = (EntityPlayer)attacker;
 
 			ItemStack currentTool = weapon;
 
-			if(!p.getEntityWorld().isRemote && currentTool.getItem() instanceof ItemTool && ((ItemTool)currentTool.getItem()).getToolMaterialName().equals(ItemsCore.windElemental.name()))
-			{
+			if(!p.getEntityWorld().isRemote && currentTool.getItem() instanceof ItemTool && ((ItemTool)currentTool.getItem()).getToolMaterialName().equals(ItemsCore.windElemental.name())) {
 				String clazz = "sword";
 
 				String currentToolClass = "";
@@ -60,8 +56,7 @@ public class ItemWindHoe extends ItemHoeEC {
 
 				currentTool.writeToNBT(toolTag);
 
-				if(toolTag.hasKey("tag"))
-				{
+				if(toolTag.hasKey("tag")) {
 					genericTag = toolTag.getCompoundTag("tag").copy();
 					toolTag.getCompoundTag("tag").removeTag("pickaxe");
 					toolTag.getCompoundTag("tag").removeTag("axe");
@@ -100,13 +95,12 @@ public class ItemWindHoe extends ItemHoeEC {
 
 				ItemStack efficent = null;
 
-				if(genericTag.hasKey(clazz))
-				{
+				if(genericTag.hasKey(clazz)) {
 					NBTTagCompound loadFrom = genericTag.getCompoundTag(clazz).copy();
 					genericTag.removeTag(clazz);
 					efficent = new ItemStack(loadFrom);
-				}else
-				{
+				}
+else {
 					if(clazz.equalsIgnoreCase("pickaxe")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_pick, 1, currentTool.getItemDamage());
 					}
@@ -124,8 +118,7 @@ public class ItemWindHoe extends ItemHoeEC {
 					}
 				}
 
-				if(!efficent.isEmpty() && efficent.getItem() != null)
-				{
+				if(!efficent.isEmpty() && efficent.getItem() != null) {
 					NBTTagCompound anotherTag = MiscUtils.getStackTag(efficent);
 
 					if(genericTag.hasKey("pickaxe")) {

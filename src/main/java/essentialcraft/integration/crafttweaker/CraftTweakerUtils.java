@@ -34,12 +34,10 @@ public class CraftTweakerUtils {
 		if(ingredient instanceof IOreDictEntry) {
 			return new UnformedItemStack(((IOreDictEntry)ingredient).getName());
 		}
-		else if(ingredient instanceof IItemStack) {
+		if(ingredient instanceof IItemStack) {
 			return new UnformedItemStack(CraftTweakerMC.getItemStack((IItemStack)ingredient));
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	public static IItemStack getIItemStack(UnformedItemStack uis) {
@@ -57,13 +55,11 @@ public class CraftTweakerUtils {
 			}
 			return IngredientUtils.getIngredient(stack);
 		}
-		else {
-			try {
-				return IngredientUtils.getIngredientNBT(
-						ingredient.getItems().stream().map(CraftTweakerMC::getItemStack).collect(Collectors.toList()));
-			}
-			catch(Exception e) {}
+		try {
+			return IngredientUtils.getIngredientNBT(
+					ingredient.getItems().stream().map(CraftTweakerMC::getItemStack).collect(Collectors.toList()));
 		}
+		catch(Exception e) {}
 		return Ingredient.EMPTY;
 	}
 }

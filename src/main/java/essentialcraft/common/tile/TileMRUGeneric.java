@@ -128,15 +128,13 @@ public abstract class TileMRUGeneric extends TileEntity implements ISidedInvento
 			items[slot] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		else {
-			itemstack = items[slot].splitStack(amount);
+		itemstack = items[slot].splitStack(amount);
 
-			if(items[slot].getCount() == 0) {
-				items[slot] = ItemStack.EMPTY;
-			}
-
-			return itemstack;
+		if(items[slot].getCount() == 0) {
+			items[slot] = ItemStack.EMPTY;
 		}
+
+		return itemstack;
 	}
 
 	@Override

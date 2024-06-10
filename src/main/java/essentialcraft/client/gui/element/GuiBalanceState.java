@@ -11,14 +11,12 @@ public class GuiBalanceState extends GuiTextElement{
 
 	public IMRUHandler tile;
 
-	public GuiBalanceState(int i, int j, IMRUHandler t)
-	{
+	public GuiBalanceState(int i, int j, IMRUHandler t) {
 		super(i, j);
 		tile = t;
 	}
 
-	public GuiBalanceState(int i, int j, TileEntity t)
-	{
+	public GuiBalanceState(int i, int j, TileEntity t) {
 		super(i, j);
 		if(t.hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 			tile = t.getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
@@ -59,26 +57,21 @@ public class GuiBalanceState extends GuiTextElement{
 			str = str.substring(0, 6);
 		}
 
-		for(int i = str.length()-1; i > 0; --i)
-		{
-			if(i > 2)
-			{
+		for(int i = str.length()-1; i > 0; --i) {
+			if(i > 2) {
 				char c = str.charAt(i);
-				if(c == '0')
-				{
+				if(c == '0') {
 					str = str.substring(0, i);
 				}
 			}
 		}
 		String balanceType = "Pure";
 		int color = 0x00ffff;
-		if(balance < 1)
-		{
+		if(balance < 1) {
 			balanceType = "Frozen";
 			color = 0x0000ff;
 		}
-		if(balance > 1)
-		{
+		if(balance > 1) {
 			balanceType = "Chaos";
 			color = 0xff0000;
 		}

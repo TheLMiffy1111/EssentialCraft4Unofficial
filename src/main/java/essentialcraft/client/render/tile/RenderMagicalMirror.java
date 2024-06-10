@@ -51,15 +51,13 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 		bindTexture(textures);
 		model.renderPart("pCube2");
 		bindTexture(glass);
-		if(tile.pulsing)
-		{
+		if(tile.pulsing) {
 			timeIndex = Minecraft.getMinecraft().world.getWorldTime()%20;
 			float colorIndex = 1F;
-			if(timeIndex <= 10)
-			{
+			if(timeIndex <= 10) {
 				colorIndex = 1F - timeIndex/10;
-			}else
-			{
+			}
+else {
 				colorIndex = (timeIndex-10)/10;
 			}
 			GlStateManager.color(1, colorIndex, 1);
@@ -71,13 +69,11 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 
-		if(!tile.transferingStack.isEmpty())
-		{
-			if(tile.transferTime < 20)
-			{
+		if(!tile.transferingStack.isEmpty()) {
+			if(tile.transferTime < 20) {
 				DrawUtils.renderItemStack_Full(tile.transferingStack, x, y, z, (tile.getWorld().getWorldTime()+partialTicks)%360, 0, 1, 1, 1, 0.5F, -0.3F+tile.transferTime/20F, 0.5F);
-			}else
-			{
+			}
+else {
 				Vec3d vec = new Vec3d(tile.inventoryPos.getX() - tile.getPos().getX(), tile.inventoryPos.getY() - tile.getPos().getY(), tile.inventoryPos.getZ() - tile.getPos().getZ());
 
 				DrawUtils.renderItemStack_Full(tile.transferingStack, x, y, z, (tile.getWorld().getWorldTime()+partialTicks)%360, 0, 1, 1, 1, 0.5F+(float)vec.x*(tile.transferTime-20F)/40, 0.5F+(float)vec.y*(tile.transferTime-20F)/40, 0.5F+(float)vec.z*(tile.transferTime-20F)/40);
@@ -88,8 +84,7 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
-	protected ResourceLocation getEntityTexture(TileEntity entity)
-	{
+	protected ResourceLocation getEntityTexture(TileEntity entity) {
 		return textures;
 	}
 

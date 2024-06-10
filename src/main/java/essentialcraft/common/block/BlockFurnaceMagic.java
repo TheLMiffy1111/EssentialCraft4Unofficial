@@ -38,15 +38,13 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	public static final PropertyEnum<FurnaceType> TYPE = PropertyEnum.<FurnaceType>create("type", FurnaceType.class);
 
-	public BlockFurnaceMagic()
-	{
+	public BlockFurnaceMagic() {
 		super(Material.ROCK);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TYPE, FurnaceType.FORTIFIED));
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 
@@ -63,8 +61,7 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	}
 
 	@Override
-	public int damageDropped(IBlockState s)
-	{
+	public int damageDropped(IBlockState s) {
 		return s.getValue(TYPE).getIndex()*4;
 	}
 
@@ -74,8 +71,7 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		list.add(new ItemStack(this, 1, 0));
 		list.add(new ItemStack(this, 1, 4));
 		list.add(new ItemStack(this, 1, 8));
@@ -83,45 +79,38 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	}
 
 	@Override
-	public void onBlockAdded(World w, BlockPos p, IBlockState s)
-	{
+	public void onBlockAdded(World w, BlockPos p, IBlockState s) {
 		super.onBlockAdded(w, p, s);
 		setBlockRotation(w, p, s);
 	}
 
-	private void setBlockRotation(World w, BlockPos p, IBlockState s)
-	{
-		if (!w.isRemote)
-		{
+	private void setBlockRotation(World w, BlockPos p, IBlockState s) {
+		if (!w.isRemote) {
 			IBlockState block = w.getBlockState(p.north());
 			IBlockState block1 = w.getBlockState(p.south());
 			IBlockState block2 = w.getBlockState(p.west());
 			IBlockState block3 = w.getBlockState(p.east());
 			int b0 = s.getValue(TYPE).getIndex();
 
-			if (block.isOpaqueCube() && !block1.isOpaqueCube())
-			{
+			if (block.isOpaqueCube() && !block1.isOpaqueCube()) {
 				b0 += 1;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
 			}
 
-			if (block1.isOpaqueCube() && !block.isOpaqueCube())
-			{
+			if (block1.isOpaqueCube() && !block.isOpaqueCube()) {
 				b0 += 0;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
 			}
 
-			if (block2.isOpaqueCube() && !block3.isOpaqueCube())
-			{
+			if (block2.isOpaqueCube() && !block3.isOpaqueCube()) {
 				b0 += 3;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
 			}
 
-			if (block3.isOpaqueCube() && !block2.isOpaqueCube())
-			{
+			if (block3.isOpaqueCube() && !block2.isOpaqueCube()) {
 				b0 += 2;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
@@ -131,20 +120,17 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-	{
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return getDefaultState().withProperty(TYPE, FurnaceType.fromIndex(meta/4)).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
-	public void onBlockPlacedBy(World w, BlockPos p, IBlockState s, EntityLivingBase pl, ItemStack is)
-	{
+	public void onBlockPlacedBy(World w, BlockPos p, IBlockState s, EntityLivingBase pl, ItemStack is) {
 		w.setBlockState(p, getDefaultState().withProperty(TYPE, FurnaceType.fromIndex(is.getItemDamage()/4)).withProperty(FACING, pl.getHorizontalFacing().getOpposite()), 2);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World w, int meta)
-	{
+	public TileEntity createNewTileEntity(World w, int meta) {
 		return new TileFurnaceMagic();
 	}
 

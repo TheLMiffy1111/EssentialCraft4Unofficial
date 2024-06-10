@@ -23,14 +23,12 @@ public class RenderHologram extends RenderBiped<EntityHologram>
 	private static final ResourceLocation textures = new ResourceLocation("essentialcraft", "textures/entities/boss.png");
 	/** The model of the enderman */
 	private ModelBiped model;
-	public RenderHologram()
-	{
+	public RenderHologram() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(1, 0, 64, 32), 0.5F);
 		model = (ModelBiped)super.mainModel;
 	}
 
-	public RenderHologram(RenderManager rm)
-	{
+	public RenderHologram(RenderManager rm) {
 		super(rm, new ModelBiped(0, 0, 64, 32), 0.5F);
 		model = (ModelBiped)super.mainModel;
 	}

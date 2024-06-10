@@ -40,11 +40,7 @@ public class ContainerMIM extends ContainerInventory {
 
 			TileEntity t = tile.getWorld().getTileEntity(new BlockPos(coords[0], coords[1], coords[2]));
 
-			if(t == null) {
-				return false;
-			}
-
-			if(!dependant.isAssignableFrom(t.getClass())) {
+			if((t == null) || !dependant.isAssignableFrom(t.getClass())) {
 				return false;
 			}
 

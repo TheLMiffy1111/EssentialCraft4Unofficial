@@ -9,7 +9,7 @@ import essentialcraft.client.gui.element.GuiProgressBar_MagicianTable;
 import essentialcraft.common.tile.TileMagicianTable;
 import net.minecraft.inventory.Container;
 
-public class GuiMagicianTable extends GuiCommon{
+public class GuiMagicianTable extends GuiCommon {
 
 	public GuiMagicianTable(Container c, TileMagicianTable tile) {
 		super(c, tile);

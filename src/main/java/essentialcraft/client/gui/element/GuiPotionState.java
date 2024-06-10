@@ -13,8 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiPotionState extends GuiTextElement{
 	public TilePotionSpreader tile;
 
-	public GuiPotionState(int i, int j, TileEntity t)
-	{
+	public GuiPotionState(int i, int j, TileEntity t) {
 		super(i, j);
 		tile = (TilePotionSpreader) t;
 	}
@@ -33,8 +32,7 @@ public class GuiPotionState extends GuiTextElement{
 		GlStateManager.pushMatrix();
 		TextureAtlasSprite icon = TextureUtils.fromItem(Items.POTIONITEM);
 		DrawUtils.drawTexture_Items(posX+9, posY+9, icon, 18, 18, 10);
-		if(tile.potionID != null)
-		{
+		if(tile.potionID != null) {
 			icon = TextureUtils.fromItem(Items.POTIONITEM);
 			int j = Potion.REGISTRY.getObject(tile.potionID).getLiquidColor();
 			float f = 0F;

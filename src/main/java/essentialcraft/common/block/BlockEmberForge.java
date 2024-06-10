@@ -19,8 +19,7 @@ public class BlockEmberForge extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

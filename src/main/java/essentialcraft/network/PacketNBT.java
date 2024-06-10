@@ -12,13 +12,11 @@ public class PacketNBT implements IMessage {
 
 	public PacketNBT() {}
 
-	public PacketNBT(NBTTagCompound t)
-	{
+	public PacketNBT(NBTTagCompound t) {
 		theTag = t;
 	}
 
-	public PacketNBT setID(int i)
-	{
+	public PacketNBT setID(int i) {
 		packetID = i;
 		return this;
 	}

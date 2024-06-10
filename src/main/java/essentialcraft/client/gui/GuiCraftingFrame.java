@@ -24,14 +24,12 @@ public class GuiCraftingFrame extends GuiContainer{
 	}
 
 	@Override
-	protected boolean checkHotbarKeys(int slot)
-	{
+	protected boolean checkHotbarKeys(int slot) {
 		return false;
 	}
 
 	@Override
-	public void initGui()
-	{
+	public void initGui() {
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		buttonList.add(new GuiButton(0, k+6, l+6, 20, 20, ""));
@@ -39,21 +37,18 @@ public class GuiCraftingFrame extends GuiContainer{
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton par1GuiButton)
-	{
+	protected void actionPerformed(GuiButton par1GuiButton) {
 		MiscUtils.handleButtonPress(par1GuiButton.id, this.getClass(), par1GuiButton.getClass(), mc.player, 0, 0, 0);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float p_146976_1_,
-			int p_146976_2_, int p_146976_3_) {
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		DrawUtils.bindTexture("minecraft", "textures/gui/container/crafting_table.png");
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 
 	@Override
-	public void drawScreen(int mX, int mY, float partialTicks)
-	{
+	public void drawScreen(int mX, int mY, float partialTicks) {
 		drawDefaultBackground();
 		if(!crafter.filterStack.isItemEqual(mc.player.getHeldItemMainhand())) {
 			crafter.filterStack = mc.player.getHeldItemMainhand();
@@ -63,34 +58,28 @@ public class GuiCraftingFrame extends GuiContainer{
 		}
 
 		super.drawScreen(mX, mY, partialTicks);
-		for (int ik = 0; ik < buttonList.size(); ++ik)
-		{
+		for (int ik = 0; ik < buttonList.size(); ++ik) {
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.color(1, 1, 1);
 			GuiButton btn  = buttonList.get(ik);
 			boolean hover = mX >= btn.x && mY >= btn.y && mX < btn.x + btn.width && mY < btn.y + btn.height;
 			int id = btn.id;
-			if(id == 0)
-			{
+			if(id == 0) {
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(crafter.filterStack).getBoolean("ignoreOreDict"))
-				{
+				if(MiscUtils.getStackTag(crafter.filterStack).getBoolean("ignoreOreDict")) {
 					this.drawTexturedModalRect(btn.x, btn.y, 20, 40, 20, 20);
-				}else
-				{
+				}
+else {
 					this.drawTexturedModalRect(btn.x, btn.y, 0, 40, 20, 20);
 				}
 			}
-			if(hover)
-			{
-				if(id == 0)
-				{
+			if(hover) {
+				if(id == 0) {
 					List<String> drawedLst = new ArrayList<>();
-					if(MiscUtils.getStackTag(crafter.filterStack).getBoolean("ignoreOreDict"))
-					{
+					if(MiscUtils.getStackTag(crafter.filterStack).getBoolean("ignoreOreDict")) {
 						drawedLst.add("Ore Dictionary: Ignored");
-					}else
-					{
+					}
+else {
 						drawedLst.add("Ore Dictionary: Not Ignored");
 					}
 					drawHoveringText(drawedLst, mX, mY, fontRenderer);
@@ -102,11 +91,9 @@ public class GuiCraftingFrame extends GuiContainer{
 	}
 
 	@Override
-	protected void drawHoveringText(List<String> list, int x, int y, FontRenderer font)
-	{
+	protected void drawHoveringText(List<String> list, int x, int y, FontRenderer font) {
 		GlStateManager.disableLighting();
-		if (!list.isEmpty())
-		{
+		if (!list.isEmpty()) {
 			GlStateManager.disableRescaleNormal();
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableLighting();
@@ -115,8 +102,7 @@ public class GuiCraftingFrame extends GuiContainer{
 			for(String s : list) {
 				int l = font.getStringWidth(s);
 
-				if (l > k)
-				{
+				if (l > k) {
 					k = l;
 				}
 			}
@@ -125,18 +111,15 @@ public class GuiCraftingFrame extends GuiContainer{
 			int k2 = y - 12;
 			int i1 = 8;
 
-			if (list.size() > 1)
-			{
+			if (list.size() > 1) {
 				i1 += 2 + (list.size() - 1) * 10;
 			}
 
-			if (j2 + k > width)
-			{
+			if (j2 + k > width) {
 				j2 -= 28 + k;
 			}
 
-			if (k2 + i1 + 6 > height)
-			{
+			if (k2 + i1 + 6 > height) {
 				k2 = height - i1 - 6;
 			}
 
@@ -155,13 +138,11 @@ public class GuiCraftingFrame extends GuiContainer{
 			drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 - 3 + 1, k1, k1);
 			drawGradientRect(j2 - 3, k2 + i1 + 2, j2 + k + 3, k2 + i1 + 3, l1, l1);
 
-			for (int i2 = 0; i2 < list.size(); ++i2)
-			{
+			for (int i2 = 0; i2 < list.size(); ++i2) {
 				String s1 = list.get(i2);
 				font.drawStringWithShadow(s1, j2, k2, -1);
 
-				if (i2 == 0)
-				{
+				if (i2 == 0) {
 					k2 += 2;
 				}
 

@@ -23,30 +23,25 @@ import net.minecraft.world.World;
 
 public class ItemWindAxe extends ItemAxeEC {
 
-	public ItemWindAxe(ToolMaterial m)
-	{
+	public ItemWindAxe(ToolMaterial m) {
 		super(m);
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand p_77648_6_, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand p_77648_6_, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		return ItemsCore.wind_elemental_hoe.onItemUse(player, world, pos, p_77648_6_, facing, hitX, hitY, hitZ);
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack weapon, EntityLivingBase attacked, EntityLivingBase attacker)
-	{
-		if(attacker instanceof EntityPlayer)
-		{
+	public boolean hitEntity(ItemStack weapon, EntityLivingBase attacked, EntityLivingBase attacker) {
+		if(attacker instanceof EntityPlayer) {
 			//Totally the same code as in
 			//#link essentialcraft.utils.common.ECEventHandler
 			EntityPlayer p = (EntityPlayer)attacker;
 
 			ItemStack currentTool = weapon;
 
-			if(!p.getEntityWorld().isRemote && currentTool.getItem() instanceof ItemTool && ((ItemTool)currentTool.getItem()).getToolMaterialName().equals(ItemsCore.windElemental.name()))
-			{
+			if(!p.getEntityWorld().isRemote && currentTool.getItem() instanceof ItemTool && ((ItemTool)currentTool.getItem()).getToolMaterialName().equals(ItemsCore.windElemental.name())) {
 				String clazz = "sword";
 
 				String currentToolClass = "";
@@ -71,8 +66,7 @@ public class ItemWindAxe extends ItemAxeEC {
 
 				currentTool.writeToNBT(toolTag);
 
-				if(toolTag.hasKey("tag"))
-				{
+				if(toolTag.hasKey("tag")) {
 					genericTag = toolTag.getCompoundTag("tag").copy();
 					toolTag.getCompoundTag("tag").removeTag("pickaxe");
 					toolTag.getCompoundTag("tag").removeTag("axe");
@@ -109,13 +103,12 @@ public class ItemWindAxe extends ItemAxeEC {
 
 				ItemStack efficent = ItemStack.EMPTY;
 
-				if(genericTag.hasKey(clazz))
-				{
+				if(genericTag.hasKey(clazz)) {
 					NBTTagCompound loadFrom = genericTag.getCompoundTag(clazz).copy();
 					genericTag.removeTag(clazz);
 					efficent = new ItemStack(loadFrom);
-				}else
-				{
+				}
+else {
 					if(clazz.equalsIgnoreCase("pickaxe")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_pick, 1, currentTool.getItemDamage());
 					}
@@ -133,8 +126,7 @@ public class ItemWindAxe extends ItemAxeEC {
 					}
 				}
 
-				if(!efficent.isEmpty() && efficent.getItem() != null)
-				{
+				if(!efficent.isEmpty() && efficent.getItem() != null) {
 					NBTTagCompound anotherTag = MiscUtils.getStackTag(efficent);
 
 					if(genericTag.hasKey("pickaxe")) {

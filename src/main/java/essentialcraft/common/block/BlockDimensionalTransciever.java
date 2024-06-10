@@ -27,8 +27,7 @@ public class BlockDimensionalTransciever extends BlockContainer implements IMode
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

@@ -26,23 +26,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemFilter extends Item implements IModelRegisterer {
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand hand) {
 		p.openGui(EssentialCraftCore.core, Config.guiID[0], w, 0, -1, 0);
 		return super.onItemRightClick(w, p, hand);
 	}
 
-	protected int containerMatchesItem(Container openContainer)
-	{
+	protected int containerMatchesItem(Container openContainer) {
 		return 0;
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
-	{
+	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
 		if(isInCreativeTab(par2CreativeTabs)) {
-			for(int var4 = 0; var4 < 4; ++var4)
-			{
+			for(int var4 = 0; var4 < 4; ++var4) {
 				ItemStack min = new ItemStack(this, 1, var4);
 				list.add(min);
 			}
@@ -51,8 +47,7 @@ public class ItemFilter extends Item implements IModelRegisterer {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
 		if(stack.getItemDamage() == 1 || stack.getItemDamage() == 3) {
 			list.add(I18n.translateToLocal("essentialcraft.txt.desc.advanced"));
 		}
@@ -65,26 +60,21 @@ public class ItemFilter extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem)
-	{
-		if (world.isRemote || !isCurrentItem || !(entity instanceof EntityPlayer))
-		{
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
+		if (world.isRemote || !isCurrentItem || !(entity instanceof EntityPlayer)) {
 			return;
 		}
-		if(((EntityPlayer)entity).openContainer == null || !(((EntityPlayer) entity).openContainer instanceof ContainerFilter))
-		{
+		if(((EntityPlayer)entity).openContainer == null || !(((EntityPlayer) entity).openContainer instanceof ContainerFilter)) {
 			return;
 		}
 		int containerType = containerMatchesItem(((EntityPlayer)entity).openContainer);
-		if (containerType == 0)
-		{
+		if (containerType == 0) {
 			ContainerFilter c = (ContainerFilter)((EntityPlayer)entity).openContainer;
 			c.saveToNBT(itemStack);
 		}
 	}
 
-	public ItemFilter()
-	{
+	public ItemFilter() {
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}

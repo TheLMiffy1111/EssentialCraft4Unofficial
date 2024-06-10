@@ -25,8 +25,7 @@ public class BlockMRUCUECHoldingChamber extends BlockContainer implements IModel
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

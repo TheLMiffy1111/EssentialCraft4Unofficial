@@ -10,26 +10,22 @@ public class BiomeHoannaDreadlands extends Biome
 	public int waterColor = 16777215;
 	public int leavesColor = 16777215;
 
-	public BiomeHoannaDreadlands setGrassColor(int i)
-	{
+	public BiomeHoannaDreadlands setGrassColor(int i) {
 		grassColor = i;
 		return this;
 	}
 
-	public BiomeHoannaDreadlands setWaterColor(int i)
-	{
+	public BiomeHoannaDreadlands setWaterColor(int i) {
 		waterColor = i;
 		return this;
 	}
 
-	public BiomeHoannaDreadlands setLeavesColor(int i)
-	{
+	public BiomeHoannaDreadlands setLeavesColor(int i) {
 		leavesColor = i;
 		return this;
 	}
 
-	public BiomeHoannaDreadlands(BiomeProperties par1)
-	{
+	public BiomeHoannaDreadlands(BiomeProperties par1) {
 		super(par1);
 		topBlock = BlocksCore.dreadDirt.getDefaultState();
 		fillerBlock = BlocksCore.dreadDirt.getDefaultState();
@@ -42,31 +38,26 @@ public class BiomeHoannaDreadlands extends Biome
 		spawnableCreatureList.clear();
 	}
 
-	public int getBiomeGrassColor()
-	{
+	public int getBiomeGrassColor() {
 		return grassColor;
 	}
 
-	public int getBiomeFoliageColor()
-	{
+	public int getBiomeFoliageColor() {
 		return leavesColor;
 	}
 
 	@Override
-	public int getWaterColorMultiplier()
-	{
+	public int getWaterColorMultiplier() {
 		return waterColor;
 	}
 
 	@Override
-	public int getModdedBiomeGrassColor(int original)
-	{
+	public int getModdedBiomeGrassColor(int original) {
 		return grassColor;
 	}
 
 	@Override
-	public int getModdedBiomeFoliageColor(int original)
-	{
+	public int getModdedBiomeFoliageColor(int original) {
 		return leavesColor;
 	}
 }

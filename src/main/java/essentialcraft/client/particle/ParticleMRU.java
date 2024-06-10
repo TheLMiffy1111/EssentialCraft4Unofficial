@@ -22,8 +22,7 @@ public class ParticleMRU extends Particle{
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
 	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft", "textures/special/particles.png");
 
-	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k)
-	{
+	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k) {
 		super(w, x, y, z, i, j, k);
 		motionX = i;
 		motionY = j;
@@ -42,8 +41,7 @@ public class ParticleMRU extends Particle{
 		setParticleTextureIndex((int)(Math.random() * 8D));
 	}
 
-	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k, double cR, double cG, double cB)
-	{
+	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k, double cR, double cG, double cB) {
 		this(w, x, y, z, i, j, k);
 		particleRed = (float) cR;
 		particleGreen = (float) cG;
@@ -56,14 +54,12 @@ public class ParticleMRU extends Particle{
 	}
 
 	@Override
-	public void renderParticle(BufferBuilder var1, Entity var2, float par2, float par3, float par4, float par5, float par6, float par7)
-	{
+	public void renderParticle(BufferBuilder var1, Entity var2, float par2, float par3, float par4, float par5, float par6, float par7) {
 		TessellatorWrapper.getInstance().draw().begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 		Minecraft.getMinecraft().renderEngine.bindTexture(ecparticleTextures);
 		boolean enabled = GL11.glIsEnabled(GL11.GL_BLEND);
 		GlStateManager.enableBlend();
-		if(ECUtils.canPlayerSeeMRU(Minecraft.getMinecraft().player))
-		{
+		if(ECUtils.canPlayerSeeMRU(Minecraft.getMinecraft().player)) {
 			float sc = particleScale;
 			float cR = particleRed;
 			float cG = particleGreen;
@@ -90,16 +86,14 @@ public class ParticleMRU extends Particle{
 	}
 
 	@Override
-	public int getBrightnessForRender(float p_70070_1_)
-	{
+	public int getBrightnessForRender(float p_70070_1_) {
 		return 255;
 	}
 
 	/**
 	 * Gets how bright this entity is.
 	 */
-	public float getBrightness(float p_70013_1_)
-	{
+	public float getBrightness(float p_70013_1_) {
 		float f1 = super.getBrightnessForRender(p_70013_1_);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
@@ -110,8 +104,7 @@ public class ParticleMRU extends Particle{
 	 * Called to update the entity's position/logic.
 	 */
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		tickPos += 15+world.rand.nextFloat()*15;
 		if(particleAge < particleMaxAge/2) {
 			setParticleTextureIndex(7 - particleAge * 8 / (particleMaxAge/2));
@@ -127,8 +120,7 @@ public class ParticleMRU extends Particle{
 		posY = mruPosY + motionY * f + Math.cos(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
 		posZ = mruPosZ + motionZ * f - Math.sin(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
 
-		if (particleAge++ >= particleMaxAge)
-		{
+		if (particleAge++ >= particleMaxAge) {
 			setExpired();
 		}
 	}

@@ -16,14 +16,12 @@ public class ItemMonocle extends Item implements IMRUVisibilityHandler, IModelRe
 	}
 
 	@Override
-	public boolean isFull3D()
-	{
+	public boolean isFull3D() {
 		return true;
 	}
 
 	@Override
-	public int getItemEnchantability()
-	{
+	public int getItemEnchantability() {
 		return 10;
 	}
 

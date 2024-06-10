@@ -29,20 +29,14 @@ public class ItemLifeStaff extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(ECUtils.playerUseMRU(player, stack, 100))
-		{
-			if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(), stack.getItemDamage(), stack.getCount()+1), world, pos, player, hand))
-			{
-				for(int px = -5; px <= 5; ++px)
-				{
-					for(int pz = -5; pz <= 5; ++pz)
-					{
+		if(ECUtils.playerUseMRU(player, stack, 100)) {
+			if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(), stack.getItemDamage(), stack.getCount()+1), world, pos, player, hand)) {
+				for(int px = -5; px <= 5; ++px) {
+					for(int pz = -5; pz <= 5; ++pz) {
 						if(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() >= 100) {
-							if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(), stack.getItemDamage(), stack.getCount()+1), world, pos.add(px, 0, pz), player, hand))
-							{
+							if(ItemDye.applyBonemeal(new ItemStack(stack.getItem(), stack.getItemDamage(), stack.getCount()+1), world, pos.add(px, 0, pz), player, hand)) {
 								ECUtils.playerUseMRU(player, stack, 100);
 							}
 						}
@@ -54,18 +48,14 @@ public class ItemLifeStaff extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
-	{
-		if(entity instanceof EntityZombieVillager)
-		{
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		if(entity instanceof EntityZombieVillager) {
 			EntityZombieVillager e = (EntityZombieVillager)entity;
-			if(ECUtils.playerUseMRU(player, stack, 500) && !e.getEntityWorld().isRemote)
-			{
+			if(ECUtils.playerUseMRU(player, stack, 500) && !e.getEntityWorld().isRemote) {
 				EntityVillager entityvillager = new EntityVillager(e.getEntityWorld());
 				entityvillager.copyLocationAndAnglesFrom(e);
 				entityvillager.onInitialSpawn(entity.getEntityWorld().getDifficultyForLocation(entity.getPosition()), (IEntityLivingData)null);
-				if (e.isChild())
-				{
+				if (e.isChild()) {
 					entityvillager.setGrowingAge(-24000);
 				}
 
@@ -76,11 +66,9 @@ public class ItemLifeStaff extends ItemMRUGeneric implements IModelRegisterer {
 			}
 			return true;
 		}
-		if(entity instanceof EntityAgeable)
-		{
+		if(entity instanceof EntityAgeable) {
 			EntityAgeable e = (EntityAgeable) entity;
-			if(e.isChild() && ECUtils.playerUseMRU(player, stack, 100) && !e.getEntityWorld().isRemote)
-			{
+			if(e.isChild() && ECUtils.playerUseMRU(player, stack, 100) && !e.getEntityWorld().isRemote) {
 				e.setGrowingAge(0);
 			}
 		}

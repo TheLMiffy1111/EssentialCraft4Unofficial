@@ -22,8 +22,7 @@ public class RenderMithrilineCrystal extends TileEntitySpecialRenderer<TileMithr
 	public static final ResourceLocation textures_shade = new ResourceLocation("essentialcraft:textures/models/shadecrystal.png");
 	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/mithrilinecrystal.obj"));
 
-	public void doRender(TileMithrilineCrystal tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMithrilineCrystal tile, double x, double y, double z, float partialTicks) {
 		int meta = tile.getBlockMetadata();
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.pushMatrix();

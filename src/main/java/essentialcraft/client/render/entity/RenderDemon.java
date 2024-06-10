@@ -22,21 +22,18 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 	private static final ResourceLocation endermanTextures = new ResourceLocation("essentialcraft", "textures/entities/demon.png");
 	/** The model of the enderman */
 	private ModelDemon endermanModel;
-	public RenderDemon()
-	{
+	public RenderDemon() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelDemon(1, 0, 64, 32), 0.5F);
 		endermanModel = (ModelDemon)super.mainModel;
 	}
 
-	public RenderDemon(RenderManager rm)
-	{
+	public RenderDemon(RenderManager rm) {
 		super(rm, new ModelDemon(1, 0, 64, 32), 0.5F);
 		endermanModel = (ModelDemon)super.mainModel;
 	}
 
 	@Override
-	protected void preRenderCallback(EntityDemon entity, float partialTicks)
-	{
+	protected void preRenderCallback(EntityDemon entity, float partialTicks) {
 		float s = 1.4F;
 		GlStateManager.scale(s, s, s);
 	}
@@ -54,10 +51,8 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 		return endermanTextures;
 	}
 
-	protected int shouldRenderPass(EntityDemon partialTicks, int p_77032_2_, float p_77032_3_)
-	{
-		if(p_77032_2_ != 0)
-		{
+	protected int shouldRenderPass(EntityDemon partialTicks, int p_77032_2_, float p_77032_3_) {
+		if(p_77032_2_ != 0) {
 			return -1;
 		}
 		bindTexture(endermanEyesTexture);
@@ -67,12 +62,10 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 		GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 		GlStateManager.disableLighting();
 
-		if (partialTicks.isInvisible())
-		{
+		if (partialTicks.isInvisible()) {
 			GlStateManager.depthMask(false);
 		}
-		else
-		{
+		else {
 			GlStateManager.depthMask(true);
 		}
 

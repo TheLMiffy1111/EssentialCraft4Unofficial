@@ -59,8 +59,7 @@ public class BlockChestEC extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		list.add(new ItemStack(this, 1, 0));
 		list.add(new ItemStack(this, 1, 1));
 	}
@@ -102,8 +101,7 @@ public class BlockChestEC extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public int damageDropped(IBlockState s)
-	{
+	public int damageDropped(IBlockState s) {
 		return s.getValue(TYPE).getIndex();
 	}
 

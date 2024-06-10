@@ -84,13 +84,11 @@ public class RenderCloudsHoanna extends IRenderHandler{
 					if (EntityRenderer.anaglyphField == 0) {
 						GlStateManager.colorMask(false, true, true, true);
 					}
-					else
-					{
+					else {
 						GlStateManager.colorMask(true, false, false, true);
 					}
 				}
-				else
-				{
+				else {
 					GlStateManager.colorMask(true, true, true, true);
 				}
 

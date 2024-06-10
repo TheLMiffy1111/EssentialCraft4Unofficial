@@ -17,8 +17,7 @@ public class RenderMIM extends TileEntitySpecialRenderer<TileMIM>
 	public static final ResourceLocation vtextures = new ResourceLocation("essentialcraft:textures/blocks/voidstone.png");
 	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/mim.obj"));
 
-	public void doRender(TileMIM t, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMIM t, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y, (float)z+0.5F);

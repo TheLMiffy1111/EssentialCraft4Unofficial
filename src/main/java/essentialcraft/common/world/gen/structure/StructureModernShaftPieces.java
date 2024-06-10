@@ -63,22 +63,17 @@ public class StructureModernShaftPieces {
 	}
 
 	private static StructureComponent getNextMineShaftComponent(StructureComponent parent, List<StructureComponent> components, Random rand, int x, int y, int z, EnumFacing facing, int index) {
-		if(index > 8) {
+		if((index > 8) || (Math.abs(x - parent.getBoundingBox().minX) > 80) || (Math.abs(z - parent.getBoundingBox().minZ) > 80)) {
 			return null;
 		}
-		if(Math.abs(x - parent.getBoundingBox().minX) <= 80 && Math.abs(z - parent.getBoundingBox().minZ) <= 80) {
-			StructureComponent structurecomponent1 = getRandomComponent(components, rand, x, y, z, facing, index + 1);
+		StructureComponent structurecomponent1 = getRandomComponent(components, rand, x, y, z, facing, index + 1);
 
-			if(structurecomponent1 != null) {
-				components.add(structurecomponent1);
-				structurecomponent1.buildComponent(parent, components, rand);
-			}
+		if(structurecomponent1 != null) {
+			components.add(structurecomponent1);
+			structurecomponent1.buildComponent(parent, components, rand);
+		}
 
-			return structurecomponent1;
-		}
-		else {
-			return null;
-		}
+		return structurecomponent1;
 	}
 
 	public static class Corridor extends StructureComponent {

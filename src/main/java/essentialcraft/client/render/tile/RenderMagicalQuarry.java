@@ -16,12 +16,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderMagicalQuarry extends TileEntitySpecialRenderer<TileMagicalQuarry>
 {
-	public void doRender(TileMagicalQuarry tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMagicalQuarry tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
-		if(tile.miningX == 0 && tile.miningY == 0 && tile.miningZ == 0)
-		{}else
-		{
+		if(tile.miningX == 0 && tile.miningY == 0 && tile.miningZ == 0) {}
+else {
 			GlStateManager.pushMatrix();
 			float[] o = {tile.miningX, tile.miningY+0.5F, tile.miningZ};
 			GlStateManager.popMatrix();
@@ -55,8 +53,7 @@ public class RenderMagicalQuarry extends TileEntitySpecialRenderer<TileMagicalQu
 			tessellator.startDrawing(5);
 			byte b0 = 8;
 
-			for (int i = 0; i <= b0; ++i)
-			{
+			for (int i = 0; i <= b0; ++i) {
 				float f11 = MathHelper.sin(i % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 				float f12 = MathHelper.cos(i % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 				float f13 = i % b0 * 1F / b0;

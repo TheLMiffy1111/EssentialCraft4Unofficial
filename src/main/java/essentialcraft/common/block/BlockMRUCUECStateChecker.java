@@ -43,8 +43,7 @@ public class BlockMRUCUECStateChecker extends BlockContainer implements IModelRe
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

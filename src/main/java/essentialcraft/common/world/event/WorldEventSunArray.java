@@ -33,23 +33,19 @@ public class WorldEventSunArray implements IWorldEvent{
 	public void playerTick(EntityPlayer p, int leftoverTime) {
 		boolean ignoreSun = false;
 		IBaublesItemHandler b = BaublesApi.getBaublesHandler(p);
-		if(b != null)
-		{
-			for(int i = 0; i < b.getSlots(); ++i)
-			{
+		if(b != null) {
+			for(int i = 0; i < b.getSlots(); ++i) {
 				ItemStack is = b.getStackInSlot(i);
 				if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 19) {
 					ignoreSun = true;
 				}
 			}
 		}
-		if(!p.capabilities.isCreativeMode && p.dimension == Config.dimensionID && p.getEntityWorld().canBlockSeeSky(new BlockPos(MathHelper.floor(p.posX), MathHelper.floor(p.posY+2), MathHelper.floor(p.posZ))) && !ignoreSun)
-		{
+		if(!p.capabilities.isCreativeMode && p.dimension == Config.dimensionID && p.getEntityWorld().canBlockSeeSky(new BlockPos(MathHelper.floor(p.posX), MathHelper.floor(p.posY+2), MathHelper.floor(p.posZ))) && !ignoreSun) {
 			p.attackEntityFrom(DamageSource.ON_FIRE, 1);
 			p.setFire(10);
 		}
-		if(p.dimension == Config.dimensionID)
-		{
+		if(p.dimension == Config.dimensionID) {
 			EntityFallingBlock sand = new EntityFallingBlock(p.getEntityWorld(), Math.floor(p.posX+MathUtils.randomDouble(p.getEntityWorld().rand)*128)+0.5D, 255, Math.floor(p.posZ+MathUtils.randomDouble(p.getEntityWorld().rand)*128)+0.5D, Blocks.FIRE.getDefaultState());
 			sand.fallTime = 3;
 			sand.shouldDropItem = false;

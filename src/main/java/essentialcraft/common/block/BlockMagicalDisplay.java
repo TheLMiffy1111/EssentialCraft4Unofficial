@@ -42,14 +42,12 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemsCore.genericItem;
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_)
-	{
+	public int damageDropped(IBlockState p_149692_1_) {
 		return 27;
 	}
 
@@ -71,20 +69,18 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, BlockPos pos, IBlockState par3, EntityPlayer p, EnumHand par5, EnumFacing p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
-	{
+	public boolean onBlockActivated(World w, BlockPos pos, IBlockState par3, EntityPlayer p, EnumHand par5, EnumFacing p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
 		ItemStack is = p.getHeldItem(par5);
 		TileMagicalDisplay display = (TileMagicalDisplay)w.getTileEntity(pos);
-		if(!is.isEmpty())
-		{
-			if(display.getStackInSlot(0).isEmpty())
-			{
+		if(!is.isEmpty()) {
+			if(display.getStackInSlot(0).isEmpty()) {
 				ItemStack sett = is.copy();
 				sett.setCount(1);
 				display.setInventorySlotContents(0, sett);
 				p.inventory.decrStackSize(p.inventory.currentItem, 1);
 
-			}else {
+			}
+else {
 				ItemStack dropped = display.getStackInSlot(0);
 				if(!dropped.isEmpty() && !w.isRemote) {
 					if(dropped.getCount() == 0) {
@@ -98,8 +94,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 			}
 			display.syncTick = 0;
 		}
-		else if(p.isSneaking())
-		{
+		else if(p.isSneaking()) {
 			ItemStack dropped = display.getStackInSlot(0);
 			if(!dropped.isEmpty() && !w.isRemote) {
 				if(dropped.getCount() == 0) {
@@ -112,8 +107,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 				display.syncTick = 1;
 			}
 		}
-		else
-		{
+		else {
 			++display.type;
 			if(display.type >= 3) {
 				display.type = 0;
@@ -124,51 +118,41 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase p)
-	{
+	public IBlockState getStateForPlacement(World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase p) {
 		return getDefaultState().withProperty(FACING, side);
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		int metadata = state.getValue(FACING).getIndex();
-		if(metadata == 0)
-		{
+		if(metadata == 0) {
 			return new AxisAlignedBB(0, 0.95F, 0, 1, 1, 1F);
 		}
-		if(metadata == 1)
-		{
+		if(metadata == 1) {
 			return new AxisAlignedBB(0, 0, 0, 1, 0.05F, 1F);
 		}
-		if(metadata == 2)
-		{
+		if(metadata == 2) {
 			return new AxisAlignedBB(0, 0, 0.95F, 1, 1, 1F);
 		}
-		if(metadata == 3)
-		{
+		if(metadata == 3) {
 			return new AxisAlignedBB(0, 0, 0F, 1, 1, 0.05F);
 		}
-		if(metadata == 4)
-		{
+		if(metadata == 4) {
 			return new AxisAlignedBB(0.95F, 0, 0, 1, 1, 1F);
 		}
-		if(metadata == 5)
-		{
+		if(metadata == 5) {
 			return new AxisAlignedBB(0, 0, 0, 0.05F, 1, 1);
 		}
 		return super.getBoundingBox(state, source, pos);
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState s)
-	{
+	public boolean isFullCube(IBlockState s) {
 		return false;
 	}
 

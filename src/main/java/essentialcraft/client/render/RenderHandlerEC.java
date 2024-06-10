@@ -127,58 +127,46 @@ public class RenderHandlerEC {
 
 	public static HashMap<IInventory, HashMap<Integer, List<EnumFacing>>> slotsTable = new HashMap<>();
 
-	public void renderParadox()
-	{
+	public void renderParadox() {
 		Minecraft mc = Minecraft.getMinecraft();
 		ScaledResolution scaledresolution = new ScaledResolution(mc);
 		int k = scaledresolution.getScaledWidth();
 		int l = scaledresolution.getScaledHeight();
-		if(currentParadoxTicks >= 190)
-		{
+		if(currentParadoxTicks >= 190) {
 			renderImage(whitebox, k, l, 1, 0, 0, 0);
 
 		}
-		if(paradoxID == 0)
-		{
-			if(currentParadoxTicks == 199)
-			{
+		if(paradoxID == 0) {
+			if(currentParadoxTicks == 199) {
 				mc.player.getEntityWorld().playSound(mc.player.posX, mc.player.posY, mc.player.posZ, SoundEvents.AMBIENT_CAVE, SoundCategory.AMBIENT, 100, 0.01F, false);
 			}
-			if(currentParadoxTicks == 199)
-			{
+			if(currentParadoxTicks == 199) {
 				MiscUtils.setShaders(5);
 			}
-			if(currentParadoxTicks <= 10)
-			{
+			if(currentParadoxTicks <= 10) {
 				MiscUtils.setShaders(-1);
 				renderImage(whitebox, k, l, 1, 1, 1, 1);
 			}
 			if(currentParadoxTicks >= 10) {
-				for(int i = 0; i < 20; ++i)
-				{
+				for(int i = 0; i < 20; ++i) {
 					mc.world.spawnParticle(EnumParticleTypes.REDSTONE, mc.player.posX+MathUtils.randomDouble(mc.world.rand)*16, mc.player.posY+MathUtils.randomDouble(mc.world.rand)*16, mc.player.posZ+MathUtils.randomDouble(mc.world.rand)*16, -1, 0, 0);
 				}
 			}
 		}
-		if(paradoxID == 1)
-		{
-			if(currentParadoxTicks >= 190)
-			{
+		if(paradoxID == 1) {
+			if(currentParadoxTicks >= 190) {
 				renderImage(whitebox, k, l, 1, 0, 0, 0);
 			}
-			if(currentParadoxTicks == 190)
-			{
+			if(currentParadoxTicks == 190) {
 				MiscUtils.setShaders(16);
 				World w = mc.world;
 				WorldProvider prov = w.provider;
-				if(!(prov.getSkyRenderer() instanceof RenderSkyParadox))
-				{
+				if(!(prov.getSkyRenderer() instanceof RenderSkyParadox)) {
 					skyRenderer = prov.getSkyRenderer();
 					prov.setSkyRenderer(new RenderSkyParadox());
 				}
 			}
-			if(currentParadoxTicks <= 10)
-			{
+			if(currentParadoxTicks <= 10) {
 				MiscUtils.setShaders(-1);
 				renderImage(whitebox, k, l, 1, 1, 1, 1);
 				World w = mc.world;
@@ -186,61 +174,48 @@ public class RenderHandlerEC {
 				prov.setSkyRenderer(skyRenderer);
 			}
 		}
-		if(paradoxID == 2)
-		{
-			if(currentParadoxTicks >= 190)
-			{
+		if(paradoxID == 2) {
+			if(currentParadoxTicks >= 190) {
 				renderImage(whitebox, k, l, 1, 0, 0, 0);
 			}
-			if(currentParadoxTicks == 190)
-			{
+			if(currentParadoxTicks == 190) {
 				MiscUtils.setShaders(12);
 			}
-			if(currentParadoxTicks < 190 && currentParadoxTicks > 10)
-			{
-				if(explosion == null)
-				{
+			if(currentParadoxTicks < 190 && currentParadoxTicks > 10) {
+				if(explosion == null) {
 					explosion = new Coord3D(mc.player.posX+MathUtils.randomDouble(mc.world.rand)*32, mc.player.posY+32, mc.player.posZ+MathUtils.randomDouble(mc.world.rand)*32);
 
 				}
-				else
-				{
+				else {
 					mc.world.playSound(explosion.x, explosion.y, explosion.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 3, 0.1F, true);
 					mc.world.createExplosion(null, explosion.x, explosion.y, explosion.z, 5, false);
 					explosion.y -= 0.5F;
-					if(explosion.y < mc.player.posY-10)
-					{
+					if(explosion.y < mc.player.posY-10) {
 						explosion = null;
 					}
 				}
 			}
-			if(currentParadoxTicks <= 10)
-			{
+			if(currentParadoxTicks <= 10) {
 				MiscUtils.setShaders(-1);
 				renderImage(whitebox, k, l, 1, 1, 1, 1);
 			}
 		}
-		if(paradoxID == 3)
-		{
-			if(currentParadoxTicks >= 190)
-			{
+		if(paradoxID == 3) {
+			if(currentParadoxTicks >= 190) {
 				renderImage(whitebox, k, l, 1, 0, 0, 0);
 			}
-			if(currentParadoxTicks == 190)
-			{
+			if(currentParadoxTicks == 190) {
 				MiscUtils.setShaders(8);
 			}
 			mc.player.motionY += 0.04F;
-			if(currentParadoxTicks <= 10)
-			{
+			if(currentParadoxTicks <= 10) {
 				MiscUtils.setShaders(-1);
 				renderImage(whitebox, k, l, 1, 1, 1, 1);
 			}
 		}
 	}
 
-	public static IInventory getInventoryFromContainer(GuiContainer gc)
-	{
+	public static IInventory getInventoryFromContainer(GuiContainer gc) {
 		for(Slot slt : gc.inventorySlots.inventorySlots) {
 			if(slt != null) {
 				return slt.inventory;
@@ -463,12 +438,10 @@ public class RenderHandlerEC {
 				GlStateManager.glEnd();
 
 
-				if (depth)
-				{
+				if (depth) {
 					GlStateManager.enableDepth();
 				}
-				if (texture)
-				{
+				if (texture) {
 					GlStateManager.enableTexture2D();
 				}
 
@@ -478,11 +451,9 @@ public class RenderHandlerEC {
 				GlStateManager.popMatrix();
 			}
 
-			if(is.getItem() instanceof ItemMagicalBuilder)
-			{
+			if(is.getItem() instanceof ItemMagicalBuilder) {
 				ItemMagicalBuilder builder = (ItemMagicalBuilder)is.getItem();
-				if(builder.hasFirstPoint(is) && !builder.hasSecondPoint(is))
-				{
+				if(builder.hasFirstPoint(is) && !builder.hasSecondPoint(is)) {
 					Coord3D c = builder.getFirstPoint(is);
 
 					AxisAlignedBB aabb = new AxisAlignedBB(c.x, c.y, c.z, c.x+1, c.y+1, c.z+1);
@@ -533,12 +504,10 @@ public class RenderHandlerEC {
 					GlStateManager.glEnd();
 
 
-					if (depth)
-					{
+					if (depth) {
 						GlStateManager.enableDepth();
 					}
-					if (texture)
-					{
+					if (texture) {
 						GlStateManager.enableTexture2D();
 					}
 
@@ -548,8 +517,7 @@ public class RenderHandlerEC {
 					GlStateManager.popMatrix();
 
 				}
-				else if(builder.hasFirstPoint(is) && builder.hasSecondPoint(is))
-				{
+				else if(builder.hasFirstPoint(is) && builder.hasSecondPoint(is)) {
 					Coord3D c = builder.getFirstPoint(is);
 					Coord3D c1 = builder.getSecondPoint(is);
 
@@ -601,12 +569,10 @@ public class RenderHandlerEC {
 					GlStateManager.glEnd();
 
 
-					if (depth)
-					{
+					if (depth) {
 						GlStateManager.enableDepth();
 					}
-					if (texture)
-					{
+					if (texture) {
 						GlStateManager.enableTexture2D();
 					}
 
@@ -1142,15 +1108,11 @@ public class RenderHandlerEC {
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void onClientRenderTick(RenderGameOverlayEvent.Pre event)
-	{
-		if(event.getType() != ElementType.ALL)
-		{
+	public void onClientRenderTick(RenderGameOverlayEvent.Pre event) {
+		if(event.getType() != ElementType.ALL) {
 			EntityPlayer p = Minecraft.getMinecraft().player;
-			if(!p.getHeldItemMainhand().isEmpty() && p.getHeldItemMainhand().getItem() instanceof ItemGun && p.isSneaking() && p.getHeldItemMainhand().getTagCompound() != null && p.getHeldItemMainhand().getTagCompound().hasKey("scope") && ((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper"))
-			{
-				if(event.getType() == ElementType.CROSSHAIRS)
-				{
+			if(!p.getHeldItemMainhand().isEmpty() && p.getHeldItemMainhand().getItem() instanceof ItemGun && p.isSneaking() && p.getHeldItemMainhand().getTagCompound() != null && p.getHeldItemMainhand().getTagCompound().hasKey("scope") && ((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper")) {
+				if(event.getType() == ElementType.CROSSHAIRS) {
 					Minecraft mc = Minecraft.getMinecraft();
 					ScaledResolution scaledresolution = new ScaledResolution(mc);
 					int k = scaledresolution.getScaledWidth();

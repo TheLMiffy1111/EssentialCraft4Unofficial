@@ -25,20 +25,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHolder>
 {
 
-	public void doRender(TileMonsterHolder tile, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMonsterHolder tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		List<EntityLivingBase> lst = tile.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(tile.getPos().getX()-32, tile.getPos().getY()-32, tile.getPos().getZ()-32, tile.getPos().getX()+33, tile.getPos().getY()+33, tile.getPos().getZ()+33));
-		if(!lst.isEmpty() && tile.getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null).getMRU() > lst.size())
-		{
+		if(!lst.isEmpty() && tile.getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null).getMRU() > lst.size()) {
 			for(EntityLivingBase e : lst) {
-				if(!(e instanceof EntityPlayer))
-				{
+				if(!(e instanceof EntityPlayer)) {
 					Coord3D tilePos = new Coord3D(tile.getPos().getX()+0.5D, tile.getPos().getY()+0.5D, tile.getPos().getZ()+0.5D);
 					Coord3D mobPosition = new Coord3D(e.posX, e.posY, e.posZ);
 					DummyDistance dist = new DummyDistance(tilePos, mobPosition);
-					if(dist.getDistance() < 10)
-					{
+					if(dist.getDistance() < 10) {
 						GlStateManager.pushMatrix();
 						double[] o = {e.posX-0.5D, e.posY+e.getEyeHeight()+0.5D, e.posZ-0.5D};
 						float f21 = 0 + partialTicks;
@@ -69,8 +65,7 @@ public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHo
 						tessellator.startDrawingWithColor(5);
 						byte b0 = 8;
 
-						for (int i1 = 0; i1 <= b0; ++i1)
-						{
+						for (int i1 = 0; i1 <= b0; ++i1) {
 							float f11 = MathHelper.sin(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 							float f12 = MathHelper.cos(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 							float f13 = i1 % b0 * 1F / b0;

@@ -46,10 +46,10 @@ public class BlockMIMImporter extends BlockContainer implements IModelRegisterer
 		if(metadata == 1) {
 			return new AxisAlignedBB(0.35F, 0.8F, 0.35F, 0.65F, 1F, 0.65F);
 		}
-		else if(metadata == 2) {
+		if(metadata == 2) {
 			return new AxisAlignedBB(0.35F, 0.35F, 0F, 0.65F, 0.65F, 0.2F);
 		}
-		else if(metadata == 3) {
+		if(metadata == 3) {
 			return new AxisAlignedBB(0.35F, 0.35F, 0.8F, 0.65F, 0.65F, 1F);
 		}
 		else if(metadata == 4) {
@@ -69,20 +69,17 @@ public class BlockMIMImporter extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState s)
-	{
+	public boolean isNormalCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

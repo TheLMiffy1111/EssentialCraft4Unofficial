@@ -27,34 +27,28 @@ public class BlockMetadataManager extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean canProvidePower(IBlockState s)
-	{
+	public boolean canProvidePower(IBlockState s) {
 		return true;
 	}
 
 	@Override
-	public void neighborChanged(IBlockState s, World w, BlockPos p, Block n, BlockPos p1)
-	{
-		for(int i = 0; i < 6; ++i)
-		{
+	public void neighborChanged(IBlockState s, World w, BlockPos p, Block n, BlockPos p1) {
+		for(int i = 0; i < 6; ++i) {
 			EnumFacing d = EnumFacing.byIndex(i);
 			Block b = w.getBlockState(p.offset(d)).getBlock();
-			if(b != n && b != this && n != this)
-			{
+			if(b != n && b != this && n != this) {
 				b.neighborChanged(w.getBlockState(p.offset(d)), w, p.offset(d), this, p);
 			}
 		}
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState s, IBlockAccess world, BlockPos p, EnumFacing side)
-	{
+	public boolean canConnectRedstone(IBlockState s, IBlockAccess world, BlockPos p, EnumFacing side) {
 		return side != s.getValue(FACING).getOpposite();
 	}
 
 	@Override
-	public int getWeakPower(IBlockState s, IBlockAccess w, BlockPos p, EnumFacing side)
-	{
+	public int getWeakPower(IBlockState s, IBlockAccess w, BlockPos p, EnumFacing side) {
 		EnumFacing d = s.getValue(FACING);
 		return side != d.getOpposite()? w.getBlockState(p.offset(d)).getBlock().getMetaFromState(w.getBlockState(p.offset(d))) : 0;
 	}

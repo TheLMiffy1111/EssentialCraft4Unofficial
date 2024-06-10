@@ -10,8 +10,7 @@ public class GuiMIMCraftingManager extends GuiContainer{
 
 	TileMIMCraftingManager tile;
 
-	public GuiMIMCraftingManager(InventoryPlayer inventoryPlayer, TileMIMCraftingManager t)
-	{
+	public GuiMIMCraftingManager(InventoryPlayer inventoryPlayer, TileMIMCraftingManager t) {
 		super(new ContainerMIMCraftingManager(inventoryPlayer, t));
 		tile = t;
 

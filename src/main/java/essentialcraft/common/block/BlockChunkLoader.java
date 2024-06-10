@@ -22,8 +22,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockChunkLoader extends BlockContainer implements IModelRegisterer {
 
-	public BlockChunkLoader()
-	{
+	public BlockChunkLoader() {
 		super(Material.ROCK);
 	}
 
@@ -40,8 +39,7 @@ public class BlockChunkLoader extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState s)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState s) {
 		return EnumBlockRenderType.MODEL;
 	}
 

@@ -9,7 +9,7 @@ import essentialcraft.client.gui.element.GuiRepairState;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiMagicalRepairer extends GuiCommon{
+public class GuiMagicalRepairer extends GuiCommon {
 
 	public GuiMagicalRepairer(Container c, TileEntity tile) {
 		super(c, tile);
@@ -19,7 +19,4 @@ public class GuiMagicalRepairer extends GuiCommon{
 		elementList.add(new GuiMRUState(25, 58, tile, 0));
 		elementList.add(new GuiRepairState(25, 40, tile, 0));
 	}
-
-
-
 }

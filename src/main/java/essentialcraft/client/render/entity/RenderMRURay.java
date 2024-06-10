@@ -35,26 +35,22 @@ public class RenderMRURay extends Render<EntityMRURay> {
 		float r = 0;
 		float g = 1;
 		float b = 1;
-		if(ray.balance == 1)
-		{
+		if(ray.balance == 1) {
 			r = 1;
 			g = 0;
 			b = 0;
 		}
-		if(ray.balance == 2)
-		{
+		if(ray.balance == 2) {
 			r = 0;
 			g = 0;
 			b = 1;
 		}
-		if(ray.balance == 3)
-		{
+		if(ray.balance == 3) {
 			r = 1;
 			g = 0;
 			b = 1;
 		}
-		if(ray.balance == 4)
-		{
+		if(ray.balance == 4) {
 			r = 0.3F;
 			g = 0.3F;
 			b = 0.3F;

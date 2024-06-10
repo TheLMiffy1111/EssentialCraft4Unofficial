@@ -16,13 +16,11 @@ public class RenderMagicianTable extends TileEntitySpecialRenderer<TileMagicianT
 {
 	public static final IModelCustom cube = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/cube.obj"));
 
-	public void doRender(TileMagicianTable table, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileMagicianTable table, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y, (float)z+0.5F);
-		if(table.upgrade != -1)
-		{
+		if(table.upgrade != -1) {
 			bindTexture(MagicianTableUpgrades.UPGRADE_TEXTURES.get(table.upgrade));
 			float scale = 0.99F;
 			GlStateManager.translate(0, 0.005F, 0);

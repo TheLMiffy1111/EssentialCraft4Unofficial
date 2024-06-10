@@ -35,8 +35,7 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
 		if(world.isRemote) {
 			return EnumActionResult.SUCCESS;
@@ -74,11 +73,9 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
 		super.addInformation(stack, player, list, par4);
-		if(stack.getTagCompound() != null)
-		{
+		if(stack.getTagCompound() != null) {
 			int[] coord = MiscUtils.getStackTag(stack).getIntArray("pos");
 			list.add("Currently linked to Mirror At:");
 			list.add("x: "+coord[0]);
@@ -88,16 +85,13 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 		}
 	}
 
-	public static int[] getCoords(ItemStack stack)
-	{
+	public static int[] getCoords(ItemStack stack) {
 		return MiscUtils.getStackTag(stack).getIntArray("pos");
 	}
 
 
-	public boolean createTag(ItemStack stack)
-	{
-		if(stack.getTagCompound() == null)
-		{
+	public boolean createTag(ItemStack stack) {
+		if(stack.getTagCompound() == null) {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setIntArray("pos", new int[]{0, 0, 0});
 			return true;

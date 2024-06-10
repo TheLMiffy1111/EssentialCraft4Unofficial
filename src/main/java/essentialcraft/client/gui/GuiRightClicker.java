@@ -6,7 +6,7 @@ import essentialcraft.client.gui.element.GuiMRUStorage;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiRightClicker extends GuiCommon{
+public class GuiRightClicker extends GuiCommon {
 
 	public GuiRightClicker(Container c, TileEntity tile) {
 		super(c, tile);

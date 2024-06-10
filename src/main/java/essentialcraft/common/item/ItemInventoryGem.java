@@ -37,15 +37,13 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 	public static int clickTicks;
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
 		if(stack.getTagCompound() != null && MiscUtils.getStackTag(stack).hasKey("pos")) {
 			return EnumActionResult.PASS;
 		}
 
-		if(world.getBlockState(pos).getBlock() == BlocksCore.rayTower && world.getBlockState(pos).getValue(BlockRayTower.LAYER).getIndexTwo() == 1)
-		{
+		if(world.getBlockState(pos).getBlock() == BlocksCore.rayTower && world.getBlockState(pos).getValue(BlockRayTower.LAYER).getIndexTwo() == 1) {
 			pos = pos.down();
 		}
 		TileEntity t = world.getTileEntity(pos);
@@ -76,11 +74,9 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getTagCompound() != null && !world.isRemote && player.isSneaking())
-		{
+		if(stack.getTagCompound() != null && !world.isRemote && player.isSneaking()) {
 			if(stack.getTagCompound().getBoolean("created")) {
 				stack.setTagCompound(null);
 				world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_NOTE_BASS, SoundCategory.PLAYERS, 1F, 0.01F);
@@ -89,8 +85,7 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 				MiscUtils.getStackTag(stack).setBoolean("created", true);
 			}
 		}
-		if(stack.getTagCompound() != null && world.isRemote && !player.isSneaking())
-		{
+		if(stack.getTagCompound() != null && world.isRemote && !player.isSneaking()) {
 			int[] c = MiscUtils.getStackTag(stack).getIntArray("pos");
 			currentlyClicked = new Coord3D(c[0], c[1], c[2]);
 			clickTicks = 100;
@@ -100,10 +95,8 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
-		if(stack.getTagCompound() != null)
-		{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
+		if(stack.getTagCompound() != null) {
 			int[] coord = MiscUtils.getStackTag(stack).getIntArray("pos");
 			list.add("Currently Bound To Inventory At:");
 			list.add("x: "+coord[0]);
@@ -113,25 +106,21 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 		}
 	}
 
-	public static int[] getCoords(ItemStack stack)
-	{
+	public static int[] getCoords(ItemStack stack) {
 		return MiscUtils.getStackTag(stack).getIntArray("pos");
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
-	{
+	public EnumRarity getRarity(ItemStack stack) {
 		return stack.getTagCompound() != null ? EnumRarity.EPIC : EnumRarity.COMMON;
 	}
 
-	public ItemStack createTag(ItemStack stack)
-	{
+	public ItemStack createTag(ItemStack stack) {
 		ItemStack retStk = stack.copy();
 		retStk.setCount(1);
 		stack.shrink(1);
 
-		if(retStk.getTagCompound() == null)
-		{
+		if(retStk.getTagCompound() == null) {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setIntArray("pos", new int[]{0, 0, 0});
 			return retStk;

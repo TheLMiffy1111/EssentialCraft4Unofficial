@@ -135,10 +135,8 @@ public class ECUtils {
 		return null;
 	}
 
-	public static void changePlayerPositionOnClient(EntityPlayer e)
-	{
-		if(!e.getEntityWorld().isRemote)
-		{
+	public static void changePlayerPositionOnClient(EntityPlayer e) {
+		if(!e.getEntityWorld().isRemote) {
 			DummyData aaa = new DummyData("x", e.posX);
 			DummyData aab = new DummyData("y", e.posY);
 			DummyData aac = new DummyData("z", e.posZ);
@@ -149,8 +147,7 @@ public class ECUtils {
 		}
 	}
 
-	public static void playSoundToAllNearby(double x, double y, double z, String sound, float volume, float pitch, double radius, int dim)
-	{
+	public static void playSoundToAllNearby(double x, double y, double z, String sound, float volume, float pitch, double radius, int dim) {
 		DummyData aaa = new DummyData("x", x);
 		DummyData aab = new DummyData("y", y);
 		DummyData aac = new DummyData("z", z);
@@ -175,42 +172,35 @@ public class ECUtils {
 		}
 	}
 
-	public static void createNBTTag(ItemStack stack)
-	{
-		if(stack.isEmpty() || stack.hasTagCompound())
-		{
+	public static void createNBTTag(ItemStack stack) {
+		if(stack.isEmpty() || stack.hasTagCompound()) {
 			return;
 		}
 		NBTTagCompound itemTag = new NBTTagCompound();
 		stack.setTagCompound(itemTag);
 	}
 
-	public static NBTTagCompound getStackTag(ItemStack stack)
-	{
+	public static NBTTagCompound getStackTag(ItemStack stack) {
 		createNBTTag(stack);
 		return stack.getTagCompound();
 	}
 
-	public static NBTTagCompound getOrCreateNbtData(ItemStack itemStack)
-	{
+	public static NBTTagCompound getOrCreateNbtData(ItemStack itemStack) {
 		NBTTagCompound ret = itemStack.getTagCompound();
-		if(!itemStack.isEmpty() && ret == null)
-		{
+		if(!itemStack.isEmpty() && ret == null) {
 			ret = new NBTTagCompound();
 			itemStack.setTagCompound(ret);
 		}
 		return ret;
 	}
 
-	public static void registerBlockResistance(Block blk, int meta, float resistance)
-	{
+	public static void registerBlockResistance(Block blk, int meta, float resistance) {
 		DummyData dt = new DummyData(blk.getTranslationKey(), meta);
 		IGNORE_META.put(blk.getTranslationKey(), meta == -1);
 		MRU_RESISTANCES.put(dt.toString(), resistance);
 	}
 
-	public static boolean canPlayerSeeMRU(EntityPlayer player)
-	{
+	public static boolean canPlayerSeeMRU(EntityPlayer player) {
 		ItemStack currentItem = player.getHeldItemMainhand();
 		ItemStack offhandItem = player.getHeldItemOffhand();
 
@@ -224,26 +214,19 @@ public class ECUtils {
 				offhandItem.getItem() instanceof IMRUVisibilityHandler && ((IMRUVisibilityHandler)offhandItem.getItem()).canSeeMRU(offhandItem);
 	}
 
-	public static boolean canSpellWork(ItemStack spell, ISpell spell_2, int ubmru, int attune, EntityPlayer player)
-	{
+	public static boolean canSpellWork(ItemStack spell, ISpell spell_2, int ubmru, int attune, EntityPlayer player) {
 		NBTTagCompound tag = MiscUtils.getStackTag(spell);
-		if(tag.hasKey("cooldown"))
-		{
-			if(tag.getInteger("cooldown") <= 0)
-			{
-				if(ubmru >= spell_2.getUBMRURequired(spell))
-				{
-					if(spell_2.getAttunementRequired(spell) == -1 || spell_2.getAttunementRequired(spell) == attune)
-					{
+		if(tag.hasKey("cooldown")) {
+			if(tag.getInteger("cooldown") <= 0) {
+				if(ubmru >= spell_2.getUBMRURequired(spell)) {
+					if(spell_2.getAttunementRequired(spell) == -1 || spell_2.getAttunementRequired(spell) == attune) {
 						return true;
 					}
 				}
 			}
 		}
-		else if(ubmru >= spell_2.getUBMRURequired(spell))
-		{
-			if(spell_2.getAttunementRequired(spell) == -1 || spell_2.getAttunementRequired(spell) == attune)
-			{
+		else if(ubmru >= spell_2.getUBMRURequired(spell)) {
+			if(spell_2.getAttunementRequired(spell) == -1 || spell_2.getAttunementRequired(spell) == attune) {
 				return true;
 			}
 		}
@@ -451,13 +434,10 @@ public class ECUtils {
 		return retFlt;
 	}
 
-	public static void newWorldEvent(World w)
-	{
-		if(WorldEventRegistry.currentEvent == null)
-		{
+	public static void newWorldEvent(World w) {
+		if(WorldEventRegistry.currentEvent == null) {
 			IWorldEvent event = WorldEventRegistry.selectRandomEvent(w);
-			if(event != null && WorldEventRegistry.currentEvent == null)
-			{
+			if(event != null && WorldEventRegistry.currentEvent == null) {
 				WorldEventRegistry.currentEvent = event;
 				WorldEventRegistry.currentEventDuration = event.getEventDuration(w);
 				event.onEventBeginning(w);
@@ -465,30 +445,25 @@ public class ECUtils {
 		}
 	}
 
-	public static void endEvent(World w)
-	{
-		if(WorldEventRegistry.currentEvent != null)
-		{
-			if(WorldEventRegistry.currentEventDuration-20 <= 0)
-			{
+	public static void endEvent(World w) {
+		if(WorldEventRegistry.currentEvent != null) {
+			if(WorldEventRegistry.currentEventDuration-20 <= 0) {
 				WorldEventRegistry.currentEvent.onEventEnd(w);
 				WorldEventRegistry.currentEvent = null;
 				WorldEventRegistry.currentEventDuration = -1;
-			}else
-			{
+			}
+else {
 				WorldEventRegistry.currentEventDuration -= 20;
 			}
 		}
 	}
 
-	public static void requestCurrentEventSyncForPlayer(EntityPlayerMP player)
-	{
+	public static void requestCurrentEventSyncForPlayer(EntityPlayerMP player) {
 		PacketNBT syncPacket = new PacketNBT(ec3WorldTag).setID(2);
 		EssentialCraftCore.network.sendTo(syncPacket, player);
 	}
 
-	public static void requestCurrentEventSync()
-	{
+	public static void requestCurrentEventSync() {
 		PacketNBT syncPacket = new PacketNBT(ec3WorldTag).setID(2);
 		EssentialCraftCore.network.sendToAll(syncPacket);
 	}
@@ -530,22 +505,17 @@ public class ECUtils {
 	 * @param recipeType ID
 	 * @return The actual recipe or null if none found
 	 */
-	public static IRecipe findRecipeByIS(ItemStack searched, int recipeType)
-	{
-		if(recipeType == 0 || recipeType == 1)
-		{
-			for(IRecipe recipe : ForgeRegistries.RECIPES)
-			{
-				if(recipe instanceof ShapedRecipes)
-				{
+	public static IRecipe findRecipeByIS(ItemStack searched, int recipeType) {
+		if(recipeType == 0 || recipeType == 1) {
+			for(IRecipe recipe : ForgeRegistries.RECIPES) {
+				if(recipe instanceof ShapedRecipes) {
 					ShapedRecipes mRecipe = (ShapedRecipes) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
 					if(ItemStack.areItemStackTagsEqual(output, searched) && output.isItemEqual(searched)) {
 						return new ShapedRecipes(mRecipe.getGroup(), mRecipe.recipeWidth, mRecipe.recipeHeight, mRecipe.recipeItems, mRecipe.getRecipeOutput());
 					}
 				}
-				if(recipe instanceof ShapelessRecipes)
-				{
+				if(recipe instanceof ShapelessRecipes) {
 					ShapelessRecipes mRecipe = (ShapelessRecipes) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
 					if(output.isItemEqual(searched)) {
@@ -554,8 +524,7 @@ public class ECUtils {
 				}
 			}
 		}
-		if(recipeType == 2 || recipeType == 3)
-		{
+		if(recipeType == 2 || recipeType == 3) {
 			for(IRecipe recipe : ForgeRegistries.RECIPES) {
 				if(recipe instanceof ShapedOreRecipe) {
 					ShapedOreRecipe mRecipe = (ShapedOreRecipe) recipe;
@@ -665,71 +634,51 @@ public class ECUtils {
 					return true;
 				}
 			}
-		}else
-		{
+		}
+else {
 			boolean ignoreMeta = MiscUtils.getStackTag(filter).getBoolean("ignoreMeta");
 			boolean ignoreNBT = MiscUtils.getStackTag(filter).getBoolean("ignoreNBT");
 			boolean ignoreOreDict = MiscUtils.getStackTag(filter).getBoolean("ignoreOreDict");
-			for(int i = 0; i < filterInventory.getSizeInventory(); ++i)
-			{
+			for(int i = 0; i < filterInventory.getSizeInventory(); ++i) {
 				ItemStack f = filterInventory.getStackInSlot(i);
-				if(f.getItem() instanceof ItemFilter)
-				{
+				if(f.getItem() instanceof ItemFilter) {
 					if(canFilterAcceptItem(new InventoryMagicFilter(f), is, f)) {
 						return true;
 					}
 				}
-				else if(filter.getItemDamage() == 1)
-				{
-					if(oreDictionaryCompare(is, f) || ignoreOreDict)
-					{
-						if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-						{
+				else if(filter.getItemDamage() == 1) {
+					if(oreDictionaryCompare(is, f) || ignoreOreDict) {
+						if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT) {
 							return true;
 						}
-					}else
-					{
-						if(ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta)
-						{
-							if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-							{
-								return true;
-							}
-						}
 					}
-				}else
-				{
-					if(!oreDictionaryCompare(is, f) || ignoreOreDict)
-					{
-						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-						{
+					else if(ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta) {
+						if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT) {
 							return true;
 						}
-						else {
-							return false;
-						}
 					}
-					if(!ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta)
-					{
-						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-						{
+				}
+else {
+					if(!oreDictionaryCompare(is, f) || ignoreOreDict) {
+						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT) {
 							return true;
 						}
-						else {
-							return false;
-						}
-					}
-					else {
 						return false;
 					}
+					if(ItemStack.areItemStacksEqual(is, f) && ((is.getItem() != f.getItem()) || !ignoreMeta)) {
+						return false;
+					}
+					if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT) {
+						return true;
+					}
+					return false;
 				}
 			}
 		}
 		return filter.getItemDamage() > 1;
 	}
 
-	public static void spawnItemFX(TileEntity source, TileEntity destination)
-	{
+	public static void spawnItemFX(TileEntity source, TileEntity destination) {
 		double sX = source.getPos().getX() + 0.5D;
 		double sY = source.getPos().getY() + 0.5D;
 		double sZ = source.getPos().getZ() + 0.5D;
@@ -744,8 +693,7 @@ public class ECUtils {
 		DummyPacketHandler.sendToAll(pkt);
 	}
 
-	public static void spawnItemFX(double sX, double sY, double sZ, double dX, double dY, double dZ)
-	{
+	public static void spawnItemFX(double sX, double sY, double sZ, double dX, double dY, double dZ) {
 		double mX = dX - sX;
 		double mY = dY - sY;
 		double mZ = dZ - sZ;

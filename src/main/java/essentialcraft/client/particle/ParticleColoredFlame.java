@@ -16,8 +16,7 @@ public class ParticleColoredFlame extends Particle {
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
 	private static final ResourceLocation ecparticleTextures = new ResourceLocation("essentialcraft", "textures/special/particles.png");
 
-	public ParticleColoredFlame(World w, double x, double y, double z, double mX, double mY, double mZ)
-	{
+	public ParticleColoredFlame(World w, double x, double y, double z, double mX, double mY, double mZ) {
 		super(w, x, y, z, mX, mY, mZ);
 		motionX = motionX * 0.009999999776482582D + mX;
 		motionY = motionY * 0.009999999776482582D + mY;
@@ -35,8 +34,7 @@ public class ParticleColoredFlame extends Particle {
 		return true;
 	}
 
-	public ParticleColoredFlame(World w, double x, double y, double z, double mX, double mY, double mZ, double r, double g, double b, double scale)
-	{
+	public ParticleColoredFlame(World w, double x, double y, double z, double mX, double mY, double mZ, double r, double g, double b, double scale) {
 		super(w, x, y, z, mX, mY, mZ);
 		motionX = motionX * 0.009999999776482582D + mX;
 		motionY = motionY * 0.009999999776482582D + mY;
@@ -52,8 +50,7 @@ public class ParticleColoredFlame extends Particle {
 	}
 
 	@Override
-	public void renderParticle(BufferBuilder var1, Entity var2, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
-	{
+	public void renderParticle(BufferBuilder var1, Entity var2, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_) {
 		TessellatorWrapper.getInstance().draw().begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 		Minecraft.getMinecraft().renderEngine.bindTexture(ecparticleTextures);
 
@@ -66,17 +63,14 @@ public class ParticleColoredFlame extends Particle {
 	}
 
 	@Override
-	public int getBrightnessForRender(float p_70070_1_)
-	{
+	public int getBrightnessForRender(float p_70070_1_) {
 		float f1 = (particleAge + p_70070_1_) / particleMaxAge;
 
-		if (f1 < 0F)
-		{
+		if (f1 < 0F) {
 			f1 = 0F;
 		}
 
-		if (f1 > 1F)
-		{
+		if (f1 > 1F) {
 			f1 = 1F;
 		}
 
@@ -85,8 +79,7 @@ public class ParticleColoredFlame extends Particle {
 		int k = i >> 16 & 255;
 		j += (int)(f1 * 15F * 16F);
 
-		if (j > 240)
-		{
+		if (j > 240) {
 			j = 240;
 		}
 
@@ -96,17 +89,14 @@ public class ParticleColoredFlame extends Particle {
 	/**
 	 * Gets how bright this entity is.
 	 */
-	public float getBrightness(float p_70013_1_)
-	{
+	public float getBrightness(float p_70013_1_) {
 		float f1 = (particleAge + p_70013_1_) / particleMaxAge;
 
-		if (f1 < 0F)
-		{
+		if (f1 < 0F) {
 			f1 = 0F;
 		}
 
-		if (f1 > 1F)
-		{
+		if (f1 > 1F) {
 			f1 = 1F;
 		}
 
@@ -118,14 +108,12 @@ public class ParticleColoredFlame extends Particle {
 	 * Called to update the entity's position/logic.
 	 */
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		prevPosX = posX;
 		prevPosY = posY;
 		prevPosZ = posZ;
 
-		if (particleAge++ >= particleMaxAge)
-		{
+		if (particleAge++ >= particleMaxAge) {
 			setExpired();
 		}
 
@@ -134,8 +122,7 @@ public class ParticleColoredFlame extends Particle {
 		motionY *= 0.9599999785423279D;
 		motionZ *= 0.9599999785423279D;
 
-		if (onGround)
-		{
+		if (onGround) {
 			motionX *= 0.699999988079071D;
 			motionZ *= 0.699999988079071D;
 		}

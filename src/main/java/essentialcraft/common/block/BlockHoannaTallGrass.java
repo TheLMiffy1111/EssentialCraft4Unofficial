@@ -77,14 +77,12 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	 * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
 	 */
 	@Override
-	public int quantityDroppedWithBonus(int p_149679_1_, Random p_149679_2_)
-	{
+	public int quantityDroppedWithBonus(int p_149679_1_, Random p_149679_2_) {
 		return 1 + p_149679_2_.nextInt(p_149679_1_ * 2 + 1);
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState meta, int fortune)
-	{
+	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState meta, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<>();
 		if(world instanceof World ? ((World)world).rand.nextInt(8) != 0 : RANDOM.nextInt(8) != 0) {
 			return ret;
@@ -133,8 +131,7 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	}
 
 	@Override
-	protected boolean canSustainBush(IBlockState p_149854_1_)
-	{
+	protected boolean canSustainBush(IBlockState p_149854_1_) {
 		return p_149854_1_.getBlock() == Blocks.GRASS || p_149854_1_.getBlock() == Blocks.DIRT || p_149854_1_.getBlock() == Blocks.FARMLAND || p_149854_1_.getBlock() instanceof BlockHoannaTallGrass;
 	}
 

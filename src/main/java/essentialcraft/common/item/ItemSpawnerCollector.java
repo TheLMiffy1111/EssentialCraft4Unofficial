@@ -28,17 +28,14 @@ public class ItemSpawnerCollector extends ItemMRUGeneric implements IModelRegist
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		Block b = world.getBlockState(pos).getBlock();
-		if(b != null && b instanceof BlockMobSpawner)
-		{
+		if(b != null && b instanceof BlockMobSpawner) {
 			if(world.getTileEntity(pos) == null || !(world.getTileEntity(pos) instanceof TileEntityMobSpawner)) {
 				return EnumActionResult.PASS;
 			}
 
-			if(ECUtils.playerUseMRU(player, player.getHeldItem(hand), 5000))
-			{
+			if(ECUtils.playerUseMRU(player, player.getHeldItem(hand), 5000)) {
 				TileEntityMobSpawner t = (TileEntityMobSpawner)world.getTileEntity(pos);
 				NBTTagCompound mobTag = new NBTTagCompound();
 				t.writeToNBT(mobTag);

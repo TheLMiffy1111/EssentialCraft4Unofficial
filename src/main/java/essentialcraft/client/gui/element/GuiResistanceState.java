@@ -10,8 +10,7 @@ public class GuiResistanceState extends GuiTextElement{
 
 	public TileEntity tile;
 
-	public GuiResistanceState(int i, int j, TileEntity t)
-	{
+	public GuiResistanceState(int i, int j, TileEntity t) {
 		super(i, j);
 		tile = t;
 	}
@@ -38,8 +37,7 @@ public class GuiResistanceState extends GuiTextElement{
 
 	@Override
 	public void drawText(int posX, int posY) {
-		if(tile instanceof TileMRUCUECStateChecker)
-		{
+		if(tile instanceof TileMRUCUECStateChecker) {
 			TileMRUCUECController controllerTile = (TileMRUCUECController) ((TileMRUCUECStateChecker)tile).structureController();
 			if(controllerTile != null) {
 				Minecraft.getMinecraft().fontRenderer.drawString(controllerTile.resistance+" MROV", posX+2, posY+5, 0xffffff, true);

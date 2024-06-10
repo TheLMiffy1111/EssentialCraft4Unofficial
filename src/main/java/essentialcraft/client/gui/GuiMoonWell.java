@@ -10,7 +10,7 @@ import essentialcraft.client.gui.element.GuiMoonState;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-public class GuiMoonWell extends GuiCommon{
+public class GuiMoonWell extends GuiCommon {
 
 	public GuiMoonWell(Container c, TileEntity tile) {
 		super(c, tile);

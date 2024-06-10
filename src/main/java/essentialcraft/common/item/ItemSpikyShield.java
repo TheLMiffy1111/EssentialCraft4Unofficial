@@ -26,13 +26,10 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_)
-	{
-		if(p_77654_3_ instanceof EntityPlayer && ECUtils.playerUseMRU((EntityPlayer)p_77654_3_, p_77654_1_, 100))
-		{
+	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_) {
+		if(p_77654_3_ instanceof EntityPlayer && ECUtils.playerUseMRU((EntityPlayer)p_77654_3_, p_77654_1_, 100)) {
 			List<EntityMob> mobs = p_77654_2_.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(p_77654_3_.posX-5, p_77654_3_.posY-2, p_77654_3_.posZ-5, p_77654_3_.posX+5, p_77654_3_.posY+2, p_77654_3_.posZ+5));
-			if(!mobs.isEmpty())
-			{
+			if(!mobs.isEmpty()) {
 				for(EntityMob mob : mobs) {
 					mob.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p_77654_3_), 12F);
 				}
@@ -42,8 +39,7 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-	{
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
 		player.hurtResistantTime = 20;
 	}
 
@@ -51,8 +47,7 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 	 * How long it takes to use or consume an item
 	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
-	{
+	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 40;
 	}
 
@@ -60,8 +55,7 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
-	{
+	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.BLOCK;
 	}
 
@@ -69,10 +63,9 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer, enumHand
 	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand) {
 		if(ECUtils.playerUseMRU(p_77659_3_, p_77659_3_.getHeldItem(hand), 2000)) {
-			;
+
 		}
 		{
 			p_77659_3_.setActiveHand(hand);

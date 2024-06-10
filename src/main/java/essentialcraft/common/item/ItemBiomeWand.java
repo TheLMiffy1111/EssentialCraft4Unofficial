@@ -24,14 +24,12 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 		bFull3D = true;
 	}
 
-	public static boolean isBiomeSaved(ItemStack stack)
-	{
+	public static boolean isBiomeSaved(ItemStack stack) {
 		NBTTagCompound tag = MiscUtils.getStackTag(stack);
 		return tag.hasKey("biome");
 	}
 
-	public static int getBiomeID(ItemStack stack)
-	{
+	public static int getBiomeID(ItemStack stack) {
 		NBTTagCompound tag = MiscUtils.getStackTag(stack);
 		if(isBiomeSaved(stack)) {
 			return tag.getInteger("biome");
@@ -39,11 +37,9 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 		return -1;
 	}
 
-	public static void setBiomeID(ItemStack stack, int bID, boolean remove)
-	{
+	public static void setBiomeID(ItemStack stack, int bID, boolean remove) {
 		NBTTagCompound tag = MiscUtils.getStackTag(stack);
-		if(remove)
-		{
+		if(remove) {
 			tag.removeTag("biome");
 			return;
 		}
@@ -52,32 +48,26 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(!player.isSneaking())
-		{
-			if(isBiomeSaved(stack))
-			{
-				if(ECUtils.playerUseMRU(player, stack, 100))
-				{
-					for(int x = pos.getX()-1; x <= pos.getX()+1; ++x)
-					{
-						for(int z = pos.getZ()-1; z <= pos.getZ()+1; ++z)
-						{
+		if(!player.isSneaking()) {
+			if(isBiomeSaved(stack)) {
+				if(ECUtils.playerUseMRU(player, stack, 100)) {
+					for(int x = pos.getX()-1; x <= pos.getX()+1; ++x) {
+						for(int z = pos.getZ()-1; z <= pos.getZ()+1; ++z) {
 							MiscUtils.changeBiome(world, Biome.getBiome(getBiomeID(stack)), x, z);
 							player.swingArm(hand);
 						}
 					}
 				}
-			}else
-			{
+			}
+else {
 				int cbiome = Biome.getIdForBiome(world.getBiome(pos));
 				setBiomeID(stack, cbiome, false);
 				player.swingArm(hand);
 			}
-		}else
-		{
+		}
+else {
 			setBiomeID(stack, 0, true);
 			player.swingArm(hand);
 		}
@@ -85,8 +75,7 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 	}
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int par2)
-	{
+	public int getColorFromItemstack(ItemStack stack, int par2) {
 		if(isBiomeSaved(stack)) {
 			return Biome.getBiome(getBiomeID(stack)).getFoliageColorAtPos(BlockPos.ORIGIN);
 		}

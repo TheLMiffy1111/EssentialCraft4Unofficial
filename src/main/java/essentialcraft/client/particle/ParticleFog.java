@@ -21,8 +21,7 @@ public class ParticleFog extends Particle{
 	public double red, green, blue;
 	public static final ResourceLocation rec = new ResourceLocation("essentialcraft", "textures/items/particles/fog.png");
 	private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
-	public ParticleFog(World w, double x, double y, double z, double i, double j, double k)
-	{
+	public ParticleFog(World w, double x, double y, double z, double i, double j, double k) {
 		super(w, x, y, z, i, j, k);
 		if(w != null && w.rand != null) {
 			motionX = MathUtils.randomDouble(w.rand);
@@ -47,8 +46,7 @@ public class ParticleFog extends Particle{
 	}
 
 	@Override
-	public void renderParticle(BufferBuilder var1, Entity var2, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
-	{
+	public void renderParticle(BufferBuilder var1, Entity var2, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_) {
 		TessellatorWrapper var3 = TessellatorWrapper.getInstance();
 		var3.draw().begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 		Minecraft.getMinecraft().renderEngine.bindTexture(rec);
@@ -63,8 +61,7 @@ public class ParticleFog extends Particle{
 	}
 
 	@Override
-	public int getBrightnessForRender(float p_70070_1_)
-	{
+	public int getBrightnessForRender(float p_70070_1_) {
 		int i = super.getBrightnessForRender(p_70070_1_);
 		float f1 = (float)particleAge / (float)particleMaxAge;
 		f1 *= f1;
@@ -73,8 +70,7 @@ public class ParticleFog extends Particle{
 		int k = i >> 16 & 255;
 		k += (int)(f1 * 15F * 16F);
 
-		if (k > 240)
-		{
+		if (k > 240) {
 			k = 240;
 		}
 
@@ -84,8 +80,7 @@ public class ParticleFog extends Particle{
 	/**
 	 * Gets how bright this entity is.
 	 */
-	public float getBrightness(float p_70013_1_)
-	{
+	public float getBrightness(float p_70013_1_) {
 		float f1 = super.getBrightnessForRender(p_70013_1_);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
@@ -96,8 +91,7 @@ public class ParticleFog extends Particle{
 	 * Called to update the entity's position/logic.
 	 */
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		prevPosX = posX;
 		prevPosY = posY;
 		prevPosZ = posZ;
@@ -106,8 +100,7 @@ public class ParticleFog extends Particle{
 		posY = mruPosY + motionY * f;
 		posZ = mruPosZ + motionZ * f;
 		particleScale *= 1.01F;
-		if (particleAge++ >= particleMaxAge)
-		{
+		if (particleAge++ >= particleMaxAge) {
 			setExpired();
 		}
 	}

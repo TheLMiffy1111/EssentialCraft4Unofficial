@@ -6,8 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiMoonState extends GuiTextElement{
 
-	public GuiMoonState(int i, int j)
-	{
+	public GuiMoonState(int i, int j) {
 		super(i, j);
 	}
 

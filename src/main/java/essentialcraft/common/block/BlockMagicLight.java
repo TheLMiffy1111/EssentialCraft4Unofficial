@@ -35,20 +35,17 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_)
-	{
+	public int quantityDropped(Random p_149745_1_) {
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_)
-	{
+	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		return null;
 	}
 
 	@Override
-	public void updateTick(World p_149674_1_, BlockPos p_149674_2_, IBlockState p_149674_3_, Random p_149674_4_)
-	{
+	public void updateTick(World p_149674_1_, BlockPos p_149674_2_, IBlockState p_149674_3_, Random p_149674_4_) {
 		int meta = p_149674_3_.getValue(TYPE).getIndex();
 		if(meta == 1) {
 			p_149674_1_.setBlockToAir(p_149674_2_);
@@ -56,12 +53,10 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState p_149734_1_, World p_149734_2_, BlockPos p_149734_3_, Random p_149734_4_)
-	{
+	public void randomDisplayTick(IBlockState p_149734_1_, World p_149734_2_, BlockPos p_149734_3_, Random p_149734_4_) {
 		int meta = p_149734_1_.getValue(TYPE).getIndex();
 		if(meta == 0) {
-			for(int i = 0; i < 5; ++i)
-			{
+			for(int i = 0; i < 5; ++i) {
 				Vec3d rotateVec = new Vec3d(1, 1, 1);
 				rotateVec = rotateVec.rotatePitch(p_149734_4_.nextFloat()*360F);
 				rotateVec = rotateVec.rotateYaw(p_149734_4_.nextFloat()*360F);
@@ -72,32 +67,27 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
+	public boolean isOpaqueCube(IBlockState s) {
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return Block.NULL_AABB;
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return BLOCK_AABB.offset(pos);
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState s)
-	{
+	public boolean isFullCube(IBlockState s) {
 		return false;
 	}
 

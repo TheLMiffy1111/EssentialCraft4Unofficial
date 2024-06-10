@@ -150,21 +150,18 @@ public class EntityDemon extends EntityLiving implements IInventory {
 
 
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(DESIRED, new ItemStack(Items.APPLE, 1, 0));
 	}
 
 	@Override
-	public Iterable<ItemStack> getHeldEquipment()
-	{
+	public Iterable<ItemStack> getHeldEquipment() {
 		return Collections.emptySet();
 	}
 
 	@Override
-	public ItemStack getItemStackFromSlot(EntityEquipmentSlot slotIn)
-	{
+	public ItemStack getItemStackFromSlot(EntityEquipmentSlot slotIn) {
 		return ItemStack.EMPTY;
 	}
 
@@ -172,14 +169,12 @@ public class EntityDemon extends EntityLiving implements IInventory {
 	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack p_70062_2_) {}
 
 	@Override
-	public int getSizeInventory()
-	{
+	public int getSizeInventory() {
 		return 1;
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int slot)
-	{
+	public ItemStack getStackInSlot(int slot) {
 		return inventory;
 	}
 
@@ -208,8 +203,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 	}
 
 	@Override
-	public int getInventoryStackLimit()
-	{
+	public int getInventoryStackLimit() {
 		return 64;
 	}
 

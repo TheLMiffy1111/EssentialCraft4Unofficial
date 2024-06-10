@@ -399,14 +399,10 @@ public class ECEventHandler {
 
 
 	@SubscribeEvent
-	public void damageEvent(LivingHurtEvent event)
-	{
-		if(event.getSource() != null)
-		{
-			if(event.getSource().getTrueSource() != null)
-			{
-				if(event.getSource().getTrueSource() instanceof EntityPlayer)
-				{
+	public void damageEvent(LivingHurtEvent event) {
+		if(event.getSource() != null) {
+			if(event.getSource().getTrueSource() != null) {
+				if(event.getSource().getTrueSource() instanceof EntityPlayer) {
 					EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 					boolean reset = false;
 					boolean dd = false;
@@ -414,10 +410,8 @@ public class ECEventHandler {
 					boolean radiation = false;
 
 					IBaublesItemHandler b = BaublesApi.getBaublesHandler(player);
-					if(b != null)
-					{
-						for(int i = 0; i < b.getSlots(); ++i)
-						{
+					if(b != null) {
+						for(int i = 0; i < b.getSlots(); ++i) {
 							ItemStack is = b.getStackInSlot(i);
 							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 13) {
 								reset = true;
@@ -433,24 +427,19 @@ public class ECEventHandler {
 							}
 						}
 					}
-					if(dd)
-					{
+					if(dd) {
 						event.setAmount(event.getAmount()*2);
 					}
-					if(reset)
-					{
-						if(ApiCore.getPlayerData(player).getPlayerUBMRU() >= 300)
-						{
+					if(reset) {
+						if(ApiCore.getPlayerData(player).getPlayerUBMRU() >= 300) {
 							ApiCore.getPlayerData(player).modifyUBMRU(ApiCore.getPlayerData(player).getPlayerUBMRU()-300);
 							player.resetCooldown();
 							event.getEntity().hurtResistantTime = 0;
 							event.getEntityLiving().hurtTime = 0;
 						}
 					}
-					if(damageScrewup)
-					{
-						if(event.getEntityLiving().hurtResistantTime <= 0 || event.getEntityLiving().hurtResistantTime <= 0)
-						{
+					if(damageScrewup) {
+						if(event.getEntityLiving().hurtResistantTime <= 0 || event.getEntityLiving().hurtResistantTime <= 0) {
 							float percentage = event.getAmount()/10;
 							event.setAmount(event.getAmount() - percentage);
 							event.getEntityLiving().attackEntityFrom(DamageSource.MAGIC, percentage);
@@ -458,13 +447,11 @@ public class ECEventHandler {
 							event.getEntityLiving().hurtTime = 0;
 						}
 					}
-					if(radiation)
-					{
-						if(event.getEntityLiving() instanceof EntityPlayer)
-						{
+					if(radiation) {
+						if(event.getEntityLiving() instanceof EntityPlayer) {
 							RadiationManager.increasePlayerRadiation((EntityPlayer) event.getEntityLiving(), (int) (event.getAmount()*1000*5));
-						}else
-						{
+						}
+else {
 							event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier(SharedMonsterAttributes.MAX_HEALTH.getName(), -event.getAmount(), 0));
 						}
 					}
@@ -472,18 +459,15 @@ public class ECEventHandler {
 			}
 
 		}
-		if(event.getEntityLiving() instanceof EntityPlayer)
-		{
+		if(event.getEntityLiving() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			boolean dd = false;
 			boolean saveFromDeath = false;
 			boolean radiation = false;
 			int timesToReflect = 0;
 			IBaublesItemHandler b = BaublesApi.getBaublesHandler(player);
-			if(b != null)
-			{
-				for(int i = 0; i < b.getSlots(); ++i)
-				{
+			if(b != null) {
+				for(int i = 0; i < b.getSlots(); ++i) {
 					ItemStack is = b.getStackInSlot(i);
 					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 14) {
 						dd = true;
@@ -499,48 +483,38 @@ public class ECEventHandler {
 					}
 				}
 			}
-			if(dd)
-			{
+			if(dd) {
 				event.setAmount(event.getAmount() * 2);
 			}
-			for(int i = 0; i < timesToReflect; ++i)
-			{
-				if(!player.getEntityWorld().isRemote && event.getSource()!=null&&event.getSource().getTrueSource()!=null&&player.getEntityWorld().rand.nextFloat()<0.1F)
-				{
+			for(int i = 0; i < timesToReflect; ++i) {
+				if(!player.getEntityWorld().isRemote && event.getSource()!=null&&event.getSource().getTrueSource()!=null&&player.getEntityWorld().rand.nextFloat()<0.1F) {
 					event.getSource().getTrueSource().attackEntityFrom(DamageSource.causePlayerDamage(player), event.getAmount());
 					event.setAmount(0F);
 					break;
 				}
 			}
-			if(saveFromDeath)
-			{
-				if(player.getHealth() - event.getAmount() <= 0)
-				{
-					if(ApiCore.getPlayerData(player).getPlayerUBMRU() >= event.getAmount()*5000)
-					{
+			if(saveFromDeath) {
+				if(player.getHealth() - event.getAmount() <= 0) {
+					if(ApiCore.getPlayerData(player).getPlayerUBMRU() >= event.getAmount()*5000) {
 						ApiCore.getPlayerData(player).modifyUBMRU((int) (ApiCore.getPlayerData(player).getPlayerUBMRU() - event.getAmount()*5000));
 						event.setAmount(0);
 					}
 				}
 			}
-			if(radiation)
-			{
+			if(radiation) {
 				RadiationManager.increasePlayerRadiation(player, (int) (event.getAmount()*1000));
 			}
-		}else
-		{
+		}
+else {
 
 		}
-		if(event.getSource() != null && event.getSource().getTrueSource() instanceof EntityLivingBase)
-		{
+		if(event.getSource() != null && event.getSource().getTrueSource() instanceof EntityLivingBase) {
 			EntityLivingBase elb = (EntityLivingBase)event.getSource().getTrueSource();
-			if(!elb.getHeldItemMainhand().isEmpty() && elb.getHeldItemMainhand().getItem() instanceof ItemShadeSword)
-			{
+			if(!elb.getHeldItemMainhand().isEmpty() && elb.getHeldItemMainhand().getItem() instanceof ItemShadeSword) {
 				ItemShadeSword iss = (ItemShadeSword)elb.getHeldItemMainhand().getItem();
 				iss.hitEntity(event.getEntityLiving().getHeldItemMainhand(), event.getEntityLiving(), elb);
 			}
-			else if(!elb.getHeldItemOffhand().isEmpty() && elb.getHeldItemOffhand().getItem() instanceof ItemShadeSword)
-			{
+			else if(!elb.getHeldItemOffhand().isEmpty() && elb.getHeldItemOffhand().getItem() instanceof ItemShadeSword) {
 				ItemShadeSword iss = (ItemShadeSword)elb.getHeldItemOffhand().getItem();
 				iss.hitEntity(event.getEntityLiving().getHeldItemOffhand(), event.getEntityLiving(), elb);
 			}
@@ -617,8 +591,7 @@ public class ECEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onBlockSpeedCheck(PlayerEvent.BreakSpeed event)
-	{
+	public void onBlockSpeedCheck(PlayerEvent.BreakSpeed event) {
 		//I usually do not comment my code.
 		//However I think that this is an exception
 		//I do not know why it took me so long to figure all this out
@@ -631,8 +604,7 @@ public class ECEventHandler {
 		ItemStack currentTool = p.getHeldItemMainhand();
 
 		//A usual check - we are on a server, the tool exists and the tool is a Wind type of tool.
-		if(!event.getEntityPlayer().getEntityWorld().isRemote && (currentTool.getItem() instanceof ItemWindAxe || currentTool.getItem() instanceof ItemWindPickaxe || currentTool.getItem() instanceof ItemWindShovel || currentTool.getItem() instanceof ItemWindHoe || currentTool.getItem() instanceof ItemWindSword))
-		{
+		if(!event.getEntityPlayer().getEntityWorld().isRemote && (currentTool.getItem() instanceof ItemWindAxe || currentTool.getItem() instanceof ItemWindPickaxe || currentTool.getItem() instanceof ItemWindShovel || currentTool.getItem() instanceof ItemWindHoe || currentTool.getItem() instanceof ItemWindSword)) {
 			//Setting the current tool type via
 			//Hard-coded tool check. Hmmm....
 			String currentToolClass = "";
@@ -653,15 +625,12 @@ public class ECEventHandler {
 			}
 
 			//If the player is using an improper tool, or the current stack is a sword
-			if (!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(), event.getPos(), currentTool) || currentToolClass.equalsIgnoreCase("sword"))
-			{
+			if (!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(), event.getPos(), currentTool) || currentToolClass.equalsIgnoreCase("sword")) {
 				//Getting the proper tool type
 				String clazz = event.getState().getBlock().getHarvestTool(event.getState());
-				if(clazz == null || clazz.isEmpty())
-				{
+				if(clazz == null || clazz.isEmpty()) {
 					//If the block and it's materials exist. Who knows, that mod calls this event...
-					if(event.getState()!=null && event.getState()!=null)
-					{
+					if(event.getState()!=null && event.getState()!=null) {
 						//Bunch of material checks to make sure lazy modders like me will still get their blocks recognized properly
 						if(event.getState().getMaterial()==Material.ANVIL) {
 							clazz = "pickaxe";
@@ -727,8 +696,7 @@ public class ECEventHandler {
 				}
 				//If the proper tool type exists
 				//Also a dumb sword check
-				if(clazz != null && !clazz.isEmpty() && clazz != currentToolClass)
-				{
+				if(clazz != null && !clazz.isEmpty() && clazz != currentToolClass) {
 					//Initializing 2 blank NBTs
 
 					//This one will store all the info about the current tool - ID, Meta, Amount and things like enchantments.
@@ -742,8 +710,7 @@ public class ECEventHandler {
 					currentTool.writeToNBT(toolTag);
 
 					//If our tag actually stores anything apart from ID, Amount and Meta
-					if(toolTag.hasKey("tag"))
-					{
+					if(toolTag.hasKey("tag")) {
 						//copy the generic tag
 						genericTag = toolTag.getCompoundTag("tag").copy();
 
@@ -773,8 +740,7 @@ public class ECEventHandler {
 					Iterator<String> $i = tags.iterator();
 
 					//Iterating through each KEY and putting it into our blank list
-					while($i.hasNext())
-					{
+					while($i.hasNext()) {
 						tagKeyLst.add($i.next());
 					}
 
@@ -806,15 +772,15 @@ public class ECEventHandler {
 					ItemStack efficent = ItemStack.EMPTY;
 
 					//If the tool we are switching to was found in the tag, and, therefore, was stored
-					if(genericTag.hasKey(clazz))
-					{
+					if(genericTag.hasKey(clazz)) {
 						//Preparing the generic NBT
 						NBTTagCompound loadFrom = genericTag.getCompoundTag(clazz).copy();
 						//And removing that tool from NBT = we do not want NBT duplicates.
 						genericTag.removeTag(clazz);
 						//Loading our tool from the NBT
 						efficent = new ItemStack(loadFrom);
-					}else //Or, if the tool was not found, we are creating a new blank one
+					}
+else //Or, if the tool was not found, we are creating a new blank one
 					{
 						//Another hard-coded tool initialization.
 						if(clazz.equalsIgnoreCase("pickaxe")) {
@@ -835,8 +801,7 @@ public class ECEventHandler {
 					}
 
 					//If our tool got replaced. Also, if our tool is a valid item. Should be valid all the times, but...
-					if(efficent != null && efficent.getItem() != null)
-					{
+					if(efficent != null && efficent.getItem() != null) {
 						//Getting the tag of our new-made item.
 						//IMPORTANT! This is already a 'tag' tag. I mean, println the efficent's NBT, and you will see
 						//{id:6666s, Damage:0s, Count:1b, tag:{}}
@@ -943,21 +908,16 @@ public class ECEventHandler {
 	}
 
 	@SubscribeEvent
-	public void worldTick(WorldTickEvent event)
-	{
-		if(!event.world.isRemote && event.world != null && event.world.provider != null && event.world.provider.getDimension() == Config.dimensionID && event.phase == Phase.END)
-		{
-			if(ECUtils.hasActiveEvent())
-			{
-				if(WorldEventRegistry.currentEvent == null)
-				{
+	public void worldTick(WorldTickEvent event) {
+		if(!event.world.isRemote && event.world != null && event.world.provider != null && event.world.provider.getDimension() == Config.dimensionID && event.phase == Phase.END) {
+			if(ECUtils.hasActiveEvent()) {
+				if(WorldEventRegistry.currentEvent == null) {
 					WorldEventRegistry.currentEvent = WorldEventRegistry.getEventByID(ECUtils.getActiveEvent());
 					WorldEventRegistry.currentEventDuration = ECUtils.getActiveEventDuration();
-				}else
-				{
+				}
+else {
 					ECUtils.ec3WorldTag.setInteger("currentEventDuration", ECUtils.getActiveEventDuration()-1);
-					if(ECUtils.getActiveEventDuration() <= 0)
-					{
+					if(ECUtils.getActiveEventDuration() <= 0) {
 						WorldEventRegistry.currentEvent.onEventEnd(event.world);
 						WorldEventRegistry.currentEvent = null;
 						WorldEventRegistry.currentEventDuration = -1;
@@ -970,11 +930,9 @@ public class ECEventHandler {
 					}
 				}
 			}
-			else if(event.world.getWorldTime() % 20 == 0)
-			{
+			else if(event.world.getWorldTime() % 20 == 0) {
 				IWorldEvent wevent = WorldEventRegistry.selectRandomEvent(event.world);
-				if(wevent != null)
-				{
+				if(wevent != null) {
 					wevent.onEventBeginning(event.world);
 					ECUtils.ec3WorldTag.setString("currentEvent", wevent.getEventID());
 					ECUtils.ec3WorldTag.setInteger("currentEventDuration", wevent.getEventDuration(event.world));
@@ -986,23 +944,18 @@ public class ECEventHandler {
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void onAimZoom(FOVUpdateEvent event)
-	{
+	public void onAimZoom(FOVUpdateEvent event) {
 		EntityPlayer p = event.getEntity();
-		if(p.isSneaking() && p.getHeldItemMainhand().getItem() instanceof ItemGun && p.getHeldItemMainhand().getTagCompound() != null && p.getHeldItemMainhand().getTagCompound().hasKey("scope"))
-		{
+		if(p.isSneaking() && p.getHeldItemMainhand().getItem() instanceof ItemGun && p.getHeldItemMainhand().getTagCompound() != null && p.getHeldItemMainhand().getTagCompound().hasKey("scope")) {
 			String id = p.getHeldItemMainhand().getTagCompound().getString("scope");
 			ScopeMaterial s = null;
-			if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper"))
-			{
+			if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper")) {
 				s = GunRegistry.getScopeSniperFromID(id);
 			}
-			else
-			{
+			else {
 				s = GunRegistry.getScopeFromID(id);
 			}
-			if(s != null)
-			{
+			if(s != null) {
 				GunType g = null;
 				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper")) {
 					g = GunType.SNIPER;
@@ -1016,12 +969,10 @@ public class ECEventHandler {
 				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("gatling")) {
 					g = GunType.GATLING;
 				}
-				if(g != null)
-				{
+				if(g != null) {
 					ArrayList<DummyData> ls = s.materialData.get(g);
 					for(DummyData dt : ls) {
-						if(dt != null && dt.fieldName.equalsIgnoreCase("scope.zoom"))
-						{
+						if(dt != null && dt.fieldName.equalsIgnoreCase("scope.zoom")) {
 							float value = Float.parseFloat(dt.fieldValue)*1F;
 							event.setNewfov(1/value);
 							return;
@@ -1043,14 +994,11 @@ public class ECEventHandler {
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void getBiomeWaterColor(BiomeEvent.GetWaterColor event)
-	{
+	public void getBiomeWaterColor(BiomeEvent.GetWaterColor event) {
 		EntityPlayer player = EssentialCraftCore.proxy.getClientPlayer();
-		if(player != null)
-		{
+		if(player != null) {
 			int dimID = player.dimension;
-			if(dimID == Config.dimensionID)
-			{
+			if(dimID == Config.dimensionID) {
 				event.setNewColor(0xff6a58);
 			}
 		}
@@ -1058,22 +1006,16 @@ public class ECEventHandler {
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void clientTick(TickEvent.ClientTickEvent event)
-	{
+	public void clientTick(TickEvent.ClientTickEvent event) {
 		if(event.phase == TickEvent.Phase.START) {}
-		else
-		{
-			if(lastTickLanguage != null && !lastTickLanguage.isEmpty())
-			{
-				if(!lastTickLanguage.equalsIgnoreCase(FMLClientHandler.instance().getCurrentLanguage()))
-				{
+		else {
+			if(lastTickLanguage != null && !lastTickLanguage.isEmpty()) {
+				if(!lastTickLanguage.equalsIgnoreCase(FMLClientHandler.instance().getCurrentLanguage())) {
 					ResearchRegistry.init();
-					if(GuiResearchBook.currentCategory != null && GuiResearchBook.currentDiscovery != null)
-					{
+					if(GuiResearchBook.currentCategory != null && GuiResearchBook.currentDiscovery != null) {
 						String id = GuiResearchBook.currentDiscovery.id;
 						for(DiscoveryEntry element : GuiResearchBook.currentCategory.discoveries) {
-							if(element.id.equals(id))
-							{
+							if(element.id.equals(id)) {
 								GuiResearchBook.currentDiscovery=element;
 								break;
 							}
@@ -1089,16 +1031,12 @@ public class ECEventHandler {
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void getBiomeFolliageColor(BiomeEvent.GetFoliageColor event)
-	{
+	public void getBiomeFolliageColor(BiomeEvent.GetFoliageColor event) {
 		EntityPlayer player = EssentialCraftCore.proxy.getClientPlayer();
-		if(player != null)
-		{
+		if(player != null) {
 			int dimID = player.dimension;
-			if(dimID == Config.dimensionID)
-			{
-				if(!(event.getBiome() instanceof BiomeChaosCorruption) && !(event.getBiome() instanceof BiomeFrozenCorruption) && !(event.getBiome() instanceof BiomeMagicCorruption))
-				{
+			if(dimID == Config.dimensionID) {
+				if(!(event.getBiome() instanceof BiomeChaosCorruption) && !(event.getBiome() instanceof BiomeFrozenCorruption) && !(event.getBiome() instanceof BiomeMagicCorruption)) {
 					event.setNewColor(0x886a58);
 				}
 			}
@@ -1107,16 +1045,12 @@ public class ECEventHandler {
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void getBiomeGrassColor(BiomeEvent.GetGrassColor event)
-	{
+	public void getBiomeGrassColor(BiomeEvent.GetGrassColor event) {
 		EntityPlayer player = EssentialCraftCore.proxy.getClientPlayer();
-		if(player != null)
-		{
+		if(player != null) {
 			int dimID = player.dimension;
-			if(dimID == Config.dimensionID)
-			{
-				if(!(event.getBiome() instanceof BiomeChaosCorruption) && !(event.getBiome() instanceof BiomeFrozenCorruption) && !(event.getBiome() instanceof BiomeMagicCorruption))
-				{
+			if(dimID == Config.dimensionID) {
+				if(!(event.getBiome() instanceof BiomeChaosCorruption) && !(event.getBiome() instanceof BiomeFrozenCorruption) && !(event.getBiome() instanceof BiomeMagicCorruption)) {
 					event.setNewColor(0x886a58);
 				}
 			}
@@ -1124,38 +1058,30 @@ public class ECEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onKillEntity(LivingDeathEvent event)
-	{
+	public void onKillEntity(LivingDeathEvent event) {
 		EntityLivingBase base = event.getEntityLiving();
 		DamageSource src = event.getSource();
-		if(src != null && src.getTrueSource() != null)
-		{
+		if(src != null && src.getTrueSource() != null) {
 			Entity e = src.getTrueSource();
-			if(e instanceof EntityPlayer && !(e instanceof FakePlayer))
-			{
+			if(e instanceof EntityPlayer && !(e instanceof FakePlayer)) {
 				EntityPlayer player = (EntityPlayer) e;
 				int addedEnergy = 0;
-				if(base instanceof EntityPlayer && !(base instanceof FakePlayer))
-				{
+				if(base instanceof EntityPlayer && !(base instanceof FakePlayer)) {
 					int currentEnergy_int = ECUtils.getData((EntityPlayer)base).getPlayerUBMRU();
 					addedEnergy += currentEnergy_int;
 				}
-				else
-				{
+				else {
 					float maxHp = base.getMaxHealth();
 					ItemStack helmet = player.inventory.armorInventory.get(3);
-					if(!helmet.isEmpty() && helmet.getItem() == ItemsCore.magicArmorItems[4])
-					{
+					if(!helmet.isEmpty() && helmet.getItem() == ItemsCore.magicArmorItems[4]) {
 						player.getFoodStats().addStats((int)(maxHp/10F), 1F);
 					}
 					addedEnergy += (20+MathUtils.randomFloat(e.getEntityWorld().rand)*10)*maxHp;
 				}
 				if(BaublesApi.getBaublesHandler(player) != null && addedEnergy > 0) {
-					for(int i = 0; i < 7; ++i)
-					{
+					for(int i = 0; i < 7; ++i) {
 						ItemStack bStk = BaublesApi.getBaublesHandler(player).getStackInSlot(i);
-						if(bStk.getItem() instanceof IUBMRUGainModifyHandler)
-						{
+						if(bStk.getItem() instanceof IUBMRUGainModifyHandler) {
 							IUBMRUGainModifyHandler gmod = (IUBMRUGainModifyHandler)bStk.getItem();
 							addedEnergy = MathHelper.floor(gmod.getModifiedValue(addedEnergy, bStk, player.getEntityWorld().rand, player));
 						}
@@ -1166,20 +1092,16 @@ public class ECEventHandler {
 				ECUtils.getData(player).modifyUBMRU(currentEnergy_int);
 				boolean canDropEmber = false;
 				IBaublesItemHandler b = BaublesApi.getBaublesHandler(player);
-				if(b != null)
-				{
-					for(int i = 0; i < b.getSlots(); ++i)
-					{
+				if(b != null) {
+					for(int i = 0; i < b.getSlots(); ++i) {
 						ItemStack is = b.getStackInSlot(i);
 						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 12) {
 							canDropEmber = true;
 						}
 					}
 				}
-				if(canDropEmber)
-				{
-					if(player.getEntityWorld().rand.nextFloat() < 0.05F)
-					{
+				if(canDropEmber) {
+					if(player.getEntityWorld().rand.nextFloat() < 0.05F) {
 						ItemStack emberStack = new ItemStack(ItemsCore.ember, 1, player.getEntityWorld().rand.nextInt(8));
 						EntityItem emberItem = new EntityItem(base.getEntityWorld(), base.posX, base.posY, base.posZ, emberStack);
 						if(!base.getEntityWorld().isRemote) {
@@ -1189,8 +1111,7 @@ public class ECEventHandler {
 				}
 			}
 		}
-		if(base instanceof EntityPlayer)
-		{
+		if(base instanceof EntityPlayer) {
 			if(!(base instanceof FakePlayer)) {
 				ECUtils.getData((EntityPlayer) base).modifyUBMRU(0);
 			}

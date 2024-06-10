@@ -14,8 +14,7 @@ public class GunInitialization {
 	public static final String[] defaultLenseMaterials = {"chaos", "frozen", "pure", "shade"};
 	public static final String[] defaultScopeMaterials = {"mru"};
 
-	public static void register()
-	{
+	public static void register() {
 		new GunMaterial("mru").setRecipe(ItemGenericEC.getStkByName("magicalIngot"))
 		.appendData("durability", 120)
 		.appendData("damage", 8)

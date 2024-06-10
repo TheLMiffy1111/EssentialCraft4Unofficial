@@ -17,8 +17,7 @@ public class RenderDemonicPentacle extends TileEntitySpecialRenderer<TileDemonic
 	public static final ResourceLocation rune = new ResourceLocation("essentialcraft:textures/models/demonicpentacle.png");
 	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/rune.obj"));
 
-	public void doRender(TileDemonicPentacle p, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TileDemonicPentacle p, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 
 		GlStateManager.pushMatrix();
@@ -44,8 +43,7 @@ public class RenderDemonicPentacle extends TileEntitySpecialRenderer<TileDemonic
 			c= 0.8F;
 		}
 
-		if(p.tier == 0)
-		{
+		if(p.tier == 0) {
 			GlStateManager.color(c, 0, 0);
 		}
 

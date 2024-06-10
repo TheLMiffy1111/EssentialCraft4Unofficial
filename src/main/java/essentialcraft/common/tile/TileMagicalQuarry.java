@@ -362,11 +362,9 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 					int rad = getMiningRange();
 					Fort:
 						for(int x = -rad; x <= rad; ++x) {
-							for(int z = -rad; z <= rad; ++z)
-							{
+							for(int z = -rad; z <= rad; ++z) {
 								BlockPos cp = new BlockPos(pos.getX()+x, miningY, pos.getZ()+z);
-								if(getWorld().isAreaLoaded(new StructureBoundingBox(pos.getX()+x-1, miningY-1, pos.getZ()+z-1, pos.getX()+x+1, miningY+1, pos.getZ()+z+1)) && getWorld().isBlockLoaded(cp) && getWorld().getBlockState(cp).getBlock() != null && getWorld().getBlockState(cp).getBlockHardness(getWorld(), cp) != -1 && getWorld().getBlockState(cp).getBlock() != Blocks.AIR && !(getWorld().getBlockState(cp).getBlock() instanceof BlockLiquid) && !(getWorld().getBlockState(cp).getBlock() instanceof IFluidBlock))
-								{
+								if(getWorld().isAreaLoaded(new StructureBoundingBox(pos.getX()+x-1, miningY-1, pos.getZ()+z-1, pos.getX()+x+1, miningY+1, pos.getZ()+z+1)) && getWorld().isBlockLoaded(cp) && getWorld().getBlockState(cp).getBlock() != null && getWorld().getBlockState(cp).getBlockHardness(getWorld(), cp) != -1 && getWorld().getBlockState(cp).getBlock() != Blocks.AIR && !(getWorld().getBlockState(cp).getBlock() instanceof BlockLiquid) && !(getWorld().getBlockState(cp).getBlock() instanceof IFluidBlock)) {
 									miningX = pos.getX()+x;
 									miningZ = pos.getZ()+z;
 									mineBlock(getWorld().getBlockState(new BlockPos(pos.getX()+x, miningY, pos.getZ()+z)).getBlock());

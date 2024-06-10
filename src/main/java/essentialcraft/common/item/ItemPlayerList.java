@@ -27,8 +27,7 @@ public class ItemPlayerList extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		NBTTagCompound itemTag = MiscUtils.getStackTag(player.getHeldItem(hand));
 		if(!itemTag.hasKey("usernames")) {
 			itemTag.setString("usernames", "||username:null");
@@ -41,8 +40,7 @@ public class ItemPlayerList extends Item implements IModelRegisterer {
 				canAddUsername = false;
 			}
 		}
-		if(canAddUsername)
-		{
+		if(canAddUsername) {
 			str+="||username:"+MiscUtils.getUUIDFromPlayer(player).toString();
 		}
 		itemTag.setString("usernames", str);
@@ -51,10 +49,8 @@ public class ItemPlayerList extends Item implements IModelRegisterer {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
-	{
-		if(stack.getTagCompound() != null)
-		{
+	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
+		if(stack.getTagCompound() != null) {
 			list.add("Allowed Players:");
 			NBTTagCompound itemTag = MiscUtils.getStackTag(stack);
 			if(!itemTag.hasKey("usernames")) {
@@ -64,8 +60,7 @@ public class ItemPlayerList extends Item implements IModelRegisterer {
 			DummyData[] dt = DataStorage.parseData(str);
 			for(DummyData element : dt) {
 				String name = element.fieldValue;
-				if(!name.equals("null"))
-				{
+				if(!name.equals("null")) {
 					list.add(" -"+MiscUtils.getUsernameFromUUID(name));
 				}
 			}

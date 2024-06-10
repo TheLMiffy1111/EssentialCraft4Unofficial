@@ -26,18 +26,14 @@ public class ItemMagicLantern extends ItemMRUGeneric implements IModelRegisterer
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem)
-	{
-		if(!world.isRemote)
-		{
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
+		if(!world.isRemote) {
 			int fX = MathHelper.floor(entity.posX);
 			int fY = MathHelper.floor(entity.posY);
 			int fZ = MathHelper.floor(entity.posZ);
 			Block b = world.getBlockState(new BlockPos(fX, fY, fZ)).getBlock();
-			if(b == Blocks.AIR)
-			{
-				if(isCurrentItem)
-				{
+			if(b == Blocks.AIR) {
+				if(isCurrentItem) {
 					world.setBlockState(new BlockPos(fX, fY, fZ), BlocksCore.torch.getStateFromMeta(1), 2);
 					world.scheduleUpdate(new BlockPos(fX, fY, fZ), BlocksCore.torch, 20);
 				}
@@ -48,25 +44,19 @@ public class ItemMagicLantern extends ItemMRUGeneric implements IModelRegisterer
 
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing dir, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing dir, float hitX, float hitY, float hitZ) {
 		Block b = world.getBlockState(pos.offset(dir)).getBlock();
-		if(b == Blocks.AIR)
-		{
-			if(player.inventory.hasItemStack(new ItemStack(ItemsCore.magicalSlag)) && ECUtils.playerUseMRU(player, player.getHeldItem(hand), 100))
-			{
+		if(b == Blocks.AIR) {
+			if(player.inventory.hasItemStack(new ItemStack(ItemsCore.magicalSlag)) && ECUtils.playerUseMRU(player, player.getHeldItem(hand), 100)) {
 				int slotID = -1;
-				for(int i = 0; i < player.inventory.getSizeInventory(); ++i)
-				{
+				for(int i = 0; i < player.inventory.getSizeInventory(); ++i) {
 					ItemStack stk = player.inventory.getStackInSlot(i);
-					if(stk.getItem() == ItemsCore.magicalSlag)
-					{
+					if(stk.getItem() == ItemsCore.magicalSlag) {
 						slotID = i;
 						break;
 					}
 				}
-				if(slotID != -1)
-				{
+				if(slotID != -1) {
 					player.inventory.decrStackSize(slotID, 1);
 					world.setBlockState(pos.offset(dir), BlocksCore.torch.getStateFromMeta(0), 3);
 					player.swingArm(hand);

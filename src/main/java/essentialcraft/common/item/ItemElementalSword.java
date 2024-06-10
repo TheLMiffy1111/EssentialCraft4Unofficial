@@ -208,104 +208,99 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 
 	public static void setPrimaryAttribute(ItemStack s) {
 		NBTTagCompound tag = s.getTagCompound();
-		if(tag.hasKey("primary")) {
+		if(tag.hasKey("primary") || !tag.hasKey("focus_0")) {
 			return;
 		}
-		if(tag.hasKey("focus_0")) {
-			String s_0 = tag.getString("focus_0");
-			String s_1 = tag.getString("focus_1");
-			String s_2 = tag.getString("focus_2");
-			String s_3 = tag.getString("focus_3");
-			s_0 = s_0.toLowerCase();
-			s_1 = s_1.toLowerCase();
-			s_2 = s_2.toLowerCase();
-			s_3 = s_3.toLowerCase();
-			int fire = 0, water = 0, earth = 0, air = 0;
-			if(s_0.toLowerCase().contains("ffocus")) {
-				++fire;
-			}
-			if(s_1.toLowerCase().contains("ffocus")) {
-				++fire;
-			}
-			if(s_2.toLowerCase().contains("ffocus")) {
-				++fire;
-			}
-			if(s_3.toLowerCase().contains("ffocus")) {
-				++fire;
-			}
-			if(s_0.toLowerCase().contains("wfocus")) {
-				++water;
-			}
-			if(s_1.toLowerCase().contains("wfocus")) {
-				++water;
-			}
-			if(s_2.toLowerCase().contains("wfocus")) {
-				++water;
-			}
-			if(s_3.toLowerCase().contains("wfocus")) {
-				++water;
-			}
-			if(s_0.toLowerCase().contains("efocus")) {
-				++earth;
-			}
-			if(s_1.toLowerCase().contains("efocus")) {
-				++earth;
-			}
-			if(s_2.toLowerCase().contains("efocus")) {
-				++earth;
-			}
-			if(s_3.toLowerCase().contains("efocus")) {
-				++earth;
-			}
-			if(s_0.toLowerCase().contains("afocus")) {
-				++air;
-			}
-			if(s_1.toLowerCase().contains("afocus")) {
-				++air;
-			}
-			if(s_2.toLowerCase().contains("afocus")) {
-				++air;
-			}
-			if(s_3.toLowerCase().contains("afocus")) {
-				++air;
-			}
-			if(fire > water && fire > earth && fire > air) {
-				tag.setString("primary", "Fire");
-			}
-			else if(water > fire && water > earth && water > air) {
-				tag.setString("primary", "Water");
-			}
-			else if(earth > water && earth > fire && earth > air) {
-				tag.setString("primary", "Earth");
-			}
-			else if(air > water && air > earth && air > fire) {
-				tag.setString("primary", "Air");
-			}
-			else {
-				tag.setString("primary", "Combined");
-			}
-			List<String> secondaryAttribs = new ArrayList<>();
-			if(fire != 0) {
-				secondaryAttribs.add("Fire");
-			}
-			if(water != 0) {
-				secondaryAttribs.add("Water");
-			}
-			if(earth != 0) {
-				secondaryAttribs.add("Earth");
-			}
-			if(air != 0) {
-				secondaryAttribs.add("Air");
-			}
-			if(!secondaryAttribs.isEmpty()) {
-				tag.setString("secondary", secondaryAttribs.get(rand.nextInt(secondaryAttribs.size())));
-			}
-			else {
-				tag.setString("secondary", getPrimaryAttribute(s));
-			}
+		String s_0 = tag.getString("focus_0");
+		String s_1 = tag.getString("focus_1");
+		String s_2 = tag.getString("focus_2");
+		String s_3 = tag.getString("focus_3");
+		s_0 = s_0.toLowerCase();
+		s_1 = s_1.toLowerCase();
+		s_2 = s_2.toLowerCase();
+		s_3 = s_3.toLowerCase();
+		int fire = 0, water = 0, earth = 0, air = 0;
+		if(s_0.toLowerCase().contains("ffocus")) {
+			++fire;
+		}
+		if(s_1.toLowerCase().contains("ffocus")) {
+			++fire;
+		}
+		if(s_2.toLowerCase().contains("ffocus")) {
+			++fire;
+		}
+		if(s_3.toLowerCase().contains("ffocus")) {
+			++fire;
+		}
+		if(s_0.toLowerCase().contains("wfocus")) {
+			++water;
+		}
+		if(s_1.toLowerCase().contains("wfocus")) {
+			++water;
+		}
+		if(s_2.toLowerCase().contains("wfocus")) {
+			++water;
+		}
+		if(s_3.toLowerCase().contains("wfocus")) {
+			++water;
+		}
+		if(s_0.toLowerCase().contains("efocus")) {
+			++earth;
+		}
+		if(s_1.toLowerCase().contains("efocus")) {
+			++earth;
+		}
+		if(s_2.toLowerCase().contains("efocus")) {
+			++earth;
+		}
+		if(s_3.toLowerCase().contains("efocus")) {
+			++earth;
+		}
+		if(s_0.toLowerCase().contains("afocus")) {
+			++air;
+		}
+		if(s_1.toLowerCase().contains("afocus")) {
+			++air;
+		}
+		if(s_2.toLowerCase().contains("afocus")) {
+			++air;
+		}
+		if(s_3.toLowerCase().contains("afocus")) {
+			++air;
+		}
+		if(fire > water && fire > earth && fire > air) {
+			tag.setString("primary", "Fire");
+		}
+		else if(water > fire && water > earth && water > air) {
+			tag.setString("primary", "Water");
+		}
+		else if(earth > water && earth > fire && earth > air) {
+			tag.setString("primary", "Earth");
+		}
+		else if(air > water && air > earth && air > fire) {
+			tag.setString("primary", "Air");
 		}
 		else {
-			return;
+			tag.setString("primary", "Combined");
+		}
+		List<String> secondaryAttribs = new ArrayList<>();
+		if(fire != 0) {
+			secondaryAttribs.add("Fire");
+		}
+		if(water != 0) {
+			secondaryAttribs.add("Water");
+		}
+		if(earth != 0) {
+			secondaryAttribs.add("Earth");
+		}
+		if(air != 0) {
+			secondaryAttribs.add("Air");
+		}
+		if(!secondaryAttribs.isEmpty()) {
+			tag.setString("secondary", secondaryAttribs.get(rand.nextInt(secondaryAttribs.size())));
+		}
+		else {
+			tag.setString("secondary", getPrimaryAttribute(s));
 		}
 	}
 

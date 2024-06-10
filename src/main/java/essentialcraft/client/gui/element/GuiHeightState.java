@@ -15,8 +15,7 @@ public class GuiHeightState extends GuiTextElement{
 	public TileEntity tile;
 	public int mru;
 
-	public GuiHeightState(int i, int j, TileEntity t)
-	{
+	public GuiHeightState(int i, int j, TileEntity t) {
 		super(i, j);
 		tile = t;
 	}
@@ -34,32 +33,25 @@ public class GuiHeightState extends GuiTextElement{
 		DrawUtils.drawScaledTexturedRect(posX+1, posY+3, TextureUtils.fromBlock(Blocks.STONE), 16, 11, 1);
 		DrawUtils.drawScaledTexturedRect(posX+1, posY+15, TextureUtils.fromBlock(Blocks.BEDROCK), 16, 1, 1);
 		Random rnd = new Random(143535645L);
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+3+rnd.nextInt(11), TextureUtils.fromBlock(Blocks.GRAVEL), 2, 2, 2);
 		}
-		for(int i = 0; i < 2; ++i)
-		{
+		for(int i = 0; i < 2; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+9+rnd.nextInt(11), TextureUtils.fromBlock(Blocks.DIAMOND_BLOCK), 1, 1, 2);
 		}
-		for(int i = 0; i < 12; ++i)
-		{
+		for(int i = 0; i < 12; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+3+rnd.nextInt(11), TextureUtils.fromBlock(Blocks.COAL_BLOCK), 1, 1, 2);
 		}
-		for(int i = 0; i < 6; ++i)
-		{
+		for(int i = 0; i < 6; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+3+rnd.nextInt(11), TextureUtils.fromBlock(Blocks.STAINED_HARDENED_CLAY, 8), 1, 1, 2);
 		}
-		for(int i = 0; i < 4; ++i)
-		{
+		for(int i = 0; i < 4; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+6+rnd.nextInt(8), TextureUtils.fromBlock(Blocks.GOLD_BLOCK), 1, 1, 2);
 		}
-		for(int i = 0; i < 8; ++i)
-		{
+		for(int i = 0; i < 8; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+12+rnd.nextInt(2), TextureUtils.fromBlock(Blocks.LAVA), 1, 1, 2);
 		}
-		for(int i = 0; i < 8; ++i)
-		{
+		for(int i = 0; i < 8; ++i) {
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+14, TextureUtils.fromBlock(Blocks.BEDROCK), 1, 1, 2);
 		}
 		int pos = MathUtils.pixelatedTextureSize(tile.getPos().getY(), 256, 50);

@@ -65,8 +65,7 @@ public class BlockCorruptionCleaner extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos par2, IBlockState par5)
-	{
+	public void breakBlock(World world, BlockPos par2, IBlockState par5) {
 		IInventory inv = (IInventory)world.getTileEntity(par2);
 		InventoryHelper.dropInventoryItems(world, par2, inv);
 		super.breakBlock(world, par2, par5);

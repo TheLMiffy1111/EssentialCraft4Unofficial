@@ -17,32 +17,26 @@ public class RenderPlayerPentacle extends TileEntitySpecialRenderer<TilePlayerPe
 	public static final ResourceLocation rune = new ResourceLocation("essentialcraft:textures/models/pentacle.png");
 	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/rune.obj"));
 
-	public void doRender(TilePlayerPentacle p, double x, double y, double z, float partialTicks)
-	{
+	public void doRender(TilePlayerPentacle p, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 
 		GlStateManager.pushMatrix();
 		Minecraft.getMinecraft().renderEngine.bindTexture(rune);
 		GlStateManager.translate(x+0.5F, y-0.2F, z+0.5F);
 
-		if(p.tier == -1)
-		{
+		if(p.tier == -1) {
 			GlStateManager.color(0.2F, 0.2F, 0.2F);
 		}
-		if(p.tier == 0)
-		{
+		if(p.tier == 0) {
 			GlStateManager.color(0F, 1F, 0F);
 		}
-		if(p.tier == 1)
-		{
+		if(p.tier == 1) {
 			GlStateManager.color(0F, 0F, 1F);
 		}
-		if(p.tier == 2)
-		{
+		if(p.tier == 2) {
 			GlStateManager.color(0.5F, 0F, 0.5F);
 		}
-		if(p.tier == 3)
-		{
+		if(p.tier == 3) {
 			GlStateManager.color(1F, 0F, 0F);
 		}
 

@@ -19,36 +19,30 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelRegisterer {
 
-	public ItemGenericArmor(ArmorMaterial material, int renderIndex, int type)
-	{
+	public ItemGenericArmor(ArmorMaterial material, int renderIndex, int type) {
 		super(material, renderIndex, EntityEquipmentSlot.values()[5-type]);
 	}
 
-	public ItemGenericArmor(ArmorMaterial material, int renderIndex, EntityEquipmentSlot type)
-	{
+	public ItemGenericArmor(ArmorMaterial material, int renderIndex, EntityEquipmentSlot type) {
 		super(material, renderIndex, type);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, EntityEquipmentSlot slot, String type)
-	{
+	public String getArmorTexture(ItemStack itemstack, Entity entity, EntityEquipmentSlot slot, String type) {
 		if(type != null && type.equalsIgnoreCase("overlay")) {
 			return "essentialcraft:textures/blocks/null.png";
 		}
-		switch(slot)
-		{
+		switch(slot) {
 		case LEGS: return "essentialcraft:textures/special/armor/wind_layer_2.png"; //2 should be the slot for legs
 		default: return "essentialcraft:textures/special/armor/wind_layer_1.png";
 		}
 	}
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int renderPass)
-	{
+	public int getColorFromItemstack(ItemStack stack, int renderPass) {
 		int j = getColor(stack);
 
-		if (j < 0)
-		{
+		if (j < 0) {
 			j = 0xffffff;
 		}
 
@@ -56,17 +50,14 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	}
 
 	@Override
-	public boolean hasColor(ItemStack stk)
-	{
+	public boolean hasColor(ItemStack stk) {
 		return !stk.hasTagCompound() ? false : !stk.getTagCompound().hasKey("display", 10) ? false : stk.getTagCompound().getCompoundTag("display").hasKey("color", 3);
 	}
 
 	@Override
-	public int getColor(ItemStack p_82814_1_)
-	{
+	public int getColor(ItemStack p_82814_1_) {
 		NBTTagCompound nbttagcompound = p_82814_1_.getTagCompound();
-		if (nbttagcompound == null)
-		{
+		if (nbttagcompound == null) {
 			return 0xffffff;
 		}
 		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
@@ -74,36 +65,30 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	}
 
 	@Override
-	public void removeColor(ItemStack stk)
-	{
+	public void removeColor(ItemStack stk) {
 		NBTTagCompound nbttagcompound = stk.getTagCompound();
 
-		if (nbttagcompound != null)
-		{
+		if (nbttagcompound != null) {
 			NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
 
-			if (nbttagcompound1.hasKey("color"))
-			{
+			if (nbttagcompound1.hasKey("color")) {
 				nbttagcompound1.removeTag("color");
 			}
 		}
 	}
 
 	@Override
-	public void setColor(ItemStack stk, int newColor)
-	{
+	public void setColor(ItemStack stk, int newColor) {
 		NBTTagCompound nbttagcompound = stk.getTagCompound();
 
-		if (nbttagcompound == null)
-		{
+		if (nbttagcompound == null) {
 			nbttagcompound = new NBTTagCompound();
 			stk.setTagCompound(nbttagcompound);
 		}
 
 		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
 
-		if (!nbttagcompound.hasKey("display", 10))
-		{
+		if (!nbttagcompound.hasKey("display", 10)) {
 			nbttagcompound.setTag("display", nbttagcompound1);
 		}
 
@@ -111,8 +96,7 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack s)
-	{
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack s) {
 		Multimap<String, AttributeModifier> mods = HashMultimap.<String, AttributeModifier>create();
 
 		if(this == ItemsCore.wind_chestplate && equipmentSlot == EntityEquipmentSlot.CHEST) {

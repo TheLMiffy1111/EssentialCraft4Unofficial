@@ -150,50 +150,38 @@ public class StructureTownPieces {
 		if(structureboundingbox != null) {
 			return new StructureTownPieces.Torch(start, index, structureboundingbox, facing);
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	private static StructureComponent generateAndAddComponent(StructureTownPieces.Start start, List<StructureComponent> components, Random rand, int sMinX, int sMinY, int sMinZ, EnumFacing facing, int index) {
-		if(index > 500) {
+		if ((index > 500) || (Math.abs(sMinX - start.getBoundingBox().minX) > 600) || (Math.abs(sMinZ - start.getBoundingBox().minZ) > 600)) {
 			return null;
 		}
-		if (Math.abs(sMinX - start.getBoundingBox().minX) <= 600 && Math.abs(sMinZ - start.getBoundingBox().minZ) <= 600) {
-			StructureTownPieces.Town town = generateComponent(start, components, rand, sMinX, sMinY, sMinZ, facing, index + 1);
+		StructureTownPieces.Town town = generateComponent(start, components, rand, sMinX, sMinY, sMinZ, facing, index + 1);
 
-			if(town != null) {
-				components.add(town);
-				start.pendingHouses.add(town);
-				return town;
-			}
+		if(town != null) {
+			components.add(town);
+			start.pendingHouses.add(town);
+			return town;
+		}
 
-			return null;
-		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	private static StructureComponent generateAndAddRoadPiece(StructureTownPieces.Start start, List<StructureComponent> components, Random rand, int sMinX, int sMinY, int sMinZ, EnumFacing facing, int index) {
-		if(index > 50 + start.terrainType) {
+		if((index > 50 + start.terrainType) || (Math.abs(sMinX - start.getBoundingBox().minX) > 600) || (Math.abs(sMinZ - start.getBoundingBox().minZ) > 600)) {
 			return null;
 		}
-		if(Math.abs(sMinX - start.getBoundingBox().minX) <= 600 && Math.abs(sMinZ - start.getBoundingBox().minZ) <= 600) {
-			StructureBoundingBox structureboundingbox = StructureTownPieces.Path.findPieceBox(start, components, rand, sMinX, sMinY, sMinZ, facing);
+		StructureBoundingBox structureboundingbox = StructureTownPieces.Path.findPieceBox(start, components, rand, sMinX, sMinY, sMinZ, facing);
 
-			if(structureboundingbox != null && structureboundingbox.minY > 10) {
-				StructureTownPieces.Path path = new StructureTownPieces.Path(start, index, rand, structureboundingbox, facing);
-				components.add(path);
-				start.pendingRoads.add(path);
-				return path;
-			}
+		if(structureboundingbox != null && structureboundingbox.minY > 10) {
+			StructureTownPieces.Path path = new StructureTownPieces.Path(start, index, rand, structureboundingbox, facing);
+			components.add(path);
+			start.pendingRoads.add(path);
+			return path;
+		}
 
-			return null;
-		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	public static class Tower extends StructureTownPieces.Town {

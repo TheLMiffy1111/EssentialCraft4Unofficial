@@ -21,8 +21,7 @@ public class ItemMagicalShield extends ItemMRUGeneric implements IModelRegistere
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-	{
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
 		player.hurtResistantTime = 20;
 	}
 
@@ -30,8 +29,7 @@ public class ItemMagicalShield extends ItemMRUGeneric implements IModelRegistere
 	 * How long it takes to use or consume an item
 	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
-	{
+	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 40;
 	}
 
@@ -39,8 +37,7 @@ public class ItemMagicalShield extends ItemMRUGeneric implements IModelRegistere
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
-	{
+	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.BLOCK;
 	}
 
@@ -48,10 +45,8 @@ public class ItemMagicalShield extends ItemMRUGeneric implements IModelRegistere
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer, enumHand
 	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand)
-	{
-		if(ECUtils.playerUseMRU(p_77659_3_, p_77659_3_.getHeldItem(hand), 2000))
-		{
+	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand) {
+		if(ECUtils.playerUseMRU(p_77659_3_, p_77659_3_.getHeldItem(hand), 2000)) {
 			p_77659_3_.setActiveHand(hand);
 		}
 		return super.onItemRightClick(p_77659_2_, p_77659_3_, hand);

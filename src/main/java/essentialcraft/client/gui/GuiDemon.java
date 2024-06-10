@@ -9,31 +9,28 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiDemon extends GuiCommon{
+public class GuiDemon extends GuiCommon {
 
 	public ResourceLocation DguiGenLocation = new ResourceLocation("essentialcraft", "textures/gui/demon.png");
 
-	public GuiDemon(Container c)
-	{
+	public GuiDemon(Container c) {
 		super(c);
 	}
 
-	private void drawItemStack(ItemStack p_146982_1_, int p_146982_2_, int p_146982_3_, String p_146982_4_)
-	{
+	private void drawItemStack(ItemStack stack, int x, int y, String text) {
 		FontRenderer font = null;
-		if (p_146982_1_ != null) {
-			font = p_146982_1_.getItem().getFontRenderer(p_146982_1_);
+		if(stack != null) {
+			font = stack.getItem().getFontRenderer(stack);
 		}
-		if (font == null) {
+		if(font == null) {
 			font = fontRenderer;
 		}
-		itemRender.renderItemAndEffectIntoGUI(p_146982_1_, p_146982_2_, p_146982_3_);
-		itemRender.renderItemOverlayIntoGUI(font, p_146982_1_, p_146982_2_, p_146982_3_ - 0, p_146982_4_);
+		itemRender.renderItemAndEffectIntoGUI(stack, x, y);
+		itemRender.renderItemOverlayIntoGUI(font, stack, x, y, text);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2)
-	{
+	protected void drawGuiContainerBackgroundLayer(float f1, int i1, int i2) {
 		GlStateManager.color(1, 1, 1);
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
@@ -41,8 +38,7 @@ public class GuiDemon extends GuiCommon{
 		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
 		ContainerDemon cd = (ContainerDemon)inventorySlots;
 		EntityDemon demon = (EntityDemon)cd.entity;
-		if(demon != null && !demon.desiredItem.isEmpty())
-		{
+		if(demon != null && !demon.desiredItem.isEmpty()) {
 			GlStateManager.translate(0, 0, 100);
 			drawItemStack(demon.desiredItem, k + 80, l + 30, demon.desiredItem.getCount()+"");
 			fontRenderer.drawString(demon.desiredItem.getDisplayName(), k + 5, l + 59, 0xffffff);

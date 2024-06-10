@@ -125,9 +125,7 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 			blockportal$size1.placePortalBlocks();
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
