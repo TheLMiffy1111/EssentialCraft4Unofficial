@@ -86,13 +86,13 @@ public class ItemBaublesResistance extends Item implements IBauble, IModelRegist
 		ArrayList<ModelResourceLocation> names = new ArrayList<>();
 		for(int bottomInt = 0; bottomInt < 6; bottomInt++) {
 			for(int topInt = 0; topInt < 6; topInt++) {
-				names.add(new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=" + bottomInt + ", " + "top=" + topInt));
-				names.add(new ModelResourceLocation("essentialcraft:item/baublesbelt", "bottom=" + bottomInt + ", " + "top=" + topInt));
-				names.add(new ModelResourceLocation("essentialcraft:item/baublesring", "bottom=" + bottomInt + ", " + "top=" + topInt));
-				//names.add(new ModelResourceLocation("essentialcraft:item/baublestrinket", "bottom=" + bottomInt + ", " + "top=" + topInt));
-				//names.add(new ModelResourceLocation("essentialcraft:item/baubleshead", "bottom=" + bottomInt + ", " + "top=" + topInt));
-				//names.add(new ModelResourceLocation("essentialcraft:item/baublesbody", "bottom=" + bottomInt + ", " + "top=" + topInt));
-				//names.add(new ModelResourceLocation("essentialcraft:item/baublescharm", "bottom=" + bottomInt + ", " + "top=" + topInt));
+				names.add(new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=" + bottomInt + "," + "top=" + topInt));
+				names.add(new ModelResourceLocation("essentialcraft:item/baublesbelt", "bottom=" + bottomInt + "," + "top=" + topInt));
+				names.add(new ModelResourceLocation("essentialcraft:item/baublesring", "bottom=" + bottomInt + "," + "top=" + topInt));
+				//names.add(new ModelResourceLocation("essentialcraft:item/baublestrinket", "bottom=" + bottomInt + "," + "top=" + topInt));
+				//names.add(new ModelResourceLocation("essentialcraft:item/baubleshead", "bottom=" + bottomInt + "," + "top=" + topInt));
+				//names.add(new ModelResourceLocation("essentialcraft:item/baublesbody", "bottom=" + bottomInt + "," + "top=" + topInt));
+				//names.add(new ModelResourceLocation("essentialcraft:item/baublescharm", "bottom=" + bottomInt + "," + "top=" + topInt));
 			}
 		}
 		ModelBakery.registerItemVariants(this, names.toArray(new ModelResourceLocation[0]));
@@ -107,13 +107,13 @@ public class ItemBaublesResistance extends Item implements IBauble, IModelRegist
 				int bottomInt = bTag.getInteger("b");
 				int topInt = bTag.getInteger("t");
 				switch(type) {
-				case 0: return new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=" + bottomInt + ", " + "top=" + topInt);
-				case 1: return new ModelResourceLocation("essentialcraft:item/baublesbelt", "bottom=" + bottomInt + ", " + "top=" + topInt);
-				case 2: return new ModelResourceLocation("essentialcraft:item/baublesring", "bottom=" + bottomInt + ", " + "top=" + topInt);
-				case 3: return new ModelResourceLocation("essentialcraft:item/baublestrinket", "bottom=" + bottomInt + ", " + "top=" + topInt);
-				case 4: return new ModelResourceLocation("essentialcraft:item/baubleshead", "bottom=" + bottomInt + ", " + "top=" + topInt);
-				case 5: return new ModelResourceLocation("essentialcraft:item/baublesbody", "bottom=" + bottomInt + ", " + "top=" + topInt);
-				case 6: return new ModelResourceLocation("essentialcraft:item/baublescharm", "bottom=" + bottomInt + ", " + "top=" + topInt);
+				case 0: return new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=" + bottomInt + "," + "top=" + topInt);
+				case 1: return new ModelResourceLocation("essentialcraft:item/baublesbelt", "bottom=" + bottomInt + "," + "top=" + topInt);
+				case 2: return new ModelResourceLocation("essentialcraft:item/baublesring", "bottom=" + bottomInt + "," + "top=" + topInt);
+				case 3: return new ModelResourceLocation("essentialcraft:item/baublestrinket", "bottom=" + bottomInt + "," + "top=" + topInt);
+				case 4: return new ModelResourceLocation("essentialcraft:item/baubleshead", "bottom=" + bottomInt + "," + "top=" + topInt);
+				case 5: return new ModelResourceLocation("essentialcraft:item/baublesbody", "bottom=" + bottomInt + "," + "top=" + topInt);
+				case 6: return new ModelResourceLocation("essentialcraft:item/baublescharm", "bottom=" + bottomInt + "," + "top=" + topInt);
 				}
 			}
 			return new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=0, top=0");

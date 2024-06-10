@@ -107,7 +107,7 @@ public class BlockDropsOre extends Block implements IModelRegisterer {
 	public void registerModels() {
 		for(int i = 0; i < OreDimensionType.values().length; i++) {
 			for(int j = 0; j < EnumDropType.values().length-1; j++) {
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i*(EnumDropType.values().length-1)+j, new ModelResourceLocation("essentialcraft:oredrops", "dimension=" + OreDimensionType.fromIndex(i).getName() + ", " + "type=" + EnumDropType.fromIndexOre(j).getName()));
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i*(EnumDropType.values().length-1)+j, new ModelResourceLocation("essentialcraft:oredrops", "dimension=" + OreDimensionType.fromIndex(i).getName() + "," + "type=" + EnumDropType.fromIndexOre(j).getName()));
 			}
 		}
 	}

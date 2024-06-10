@@ -487,7 +487,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 		ArrayList<ModelResourceLocation> locations = new ArrayList<>();
 		for(String name : names) {
 			for(String name2 : names) {
-				locations.add(new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + name + ", " + "top=" + name2));
+				locations.add(new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + name + "," + "top=" + name2));
 			}
 		}
 		ModelBakery.registerItemVariants(this, locations.toArray(new ModelResourceLocation[0]));
@@ -496,7 +496,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 	public static class MeshDefinitionElementalSword implements ItemMeshDefinition {
 		@Override
 		public ModelResourceLocation getModelLocation(ItemStack stack) {
-			return new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + getA(stack, 0) + ", " + "top=" + getA(stack, 1));
+			return new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + getA(stack, 0) + "," + "top=" + getA(stack, 1));
 		}
 	}
 }

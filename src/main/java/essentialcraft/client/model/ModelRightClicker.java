@@ -44,7 +44,7 @@ public class ModelRightClicker implements IBakedModel {
 
 		Minecraft mc = Minecraft.getMinecraft();
 		if(heldState == null && layer == BlockRenderLayer.SOLID) {
-			ModelResourceLocation path = new ModelResourceLocation("essentialcraft:rightClicker", "facing=" + state.getValue(BlockRightClicker.FACING).getName() + ", " + "type=" + state.getValue(BlockRightClicker.TYPE).getName());
+			ModelResourceLocation path = new ModelResourceLocation("essentialcraft:rightClicker", "facing=" + state.getValue(BlockRightClicker.FACING).getName() + "," + "type=" + state.getValue(BlockRightClicker.TYPE).getName());
 			return mc.getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getModel(path).getQuads(state, side, rand);
 		}
 		if(heldState != null) {
