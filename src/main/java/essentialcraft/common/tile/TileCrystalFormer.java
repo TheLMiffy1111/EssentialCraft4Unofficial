@@ -31,8 +31,9 @@ public class TileCrystalFormer extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			doWork();
+		}
 		spawnParticles();
 	}
 
@@ -41,8 +42,9 @@ public class TileCrystalFormer extends TileMRUGeneric {
 			if(mruStorage.getMRU() >= mruUsage) {
 				mruStorage.extractMRU(mruUsage, true);
 				++progressLevel;
-				if(generatesCorruption)
+				if(generatesCorruption) {
 					ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, genCorruption);
+				}
 				if(progressLevel >= requiredTime) {
 					progressLevel = 0;
 					createItem();
@@ -82,17 +84,20 @@ public class TileCrystalFormer extends TileMRUGeneric {
 	}
 
 	public boolean isGlassBlock(ItemStack is) {
-		if(is.isEmpty())
+		if(is.isEmpty()) {
 			return false;
+		}
 
-		if(is.getItem() == Item.getItemFromBlock(Blocks.GLASS) || is.getItem() == Item.getItemFromBlock(Blocks.STAINED_GLASS))
+		if(is.getItem() == Item.getItemFromBlock(Blocks.GLASS) || is.getItem() == Item.getItemFromBlock(Blocks.STAINED_GLASS)) {
 			return true;
+		}
 
 		if(OreDictionary.getOreIDs(is) != null && OreDictionary.getOreIDs(is).length > 0) {
 			for(int i = 0; i < OreDictionary.getOreIDs(is).length; ++i) {
 				String name = OreDictionary.getOreName(OreDictionary.getOreIDs(is)[i]);
-				if(name.equals("blockGlass"))
+				if(name.equals("blockGlass")) {
 					return true;
+				}
 			}
 		}
 

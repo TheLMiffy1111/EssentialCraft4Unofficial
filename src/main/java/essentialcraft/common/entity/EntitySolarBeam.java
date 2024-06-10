@@ -26,15 +26,15 @@ public class EntitySolarBeam extends EntityWeatherEffect {
 
 	public EntitySolarBeam(World p_i1702_1_) {
 		super(p_i1702_1_);
-		this.ignoreFrustumCheck = true;
-		this.setSize(0.3F, 0.3F);
+		ignoreFrustumCheck = true;
+		setSize(0.3F, 0.3F);
 	}
 
 	public EntitySolarBeam(World p_i1703_1_, double p_i1703_2_, double p_i1703_4_, double p_i1703_6_)
 	{
 		super(p_i1703_1_);
-		this.setLocationAndAngles(p_i1703_2_, p_i1703_4_, p_i1703_6_, 0.0F, 0.0F);
-		this.beamLiveTime = 20;
+		setLocationAndAngles(p_i1703_2_, p_i1703_4_, p_i1703_6_, 0.0F, 0.0F);
+		beamLiveTime = 20;
 		if (!p_i1703_1_.isRemote && p_i1703_1_.getGameRules().getBoolean("doFireTick") && p_i1703_1_.isAreaLoaded(new BlockPos(MathHelper.floor(p_i1703_2_), MathHelper.floor(p_i1703_4_), MathHelper.floor(p_i1703_6_)), 10))
 		{
 			int i = MathHelper.floor(p_i1703_2_);
@@ -48,9 +48,9 @@ public class EntitySolarBeam extends EntityWeatherEffect {
 
 			for (i = 0; i < 32; ++i)
 			{
-				j = MathHelper.floor(p_i1703_2_) + this.rand.nextInt(13) - 1;
-				k = MathHelper.floor(p_i1703_4_) + this.rand.nextInt(13) - 1;
-				int l = MathHelper.floor(p_i1703_6_) + this.rand.nextInt(13) - 1;
+				j = MathHelper.floor(p_i1703_2_) + rand.nextInt(13) - 1;
+				k = MathHelper.floor(p_i1703_4_) + rand.nextInt(13) - 1;
+				int l = MathHelper.floor(p_i1703_6_) + rand.nextInt(13) - 1;
 
 				if (p_i1703_1_.getBlockState(new BlockPos(j, k, l)).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(p_i1703_1_, new BlockPos(j, k, l)))
 				{
@@ -64,16 +64,17 @@ public class EntitySolarBeam extends EntityWeatherEffect {
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if(--beamLiveTime <= 0)
-			this.setDead();
-		if(beamLiveTime%5 == 0)
-			this.getEntityWorld().playSound(null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.WEATHER, 10.0F, 2F);
+		if(--beamLiveTime <= 0) {
+			setDead();
+		}
+		if(beamLiveTime%5 == 0) {
+			getEntityWorld().playSound(null, posX, posY, posZ, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.WEATHER, 10.0F, 2F);
+		}
 		double d0 = 6.0D;
-		List<?> list = this.getEntityWorld().getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(this.posX - d0, this.posY - d0, this.posZ - d0, this.posX + d0, this.posY + 128.0D + d0, this.posZ + d0));
+		List<?> list = getEntityWorld().getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 128.0D + d0, posZ + d0));
 
-		for (int l = 0; l < list.size(); ++l)
-		{
-			Entity entity = (Entity)list.get(l);
+		for(Object element : list) {
+			Entity entity = (Entity)element;
 			entity.setFire(5);
 			entity.attackEntityFrom(DamageSource.ON_FIRE, 3.0F);
 		}

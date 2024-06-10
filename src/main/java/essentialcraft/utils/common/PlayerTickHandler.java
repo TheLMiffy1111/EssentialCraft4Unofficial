@@ -70,12 +70,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PlayerTickHandler {
-	public HashMap<EntityPlayer, Integer> ticks = new HashMap<EntityPlayer, Integer>();
-	public HashMap<EntityPlayer, Integer> wticks = new HashMap<EntityPlayer, Integer>();
+	public HashMap<EntityPlayer, Integer> ticks = new HashMap<>();
+	public HashMap<EntityPlayer, Integer> wticks = new HashMap<>();
 
-	public HashMap<EntityPlayer, Boolean> isWearingBoots = new HashMap<EntityPlayer, Boolean>();
+	public HashMap<EntityPlayer, Boolean> isWearingBoots = new HashMap<>();
 
-	public HashMap<EntityPlayer, Boolean> isFlightAllowed = new HashMap<EntityPlayer, Boolean>();
+	public HashMap<EntityPlayer, Boolean> isFlightAllowed = new HashMap<>();
 
 	public boolean client_flightAllowed;
 
@@ -376,10 +376,12 @@ public class PlayerTickHandler {
 							FMLLog.log(Level.WARN, "[EC4]Player data for player "+e.getName()+" could not be read. If it is the first time of the player to log in - it is fine. Otherwise, report the error to the author!");
 						}
 
-						if(tag != null)
+						if(tag != null) {
 							ECUtils.readOrCreatePlayerData(uuid, tag);
-						else
+						}
+						else {
 							ECUtils.createPlayerData(uuid);
+						}
 					}
 					catch(Exception Ex) {
 						FMLCommonHandler.instance().raiseException(Ex, "EssentialCraft4 Encountered an exception whlist reading playerdata NBT of player "+e.getName()+"! It is totally fine if this is your first time opening the save. If it is not - report the error to the forum - http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2286105", false);
@@ -453,7 +455,7 @@ public class PlayerTickHandler {
 					if(belt.getItem() instanceof ItemComputerBoard) {
 						Side s = FMLCommonHandler.instance().getEffectiveSide();
 						if(s.isClient()) {
-							this.client_flightAllowed = true;
+							client_flightAllowed = true;
 							if(!e.capabilities.allowFlying && !e.capabilities.isCreativeMode) {
 								e.capabilities.allowFlying = true;
 							}
@@ -482,14 +484,12 @@ public class PlayerTickHandler {
 
 							}
 						}
-						else {
-							if(isFlightAllowed.get(e)) {
-								isFlightAllowed.put(e, false);
-								if(e.capabilities.allowFlying && !e.capabilities.isCreativeMode) {
-									e.capabilities.allowFlying = false;
-									if(e.capabilities.isFlying) {
-										e.capabilities.isFlying = false;
-									}
+						else if(isFlightAllowed.get(e)) {
+							isFlightAllowed.put(e, false);
+							if(e.capabilities.allowFlying && !e.capabilities.isCreativeMode) {
+								e.capabilities.allowFlying = false;
+								if(e.capabilities.isFlying) {
+									e.capabilities.isFlying = false;
 								}
 							}
 						}
@@ -510,14 +510,12 @@ public class PlayerTickHandler {
 
 						}
 					}
-					else {
-						if(isFlightAllowed.get(e)) {
-							isFlightAllowed.put(e, false);
-							if(e.capabilities.allowFlying && !e.capabilities.isCreativeMode) {
-								e.capabilities.allowFlying = false;
-								if(e.capabilities.isFlying) {
-									e.capabilities.isFlying = false;
-								}
+					else if(isFlightAllowed.get(e)) {
+						isFlightAllowed.put(e, false);
+						if(e.capabilities.allowFlying && !e.capabilities.isCreativeMode) {
+							e.capabilities.allowFlying = false;
+							if(e.capabilities.isFlying) {
+								e.capabilities.isFlying = false;
 							}
 						}
 					}
@@ -540,18 +538,19 @@ public class PlayerTickHandler {
 				if(e.ticksExisted % 1200 == 0) {
 					PlayerGenericData data = ECUtils.getData(e);
 					if(e.getEntityWorld().rand.nextInt(36000) <= data.getOverhaulDamage()) {
-						ArrayList<ICorruptionEffect> possibleEffects = new ArrayList<ICorruptionEffect>();
+						ArrayList<ICorruptionEffect> possibleEffects = new ArrayList<>();
 						List<ICorruptionEffect> playerEffects = data.getEffects();
 						ArrayList<ICorruptionEffect> costSelected = CorruptionEffectRegistry.findSuitableEffects(data.getOverhaulDamage());
 						for(int i = 0; i < costSelected.size(); ++i) {
 							ICorruptionEffect selected = costSelected.get(i);
 							boolean canAdd = selected != null;
 							if(selected != null) {
-								if(!playerEffects.isEmpty())
+								if(!playerEffects.isEmpty()) {
 									J:for(int j = 0; j < playerEffects.size(); ++j) {
 										ICorruptionEffect playerEffect = playerEffects.get(j);
-										if(playerEffect == null)
+										if(playerEffect == null) {
 											continue J;
+										}
 										if(selected.effectEquals(playerEffect)) {
 											if(!selected.canMultiply()) {
 												canAdd = false;
@@ -559,8 +558,10 @@ public class PlayerTickHandler {
 											}
 										}
 									}
-								if(canAdd)
+								}
+								if(canAdd) {
 									possibleEffects.add(selected);
+								}
 							}
 						}
 						if(!possibleEffects.isEmpty()) {
@@ -572,18 +573,18 @@ public class PlayerTickHandler {
 						}
 					}
 				}
-				for(int i = 0; i < ECUtils.getData(e).getEffects().size(); ++i) {
-					ICorruptionEffect effect = ECUtils.getData(e).getEffects().get(i);
+				for(ICorruptionEffect effect : ECUtils.getData(e).getEffects()) {
 					effect.onPlayerTick(e);
 				}
 
-				if(WorldEventRegistry.currentEvent != null)
+				if(WorldEventRegistry.currentEvent != null) {
 					WorldEventRegistry.currentEvent.playerTick(e, WorldEventRegistry.currentEventDuration);
+				}
 
 				World wrd = e.getEntityWorld();
 				List<EntityItem> itemList = wrd.<EntityItem>getEntitiesWithinAABB(EntityItem.class,new AxisAlignedBB(e.posX-0.5D, e.posY-0.5D, e.posZ-0.5D, e.posX+0.5D, e.posY+0.5D, e.posZ+0.5D).grow(2, 1, 2));
-				for(int i = 0; i < itemList.size(); ++i) {
-					doGroundItemChecks(itemList.get(i));
+				for(EntityItem element : itemList) {
+					doGroundItemChecks(element);
 				}
 			}
 		}
@@ -603,8 +604,9 @@ public class PlayerTickHandler {
 						b_check_b4.getMaterial() == Material.LAVA &&
 						b_check_b2.getMaterial() == Material.LAVA &&
 						b_check_b3.getMaterial() == Material.LAVA) {
-					if(item.getItem().getCount() == 1)
+					if(item.getItem().getCount() == 1) {
 						item.lifespan = 0;
+					}
 					else {
 						item.getItem().shrink(1);
 					}
@@ -627,8 +629,9 @@ public class PlayerTickHandler {
 						b_check_b4.getMaterial() == Material.WATER &&
 						b_check_b2.getMaterial() == Material.WATER &&
 						b_check_b3.getMaterial() == Material.WATER) {
-					if(item.getItem().getCount() == 1)
+					if(item.getItem().getCount() == 1) {
 						item.lifespan = 0;
+					}
 					else {
 						item.getItem().shrink(1);
 					}
@@ -651,8 +654,9 @@ public class PlayerTickHandler {
 						b_check_b4.getBlock() == Blocks.GRASS &&
 						b_check_b2.getBlock() == Blocks.GRASS &&
 						b_check_b3.getBlock() == Blocks.GRASS) {
-					if(item.getItem().getCount() == 1)
+					if(item.getItem().getCount() == 1) {
 						item.lifespan = 0;
+					}
 					else {
 						item.getItem().shrink(1);
 					}
@@ -675,8 +679,9 @@ public class PlayerTickHandler {
 						b_check_b4.getBlock() == Blocks.SAND &&
 						b_check_b2.getBlock() == Blocks.SAND &&
 						b_check_b3.getBlock() == Blocks.SAND) {
-					if(item.getItem().getCount() == 1)
+					if(item.getItem().getCount() == 1) {
 						item.lifespan = 0;
+					}
 					else {
 						item.getItem().shrink(1);
 					}
@@ -699,8 +704,9 @@ public class PlayerTickHandler {
 						b_check_b4.getBlock() == Blocks.SOUL_SAND &&
 						b_check_b2.getBlock() == Blocks.SOUL_SAND &&
 						b_check_b3.getBlock() == Blocks.SOUL_SAND) {
-					if(item.getItem().getCount() == 1)
+					if(item.getItem().getCount() == 1) {
 						item.lifespan = 0;
+					}
 					else {
 						item.getItem().shrink(1);
 					}
@@ -723,8 +729,9 @@ public class PlayerTickHandler {
 						b_check_b4.getBlock() == Blocks.SOUL_SAND &&
 						b_check_b2.getBlock() == Blocks.SOUL_SAND &&
 						b_check_b3.getBlock() == Blocks.SOUL_SAND) {
-					if(item.getItem().getCount() == 1)
+					if(item.getItem().getCount() == 1) {
 						item.lifespan = 0;
+					}
 					else {
 						item.getItem().shrink(1);
 					}

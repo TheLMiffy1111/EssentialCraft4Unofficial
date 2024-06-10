@@ -51,14 +51,15 @@ public class BlockMithrilineOre extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		for(int i = 0; i < 3; ++i)
+		for(int i = 0; i < 3; ++i) {
 			list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override
@@ -74,9 +75,9 @@ public class BlockMithrilineOre extends Block implements IModelRegisterer {
 	@Override
 	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> ret = new ArrayList<>();
 
-		int count = this.RANDOM.nextInt(8*(fortune+1))+3;
+		int count = RANDOM.nextInt(8*(fortune+1))+3;
 		for(int i = 0; i < count; i++) {
 			Item item = getItemDropped(state, RANDOM, fortune);
 			if(item != null) {

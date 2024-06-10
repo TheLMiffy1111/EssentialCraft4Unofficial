@@ -72,15 +72,17 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 	public void update() {
 		boolean correct = isStructureCorrect();
 		if(syncTick == 0) {
-			if(tracker == null)
+			if(tracker == null) {
 				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + "," + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
+			}
 			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);
 			}
 			syncTick = 60;
 		}
-		else
+		else {
 			--syncTick;
+		}
 
 		if(requestSync && getWorld().isRemote) {
 			requestSync = false;
@@ -88,9 +90,8 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 		}
 
 		if(correct) {
-			if(espeStorage.getESPE() < maxEnergy)
-				for(int i = 0; i < possiblePowerSources.length; ++i) {
-					Vec3i c = possiblePowerSources[i];
+			if(espeStorage.getESPE() < maxEnergy) {
+				for(Vec3i c : possiblePowerSources) {
 					TileEntity c_tile = getWorld().getTileEntity(pos.add(c));
 					if(c_tile != null && c_tile.hasCapability(CapabilityESPEHandler.ESPE_HANDLER_CAPABILITY, null)) {
 						IESPEHandler otherStorage = c_tile.getCapability(CapabilityESPEHandler.ESPE_HANDLER_CAPABILITY, null);
@@ -100,8 +101,9 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 
 						if(getWorld().isRemote && c_tile instanceof TileMithrilineCrystal) {
 							int movement = (int)(getWorld().getWorldTime() % 60);
-							if(movement > 30)
+							if(movement > 30) {
 								movement = 60 - movement;
+							}
 							getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+c.getX()+0.5F, pos.getY()+c.getY()+movement/30D, pos.getZ()+c.getZ()+0.5F, -1, 1, 0);
 							getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+c.getX()+0.5F, pos.getY()+c.getY()+2+movement/30D, pos.getZ()+c.getZ()+0.5F, -1, 1, 0);
 						}
@@ -110,6 +112,7 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 						break;
 					}
 				}
+			}
 
 			if(!getStackInSlot(0).isEmpty()) {
 				MithrilineFurnaceRecipe rec = MithrilineFurnaceRecipes.getRecipeByInput(getStackInSlot(0));
@@ -120,10 +123,12 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 						progress += espeStorage.extractESPE(req, true);
 						if(progress >= reqProgress) {
 							decrStackSize(0, rec.stackSize);
-							if(getStackInSlot(1).isEmpty())
+							if(getStackInSlot(1).isEmpty()) {
 								setInventorySlotContents(1, rec.result.copy());
-							else
+							}
+							else {
 								getStackInSlot(1).grow(rec.result.getCount());
+							}
 
 							progress = 0;
 						}
@@ -140,8 +145,9 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 			}
 
 			if(getWorld().isRemote) {
-				for(int i = 0; i < 10; ++i)
+				for(int i = 0; i < 10; ++i) {
 					EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.4F, pos.getY()+0.2F + MathUtils.randomFloat(getWorld().rand)*0.6F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.4F, 0, 0.01F, 0, 0D, 1D, 0F, 1F);
+				}
 			}
 		}
 	}
@@ -187,8 +193,9 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	public static void setupConfig(Configuration cfg) {
@@ -214,25 +221,25 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if(!items[par1].isEmpty()) {
-			ItemStack itemstack;
-
-			if(items[par1].getCount() <= par2) {
-				itemstack = items[par1];
-				items[par1] = ItemStack.EMPTY;
-				return itemstack;
-			}
-			else {
-				itemstack = items[par1].splitStack(par2);
-
-				if(items[par1].getCount() == 0)
-					items[par1] = ItemStack.EMPTY;
-
-				return itemstack;
-			}
-		}
-		else
+		if(items[par1].isEmpty()) {
 			return ItemStack.EMPTY;
+		}
+		ItemStack itemstack;
+
+		if(items[par1].getCount() <= par2) {
+			itemstack = items[par1];
+			items[par1] = ItemStack.EMPTY;
+			return itemstack;
+		}
+		else {
+			itemstack = items[par1].splitStack(par2);
+
+			if(items[par1].getCount() == 0) {
+				items[par1] = ItemStack.EMPTY;
+			}
+
+			return itemstack;
+		}
 	}
 
 	@Override
@@ -242,8 +249,7 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 			items[par1] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		else
-			return ItemStack.EMPTY;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -303,8 +309,9 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < getSizeInventory(); i++)
+		for(int i = 0; i < getSizeInventory(); i++) {
 			setInventorySlotContents(i, ItemStack.EMPTY);
+		}
 	}
 
 	@Override

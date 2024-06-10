@@ -14,9 +14,9 @@ public class PotionChaosInfluence extends Potion {
 
 	public PotionChaosInfluence(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(4, 1);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.chaosInfluence");
+		setIconIndex(4, 1);
+		setEffectiveness(0.25D);
+		setPotionName("potion.chaosInfluence");
 		this.setRegistryName("essentialcraft", "potion.chaosinfluence");
 	}
 
@@ -30,8 +30,9 @@ public class PotionChaosInfluence extends Potion {
 		if(b != null) {
 			for(int i = 0; i < b.getSlots(); ++i) {
 				ItemStack is = b.getStackInSlot(i);
-				if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 31)
+				if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 31) {
 					remove = true;
+				}
 			}
 		}
 		if(remove) {

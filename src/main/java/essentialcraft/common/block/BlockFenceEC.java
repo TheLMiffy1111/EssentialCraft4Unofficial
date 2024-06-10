@@ -24,6 +24,6 @@ public class BlockFenceEC extends BlockFence implements IModelRegisterer {
 
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("essentialcraft:" + getRegistryName().getResourcePath(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("essentialcraft:" + getRegistryName().getPath(), "inventory"));
 	}
 }

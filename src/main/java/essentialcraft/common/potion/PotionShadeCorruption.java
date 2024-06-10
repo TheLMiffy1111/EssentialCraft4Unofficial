@@ -9,9 +9,9 @@ public class PotionShadeCorruption extends Potion {
 
 	public PotionShadeCorruption(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(5, 2);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.shadeCorruption");
+		setIconIndex(5, 2);
+		setEffectiveness(0.25D);
+		setPotionName("potion.shadeCorruption");
 		this.setRegistryName("essentialcraft", "potion.shadecorruption");
 	}
 

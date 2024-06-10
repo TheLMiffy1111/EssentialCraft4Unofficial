@@ -77,12 +77,13 @@ public class BlockMRUCoil extends BlockContainer implements IModelRegisterer {
 			ItemStack is = tile.getStackInSlot(1);
 			if(is.getItem() instanceof ItemPlayerList) {
 				NBTTagCompound itemTag = MiscUtils.getStackTag(is);
-				if(!itemTag.hasKey("usernames"))
+				if(!itemTag.hasKey("usernames")) {
 					itemTag.setString("usernames", "||username:null");
+				}
 				String str = itemTag.getString("usernames");
 				DummyData[] dt = DataStorage.parseData(str);
-				for(int i = 0; i < dt.length; ++i) {
-					String username = dt[i].fieldValue;
+				for(DummyData element : dt) {
+					String username = element.fieldValue;
 					String playerName = MiscUtils.getUUIDFromPlayer(player).toString();
 					if(username.equals(playerName)) {
 						flag = true;

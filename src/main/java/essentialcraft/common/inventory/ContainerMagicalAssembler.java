@@ -17,6 +17,6 @@ public class ContainerMagicalAssembler extends ContainerInventory {
 		for(int h = 2; h < 18; ++h) {
 			addSlotToContainer(new SlotGeneric(inv, h, 1000000, 1000000));
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

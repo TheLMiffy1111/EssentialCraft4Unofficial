@@ -32,7 +32,7 @@ public class ItemSoulStone extends Item implements IItemColor, IModelRegisterer 
 	int clientTimer = 0;
 	public ItemSoulStone() {
 		super();
-		this.maxStackSize = 1;
+		maxStackSize = 1;
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class ItemSoulStone extends Item implements IItemColor, IModelRegisterer 
 					--clientTimer;
 				}
 			}
-			this.addBloodMagicDescription(stack, player, list, par4);
+			addBloodMagicDescription(stack, player, list, par4);
 		}
 	}
 
@@ -125,7 +125,7 @@ public class ItemSoulStone extends Item implements IItemColor, IModelRegisterer 
 	public void addBloodMagicDescription(ItemStack stack, EntityPlayer player, List<String> list, ITooltipFlag par4) {
 		if(Loader.isModLoaded("bloodmagic")) {
 			if(stack.getItemDamage() == 1) {
-				String username = stack.getTagCompound().getString("playerName");
+				stack.getTagCompound().getString("playerName");
 
 				if(EssentialCraftCore.clazzExists("WayofTime.bloodmagic.api.BloodMagicAPI")) {
 					try {

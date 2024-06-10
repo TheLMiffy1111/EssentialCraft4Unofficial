@@ -106,12 +106,15 @@ public class GuiMRUGenerated extends GuiTextElement{
 				}
 				double heat = furnace.heat;
 				double mruGenerated;
-				if(heat < 1000)
+				if(heat < 1000) {
 					mruGenerated = heat/100;
-				else if(heat > 10000)
+				}
+				else if(heat > 10000) {
 					mruGenerated = 80+heat/1000;
-				else
+				}
+				else {
 					mruGenerated = heat/124;
+				}
 				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(mruGenerated+" MRU/t", posX+2, posY+5, 0xffffff);
 				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Heat: "+(int)furnace.heat+"C", posX+82, posY-10, 0xffffff);
 			}

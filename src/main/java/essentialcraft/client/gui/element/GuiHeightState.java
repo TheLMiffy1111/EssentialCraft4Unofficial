@@ -63,7 +63,9 @@ public class GuiHeightState extends GuiTextElement{
 			DrawUtils.drawScaledTexturedRect(posX+1+rnd.nextInt(15), posY+14, TextureUtils.fromBlock(Blocks.BEDROCK), 1, 1, 2);
 		}
 		int pos = MathUtils.pixelatedTextureSize(tile.getPos().getY(), 256, 50);
-		if(pos > 45)pos = 45;
+		if(pos > 45) {
+			pos = 45;
+		}
 		GlStateManager.color(0, 1, 0);
 		DrawUtils.drawScaledTexturedRect(posX+1, posY+14-pos, TextureUtils.fromBlock(Blocks.EMERALD_BLOCK), 16, 1, 2);
 		GlStateManager.color(1,1,1);

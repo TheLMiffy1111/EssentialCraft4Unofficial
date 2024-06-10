@@ -14,6 +14,6 @@ public class ContainerMRUIntersector extends ContainerInventory {
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 23));
 		addSlotToContainer(new SlotBoundEssence(inv, 1, 108, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

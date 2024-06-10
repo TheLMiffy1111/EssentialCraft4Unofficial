@@ -65,11 +65,13 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
 		Multimap<String, AttributeModifier> mods = HashMultimap.<String, AttributeModifier>create();
 
-		if(this == ItemsCore.computer_chestplate && slot == EntityEquipmentSlot.CHEST)
+		if(this == ItemsCore.computer_chestplate && slot == EntityEquipmentSlot.CHEST) {
 			mods.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "hp", 40D, 0));
+		}
 
-		if(this == ItemsCore.computer_leggings && slot == EntityEquipmentSlot.LEGS)
+		if(this == ItemsCore.computer_leggings && slot == EntityEquipmentSlot.LEGS) {
 			mods.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0001"), "movespeed", 0.15D, 0));
+		}
 		return mods;
 	}
 
@@ -80,7 +82,7 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 
 		list.add(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() + "/" + stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMaxMRU() + " MRU");
 
-		switch(this.armorType) {
+		switch(armorType) {
 		case HEAD: {
 			list.add(TextFormatting.DARK_PURPLE+I18n.translateToLocal("essentialcraft.txt.computer_helmet.props"));
 			break;
@@ -109,19 +111,22 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 	}
 
 	public static boolean hasFullset(EntityPlayer p) {
-		if(p == null)
+		if(p == null) {
 			return false;
+		}
 
-		for(int i = 0; i < 4; ++i)
-			if(!(p.inventory.armorInventory.get(i).getItem() instanceof ItemComputerArmor))
+		for(int i = 0; i < 4; ++i) {
+			if(!(p.inventory.armorInventory.get(i).getItem() instanceof ItemComputerArmor)) {
 				return false;
+			}
+		}
 
 		return true;
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(par2CreativeTabs)) {
+		if(isInCreativeTab(par2CreativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
@@ -166,8 +171,9 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 
 			if(source.getTrueSource() != null && hasFullSet) {
 				float newDamage = (float) (damage/2);
-				if(newDamage<0.5D)
+				if(newDamage<0.5D) {
 					newDamage = 0;
+				}
 
 				ECUtils.playSoundToAllNearby(player.posX, player.posY, player.posZ, "essentialcraft:sound.lightning_hit", 0.2F, 1F, 8, player.dimension);
 				source.getTrueSource().attackEntityFrom(DamageSource.causeThornsDamage(player), newDamage);
@@ -178,8 +184,7 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 			ItemArmor aarmor = (ItemArmor)armor.getItem();
 			return new ArmorProperties(0, aarmor.damageReduceAmount/10D, Integer.MAX_VALUE);
 		}
-		else
-			return new ArmorProperties(0, 0, 1);
+		return new ArmorProperties(0, 0, 1);
 	}
 
 	@Override
@@ -212,6 +217,6 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getResourcePath(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getPath(), "inventory"));
 	}
 }

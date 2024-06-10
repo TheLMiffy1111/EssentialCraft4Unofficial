@@ -22,33 +22,33 @@ public class ItemsCore {
 		windElemental = EnumHelper.addToolMaterial("windElemental", 11, 15684, 15.0F, 6F, 42);
 		shade = EnumHelper.addToolMaterial("shade", 32, 754, 1.0F, 17.0F, 12);
 
-		testingItem = new ItemTestEC().setUnlocalizedName("essentialcraft.testItem").setMaxStackSize(1).setFull3D();
+		testingItem = new ItemTestEC().setTranslationKey("essentialcraft.testItem").setMaxStackSize(1).setFull3D();
 		registerItemSimple(testingItem, "testItem");
-		mruMover1 = new ItemMRUMover().setUnlocalizedName("essentialcraft.mruMover1").setMaxStackSize(1).setFull3D();
+		mruMover1 = new ItemMRUMover().setTranslationKey("essentialcraft.mruMover1").setMaxStackSize(1).setFull3D();
 		registerItemSimple(mruMover1, "mruMover1");
-		drops = new ItemDrop().setUnlocalizedName("essentialcraft.drops_").setMaxStackSize(64);
+		drops = new ItemDrop().setTranslationKey("essentialcraft.drops_").setMaxStackSize(64);
 		registerItemSimple(drops,  "gem_elemental");
-		elemental_pick = new ItemPickaxeEC(elemental).setUnlocalizedName("essentialcraft.elemental_pick").setMaxStackSize(1).setFull3D();
+		elemental_pick = new ItemPickaxeEC(elemental).setTranslationKey("essentialcraft.elemental_pick").setMaxStackSize(1).setFull3D();
 		registerItemSimple(elemental_pick, "elemental_pick");
-		elemental_axe = new ItemAxeEC(elemental).setUnlocalizedName("essentialcraft.elemental_axe").setMaxStackSize(1).setFull3D();
+		elemental_axe = new ItemAxeEC(elemental).setTranslationKey("essentialcraft.elemental_axe").setMaxStackSize(1).setFull3D();
 		registerItemSimple(elemental_axe, "elemental_axe");
-		elemental_hoe = new ItemHoeEC(elemental).setUnlocalizedName("essentialcraft.elemental_hoe").setMaxStackSize(1).setFull3D();
+		elemental_hoe = new ItemHoeEC(elemental).setTranslationKey("essentialcraft.elemental_hoe").setMaxStackSize(1).setFull3D();
 		registerItemSimple(elemental_hoe, "elemental_hoe");
-		elemental_shovel = new ItemShovelEC(elemental).setUnlocalizedName("essentialcraft.elemental_shovel").setMaxStackSize(1).setFull3D();
+		elemental_shovel = new ItemShovelEC(elemental).setTranslationKey("essentialcraft.elemental_shovel").setMaxStackSize(1).setFull3D();
 		registerItemSimple(elemental_shovel, "elemental_shovel");
-		elemental_sword = new ItemSwordEC(elemental).setUnlocalizedName("essentialcraft.elemental_sword").setMaxStackSize(1).setFull3D();
+		elemental_sword = new ItemSwordEC(elemental).setTranslationKey("essentialcraft.elemental_sword").setMaxStackSize(1).setFull3D();
 		registerItemSimple(elemental_sword, "elemental_sword");
-		bound_gem = new ItemBoundGem().setUnlocalizedName("essentialcraft.bound_gem");
+		bound_gem = new ItemBoundGem().setTranslationKey("essentialcraft.bound_gem");
 		registerItemSimple(bound_gem, "bound_gem");
 		magicMonocle = registerItemSimple(new ItemMonocle(), "magicMonocle", 16, true, 1);
 
-		record_everlastingSummer = new ItemRecordEC("letsbefriends", SoundRegistry.recordLetsBeFriends).setUnlocalizedName("essentialcraft.record");
+		record_everlastingSummer = new ItemRecordEC("letsbefriends", SoundRegistry.recordLetsBeFriends).setTranslationKey("essentialcraft.record");
 		registerItemSimple(record_everlastingSummer, "record");
 
-		record_papersPlease = new ItemRecordEC("arstotzkan", SoundRegistry.recordArstotzkan).setUnlocalizedName("essentialcraft.record_a");
+		record_papersPlease = new ItemRecordEC("arstotzkan", SoundRegistry.recordArstotzkan).setTranslationKey("essentialcraft.record_a");
 		registerItemSimple(record_papersPlease, "record_a");
 
-		record_secret = new ItemRecordEC("ecsecret", SoundRegistry.recordSecret).setUnlocalizedName("essentialcraft.record_secret");
+		record_secret = new ItemRecordEC("ecsecret", SoundRegistry.recordSecret).setTranslationKey("essentialcraft.record_secret");
 		registerItemSimple(record_secret, "record_secret");
 
 		soulStone = registerItemSimple(new ItemSoulStone(), "soulStone", 0, false, 1);
@@ -61,7 +61,7 @@ public class ItemsCore {
 		magicalAlloy = registerItemSimple(new ItemMagicalAlloy(), "magicalAlloy", 0, false, 64);
 		essence = registerItemSimple(new ItemEssence(), "essence", 0, false, 16);
 
-		storage = new ItemMRUStorageEC(new int[]{500, 5000, 30000, 120000, 1000000}).setUnlocalizedName("essentialcraft.storage");
+		storage = new ItemMRUStorageEC(new int[]{500, 5000, 30000, 120000, 1000000}).setTranslationKey("essentialcraft.storage");
 		registerItemSimple(storage, "storage");
 
 		magicalDigger = registerItemSimple(new ItemMagicalDigger(), "magicalDigger", 0, true, 1);
@@ -83,25 +83,25 @@ public class ItemsCore {
 
 		elementalFuel = registerItemSimple(new ItemEssentialFuel(), "elementalFuel", 0, false, 16);
 
-		fFocus = new ItemElementalFocus().setUnlocalizedName("essentialcraft.fFocus");
+		fFocus = new ItemElementalFocus().setTranslationKey("essentialcraft.fFocus");
 		registerItemSimple(fFocus, "fFocus");
-		wFocus = new ItemElementalFocus().setUnlocalizedName("essentialcraft.wFocus");
+		wFocus = new ItemElementalFocus().setTranslationKey("essentialcraft.wFocus");
 		registerItemSimple(wFocus, "wFocus");
-		eFocus = new ItemElementalFocus().setUnlocalizedName("essentialcraft.eFocus");
+		eFocus = new ItemElementalFocus().setTranslationKey("essentialcraft.eFocus");
 		registerItemSimple(eFocus, "eFocus");
-		aFocus = new ItemElementalFocus().setUnlocalizedName("essentialcraft.aFocus");
+		aFocus = new ItemElementalFocus().setTranslationKey("essentialcraft.aFocus");
 		registerItemSimple(aFocus, "aFocus");
 
-		fruit = new ItemFruit(8, 10F, false).setUnlocalizedName("essentialcraft.fruit_Item");
+		fruit = new ItemFruit(8, 10F, false).setTranslationKey("essentialcraft.fruit_Item");
 		registerItemSimple(fruit, "fruit_Item");
 
-		bottledWind = new ItemWindKeeper(10).setUnlocalizedName("essentialcraft.bottledWind");
+		bottledWind = new ItemWindKeeper(10).setTranslationKey("essentialcraft.bottledWind");
 		registerItemSimple(bottledWind, "bottledWind");
 
-		imprisonedWind = new ItemWindKeeper(25).setUnlocalizedName("essentialcraft.imprisonedWind");
+		imprisonedWind = new ItemWindKeeper(25).setTranslationKey("essentialcraft.imprisonedWind");
 		registerItemSimple(imprisonedWind, "imprisonedWind");
 
-		windKeeper = new ItemWindKeeper(100).setUnlocalizedName("essentialcraft.windKeeper");
+		windKeeper = new ItemWindKeeper(100).setTranslationKey("essentialcraft.windKeeper");
 		registerItemSimple(windKeeper, "windKeeper");
 
 		windTablet = registerItemSimple(new ItemWindTablet(), "windTablet", 0, false, 1);
@@ -111,74 +111,74 @@ public class ItemsCore {
 
 
 
-		magicArmorItems[0] = new ItemArmorEC(magicArmorMaterial, 4, 0, 0).setArmorTexture("armorEC3Magic").setUnlocalizedName("essentialcraft.helm_magic").setMaxDamage(512);
+		magicArmorItems[0] = new ItemArmorEC(magicArmorMaterial, 4, 0, 0).setArmorTexture("armorEC3Magic").setTranslationKey("essentialcraft.helm_magic").setMaxDamage(512);
 		registerItemSimple(magicArmorItems[0], "helm_magic");
 		ApiCore.allowItemToSeeMRU(magicArmorItems[0]);
 		ApiCore.setItemResistances(magicArmorItems[0], 0.25F, 0.125F, 0.10F);
 
-		magicArmorItems[1] = new ItemArmorEC(magicArmorMaterial, 4, 1, 0).setArmorTexture("armorEC3Magic").setUnlocalizedName("essentialcraft.chest_magic").setMaxDamage(1536);
+		magicArmorItems[1] = new ItemArmorEC(magicArmorMaterial, 4, 1, 0).setArmorTexture("armorEC3Magic").setTranslationKey("essentialcraft.chest_magic").setMaxDamage(1536);
 		registerItemSimple(magicArmorItems[1], "chest_magic");
 		ApiCore.setItemResistances(magicArmorItems[1], 0.25F, 0.125F, 0.10F);
 
-		magicArmorItems[2] = new ItemArmorEC(magicArmorMaterial, 4, 2, 0).setArmorTexture("armorEC3Magic").setUnlocalizedName("essentialcraft.legs_magic").setMaxDamage(1024);
+		magicArmorItems[2] = new ItemArmorEC(magicArmorMaterial, 4, 2, 0).setArmorTexture("armorEC3Magic").setTranslationKey("essentialcraft.legs_magic").setMaxDamage(1024);
 		registerItemSimple(magicArmorItems[2], "legs_magic");
 		ApiCore.setItemResistances(magicArmorItems[2], 0.25F, 0.125F, 0.10F);
 
-		magicArmorItems[3] = new ItemArmorEC(magicArmorMaterial, 4, 3, 0).setArmorTexture("armorEC3Magic").setUnlocalizedName("essentialcraft.boots_magic").setMaxDamage(512);
+		magicArmorItems[3] = new ItemArmorEC(magicArmorMaterial, 4, 3, 0).setArmorTexture("armorEC3Magic").setTranslationKey("essentialcraft.boots_magic").setMaxDamage(512);
 		registerItemSimple(magicArmorItems[3], "boots_magic");
 		ApiCore.setItemResistances(magicArmorItems[3], 0.25F, 0.125F, 0.10F);
 
 
 
-		magicArmorItems[4] = new ItemArmorEC(voidArmorMaterial, 4, 0, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Converts life energy of fallen foes to your hunger").setUnlocalizedName("essentialcraft.helm_void").setMaxDamage(2048);
+		magicArmorItems[4] = new ItemArmorEC(voidArmorMaterial, 4, 0, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Converts life energy of fallen foes to your hunger").setTranslationKey("essentialcraft.helm_void").setMaxDamage(2048);
 		registerItemSimple(magicArmorItems[4], "helm_void");
 		ApiCore.allowItemToSeeMRU(magicArmorItems[4]);
 		ApiCore.setItemResistances(magicArmorItems[4], 1F, 0.5F, 0.75F);
 
-		magicArmorItems[5] = new ItemArmorEC(voidArmorMaterial, 4, 1, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Can dodge 20% of attacks").setUnlocalizedName("essentialcraft.chest_void").setMaxDamage(6144);
+		magicArmorItems[5] = new ItemArmorEC(voidArmorMaterial, 4, 1, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Can dodge 20% of attacks").setTranslationKey("essentialcraft.chest_void").setMaxDamage(6144);
 		registerItemSimple(magicArmorItems[5], "chest_void");
 		ApiCore.setItemResistances(magicArmorItems[5], 1F, 0.5F, 0.75F);
 
-		magicArmorItems[6] = new ItemArmorEC(voidArmorMaterial, 4, 2, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Can phase-shift through monsters").setUnlocalizedName("essentialcraft.legs_void").setMaxDamage(4096);
+		magicArmorItems[6] = new ItemArmorEC(voidArmorMaterial, 4, 2, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Can phase-shift through monsters").setTranslationKey("essentialcraft.legs_void").setMaxDamage(4096);
 		registerItemSimple(magicArmorItems[6], "legs_void");
 		ApiCore.setItemResistances(magicArmorItems[6], 1F, 0.5F, 0.75F);
 
-		magicArmorItems[7] = new ItemArmorEC(voidArmorMaterial, 4, 3, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Negates 90% of falldamage").setUnlocalizedName("essentialcraft.boots_void").setMaxDamage(2048);
+		magicArmorItems[7] = new ItemArmorEC(voidArmorMaterial, 4, 3, 1).setArmorTexture("armorEC3Void").setDescription(TextFormatting.ITALIC+"Negates 90% of falldamage").setTranslationKey("essentialcraft.boots_void").setMaxDamage(2048);
 		registerItemSimple(magicArmorItems[7], "boots_void");
 		ApiCore.setItemResistances(magicArmorItems[7], 1F, 0.5F, 0.75F);
 
 
 
-		magicArmorItems[8] = new ItemArmorEC(inquisArmorMaterial, 4, 0, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Linses created from the moonlight metal to see unpurity").setUnlocalizedName("essentialcraft.helm_inq").setMaxDamage(5120);
+		magicArmorItems[8] = new ItemArmorEC(inquisArmorMaterial, 4, 0, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Linses created from the moonlight metal to see unpurity").setTranslationKey("essentialcraft.helm_inq").setMaxDamage(5120);
 		registerItemSimple(magicArmorItems[8], "helm_inq");
 		ApiCore.allowItemToSeeMRU(magicArmorItems[8]);
 		ApiCore.setItemResistances(magicArmorItems[8], 1F, 1F, 1F);
 
-		magicArmorItems[9] = new ItemArmorEC(inquisArmorMaterial, 4, 1, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Be quiet, Dominique!").setUnlocalizedName("essentialcraft.chest_inq").setMaxDamage(15360);
+		magicArmorItems[9] = new ItemArmorEC(inquisArmorMaterial, 4, 1, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Be quiet, Dominique!").setTranslationKey("essentialcraft.chest_inq").setMaxDamage(15360);
 		registerItemSimple(magicArmorItems[9], "chest_inq");
 		ApiCore.setItemResistances(magicArmorItems[9], 1F, 1F, 1F);
 
-		magicArmorItems[10] = new ItemArmorEC(inquisArmorMaterial, 4, 2, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Magic is a parasite. It must be wiped out!").setUnlocalizedName("essentialcraft.legs_inq").setMaxDamage(10240);
+		magicArmorItems[10] = new ItemArmorEC(inquisArmorMaterial, 4, 2, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Magic is a parasite. It must be wiped out!").setTranslationKey("essentialcraft.legs_inq").setMaxDamage(10240);
 		registerItemSimple(magicArmorItems[10], "legs_inq");
 		ApiCore.setItemResistances(magicArmorItems[10], 1F, 1F, 1F);
 
-		magicArmorItems[11] = new ItemArmorEC(inquisArmorMaterial, 4, 3, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Magic shall not prevail!").setUnlocalizedName("essentialcraft.boots_inq").setMaxDamage(5120);
+		magicArmorItems[11] = new ItemArmorEC(inquisArmorMaterial, 4, 3, 2).setArmorTexture("armorEC3Inquisitorium").setDescription(TextFormatting.ITALIC+"Magic shall not prevail!").setTranslationKey("essentialcraft.boots_inq").setMaxDamage(5120);
 		registerItemSimple(magicArmorItems[11], "boots_inq");
 		ApiCore.setItemResistances(magicArmorItems[11], 1F, 1F, 1F);
 
 
 
-		magicArmorItems[12] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 0, 3).setArmorTexture("armorEC3Wind").setUnlocalizedName("essentialcraft.helm_wind").setMaxDamage(128);
+		magicArmorItems[12] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 0, 3).setArmorTexture("armorEC3Wind").setTranslationKey("essentialcraft.helm_wind").setMaxDamage(128);
 		registerItemSimple(magicArmorItems[12], "helm_wind");
 		ApiCore.allowItemToSeeMRU(magicArmorItems[12]);
 
-		magicArmorItems[13] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 1, 3).setArmorTexture("armorEC3Wind").setUnlocalizedName("essentialcraft.chest_wind").setMaxDamage(384);
+		magicArmorItems[13] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 1, 3).setArmorTexture("armorEC3Wind").setTranslationKey("essentialcraft.chest_wind").setMaxDamage(384);
 		registerItemSimple(magicArmorItems[13], "chest_wind");
 
-		magicArmorItems[14] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 2, 3).setArmorTexture("armorEC3Wind").setUnlocalizedName("essentialcraft.legs_wind").setMaxDamage(256);
+		magicArmorItems[14] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 2, 3).setArmorTexture("armorEC3Wind").setTranslationKey("essentialcraft.legs_wind").setMaxDamage(256);
 		registerItemSimple(magicArmorItems[14], "legs_wind");
 
-		magicArmorItems[15] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 3, 3).setArmorTexture("armorEC3Wind").setUnlocalizedName("essentialcraft.boots_wind").setMaxDamage(128);
+		magicArmorItems[15] = new ItemArmorEC(ArmorMaterial.LEATHER, 4, 3, 3).setArmorTexture("armorEC3Wind").setTranslationKey("essentialcraft.boots_wind").setMaxDamage(128);
 		registerItemSimple(magicArmorItems[15], "boots_wind");
 
 
@@ -192,7 +192,7 @@ public class ItemsCore {
 		research_book = registerItemSimple(new ItemKnowledgeBook(), "research_book", 0, false, 1);
 
 		air_potion = registerItemSimple(new ItemLiquidAir(), "air_potion", 0, false, 64);
-		mruMover_t2 = new ItemMRUMover().setUnlocalizedName("essentialcraft.mruMover_t2").setMaxDamage(256*6).setMaxStackSize(1).setFull3D();
+		mruMover_t2 = new ItemMRUMover().setTranslationKey("essentialcraft.mruMover_t2").setMaxDamage(256*6).setMaxStackSize(1).setFull3D();
 		registerItemSimple(mruMover_t2, "mruMover_t2");
 		playerList = registerItemSimple(new ItemPlayerList(), "playerList", 0, false, 1);
 		magicalChisel = registerItemSimple(new ItemMagicalChisel(), "magicalChisel", 256, true, 1);
@@ -206,51 +206,51 @@ public class ItemsCore {
 		shadeKnife = registerItemSimple(new ItemShadowKnife(), "shadeKnife", 0, true, 32);
 		entityEgg = registerItemSimple(new ItemSpawnEggEC(), "entityEgg", 0, false, 64);
 
-		pistol = new ItemGun("pistol").setUnlocalizedName("essentialcraft.gun.pistol");
+		pistol = new ItemGun("pistol").setTranslationKey("essentialcraft.gun.pistol");
 		registerItemSimple(pistol, "gun.pistol");
-		rifle = new ItemGun("rifle").setUnlocalizedName("essentialcraft.gun.rifle");
+		rifle = new ItemGun("rifle").setTranslationKey("essentialcraft.gun.rifle");
 		registerItemSimple(rifle, "gun.rifle");
-		sniper = new ItemGun("sniper").setUnlocalizedName("essentialcraft.gun.sniper");
+		sniper = new ItemGun("sniper").setTranslationKey("essentialcraft.gun.sniper");
 		registerItemSimple(sniper, "gun.sniper");
-		gatling = new ItemGun("gatling").setUnlocalizedName("essentialcraft.gun.gatling");
+		gatling = new ItemGun("gatling").setTranslationKey("essentialcraft.gun.gatling");
 		registerItemSimple(gatling, "gun.gatling");
 
-		weak_elemental_pick = new ItemPickaxeEC(weakElemental).setUnlocalizedName("essentialcraft.weak_elemental_pick").setMaxStackSize(1).setFull3D();
+		weak_elemental_pick = new ItemPickaxeEC(weakElemental).setTranslationKey("essentialcraft.weak_elemental_pick").setMaxStackSize(1).setFull3D();
 		registerItemSimple(weak_elemental_pick, "weak_elemental_pick");
-		weak_elemental_axe = new ItemAxeEC(weakElemental).setUnlocalizedName("essentialcraft.weak_elemental_axe").setMaxStackSize(1).setFull3D();
+		weak_elemental_axe = new ItemAxeEC(weakElemental).setTranslationKey("essentialcraft.weak_elemental_axe").setMaxStackSize(1).setFull3D();
 		registerItemSimple(weak_elemental_axe, "weak_elemental_axe");
-		weak_elemental_hoe = new ItemHoeEC(weakElemental).setUnlocalizedName("essentialcraft.weak_elemental_hoe").setMaxStackSize(1).setFull3D();
+		weak_elemental_hoe = new ItemHoeEC(weakElemental).setTranslationKey("essentialcraft.weak_elemental_hoe").setMaxStackSize(1).setFull3D();
 		registerItemSimple(weak_elemental_hoe, "weak_elemental_hoe");
-		weak_elemental_shovel = new ItemShovelEC(weakElemental).setUnlocalizedName("essentialcraft.weak_elemental_shovel").setMaxStackSize(1).setFull3D();
+		weak_elemental_shovel = new ItemShovelEC(weakElemental).setTranslationKey("essentialcraft.weak_elemental_shovel").setMaxStackSize(1).setFull3D();
 		registerItemSimple(weak_elemental_shovel, "weak_elemental_shovel");
-		weak_elemental_sword = new ItemSwordEC(weakElemental).setUnlocalizedName("essentialcraft.weak_elemental_sword").setMaxStackSize(1).setFull3D();
+		weak_elemental_sword = new ItemSwordEC(weakElemental).setTranslationKey("essentialcraft.weak_elemental_sword").setMaxStackSize(1).setFull3D();
 		registerItemSimple(weak_elemental_sword, "weak_elemental_sword");
 
-		wind_elemental_pick = new ItemWindPickaxe(windElemental).setUnlocalizedName("essentialcraft.wind_elemental_pick").setMaxStackSize(1).setFull3D();
+		wind_elemental_pick = new ItemWindPickaxe(windElemental).setTranslationKey("essentialcraft.wind_elemental_pick").setMaxStackSize(1).setFull3D();
 		registerItemSimple(wind_elemental_pick, "wind_elemental_pick");
-		wind_elemental_shovel = new ItemWindShovel(windElemental).setUnlocalizedName("essentialcraft.wind_elemental_shovel").setMaxStackSize(1).setFull3D();
+		wind_elemental_shovel = new ItemWindShovel(windElemental).setTranslationKey("essentialcraft.wind_elemental_shovel").setMaxStackSize(1).setFull3D();
 		registerItemSimple(wind_elemental_shovel, "wind_elemental_shovel");
-		wind_elemental_axe = new ItemWindAxe(windElemental).setUnlocalizedName("essentialcraft.wind_elemental_axe").setMaxStackSize(1).setFull3D();
+		wind_elemental_axe = new ItemWindAxe(windElemental).setTranslationKey("essentialcraft.wind_elemental_axe").setMaxStackSize(1).setFull3D();
 		registerItemSimple(wind_elemental_axe, "wind_elemental_axe");
-		wind_elemental_hoe = new ItemWindHoe(windElemental).setUnlocalizedName("essentialcraft.wind_elemental_hoe").setMaxStackSize(1).setFull3D();
+		wind_elemental_hoe = new ItemWindHoe(windElemental).setTranslationKey("essentialcraft.wind_elemental_hoe").setMaxStackSize(1).setFull3D();
 		registerItemSimple(wind_elemental_hoe, "wind_elemental_hoe");
-		wind_elemental_sword = new ItemWindSword(windElemental).setUnlocalizedName("essentialcraft.wind_elemental_sword").setMaxStackSize(1).setFull3D();
+		wind_elemental_sword = new ItemWindSword(windElemental).setTranslationKey("essentialcraft.wind_elemental_sword").setMaxStackSize(1).setFull3D();
 		registerItemSimple(wind_elemental_sword, "wind_elemental_sword");
 
-		wind_helmet = new ItemGenericArmor(windArmorMaterial, 0, 0).setUnlocalizedName("essentialcraft.wind_helmet").setMaxDamage(624);
+		wind_helmet = new ItemGenericArmor(windArmorMaterial, 0, 0).setTranslationKey("essentialcraft.wind_helmet").setMaxDamage(624);
 		registerItemSimple(wind_helmet, "wind_helmet");
 		ApiCore.allowItemToSeeMRU(wind_helmet);
 		ApiCore.setItemResistances(wind_helmet, 0.5F, 0.75F, 0.5F);
 
-		wind_chestplate = new ItemGenericArmor(windArmorMaterial, 0, 1).setUnlocalizedName("essentialcraft.wind_chestplate").setMaxDamage(1248);
+		wind_chestplate = new ItemGenericArmor(windArmorMaterial, 0, 1).setTranslationKey("essentialcraft.wind_chestplate").setMaxDamage(1248);
 		registerItemSimple(wind_chestplate, "wind_chestplate");
 		ApiCore.setItemResistances(wind_chestplate, 0.5F, 0.75F, 0.5F);
 
-		wind_leggings = new ItemGenericArmor(windArmorMaterial, 0, 2).setUnlocalizedName("essentialcraft.wind_leggings").setMaxDamage(936);
+		wind_leggings = new ItemGenericArmor(windArmorMaterial, 0, 2).setTranslationKey("essentialcraft.wind_leggings").setMaxDamage(936);
 		registerItemSimple(wind_leggings, "wind_leggings");
 		ApiCore.setItemResistances(wind_leggings, 0.5F, 0.75F, 0.5F);
 
-		wind_boots = new ItemGenericArmor(windArmorMaterial, 0, 3).setUnlocalizedName("essentialcraft.wind_boots").setMaxDamage(624);
+		wind_boots = new ItemGenericArmor(windArmorMaterial, 0, 3).setTranslationKey("essentialcraft.wind_boots").setMaxDamage(624);
 		registerItemSimple(wind_boots, "wind_boots");
 		ApiCore.setItemResistances(wind_boots, 0.5F, 0.75F, 0.5F);
 
@@ -259,20 +259,20 @@ public class ItemsCore {
 
 		magicalBuilder = registerItemSimple(new ItemMagicalBuilder(), "magicalBuilder", 0, true, 1);
 
-		computer_helmet = new ItemComputerArmor(computerArmorMaterial, 0, 0).setTextureName("essentialcraft:armor/computer_helmet").setUnlocalizedName("essentialcraft.computer_helmet").setMaxDamage(16384);
+		computer_helmet = new ItemComputerArmor(computerArmorMaterial, 0, 0).setTextureName("essentialcraft:armor/computer_helmet").setTranslationKey("essentialcraft.computer_helmet").setMaxDamage(16384);
 		registerItemSimple(computer_helmet, "computer_helmet");
 		ApiCore.allowItemToSeeMRU(computer_helmet);
 		ApiCore.setItemResistances(computer_helmet, 1F, 1F, 1F);
 
-		computer_chestplate = new ItemComputerArmor(computerArmorMaterial, 0, 1).setTextureName("essentialcraft:armor/computer_chestplate").setUnlocalizedName("essentialcraft.computer_chestplate").setMaxDamage(16384);
+		computer_chestplate = new ItemComputerArmor(computerArmorMaterial, 0, 1).setTextureName("essentialcraft:armor/computer_chestplate").setTranslationKey("essentialcraft.computer_chestplate").setMaxDamage(16384);
 		registerItemSimple(computer_chestplate, "computer_chestplate");
 		ApiCore.setItemResistances(computer_chestplate, 1F, 1F, 1F);
 
-		computer_leggings = new ItemComputerArmor(computerArmorMaterial, 0, 2).setTextureName("essentialcraft:armor/computer_leggings").setUnlocalizedName("essentialcraft.computer_leggings").setMaxDamage(16384);
+		computer_leggings = new ItemComputerArmor(computerArmorMaterial, 0, 2).setTextureName("essentialcraft:armor/computer_leggings").setTranslationKey("essentialcraft.computer_leggings").setMaxDamage(16384);
 		registerItemSimple(computer_leggings, "computer_leggings");
 		ApiCore.setItemResistances(computer_leggings, 1F, 1F, 1F);
 
-		computer_boots = new ItemComputerArmor(computerArmorMaterial, 0, 3).setTextureName("essentialcraft:armor/computer_boots").setUnlocalizedName("essentialcraft.computer_boots").setMaxDamage(16384);
+		computer_boots = new ItemComputerArmor(computerArmorMaterial, 0, 3).setTextureName("essentialcraft:armor/computer_boots").setTranslationKey("essentialcraft.computer_boots").setMaxDamage(16384);
 		registerItemSimple(computer_boots, "computer_boots");
 		ApiCore.setItemResistances(computer_boots, 1F, 1F, 1F);
 
@@ -280,7 +280,7 @@ public class ItemsCore {
 
 		orbitalRemote = registerItemSimple(new ItemOrbitalRemote(), "orbitalRemote", 0, true, 1);
 
-		record_robocalypse = new ItemRecordEC("hologram", SoundRegistry.recordRopocalypse).setUnlocalizedName("essentialcraft.hologramRec");
+		record_robocalypse = new ItemRecordEC("hologram", SoundRegistry.recordRopocalypse).setTranslationKey("essentialcraft.hologramRec");
 
 		dividingGun = registerItemSimple(new ItemDividerGun(), "dividerGun", 0, true, 1);
 
@@ -312,9 +312,10 @@ public class ItemsCore {
 	}
 
 	public static <T extends Item> T registerItemSimple(T item, String name, int damage, boolean full3D, int stackSize) {
-		item.setUnlocalizedName("essentialcraft."+name).setMaxDamage(damage).setMaxStackSize(stackSize);
-		if(full3D)
+		item.setTranslationKey("essentialcraft."+name).setMaxDamage(damage).setMaxStackSize(stackSize);
+		if(full3D) {
 			item.setFull3D();
+		}
 		ItemRegistry.registerItem(item, name, EssentialCraftCore.class);
 		EssentialCraftCore.proxy.handleItemRegister(item);
 		return item;

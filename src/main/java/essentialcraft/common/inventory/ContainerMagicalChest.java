@@ -31,12 +31,14 @@ public class ContainerMagicalChest extends ContainerInventory {
 
 		for(int chestRowIndex = 0; chestRowIndex < chestInventoryRows; ++chestRowIndex) {
 			for(int chestColumnIndex = 0; chestColumnIndex < chestInventoryColumns; ++chestColumnIndex) {
-				if(tile.getBlockMetadata() == 0)
+				if(tile.getBlockMetadata() == 0) {
 					addSlotToContainer(new Slot(inv, chestColumnIndex + chestRowIndex*chestInventoryColumns, 8 + chestColumnIndex*18, 18 + chestRowIndex*18));
-				else if(tile.getBlockMetadata() == 1)
+				}
+				else if(tile.getBlockMetadata() == 1) {
 					addSlotToContainer(new Slot(inv, chestColumnIndex + chestRowIndex*chestInventoryColumns, 12 + chestColumnIndex*18, 8 + chestRowIndex*18));
+				}
 			}
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

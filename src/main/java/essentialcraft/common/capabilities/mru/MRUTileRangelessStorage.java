@@ -10,12 +10,12 @@ public class MRUTileRangelessStorage extends MRUTileStorage {
 
 	public MRUTileRangelessStorage() {
 		super();
-		this.setRange(Integer.MAX_VALUE);
+		setRange(Integer.MAX_VALUE);
 	}
 
 	public MRUTileRangelessStorage(int maxMRU) {
 		super(maxMRU);
-		this.setRange(Integer.MAX_VALUE);
+		setRange(Integer.MAX_VALUE);
 	}
 
 	@Override
@@ -25,12 +25,13 @@ public class MRUTileRangelessStorage extends MRUTileStorage {
 			BlockPos o1 = new BlockPos(o[0], o[1], o[2]);
 			if(!pos.equals(o1) && world.getTileEntity(o1) != null && world.getTileEntity(o1).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 				IMRUHandler other = world.getTileEntity(o1).getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
-				if(this.getMRU() < this.getMaxMRU()) {
-					int req = this.getMaxMRU() - this.getMRU();
+				if(getMRU() < getMaxMRU()) {
+					int req = getMaxMRU() - getMRU();
 					int extracted = other.extractMRU(req, true);
-					if(extracted+this.getMRU() > 0)
-						this.setBalance((other.getBalance()*extracted+this.getBalance()*this.getMRU())/(extracted+this.getMRU()));
-					this.addMRU(extracted, true);
+					if(extracted+getMRU() > 0) {
+						setBalance((other.getBalance()*extracted+getBalance()*getMRU())/(extracted+getMRU()));
+					}
+					addMRU(extracted, true);
 				}
 			}
 		}
@@ -41,7 +42,7 @@ public class MRUTileRangelessStorage extends MRUTileStorage {
 		if(world.isRemote) {
 			if(boundGem.getItem() instanceof ItemBoundGem && boundGem.getTagCompound() != null) {
 				int[] o = ItemBoundGem.getCoords(boundGem);
-				BlockPos o1 = new BlockPos(o[0],o[1],o[2]);
+				new BlockPos(o[0],o[1],o[2]);
 				BlockPos pos1 = new BlockPos(o[0], o[1], o[2]);
 				doSpawnMRUParticles(pos, pos1, world);
 			}

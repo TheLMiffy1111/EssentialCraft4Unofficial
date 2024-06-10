@@ -74,12 +74,13 @@ public class WindImbue {
 
 		@Override
 		public void apply() {
-			ArrayList<WindImbueRecipe> toRemove = new ArrayList<WindImbueRecipe>();
+			ArrayList<WindImbueRecipe> toRemove = new ArrayList<>();
 			WindImbueRecipe.RECIPES.stream().
 			filter(entry->input.contains(CraftTweakerMC.getIIngredient(entry.input)) && (output == null || output.matches(CraftTweakerMC.getIItemStack(entry.result)))).
 			forEach(entry->toRemove.add(entry));
-			if(toRemove.isEmpty())
+			if(toRemove.isEmpty()) {
 				CraftTweakerAPI.logWarning("No recipe for "+input.toString());
+			}
 			else {
 				for(WindImbueRecipe entry : toRemove) {
 					WindImbueRecipe.removeRecipe(entry);

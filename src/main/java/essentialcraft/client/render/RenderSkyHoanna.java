@@ -31,8 +31,9 @@ public class RenderSkyHoanna extends IRenderHandler {
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
 		int colorDay = 0x213141;
-		if(ECUtils.isEventActive("essentialcraft.event.darkness"))
+		if(ECUtils.isEventActive("essentialcraft.event.darkness")) {
 			colorDay = 0x000000;
+		}
 		GlStateManager.disableFog();
 		GlStateManager.disableAlpha();
 		GlStateManager.enableBlend();
@@ -168,9 +169,10 @@ public class RenderSkyHoanna extends IRenderHandler {
 		Random sunRnd = new Random(54263524L);
 		boolean b = ECUtils.isEventActive("essentialcraft.event.sunArray");
 		int mod = 1;
-		if(b)
+		if(b) {
 			mod = 3;
-		if(!ECUtils.isEventActive("essentialcraft.event.darkness"))
+		}
+		if(!ECUtils.isEventActive("essentialcraft.event.darkness")) {
 			for(int i = 0; i < 10*mod; ++i) {
 				GlStateManager.pushMatrix();
 				GlStateManager.rotate(-90.0F+i*30F, 0.0F+i*i, i-1.0F/i/i, 1.0F*i*i);
@@ -191,8 +193,9 @@ public class RenderSkyHoanna extends IRenderHandler {
 				}
 				GlStateManager.popMatrix();
 			}
+		}
 		Random moonRnd = new Random(23564637563453L);
-		if(!ECUtils.isEventActive("essentialcraft.event.darkness"))
+		if(!ECUtils.isEventActive("essentialcraft.event.darkness")) {
 			for(int i = 0; i < 6; ++i) {
 				GlStateManager.pushMatrix();
 				GlStateManager.rotate(-90.0F+i*30F, 0.0F+i*i, i-1.0F/i/i, 1.0F*i*i);
@@ -220,6 +223,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 				}
 				GlStateManager.popMatrix();
 			}
+		}
 		GlStateManager.disableTexture2D();
 		float f18 = world.getStarBrightness(partialTicks) * f6;
 

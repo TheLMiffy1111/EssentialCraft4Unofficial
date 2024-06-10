@@ -35,12 +35,10 @@ public class GuiFluidTank extends GuiElement{
 	public GuiFluidTank(int i, int j, TileEntity t) {
 		x = i;
 		y = j;
-		if(t.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null)) {
-			tank = t.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null).getTankProperties()[0];
-		}
-		else {
+		if(!t.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null)) {
 			throw new IllegalArgumentException("Tile does not handle fluids");
 		}
+		tank = t.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null).getTankProperties()[0];
 	}
 
 	@Override

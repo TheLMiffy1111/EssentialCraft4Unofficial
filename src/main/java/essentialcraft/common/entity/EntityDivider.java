@@ -27,12 +27,12 @@ public class EntityDivider extends Entity {
 
 	public EntityDivider(World w) {
 		super(w);
-		this.setSize(0.3F, 0.3F);
+		setSize(0.3F, 0.3F);
 	}
 
 	public EntityDivider(World w, double x, double y, double z) {
 		this(w);
-		this.setPositionAndRotation(x, y, z, 0, 0);
+		setPositionAndRotation(x, y, z, 0, 0);
 	}
 
 	public EntityDivider(World w, double x, double y, double z, double damage, double delay, EntityLivingBase base) {
@@ -48,7 +48,7 @@ public class EntityDivider extends Entity {
 
 	@Override
 	protected void entityInit() {
-		this.getDataManager().register(DATA, "||null:null");
+		getDataManager().register(DATA, "||null:null");
 	}
 
 	@Override
@@ -67,37 +67,31 @@ public class EntityDivider extends Entity {
 	public void onUpdate() {
 		delay -= 0.05D;
 
-		if(this.ticksExisted % 10 == 0)
-			this.playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+		if(ticksExisted % 10 == 0) {
+			playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+		}
 
-		this.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, posX, posY, posZ, 1, 0, 1);
+		getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, posX, posY, posZ, 1, 0, 1);
 
-		if(delay <= 0 && !this.isDead) {
-			List<EntityLivingBase> allEntities = this.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D).grow(3, 3, 3));
-			for(int i = 0; i < allEntities.size(); ++i) {
+		if(delay <= 0 && !isDead) {
+			List<EntityLivingBase> allEntities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D).grow(3, 3, 3));
+			for(EntityLivingBase elb : allEntities) {
 
-				EntityLivingBase elb = allEntities.get(i);
-
-				if(elb == null)
+				if((elb == null) || elb.isDead || (elb == attacker) || (elb instanceof EntityHologram)) {
 					continue;
+				}
 
-				if(elb.isDead)
+				if(elb instanceof EntityPlayer && (((EntityPlayer)elb).isCreative() || ((EntityPlayer)elb).isSpectator())) {
 					continue;
+				}
 
-				if(elb == this.attacker)
+				if(elb.getDistance(this) > 3) {
 					continue;
+				}
 
-				if(elb instanceof EntityHologram)
-					continue;
-
-				if(elb instanceof EntityPlayer && (((EntityPlayer)elb).isCreative() || ((EntityPlayer)elb).isSpectator()))
-					continue;
-
-				if(elb.getDistanceToEntity(this) > 3)
-					continue;
-
-				if(this.getEntityWorld().isRemote)
+				if(getEntityWorld().isRemote) {
 					return;
+				}
 
 				elb.setHealth(elb.getHealth()/2);
 				elb.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS,200,4,true,true));
@@ -105,7 +99,7 @@ public class EntityDivider extends Entity {
 				elb.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,200,4,true,true));
 				elb.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,100,0,true,true));
 			}
-			this.setDead();
+			setDead();
 
 		}
 	}

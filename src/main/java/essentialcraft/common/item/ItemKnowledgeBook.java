@@ -25,7 +25,7 @@ public class ItemKnowledgeBook extends Item implements IModelRegisterer {
 
 	public ItemKnowledgeBook() {
 		super();
-		this.maxStackSize = 1;
+		maxStackSize = 1;
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ItemKnowledgeBook extends Item implements IModelRegisterer {
 	@Override
 	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_)
 	{
-		if(this.isInCreativeTab(p_150895_2_))
+		if(isInCreativeTab(p_150895_2_)) {
 			for(int i = 0; i < 5; ++i)
 			{
 				ItemStack book = new ItemStack(this);
@@ -60,6 +60,7 @@ public class ItemKnowledgeBook extends Item implements IModelRegisterer {
 				book.setTagCompound(bookTag);
 				p_150895_3_.add(book);
 			}
+		}
 	}
 
 	@Override

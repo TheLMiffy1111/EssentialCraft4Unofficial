@@ -43,17 +43,22 @@ public class RenderElementalCrystalAsItem implements IItemRenderer {
 		float earthF = 0F;
 		float airF = 0F;
 
-		if(tag.hasKey("size"))
+		if(tag.hasKey("size")) {
 			size = tag.getFloat("size");
+		}
 
-		if(tag.hasKey("fire"))
+		if(tag.hasKey("fire")) {
 			fireF = tag.getFloat("fire");
-		if(tag.hasKey("water"))
+		}
+		if(tag.hasKey("water")) {
 			waterF = tag.getFloat("water");
-		if(tag.hasKey("earth"))
+		}
+		if(tag.hasKey("earth")) {
 			earthF = tag.getFloat("earth");
-		if(tag.hasKey("air"))
+		}
+		if(tag.hasKey("air")) {
 			airF = tag.getFloat("air");
+		}
 
 		GlStateManager.pushMatrix();
 		float scale = MathUtils.getPercentage((int) size, 100)/100F;

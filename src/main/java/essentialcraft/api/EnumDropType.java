@@ -4,12 +4,13 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumDropType implements IStringSerializable {
-	FIRE(0,"fire",1,MapColor.ADOBE),
-	WATER(1,"water",2,MapColor.WATER),
-	EARTH(2,"earth",3,MapColor.DIRT),
-	AIR(3,"air",4,MapColor.CLOTH),
-	ELEMENTAL(4,"elemental",0,MapColor.PURPLE),
-	MITHRILINE(5,"mithriline",-1,MapColor.GREEN);
+
+	FIRE(0, "fire", 1, MapColor.ADOBE),
+	WATER(1, "water", 2, MapColor.WATER),
+	EARTH(2, "earth", 3, MapColor.DIRT),
+	AIR(3, "air", 4, MapColor.CLOTH),
+	ELEMENTAL(4, "elemental", 0, MapColor.PURPLE),
+	MITHRILINE(5, "mithriline", -1, MapColor.GREEN);
 
 	private final int index;
 	private final String name;
@@ -46,13 +47,13 @@ public enum EnumDropType implements IStringSerializable {
 	}
 
 	public static EnumDropType fromIndex(int i) {
-		return values()[i%6];
+		return values()[i % 6];
 	}
 
 	public static EnumDropType fromIndexOre(int i) {
-		return values()[(i+4)%5];
+		return values()[(i+4) % 5];
 	}
 
-	public static final EnumDropType[] CAN_BE_FARMED = {FIRE,WATER,EARTH,AIR};
-	public static final EnumDropType[] NORMAL = {FIRE,WATER,EARTH,AIR,ELEMENTAL};
+	public static final EnumDropType[] CAN_BE_FARMED = {FIRE, WATER, EARTH, AIR};
+	public static final EnumDropType[] NORMAL = {FIRE, WATER, EARTH, AIR, ELEMENTAL};
 }

@@ -14,12 +14,15 @@ public class WorldGenManager implements IWorldGenerator {
 		if(world != null) {
 			if(world.provider != null) {
 				int dim = world.provider.getDimension();
-				if(dim == -1)
-					this.handleNetherGen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-				else if(dim == 1)
-					this.handleEndGen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-				else
-					this.handlePossibleOverworldGen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+				if(dim == -1) {
+					handleNetherGen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+				}
+				else if(dim == 1) {
+					handleEndGen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+				}
+				else {
+					handlePossibleOverworldGen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+				}
 			}
 		}
 	}

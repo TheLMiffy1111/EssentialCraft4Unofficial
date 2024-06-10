@@ -100,7 +100,7 @@ public class TileMRUCoil extends TileMRUGeneric {
 		Block b_1_9 = getWorld().getBlockState(dp.add(-3, 0, 0)).getBlock();
 		Block b_1_10 = getWorld().getBlockState(dp.add(-3, 0, -1)).getBlock();
 		Block b_1_11 = getWorld().getBlockState(dp.add(-3, 0, 1)).getBlock();
-		Set<Block> cBl = new HashSet<Block>();
+		Set<Block> cBl = new HashSet<>();
 		cBl.add(b_0);
 		cBl.add(b_1);
 		cBl.add(b_2);
@@ -142,23 +142,27 @@ public class TileMRUCoil extends TileMRUGeneric {
 			ticksBeforeStructureCheck = 20;
 			initStructure();
 		}
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(getWorld().isRemote) {
 				if(canWork()) {
 					if(localLightning == null) {
 						localLightning = new Lightning(getWorld().rand, new Coord3D(0.5F, 0.9F, 0.5F), new Coord3D(0.5F + MathUtils.randomDouble(getWorld().rand), 0.9F + MathUtils.randomDouble(getWorld().rand), 0.5F + MathUtils.randomDouble(getWorld().rand)), 0.1F, 1.0F, 0.2F, 1.0F);
 					}
-					else if(localLightning.renderTicksExisted >= 20)
+					else if(localLightning.renderTicksExisted >= 20) {
 						localLightning = null;
+					}
 				}
-				else
+				else {
 					localLightning = null;
+				}
 			}
 			if(monsterLightning != null) {
-				if(!getWorld().isRemote)
+				if(!getWorld().isRemote) {
 					++lightningTicks;
-				if(monsterLightning.renderTicksExisted >= 20 && getWorld().isRemote)
+				}
+				if(monsterLightning.renderTicksExisted >= 20 && getWorld().isRemote) {
 					monsterLightning = null;
+				}
 				if(lightningTicks >= 20 && !getWorld().isRemote) {
 					lightningTicks = 0;
 					monsterLightning = null;
@@ -169,35 +173,35 @@ public class TileMRUCoil extends TileMRUGeneric {
 				if(entities != null && !entities.isEmpty() && monsterLightning == null) {
 					Ford:
 						for(EntityLivingBase b : entities) {
-							if(b instanceof EntityPlayer) {
-								if(!((EntityPlayer)b).capabilities.isCreativeMode && hurtPlayers) {
-									ItemStack is = getStackInSlot(1);
-									if(is.getItem() instanceof ItemPlayerList) {
-										NBTTagCompound itemTag = MiscUtils.getStackTag(is);
-										if(!itemTag.hasKey("usernames"))
-											itemTag.setString("usernames", "||username:null");
-										String str = itemTag.getString("usernames");
-										DummyData[] dt = DataStorage.parseData(str);
-										for(int i = 0; i < dt.length; ++i) {
-											String username = dt[i].fieldValue;
-											String playerName = MiscUtils.getUUIDFromPlayer((EntityPlayer)b).toString();
-											if(username.equals(playerName))
-												continue Ford;
-										}
-										attack(b);
-
-									}
-									else
-										attack(b);
+							if(!(b instanceof EntityPlayer)) {
+								if((!(b instanceof IMob) && !hurtPassive) || b.hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
+									continue Ford;
 								}
-							}
-							else {
-								if(!(b instanceof IMob) && !hurtPassive)
-									continue Ford;
-								if(b.hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null))
-									continue Ford;
 								attack(b);
 								break Ford;
+							}
+							if(!((EntityPlayer)b).capabilities.isCreativeMode && hurtPlayers) {
+								ItemStack is = getStackInSlot(1);
+								if(is.getItem() instanceof ItemPlayerList) {
+									NBTTagCompound itemTag = MiscUtils.getStackTag(is);
+									if(!itemTag.hasKey("usernames")) {
+										itemTag.setString("usernames", "||username:null");
+									}
+									String str = itemTag.getString("usernames");
+									DummyData[] dt = DataStorage.parseData(str);
+									for(DummyData element : dt) {
+										String username = element.fieldValue;
+										String playerName = MiscUtils.getUUIDFromPlayer((EntityPlayer)b).toString();
+										if(username.equals(playerName)) {
+											continue Ford;
+										}
+									}
+									attack(b);
+
+								}
+								else {
+									attack(b);
+								}
 							}
 						}
 				}
@@ -207,11 +211,13 @@ public class TileMRUCoil extends TileMRUGeneric {
 
 	public void attack(EntityLivingBase b) {
 		if(mruStorage.getMRU() >= mruUsage && !b.isDead && b.hurtTime <= 0 && b.hurtResistantTime <= 0) {
-			if(generatesCorruption)
+			if(generatesCorruption) {
 				ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+			}
 			b.attackEntityFrom(DamageSource.MAGIC, damage);
-			if(getWorld().isRemote && monsterLightning == null)
+			if(getWorld().isRemote && monsterLightning == null) {
 				getWorld().playSound(pos.getX()+0.5F,pos.getY()+0.5F,pos.getZ()+0.5F, SoundRegistry.machineLightningHit, SoundCategory.BLOCKS, 2F, 2F, false);
+			}
 			monsterLightning = new Lightning(getWorld().rand, new Coord3D(0.5F,0.8F,0.5F), new Coord3D(b.posX-pos.getX()+0.5D, b.posY-pos.getY()+0.8D, b.posZ-pos.getZ()+0.5D), 0.1F, 1F, 0.0F, 0.7F);
 			mruStorage.extractMRU(mruUsage, true);
 		}

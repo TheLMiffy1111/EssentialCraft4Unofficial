@@ -47,12 +47,12 @@ public class MRUEntityStorage extends MRUStorage implements IMRUHandlerEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		this.setFlag(nbt.getBoolean("flag"));
-		this.setAlwaysStay(nbt.getBoolean("stay"));
+		setFlag(nbt.getBoolean("flag"));
+		setAlwaysStay(nbt.getBoolean("stay"));
 
 		//backwards compatibility
 		if(nbt.hasKey("Balance")) {
-			this.balance = nbt.getFloat("Balance");
+			balance = nbt.getFloat("Balance");
 		}
 	}
 }

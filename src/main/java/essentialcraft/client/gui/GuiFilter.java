@@ -1,7 +1,6 @@
 package essentialcraft.client.gui;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import DummyCore.Utils.DrawUtils;
@@ -33,13 +32,13 @@ public class GuiFilter extends GuiContainer{
 	@Override
 	public void initGui()
 	{
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		if(this.filter.filterStack.getItemDamage() == 1 || this.filter.filterStack.getItemDamage() == 3)
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		if(filter.filterStack.getItemDamage() == 1 || filter.filterStack.getItemDamage() == 3)
 		{
-			this.buttonList.add(new GuiButton(0, k+20, l+6, 20, 20, ""));
-			this.buttonList.add(new GuiButton(1, k+20, l+30, 20, 20, ""));
-			this.buttonList.add(new GuiButton(2, k+20, l+54, 20, 20, ""));
+			buttonList.add(new GuiButton(0, k+20, l+6, 20, 20, ""));
+			buttonList.add(new GuiButton(1, k+20, l+30, 20, 20, ""));
+			buttonList.add(new GuiButton(2, k+20, l+54, 20, 20, ""));
 		}
 		super.initGui();
 	}
@@ -47,7 +46,7 @@ public class GuiFilter extends GuiContainer{
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton)
 	{
-		MiscUtils.handleButtonPress(par1GuiButton.id, this.getClass(), par1GuiButton.getClass(), this.mc.player, 0, 0, 0);
+		MiscUtils.handleButtonPress(par1GuiButton.id, this.getClass(), par1GuiButton.getClass(), mc.player, 0, 0, 0);
 	}
 
 	@Override
@@ -60,24 +59,26 @@ public class GuiFilter extends GuiContainer{
 	@Override
 	public void drawScreen(int mX, int mY, float partialTicks)
 	{
-		this.drawDefaultBackground();
-		if(!this.filter.filterStack.isItemEqual(mc.player.getHeldItemMainhand()))
-			this.filter.filterStack = mc.player.getHeldItemMainhand();
-		if(!ItemStack.areItemStackTagsEqual(this.filter.filterStack, mc.player.getHeldItemMainhand()))
-			this.filter.filterStack = mc.player.getHeldItemMainhand();
+		drawDefaultBackground();
+		if(!filter.filterStack.isItemEqual(mc.player.getHeldItemMainhand())) {
+			filter.filterStack = mc.player.getHeldItemMainhand();
+		}
+		if(!ItemStack.areItemStackTagsEqual(filter.filterStack, mc.player.getHeldItemMainhand())) {
+			filter.filterStack = mc.player.getHeldItemMainhand();
+		}
 		super.drawScreen(mX, mY, partialTicks);
-		for (int ik = 0; ik < this.buttonList.size(); ++ik)
+		for (int ik = 0; ik < buttonList.size(); ++ik)
 		{
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.color(1, 1, 1);
-			GuiButton btn  = this.buttonList.get(ik);
+			GuiButton btn  = buttonList.get(ik);
 			boolean hover = mX >= btn.x && mY >= btn.y && mX < btn.x + btn.width && mY < btn.y + btn.height;
 			int id = btn.id;
 
 			if(id == 0)
 			{
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(this.filter.filterStack).getBoolean("ignoreMeta"))
+				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreMeta"))
 				{
 					this.drawTexturedModalRect(btn.x, btn.y, 20, 0, 20, 20);
 				}else
@@ -88,7 +89,7 @@ public class GuiFilter extends GuiContainer{
 			if(id == 1)
 			{
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(this.filter.filterStack).getBoolean("ignoreNBT"))
+				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreNBT"))
 				{
 					this.drawTexturedModalRect(btn.x, btn.y, 20, 20, 20, 20);
 				}else
@@ -99,7 +100,7 @@ public class GuiFilter extends GuiContainer{
 			if(id == 2)
 			{
 				DrawUtils.bindTexture("essentialcraft", "textures/gui/guiFilterButtons.png");
-				if(MiscUtils.getStackTag(this.filter.filterStack).getBoolean("ignoreOreDict"))
+				if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreOreDict"))
 				{
 					this.drawTexturedModalRect(btn.x, btn.y, 20, 40, 20, 20);
 				}else
@@ -111,8 +112,8 @@ public class GuiFilter extends GuiContainer{
 			{
 				if(id == 0)
 				{
-					List<String> drawedLst = new ArrayList<String>();
-					if(MiscUtils.getStackTag(this.filter.filterStack).getBoolean("ignoreMeta"))
+					List<String> drawedLst = new ArrayList<>();
+					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreMeta"))
 					{
 						drawedLst.add("Metadata: Ignored");
 					}else
@@ -124,8 +125,8 @@ public class GuiFilter extends GuiContainer{
 				}
 				if(id == 1)
 				{
-					List<String> drawedLst = new ArrayList<String>();
-					if(MiscUtils.getStackTag(this.filter.filterStack).getBoolean("ignoreNBT"))
+					List<String> drawedLst = new ArrayList<>();
+					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreNBT"))
 					{
 						drawedLst.add("NBT Tag: Ignored");
 					}else
@@ -137,8 +138,8 @@ public class GuiFilter extends GuiContainer{
 				}
 				if(id == 2)
 				{
-					List<String> drawedLst = new ArrayList<String>();
-					if(MiscUtils.getStackTag(this.filter.filterStack).getBoolean("ignoreOreDict"))
+					List<String> drawedLst = new ArrayList<>();
+					if(MiscUtils.getStackTag(filter.filterStack).getBoolean("ignoreOreDict"))
 					{
 						drawedLst.add("Ore Dictionary: Ignored");
 					}else
@@ -150,7 +151,7 @@ public class GuiFilter extends GuiContainer{
 				}
 			}
 		}
-		this.renderHoveredToolTip(mX, mY);
+		renderHoveredToolTip(mX, mY);
 	}
 
 	@Override
@@ -164,11 +165,7 @@ public class GuiFilter extends GuiContainer{
 			GlStateManager.disableLighting();
 			GlStateManager.disableDepth();
 			int k = 0;
-			Iterator<String> iterator = list.iterator();
-
-			while (iterator.hasNext())
-			{
-				String s = iterator.next();
+			for(String s : list) {
 				int l = font.getStringWidth(s);
 
 				if (l > k)
@@ -186,30 +183,30 @@ public class GuiFilter extends GuiContainer{
 				i1 += 2 + (list.size() - 1) * 10;
 			}
 
-			if (j2 + k > this.width)
+			if (j2 + k > width)
 			{
 				j2 -= 28 + k;
 			}
 
-			if (k2 + i1 + 6 > this.height)
+			if (k2 + i1 + 6 > height)
 			{
-				k2 = this.height - i1 - 6;
+				k2 = height - i1 - 6;
 			}
 
-			this.zLevel = 600.0F;
+			zLevel = 600.0F;
 			itemRender.zLevel = 600.0F;
 			int j1 = -267386872;
-			this.drawGradientRect(j2 - 3, k2 - 4, j2 + k + 3, k2 - 3, j1, j1);
-			this.drawGradientRect(j2 - 3, k2 + i1 + 3, j2 + k + 3, k2 + i1 + 4, j1, j1);
-			this.drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 + i1 + 3, j1, j1);
-			this.drawGradientRect(j2 - 4, k2 - 3, j2 - 3, k2 + i1 + 3, j1, j1);
-			this.drawGradientRect(j2 + k + 3, k2 - 3, j2 + k + 4, k2 + i1 + 3, j1, j1);
+			drawGradientRect(j2 - 3, k2 - 4, j2 + k + 3, k2 - 3, j1, j1);
+			drawGradientRect(j2 - 3, k2 + i1 + 3, j2 + k + 3, k2 + i1 + 4, j1, j1);
+			drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 + i1 + 3, j1, j1);
+			drawGradientRect(j2 - 4, k2 - 3, j2 - 3, k2 + i1 + 3, j1, j1);
+			drawGradientRect(j2 + k + 3, k2 - 3, j2 + k + 4, k2 + i1 + 3, j1, j1);
 			int k1 = 1347420415;
 			int l1 = (k1 & 16711422) >> 1 | k1 & -16777216;
-			this.drawGradientRect(j2 - 3, k2 - 3 + 1, j2 - 3 + 1, k2 + i1 + 3 - 1, k1, l1);
-			this.drawGradientRect(j2 + k + 2, k2 - 3 + 1, j2 + k + 3, k2 + i1 + 3 - 1, k1, l1);
-			this.drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 - 3 + 1, k1, k1);
-			this.drawGradientRect(j2 - 3, k2 + i1 + 2, j2 + k + 3, k2 + i1 + 3, l1, l1);
+			drawGradientRect(j2 - 3, k2 - 3 + 1, j2 - 3 + 1, k2 + i1 + 3 - 1, k1, l1);
+			drawGradientRect(j2 + k + 2, k2 - 3 + 1, j2 + k + 3, k2 + i1 + 3 - 1, k1, l1);
+			drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 - 3 + 1, k1, k1);
+			drawGradientRect(j2 - 3, k2 + i1 + 2, j2 + k + 3, k2 + i1 + 3, l1, l1);
 
 			for (int i2 = 0; i2 < list.size(); ++i2)
 			{
@@ -224,7 +221,7 @@ public class GuiFilter extends GuiContainer{
 				k2 += 10;
 			}
 
-			this.zLevel = 0.0F;
+			zLevel = 0.0F;
 			itemRender.zLevel = 0.0F;
 			GlStateManager.enableLighting();
 			GlStateManager.enableDepth();

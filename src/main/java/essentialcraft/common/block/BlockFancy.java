@@ -34,20 +34,27 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 
 	public BlockFancy(Material material) {
 		super(material);
-		if(material == Material.ROCK)
-			this.setSoundType(SoundType.STONE);
-		if(material == Material.ANVIL)
-			this.setSoundType(SoundType.ANVIL);
-		if(material == Material.CLAY || material == Material.GROUND)
-			this.setSoundType(SoundType.GROUND);
-		if(material == Material.CLOTH)
-			this.setSoundType(SoundType.CLOTH);
-		if(material == Material.CRAFTED_SNOW)
-			this.setSoundType(SoundType.SNOW);
-		if(material == Material.WOOD)
-			this.setSoundType(SoundType.WOOD);
-		if(material == Material.GLASS)
-			this.setSoundType(SoundType.GLASS);
+		if(material == Material.ROCK) {
+			setSoundType(SoundType.STONE);
+		}
+		if(material == Material.ANVIL) {
+			setSoundType(SoundType.ANVIL);
+		}
+		if(material == Material.CLAY || material == Material.GROUND) {
+			setSoundType(SoundType.GROUND);
+		}
+		if(material == Material.CLOTH) {
+			setSoundType(SoundType.CLOTH);
+		}
+		if(material == Material.CRAFTED_SNOW) {
+			setSoundType(SoundType.SNOW);
+		}
+		if(material == Material.WOOD) {
+			setSoundType(SoundType.WOOD);
+		}
+		if(material == Material.GLASS) {
+			setSoundType(SoundType.GLASS);
+		}
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, FancyBlockType.ANCIENT_TILE));
 	}
 
@@ -58,7 +65,7 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
@@ -71,8 +78,9 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		for(int i = 0; i < 16; ++i)
+		for(int i = 0; i < 16; ++i) {
 			list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override
@@ -100,7 +108,7 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 	public void registerModels() {
 		ModelLoader.setCustomStateMapper(this, new FancyBlockStateMapper());
 		for(int i = 0; i < 16; i++) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:" + getRegistryName().getResourcePath().replace('.', '/'), "type=" + FancyBlockType.fromIndex(i).getName()));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:" + getRegistryName().getPath().replace('.', '/'), "type=" + FancyBlockType.fromIndex(i).getName()));
 		}
 	}
 
@@ -152,7 +160,7 @@ public class BlockFancy extends Block implements IColdBlock, IModelRegisterer {
 	public static class FancyBlockStateMapper extends StateMapperBase {
 		@Override
 		protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-			return new ModelResourceLocation("essentialcraft:" + state.getBlock().getRegistryName().getResourcePath().replace('.', '/'), "type=" + state.getValue(TYPE).getName());
+			return new ModelResourceLocation("essentialcraft:" + state.getBlock().getRegistryName().getPath().replace('.', '/'), "type=" + state.getValue(TYPE).getName());
 		}
 	}
 }

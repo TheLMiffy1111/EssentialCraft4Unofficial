@@ -22,34 +22,32 @@ public class BlockBlockBreaker extends Block implements IModelRegisterer {
 
 	public BlockBlockBreaker() {
 		super(Material.ROCK);
-		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.DOWN));
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.DOWN));
 	}
 
 	@Override
-	public boolean canProvidePower(IBlockState s) {
+	public boolean canProvidePower(IBlockState state) {
 		return true;
 	}
 
 	@Override
-	public void neighborChanged(IBlockState s, World w, BlockPos p, Block n, BlockPos fp) {
-		if(!w.isRemote && w.isBlockIndirectlyGettingPowered(p) > 0) {
-			EnumFacing d = w.getBlockState(p).getValue(FACING);
-			Block broken = w.getBlockState(p.offset(d)).getBlock();
-			if(!broken.isAir(w.getBlockState(p.offset(d)), w, p.offset(d))) {
-				float hardness = broken.getBlockHardness(w.getBlockState(p.offset(d)), w, p.offset(d));
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+		if(!world.isRemote && world.getRedstonePowerFromNeighbors(pos) > 0) {
+			EnumFacing d = world.getBlockState(pos).getValue(FACING);
+			Block broken = world.getBlockState(pos.offset(d)).getBlock();
+			if(!broken.isAir(world.getBlockState(pos.offset(d)), world, pos.offset(d))) {
+				float hardness = broken.getBlockHardness(world.getBlockState(pos.offset(d)), world, pos.offset(d));
 				if(hardness >= 0 && hardness <= 10) {
 					for(int i = 1; i < 13; ++i) {
-						BlockPos dP = p.offset(d, i);
-						Block b = w.getBlockState(dP).getBlock();
-						if(b.getBlockHardness(w.getBlockState(dP), w, dP) == hardness) {
-							b.breakBlock(w, dP, w.getBlockState(dP));
-							b.onBlockDestroyedByPlayer(w, dP, w.getBlockState(dP));
-							b.dropBlockAsItem(w, dP, w.getBlockState(dP), 0);
-							w.setBlockToAir(dP);
-						}
-						else {
+						BlockPos dP = pos.offset(d, i);
+						Block b = world.getBlockState(dP).getBlock();
+						if(b.getBlockHardness(world.getBlockState(dP), world, dP) != hardness) {
 							break;
 						}
+						b.breakBlock(world, dP, world.getBlockState(dP));
+						b.onPlayerDestroy(world, dP, world.getBlockState(dP));
+						b.dropBlockAsItem(world, dP, world.getBlockState(dP), 0);
+						world.setBlockToAir(dP);
 					}
 				}
 			}
@@ -63,7 +61,7 @@ public class BlockBlockBreaker extends Block implements IModelRegisterer {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta % 6));
 	}
 
 	@Override

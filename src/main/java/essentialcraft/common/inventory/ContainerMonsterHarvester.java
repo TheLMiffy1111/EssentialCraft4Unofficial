@@ -18,6 +18,6 @@ public class ContainerMonsterHarvester extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 3, 144, 23));
 		addSlotToContainer(new SlotGeneric(inv, 4, 117, 41));
 		addSlotToContainer(new SlotGeneric(inv, 5, 135, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

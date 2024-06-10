@@ -24,8 +24,8 @@ public class BlockMRUSpreader extends Block implements IModelRegisterer {
 
 	public BlockMRUSpreader() {
 		super(Material.ROCK, MapColor.PURPLE);
-		this.setTickRandomly(true);
-		this.setLightLevel(1.0F);
+		setTickRandomly(true);
+		setLightLevel(1.0F);
 	}
 
 	@Override
@@ -34,8 +34,9 @@ public class BlockMRUSpreader extends Block implements IModelRegisterer {
 			Vec3d rotateVec = new Vec3d(1, 1, 1);
 			rotateVec = rotateVec.rotatePitch(p_149734_5_.nextFloat()*360F);
 			rotateVec = rotateVec.rotateYaw(p_149734_5_.nextFloat()*360F);
-			for(int i1 = 0; i1 < 10; ++i1)
+			for(int i1 = 0; i1 < 10; ++i1) {
 				EssentialCraftCore.proxy.spawnParticle("mruFX", p_149734_2_.getX()+0.5F, p_149734_2_.getY()+1F, p_149734_2_.getZ()+0.5F, rotateVec.x*10, rotateVec.y*10, rotateVec.z*10);
+			}
 		}
 	}
 

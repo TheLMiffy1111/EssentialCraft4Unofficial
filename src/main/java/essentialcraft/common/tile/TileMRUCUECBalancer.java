@@ -20,13 +20,15 @@ public class TileMRUCUECBalancer extends TileEntity implements IStructurePiece, 
 
 	@Override
 	public void setStructureController(TileEntity tile, EnumStructureType structure) {
-		if(tile instanceof TileMRUCUECController && structure == getStructure())
+		if(tile instanceof TileMRUCUECController && structure == getStructure()) {
 			controller = (TileMRUCUECController)tile;
+		}
 	}
 
 	@Override
 	public void update() {
-		if(controller != null && controller.getMRUCU() != null)
+		if(controller != null && controller.getMRUCU() != null) {
 			controller.getMRUCU().setFlag(true);
+		}
 	}
 }

@@ -1,88 +1,225 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
+plugins {
+	id "com.crystaelix.loom" version "jitpack-39f2e017"
+	id "eclipse"
+	id "idea"
+	id "maven-publish"
+	id "net.kyori.blossom" version "[1,2)"
+	id "me.modmuss50.mod-publish-plugin" version "0.5.0"
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
-    maven {
-        url = "http://maven.blamejared.com/"
-    }
-    maven {
-        url = "http://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        url = "http://tehnut.info/maven/"
-    }
-    maven {
-        url = "http://chickenbones.net/maven/"
-    }
-    maven {
-        url = "http://maven.tterrag.com/"
-    }
-    maven {
-        url = "http://maven.covers1624.net/"
-    }
+	mavenCentral()
+	flatDir {
+		dirs "libs"
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://maven.blamejared.com/"
+			}
+		}
+		filter {
+			includeGroup "mezz.jei"
+			includeGroup "CraftTweaker2"
+		}
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://maven.covers1624.net/"
+			}
+		}
+		filter {
+			includeGroup "codechicken"
+		}
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://dvs1.progwml6.com/files/maven/"
+			}
+		}
+		filter {
+			includeGroup "slimeknights.mantle"
+			includeGroup "slimeknights"
+		}
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://maven.amadornes.com/"
+			}
+		}
+		filter {
+			includeGroup "MCMultiPart2"
+		}
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://repo.cleanroommc.com/releases/"
+			}
+		}
+		filter {
+			includeGroup "com.cleanroommc"
+			includeGroup "zone.rong"
+		}
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://cursemaven.com/"
+			}
+		}
+		filter {
+			includeGroup "curse.maven"
+		}
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				url = "https://modmaven.dev/"
+			}
+		}
+		filter {
+			includeGroup "team.chisel.ctm"
+		}
+	}
 }
 
+sourceSets {
+	main
+}
+
+def mcVersion = "1.12.2"
+def modName = "EssentialCraftUnofficial"
+def modId = "essentialcraft"
+def specVersion = "4"
+def vendor = "essentialcraft"
+
+group = "essentialcraft"
 version = "4.9.112.5"
-group= "essentialcraft"
-archivesBaseName = "EssentialCraftUnofficial"
+archivesBaseName = modName
 
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
+java {
+	toolchain.languageVersion = JavaLanguageVersion.of(8)
+	withSourcesJar()
 }
 
-minecraft {
-    version = "1.12.2-14.23.4.2758"
-    runDir = "run"
-    mappings = "snapshot_20170624"
-    makeObfSourceJar = false
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = "UTF-8"
+}
+
+loom {
+	silentMojangMappingsLicense()
+	interfaceInjection.enableDependencyInterfaceInjection = false
+	runs {
+		configureEach {
+			property "fabric.log.console.level", "debug"
+			environmentVariable "MC_VERSION", mcVersion
+		}
+		client {
+			programArg "--username=Dev"
+		}
+		server
+	}
+	generatedIntermediateMappings()
 }
 
 dependencies {
-	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.0.9.285"
-    deobfCompile "mezz.jei:jei_1.12.2:4.9.2.196"
-    deobfCompile "slimeknights.mantle:Mantle:1.12-1.3.1.21"
-    deobfCompile "slimeknights:TConstruct:1.12-2.8.1.49"
-    deobfCompile "mcp.mobius.waila:Hwyla:1.8.20-B35_1.12"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.2.1-83"
-    deobfCompile "info.amerifrance.guideapi:Guide-API:1.12-2.1.4-57"
-    deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.1.351:universal"
-    deobfCompile "team.chisel.ctm:CTM:MC1.12-0.2.2.7"
-    deobfCompile "cofh:RedstoneFlux:1.12-2.0.2.3:universal"
-    deobfCompile("cofh:CoFHCore:1.12.2-4.5.3.20:universal") {
-        transitive = false
-    }
-    deobfCompile("cofh:CoFHWorld:1.12.2-1.2.0.5:universal") {
-        transitive = false
-    }
-    deobfCompile("cofh:ThermalFoundation:1.12.2-2.5.0.19:universal") {
-        transitive = false
-    }
-    deobfCompile("cofh:ThermalExpansion:1.12.2-5.5.0.29:universal") {
-        transitive = false
-    }
-    deobfCompile("cofh:ThermalDynamics:1.12.2-2.5.1.14:universal") {
-        transitive = false
-    }
+	// Log4j
+	implementation "org.apache.logging.log4j:log4j-core:2.22.1"
+
+	// Minecraft
+	minecraft "com.mojang:minecraft:1.12.2"
+	mappings "de.oceanlabs.mcp:mcp_stable:39-1.12"
+	legacyForge "net.minecraftforge:forge:1.12.2-14.23.5.2860"
+
+	// Dependencies
+	modImplementation "curse.maven:dummycore-unofficial-266491:2611426"
+	modImplementation "curse.maven:baubles-227083:2518667"
+	modImplementation "codechicken:CodeChickenLib:1.12.2-3.2.3.358:universal"
+	modImplementation "mezz.jei:jei_1.12.2:4.16.1.1012"
+    modImplementation "team.chisel.ctm:CTM:MC1.12.2-1.0.2.31"
+	modImplementation "curse.maven:hwyla-253449:2568751"
+
+	modImplementation("CraftTweaker2:ZenScript:4.1.20.698") {transitive = false}
+	modImplementation("CraftTweaker2:CraftTweaker2-API:4.1.20.698") {transitive = false}
+	modImplementation("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.698") {transitive = false}
+
+	modImplementation "slimeknights.mantle:Mantle:1.12-1.3.3.55"
+	modImplementation "slimeknights:TConstruct:1.12.2-2.13.0.183"
+
+	modImplementation "curse.maven:guide-api-228832:2645992"
+	modImplementation "curse.maven:blood-magic-224791:2822288"
+
+	modImplementation "curse.maven:thaumcraft-223628:2629023"
+	modImplementation "curse.maven:thaumic-jei-285492:2705304"
+
+	// Testing
+	modImplementation "MCMultiPart2:MCMultiPart:2.5.3"
+	modImplementation "curse.maven:mekanism-268560:2835175"
+
+	// Performance
+	implementation("zone.rong:mixinbooter:9.1") {transitive = false}
+	modImplementation "curse.maven:reid-629017:5143492"
+	modImplementation "curse.maven:vintagefix-871198:5175094"
+	modImplementation "curse.maven:lolasm-460609:5120166"
 }
 
-processResources
-{
+def replacements = [
+	"0@VERSION@": version
+]
+
+blossom {
+	replaceToken(replacements)
 }
 
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
+processResources {
+	inputs.properties(replacements)
+	filesMatching(["mcmod.info", "META-INF/mods.toml"]) {
+		filter {
+			it.replace(replacements)
+		}
+	}
 }
 
-artifacts {
-    archives deobfJar
+def manifestAttributes = [
+	"Specification-Title": modName,
+	"Specification-Vendor": vendor,
+	"Specification-Version": specVersion,
+	"Implementation-Title": archivesBaseName,
+	"Implementation-Version": version,
+	"Implementation-Vendor": vendor
+]
+
+jar {
+	manifest.attributes(manifestAttributes)
+}
+
+sourcesJar {
+	manifest.attributes(manifestAttributes)
+}
+
+publishMods {
+	file = remapJar.archiveFile
+	version = displayName = "${mcVersion}-${project.version}"
+	changelog = file("changelog.md").text
+	type = STABLE
+	modLoaders.add("forge")
+	additionalFiles.from(remapSourcesJar.archiveFile)
+
+	curseforge {
+		accessToken = providers.gradleProperty("curseforge.token")
+		projectId = ""
+		minecraftVersions.add(mcVersion)
+		requires "dummycore-unofficial", "baubles", "codechicken-lib-1-8"
+	}
+
+	modrinth {
+		accessToken = providers.gradleProperty("modrinth.token")
+		projectId = ""
+		minecraftVersions.add(mcVersion)
+		requires "dummycore-unofficial", "codechicken-lib"
+	}
 }

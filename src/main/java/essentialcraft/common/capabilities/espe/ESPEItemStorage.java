@@ -17,34 +17,34 @@ public class ESPEItemStorage extends ESPEStorage implements IESPEHandlerItem, IC
 
 	protected ESPEItemStorage() {
 		super();
-		this.storageSettable = true;
+		storageSettable = true;
 	}
 
 	public ESPEItemStorage(ItemStack storageStack) {
 		super();
 		this.storageStack = storageStack;
-		this.storageSettable = true;
+		storageSettable = true;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
 	public ESPEItemStorage(ItemStack storageStack, double maxESPE) {
 		super(maxESPE);
 		this.storageStack = storageStack;
-		this.storageSettable = true;
+		storageSettable = true;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
 	public ESPEItemStorage(ItemStack storageStack, int tier) {
 		super(tier);
 		this.storageStack = storageStack;
-		this.storageSettable = true;
+		storageSettable = true;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
 	public ESPEItemStorage(ItemStack storageStack, double maxESPE, int tier) {
 		super(maxESPE, tier);
 		this.storageStack = storageStack;
-		this.storageSettable = true;
+		storageSettable = true;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
@@ -52,7 +52,7 @@ public class ESPEItemStorage extends ESPEStorage implements IESPEHandlerItem, IC
 		super();
 		this.storageStack = storageStack;
 		this.storage = storage;
-		this.storageSettable = false;
+		storageSettable = false;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
@@ -60,14 +60,14 @@ public class ESPEItemStorage extends ESPEStorage implements IESPEHandlerItem, IC
 		super(maxESPE);
 		this.storageStack = storageStack;
 		this.storage = storage;
-		this.storageSettable = false;
+		storageSettable = false;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 	public ESPEItemStorage(ItemStack storageStack, int tier, boolean storage) {
 		super(tier);
 		this.storageStack = storageStack;
 		this.storage = storage;
-		this.storageSettable = false;
+		storageSettable = false;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
@@ -75,103 +75,103 @@ public class ESPEItemStorage extends ESPEStorage implements IESPEHandlerItem, IC
 		super(maxESPE, tier);
 		this.storageStack = storageStack;
 		this.storage = storage;
-		this.storageSettable = false;
+		storageSettable = false;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
 	@Override
 	public double getMaxESPE() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getMaxESPE();
 	}
 
 	@Override
 	public void setMaxESPE(double amount) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setMaxESPE(amount);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public double getESPE() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getESPE();
 	}
 
 	@Override
 	public void setESPE(double amount) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setESPE(amount);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public double addESPE(double amount, boolean doAdd) {
-		this.readIfChanged();
+		readIfChanged();
 		double ret = super.addESPE(amount, doAdd);
-		this.writeIfChanged();
+		writeIfChanged();
 		return ret;
 	}
 
 	@Override
 	public double extractESPE(double amount, boolean doExtract) {
-		this.readIfChanged();
+		readIfChanged();
 		double ret = super.extractESPE(amount, doExtract);
-		this.writeIfChanged();
+		writeIfChanged();
 		return ret;
 	}
 
 	@Override
 	public int getTier() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getTier();
 	}
 
 	@Override
 	public void setTier(int tier) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setTier(tier);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public boolean getStorage() {
-		this.readIfChanged();
-		return this.storage;
+		readIfChanged();
+		return storage;
 	}
 
 	@Override
 	public void setStorage(boolean storage) {
-		this.readIfChanged();
-		if(this.storageSettable) {
+		readIfChanged();
+		if(storageSettable) {
 			this.storage = storage;
 		}
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		if(storageSettable) {
-			this.storage = nbt.getBoolean("storage");
+			storage = nbt.getBoolean("storage");
 		}
 	}
 
 	protected NBTTagCompound prevNBT = null;
 
 	protected void writeIfChanged() {
-		NBTTagCompound nbt = this.writeToNBT(this.storageStack.getTagCompound().copy());
+		NBTTagCompound nbt = writeToNBT(storageStack.getTagCompound().copy());
 		if(!nbt.equals(prevNBT)) {
-			this.storageStack.setTagCompound(nbt);
-			this.prevNBT = nbt.copy();
+			storageStack.setTagCompound(nbt);
+			prevNBT = nbt.copy();
 		}
 	}
 
 	protected void readIfChanged() {
-		NBTTagCompound nbt = this.storageStack.getTagCompound();
+		NBTTagCompound nbt = storageStack.getTagCompound();
 		if(!nbt.equals(prevNBT)) {
-			this.readFromNBT(nbt);
-			this.prevNBT = nbt.copy();
+			readFromNBT(nbt);
+			prevNBT = nbt.copy();
 		}
 	}
 

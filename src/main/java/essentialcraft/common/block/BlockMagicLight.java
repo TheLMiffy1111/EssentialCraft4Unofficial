@@ -30,8 +30,8 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 
 	public BlockMagicLight() {
 		super(Material.CIRCUITS);
-		this.setTickRandomly(true);
-		this.setLightLevel(1.0F);
+		setTickRandomly(true);
+		setLightLevel(1.0F);
 	}
 
 	@Override
@@ -50,15 +50,16 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	public void updateTick(World p_149674_1_, BlockPos p_149674_2_, IBlockState p_149674_3_, Random p_149674_4_)
 	{
 		int meta = p_149674_3_.getValue(TYPE).getIndex();
-		if(meta == 1)
+		if(meta == 1) {
 			p_149674_1_.setBlockToAir(p_149674_2_);
+		}
 	}
 
 	@Override
 	public void randomDisplayTick(IBlockState p_149734_1_, World p_149734_2_, BlockPos p_149734_3_, Random p_149734_4_)
 	{
 		int meta = p_149734_1_.getValue(TYPE).getIndex();
-		if(meta == 0)
+		if(meta == 0) {
 			for(int i = 0; i < 5; ++i)
 			{
 				Vec3d rotateVec = new Vec3d(1, 1, 1);
@@ -67,6 +68,7 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 				EssentialCraftCore.proxy.spawnParticle("mruFX",p_149734_3_.getX()+0.5F, p_149734_3_.getY()+0.5F, p_149734_3_.getZ()+0.5F, rotateVec.x/5, rotateVec.y/5, rotateVec.z/5);
 				rotateVec = null;
 			}
+		}
 	}
 
 	@Override
@@ -88,7 +90,7 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}

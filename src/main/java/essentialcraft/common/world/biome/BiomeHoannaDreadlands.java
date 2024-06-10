@@ -31,15 +31,15 @@ public class BiomeHoannaDreadlands extends Biome
 	public BiomeHoannaDreadlands(BiomeProperties par1)
 	{
 		super(par1);
-		this.topBlock = BlocksCore.dreadDirt.getDefaultState();
-		this.fillerBlock = BlocksCore.dreadDirt.getDefaultState();
-		this.decorator.treesPerChunk = -999;
-		this.decorator.deadBushPerChunk = 2;
-		this.decorator.reedsPerChunk = -999;
-		this.decorator.cactiPerChunk = -999;
-		this.decorator.cactusGen = new WorldGenDreadCacti();
+		topBlock = BlocksCore.dreadDirt.getDefaultState();
+		fillerBlock = BlocksCore.dreadDirt.getDefaultState();
+		decorator.treesPerChunk = -999;
+		decorator.deadBushPerChunk = 2;
+		decorator.reedsPerChunk = -999;
+		decorator.cactiPerChunk = -999;
+		decorator.cactusGen = new WorldGenDreadCacti();
 
-		this.spawnableCreatureList.clear();
+		spawnableCreatureList.clear();
 	}
 
 	public int getBiomeGrassColor()

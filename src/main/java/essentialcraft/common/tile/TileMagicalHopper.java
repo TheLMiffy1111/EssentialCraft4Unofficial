@@ -19,9 +19,9 @@ public class TileMagicalHopper extends TileMRUGeneric {
 	public int delay = 0;
 
 	public EnumFacing getRotation() {
-		int metadata = this.getBlockMetadata();
+		int metadata = getBlockMetadata();
 		metadata %= 6;
-		return EnumFacing.getFront(metadata);
+		return EnumFacing.byIndex(metadata);
 	}
 
 	public TileMagicalHopper() {
@@ -43,7 +43,7 @@ public class TileMagicalHopper extends TileMRUGeneric {
 	@Override
 	public void update() {
 		super.update();
-		if(delay <= 0 && getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(delay <= 0 && getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			EnumFacing r = getRotation();
 			AxisAlignedBB teleportBB = new AxisAlignedBB(pos.offset(r));
 			delay = itemDelay;
@@ -52,8 +52,9 @@ public class TileMagicalHopper extends TileMRUGeneric {
 
 			for(int i = 0; i < items.size(); ++i) {
 				EntityItem item = items.get(i);
-				if(canTeleport(item) && !doNotTouch.contains(item))
-					item.setPositionAndRotation(pos.getX()+0.5D+r.getFrontOffsetX(), pos.getY()+0.5D+r.getFrontOffsetY(), pos.getZ()+0.5D+r.getFrontOffsetZ(), 0, 0);
+				if(canTeleport(item) && !doNotTouch.contains(item)) {
+					item.setPositionAndRotation(pos.getX()+0.5D+r.getXOffset(), pos.getY()+0.5D+r.getYOffset(), pos.getZ()+0.5D+r.getZOffset(), 0, 0);
+				}
 			}
 		}
 		else {
@@ -62,11 +63,13 @@ public class TileMagicalHopper extends TileMRUGeneric {
 	}
 
 	public boolean canTeleport(EntityItem item) {
-		if(item.getItem().isEmpty())
+		if(item.getItem().isEmpty()) {
 			return false;
+		}
 
-		if(getStackInSlot(0).isEmpty() || !(getStackInSlot(0).getItem() instanceof ItemFilter))
+		if(getStackInSlot(0).isEmpty() || !(getStackInSlot(0).getItem() instanceof ItemFilter)) {
 			return true;
+		}
 
 		return ECUtils.canFilterAcceptItem(new InventoryMagicFilter(getStackInSlot(0)), item.getItem(), getStackInSlot(0));
 	}

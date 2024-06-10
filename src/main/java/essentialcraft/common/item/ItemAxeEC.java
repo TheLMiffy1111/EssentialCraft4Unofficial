@@ -7,12 +7,12 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemAxeEC extends ItemAxe implements IModelRegisterer {
 
-	public ItemAxeEC(ToolMaterial p_i45347_1_) {
-		super(p_i45347_1_, p_i45347_1_.getDamageVsEntity(), p_i45347_1_.getEfficiencyOnProperMaterial());
+	public ItemAxeEC(ToolMaterial material) {
+		super(material, material.getAttackDamage(), material.getEfficiency());
 	}
 
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getResourcePath(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getPath(), "inventory"));
 	}
 }

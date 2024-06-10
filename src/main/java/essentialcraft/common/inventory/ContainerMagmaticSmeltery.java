@@ -20,6 +20,6 @@ public class ContainerMagmaticSmeltery extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 5, 155, 5));
 		addSlotToContainer(new SlotGeneric(inv, 6, 155, 23));
 		addSlotToContainer(new SlotGeneric(inv, 7, 140, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

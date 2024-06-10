@@ -27,17 +27,21 @@ public class TileMagicianTable extends TileMRUGeneric {
 
 	@Override
 	public void update() {
-		if(upgrade == -1)
+		if(upgrade == -1) {
 			speedFactor = 1D;
-		else
+		}
+		else {
 			speedFactor = MagicianTableUpgrades.UPGRADE_EFFICIENCIES.getDouble(upgrade);
-		if(speedFactor != 1)
+		}
+		if(speedFactor != 1) {
 			mruConsume = speedFactor * mruUsage;
-		else
+		}
+		else {
 			mruConsume = mruUsage;
+		}
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			ItemStack[] craftMatrix = new ItemStack[5];
 			craftMatrix[0] = getStackInSlot(1);
 			craftMatrix[1] = getStackInSlot(2);
@@ -73,8 +77,9 @@ public class TileMagicianTable extends TileMRUGeneric {
 				double mruReq = mruConsume;
 				if(mruStorage.getMRU() >= (int)mruReq && progressLevel < progressRequired) {
 					progressLevel += speedFactor;
-					if(generatesCorruption)
+					if(generatesCorruption) {
 						ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+					}
 					mruStorage.extractMRU((int)mruReq, true);
 					if(progressLevel >= progressRequired) {
 						progressRequired = 0;
@@ -111,13 +116,12 @@ public class TileMagicianTable extends TileMRUGeneric {
 	public boolean canFunction(MagicianTableRecipe rec) {
 		ItemStack result = rec.result;
 		if(!result.isEmpty()) {
-			if(getStackInSlot(6).isEmpty())
+			if(getStackInSlot(6).isEmpty()) {
 				return true;
-			else {
-				if(getStackInSlot(6).isItemEqual(result)) {
-					if(getStackInSlot(6).getCount() + result.getCount() <= getInventoryStackLimit() && getStackInSlot(6).getCount() + result.getCount() <= getStackInSlot(6).getMaxStackSize()) {
-						return true;
-					}
+			}
+			if(getStackInSlot(6).isItemEqual(result)) {
+				if(getStackInSlot(6).getCount() + result.getCount() <= getInventoryStackLimit() && getStackInSlot(6).getCount() + result.getCount() <= getStackInSlot(6).getMaxStackSize()) {
+					return true;
 				}
 			}
 		}
@@ -129,12 +133,14 @@ public class TileMagicianTable extends TileMRUGeneric {
 			ItemStack stk = currentRecipe.result;
 			if(getStackInSlot(6).isEmpty()) {
 				ItemStack copied = stk.copy();
-				if(copied.getCount() == 0)
+				if(copied.getCount() == 0) {
 					copied.setCount(1);
+				}
 				setInventorySlotContents(6, copied);
 			}
-			else if(getStackInSlot(6).getItem() == stk.getItem())
+			else if(getStackInSlot(6).getItem() == stk.getItem()) {
 				setInventorySlotContents(6, new ItemStack(stk.getItem(),stk.getCount()+getStackInSlot(6).getCount(),stk.getItemDamage()));
+			}
 			for(int i = 1; i < 6; ++i) {
 				decrStackSize(i, 1);
 			}

@@ -29,8 +29,9 @@ public class ModelMimic implements IBakedModel {
 
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		if(!(state.getBlock() instanceof BlockMimic))
+		if(!(state.getBlock() instanceof BlockMimic)) {
 			return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getMissingModel().getQuads(state, side, rand);
+		}
 
 		BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
 		IBlockState heldState = ((IExtendedBlockState)state).getValue(BlockMimic.STATE);
@@ -46,7 +47,7 @@ public class ModelMimic implements IBakedModel {
 			ModelResourceLocation path = new ModelResourceLocation("essentialcraft:mimic", "inventory");
 			return mc.getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getModel(path).getQuads(state, side, rand);
 		}
-		else if(heldState != null) {
+		if(heldState != null) {
 			if(heldState.getBlock().canRenderInLayer(heldState, layer)) {
 				IBlockState actual = heldState.getBlock().getActualState(heldState, new FakeBlockAccess(heldWorld), heldPos);
 

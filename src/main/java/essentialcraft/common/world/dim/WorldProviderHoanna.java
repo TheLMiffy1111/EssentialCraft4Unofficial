@@ -21,10 +21,10 @@ public class WorldProviderHoanna extends WorldProvider {
 	@Override
 	protected void init() {
 		super.setAllowedSpawnTypes(true, false);
-		this.biomeProvider = new BiomeProviderHoanna(this.world.getWorldInfo());
-		this.doesWaterVaporize = false;
-		this.nether = false;
-		this.setDimension(Config.dimensionID);
+		biomeProvider = new BiomeProviderHoanna(world.getWorldInfo());
+		doesWaterVaporize = false;
+		nether = false;
+		setDimension(Config.dimensionID);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class WorldProviderHoanna extends WorldProvider {
 			else {
 				f1 = 1.9F - i / 15.0F;
 			}
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
 		}
 	}
 
@@ -50,7 +50,7 @@ public class WorldProviderHoanna extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkGeneratorHoanna(this.world, this.world.getSeed(), true, this.world.getWorldInfo().getGeneratorOptions());
+		return new ChunkGeneratorHoanna(world, world.getSeed(), true, world.getWorldInfo().getGeneratorOptions());
 	}
 
 	@Override

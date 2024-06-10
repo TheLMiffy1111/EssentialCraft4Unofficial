@@ -16,7 +16,7 @@ public class BlockMagicalFruit extends Block implements IModelRegisterer {
 
 	public BlockMagicalFruit() {
 		super(Material.CACTUS);
-		this.setSoundType(SoundType.PLANT);
+		setSoundType(SoundType.PLANT);
 	}
 
 	@Override

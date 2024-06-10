@@ -27,12 +27,10 @@ public class TileMonsterHolder extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			List<EntityLivingBase> lst = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.getX()-32, pos.getY()-32, pos.getZ()-32, pos.getX()+33, pos.getY()+33, pos.getZ()+33));
 			if(!lst.isEmpty()) {
-				for(int i = 0; i < lst.size(); ++i)
-				{
-					EntityLivingBase e = lst.get(i);
+				for(EntityLivingBase e : lst) {
 					if(!(e instanceof EntityPlayer)) {
 						if(mruStorage.getMRU() >= mruUsage) {
 							mruStorage.extractMRU(mruUsage, true);

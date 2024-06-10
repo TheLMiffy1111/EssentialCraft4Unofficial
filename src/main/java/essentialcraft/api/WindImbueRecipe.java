@@ -28,12 +28,12 @@ public class WindImbueRecipe {
 		return null;
 	}
 
-	public static WindImbueRecipe getRecipeByResult(ItemStack r) {
-		if(r.isEmpty()) {
+	public static WindImbueRecipe getRecipeByResult(ItemStack result) {
+		if(result.isEmpty()) {
 			return null;
 		}
 		for(WindImbueRecipe rec : RECIPES) {
-			if(r.isItemEqual(rec.result)) {
+			if(result.isItemEqual(rec.result)) {
 				return rec;
 			}
 		}

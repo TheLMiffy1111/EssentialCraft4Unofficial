@@ -21,8 +21,12 @@ public class GuiDemon extends GuiCommon{
 	private void drawItemStack(ItemStack p_146982_1_, int p_146982_2_, int p_146982_3_, String p_146982_4_)
 	{
 		FontRenderer font = null;
-		if (p_146982_1_ != null) font = p_146982_1_.getItem().getFontRenderer(p_146982_1_);
-		if (font == null) font = fontRenderer;
+		if (p_146982_1_ != null) {
+			font = p_146982_1_.getItem().getFontRenderer(p_146982_1_);
+		}
+		if (font == null) {
+			font = fontRenderer;
+		}
 		itemRender.renderItemAndEffectIntoGUI(p_146982_1_, p_146982_2_, p_146982_3_);
 		itemRender.renderItemOverlayIntoGUI(font, p_146982_1_, p_146982_2_, p_146982_3_ - 0, p_146982_4_);
 	}
@@ -31,17 +35,17 @@ public class GuiDemon extends GuiCommon{
 	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2)
 	{
 		GlStateManager.color(1, 1, 1);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.mc.renderEngine.bindTexture(DguiGenLocation);
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		ContainerDemon cd = (ContainerDemon)this.inventorySlots;
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		mc.renderEngine.bindTexture(DguiGenLocation);
+		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		ContainerDemon cd = (ContainerDemon)inventorySlots;
 		EntityDemon demon = (EntityDemon)cd.entity;
 		if(demon != null && !demon.desiredItem.isEmpty())
 		{
 			GlStateManager.translate(0, 0, 100);
-			this.drawItemStack(demon.desiredItem, k + 80, l + 30, demon.desiredItem.getCount()+"");
-			this.fontRenderer.drawString(demon.desiredItem.getDisplayName(), k + 5, l + 59, 0xffffff);
+			drawItemStack(demon.desiredItem, k + 80, l + 30, demon.desiredItem.getCount()+"");
+			fontRenderer.drawString(demon.desiredItem.getDisplayName(), k + 5, l + 59, 0xffffff);
 			GlStateManager.translate(0, 0, -100);
 		}
 	}

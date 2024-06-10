@@ -172,7 +172,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 	@Override
 	public void neighborChanged(IBlockState s, World w, BlockPos p, Block n, BlockPos fp) {
 		if(s.getValue(TYPE).getIndex() == 0) {
-			if(w.isBlockIndirectlyGettingPowered(p) > 0 || w.getStrongPower(p) > 0) {
+			if(w.getRedstonePowerFromNeighbors(p) > 0 || w.getStrongPower(p) > 0) {
 				AxisAlignedBB aabb = new AxisAlignedBB(p).grow(12, 12, 12);
 				List<EntityItem> items = w.getEntitiesWithinAABB(EntityItem.class, aabb);
 				for(EntityItem itm : items) {
@@ -183,30 +183,32 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 			}
 		}
 		if(s.getValue(TYPE).getIndex() == 1) {
-			if(w.isBlockIndirectlyGettingPowered(p) > 0 || w.getStrongPower(p) > 0) {
+			if(w.getRedstonePowerFromNeighbors(p) > 0 || w.getStrongPower(p) > 0) {
 				AxisAlignedBB aabb = new AxisAlignedBB(p).grow(12, 12, 12);
 				List<EntityItem> items = w.getEntitiesWithinAABB(EntityItem.class, aabb);
 				for(EntityItem itm : items) {
-					if(!itm.isDead)
+					if(!itm.isDead) {
 						shuffle(itm);
+					}
 				}
 			}
 		}
 		if(s.getValue(TYPE).getIndex() == 3) {
-			if(w.isBlockIndirectlyGettingPowered(p) > 0 || w.getStrongPower(p) > 0) {
+			if(w.getRedstonePowerFromNeighbors(p) > 0 || w.getStrongPower(p) > 0) {
 				AxisAlignedBB aabb = new AxisAlignedBB(p).grow(12, 12, 12);
 				List<EntityItem> items = w.getEntitiesWithinAABB(EntityItem.class, aabb);
 				for(EntityItem itm : items) {
-					if(!itm.isDead)
+					if(!itm.isDead) {
 						breed(itm);
+					}
 				}
 			}
 		}
 		if(s.getValue(TYPE).getIndex() == 5) {
-			if(w.isBlockIndirectlyGettingPowered(p) > 0 || w.getStrongPower(p) > 0) {
+			if(w.getRedstonePowerFromNeighbors(p) > 0 || w.getStrongPower(p) > 0) {
 				AxisAlignedBB aabb = new AxisAlignedBB(p).grow(12, 12, 12);
 				List<Entity> entities = w.getEntitiesWithinAABB(Entity.class, aabb);
-				List<IShearable> sheep = new ArrayList<IShearable>();
+				List<IShearable> sheep = new ArrayList<>();
 				for(Entity e : entities) {
 					if(e instanceof IShearable) {
 						sheep.add((IShearable)e);
@@ -218,7 +220,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 			}
 		}
 		if(s.getValue(TYPE).getIndex() == 6 || s.getValue(TYPE).getIndex() == 7) {
-			if(w.isBlockIndirectlyGettingPowered(p) > 0 || w.getStrongPower(p) > 0) {
+			if(w.getRedstonePowerFromNeighbors(p) > 0 || w.getStrongPower(p) > 0) {
 				((TileAnimalSeparator)w.getTileEntity(p)).separate(s.getValue(TYPE).getIndex() == 6);
 			}
 		}
@@ -241,10 +243,7 @@ public class BlockRedstoneDeviceNotSided extends BlockContainer implements IMode
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos par2, IBlockState par3, EntityPlayer player, EnumHand par5, EnumFacing par7, float par8, float par9, float par10) {
-		if(world.getTileEntity(par2) == null || par3.getValue(TYPE).getIndex() == 4|| par3.getValue(TYPE).getIndex() == 8) {
-			return false;
-		}
-		if(player.isSneaking()) {
+		if(world.getTileEntity(par2) == null || par3.getValue(TYPE).getIndex() == 4|| par3.getValue(TYPE).getIndex() == 8 || player.isSneaking()) {
 			return false;
 		}
 		if(!world.isRemote) {

@@ -16,7 +16,7 @@ public class GuiModConfiguration extends GuiConfig {
 	}
 
 	private static List<IConfigElement> getConfigElements() {
-		List<IConfigElement> list = new ArrayList<IConfigElement>();
+		List<IConfigElement> list = new ArrayList<>();
 		list.addAll(new ConfigElement(Config.config.getCategory("misc")).getChildElements());
 		list.addAll(new ConfigElement(Config.config.getCategory("general")).getChildElements());
 		list.addAll(new ConfigElement(Config.config.getCategory("worldgen")).getChildElements());

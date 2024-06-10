@@ -12,7 +12,7 @@ public class PlayerGenericData implements IPlayerData {
 
 	private int damage,radiation,wind,ubmru,matrixid;
 	private boolean windbound;
-	private final List<ICorruptionEffect> effects = new ArrayList<ICorruptionEffect>();
+	private final List<ICorruptionEffect> effects = new ArrayList<>();
 	UUID playerUUID;
 
 	public PlayerGenericData(UUID playerUUID) {

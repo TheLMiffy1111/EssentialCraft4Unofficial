@@ -13,11 +13,11 @@ public class GuiPotionSpreader extends GuiCommon{
 
 	public GuiPotionSpreader(Container c, TileEntity tile) {
 		super(c,tile);
-		this.elementList.add(new GuiMRUStorage(7, 4, tile));
-		this.elementList.add(new GuiBalanceState(25, 4, tile));
-		this.elementList.add(new GuiBoundGemState(90, 4, tile, 0));
-		this.elementList.add(new GuiMRUState(25, 58, tile, 0));
-		this.elementList.add(new GuiPotionState(97, 22, tile));
+		elementList.add(new GuiMRUStorage(7, 4, tile));
+		elementList.add(new GuiBalanceState(25, 4, tile));
+		elementList.add(new GuiBoundGemState(90, 4, tile, 0));
+		elementList.add(new GuiMRUState(25, 58, tile, 0));
+		elementList.add(new GuiPotionState(97, 22, tile));
 	}
 
 

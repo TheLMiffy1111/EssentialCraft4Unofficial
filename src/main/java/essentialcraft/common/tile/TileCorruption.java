@@ -90,7 +90,7 @@ public class TileCorruption extends TileEntity implements ITickable {
 			int metadata = getWorld().getBlockState(pos).getValue(BlockCorruption.LEVEL);
 			if(metadata >= 7 && canDestroyBlocks) {
 				for(int i = 0; i < 6; ++i) {
-					EnumFacing dir = EnumFacing.getFront(i);
+					EnumFacing dir = EnumFacing.byIndex(i);
 					if(getWorld().getTileEntity(pos.offset(dir)) == null && getWorld().getBlockState(pos.offset(dir)).getBlock().isSideSolid(getWorld().getBlockState(pos.offset(dir)), getWorld(), pos.offset(dir), dir.getOpposite())) {
 						getWorld().setBlockState(pos.offset(dir), blk.getStateFromMeta(0), 3);
 					}

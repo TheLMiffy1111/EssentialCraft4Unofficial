@@ -28,7 +28,7 @@ public class TileMRUReactor extends TileMRUGeneric {
 	public static int mruGenerated = 50;
 	public static boolean damage = true;
 
-	public List<Lightning> lightnings = new ArrayList<Lightning>();
+	public List<Lightning> lightnings = new ArrayList<>();
 
 	public TileMRUReactor() {
 		super(cfgMaxMRU);
@@ -141,14 +141,14 @@ public class TileMRUReactor extends TileMRUGeneric {
 			ticksBeforeStructureCheck = 20;
 			initStructure();
 		}
-		else
+		else {
 			--ticksBeforeStructureCheck;
+		}
 		super.update();
 		if(isStructureCorrect()) {
 			List<EntityLivingBase> lst = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.getX()-3, pos.getY()-3, pos.getZ()-3, pos.getX()+4, pos.getY()+4, pos.getZ()+4));
 			if(!lst.isEmpty() && damage) {
-				for(int i = 0; i < lst.size(); ++i) {
-					EntityLivingBase e = lst.get(i);
+				for(EntityLivingBase e : lst) {
 					e.attackEntityFrom(DamageSource.MAGIC, 5);
 				}
 			}
@@ -171,8 +171,9 @@ public class TileMRUReactor extends TileMRUGeneric {
 				mruStorage.setBalance(cfgBalance);
 			}
 			if(getWorld().isRemote) {
-				if(getWorld().rand.nextFloat() < 0.05F)
+				if(getWorld().rand.nextFloat() < 0.05F) {
 					getWorld().playSound(pos.getX()+0.5F,pos.getY()+1.0F,pos.getZ()+0.5F, SoundRegistry.machineGenElectricity, SoundCategory.BLOCKS, 1F, 1F, true);
+				}
 				if(lightnings.size() <= 20) {
 					Lightning l = new Lightning(getWorld().rand, new Coord3D(0.5F, 1.0F, 0.5F), new Coord3D(0.5F+MathUtils.randomFloat(getWorld().rand), 1.0F+MathUtils.randomFloat(getWorld().rand), 0.5F+MathUtils.randomFloat(getWorld().rand)), 0.2F, 1.0F, 0.2F, 1.0F);
 					lightnings.add(l);

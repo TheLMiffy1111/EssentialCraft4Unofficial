@@ -37,7 +37,7 @@ public class BlockMetadataManager extends Block implements IModelRegisterer {
 	{
 		for(int i = 0; i < 6; ++i)
 		{
-			EnumFacing d = EnumFacing.getFront(i);
+			EnumFacing d = EnumFacing.byIndex(i);
 			Block b = w.getBlockState(p.offset(d)).getBlock();
 			if(b != n && b != this && n != this)
 			{
@@ -66,7 +66,7 @@ public class BlockMetadataManager extends Block implements IModelRegisterer {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

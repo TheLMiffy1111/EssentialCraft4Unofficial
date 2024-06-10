@@ -38,8 +38,9 @@ public class BlockCompressedDrops extends Block implements IModelRegisterer {
 
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		for(int i = 0; i < 6; ++i)
+		for(int i = 0; i < 6; ++i) {
 			list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override

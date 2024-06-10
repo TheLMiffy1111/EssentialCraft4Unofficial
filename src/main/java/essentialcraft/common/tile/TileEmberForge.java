@@ -51,7 +51,7 @@ public class TileEmberForge extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		spawnParticles();
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(structureChecker.test(getWorld(), getPos())) {
 				boolean flag = false;
 				if(world.isRemote) {
@@ -154,14 +154,14 @@ public class TileEmberForge extends TileMRUGeneric {
 								focus_3.setDead();
 							}
 							NBTTagCompound swordTag = new NBTTagCompound();
-							swordTag.setString("ember_0", ember_0.getItem().getItem().getUnlocalizedName(ember_0.getItem()));
-							swordTag.setString("ember_1", ember_1.getItem().getItem().getUnlocalizedName(ember_1.getItem()));
-							swordTag.setString("ember_2", ember_2.getItem().getItem().getUnlocalizedName(ember_2.getItem()));
-							swordTag.setString("ember_3", ember_3.getItem().getItem().getUnlocalizedName(ember_3.getItem()));
-							swordTag.setString("focus_0", focus_0.getItem().getItem().getUnlocalizedName(focus_0.getItem()));
-							swordTag.setString("focus_1", focus_1.getItem().getItem().getUnlocalizedName(focus_1.getItem()));
-							swordTag.setString("focus_2", focus_2.getItem().getItem().getUnlocalizedName(focus_2.getItem()));
-							swordTag.setString("focus_3", focus_3.getItem().getItem().getUnlocalizedName(focus_3.getItem()));
+							swordTag.setString("ember_0", ember_0.getItem().getItem().getTranslationKey(ember_0.getItem()));
+							swordTag.setString("ember_1", ember_1.getItem().getItem().getTranslationKey(ember_1.getItem()));
+							swordTag.setString("ember_2", ember_2.getItem().getItem().getTranslationKey(ember_2.getItem()));
+							swordTag.setString("ember_3", ember_3.getItem().getItem().getTranslationKey(ember_3.getItem()));
+							swordTag.setString("focus_0", focus_0.getItem().getItem().getTranslationKey(focus_0.getItem()));
+							swordTag.setString("focus_1", focus_1.getItem().getItem().getTranslationKey(focus_1.getItem()));
+							swordTag.setString("focus_2", focus_2.getItem().getItem().getTranslationKey(focus_2.getItem()));
+							swordTag.setString("focus_3", focus_3.getItem().getItem().getTranslationKey(focus_3.getItem()));
 							ItemStack eSword = new ItemStack(ItemsCore.elementalSword, 1, 0);
 							eSword.setTagCompound(swordTag);
 							ItemElementalSword.setPrimaryAttribute(eSword);

@@ -5,20 +5,19 @@ import net.minecraft.world.World;
 
 public interface IWorldEvent {
 
-	public void onEventBeginning(World w);
+	public void onEventBeginning(World world);
 
-	public void worldTick(World w, int leftoverTime);
+	public void worldTick(World world, int leftoverTime);
 
-	public void playerTick(EntityPlayer p, int leftoverTime);
+	public void playerTick(EntityPlayer player, int leftoverTime);
 
-	public void onEventEnd(World w);
+	public void onEventEnd(World world);
 
-	public int getEventDuration(World w);
+	public int getEventDuration(World world);
 
-	public boolean possibleToApply(World w);
+	public boolean possibleToApply(World world);
 
-	public float getEventProbability(World w);
+	public float getEventProbability(World world);
 
 	public String getEventID();
-
 }

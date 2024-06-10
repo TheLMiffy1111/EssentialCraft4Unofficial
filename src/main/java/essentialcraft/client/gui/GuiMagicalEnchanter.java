@@ -13,10 +13,10 @@ public class GuiMagicalEnchanter extends GuiCommon{
 
 	public GuiMagicalEnchanter(Container c, TileMagicalEnchanter tile) {
 		super(c,tile);
-		this.elementList.add(new GuiMRUStorage(7, 4, tile));
-		this.elementList.add(new GuiBalanceState(25, 4, tile));
-		this.elementList.add(new GuiBoundGemState(90, 4, tile, 0));
-		this.elementList.add(new GuiMRUState(25, 58, tile, 0));
-		this.elementList.add(new GuiEnchantmentState(25, 40, tile));
+		elementList.add(new GuiMRUStorage(7, 4, tile));
+		elementList.add(new GuiBalanceState(25, 4, tile));
+		elementList.add(new GuiBoundGemState(90, 4, tile, 0));
+		elementList.add(new GuiMRUState(25, 58, tile, 0));
+		elementList.add(new GuiEnchantmentState(25, 40, tile));
 	}
 }

@@ -111,15 +111,15 @@ public class RenderMagicalDisplay extends TileEntitySpecialRenderer<TileMagicalD
 				GlStateManager.scale(s, s, s);
 				renderer.drawString(drawedName, 0, 0, 0xffffff);
 				GlStateManager.popMatrix();
-				List<String> displaySt = new ArrayList<String>();
+				List<String> displaySt = new ArrayList<>();
 				displayed.getItem().addInformation(displayed, Minecraft.getMinecraft().world, displaySt, ITooltipFlag.TooltipFlags.NORMAL);
 
 				int longestStr = 1;
 
-				for(int i = 0; i < displaySt.size(); ++i) {
-					String st = displaySt.get(i);
-					if(longestStr < st.length())
+				for(String st : displaySt) {
+					if(longestStr < st.length()) {
 						longestStr = st.length();
+					}
 				}
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(-0.4F, 0.15F, 0);
@@ -127,9 +127,9 @@ public class RenderMagicalDisplay extends TileEntitySpecialRenderer<TileMagicalD
 				s = 0.08F / (longestStr/2F);
 				GlStateManager.scale(s, s, s);
 
-				for(int i = 0; i < displaySt.size(); ++i) {
+				for(String element : displaySt) {
 					GlStateManager.translate(0, 10, 0);
-					renderer.drawString(displaySt.get(i), 0, 0, 0xffffff);
+					renderer.drawString(element, 0, 0, 0xffffff);
 				}
 
 				GlStateManager.scale(0.5F, 0.5F, 0.5F);
@@ -144,6 +144,6 @@ public class RenderMagicalDisplay extends TileEntitySpecialRenderer<TileMagicalD
 
 	@Override
 	public void render(TileMagicalDisplay tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

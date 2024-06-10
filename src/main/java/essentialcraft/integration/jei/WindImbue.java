@@ -33,8 +33,9 @@ public class WindImbue {
 		@Override
 		public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 			minecraft.fontRenderer.drawString(MathHelper.floor(rec.enderEnergy)+" ESPE", 0, 36, 0x000000, false);
-			if(rec.result.getItem() instanceof ItemSoulStone)
+			if(rec.result.getItem() instanceof ItemSoulStone) {
 				minecraft.fontRenderer.drawString("+Wind Relations", 0, 46, 0x81d17d, true);
+			}
 		}
 
 		@Override

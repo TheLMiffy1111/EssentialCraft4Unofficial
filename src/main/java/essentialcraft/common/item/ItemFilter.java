@@ -40,24 +40,28 @@ public class ItemFilter extends Item implements IModelRegisterer {
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
 	{
-		if(this.isInCreativeTab(par2CreativeTabs))
+		if(isInCreativeTab(par2CreativeTabs)) {
 			for(int var4 = 0; var4 < 4; ++var4)
 			{
 				ItemStack min = new ItemStack(this, 1, var4);
 				list.add(min);
 			}
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4)
 	{
-		if(stack.getItemDamage() == 1 || stack.getItemDamage() == 3)
+		if(stack.getItemDamage() == 1 || stack.getItemDamage() == 3) {
 			list.add(I18n.translateToLocal("essentialcraft.txt.desc.advanced"));
-		if(stack.getItemDamage() > 1)
+		}
+		if(stack.getItemDamage() > 1) {
 			list.add(I18n.translateToLocal("essentialcraft.txt.desc.blacklist"));
-		else
+		}
+		else {
 			list.add(I18n.translateToLocal("essentialcraft.txt.desc.whitelist"));
+		}
 	}
 
 	@Override
@@ -81,8 +85,8 @@ public class ItemFilter extends Item implements IModelRegisterer {
 
 	public ItemFilter()
 	{
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override

@@ -19,8 +19,9 @@ public class RenderCloudsHoanna extends IRenderHandler{
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
-		if(world.rand.nextInt(10)==0)
+		if(world.rand.nextInt(10)==0) {
 			++cloudTickCounter;
+		}
 		for(int layer = 0; layer < 3; ++layer) {
 			GlStateManager.pushMatrix();
 			GlStateManager.disableCull();
@@ -29,7 +30,7 @@ public class RenderCloudsHoanna extends IRenderHandler{
 			BufferBuilder BufferBuilder = tessellator.getBuffer();
 			float f2 = 12.0F;
 			float f3 = 4.0F;
-			double d0 = this.cloudTickCounter + partialTicks;
+			double d0 = cloudTickCounter + partialTicks;
 			double d1 = (mc.getRenderViewEntity().prevPosX + (mc.getRenderViewEntity().posX - mc.getRenderViewEntity().prevPosX) * partialTicks + d0* layer*layer * 0.03D) / f2 ;
 			double d2 = (mc.getRenderViewEntity().prevPosZ + (mc.getRenderViewEntity().posZ - mc.getRenderViewEntity().prevPosZ) * partialTicks) / f2* layer*layer + 0.33D ;
 			float f4 = world.provider.getCloudHeight() - f1 + 0.33F + layer*36;
@@ -41,10 +42,12 @@ public class RenderCloudsHoanna extends IRenderHandler{
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			Vec3d vec3d = new Vec3d(1F*(layer+1)/3F, 1F*(layer+1)/3F, 1F*(layer+1)/3F);
-			if(world.isRaining())
+			if(world.isRaining()) {
 				vec3d = new Vec3d(0.3D, 0.3D, 0.3D);
-			if(world.isRaining() && world.isThundering())
+			}
+			if(world.isRaining() && world.isThundering()) {
 				vec3d = new Vec3d(0.1D, 0.1D, 0.1D);
+			}
 			float f5 = (float)vec3d.x;
 			float f6 = (float)vec3d.y;
 			float f7 = (float)vec3d.z;

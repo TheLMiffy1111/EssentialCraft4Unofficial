@@ -48,71 +48,71 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			tryEnchant();
+		}
 
-		this.bookSpreadPrev = this.bookSpread;
-		this.bookRotationPrev = this.bookRotation;
-		EntityPlayer entityplayer = this.world.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, 3.0D, false);
+		bookSpreadPrev = bookSpread;
+		bookRotationPrev = bookRotation;
+		EntityPlayer entityplayer = world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 3.0D, false);
 
 		if(entityplayer != null) {
-			double d0 = entityplayer.posX - (this.pos.getX() + 0.5D);
-			double d1 = entityplayer.posZ - (this.pos.getZ() + 0.5D);
-			this.tRot = (float)MathHelper.atan2(d1, d0);
-			this.bookSpread += 0.1F;
+			double d0 = entityplayer.posX - (pos.getX() + 0.5D);
+			double d1 = entityplayer.posZ - (pos.getZ() + 0.5D);
+			tRot = (float)MathHelper.atan2(d1, d0);
+			bookSpread += 0.1F;
 
-			if(this.bookSpread < 0.5F || rand.nextInt(40) == 0) {
-				float f1 = this.flipT;
+			if(bookSpread < 0.5F || rand.nextInt(40) == 0) {
+				float f1 = flipT;
 
 				while(true) {
-					this.flipT += rand.nextInt(4) - rand.nextInt(4);
+					flipT += rand.nextInt(4) - rand.nextInt(4);
 
-					if(f1 != this.flipT) {
+					if(f1 != flipT) {
 						break;
 					}
 				}
 			}
 		}
 		else {
-			this.tRot += 0.02F;
-			this.bookSpread -= 0.1F;
+			tRot += 0.02F;
+			bookSpread -= 0.1F;
 		}
 
-		while(this.bookRotation >= Math.PI) {
-			this.bookRotation -= Math.PI * 2F;
+		while(bookRotation >= Math.PI) {
+			bookRotation -= Math.PI * 2F;
 		}
 
-		while(this.bookRotation < -Math.PI) {
-			this.bookRotation += Math.PI * 2F;
+		while(bookRotation < -Math.PI) {
+			bookRotation += Math.PI * 2F;
 		}
 
-		while(this.tRot >= Math.PI) {
-			this.tRot -= Math.PI * 2F;
+		while(tRot >= Math.PI) {
+			tRot -= Math.PI * 2F;
 		}
 
-		while(this.tRot < -Math.PI) {
-			this.tRot += Math.PI * 2F;
+		while(tRot < -Math.PI) {
+			tRot += Math.PI * 2F;
 		}
 
 		float f2;
 
-		for(f2 = this.tRot - this.bookRotation; f2 >= Math.PI; f2 -= Math.PI * 2F) {
-			;
+		for(f2 = tRot - bookRotation; f2 >= Math.PI; f2 -= Math.PI * 2F) {
+
 		}
 
 		while(f2 < -Math.PI) {
 			f2 += Math.PI * 2F;
 		}
 
-		this.bookRotation += f2 * 0.4F;
-		this.bookSpread = MathHelper.clamp(this.bookSpread, 0.0F, 1.0F);
-		++this.tickCount;
-		this.pageFlipPrev = this.pageFlip;
-		float f = (this.flipT - this.pageFlip) * 0.4F;
-		float f3 = 0.2F;
+		bookRotation += f2 * 0.4F;
+		bookSpread = MathHelper.clamp(bookSpread, 0.0F, 1.0F);
+		++tickCount;
+		pageFlipPrev = pageFlip;
+		float f = (flipT - pageFlip) * 0.4F;
 		f = MathHelper.clamp(f, -0.2F, 0.2F);
-		this.flipA += (f - this.flipA) * 0.9F;
-		this.pageFlip += this.flipA;
+		flipA += (f - flipA) * 0.9F;
+		pageFlip += flipA;
 	}
 
 	@Override
@@ -130,8 +130,9 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 	public void tryEnchant() {
 		if(canItemBeEnchanted() && mruStorage.getMRU() >= mruUsage) {
 			mruStorage.extractMRU(mruUsage, true);
-			if(generatesCorruption)
+			if(generatesCorruption) {
 				ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, genCorruption);
+			}
 			++progressLevel;
 			if(progressLevel >= getRequiredTimeToAct()) {
 				enchant();
@@ -149,8 +150,7 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 		ItemStack enchanted = getStackInSlot(1).copy();
 		enchanted.setCount(1);
 		decrStackSize(1, 1);
-		for(int m = 0; m < enchants.size(); ++m) {
-			EnchantmentData d = enchants.get(m);
+		for(EnchantmentData d : enchants) {
 			if(d != null) {
 				if(enchanted.getItem() == Items.BOOK) {
 					enchanted = new ItemStack(Items.ENCHANTED_BOOK, 1, 0);
@@ -163,8 +163,9 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 	}
 
 	public List<EnchantmentData> getEnchantmentsForStack(ItemStack stack) {
-		if(enchants == null)
+		if(enchants == null) {
 			enchants = EnchantmentHelper.buildEnchantmentList(getWorld().rand, stack, getMaxPower(), false);
+		}
 		return enchants;
 	}
 
@@ -187,8 +188,9 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 				}
 			}
 		}
-		if(l > maxEnchantmentLevel)
+		if(l > maxEnchantmentLevel) {
 			l = maxEnchantmentLevel;
+		}
 		return l;
 	}
 

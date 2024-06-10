@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
 import DummyCore.Client.GuiCommon;
-import DummyCore.Client.MainMenuRegistry;
 import DummyCore.Utils.DummyData;
 import DummyCore.Utils.DummyPacketHandler;
 import DummyCore.Utils.DummyPacketIMSG;
@@ -46,7 +45,6 @@ import essentialcraft.client.gui.GuiMagicalRepairer;
 import essentialcraft.client.gui.GuiMagicalTeleporter;
 import essentialcraft.client.gui.GuiMagicianTable;
 import essentialcraft.client.gui.GuiMagmaticSmeltery;
-import essentialcraft.client.gui.GuiMainMenuEC;
 import essentialcraft.client.gui.GuiMatrixAbsorber;
 import essentialcraft.client.gui.GuiMithrilineFurnace;
 import essentialcraft.client.gui.GuiMonsterHarvester;
@@ -278,7 +276,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 
-	public static List<Pair<String, ISound>> playingMusic = new CopyOnWriteArrayList<Pair<String, ISound>>();
+	public static List<Pair<String, ISound>> playingMusic = new CopyOnWriteArrayList<>();
 
 	@Override
 	public void firstMovement(FMLPreInitializationEvent event) {
@@ -288,8 +286,8 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public boolean listHasKey(String key) {
-		for(int i = 0; i < playingMusic.size(); ++i) {
-			if(playingMusic.get(i).getLeft().equals(key)) {
+		for(Pair<String, ISound> element : playingMusic) {
+			if(element.getLeft().equals(key)) {
 				return true;
 			}
 		}
@@ -524,7 +522,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderInformation() {
-		MainMenuRegistry.registerNewGui(GuiMainMenuEC.class, "[EC] Magical Menu", "For EssentialCraft Fans ;)");
 		RenderingRegistry.registerEntityRenderingHandler(EntityMRUPresence.class, new RenderMRUPresence.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMRUArrow.class, new RenderMRUArrow.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySolarBeam.class, new RenderSolarBeam.Factory());
@@ -603,16 +600,21 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public Object getClientIcon(String str) {
-		if(str.equals("mru"))
+		if(str.equals("mru")) {
 			return mruIcon;
-		if(str.equals("chaosIcon"))
+		}
+		if(str.equals("chaosIcon")) {
 			return chaosIcon;
-		if(str.equals("frozenIcon"))
+		}
+		if(str.equals("frozenIcon")) {
 			return frozenIcon;
-		if(str.equals("mruParticleIcon"))
+		}
+		if(str.equals("mruParticleIcon")) {
 			return mruParticleIcon;
-		if(str.equals("particle_fogFX"))
+		}
+		if(str.equals("particle_fogFX")) {
 			return fogIcon;
+		}
 		if(str.startsWith("consSpellParticle")) {
 			int index = str.indexOf('_');
 			if(index != -1) {
@@ -625,13 +627,16 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void spawnParticle(String name, float x, float y, float z, double i, double j, double k) {
-		if(true && doParticle()) {
-			if(name.equals("mruFX"))
+		if(doParticle()) {
+			if(name.equals("mruFX")) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMRU(Minecraft.getMinecraft().world, x, y, z, i, j, k));
-			if(name.equals("cSpellFX"))
+			}
+			if(name.equals("cSpellFX")) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleCSpell(Minecraft.getMinecraft().world, x, y, z, i, j, k));
-			if(name.equals("fogFX"))
+			}
+			if(name.equals("fogFX")) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFog(Minecraft.getMinecraft().world, x, y, z, i, j, k));
+			}
 		}
 	}
 
@@ -670,10 +675,10 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public Object getRenderer(int index) {
-		if(index == 0)
+		if(index == 0) {
 			return skyedRenderer;
-		else
-			return cloudedRenderer;
+		}
+		return cloudedRenderer;
 	}
 
 	@Override
@@ -684,37 +689,43 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void ItemFX(double... ds) {
 		if(true && doParticle()) {
-			if(ds.length == 6)
+			if(ds.length == 6) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleItem(Minecraft.getMinecraft().world, ds[0], ds[1], ds[2], 1, 0, 1, ds[3], ds[4], ds[5]));
+			}
 		}
 	}
 
 	@Override
 	public void FlameFX(double... ds) {
 		if(true && doParticle()) {
-			if(ds.length == 10)
+			if(ds.length == 10) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(
 						new ParticleColoredFlame(Minecraft.getMinecraft().world, ds[0], ds[1], ds[2], ds[3], ds[4], ds[5], ds[6], ds[7], ds[8], ds[9]));
+			}
 		}
 	}
 
 	@Override
 	public void SmokeFX(double... ds) {
 		if(true && doParticle()) {
-			if(ds.length == 7)
+			if(ds.length == 7) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleSmokeEC(Minecraft.getMinecraft().world, ds[0], ds[1], ds[2], ds[3], ds[4], ds[5], (float)ds[6]));
-			if(ds.length == 10)
+			}
+			if(ds.length == 10) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleSmokeEC(Minecraft.getMinecraft().world, ds[0], ds[1], ds[2], ds[3], ds[4], ds[5], (float)ds[6], ds[7], ds[8], ds[9]));
+			}
 		}
 	}
 
 	@Override
 	public void MRUFX(double... ds) {
 		if(true && doParticle()) {
-			if(ds.length == 6)
+			if(ds.length == 6) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMRU(Minecraft.getMinecraft().world, ds[0], ds[1], ds[2], ds[3], ds[4], ds[5]));
-			if(ds.length == 9)
+			}
+			if(ds.length == 9) {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMRU(Minecraft.getMinecraft().world, ds[0], ds[1], ds[2], ds[3], ds[4], ds[5], ds[6], ds[7], ds[8]));
+			}
 		}
 	}
 
@@ -766,14 +777,17 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	private boolean doParticle() {
-		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 			return false;
+		}
 
 		float chance = 1F;
-		if(Minecraft.getMinecraft().gameSettings.particleSetting == 1)
+		if(Minecraft.getMinecraft().gameSettings.particleSetting == 1) {
 			chance = 0.6F;
-		else if(Minecraft.getMinecraft().gameSettings.particleSetting == 2)
+		}
+		else if(Minecraft.getMinecraft().gameSettings.particleSetting == 2) {
 			chance = 0.2F;
+		}
 
 		return chance == 1F || Math.random() < chance;
 	}

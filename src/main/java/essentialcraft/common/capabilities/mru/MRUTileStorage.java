@@ -24,7 +24,7 @@ public class MRUTileStorage extends MRUStorage implements IWorldUpdatable<ItemSt
 	}
 
 	public int getRange() {
-		return this.range;
+		return range;
 	}
 
 	public MRUTileStorage setRange(int range) {
@@ -34,8 +34,8 @@ public class MRUTileStorage extends MRUStorage implements IWorldUpdatable<ItemSt
 
 	@Override
 	public void update(BlockPos pos, World world, ItemStack boundGem) {
-		this.spawnMRUParticles(pos, world, boundGem);
-		this.mruIn(pos, world, boundGem);
+		spawnMRUParticles(pos, world, boundGem);
+		mruIn(pos, world, boundGem);
 	}
 
 	public void mruIn(BlockPos pos, World world, ItemStack boundGem) {
@@ -45,12 +45,13 @@ public class MRUTileStorage extends MRUStorage implements IWorldUpdatable<ItemSt
 				BlockPos o1 = new BlockPos(o[0], o[1], o[2]);
 				if(!pos.equals(o1) && world.getTileEntity(o1) != null && world.getTileEntity(o1).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 					IMRUHandler other = world.getTileEntity(o1).getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
-					if(this.getMRU() < this.getMaxMRU()) {
-						int req = this.getMaxMRU() - this.getMRU();
+					if(getMRU() < getMaxMRU()) {
+						int req = getMaxMRU() - getMRU();
 						int extracted = other.extractMRU(req, true);
-						if(extracted+this.getMRU() > 0)
-							this.setBalance((other.getBalance()*extracted+this.getBalance()*this.getMRU())/(extracted+this.getMRU()));
-						this.addMRU(extracted, true);
+						if(extracted+getMRU() > 0) {
+							setBalance((other.getBalance()*extracted+getBalance()*getMRU())/(extracted+getMRU()));
+						}
+						addMRU(extracted, true);
 					}
 				}
 			}
@@ -91,16 +92,18 @@ public class MRUTileStorage extends MRUStorage implements IWorldUpdatable<ItemSt
 			if(balance!=1.0F) {
 				if(balance<1.0F) {
 					float diff = balance;
-					if(diff < 0.01F)
+					if(diff < 0.01F) {
 						diff = 0.0F;
+					}
 					colorRRender = colorRNormal*diff + colorRFrozen*(1.0F-diff);
 					colorGRender = colorGNormal*diff + colorGFrozen*(1.0F-diff);
 					colorBRender = colorBNormal*diff + colorBFrozen*(1.0F-diff);
 				}
 				if(balance>1.0F) {
 					float diff = 2.0F-balance;
-					if(diff < 0.01F)
+					if(diff < 0.01F) {
 						diff = 0.0F;
+					}
 					colorRRender = colorRNormal*diff + colorRChaos*(1.0F-diff);
 					colorGRender = colorGNormal*diff + colorGChaos*(1.0F-diff);
 					colorBRender = colorBNormal*diff + colorBChaos*(1.0F-diff);
@@ -108,20 +111,24 @@ public class MRUTileStorage extends MRUStorage implements IWorldUpdatable<ItemSt
 			}
 			//will change
 			if(world.getTileEntity(posThis) instanceof TileRayTower) {
-				if(world.getTileEntity(posOther) instanceof TileRayTower)
+				if(world.getTileEntity(posOther) instanceof TileRayTower) {
 					EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+1.85D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()+0.25D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
-				else if(world.getTileEntity(posOther) instanceof TileMRUReactor)
+				}
+				else if(world.getTileEntity(posOther) instanceof TileMRUReactor) {
 					EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+1.1D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()+0.8D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
-				else
+				}
+				else {
 					EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+0.5D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()+1.5D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
+				}
+			}
+			else if(world.getTileEntity(posOther) instanceof TileRayTower) {
+				EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+1.85D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()-1.5D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
+			}
+			else if(world.getTileEntity(posOther) instanceof TileMRUReactor) {
+				EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+1.1D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()-0.6D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
 			}
 			else {
-				if(world.getTileEntity(posOther) instanceof TileRayTower)
-					EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+1.85D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()-1.5D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
-				else if(world.getTileEntity(posOther) instanceof TileMRUReactor)
-					EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+1.1D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY()-0.6D, posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
-				else
-					EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+0.5D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY(), posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
+				EssentialCraftCore.proxy.MRUFX(posOther.getX()+0.5D, posOther.getY()+0.5D, posOther.getZ()+0.5D, posThis.getX()-posOther.getX(), posThis.getY()-posOther.getY(), posThis.getZ()-posOther.getZ(),colorRRender,colorGRender,colorBRender);
 			}
 		}
 	}

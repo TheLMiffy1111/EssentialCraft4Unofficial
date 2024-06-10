@@ -35,7 +35,7 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 
 	public BlockHoannaTallGrass() {
 		super(Material.VINE);
-		this.setSoundType(SoundType.PLANT);
+		setSoundType(SoundType.PLANT);
 	}
 
 	@Override
@@ -47,8 +47,9 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
 		Block b = state.getBlock();
-		if(b != null && b instanceof BlockHoannaTallGrass)
+		if(b != null && b instanceof BlockHoannaTallGrass) {
 			return true;
+		}
 		return false;
 	}
 
@@ -84,11 +85,14 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	@Override
 	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState meta, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		if(world instanceof World ? ((World)world).rand.nextInt(8) != 0 : RANDOM.nextInt(8) != 0)
+		ArrayList<ItemStack> ret = new ArrayList<>();
+		if(world instanceof World ? ((World)world).rand.nextInt(8) != 0 : RANDOM.nextInt(8) != 0) {
 			return ret;
+		}
 		ItemStack seed = ForgeHooks.getGrassSeed(world instanceof World ? ((World)world).rand : RANDOM, fortune);
-		if(!seed.isEmpty()) ret.add(seed);
+		if(!seed.isEmpty()) {
+			ret.add(seed);
+		}
 		return ret;
 	}
 
@@ -99,7 +103,7 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> ret = new ArrayList<>();
 		ret.add(new ItemStack(this, 1, getMetaFromState(world.getBlockState(pos))));
 		return ret;
 	}

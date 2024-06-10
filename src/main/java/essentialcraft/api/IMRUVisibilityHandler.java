@@ -7,5 +7,5 @@ import net.minecraft.item.ItemStack;
  */
 public interface IMRUVisibilityHandler {
 
-	public boolean canSeeMRU(ItemStack stk);
+	public boolean canSeeMRU(ItemStack stack);
 }

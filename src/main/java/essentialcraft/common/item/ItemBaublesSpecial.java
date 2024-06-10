@@ -149,26 +149,29 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 		if(itemstack.getItemDamage() == 17 && player instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer)player;
 			p.addExhaustion(0.01F);
-			if(p.ticksExisted % 10 == 0)
+			if(p.ticksExisted % 10 == 0) {
 				ApiCore.getPlayerData((EntityPlayer)player).modifyUBMRU(ApiCore.getPlayerData((EntityPlayer)player).getPlayerUBMRU()+1);
+			}
 		}
 		if(itemstack.getItemDamage() == 18 && player instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer)player;
-			if(p.getEntityWorld().provider != null && p.getEntityWorld().provider.getDimension()!=Config.dimensionID)
+			if(p.getEntityWorld().provider != null && p.getEntityWorld().provider.getDimension()!=Config.dimensionID) {
 				RadiationManager.increasePlayerRadiation(p, -3);
+			}
 		}
 		if(itemstack.getItemDamage() == 19 && player instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer)player;
-			if(p.getEntityWorld().provider != null && p.getEntityWorld().provider.getDimension()==Config.dimensionID && !p.capabilities.isCreativeMode)
+			if(p.getEntityWorld().provider != null && p.getEntityWorld().provider.getDimension()==Config.dimensionID && !p.capabilities.isCreativeMode) {
 				RadiationManager.increasePlayerRadiation(p, 1);
+			}
 		}
 		if(itemstack.getItemDamage() == 7 && player instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer)player;
 			PotionEffect[] peArray = new PotionEffect[p.getActivePotionEffects().size()];
 			peArray = p.getActivePotionEffects().toArray(peArray);
-			for(int i = 0; i < peArray.length; ++i) {
-				PotionEffect effect = p.getActivePotionEffect(peArray[i].getPotion());
-				if(isPotionBad(peArray[i].getPotion())) {
+			for(PotionEffect element : peArray) {
+				PotionEffect effect = p.getActivePotionEffect(element.getPotion());
+				if(isPotionBad(element.getPotion())) {
 					try {
 						Class<PotionEffect> cz = PotionEffect.class;
 						Field duration = cz.getDeclaredFields()[1];
@@ -192,23 +195,26 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 
 	@Override
 	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(this.isInCreativeTab(p_150895_2_))
+		if(isInCreativeTab(p_150895_2_)) {
 			for(int i = 0; i < names.length-1; ++i) {
 				p_150895_3_.add(new ItemStack(this, 1, i));
 			}
+		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName() + "." + names[Math.min(stack.getItemDamage(), names.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey() + "." + names[Math.min(stack.getItemDamage(), names.length-1)];
 	}
 
 	@Override
 	public float getModifiedValue(float original, ItemStack mod, Random rng, EntityPlayer p) {
-		if(mod.getItemDamage() == 31)
+		if(mod.getItemDamage() == 31) {
 			return original*2;
-		if(mod.getItemDamage() == 29)
+		}
+		if(mod.getItemDamage() == 29) {
 			return original/2;
+		}
 		if(mod.getItemDamage() == 20) {
 			float divide = original/100*25;
 			original -= divide;
@@ -218,22 +224,23 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 			double z = p.posZ;
 
 			List<EntityMob> mobs = p.getEntityWorld().getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(x-0.5D, y-0.5D, z-0.5D, x+0.5D, y+0.5D, z+0.5D).grow(6, 3, 6));
-			for(int i = 0; i < mobs.size(); ++i) {
-				EntityMob mob = mobs.get(i);
+			for(EntityMob mob : mobs) {
 				mob.attackEntityFrom(DamageSource.causePlayerDamage(p), 3);
 			}
 
 			return original;
 		}
-		if(mod.getItemDamage() == 1)
+		if(mod.getItemDamage() == 1) {
 			return original + rng.nextInt(100);
+		}
 		if(mod.getItemDamage() == 2) {
 			float divide10 = original/10;
 			original -= divide10;
 			EntityXPOrb orb = new EntityXPOrb(p.getEntityWorld(), p.posX+MathUtils.randomFloat(rng), p.posY+MathUtils.randomFloat(rng), p.posZ+MathUtils.randomFloat(rng), MathHelper.floor(divide10/4));
 			orb.delayBeforeCanPickup = 100;
-			if(!p.getEntityWorld().isRemote)
+			if(!p.getEntityWorld().isRemote) {
 				p.getEntityWorld().spawnEntity(orb);
+			}
 
 			return original;
 		}
@@ -245,8 +252,9 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 
 			return original;
 		}
-		if(mod.getItemDamage() == 7)
+		if(mod.getItemDamage() == 7) {
 			return 0;
+		}
 		return original;
 	}
 
@@ -254,8 +262,9 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 	@Override
 	public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag par4) {
 		super.addInformation(stack, world, list, par4);
-		if(stack.getItemDamage() == 0)
+		if(stack.getItemDamage() == 0) {
 			list.add(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() + "/" + stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMaxMRU() + " MRU");
+		}
 
 		list.addAll(buildHelpList(I18n.translateToLocal("essentialcraft.txt.help.baubles."+stack.getItemDamage())));
 	}
@@ -270,19 +279,21 @@ public class ItemBaublesSpecial extends Item implements IBauble, IUBMRUGainModif
 		if(stk.getItemDamage() == 5) {
 			if(!p.getEntityWorld().isRemote && p.getEntityWorld().rand.nextFloat() <= 0.15F) {
 				ItemStack windKeeper = new ItemStack(ItemsCore.windKeeper);
-				if(!p.inventory.addItemStackToInventory(windKeeper))
+				if(!p.inventory.addItemStackToInventory(windKeeper)) {
 					p.dropItem(windKeeper, true);
+				}
 				p.sendMessage(new TextComponentString("The wind catcher catches some wind...").setStyle(new Style().setColor(TextFormatting.DARK_RED).setItalic(true)));
 			}
 			return -0.1F;
 		}
-		if(stk.getItemDamage() == 6)
+		if(stk.getItemDamage() == 6) {
 			return 0.3F;
+		}
 		return 0;
 	}
 
 	public List<String> buildHelpList(String s) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		String addedString = "";
 		while(s.indexOf("|") != -1) {
 			int index = s.indexOf("|");

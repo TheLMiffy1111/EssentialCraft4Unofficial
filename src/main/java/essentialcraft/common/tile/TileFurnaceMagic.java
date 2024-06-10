@@ -50,14 +50,15 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			ItemStack ore = getStackInSlot(1);
 			if(!ore.isEmpty()) {
 				int[] oreIds = OreDictionary.getOreIDs(ore);
 
 				String oreName = "Unknown";
-				if(oreIds.length > 0)
+				if(oreIds.length > 0) {
 					oreName = OreDictionary.getOreName(oreIds[0]);
+				}
 				int metadata = -1;
 				for(int i = 0; i < OreSmeltingRecipe.RECIPES.size(); ++i) {
 					OreSmeltingRecipe oreColor = OreSmeltingRecipe.RECIPES.get(i);
@@ -73,8 +74,9 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 							getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5D+MathUtils.randomDouble(getWorld().rand)/2.2D, pos.getY(), pos.getZ()+0.5D+MathUtils.randomDouble(getWorld().rand)/2.2D, 0, -0.1D, 0);
 							++progressLevel;
 
-							if(generatesCorruption)
+							if(generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, genCorruption);
+							}
 
 							if(progressLevel >= time) {
 								decrStackSize(1, 1);
@@ -92,8 +94,9 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 							getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)/2.2D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)/2.2D, 0, -0.1D, 0);
 							++progressLevel;
 
-							if(generatesCorruption)
+							if(generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+							}
 
 							if(progressLevel >= time) {
 								decrStackSize(1, 1);
@@ -101,8 +104,9 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 
 								ItemStack is = getStackInSlot(2);
 								is.grow(suggestedStackSize);
-								if(is.getCount() > is.getMaxStackSize())
+								if(is.getCount() > is.getMaxStackSize()) {
 									is.setCount(is.getMaxStackSize());
+								}
 								setInventorySlotContents(2, is);
 								progressLevel = 0;
 								syncTick = 0;
@@ -110,11 +114,13 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 						}
 					}
 				}
-				else
+				else {
 					progressLevel = 0;
+				}
 			}
-			else
+			else {
 				progressLevel = 0;
+			}
 
 			ItemStack alloy = getStackInSlot(1);
 			if(alloy.getItem() == ItemsCore.magicalAlloy) {
@@ -122,10 +128,12 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 				String oreName = oreColor.oreName;
 				String outputName = oreColor.outputName;
 				String suggestedIngotName;
-				if(outputName.isEmpty())
+				if(outputName.isEmpty()) {
 					suggestedIngotName = "ingot"+oreName.substring(3);
-				else
+				}
+				else {
 					suggestedIngotName = outputName;
+				}
 				List<ItemStack> oreLst = OreDictionary.getOres(suggestedIngotName);
 
 				if(oreLst != null && !oreLst.isEmpty()) {
@@ -136,8 +144,9 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 							getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5D+MathUtils.randomDouble(getWorld().rand)/2.2D, pos.getY(), pos.getZ()+0.5D+MathUtils.randomDouble(getWorld().rand)/2.2D, 0, -0.1D, 0);
 							++smeltingLevel;
 
-							if(!getWorld().isRemote && generatesCorruption)
+							if(!getWorld().isRemote && generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+							}
 
 							if(smeltingLevel >= time) {
 								decrStackSize(1, 1);
@@ -154,8 +163,9 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 							mruStorage.extractMRU(usage, true);
 							getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)/2.2D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)/2.2D, 0, -0.1D, 0);
 							++smeltingLevel;
-							if(!getWorld().isRemote && generatesCorruption)
+							if(!getWorld().isRemote && generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, genCorruption);
+							}
 							if(smeltingLevel >= time) {
 								decrStackSize(1, 1);
 								int suggestedStackSize = 2;
@@ -168,11 +178,13 @@ public class TileFurnaceMagic extends TileMRUGeneric {
 						}
 					}
 				}
-				else
+				else {
 					smeltingLevel = 0;
+				}
 			}
-			else
+			else {
 				smeltingLevel = 0;
+			}
 		}
 	}
 

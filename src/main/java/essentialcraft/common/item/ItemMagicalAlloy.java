@@ -26,13 +26,14 @@ public class ItemMagicalAlloy extends Item implements IItemColor, IModelRegister
 
 	@Override
 	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(this.isInCreativeTab(p_150895_2_))
+		if(isInCreativeTab(p_150895_2_)) {
 			for(OreSmeltingRecipe recipe : OreSmeltingRecipe.RECIPES) {
 				ItemStack toAdd = new ItemStack(this, 1, 0);
 				NBTTagCompound tag = MiscUtils.getStackTag(toAdd);
 				tag.setString("ore", recipe.oreName);
 				p_150895_3_.add(toAdd);
 			}
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -21,7 +21,7 @@ public class RenderMRUArrow extends Render<EntityMRUArrow> {
 
 	@Override
 	public void doRender(EntityMRUArrow entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		this.bindEntityTexture(entity);
+		bindEntityTexture(entity);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
 		GlStateManager.disableLighting();
@@ -30,16 +30,6 @@ public class RenderMRUArrow extends Render<EntityMRUArrow> {
 		GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferbuilder = tessellator.getBuffer();
-		int i = 0;
-		float f = 0.0F;
-		float f1 = 0.5F;
-		float f2 = 0.0F;
-		float f3 = 0.15625F;
-		float f4 = 0.0F;
-		float f5 = 0.15625F;
-		float f6 = 0.15625F;
-		float f7 = 0.3125F;
-		float f8 = 0.05625F;
 		GlStateManager.enableRescaleNormal();
 		float f9 = entity.arrowShake - partialTicks;
 
@@ -52,9 +42,9 @@ public class RenderMRUArrow extends Render<EntityMRUArrow> {
 		GlStateManager.scale(0.05625F, 0.05625F, 0.05625F);
 		GlStateManager.translate(-4.0F, 0.0F, 0.0F);
 
-		if(this.renderOutlines) {
+		if(renderOutlines) {
 			GlStateManager.enableColorMaterial();
-			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+			GlStateManager.enableOutlineMode(getTeamColor(entity));
 		}
 
 		GlStateManager.glNormal3f(0.05625F, 0.0F, 0.0F);
@@ -83,7 +73,7 @@ public class RenderMRUArrow extends Render<EntityMRUArrow> {
 			tessellator.draw();
 		}
 
-		if(this.renderOutlines) {
+		if(renderOutlines) {
 			GlStateManager.disableOutlineMode();
 			GlStateManager.disableColorMaterial();
 		}

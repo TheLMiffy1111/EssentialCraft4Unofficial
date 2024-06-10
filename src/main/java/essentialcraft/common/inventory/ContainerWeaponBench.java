@@ -112,6 +112,6 @@ public class ContainerWeaponBench extends ContainerInventory {
 			addSlotToContainer(new SlotGeneric(inv, 18, 120, 57));
 			sizeInventory = 19;
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

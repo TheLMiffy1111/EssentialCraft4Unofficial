@@ -26,6 +26,6 @@ public class ContainerCrystalExtractor extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 10, 80, 41));
 		addSlotToContainer(new SlotGeneric(inv, 11, 98, 41));
 		addSlotToContainer(new SlotGeneric(inv, 12, 116, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

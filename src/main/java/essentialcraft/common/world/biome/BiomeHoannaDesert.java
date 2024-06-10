@@ -31,14 +31,14 @@ public class BiomeHoannaDesert extends Biome {
 
 	public BiomeHoannaDesert(BiomeProperties par1) {
 		super(par1);
-		this.topBlock = Blocks.SAND.getDefaultState();
-		this.fillerBlock = Blocks.SAND.getDefaultState();
-		this.decorator.treesPerChunk = -999;
-		this.decorator.deadBushPerChunk = 2;
-		this.decorator.reedsPerChunk = 50;
-		this.decorator.cactiPerChunk = 10;
-		this.decorator.cactusGen = new WorldGenDreadCacti();
-		this.spawnableCreatureList.clear();
+		topBlock = Blocks.SAND.getDefaultState();
+		fillerBlock = Blocks.SAND.getDefaultState();
+		decorator.treesPerChunk = -999;
+		decorator.deadBushPerChunk = 2;
+		decorator.reedsPerChunk = 50;
+		decorator.cactiPerChunk = 10;
+		decorator.cactusGen = new WorldGenDreadCacti();
+		spawnableCreatureList.clear();
 	}
 
 	@Override
@@ -68,6 +68,6 @@ public class BiomeHoannaDesert extends Biome {
 
 	@Override
 	public void decorate(World world, Random rand, BlockPos pos) {
-		this.decorator.decorate(world, rand, this, pos);
+		decorator.decorate(world, rand, this, pos);
 	}
 }

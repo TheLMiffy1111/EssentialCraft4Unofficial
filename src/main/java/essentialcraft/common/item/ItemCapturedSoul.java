@@ -23,7 +23,7 @@ public class ItemCapturedSoul extends Item implements IModelRegisterer {
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> lst) {
-		if(this.isInCreativeTab(tab)) {
+		if(isInCreativeTab(tab)) {
 			for(EntityEntry e : DemonTrade.ALL_MOBS) {
 				ItemStack stack = new ItemStack(this, 1, 0);
 				MiscUtils.getStackTag(stack).setString("entity", e.getRegistryName().toString());

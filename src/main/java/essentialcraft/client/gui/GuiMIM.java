@@ -15,27 +15,23 @@ public class GuiMIM extends GuiCommon{
 	public GuiMIM(Container c, TileEntity tile) {
 		super(c,tile);
 		guiGenLocation = new ResourceLocation("essentialcraft","textures/gui/mim.png");
-		this.elementList.add(new GuiMRUStorage(4, 72, tile));
-		this.xSize = 196;
-		this.ySize = 256;
+		elementList.add(new GuiMRUStorage(4, 72, tile));
+		xSize = 196;
+		ySize = 256;
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2) {
 		GlStateManager.color(1, 1, 1);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.mc.renderEngine.bindTexture(guiGenLocation);
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		for(int i = 0; i < this.inventorySlots.inventorySlots.size(); ++i)
-		{
-			Slot slt = this.inventorySlots.inventorySlots.get(i);
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		mc.renderEngine.bindTexture(guiGenLocation);
+		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		for(Slot slt : inventorySlots.inventorySlots) {
 			renderSlot(slt);
 			GlStateManager.color(1, 1, 1);
 		}
-		for(int i = 0; i < this.elementList.size(); ++i)
-		{
-			GuiElement element = elementList.get(i);
+		for(GuiElement element : elementList) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(element.getElementTexture());
 			element.draw(k+element.getX(),l+element.getY(),i1,i2);
 			GlStateManager.color(1, 1, 1);

@@ -31,9 +31,7 @@ public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHo
 		List<EntityLivingBase> lst = tile.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(tile.getPos().getX()-32, tile.getPos().getY()-32, tile.getPos().getZ()-32, tile.getPos().getX()+33, tile.getPos().getY()+33, tile.getPos().getZ()+33));
 		if(!lst.isEmpty() && tile.getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null).getMRU() > lst.size())
 		{
-			for(int i = 0; i < lst.size(); ++i)
-			{
-				EntityLivingBase e = lst.get(i);
+			for(EntityLivingBase e : lst) {
 				if(!(e instanceof EntityPlayer))
 				{
 					Coord3D tilePos = new Coord3D(tile.getPos().getX()+0.5D,tile.getPos().getY()+0.5D,tile.getPos().getZ()+0.5D);
@@ -98,8 +96,9 @@ public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHo
 
 	@Override
 	public void render(TileMonsterHolder tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 
 	@Override

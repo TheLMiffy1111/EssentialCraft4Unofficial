@@ -21,8 +21,8 @@ public class ItemMagnetizingStaff extends ItemMRUGeneric implements IModelRegist
 
 	public ItemMagnetizingStaff() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override
@@ -40,20 +40,26 @@ public class ItemMagnetizingStaff extends ItemMRUGeneric implements IModelRegist
 			List<EntityItem> items = player.getEntityWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(player.posX-0.5D, player.posY, player.posZ-0.5D, player.posX+0.5D, player.posY+1, player.posZ+0.5D).grow(12D, 6D, 12D));
 			for(EntityItem item : items)
 			{
-				if(player.posX < item.posX)
+				if(player.posX < item.posX) {
 					item.motionX -= 0.1F;
-				else
+				}
+				else {
 					item.motionX += 0.1F;
+				}
 
-				if(player.posY < item.posY)
+				if(player.posY < item.posY) {
 					item.motionY -= 0.1F;
-				else
+				}
+				else {
 					item.motionY += 0.5F;
+				}
 
-				if(player.posZ < item.posZ)
+				if(player.posZ < item.posZ) {
 					item.motionZ -= 0.1F;
-				else
+				}
+				else {
 					item.motionZ += 0.1F;
+				}
 			}
 
 			//Split//
@@ -61,20 +67,26 @@ public class ItemMagnetizingStaff extends ItemMRUGeneric implements IModelRegist
 			List<EntityXPOrb> orbs = player.getEntityWorld().getEntitiesWithinAABB(EntityXPOrb.class, new AxisAlignedBB(player.posX-0.5D, player.posY, player.posZ-0.5D, player.posX+0.5D, player.posY+1, player.posZ+0.5D).expand(12D, 6D, 12D));
 			for(EntityXPOrb item : orbs)
 			{
-				if(player.posX < item.posX)
+				if(player.posX < item.posX) {
 					item.motionX -= 0.1F;
-				else
+				}
+				else {
 					item.motionX += 0.1F;
+				}
 
-				if(player.posY < item.posY)
+				if(player.posY < item.posY) {
 					item.motionY -= 0.1F;
-				else
+				}
+				else {
 					item.motionY += 0.5F;
+				}
 
-				if(player.posZ < item.posZ)
+				if(player.posZ < item.posZ) {
 					item.motionZ -= 0.1F;
-				else
+				}
+				else {
 					item.motionZ += 0.1F;
+				}
 			}
 		}
 	}

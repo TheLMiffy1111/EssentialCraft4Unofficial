@@ -30,7 +30,7 @@ public class BlockRayTower extends BlockContainer implements IModelRegisterer {
 
 	protected BlockRayTower() {
 		super(Material.IRON);
-		setDefaultState(this.blockState.getBaseState().withProperty(LAYER, EnumLayer.BOTTOM));
+		setDefaultState(blockState.getBaseState().withProperty(LAYER, EnumLayer.BOTTOM));
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class BlockRayTower extends BlockContainer implements IModelRegisterer {
 		{
 			if(s.getValue(LAYER) == EnumLayer.BOTTOM)
 			{
-				w.setBlockState(p.up(), this.getDefaultState().withProperty(LAYER, EnumLayer.TOP),3);
+				w.setBlockState(p.up(), getDefaultState().withProperty(LAYER, EnumLayer.TOP),3);
 			}
 		}
 	}
@@ -65,7 +65,7 @@ public class BlockRayTower extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}

@@ -29,29 +29,29 @@ public class ChunkGeneratorHoanna extends ChunkGeneratorOverworld {
 	public ChunkGeneratorHoanna(World world, long seed, boolean mapFeaturesEnabledIn, String generatorOptions) {
 		super(world, seed, false, generatorOptions);
 		instance = this;
-		this.rand = new Random(seed);
+		rand = new Random(seed);
 		this.world = world;
 	}
 
 	@Override
 	public void populate(int chunkX, int chunkZ) {
 		instance = this;
-		this.town.generateStructure(this.world, this.rand, new ChunkPos(chunkX, chunkZ));
-		this.shafts.generateStructure(this.world, this.rand, new ChunkPos(chunkX, chunkZ));
-		this.catacombs.generateStructure(this.world, this.rand, new ChunkPos(chunkX, chunkZ));
+		town.generateStructure(world, rand, new ChunkPos(chunkX, chunkZ));
+		shafts.generateStructure(world, rand, new ChunkPos(chunkX, chunkZ));
+		catacombs.generateStructure(world, rand, new ChunkPos(chunkX, chunkZ));
 		super.populate(chunkX, chunkZ);
 	}
 
 	@Override
 	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
 		if(structureName.equals("Town")) {
-			return this.town.isInsideStructure(pos);
+			return town.isInsideStructure(pos);
 		}
 		if(structureName.equals("ModernShafts")) {
-			return this.shafts.isInsideStructure(pos);
+			return shafts.isInsideStructure(pos);
 		}
 		if(structureName.equals("OldCatacombs")) {
-			return this.catacombs.isInsideStructure(pos);
+			return catacombs.isInsideStructure(pos);
 		}
 		return super.isInsideStructure(worldIn, structureName, pos);
 	}
@@ -60,18 +60,18 @@ public class ChunkGeneratorHoanna extends ChunkGeneratorOverworld {
 	public Chunk generateChunk(int chunkX, int chunkZ) {
 		instance = this;
 		ChunkPrimer chunkprimer = new ChunkPrimer();
-		this.town.generate(this.world, chunkX, chunkZ, chunkprimer);
-		this.shafts.generate(this.world, chunkX, chunkZ, chunkprimer);
-		this.catacombs.generate(this.world, chunkX, chunkZ, chunkprimer);
+		town.generate(world, chunkX, chunkZ, chunkprimer);
+		shafts.generate(world, chunkX, chunkZ, chunkprimer);
+		catacombs.generate(world, chunkX, chunkZ, chunkprimer);
 		return super.generateChunk(chunkX, chunkZ);
 	}
 
 	@Override
 	public void recreateStructures(Chunk chunk, int chunkX, int chunkZ) {
 		ChunkPrimer chunkprimer = new ChunkPrimer();
-		this.town.generate(this.world, chunkX, chunkZ, chunkprimer);
-		this.shafts.generate(this.world, chunkX, chunkZ, chunkprimer);
-		this.catacombs.generate(this.world, chunkX, chunkZ, chunkprimer);
+		town.generate(world, chunkX, chunkZ, chunkprimer);
+		shafts.generate(world, chunkX, chunkZ, chunkprimer);
+		catacombs.generate(world, chunkX, chunkZ, chunkprimer);
 		super.recreateStructures(chunk, chunkX, chunkZ);
 	}
 

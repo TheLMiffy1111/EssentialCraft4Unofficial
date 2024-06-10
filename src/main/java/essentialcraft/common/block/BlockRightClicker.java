@@ -45,9 +45,9 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 
 	public static final PropertyEnum<ActivatorType> TYPE = PropertyEnum.<ActivatorType>create("type", ActivatorType.class);
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	public static final UnlistedPropertyObject<IBlockState> STATE = new UnlistedPropertyObject<IBlockState>("state", IBlockState.class);
-	public static final UnlistedPropertyObject<IBlockAccess> WORLD = new UnlistedPropertyObject<IBlockAccess>("world", IBlockAccess.class);
-	public static final UnlistedPropertyObject<BlockPos> POS = new UnlistedPropertyObject<BlockPos>("pos", BlockPos.class);
+	public static final UnlistedPropertyObject<IBlockState> STATE = new UnlistedPropertyObject<>("state", IBlockState.class);
+	public static final UnlistedPropertyObject<IBlockAccess> WORLD = new UnlistedPropertyObject<>("world", IBlockAccess.class);
+	public static final UnlistedPropertyObject<BlockPos> POS = new UnlistedPropertyObject<>("pos", BlockPos.class);
 
 	public BlockRightClicker() {
 		super(Material.ROCK);
@@ -100,8 +100,9 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 	public void onBlockPlacedBy(World w, BlockPos p, IBlockState s, EntityLivingBase placer, ItemStack p_149689_6_) {
 		int l = EnumFacing.getDirectionFromEntityLiving(p, placer).getIndex();
 		TileEntity tile = w.getTileEntity(p);
-		if(tile != null && tile instanceof TileRightClicker)
+		if(tile != null && tile instanceof TileRightClicker) {
 			((TileRightClicker)tile).rotation = l;
+		}
 	}
 
 	@Override
@@ -134,8 +135,9 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntity tile = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
-		if(tile != null && tile instanceof TileRightClicker)
+		if(tile != null && tile instanceof TileRightClicker) {
 			return state.withProperty(FACING, ((TileRightClicker)tile).getRotation());
+		}
 		return state;
 	}
 
@@ -143,8 +145,9 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		state = ((IExtendedBlockState)getActualState(state, world, pos)).withProperty(WORLD, world).withProperty(POS, pos);
 		TileEntity tile = world.getTileEntity(pos);
-		if(tile != null && tile instanceof TileRightClicker)
+		if(tile != null && tile instanceof TileRightClicker) {
 			return ((IExtendedBlockState)state).withProperty(STATE, ((TileRightClicker)tile).getState());
+		}
 		return state;
 	}
 
@@ -154,9 +157,10 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 		for(int i = 0; i < 6; i++) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:rightclicker", "facing=north,type=" + ActivatorType.fromIndex(i)));
 			for(int j = 0; j < 6; j++) {
-				if(j == 2)
+				if(j == 2) {
 					continue;
-				ModelBakery.registerItemVariants(Item.getItemFromBlock(this), new ModelResourceLocation("essentialcraft:rightclicker", "facing="+ EnumFacing.getFront(j).getName() +",type=" + ActivatorType.fromIndex(i)));
+				}
+				ModelBakery.registerItemVariants(Item.getItemFromBlock(this), new ModelResourceLocation("essentialcraft:rightclicker", "facing="+ EnumFacing.byIndex(j).getName() +",type=" + ActivatorType.fromIndex(i)));
 			}
 		}
 		ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(FACING, TYPE).build());

@@ -54,7 +54,7 @@ public class ItemBaublesResistance extends Item implements IBauble, IModelRegist
 		super.addInformation(stack, world, list, flag);
 		NBTTagCompound bTag = MiscUtils.getStackTag(stack);
 		if(bTag.hasKey("type")) {
-			ArrayList<Float> fltLst = new ArrayList<Float>();
+			new ArrayList<Float>();
 			list.add(TextFormatting.GOLD+"+"+(int)(bTag.getFloat("mrucr")*100)+"% "+TextFormatting.DARK_PURPLE+"to MRUCorruption resistance");
 			list.add(TextFormatting.GOLD+"+"+(int)(bTag.getFloat("mrurr")*100)+"% "+TextFormatting.DARK_PURPLE+"to MRURadiation resistance");
 			list.add(TextFormatting.GOLD+"-"+(int)(bTag.getFloat("car")*100)+"% "+TextFormatting.DARK_PURPLE+"to Corruption affection");
@@ -83,7 +83,7 @@ public class ItemBaublesResistance extends Item implements IBauble, IModelRegist
 	@Override
 	public void registerModels() {
 		ModelLoader.setCustomMeshDefinition(this, new MeshDefinitionBaublesWearable());
-		ArrayList<ModelResourceLocation> names = new ArrayList<ModelResourceLocation>();
+		ArrayList<ModelResourceLocation> names = new ArrayList<>();
 		for(int bottomInt = 0; bottomInt < 6; bottomInt++) {
 			for(int topInt = 0; topInt < 6; topInt++) {
 				names.add(new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=" + bottomInt + "," + "top=" + topInt));

@@ -24,14 +24,15 @@ public class TileCrystalController extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(!getWorld().isRemote && getWorld().rand.nextDouble() < chanceToUseMRU && mruStorage.getMRU() >= mruUsage) {
 				mruStorage.extractMRU(mruUsage, true);
 			}
 		}
 		spawnParticles();
-		if(!getWorld().isRemote && getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(!getWorld().isRemote && getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			mutateToElement();
+		}
 	}
 
 	public void spawnParticles() {
@@ -59,14 +60,18 @@ public class TileCrystalController extends TileMRUGeneric {
 
 	public TileElementalCrystal getCrystal() {
 		TileElementalCrystal t = null;
-		if(hasCrystalOnEast())
+		if(hasCrystalOnEast()) {
 			t = (TileElementalCrystal)getWorld().getTileEntity(pos.east());
-		if(hasCrystalOnWest())
+		}
+		if(hasCrystalOnWest()) {
 			t = (TileElementalCrystal)getWorld().getTileEntity(pos.west());
-		if(hasCrystalOnSouth())
+		}
+		if(hasCrystalOnSouth()) {
 			t = (TileElementalCrystal)getWorld().getTileEntity(pos.south());
-		if(hasCrystalOnNorth())
+		}
+		if(hasCrystalOnNorth()) {
 			t = (TileElementalCrystal)getWorld().getTileEntity(pos.north());
+		}
 		return t;
 	}
 

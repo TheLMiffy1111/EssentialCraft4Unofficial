@@ -33,8 +33,8 @@ public class TileDemonicPentacle extends TileEntity implements ITickable {
 
 	public boolean consumeEnderstarEnergy(int consumed) {
 		double aconsumed = 0;
-		for(int i = 0; i < coords.length; ++i) {
-			TileEntity tile = getWorld().getTileEntity(pos.add(coords[i]));
+		for(Vec3i coord : coords) {
+			TileEntity tile = getWorld().getTileEntity(pos.add(coord));
 			if(tile == null) {
 				continue;
 			}
@@ -52,8 +52,8 @@ public class TileDemonicPentacle extends TileEntity implements ITickable {
 		}
 
 		aconsumed = 0;
-		for(int i = 0; i < coords.length; ++i) {
-			TileEntity tile = getWorld().getTileEntity(pos.add(coords[i]));
+		for(Vec3i coord : coords) {
+			TileEntity tile = getWorld().getTileEntity(pos.add(coord));
 			if(tile == null) {
 				continue;
 			}
@@ -76,8 +76,8 @@ public class TileDemonicPentacle extends TileEntity implements ITickable {
 
 		double energy = 0;
 
-		for(int i = 0; i < coords.length; ++i) {
-			TileEntity tile = getWorld().getTileEntity(pos.add(coords[i]));
+		for(Vec3i coord : coords) {
+			TileEntity tile = getWorld().getTileEntity(pos.add(coord));
 			if(tile == null) {
 				continue;
 			}
@@ -115,8 +115,9 @@ public class TileDemonicPentacle extends TileEntity implements ITickable {
 
 		if(getWorld().isRemote && tier >= 0) {
 			int movement = (int)(getWorld().getWorldTime() % 60);
-			if(movement > 30)
+			if(movement > 30) {
 				movement = 60 - movement;
+			}
 			for(int i = 0; i < 4; ++i) {
 				if(getWorld().getTileEntity(pos.add(coords[i])) instanceof TileMithrilineCrystal) {
 					getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+coords[i].getX()+0.5D, pos.getY()+coords[i].getY()+movement/30D, pos.getZ()+coords[i].getZ()+0.5D, -1, 1, 0);
@@ -213,7 +214,8 @@ public class TileDemonicPentacle extends TileEntity implements ITickable {
 		BlockPos cp = pos.down();
 		tier = -1;
 
-		if(tier0Checker.test(w, cp))
+		if(tier0Checker.test(w, cp)) {
 			tier = 0;
+		}
 	}
 }

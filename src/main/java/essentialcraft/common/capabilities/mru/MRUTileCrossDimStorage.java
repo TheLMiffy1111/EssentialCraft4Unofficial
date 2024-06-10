@@ -25,11 +25,11 @@ public class MRUTileCrossDimStorage extends MRUTileStorage {
 			if(getDimension(boundGem) == world.provider.getDimension()) {
 				if(!pos.equals(o1) && world.getTileEntity(o1) != null && world.getTileEntity(o1).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 					IMRUHandler other = world.getTileEntity(o1).getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
-					if(this.getMRU() < this.getMaxMRU()) {
-						int req = this.getMaxMRU() - this.getMRU();
+					if(getMRU() < getMaxMRU()) {
+						int req = getMaxMRU() - getMRU();
 						int extracted = other.extractMRU(req, true);
-						this.setBalance((other.getBalance()*extracted+this.getBalance()*this.getMRU())/(extracted+this.getMRU()));
-						this.addMRU(extracted, true);
+						setBalance((other.getBalance()*extracted+getBalance()*getMRU())/(extracted+getMRU()));
+						addMRU(extracted, true);
 					}
 				}
 			}
@@ -37,11 +37,11 @@ public class MRUTileCrossDimStorage extends MRUTileStorage {
 				World worldOther = world.getMinecraftServer().getWorld(getDimension(boundGem));
 				if(worldOther != null && worldOther.getTileEntity(o1) != null && worldOther.getTileEntity(o1).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 					IMRUHandler other = worldOther.getTileEntity(o1).getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
-					if(this.getMRU() < this.getMaxMRU()) {
-						int req = this.getMaxMRU() - this.getMRU();
+					if(getMRU() < getMaxMRU()) {
+						int req = getMaxMRU() - getMRU();
 						int extracted = other.extractMRU(req, true);
-						this.setBalance((other.getBalance()*extracted+this.getBalance()*this.getMRU())/(extracted+this.getMRU()));
-						this.addMRU(extracted, true);
+						setBalance((other.getBalance()*extracted+getBalance()*getMRU())/(extracted+getMRU()));
+						addMRU(extracted, true);
 					}
 				}
 			}

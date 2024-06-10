@@ -62,8 +62,9 @@ public class PlayerTracker {
 					{
 						if(BaublesApi.getBaublesHandler(player).getStackInSlot(i).getItem() instanceof IWindResistHandler)
 						{
-							if(addBuff)
+							if(addBuff) {
 								addBuff = !((IWindResistHandler)BaublesApi.getBaublesHandler(player).getStackInSlot(i).getItem()).resistWind(player, BaublesApi.getBaublesHandler(player).getStackInSlot(i));
+							}
 						}
 					}
 				}
@@ -76,15 +77,17 @@ public class PlayerTracker {
 						{
 							if(player.inventory.armorInventory.get(i).getItem() instanceof IWindResistHandler)
 							{
-								if(addBuff)
+								if(addBuff) {
 									addBuff = !((IWindResistHandler)player.inventory.armorInventory.get(i).getItem()).resistWind(player, BaublesApi.getBaublesHandler(player).getStackInSlot(i));
+								}
 							}
 						}
 					}
 				}
 
-				if(addBuff)
+				if(addBuff) {
 					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST,100,12));
+				}
 				player.sendMessage(new TextComponentString("The wind pushes you upwards...").setStyle(new Style().setColor(TextFormatting.DARK_AQUA).setItalic(true)));
 
 				WindRelations.increasePlayerWindRelations(player, 1000);
@@ -124,8 +127,9 @@ public class PlayerTracker {
 			}
 			if(!chestplate.isEmpty() && chestplate.getItem() == ItemsCore.computer_chestplate)
 			{
-				if(event.getSource() != null && (event.getSource() == DamageSource.WITHER || event.getSource() == DamageSource.MAGIC || event.getSource() == DamageSource.STARVE))
+				if(event.getSource() != null && (event.getSource() == DamageSource.WITHER || event.getSource() == DamageSource.MAGIC || event.getSource() == DamageSource.STARVE)) {
 					event.setCanceled(true);
+				}
 				return;
 			}
 			ItemStack boots = player.inventory.armorInventory.get(0);

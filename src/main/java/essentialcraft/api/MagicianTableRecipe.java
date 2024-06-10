@@ -5,9 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class MagicianTableRecipe extends Impl<IRecipe> implements IRecipe {
+public class MagicianTableRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
 	public Ingredient[] requiredItems = {Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY};
 	public ItemStack result = ItemStack.EMPTY;
@@ -23,9 +23,9 @@ public class MagicianTableRecipe extends Impl<IRecipe> implements IRecipe {
 	}
 
 	public MagicianTableRecipe(MagicianTableRecipe recipeByResult) {
-		this.requiredItems = recipeByResult.requiredItems.clone();
-		this.result = recipeByResult.result.copy();
-		this.mruRequired = recipeByResult.mruRequired;
+		requiredItems = recipeByResult.requiredItems.clone();
+		result = recipeByResult.result.copy();
+		mruRequired = recipeByResult.mruRequired;
 	}
 
 	public boolean matches(ItemStack[] input) {
@@ -33,7 +33,7 @@ public class MagicianTableRecipe extends Impl<IRecipe> implements IRecipe {
 			return false;
 		}
 		for(int i = 0; i < 5; ++i) {
-			if(!this.requiredItems[i].apply(input[i])) {
+			if(!requiredItems[i].apply(input[i])) {
 				return false;
 			}
 		}
@@ -43,7 +43,7 @@ public class MagicianTableRecipe extends Impl<IRecipe> implements IRecipe {
 	@Override
 	public String toString() {
 		String retStr = super.toString();
-		for(int i = 0; i < this.requiredItems.length; ++i) {
+		for(int i = 0; i < requiredItems.length; ++i) {
 			retStr+="||item_"+i+":"+requiredItems[i];
 		}
 		retStr+="||output:"+result;
@@ -72,7 +72,7 @@ public class MagicianTableRecipe extends Impl<IRecipe> implements IRecipe {
 
 	@Override
 	public boolean canFit(int width, int height) {
-		return width*height>=5;
+		return width*height >= 5;
 	}
 
 	@Override

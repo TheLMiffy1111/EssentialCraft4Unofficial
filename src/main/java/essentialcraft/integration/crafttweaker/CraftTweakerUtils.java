@@ -28,17 +28,17 @@ public class CraftTweakerUtils {
 	}
 
 	public static UnformedItemStack toUnformedIS(IIngredient ingredient) {
-		if(ingredient == null)
+		if(ingredient == null) {
 			return null;
+		}
+		if(ingredient instanceof IOreDictEntry) {
+			return new UnformedItemStack(((IOreDictEntry)ingredient).getName());
+		}
+		else if(ingredient instanceof IItemStack) {
+			return new UnformedItemStack(CraftTweakerMC.getItemStack((IItemStack)ingredient));
+		}
 		else {
-			if(ingredient instanceof IOreDictEntry) {
-				return new UnformedItemStack(((IOreDictEntry)ingredient).getName());
-			}
-			else if(ingredient instanceof IItemStack) {
-				return new UnformedItemStack(CraftTweakerMC.getItemStack((IItemStack)ingredient));
-			}
-			else
-				return null;
+			return null;
 		}
 	}
 
@@ -50,7 +50,7 @@ public class CraftTweakerUtils {
 		if(ingredient instanceof IOreDictEntry) {
 			return IngredientUtils.getIngredient(((IOreDictEntry)ingredient).getName());
 		}
-		else if(ingredient instanceof IItemStack) {
+		if(ingredient instanceof IItemStack) {
 			ItemStack stack = CraftTweakerMC.getItemStack(ingredient);
 			if(stack.hasTagCompound()) {
 				return IngredientUtils.getIngredientNBT(stack);

@@ -15,6 +15,6 @@ public class ContainerHeatGenerator extends ContainerInventory {
 	public void setupSlots() {
 		addSlotToContainer(new SlotGeneric(inv, 0, 108, 41));
 		addSlotToContainer(new SlotFurnaceOutput(player, inv, 1, 144, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

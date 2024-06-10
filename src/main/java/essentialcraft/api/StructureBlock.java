@@ -7,17 +7,17 @@ public class StructureBlock {
 
 	public Block blk;
 	public int metadata;
-	public int x,y,z;
+	public int x, y, z;
 
-	public StructureBlock(Block b, int meta, int i, int j, int k) {
-		blk = b;
+	public StructureBlock(Block block, int meta, int x, int y, int z) {
+		blk = block;
 		metadata = meta;
-		x = i;
-		y = j;
-		z = k;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
-	public StructureBlock(Block b, int meta, BlockPos p) {
-		this(b,meta,p.getX(),p.getY(),p.getZ());
+	public StructureBlock(Block block, int meta, BlockPos pos) {
+		this(block, meta, pos.getX(), pos.getY(), pos.getZ());
 	}
 }

@@ -32,7 +32,7 @@ public class TileCorruptionCleaner extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(!getWorld().isRemote && getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(!getWorld().isRemote && getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(cleared == null) {
 				int offsetX = (int)(MathUtils.randomDouble(getWorld().rand)*maxRadius);
 				int offsetY = (int)(MathUtils.randomDouble(getWorld().rand)*maxRadius);
@@ -55,10 +55,12 @@ public class TileCorruptionCleaner extends TileMRUGeneric {
 					mruStorage.extractMRU(mruUsage, true);
 					if(clearTime <= 0) {
 						int metadata = getWorld().getBlockState(cleared).getValue(BlockCorruption.LEVEL);
-						if(metadata == 0 || removeBlock)
+						if(metadata == 0 || removeBlock) {
 							getWorld().setBlockToAir(cleared);
-						else
+						}
+						else {
 							getWorld().setBlockState(cleared, b.getStateFromMeta(metadata-1), 2);
+						}
 						cleared = null;
 					}
 				}

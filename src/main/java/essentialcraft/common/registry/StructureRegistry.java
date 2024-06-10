@@ -25,7 +25,7 @@ public class StructureRegistry {
 		StructureTownPieces.registerTownComponents();
 		StructureModernShaftPieces.registerShaftComponents();
 		StructureOldCatacombs.registerCatacombComponents();
-		List<Block> structureBlocks_mrucucc = new ArrayList<Block>();
+		List<Block> structureBlocks_mrucucc = new ArrayList<>();
 		structureBlocks_mrucucc.add(BlocksCore.fortifiedGlass);
 		structureBlocks_mrucucc.add(BlocksCore.magicPlating);
 		structureBlocks_mrucucc.add(BlocksCore.ecController);
@@ -49,7 +49,7 @@ public class StructureRegistry {
 		//structureBlocks_mrucucc.add(BlocksCore.fancyBlocks.get(7));
 		STRUCTURE_TO_BLOCKS_MAP.putAll(EnumStructureType.MRUCUEC, structureBlocks_mrucucc);
 
-		List<Block> structureBlocks_mrucoil = new ArrayList<Block>();
+		List<Block> structureBlocks_mrucoil = new ArrayList<>();
 		structureBlocks_mrucoil.add(BlocksCore.platingPale);
 		structureBlocks_mrucoil.add(BlocksCore.magicPlating);
 		structureBlocks_mrucoil.add(BlocksCore.voidStone);

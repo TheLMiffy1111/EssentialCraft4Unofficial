@@ -34,13 +34,13 @@ public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 
 	public ItemMRUMatrixProjection() {
 		super();
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName(stack)+"_"+names[Math.min(stack.getItemDamage(),names.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return super.getTranslationKey(stack)+"_"+names[Math.min(stack.getItemDamage(),names.length-1)];
 	}
 
 	@Override
@@ -72,11 +72,12 @@ public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 	@Override
 	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_)
 	{
-		if(this.isInCreativeTab(p_150895_2_))
+		if(isInCreativeTab(p_150895_2_)) {
 			for(int i = 0; i < 5; ++i)
 			{
 				p_150895_3_.add(new ItemStack(this,1,i));
 			}
+		}
 	}
 
 	@Override

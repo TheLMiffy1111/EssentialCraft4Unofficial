@@ -14,6 +14,6 @@ public class ContainerCrystalController extends ContainerInventory {
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 5));
 		addSlotToContainer(new SlotGeneric(inv, 1, 140, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

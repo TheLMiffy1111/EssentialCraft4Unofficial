@@ -38,7 +38,7 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 
 	public boolean isCorrect;
 
-	public List<BlockPosition> blocksInStructure = new ArrayList<BlockPosition>();
+	public List<BlockPosition> blocksInStructure = new ArrayList<>();
 
 	public static int cfgMaxMRU = 60000;
 	public static int cfgMRUPerStorage = 100000;
@@ -51,24 +51,28 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 			isCorrect = checkStructure();
 			structureCheckTick = 200;
 		}
-		else
+		else {
 			--structureCheckTick;
+		}
 
 		//Sending the sync packets to the CLIENT.
 		if(syncTick == 0) {
-			if(!getWorld().isRemote)
+			if(!getWorld().isRemote) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 16);
+			}
 			syncTick = 30;
 		}
-		else
+		else {
 			--syncTick;
+		}
 	}
 
 	public IMRUHandlerEntity getMRUCU() {
 		if(isCorrect) {
 			List<Entity> eList = getWorld().getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(lowerCoord, upperCoord), e->e.hasCapability(CapabilityMRUHandler.MRU_HANDLER_ENTITY_CAPABILITY, null));
-			if(eList != null && !eList.isEmpty())
+			if(eList != null && !eList.isEmpty()) {
 				return eList.get(0).getCapability(CapabilityMRUHandler.MRU_HANDLER_ENTITY_CAPABILITY, null);
+			}
 		}
 		return null;
 	}
@@ -82,8 +86,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 
@@ -122,23 +127,26 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 			++checkInt0;
 		}
 		--checkInt0;
-		if(checkInt0 > 0)
+		if(checkInt0 > 0) {
 			maxX = checkInt0;
+		}
 		checkInt0 = 0;
 		while(allowedBlocks.contains(getWorld().getBlockState(pos.add(checkInt0, 0, 0)).getBlock())) {
 			--checkInt0;
 		}
 		++checkInt0;
-		if(checkInt0 < 0)
+		if(checkInt0 < 0) {
 			minX = checkInt0;
+		}
 		if(maxX == 0) {
 			checkInt0 = 0;
 			while(allowedBlocks.contains(getWorld().getBlockState(pos.add(0, 0, checkInt0)).getBlock())) {
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxZ = checkInt0;
+			}
 		}
 		if(minX == 0) {
 			checkInt0 = 0;
@@ -146,8 +154,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minZ = checkInt0;
+			}
 		}
 		if(maxX == 0 && maxZ != 0) {
 			checkInt0 = 0;
@@ -155,8 +164,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxX = checkInt0;
+			}
 		}
 		if(minX == 0 && maxZ != 0) {
 			checkInt0 = 0;
@@ -164,8 +174,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minX = checkInt0;
+			}
 		}
 		if(maxX == 0 && minZ != 0) {
 			checkInt0 = 0;
@@ -173,8 +184,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxX = checkInt0;
+			}
 		}
 		if(minX == 0 && minZ != 0) {
 			checkInt0 = 0;
@@ -182,8 +194,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minX = checkInt0;
+			}
 		}
 		if(maxZ == 0 && maxX != 0) {
 			checkInt0 = 0;
@@ -191,8 +204,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxZ = checkInt0;
+			}
 		}
 		if(minZ == 0 && maxX != 0) {
 			checkInt0 = 0;
@@ -200,8 +214,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minZ = checkInt0;
+			}
 		}
 		if(maxZ == 0 && minX != 0) {
 			checkInt0 = 0;
@@ -209,8 +224,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxZ = checkInt0;
+			}
 		}
 		if(minZ == 0 && minX != 0) {
 			checkInt0 = 0;
@@ -218,8 +234,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minZ = checkInt0;
+			}
 		}
 		if(maxY == 0 && maxX != 0 && maxZ != 0) {
 			checkInt0 = 0;
@@ -227,8 +244,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxY = checkInt0;
+			}
 		}
 		if(maxY == 0 && minX != 0 && maxZ != 0) {
 			checkInt0 = 0;
@@ -236,8 +254,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxY = checkInt0;
+			}
 		}
 		if(maxY == 0 && maxX != 0 && minZ != 0) {
 			checkInt0 = 0;
@@ -245,8 +264,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxY = checkInt0;
+			}
 		}
 		if(maxY == 0 && minX != 0 && minZ != 0) {
 			checkInt0 = 0;
@@ -254,8 +274,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				++checkInt0;
 			}
 			--checkInt0;
-			if(checkInt0 > 0)
+			if(checkInt0 > 0) {
 				maxY = checkInt0;
+			}
 		}
 		if(minY == 0 && maxX != 0 && minZ != 0) {
 			checkInt0 = 0;
@@ -271,8 +292,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minY = checkInt0;
+			}
 		}
 		if(minY == 0 && minX != 0 && maxZ != 0) {
 			checkInt0 = 0;
@@ -280,8 +302,9 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minY = checkInt0;
+			}
 		}
 		if(minY == 0 && maxX != 0 && maxZ != 0) {
 			checkInt0 = 0;
@@ -289,39 +312,44 @@ public class TileMRUCUECController extends TileEntity implements IMRUDisplay, IT
 				--checkInt0;
 			}
 			++checkInt0;
-			if(checkInt0 < 0)
+			if(checkInt0 < 0) {
 				minY = checkInt0;
+			}
 		}
 		//Checking for the cuboid shape//
-		if(minX == 0 && maxX == 0 || minY == 0 && maxY == 0 || minZ == 0 && maxZ == 0)
+		if(minX == 0 && maxX == 0 || minY == 0 && maxY == 0 || minZ == 0 && maxZ == 0) {
 			return false;
-		else {
-			lowerCoord = pos.add(minX, minY, minZ);
-			upperCoord = pos.add(maxX, maxY, maxZ);
-			for(int x = minX; x <= maxX; ++x) {
-				for(int y = minY; y <= maxY; ++y) {
-					for(int z = minZ; z <= maxZ; ++z) {
-						if(z == minZ || z == maxZ || x == minX || x == maxX || y == minY || y == maxY) {
-							BlockPos cp = new BlockPos(pos.add(x, y, z));
-							if(allowedBlocks.contains(getWorld().getBlockState(cp).getBlock())) {
-								blocksInStructure.add(new BlockPosition(getWorld(), pos.getX()+x, pos.getY()+y, pos.getZ()+z));
-								int meta = getWorld().getBlockState(cp).getBlock().getMetaFromState(getWorld().getBlockState(cp));
-								if(ECUtils.IGNORE_META.containsKey(getWorld().getBlockState(cp).getBlock().getUnlocalizedName()) && ECUtils.IGNORE_META.get(getWorld().getBlockState(cp).getBlock().getUnlocalizedName()))
-									meta = -1;
-								DummyData dt = new DummyData(getWorld().getBlockState(cp).getBlock().getUnlocalizedName(),meta);
-								if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString()))
-									resistance += ECUtils.MRU_RESISTANCES.get(dt.toString());
-								else
-									resistance += 1F;
-								if(getWorld().getTileEntity(cp) != null && getWorld().getTileEntity(cp) instanceof IStructurePiece) {
-									IStructurePiece piece = (IStructurePiece) getWorld().getTileEntity(cp);
-									piece.setStructureController(this, EnumStructureType.MRUCUEC);
-									if(getWorld().getTileEntity(cp) instanceof TileMRUCUECHoldingChamber)
-										mruStorage.setMaxMRU(mruStorage.getMaxMRU()+cfgMRUPerStorage);
+		}
+		lowerCoord = pos.add(minX, minY, minZ);
+		upperCoord = pos.add(maxX, maxY, maxZ);
+		for(int x = minX; x <= maxX; ++x) {
+			for(int y = minY; y <= maxY; ++y) {
+				for(int z = minZ; z <= maxZ; ++z) {
+					if(z == minZ || z == maxZ || x == minX || x == maxX || y == minY || y == maxY) {
+						BlockPos cp = new BlockPos(pos.add(x, y, z));
+						if(allowedBlocks.contains(getWorld().getBlockState(cp).getBlock())) {
+							blocksInStructure.add(new BlockPosition(getWorld(), pos.getX()+x, pos.getY()+y, pos.getZ()+z));
+							int meta = getWorld().getBlockState(cp).getBlock().getMetaFromState(getWorld().getBlockState(cp));
+							if(ECUtils.IGNORE_META.containsKey(getWorld().getBlockState(cp).getBlock().getTranslationKey()) && ECUtils.IGNORE_META.get(getWorld().getBlockState(cp).getBlock().getTranslationKey())) {
+								meta = -1;
+							}
+							DummyData dt = new DummyData(getWorld().getBlockState(cp).getBlock().getTranslationKey(),meta);
+							if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
+								resistance += ECUtils.MRU_RESISTANCES.get(dt.toString());
+							}
+							else {
+								resistance += 1F;
+							}
+							if(getWorld().getTileEntity(cp) != null && getWorld().getTileEntity(cp) instanceof IStructurePiece) {
+								IStructurePiece piece = (IStructurePiece) getWorld().getTileEntity(cp);
+								piece.setStructureController(this, EnumStructureType.MRUCUEC);
+								if(getWorld().getTileEntity(cp) instanceof TileMRUCUECHoldingChamber) {
+									mruStorage.setMaxMRU(mruStorage.getMaxMRU()+cfgMRUPerStorage);
 								}
 							}
-							else
-								return false;
+						}
+						else {
+							return false;
 						}
 					}
 				}

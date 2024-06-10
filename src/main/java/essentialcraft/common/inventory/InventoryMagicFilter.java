@@ -40,11 +40,13 @@ public class InventoryMagicFilter implements IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		if(inventory[slot].isEmpty())
+		if(inventory[slot].isEmpty()) {
 			return ItemStack.EMPTY;
+		}
 		ItemStack returnStack;
-		if(inventory[slot].getCount() > amount)
+		if(inventory[slot].getCount() > amount) {
 			returnStack = inventory[slot].splitStack(amount);
+		}
 		else {
 			returnStack = inventory[slot];
 			inventory[slot] = ItemStack.EMPTY;
@@ -84,8 +86,9 @@ public class InventoryMagicFilter implements IInventory {
 	public void markDirty() {
 		for(int i = 0; i < inventory.length; i++) {
 			ItemStack tempStack = getStackInSlot(i);
-			if (!tempStack.isEmpty() && tempStack.getCount() == 0)
+			if (!tempStack.isEmpty() && tempStack.getCount() == 0) {
 				setInventorySlotContents(i, ItemStack.EMPTY);
+			}
 		}
 	}
 
@@ -107,14 +110,16 @@ public class InventoryMagicFilter implements IInventory {
 
 	public void readFromNBTTagCompound(NBTTagCompound tag) {
 		NBTTagCompound inventoryTag = (NBTTagCompound)tag.getTag("inventory");
-		if(inventoryTag == null)
+		if(inventoryTag == null) {
 			return;
+		}
 
 		if(randomUUID == null) {
 			randomUUID = UUID.fromString(tag.getString("uniqueID"));
 			//Not actually sure if this can happen, but it is Java, so the more null checks, the better!
-			if(randomUUID == null)
+			if(randomUUID == null) {
 				randomUUID = UUID.randomUUID();
+			}
 		}
 
 		NBTTagList actualInventory = inventoryTag.getTagList("items", 10);
@@ -145,8 +150,9 @@ public class InventoryMagicFilter implements IInventory {
 		inventoryTag.setTag("items", items);
 		tag.setTag("inventory", inventoryTag);
 		//Can this ever happen? I guess it only happens on server, so should be impossible, but just in case - here is a NPE check.
-		if(randomUUID == null)
+		if(randomUUID == null) {
 			randomUUID = UUID.randomUUID();
+		}
 		tag.setString("uniqueID", randomUUID.toString());
 		return tag;
 	}
@@ -171,8 +177,9 @@ public class InventoryMagicFilter implements IInventory {
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < getSizeInventory(); i++)
+		for(int i = 0; i < getSizeInventory(); i++) {
 			setInventorySlotContents(i, ItemStack.EMPTY);
+		}
 	}
 
 	@Override

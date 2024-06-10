@@ -31,11 +31,14 @@ public class RenderWindRune extends TileEntitySpecialRenderer<TileWindRune>
 
 		float movement = (p.getWorld().getWorldTime()+partialTicks)%60+partialTicks;
 
-		if(movement > 30)
+		if(movement > 30) {
 			movement = 60F - movement;
+		}
 
 		float c = movement/30F;
-		if(c < 0.2F)c = 0.2F;
+		if(c < 0.2F) {
+			c = 0.2F;
+		}
 
 		if(p.tier == 0) {
 			GlStateManager.color(c, c, c);
@@ -49,7 +52,7 @@ public class RenderWindRune extends TileEntitySpecialRenderer<TileWindRune>
 
 	@Override
 	public void render(TileWindRune tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 
 	@Override

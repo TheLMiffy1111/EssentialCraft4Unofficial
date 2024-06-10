@@ -73,7 +73,7 @@ public class ItemCharm extends ItemMRUGeneric implements IBauble, IModelRegister
 
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(par2CreativeTabs)) {
+		if(isInCreativeTab(par2CreativeTabs)) {
 			for(int var4 = 0; var4 < 10; ++var4) {
 				ItemStack min = new ItemStack(this, 1, var4);
 				ItemStack max = new ItemStack(this, 1, var4);
@@ -100,8 +100,9 @@ public class ItemCharm extends ItemMRUGeneric implements IBauble, IModelRegister
 	}
 
 	public void updateEarth(EntityPlayer e, ItemStack s) {
-		if(e.hurtTime > 0 && !e.isPotionActive(MobEffects.RESISTANCE) && ECUtils.playerUseMRU(e, s, 200))
+		if(e.hurtTime > 0 && !e.isPotionActive(MobEffects.RESISTANCE) && ECUtils.playerUseMRU(e, s, 200)) {
 			e.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100, 0));
+		}
 	}
 
 	public void updateAir(EntityPlayer e, ItemStack s) {
@@ -177,7 +178,8 @@ public class ItemCharm extends ItemMRUGeneric implements IBauble, IModelRegister
 
 	@Override
 	public void registerModels() {
-		for(int i = 0; i < name.length-1; i++)
+		for(int i = 0; i < name.length-1; i++) {
 			ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation("essentialcraft:item/charm", "type=" + name[i].toLowerCase(Locale.ENGLISH)));
+		}
 	}
 }

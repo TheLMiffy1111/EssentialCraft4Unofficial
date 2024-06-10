@@ -8,5 +8,5 @@ import net.minecraft.item.ItemStack;
  */
 public interface IWindResistHandler {
 
-	public boolean resistWind(EntityPlayer p, ItemStack stk);
+	public boolean resistWind(EntityPlayer player, ItemStack stack);
 }

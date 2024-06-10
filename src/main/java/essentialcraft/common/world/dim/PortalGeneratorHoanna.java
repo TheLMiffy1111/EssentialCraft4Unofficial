@@ -27,7 +27,6 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 	@Override
 	public boolean placeInExistingPortal(WorldServer worldIn, Entity entityIn, float rotationYaw, double x,
 			double y, double z, Random random, Long2ObjectMap<PortalPosition> destinationCoordinateCache) {
-		int i = 128;
 		double d0 = -1.0D;
 		int j = MathHelper.floor(entityIn.posX);
 		int k = MathHelper.floor(entityIn.posZ);
@@ -67,81 +66,73 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 			}
 		}
 
-		if(d0 >= 0.0D) {
-			if(flag) {
-				destinationCoordinateCache.put(l, worldIn.getDefaultTeleporter().new PortalPosition(blockpos, worldIn.getTotalWorldTime()));
-			}
-
-			double d5 = blockpos.getX() + 0.5D;
-			double d6 = blockpos.getY() + 0.5D;
-			double d7 = blockpos.getZ() + 0.5D;
-			int zP = 0;
-			int xP = 0;
-			double origYd6 = d6;
-			BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortal)BlocksCore.portal).createPatternHelper(worldIn, blockpos);
-			boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
-			double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-
-			double aG0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-			double aG1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entityIn.posZ : entityIn.posX;
-			aG1 = Math.abs(MathHelper.pct(aG1 - (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), aG0, aG0 - blockpattern$patternhelper.getWidth()));
-			double aG2 = MathHelper.pct(entityIn.posY - 1.0D, blockpattern$patternhelper.getFrontTopLeft().getY(), blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight());
-			Vec3d aG = new Vec3d(aG1, aG2, 0.0D);
-			EnumFacing eTD = blockpattern$patternhelper.getForwards();
-
-			d6 = blockpattern$patternhelper.getFrontTopLeft().getY() + 1 - aG.y * blockpattern$patternhelper.getHeight();
-
-			if(flag1) {
-				++d2;
-			}
-
-			if(blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X) {
-				d7 = d2 + (1.0D - aG.x) * blockpattern$patternhelper.getWidth() * blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
-				xP = 1;
-			}
-			else {
-				d5 = d2 + (1.0D - aG.x) * blockpattern$patternhelper.getWidth() * blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
-				zP = 1;
-			}
-
-			float f = 0.0F;
-			float f1 = 0.0F;
-			float f2 = 0.0F;
-			float f3 = 0.0F;
-
-			if(blockpattern$patternhelper.getForwards().getOpposite() == eTD) {
-				f = 1.0F;
-				f1 = 1.0F;
-			}
-			else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.getOpposite()) {
-				f = -1.0F;
-				f1 = -1.0F;
-			}
-			else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.rotateY()) {
-				f2 = 1.0F;
-				f3 = -1.0F;
-			}
-			else {
-				f2 = -1.0F;
-				f3 = 1.0F;
-			}
-
-			double d3 = entityIn.motionX;
-			double d4 = entityIn.motionZ;
-			entityIn.motionX = d3 * f + d4 * f3;
-			entityIn.motionZ = d3 * f2 + d4 * f1;
-			entityIn.rotationYaw = rotationYaw - eTD.getOpposite().getHorizontalIndex() * 90 + blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90;
-			d6 = d6 < origYd6 ? origYd6 + 1 : d6;
-			if(entityIn instanceof EntityPlayerMP) {
-				((EntityPlayerMP) entityIn).connection.setPlayerLocation(blockpos.getX() + 0.5D + xP, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D + zP, entityIn.rotationYaw, entityIn.rotationPitch);
-			}
-			else {
-				entityIn.setLocationAndAngles(blockpos.getX() + 0.5D + xP, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D + zP, entityIn.rotationYaw, entityIn.rotationPitch);
-			}
-			return true;
-		} else {
+		if(d0 < 0.0D) {
 			return false;
 		}
+		if(flag) {
+			destinationCoordinateCache.put(l, worldIn.getDefaultTeleporter().new PortalPosition(blockpos, worldIn.getTotalWorldTime()));
+		}
+
+		double d6 = blockpos.getY() + 0.5D;
+		int zP = 0;
+		int xP = 0;
+		double origYd6 = d6;
+		BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortal)BlocksCore.portal).createPatternHelper(worldIn, blockpos);
+		boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
+		double aG0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+		double aG1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entityIn.posZ : entityIn.posX;
+		aG1 = Math.abs(MathHelper.pct(aG1 - (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), aG0, aG0 - blockpattern$patternhelper.getWidth()));
+		double aG2 = MathHelper.pct(entityIn.posY - 1.0D, blockpattern$patternhelper.getFrontTopLeft().getY(), blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight());
+		Vec3d aG = new Vec3d(aG1, aG2, 0.0D);
+		EnumFacing eTD = blockpattern$patternhelper.getForwards();
+
+		d6 = blockpattern$patternhelper.getFrontTopLeft().getY() + 1 - aG.y * blockpattern$patternhelper.getHeight();
+
+		if(flag1) {
+		}
+
+		if(blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X) {
+			xP = 1;
+		}
+		else {
+			zP = 1;
+		}
+
+		float f = 0.0F;
+		float f1 = 0.0F;
+		float f2 = 0.0F;
+		float f3 = 0.0F;
+
+		if(blockpattern$patternhelper.getForwards().getOpposite() == eTD) {
+			f = 1.0F;
+			f1 = 1.0F;
+		}
+		else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.getOpposite()) {
+			f = -1.0F;
+			f1 = -1.0F;
+		}
+		else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.rotateY()) {
+			f2 = 1.0F;
+			f3 = -1.0F;
+		}
+		else {
+			f2 = -1.0F;
+			f3 = 1.0F;
+		}
+
+		double d3 = entityIn.motionX;
+		double d4 = entityIn.motionZ;
+		entityIn.motionX = d3 * f + d4 * f3;
+		entityIn.motionZ = d3 * f2 + d4 * f1;
+		entityIn.rotationYaw = rotationYaw - eTD.getOpposite().getHorizontalIndex() * 90 + blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90;
+		d6 = d6 < origYd6 ? origYd6 + 1 : d6;
+		if(entityIn instanceof EntityPlayerMP) {
+			((EntityPlayerMP) entityIn).connection.setPlayerLocation(blockpos.getX() + 0.5D + xP, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D + zP, entityIn.rotationYaw, entityIn.rotationPitch);
+		}
+		else {
+			entityIn.setLocationAndAngles(blockpos.getX() + 0.5D + xP, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D + zP, entityIn.rotationYaw, entityIn.rotationPitch);
+		}
+		return true;
 	}
 
 	@Override

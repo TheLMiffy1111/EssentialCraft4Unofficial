@@ -24,8 +24,8 @@ public class ItemLifeStaff extends ItemMRUGeneric implements IModelRegisterer {
 
 	public ItemLifeStaff() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override

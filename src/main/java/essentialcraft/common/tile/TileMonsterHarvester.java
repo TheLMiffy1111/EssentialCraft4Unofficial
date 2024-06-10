@@ -37,18 +37,18 @@ public class TileMonsterHarvester extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			++destrTick;
 			if(destrTick >= mobDestructionTimer) {
 				destrTick = 0;
 				List<EntityLivingBase> lst = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(rad, rad, rad));
 				if(!lst.isEmpty() && !getWorld().isRemote) {
-					for(int i = 0; i < lst.size(); ++i) {
-						EntityLivingBase e = lst.get(i);
+					for(EntityLivingBase e : lst) {
 						if(!(e instanceof EntityPlayer)) {
 							if(mruStorage.getMRU() >= mruUsage) {
-								if(!e.isNonBoss() && !allowBossDuplication)
+								if(!e.isNonBoss() && !allowBossDuplication) {
 									return;
+								}
 								mruStorage.extractMRU(mruUsage, true);
 
 								if(!world.isRemote) {
@@ -66,15 +66,18 @@ public class TileMonsterHarvester extends TileMRUGeneric {
 									}
 									FakePlayer player = new FakePlayer((WorldServer)e.world, ECUtils.EC3FakePlayerProfile);
 									ItemStack stk = getStackInSlot(2);
-									if(!stk.isEmpty())
+									if(!stk.isEmpty()) {
 										player.inventory.setInventorySlotContents(player.inventory.currentItem, stk.copy());
+									}
 									copy.setHealth(0.01F);
 									player.attackTargetEntityWithCurrentItem(copy);
 									player.setDead();
-									if(copy.getHealth() > 0)
+									if(copy.getHealth() > 0) {
 										copy.setDead();
-									if(generatesCorruption)
+									}
+									if(generatesCorruption) {
 										ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+									}
 								}
 							}
 						}

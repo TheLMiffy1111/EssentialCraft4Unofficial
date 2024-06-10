@@ -39,16 +39,21 @@ public class ItemWindHoe extends ItemHoeEC {
 				String clazz = "sword";
 
 				String currentToolClass = "";
-				if(currentTool.getItem() instanceof ItemPickaxe)
+				if(currentTool.getItem() instanceof ItemPickaxe) {
 					currentToolClass = "pickaxe";
-				if(currentTool.getItem() instanceof ItemAxe)
+				}
+				if(currentTool.getItem() instanceof ItemAxe) {
 					currentToolClass = "axe";
-				if(currentTool.getItem() instanceof ItemSpade)
+				}
+				if(currentTool.getItem() instanceof ItemSpade) {
 					currentToolClass = "shovel";
-				if(currentTool.getItem() instanceof ItemHoe)
+				}
+				if(currentTool.getItem() instanceof ItemHoe) {
 					currentToolClass = "hoe";
-				if(currentTool.getItem() instanceof ItemSword)//<--- yet again, copy/paste is bad!
+				}
+				if(currentTool.getItem() instanceof ItemSword) { //<--- yet again, copy/paste is bad!
 					currentToolClass = "sword";
+				}
 
 				NBTTagCompound toolTag = new NBTTagCompound();
 				NBTTagCompound genericTag = new NBTTagCompound();
@@ -68,24 +73,29 @@ public class ItemWindHoe extends ItemHoeEC {
 				}
 
 				Set<String> tags = genericTag.getKeySet();
-				List<String> tagKeyLst = new ArrayList<String>();
+				List<String> tagKeyLst = new ArrayList<>();
 				tags.forEach(name->tagKeyLst.add(name));
 
-				if(tagKeyLst.indexOf("pickaxe") != -1)
+				if(tagKeyLst.indexOf("pickaxe") != -1) {
 					tagKeyLst.remove("pickaxe");
-				if(tagKeyLst.indexOf("axe") != -1)
+				}
+				if(tagKeyLst.indexOf("axe") != -1) {
 					tagKeyLst.remove("axe");
-				if(tagKeyLst.indexOf("shovel") != -1)
+				}
+				if(tagKeyLst.indexOf("shovel") != -1) {
 					tagKeyLst.remove("shovel");
-				if(tagKeyLst.indexOf("hoe") != -1)
+				}
+				if(tagKeyLst.indexOf("hoe") != -1) {
 					tagKeyLst.remove("hoe");
-				if(tagKeyLst.indexOf("sword") != -1)
+				}
+				if(tagKeyLst.indexOf("sword") != -1) {
 					tagKeyLst.remove("sword");
+				}
 
-				for(int i = 0; i < tagKeyLst.size(); ++i)
-				{
-					if(tagKeyLst.get(i) instanceof String)
-						genericTag.removeTag(tagKeyLst.get(i));
+				for(String element : tagKeyLst) {
+					if(element instanceof String) {
+						genericTag.removeTag(element);
+					}
 				}
 
 				ItemStack efficent = null;
@@ -97,35 +107,46 @@ public class ItemWindHoe extends ItemHoeEC {
 					efficent = new ItemStack(loadFrom);
 				}else
 				{
-					if(clazz.equalsIgnoreCase("pickaxe"))
+					if(clazz.equalsIgnoreCase("pickaxe")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_pick,1,currentTool.getItemDamage());
-					if(clazz.equalsIgnoreCase("shovel"))
+					}
+					if(clazz.equalsIgnoreCase("shovel")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_shovel,1,currentTool.getItemDamage());
-					if(clazz.equalsIgnoreCase("hoe"))
+					}
+					if(clazz.equalsIgnoreCase("hoe")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_hoe,1,currentTool.getItemDamage());
-					if(clazz.equalsIgnoreCase("sword"))
+					}
+					if(clazz.equalsIgnoreCase("sword")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_sword,1,currentTool.getItemDamage());
-					if(clazz.equalsIgnoreCase("axe"))
+					}
+					if(clazz.equalsIgnoreCase("axe")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_axe,1,currentTool.getItemDamage());
+					}
 				}
 
 				if(!efficent.isEmpty() && efficent.getItem() != null)
 				{
 					NBTTagCompound anotherTag = MiscUtils.getStackTag(efficent);
 
-					if(genericTag.hasKey("pickaxe"))
+					if(genericTag.hasKey("pickaxe")) {
 						anotherTag.setTag("pickaxe", genericTag.getTag("pickaxe"));
-					if(genericTag.hasKey("axe"))
+					}
+					if(genericTag.hasKey("axe")) {
 						anotherTag.setTag("axe", genericTag.getTag("axe"));
-					if(genericTag.hasKey("shovel"))
+					}
+					if(genericTag.hasKey("shovel")) {
 						anotherTag.setTag("shovel", genericTag.getTag("shovel"));
-					if(genericTag.hasKey("hoe"))
+					}
+					if(genericTag.hasKey("hoe")) {
 						anotherTag.setTag("hoe", genericTag.getTag("hoe"));
-					if(genericTag.hasKey("sword"))
+					}
+					if(genericTag.hasKey("sword")) {
 						anotherTag.setTag("sword", genericTag.getTag("sword"));
+					}
 
-					if(toolTag != null)
+					if(toolTag != null) {
 						anotherTag.setTag(currentToolClass, toolTag);
+					}
 
 					p.inventory.setInventorySlotContents(p.inventory.currentItem, efficent);
 				}

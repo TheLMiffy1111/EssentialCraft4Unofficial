@@ -57,7 +57,7 @@ public class ItemWindTablet extends ItemMRUGeneric implements IModelRegisterer {
 
 	public ItemWindTablet() {
 		super();
-		this.maxStackSize = 1;
+		maxStackSize = 1;
 	}
 
 	@Override

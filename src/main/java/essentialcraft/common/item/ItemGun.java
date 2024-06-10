@@ -56,17 +56,17 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	public ItemGun(String s)
 	{
 		super();
-		this.setHasSubtypes(true);
-		this.setMaxStackSize(1);
-		this.setFull3D();
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxStackSize(1);
+		setFull3D();
+		setMaxDamage(0);
 		gunType = s;
 	}
 
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem)
 	{
-		if(isCurrentItem && this.gunType.equalsIgnoreCase("gatling"))
+		if(isCurrentItem && gunType.equalsIgnoreCase("gatling"))
 		{
 			if(entity instanceof EntityLivingBase)
 			{
@@ -76,8 +76,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		if(MiscUtils.getStackTag(itemStack).hasKey("cool"))
 		{
 			MiscUtils.getStackTag(itemStack).setFloat("cool", MiscUtils.getStackTag(itemStack).getFloat("cool")-1);
-			if(MiscUtils.getStackTag(itemStack).getFloat("cool") <= 0)
+			if(MiscUtils.getStackTag(itemStack).getFloat("cool") <= 0) {
 				MiscUtils.getStackTag(itemStack).removeTag("cool");
+			}
 		}
 		if(MiscUtils.getStackTag(itemStack).hasKey("gunShots") && isCurrentItem)
 		{
@@ -125,75 +126,74 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			createRandomGun(gun);
 			return super.onItemRightClick(w, p, h);
 		}
-		if(p.isHandActive())
+		if(p.isHandActive()) {
 			return super.onItemRightClick(w, p, h);
-		if(this.gunType.equalsIgnoreCase("rifle") || this.gunType.equalsIgnoreCase("gatling"))
+		}
+		if(gunType.equalsIgnoreCase("rifle") || gunType.equalsIgnoreCase("gatling"))
 		{
 			p.setActiveHand(h);
 		}
-		else
+		else if(gun.getTagCompound().hasKey("base"))
 		{
-			if(gun.getTagCompound().hasKey("base"))
+			float balance = 0;
+			if(gun.getTagCompound().hasKey("lense"))
 			{
-				float balance = 0;
-				if(gun.getTagCompound().hasKey("lense"))
-				{
-					String lenseID = gun.getTagCompound().getString("lense");
-					LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
-					for(GunType gt : GunType.values()) {
-						if(lense != null && lense.materialData.containsKey(gt))
+				String lenseID = gun.getTagCompound().getString("lense");
+				LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
+				for(GunType gt : GunType.values()) {
+					if(lense != null && lense.materialData.containsKey(gt))
+					{
+						for(DummyData d : lense.materialData.get(gt))
 						{
-							for(DummyData d : lense.materialData.get(gt))
-							{
-								if(d.fieldName.equalsIgnoreCase("balance"))
-									balance = (int)Float.parseFloat(d.fieldValue);
+							if(d.fieldName.equalsIgnoreCase("balance")) {
+								balance = (int)Float.parseFloat(d.fieldValue);
 							}
 						}
 					}
 				}
-				if(MiscUtils.getStackTag(gun).hasKey("stats"))
+			}
+			if(MiscUtils.getStackTag(gun).hasKey("stats"))
+			{
+				NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
+				if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
 				{
-					NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
-					if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
-					{
-						MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
+					MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
+				}
+				if(!MiscUtils.getStackTag(gun).hasKey("gunShots"))
+				{
+					MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
+				}
+				if(MiscUtils.getStackTag(gun).hasKey("cool"))
+				{
+					return super.onItemRightClick(w, p, h);
+				}
+				if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 > stats.getFloat("shots")) {
+					p.setActiveHand(h);
+					return super.onItemRightClick(w, p, h);
+				}
+				MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
+				if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*10)))
+				{
+					if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability")) {
+						MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
 					}
-					if(!MiscUtils.getStackTag(gun).hasKey("gunShots"))
-					{
-						MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
-					}
-					if(MiscUtils.getStackTag(gun).hasKey("cool"))
-					{
-						return super.onItemRightClick(w, p, h);
-					}
-					if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 <= stats.getFloat("shots"))
-						MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
 					else
 					{
-						p.setActiveHand(h);
-						return super.onItemRightClick(w, p, h);
-					}
-					if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*10)))
-					{
-						if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability"))
-							MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
-						else
+						if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
 						{
-							if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
-							{
-								w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
-								MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
-							}
+							w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
+							MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
 						}
-
-
-						MiscUtils.getStackTag(gun).setFloat("cool", stats.getFloat("speed")*2);
-						w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
-						EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
-						if(!w.isRemote)
-							w.spawnEntity(ray);
-						p.rotationPitch -= stats.getFloat("knockback");
 					}
+
+
+					MiscUtils.getStackTag(gun).setFloat("cool", stats.getFloat("speed")*2);
+					w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
+					EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
+					if(!w.isRemote) {
+						w.spawnEntity(ray);
+					}
+					p.rotationPitch -= stats.getFloat("knockback");
 				}
 			}
 		}
@@ -224,8 +224,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	public static void calculateGunStats(ItemStack gun)
 	{
 		NBTTagCompound gunTag = MiscUtils.getStackTag(gun);
-		if(gunTag.hasKey("stats"))
+		if(gunTag.hasKey("stats")) {
 			gunTag.removeTag("stats");
+		}
 
 		NBTTagCompound stats = new NBTTagCompound();
 		GunMaterial base = null;
@@ -288,20 +289,27 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		{
 			for(DummyData d : base.materialData.get(gt))
 			{
-				if(d.fieldName.equalsIgnoreCase("durability"))
+				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("damage"))
+				}
+				if(d.fieldName.equalsIgnoreCase("damage")) {
 					damage += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("reload"))
+				}
+				if(d.fieldName.equalsIgnoreCase("reload")) {
 					reload += Float.parseFloat(d.fieldValue);
-				if(d.fieldName.equalsIgnoreCase("knockback"))
+				}
+				if(d.fieldName.equalsIgnoreCase("knockback")) {
 					knockback += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("spread"))
+				}
+				if(d.fieldName.equalsIgnoreCase("spread")) {
 					spread += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("speed"))
+				}
+				if(d.fieldName.equalsIgnoreCase("speed")) {
 					speed += Float.parseFloat(d.fieldValue);
-				if(d.fieldName.equalsIgnoreCase("shots"))
+				}
+				if(d.fieldName.equalsIgnoreCase("shots")) {
 					shots += Float.parseFloat(d.fieldValue);
+				}
 			}
 		}
 
@@ -309,20 +317,27 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		{
 			for(DummyData d : handle.materialData.get(gt))
 			{
-				if(d.fieldName.equalsIgnoreCase("durability"))
+				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue);
-				if(d.fieldName.equalsIgnoreCase("damage"))
+				}
+				if(d.fieldName.equalsIgnoreCase("damage")) {
 					damage += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("reload"))
+				}
+				if(d.fieldName.equalsIgnoreCase("reload")) {
 					reload += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("knockback"))
+				}
+				if(d.fieldName.equalsIgnoreCase("knockback")) {
 					knockback += Float.parseFloat(d.fieldValue);
-				if(d.fieldName.equalsIgnoreCase("spread"))
+				}
+				if(d.fieldName.equalsIgnoreCase("spread")) {
 					spread += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("speed"))
+				}
+				if(d.fieldName.equalsIgnoreCase("speed")) {
 					speed += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("shots"))
+				}
+				if(d.fieldName.equalsIgnoreCase("shots")) {
 					shots += Float.parseFloat(d.fieldValue)/3;
+				}
 			}
 		}
 
@@ -330,20 +345,27 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		{
 			for(DummyData d : device.materialData.get(gt))
 			{
-				if(d.fieldName.equalsIgnoreCase("durability"))
+				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("damage"))
+				}
+				if(d.fieldName.equalsIgnoreCase("damage")) {
 					damage += Float.parseFloat(d.fieldValue);
-				if(d.fieldName.equalsIgnoreCase("reload"))
+				}
+				if(d.fieldName.equalsIgnoreCase("reload")) {
 					reload += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("knockback"))
+				}
+				if(d.fieldName.equalsIgnoreCase("knockback")) {
 					knockback += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("spread"))
+				}
+				if(d.fieldName.equalsIgnoreCase("spread")) {
 					spread += Float.parseFloat(d.fieldValue);
-				if(d.fieldName.equalsIgnoreCase("speed"))
+				}
+				if(d.fieldName.equalsIgnoreCase("speed")) {
 					speed += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("shots"))
+				}
+				if(d.fieldName.equalsIgnoreCase("shots")) {
 					shots += Float.parseFloat(d.fieldValue)/3;
+				}
 			}
 		}
 
@@ -351,22 +373,30 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		{
 			for(DummyData d : lense.materialData.get(gt))
 			{
-				if(d.fieldName.equalsIgnoreCase("durability"))
+				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("damage"))
+				}
+				if(d.fieldName.equalsIgnoreCase("damage")) {
 					damage += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("reload"))
+				}
+				if(d.fieldName.equalsIgnoreCase("reload")) {
 					reload += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("knockback"))
+				}
+				if(d.fieldName.equalsIgnoreCase("knockback")) {
 					knockback += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("spread"))
+				}
+				if(d.fieldName.equalsIgnoreCase("spread")) {
 					spread += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("speed"))
+				}
+				if(d.fieldName.equalsIgnoreCase("speed")) {
 					speed += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("shots"))
+				}
+				if(d.fieldName.equalsIgnoreCase("shots")) {
 					shots += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("balance"))
+				}
+				if(d.fieldName.equalsIgnoreCase("balance")) {
 					balance = (int)Float.parseFloat(d.fieldValue);
+				}
 			}
 		}
 
@@ -374,22 +404,30 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 		{
 			for(DummyData d : scope.materialData.get(gt))
 			{
-				if(d.fieldName.equalsIgnoreCase("durability"))
+				if(d.fieldName.equalsIgnoreCase("durability")) {
 					durability += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("damage"))
+				}
+				if(d.fieldName.equalsIgnoreCase("damage")) {
 					damage += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("reload"))
+				}
+				if(d.fieldName.equalsIgnoreCase("reload")) {
 					reload += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("knockback"))
+				}
+				if(d.fieldName.equalsIgnoreCase("knockback")) {
 					knockback += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("spread"))
+				}
+				if(d.fieldName.equalsIgnoreCase("spread")) {
 					spread += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("speed"))
+				}
+				if(d.fieldName.equalsIgnoreCase("speed")) {
 					speed += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("shots"))
+				}
+				if(d.fieldName.equalsIgnoreCase("shots")) {
 					shots += Float.parseFloat(d.fieldValue)/3;
-				if(d.fieldName.equalsIgnoreCase("scope.zoom"))
+				}
+				if(d.fieldName.equalsIgnoreCase("scope.zoom")) {
 					zoom += Float.parseFloat(d.fieldValue);
+				}
 			}
 		}
 
@@ -450,21 +488,90 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
 	{
-		if(!(player instanceof EntityPlayer))
+		if(!(player instanceof EntityPlayer)) {
 			return;
+		}
 		ItemStack gun = stack;
 		EntityPlayer p = (EntityPlayer)player;
 		World w = p.getEntityWorld();
-		if(this.getItemUseAction(stack) == EnumAction.BLOCK)
+		if(getItemUseAction(stack) == EnumAction.BLOCK)
 		{
-			if(count % 20 == 0)
+			if(count % 20 == 0) {
 				player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.4F, 1+MathUtils.randomFloat(player.getEntityWorld().rand), false);
+			}
 			return;
 		}
-		else
+		if(gunType.equalsIgnoreCase("rifle") && count % 3 == 0)
 		{
-			if(this.gunType.equalsIgnoreCase("rifle") && count % 3 == 0)
+			if(gun.getTagCompound().hasKey("base"))
 			{
+				float balance = 0;
+				if(gun.getTagCompound().hasKey("lense"))
+				{
+					String lenseID = gun.getTagCompound().getString("lense");
+					LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
+					for(GunType gt : GunType.values()) {
+						if(lense != null && lense.materialData.containsKey(gt))
+						{
+							for(DummyData d : lense.materialData.get(gt))
+							{
+								if(d.fieldName.equalsIgnoreCase("balance")) {
+									balance = (int)Float.parseFloat(d.fieldValue);
+								}
+							}
+						}
+					}
+				}
+				if(MiscUtils.getStackTag(gun).hasKey("stats"))
+				{
+					NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
+					if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
+					{
+						MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
+					}
+					if(!MiscUtils.getStackTag(gun).hasKey("gunShots"))
+					{
+						MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
+					}
+					if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 <= stats.getFloat("shots")) {
+						MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
+					}
+					else
+					{
+						p.stopActiveHand();
+						return;
+					}
+					if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*3)))
+					{
+						if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability")) {
+							MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
+						}
+						else if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
+						{
+							w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
+							MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
+						}
+
+						MiscUtils.getStackTag(gun).setFloat("cool", stats.getFloat("speed")*2);
+						w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
+						EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
+						if(!w.isRemote) {
+							w.spawnEntity(ray);
+						}
+					}
+				}
+			}
+		}
+		if(gunType.equalsIgnoreCase("gatling"))
+		{
+			int usingTicks = 10000-count;
+			if(count >= 10000-60 && count % 5 == 0)
+			{
+				w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_MINECART_INSIDE, SoundCategory.PLAYERS, 0.1F, 0F+usingTicks/30F, false);
+			}
+			if(usingTicks >= 60)
+			{
+				ECUtils.playSoundToAllNearby(p.posX, p.posY, p.posZ, "essentialcraft:sound.beam", 1F, 2, 16, p.dimension);
 				if(gun.getTagCompound().hasKey("base"))
 				{
 					float balance = 0;
@@ -477,8 +584,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 							{
 								for(DummyData d : lense.materialData.get(gt))
 								{
-									if(d.fieldName.equalsIgnoreCase("balance"))
+									if(d.fieldName.equalsIgnoreCase("balance")) {
 										balance = (int)Float.parseFloat(d.fieldValue);
+									}
 								}
 							}
 						}
@@ -490,104 +598,35 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 						{
 							MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
 						}
-						if(!MiscUtils.getStackTag(gun).hasKey("gunShots"))
+						if(!MiscUtils.getStackTag(gun).hasKey("gunShots") && !w.isRemote)
 						{
 							MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
 						}
 						if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 <= stats.getFloat("shots"))
-							MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
+						{
+							if(!w.isRemote) {
+								MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
+							}
+						}
 						else
 						{
 							p.stopActiveHand();
 							return;
 						}
-						if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*3)))
+						if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*2)))
 						{
-							if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability"))
+							if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability")) {
 								MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
-							else
-							{
-								if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
-								{
-									w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
-									MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
-								}
 							}
-
-							MiscUtils.getStackTag(gun).setFloat("cool", stats.getFloat("speed")*2);
-							w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
+							else if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
+							{
+								w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
+								MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
+							}
+							//w.playSound(p.posX, p.posY, p.posZ, "essentialcraft:sound.beam", 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
 							EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
-							if(!w.isRemote)
+							if(!w.isRemote) {
 								w.spawnEntity(ray);
-						}
-					}
-				}
-			}
-			if(this.gunType.equalsIgnoreCase("gatling"))
-			{
-				int usingTicks = 10000-count;
-				if(count >= 10000-60 && count % 5 == 0)
-				{
-					w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_MINECART_INSIDE, SoundCategory.PLAYERS, 0.1F, 0F+usingTicks/30F, false);
-				}
-				if(usingTicks >= 60)
-				{
-					ECUtils.playSoundToAllNearby(p.posX, p.posY, p.posZ, "essentialcraft:sound.beam", 1F, 2, 16, p.dimension);
-					if(gun.getTagCompound().hasKey("base"))
-					{
-						float balance = 0;
-						if(gun.getTagCompound().hasKey("lense"))
-						{
-							String lenseID = gun.getTagCompound().getString("lense");
-							LenseMaterial lense = GunRegistry.getLenseFromID(lenseID);
-							for(GunType gt : GunType.values()) {
-								if(lense != null && lense.materialData.containsKey(gt))
-								{
-									for(DummyData d : lense.materialData.get(gt))
-									{
-										if(d.fieldName.equalsIgnoreCase("balance"))
-											balance = (int)Float.parseFloat(d.fieldValue);
-									}
-								}
-							}
-						}
-						if(MiscUtils.getStackTag(gun).hasKey("stats"))
-						{
-							NBTTagCompound stats = MiscUtils.getStackTag(gun).getCompoundTag("stats");
-							if(!MiscUtils.getStackTag(gun).hasKey("gunDamage"))
-							{
-								MiscUtils.getStackTag(gun).setFloat("gunDamage", 0);
-							}
-							if(!MiscUtils.getStackTag(gun).hasKey("gunShots") && !w.isRemote)
-							{
-								MiscUtils.getStackTag(gun).setFloat("gunShots", 0);
-							}
-							if(MiscUtils.getStackTag(gun).getFloat("gunShots")+1 <= stats.getFloat("shots"))
-							{
-								if(!w.isRemote)
-									MiscUtils.getStackTag(gun).setFloat("gunShots", MiscUtils.getStackTag(gun).getFloat("gunShots")+1);
-							}
-							else
-							{
-								p.stopActiveHand();
-								return;
-							}
-							if(ECUtils.playerUseMRU(p, gun, (int)(stats.getFloat("damage")*2)))
-							{
-								if(MiscUtils.getStackTag(gun).getFloat("gunDamage")+1 <= stats.getFloat("durability"))
-									MiscUtils.getStackTag(gun).setFloat("gunDamage", MiscUtils.getStackTag(gun).getFloat("gunDamage")+1);
-								else
-								{
-									if(!w.isRemote && w.rand.nextFloat() <= 0.25F)
-									{
-										w.playSound(p.posX, p.posY, p.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1, false);
-										MiscUtils.getStackTag(gun).setFloat("gunShots", stats.getFloat("shots"));
-									}
-								}
-								//w.playSound(p.posX, p.posY, p.posZ, "essentialcraft:sound.beam", 0.1F+stats.getFloat("damage")/100, 2-stats.getFloat("damage")/50, false);
-								EntityMRURay ray = new EntityMRURay(w,p,stats.getFloat("damage"),stats.getFloat("spread")/2,balance);
-								if(!w.isRemote)
-									w.spawnEntity(ray);
 							}
 						}
 					}
@@ -629,8 +668,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			{
 				float current = tag.getFloat("gunShots")+1;
 				float max = tag.getCompoundTag("stats").getFloat("shots");
-				if(current >= max)
+				if(current >= max) {
 					return EnumAction.BLOCK;
+				}
 			}
 
 		}
@@ -647,8 +687,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			{
 				float current = tag.getFloat("gunShots")+1;
 				float max = tag.getCompoundTag("stats").getFloat("shots");
-				if(current >= max)
+				if(current >= max) {
 					return MathHelper.floor(tag.getCompoundTag("stats").getFloat("reload")*20);
+				}
 			}
 		}
 		return 10000;
@@ -656,10 +697,11 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 
 	@Override
 	public void registerModels() {
-		ModelUtils.setItemModelSingleIcon(this, "essentialcraft:item/"+getRegistryName().getResourcePath(), "internal");
-		ModelBakery.registerItemVariants(this, new ModelResourceLocation("essentialcraft:item/"+getRegistryName().getResourcePath(), "inventory"));
-		if(this == ItemsCore.sniper)
+		ModelUtils.setItemModelSingleIcon(this, "essentialcraft:item/"+getRegistryName().getPath(), "internal");
+		ModelBakery.registerItemVariants(this, new ModelResourceLocation("essentialcraft:item/"+getRegistryName().getPath(), "inventory"));
+		if(this == ItemsCore.sniper) {
 			ModelBakery.registerItemVariants(this, new ModelResourceLocation("essentialcraft:item/blank", "inventory"));
+		}
 		MiscUtils.addItemOverlayElement(this, ItemOverlayGun.INSTANCE);
 	}
 
@@ -674,8 +716,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 				if(tag.hasKey("stats")) {
 					float current = tag.getFloat("gunShots");
 					float max = tag.getCompoundTag("stats").getFloat("shots");
-					if(current > max)
+					if(current > max) {
 						current = max;
+					}
 					health = current/max;
 				}
 			}
@@ -687,9 +730,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			GlStateManager.disableBlend();
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder BufferBuilder = tessellator.getBuffer();
-			this.draw(BufferBuilder, x + 14, y, 2, 14, 0, 0, 0, 255);
-			this.draw(BufferBuilder, x + 14, y, 1, 13, 51, 51, 51, 255);
-			this.draw(BufferBuilder, x + 14, y + j, 1, 13-j, 186, 0, 0, 255);
+			draw(BufferBuilder, x + 14, y, 2, 14, 0, 0, 0, 255);
+			draw(BufferBuilder, x + 14, y, 1, 13, 51, 51, 51, 255);
+			draw(BufferBuilder, x + 14, y + j, 1, 13-j, 186, 0, 0, 255);
 			GlStateManager.enableBlend();
 			GlStateManager.enableAlpha();
 			GlStateManager.enableTexture2D();

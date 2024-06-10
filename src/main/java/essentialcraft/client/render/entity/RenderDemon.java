@@ -25,13 +25,13 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 	public RenderDemon()
 	{
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelDemon(1,0,64,32), 0.5F);
-		this.endermanModel = (ModelDemon)super.mainModel;
+		endermanModel = (ModelDemon)super.mainModel;
 	}
 
 	public RenderDemon(RenderManager rm)
 	{
 		super(rm, new ModelDemon(1,0,64,32), 0.5F);
-		this.endermanModel = (ModelDemon)super.mainModel;
+		endermanModel = (ModelDemon)super.mainModel;
 	}
 
 	@Override
@@ -60,32 +60,29 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 		{
 			return -1;
 		}
+		bindTexture(endermanEyesTexture);
+		float f1 = 1.0F;
+		GlStateManager.enableBlend();
+		GlStateManager.disableAlpha();
+		GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+		GlStateManager.disableLighting();
+
+		if (partialTicks.isInvisible())
+		{
+			GlStateManager.depthMask(false);
+		}
 		else
 		{
-			this.bindTexture(endermanEyesTexture);
-			float f1 = 1.0F;
-			GlStateManager.enableBlend();
-			GlStateManager.disableAlpha();
-			GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
-			GlStateManager.disableLighting();
-
-			if (partialTicks.isInvisible())
-			{
-				GlStateManager.depthMask(false);
-			}
-			else
-			{
-				GlStateManager.depthMask(true);
-			}
-
-			char c0 = 61680;
-			int j = c0 % 65536;
-			int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-			GlStateManager.enableLighting();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, f1);
-			return 1;
+			GlStateManager.depthMask(true);
 		}
+
+		char c0 = 61680;
+		int j = c0 % 65536;
+		int k = c0 / 65536;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
+		GlStateManager.enableLighting();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, f1);
+		return 1;
 	}
 
 	public static class Factory implements IRenderFactory<EntityDemon> {

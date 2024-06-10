@@ -14,17 +14,19 @@ public class TileMIMImportNodePersistant extends TileMIMImportNode {
 
 	@Override
 	public void importAllPossibleItems(TileMIM parent) {
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) > 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) > 0) {
 			return;
+		}
 
 		IItemHandler inv = getConnectedInventory();
 		if(inv == null) {
-			IItemHandler iinv = getConnectedInventoryNonSided();
+			getConnectedInventoryNonSided();
 		}
 		int slots = inv.getSlots();
 
-		if(slots <= 0)
+		if(slots <= 0) {
 			return;
+		}
 
 		for(int j = 0; j < slots; ++j) {
 			ItemStack stk = inv.getStackInSlot(j);
@@ -33,17 +35,21 @@ public class TileMIMImportNodePersistant extends TileMIMImportNode {
 					ItemStack current = stk.copy();
 					current.shrink(1);
 
-					if(current.getCount() > 0)
-						if(parent.addItemStackToSystem(current))
+					if(current.getCount() > 0) {
+						if(parent.addItemStackToSystem(current)) {
 							inv.extractItem(j, current.getCount(), false);
+						}
+					}
 				}
 				else if(ECUtils.canFilterAcceptItem(new InventoryMagicFilter(getStackInSlot(0)), stk, getStackInSlot(0))) {
 					ItemStack current = stk.copy();
 					current.shrink(1);
 
-					if(current.getCount() > 0)
-						if(parent.addItemStackToSystem(current))
+					if(current.getCount() > 0) {
+						if(parent.addItemStackToSystem(current)) {
 							inv.extractItem(j, current.getCount(), false);
+						}
+					}
 				}
 			}
 		}

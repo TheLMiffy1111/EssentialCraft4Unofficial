@@ -4,17 +4,16 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class ShapedFurnaceRecipe extends Impl<IRecipe> implements IRecipe {
+public class ShapedFurnaceRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-	public ItemStack result = ItemStack.EMPTY;
 	public ItemStack smelted = ItemStack.EMPTY;
+	public ItemStack result = ItemStack.EMPTY;
 
-	public ShapedFurnaceRecipe(ItemStack i, ItemStack i_1)
-	{
-		smelted = i;
-		result = i_1;
+	public ShapedFurnaceRecipe(ItemStack smelted, ItemStack result) {
+		this.smelted = smelted;
+		this.result = result;
 	}
 
 	@Override
@@ -29,7 +28,7 @@ public class ShapedFurnaceRecipe extends Impl<IRecipe> implements IRecipe {
 
 	@Override
 	public boolean canFit(int width, int height) {
-		return width*height>=1;
+		return width*height >= 1;
 	}
 
 	@Override

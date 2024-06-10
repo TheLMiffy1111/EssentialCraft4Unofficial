@@ -8,17 +8,16 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class StructureRecipe extends Impl<IRecipe> implements IRecipe {
+public class StructureRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-	public List<StructureBlock> structure = new ArrayList<StructureBlock>();
+	public List<StructureBlock> structure = new ArrayList<>();
 	public ItemStack referal = ItemStack.EMPTY;
 
-	public StructureRecipe(ItemStack ref, StructureBlock... positions)
-	{
+	public StructureRecipe(ItemStack ref, StructureBlock... positions) {
 		referal = ref;
-		structure = Arrays.<StructureBlock>asList(positions);
+		structure = Arrays.asList(positions);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class StructureRecipe extends Impl<IRecipe> implements IRecipe {
 
 	@Override
 	public boolean canFit(int width, int height) {
-		return width*height>=structure.size();
+		return width*height >= structure.size();
 	}
 
 	@Override

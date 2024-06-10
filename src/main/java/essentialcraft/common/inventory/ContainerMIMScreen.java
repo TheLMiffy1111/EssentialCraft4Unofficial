@@ -17,8 +17,9 @@ public class ContainerMIMScreen extends ContainerInventory {
 		super.onContainerClosed(entityPlayer);
 		if(inv != null) {
 			TileMIMScreen screen = (TileMIMScreen)inv;
-			if(screen.parent != null)
+			if(screen.parent != null) {
 				screen.parent.closeAllStorages(entityPlayer);
+			}
 		}
 	}
 
@@ -28,12 +29,13 @@ public class ContainerMIMScreen extends ContainerInventory {
 		pInvOffsetZ = 90;
 		if(inv != null) {
 			TileMIMScreen screen = (TileMIMScreen)inv;
-			if(screen.parent != null)
+			if(screen.parent != null) {
 				screen.parent.openAllStorages(player);
+			}
 
 			addSlotToContainer(new SlotBoundEssence(inv, 0, 8, 134));
 			addSlotToContainer(new SlotGeneric(inv, 1, 8, 26));
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

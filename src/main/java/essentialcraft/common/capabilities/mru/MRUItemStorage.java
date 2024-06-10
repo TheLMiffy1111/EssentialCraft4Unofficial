@@ -16,20 +16,20 @@ public class MRUItemStorage extends MRUStorage implements IMRUHandlerItem, ICapa
 
 	protected MRUItemStorage() {
 		super();
-		this.storageSettable = true;
+		storageSettable = true;
 	}
 
 	public MRUItemStorage(ItemStack storageStack) {
 		super();
 		this.storageStack = storageStack;
-		this.storageSettable = true;
+		storageSettable = true;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
 	public MRUItemStorage(ItemStack storageStack, int maxMRU) {
 		super(maxMRU);
 		this.storageStack = storageStack;
-		this.storageSettable = true;
+		storageSettable = true;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
@@ -37,7 +37,7 @@ public class MRUItemStorage extends MRUStorage implements IMRUHandlerItem, ICapa
 		super();
 		this.storageStack = storageStack;
 		this.storage = storage;
-		this.storageSettable = false;
+		storageSettable = false;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
@@ -45,91 +45,91 @@ public class MRUItemStorage extends MRUStorage implements IMRUHandlerItem, ICapa
 		super(maxMRU);
 		this.storageStack = storageStack;
 		this.storage = storage;
-		this.storageSettable = false;
+		storageSettable = false;
 		MiscUtils.createNBTTag(this.storageStack);
 	}
 
 	@Override
 	public int getMaxMRU() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getMaxMRU();
 	}
 
 	@Override
 	public void setMaxMRU(int amount) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setMaxMRU(amount);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public int getMRU() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getMRU();
 	}
 
 	@Override
 	public void setMRU(int amount) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setMRU(amount);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public int addMRU(int amount, boolean doAdd) {
-		this.readIfChanged();
+		readIfChanged();
 		int ret = super.addMRU(amount, doAdd);
-		this.writeIfChanged();
+		writeIfChanged();
 		return ret;
 	}
 
 	@Override
 	public int extractMRU(int amount, boolean doExtract) {
-		this.readIfChanged();
+		readIfChanged();
 		int ret = super.extractMRU(amount, doExtract);
-		this.writeIfChanged();
+		writeIfChanged();
 		return ret;
 	}
 
 	@Override
 	public float getBalance() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getBalance();
 	}
 
 	@Override
 	public void setBalance(float balance) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setBalance(balance);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public boolean getShade() {
-		this.readIfChanged();
+		readIfChanged();
 		return super.getShade();
 	}
 
 	@Override
 	public void setShade(boolean shade) {
-		this.readIfChanged();
+		readIfChanged();
 		super.setShade(shade);
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
 	public boolean getStorage() {
-		this.readIfChanged();
+		readIfChanged();
 		return storage;
 	}
 
 	@Override
 	public void setStorage(boolean storage) {
-		this.readIfChanged();
+		readIfChanged();
 		if(storageSettable) {
 			this.storage = storage;
 		}
-		this.writeIfChanged();
+		writeIfChanged();
 	}
 
 	@Override
@@ -145,25 +145,25 @@ public class MRUItemStorage extends MRUStorage implements IMRUHandlerItem, ICapa
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		if(storageSettable) {
-			this.storage = nbt.getBoolean("storage");
+			storage = nbt.getBoolean("storage");
 		}
 	}
 
 	protected NBTTagCompound prevNBT = null;
 
 	protected void writeIfChanged() {
-		NBTTagCompound nbt = this.writeToNBT(this.storageStack.getTagCompound().copy());
+		NBTTagCompound nbt = writeToNBT(storageStack.getTagCompound().copy());
 		if(!nbt.equals(prevNBT)) {
-			this.storageStack.setTagCompound(nbt);
-			this.prevNBT = nbt.copy();
+			storageStack.setTagCompound(nbt);
+			prevNBT = nbt.copy();
 		}
 	}
 
 	protected void readIfChanged() {
-		NBTTagCompound nbt = this.storageStack.getTagCompound();
+		NBTTagCompound nbt = storageStack.getTagCompound();
 		if(!nbt.equals(prevNBT)) {
-			this.readFromNBT(nbt);
-			this.prevNBT = nbt.copy();
+			readFromNBT(nbt);
+			prevNBT = nbt.copy();
 		}
 	}
 

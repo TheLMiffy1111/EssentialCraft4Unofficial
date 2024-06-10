@@ -14,8 +14,8 @@ public class PotionMindfoldParadox extends Potion {
 
 	public PotionMindfoldParadox(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(7, 2);
-		this.setPotionName("potion.paradox");
+		setIconIndex(7, 2);
+		setPotionName("potion.paradox");
 		this.setRegistryName("essentialcraft", "potion.paradox");
 	}
 

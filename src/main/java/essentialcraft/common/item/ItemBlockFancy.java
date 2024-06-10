@@ -16,8 +16,8 @@ public class ItemBlockFancy extends ItemBlock {
 
 	public ItemBlockFancy(Block block) {
 		super(block);
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override

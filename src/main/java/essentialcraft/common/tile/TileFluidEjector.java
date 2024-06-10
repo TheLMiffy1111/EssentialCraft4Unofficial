@@ -5,9 +5,9 @@ import net.minecraft.util.EnumFacing;
 public class TileFluidEjector extends TileMRUGeneric {
 
 	public EnumFacing getRotation() {
-		int metadata = this.getBlockMetadata();
+		int metadata = getBlockMetadata();
 		metadata %= 6;
-		return EnumFacing.getFront(metadata);
+		return EnumFacing.byIndex(metadata);
 	}
 
 	public TileFluidEjector() {

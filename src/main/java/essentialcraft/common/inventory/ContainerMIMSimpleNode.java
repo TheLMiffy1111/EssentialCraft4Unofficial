@@ -13,6 +13,6 @@ public class ContainerMIMSimpleNode extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotGeneric(inv, 0, 80, 12));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

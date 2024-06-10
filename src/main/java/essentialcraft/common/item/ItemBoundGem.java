@@ -47,8 +47,9 @@ public class ItemBoundGem extends Item implements IModelRegisterer {
 		MiscUtils.getStackTag(is).setIntArray("pos", new int[]{pos.getX(),pos.getY(),pos.getZ()});
 		MiscUtils.getStackTag(is).setInteger("dim", player.dimension);
 		MiscUtils.getStackTag(is).setBoolean("created", !player.isSneaking());
-		if(stack.getCount() <= 0)
+		if(stack.getCount() <= 0) {
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+		}
 
 		if(!player.inventory.addItemStackToInventory(is)) {
 			player.dropItem(is, false);

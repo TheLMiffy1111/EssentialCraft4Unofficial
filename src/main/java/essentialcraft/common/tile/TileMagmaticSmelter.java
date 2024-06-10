@@ -40,7 +40,7 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(FluidUtil.getFluidContained(getStackInSlot(1)) != null && getStackInSlot(2).isEmpty()) {
 				if(lavaTank.getFluid() == null) {
 					lavaTank.fill(FluidUtil.getFluidContained(getStackInSlot(1)), true);
@@ -59,8 +59,9 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 				int[] oreIds = OreDictionary.getOreIDs(ore);
 
 				String oreName = "Unknown";
-				if(oreIds.length > 0)
+				if(oreIds.length > 0) {
 					oreName = OreDictionary.getOreName(oreIds[0]);
+				}
 				int metadata = -1;
 				for(int i = 0; i < OreSmeltingRecipe.RECIPES.size(); ++i) {
 					OreSmeltingRecipe oreColor = OreSmeltingRecipe.RECIPES.get(i);
@@ -73,20 +74,24 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 					if(getStackInSlot(4).isEmpty()) {
 						if(mruStorage.getMRU() >= mruUsage && lavaTank != null && lavaTank.getFluid() != null && lavaTank.getFluid().getFluid() == FluidRegistry.LAVA && lavaTank.getFluidAmount() > 0) {
 							mruStorage.extractMRU(mruUsage, true);
-							if(!getWorld().isRemote && getWorld().rand.nextFloat() <= 0.1F)
+							if(!getWorld().isRemote && getWorld().rand.nextFloat() <= 0.1F) {
 								lavaTank.drain(1, true);
-							if(getWorld().isRemote)
+							}
+							if(getWorld().isRemote) {
 								getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D + MathUtils.randomDouble(getWorld().rand) / 2.2D, pos.getY(), pos.getZ() + 0.5D + MathUtils.randomDouble(getWorld().rand) / 2.2D, 0, -0.1D, 0);
+							}
 							++progressLevel;
-							if(generatesCorruption)
+							if(generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+							}
 							if(progressLevel >= oreSmeltingTime) {
 								progressLevel = 0;
 								decrStackSize(3, 1);
 								int suggestedStackSize = OreSmeltingRecipe.RECIPES.get(metadata).dropAmount * 2;
 								setInventorySlotContents(4, OreSmeltingRecipe.getAlloyStack(OreSmeltingRecipe.RECIPES.get(metadata), suggestedStackSize));
-								if(getStackInSlot(7).isEmpty())
+								if(getStackInSlot(7).isEmpty()) {
 									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag,1,0));
+								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);
 									slagIS.grow(1);
@@ -98,24 +103,29 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 					else if(getStackInSlot(4).getItem() == ItemsCore.magicalAlloy && OreSmeltingRecipe.getIndex(getStackInSlot(4)) == metadata && getStackInSlot(4).getCount()+2 <= getStackInSlot(4).getMaxStackSize() && getStackInSlot(4).getCount() + 4 <= getInventoryStackLimit()) {
 						if(mruStorage.getMRU() >= mruUsage && lavaTank != null && lavaTank.getFluid() != null && lavaTank.getFluid().getFluid() == FluidRegistry.LAVA && lavaTank.getFluidAmount() > 0) {
 							mruStorage.extractMRU(mruUsage, true);
-							if(!getWorld().isRemote && getWorld().rand.nextFloat() <= 0.1F)
+							if(!getWorld().isRemote && getWorld().rand.nextFloat() <= 0.1F) {
 								lavaTank.drain(1, true);
-							if(getWorld().isRemote)
+							}
+							if(getWorld().isRemote) {
 								getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D + MathUtils.randomDouble(getWorld().rand) / 2.2D, pos.getY(), pos.getZ() + 0.5D + MathUtils.randomDouble(getWorld().rand) / 2.2D, 0, -0.1D, 0);
+							}
 							++progressLevel;
-							if(generatesCorruption)
+							if(generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+							}
 							if(progressLevel >= oreSmeltingTime) {
 								progressLevel = 0;
 								decrStackSize(3, 1);
 								int suggestedStackSize = OreSmeltingRecipe.RECIPES.get(metadata).dropAmount * 2;
 								ItemStack is = getStackInSlot(4);
 								is.grow(suggestedStackSize);
-								if(is.getCount() > is.getMaxStackSize())
+								if(is.getCount() > is.getMaxStackSize()) {
 									is.setCount(is.getMaxStackSize());
+								}
 								setInventorySlotContents(4, is);
-								if(getStackInSlot(7).isEmpty())
+								if(getStackInSlot(7).isEmpty()) {
 									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag, 1, 0));
+								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);
 									slagIS.grow(1);
@@ -125,11 +135,13 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 						}
 					}
 				}
-				else
+				else {
 					progressLevel = 0;
+				}
 			}
-			else
+			else {
 				progressLevel = 0;
+			}
 
 			ItemStack alloy = getStackInSlot(5);
 			if(!alloy.isEmpty() && getStackInSlot(5).getItem() == ItemsCore.magicalAlloy) {
@@ -137,10 +149,12 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 				String oreName = oreColor.oreName;
 				String outputName = oreColor.outputName;
 				String suggestedIngotName;
-				if(outputName.isEmpty())
+				if(outputName.isEmpty()) {
 					suggestedIngotName = "ingot" + oreName.substring(3);
-				else
+				}
+				else {
 					suggestedIngotName = outputName;
+				}
 				List<ItemStack> oreLst = OreDictionary.getOres(suggestedIngotName);
 
 				if(oreLst != null && !oreLst.isEmpty() && !getWorld().isRemote) {
@@ -148,19 +162,22 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 					if(getStackInSlot(6).isEmpty()) {
 						if(mruStorage.getMRU() >= smeltMRUUsage) {
 							mruStorage.extractMRU(smeltMRUUsage, true);
-							if(getWorld().isRemote)
+							if(getWorld().isRemote) {
 								getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5D+MathUtils.randomDouble(getWorld().rand)/2.2D, pos.getY(), pos.getZ()+0.5D+MathUtils.randomDouble(getWorld().rand)/2.2D, 0, -0.1D, 0);
+							}
 							++smeltingLevel;
-							if(generatesCorruption)
+							if(generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+							}
 							if(smeltingLevel >= alloySmeltingTime) {
 								decrStackSize(5, 1);
 								int suggestedStackSize = 2;
 								ingotStk.setCount(suggestedStackSize);
 								setInventorySlotContents(6, ingotStk);
 								smeltingLevel = 0;
-								if(getStackInSlot(7).isEmpty())
+								if(getStackInSlot(7).isEmpty()) {
 									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag,1,0));
+								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);
 									slagIS.grow(1);
@@ -172,22 +189,26 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 					else if(getStackInSlot(6).isItemEqual(ingotStk) && getStackInSlot(6).getCount()+2 <= getStackInSlot(6).getMaxStackSize() && getStackInSlot(6).getCount() + 2 <= getInventoryStackLimit()) {
 						if(mruStorage.getMRU() >= smeltMRUUsage) {
 							mruStorage.extractMRU(smeltMRUUsage, true);
-							if(getWorld().isRemote)
+							if(getWorld().isRemote) {
 								getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D + MathUtils.randomDouble(getWorld().rand) / 2.2D, pos.getY(), pos.getZ() + 0.5D + MathUtils.randomDouble(getWorld().rand) / 2.2D, 0, -0.1D, 0);
+							}
 							++smeltingLevel;
-							if(generatesCorruption)
+							if(generatesCorruption) {
 								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+							}
 							if(smeltingLevel >= alloySmeltingTime) {
 								decrStackSize(5, 1);
 								int suggestedStackSize = 2;
 								ItemStack is = getStackInSlot(6);
 								is.grow(suggestedStackSize);
-								if(is.getCount() > is.getMaxStackSize())
+								if(is.getCount() > is.getMaxStackSize()) {
 									is.setCount(is.getMaxStackSize());
+								}
 								setInventorySlotContents(6, is);
 								smeltingLevel = 0;
-								if(getStackInSlot(7).isEmpty())
+								if(getStackInSlot(7).isEmpty()) {
 									setInventorySlotContents(7, new ItemStack(ItemsCore.magicalSlag,1,0));
+								}
 								else if(getStackInSlot(7).getItem() == ItemsCore.magicalSlag && getStackInSlot(7).getCount() < 64) {
 									ItemStack slagIS = getStackInSlot(7);
 									slagIS.grow(1);
@@ -197,11 +218,13 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 						}
 					}
 				}
-				else
+				else {
 					smeltingLevel = 0;
+				}
 			}
-			else
+			else {
 				smeltingLevel = 0;
+			}
 		}
 	}
 

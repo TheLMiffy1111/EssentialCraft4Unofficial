@@ -12,10 +12,10 @@ public class GuiHeatGenerator extends GuiCommon{
 
 	public GuiHeatGenerator(Container c, TileEntity tile) {
 		super(c,tile);
-		this.elementList.add(new GuiMRUStorage(7, 4, tile));
-		this.elementList.add(new GuiMRUState(25, 58, tile, 0));
-		this.elementList.add(new GuiBalanceState(25, 22, tile));
-		this.elementList.add(new GuiMRUGenerated(25, 40,tile,"heatGenerator"));
+		elementList.add(new GuiMRUStorage(7, 4, tile));
+		elementList.add(new GuiMRUState(25, 58, tile, 0));
+		elementList.add(new GuiBalanceState(25, 22, tile));
+		elementList.add(new GuiMRUGenerated(25, 40,tile,"heatGenerator"));
 	}
 
 

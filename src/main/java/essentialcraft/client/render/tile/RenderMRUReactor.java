@@ -27,7 +27,7 @@ public class RenderMRUReactor extends TileEntitySpecialRenderer<TileMRUReactor>
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y, (float)z+0.5F);
-		this.bindTexture(stextures);
+		bindTexture(stextures);
 		if(!tile.isStructureCorrect)
 		{
 			GlStateManager.color(0.4F, 0.4F, 0.4F);
@@ -44,12 +44,11 @@ public class RenderMRUReactor extends TileEntitySpecialRenderer<TileMRUReactor>
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-		if(tile.isStructureCorrect())
-			for(int i = 0; i < tile.lightnings.size(); ++i)
-			{
-				Lightning l = tile.lightnings.get(i);
+		if(tile.isStructureCorrect()) {
+			for(Lightning l : tile.lightnings) {
 				l.render(x, y, z, partialTicks);
 			}
+		}
 		GlStateManager.popMatrix();
 
 		RenderHelper.enableStandardItemLighting();
@@ -57,6 +56,6 @@ public class RenderMRUReactor extends TileEntitySpecialRenderer<TileMRUReactor>
 
 	@Override
 	public void render(TileMRUReactor tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

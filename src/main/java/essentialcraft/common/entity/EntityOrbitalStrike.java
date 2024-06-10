@@ -37,19 +37,19 @@ public class EntityOrbitalStrike extends Entity {
 
 	public EntityOrbitalStrike(World w) {
 		super(w);
-		this.setSize(0.3F, 0.3F);
+		setSize(0.3F, 0.3F);
 	}
 
 	public EntityOrbitalStrike(World w, double x, double y, double z) {
 		this(w);
-		this.setPositionAndRotation(x, y, z, 0, 0);
+		setPositionAndRotation(x, y, z, 0, 0);
 	}
 
 	public EntityOrbitalStrike(World w, double x, double y, double z, double damage, double delay, EntityLivingBase base) {
 		this(w,x,y,z);
 		this.damage = damage;
 		this.delay = delay;
-		this.attacker = base;
+		attacker = base;
 	}
 
 	public EntityLivingBase attacker;
@@ -58,7 +58,7 @@ public class EntityOrbitalStrike extends Entity {
 
 	@Override
 	protected void entityInit() {
-		this.getDataManager().register(DATA, "||null:null");
+		getDataManager().register(DATA, "||null:null");
 	}
 
 	@Override
@@ -76,24 +76,17 @@ public class EntityOrbitalStrike extends Entity {
 	@Override
 	public void onUpdate() {
 		delay -= 0.05D;
-		if(!this.getEntityWorld().isRemote) {
-			this.getDataManager().set(DATA, String.valueOf(delay));
+		if(!getEntityWorld().isRemote) {
+			getDataManager().set(DATA, String.valueOf(delay));
 		}
-		if(this.ticksExisted == 3) {
-			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.orbital_strike", 1, 1F, 16,this.dimension);
+		if(ticksExisted == 3) {
+			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.orbital_strike", 1, 1F, 16,dimension);
 		}
-		if(delay <= 0 && !this.isDead) {
-			if(!this.getEntityWorld().isRemote) {
-				List<EntityLivingBase> allEntities = this.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D).grow(2, 2, 2));
-				for(int i = 0; i < allEntities.size(); ++i) {
-					EntityLivingBase elb = allEntities.get(i);
-					if(elb == null) {
-						continue;
-					}
-					if(elb.isDead) {
-						continue;
-					}
-					if(elb == this.attacker) {
+		if(delay <= 0 && !isDead) {
+			if(!getEntityWorld().isRemote) {
+				List<EntityLivingBase> allEntities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D).grow(2, 2, 2));
+				for(EntityLivingBase elb : allEntities) {
+					if((elb == null) || elb.isDead || (elb == attacker)) {
 						continue;
 					}
 					elb.setFire(2);
@@ -104,27 +97,27 @@ public class EntityOrbitalStrike extends Entity {
 						}
 					}.setDamageIsAbsolute(), (float)damage);
 				}
-				this.setDead();
+				setDead();
 			}
 
 			for(int i = 0; i < 3; ++i) {
-				this.getEntityWorld().playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1, this.rand.nextFloat()*2, false);
+				getEntityWorld().playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1, rand.nextFloat()*2, false);
 			}
 			for(int i = 0; i < 20; ++i) {
-				this.getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX+MathUtils.randomDouble(rand), posY+MathUtils.randomDouble(rand), posZ+MathUtils.randomDouble(rand), 0, 0, 0);
+				getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX+MathUtils.randomDouble(rand), posY+MathUtils.randomDouble(rand), posZ+MathUtils.randomDouble(rand), 0, 0, 0);
 			}
-			if(!this.getEntityWorld().isRemote && this.getEntityWorld().getGameRules().getBoolean("mobGriefing")) {
+			if(!getEntityWorld().isRemote && getEntityWorld().getGameRules().getBoolean("mobGriefing")) {
 				for(int dx = -2; dx <= 2; ++dx) {
 					int x = MathHelper.floor(posX) + dx;
 					for(int dy = -2; dy <= 2; ++dy) {
 						int y = MathHelper.floor(posY) + dy;
 						for(int dz = -2; dz <= 2; ++dz) {
 							int z = MathHelper.floor(posZ) + dz;
-							IBlockState b = this.getEntityWorld().getBlockState(new BlockPos(x, y, z));
-							if(!this.getEntityWorld().isAirBlock(new BlockPos(x, y, z))) {
+							IBlockState b = getEntityWorld().getBlockState(new BlockPos(x, y, z));
+							if(!getEntityWorld().isAirBlock(new BlockPos(x, y, z))) {
 								if(b.getMaterial() == Material.WATER || b.getMaterial() == Material.ICE || b.getMaterial() == Material.SNOW) {
-									if(!this.getEntityWorld().isRemote) {
-										this.getEntityWorld().setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState(), 3);
+									if(!getEntityWorld().isRemote) {
+										getEntityWorld().setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState(), 3);
 									}
 									getEntityWorld().playSound(x + 0.5F, y + 0.5F, z + 0.5F, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (getEntityWorld().rand.nextFloat() - getEntityWorld().rand.nextFloat()) * 0.8F, false);
 									for(int l = 0; l < 8; ++l) {
@@ -137,17 +130,17 @@ public class EntityOrbitalStrike extends Entity {
 								if(!result.isEmpty()) {
 									if(result.getItem() instanceof ItemBlock) {
 										Block setTo = ((ItemBlock)result.getItem()).getBlock();
-										if(setTo != null && !this.getEntityWorld().isRemote) {
-											this.getEntityWorld().setBlockState(new BlockPos(x, y, z), setTo.getStateFromMeta(result.getItemDamage()), 3);
+										if(setTo != null && !getEntityWorld().isRemote) {
+											getEntityWorld().setBlockState(new BlockPos(x, y, z), setTo.getStateFromMeta(result.getItemDamage()), 3);
 										}
 									}
 									else {
-										if(!this.getEntityWorld().isRemote) {
-											this.getEntityWorld().setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState(), 3);
+										if(!getEntityWorld().isRemote) {
+											getEntityWorld().setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState(), 3);
 										}
-										EntityItem itm = new EntityItem(this.getEntityWorld(),x,y,z,result.copy());
-										if(!this.getEntityWorld().isRemote) {
-											this.getEntityWorld().spawnEntity(itm);
+										EntityItem itm = new EntityItem(getEntityWorld(),x,y,z,result.copy());
+										if(!getEntityWorld().isRemote) {
+											getEntityWorld().spawnEntity(itm);
 										}
 									}
 								}
@@ -157,9 +150,9 @@ public class EntityOrbitalStrike extends Entity {
 				}
 			}
 		}
-		if(this.getEntityWorld().isRemote) {
+		if(getEntityWorld().isRemote) {
 			try {
-				this.delay = Double.parseDouble(this.getDataManager().get(DATA));
+				delay = Double.parseDouble(getDataManager().get(DATA));
 			}
 			catch(Exception e) {
 

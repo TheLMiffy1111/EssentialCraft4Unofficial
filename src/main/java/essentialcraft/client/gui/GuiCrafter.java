@@ -26,17 +26,15 @@ public class GuiCrafter extends GuiCommon{
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f1,int i1, int i2) {
 		GlStateManager.color(1, 1, 1);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.mc.renderEngine.bindTexture(guiGenLocation);
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		mc.renderEngine.bindTexture(guiGenLocation);
+		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
 
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();
 
-		for(int i = 0; i < this.inventorySlots.inventorySlots.size(); ++i)
-		{
-			Slot slt = this.inventorySlots.inventorySlots.get(i);
+		for(Slot slt : inventorySlots.inventorySlots) {
 			renderSlot(slt);
 			GlStateManager.color(1, 1, 1);
 
@@ -45,9 +43,7 @@ public class GuiCrafter extends GuiCommon{
 		GlStateManager.color(1, 1, 1);
 
 		RenderHelper.enableStandardItemLighting();
-		for(int i = 0; i < this.elementList.size(); ++i)
-		{
-			GuiElement element = elementList.get(i);
+		for(GuiElement element : elementList) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(element.getElementTexture());
 			element.draw(k+element.getX(),l+element.getY(),i1,i2);
 			GlStateManager.color(1, 1, 1);
@@ -63,27 +59,28 @@ public class GuiCrafter extends GuiCommon{
 	@Override
 	public void renderSlot(Slot slt)
 	{
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.mc.renderEngine.bindTexture(slotLocation);
-		if(slt.slotNumber != 9)
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		mc.renderEngine.bindTexture(slotLocation);
+		if(slt.slotNumber != 9) {
 			this.drawTexturedModalRect(k+slt.xPos-1, l+slt.yPos-1, 7, 83, 18, 18);
+		}
 
 		if(slt.slotNumber < 9)
 		{
-			if(this.crafter.hasFrame())
+			if(crafter.hasFrame())
 			{
 				if(!slt.getHasStack())
 				{
-					ItemStack[] retStk = this.crafter.getRecipeFromFrame();
+					ItemStack[] retStk = crafter.getRecipeFromFrame();
 					if(!retStk[slt.slotNumber].isEmpty())
 					{
 						itemRender.zLevel = 100.0F;
-						this.zLevel = 100.0F;
+						zLevel = 100.0F;
 						GL11.glColor4d(0.5D, 0.5D, 0.5D, 1D);
 						itemRender.renderItemAndEffectIntoGUI(retStk[slt.slotNumber], k+slt.xPos, l+slt.yPos);
 						itemRender.zLevel = 0.0F;
-						this.zLevel = 0.0F;
+						zLevel = 0.0F;
 					}
 				}
 			}

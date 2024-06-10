@@ -18,6 +18,6 @@ public class ContainerCrafter extends ContainerInventory {
 
 		addSlotToContainer(new SlotGeneric(inv, 9, 124, 35));
 		addSlotToContainer(new SlotGeneric(inv, 10, 94, 17));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

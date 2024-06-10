@@ -8,6 +8,5 @@ import net.minecraft.item.ItemStack;
  */
 public interface IWindModifyHandler {
 
-	public float getModifier(ItemStack stk, EntityPlayer p);
-
+	public float getModifier(ItemStack stack, EntityPlayer player);
 }

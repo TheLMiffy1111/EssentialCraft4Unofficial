@@ -125,7 +125,7 @@ public class RenderHandlerEC {
 	public static final IModelCustom board = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft","models/item/board.obj"));
 	public static final ResourceLocation boardTextures = new ResourceLocation("essentialcraft","textures/models/board.png");
 
-	public static HashMap<IInventory, HashMap<Integer,List<EnumFacing>>> slotsTable = new HashMap<IInventory, HashMap<Integer, List<EnumFacing>>>();
+	public static HashMap<IInventory, HashMap<Integer,List<EnumFacing>>> slotsTable = new HashMap<>();
 
 	public void renderParadox()
 	{
@@ -153,11 +153,12 @@ public class RenderHandlerEC {
 				MiscUtils.setShaders(-1);
 				renderImage(whitebox, k, l, 1,1,1,1);
 			}
-			if(currentParadoxTicks >= 10)
+			if(currentParadoxTicks >= 10) {
 				for(int i = 0; i < 20; ++i)
 				{
 					mc.world.spawnParticle(EnumParticleTypes.REDSTONE, mc.player.posX+MathUtils.randomDouble(mc.world.rand)*16, mc.player.posY+MathUtils.randomDouble(mc.world.rand)*16, mc.player.posZ+MathUtils.randomDouble(mc.world.rand)*16, -1, 0, 0);
 				}
+			}
 		}
 		if(paradoxID == 1)
 		{
@@ -240,10 +241,10 @@ public class RenderHandlerEC {
 
 	public static IInventory getInventoryFromContainer(GuiContainer gc)
 	{
-		for(int i = 0; i < gc.inventorySlots.inventorySlots.size(); ++i) {
-			Slot slt = gc.inventorySlots.inventorySlots.get(i);
-			if(slt != null)
+		for(Slot slt : gc.inventorySlots.inventorySlots) {
+			if(slt != null) {
 				return slt.inventory;
+			}
 		}
 		return null;
 	}
@@ -298,7 +299,7 @@ public class RenderHandlerEC {
 					float f7 = f4 * f5;
 					float f8 = f3 * f5;
 					double d3 = 32.0D;
-					Vec3d distanced = lookVec.addVector(f7 * d3, f6 * d3, f8 * d3);
+					Vec3d distanced = lookVec.add(f7 * d3, f6 * d3, f8 * d3);
 					RayTraceResult mop = p.getEntityWorld().rayTraceBlocks(lookVec, distanced, true, false, false);
 
 					if(mop != null && mop.typeOfHit == Type.BLOCK) {
@@ -335,8 +336,9 @@ public class RenderHandlerEC {
 
 			double dist = p.getDistance(mx+0.5D, my+0.5D, mz+0.5D);
 
-			if(dist > 24)
+			if(dist > 24) {
 				return;
+			}
 
 			GlStateManager.pushMatrix();
 
@@ -408,11 +410,9 @@ public class RenderHandlerEC {
 
 				double dist = p.getDistance(mx+0.5D, my+0.5D, mz+0.5D);
 
-				if(dist > 24)
+				if((dist > 24) || !p.getEntityWorld().isBlockLoaded(new BlockPos((int)mx, (int)my, (int)mz))) {
 					return;
-
-				if(!p.getEntityWorld().isBlockLoaded(new BlockPos((int)mx, (int)my, (int)mz)))
-					return;
+				}
 
 				AxisAlignedBB aabb = p.getEntityWorld().getBlockState(new BlockPos((int)mx, (int)my, (int)mz)).getBlock().getSelectedBoundingBox(p.getEntityWorld().getBlockState(new BlockPos((int)mx, (int)my, (int)mz)),p.getEntityWorld(), new BlockPos((int)mx, (int)my, (int)mz));
 
@@ -645,21 +645,21 @@ public class RenderHandlerEC {
 							ISidedInventory sided = (ISidedInventory) inv;
 							if(RenderHandlerEC.slotsTable.isEmpty() || !RenderHandlerEC.slotsTable.containsKey(inv)) {
 								RenderHandlerEC.slotsTable.clear();
-								HashMap<Integer, List<EnumFacing>> accessibleSlots = new HashMap<Integer, List<EnumFacing>>();
+								HashMap<Integer, List<EnumFacing>> accessibleSlots = new HashMap<>();
 								for(int j = 0; j < 6; ++j) {
-									EnumFacing d = EnumFacing.getFront(j);
+									EnumFacing d = EnumFacing.byIndex(j);
 									int[] slots = sided.getSlotsForFace(d);
 									if(slots != null) {
-										for(int i1 = 0; i1 < slots.length; ++i1) {
-											int slotN = slots[i1];
+										for(int slotN : slots) {
 											if(accessibleSlots.containsKey(slotN)) {
 												List<EnumFacing> lst = accessibleSlots.get(slotN);
-												if(!lst.contains(d))
+												if(!lst.contains(d)) {
 													lst.add(d);
+												}
 												accessibleSlots.put(slotN, lst);
 											}
 											else {
-												List<EnumFacing> lst = new ArrayList<EnumFacing>();
+												List<EnumFacing> lst = new ArrayList<>();
 												lst.add(d);
 												accessibleSlots.put(slotN, lst);
 											}
@@ -670,8 +670,7 @@ public class RenderHandlerEC {
 							}
 						}
 
-						for(int i = 0; i < gc.inventorySlots.inventorySlots.size(); ++i) {
-							Slot slt = gc.inventorySlots.inventorySlots.get(i);
+						for(Slot slt : gc.inventorySlots.inventorySlots) {
 							if(slt.inventory instanceof TileEntity || slt.inventory instanceof InventoryBasic) {
 
 								GlStateManager.pushMatrix();
@@ -709,23 +708,27 @@ public class RenderHandlerEC {
 	@SideOnly(Side.CLIENT)
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if(event.phase == Phase.START) {
-			if(ItemInventoryGem.clickTicks > 0)
+			if(ItemInventoryGem.clickTicks > 0) {
 				--ItemInventoryGem.clickTicks;
-			if(ItemInventoryGem.clickTicks == 0)
+			}
+			if(ItemInventoryGem.clickTicks == 0) {
 				ItemInventoryGem.currentlyClicked = null;
+			}
 		}
 		ClientProxy.playingMusic.removeIf(pair->!Minecraft.getMinecraft().getSoundHandler().isSoundPlaying(pair.getRight()));
-		if(event.player.getEntityWorld().isRemote && event.phase == Phase.START)
+		if(event.player.getEntityWorld().isRemote && event.phase == Phase.START) {
 			if(event.player instanceof EntityPlayerSP) {
 				EntityPlayerSP player = (EntityPlayerSP)event.player;
 
 				if(PotionRegistry.paradox != null && mc.player.getActivePotionEffect(PotionRegistry.paradox) != null) {
 					int duration = mc.player.getActivePotionEffect(PotionRegistry.paradox).getDuration();
 					if(duration > 100) {
-						if(duration % 100 == 0)
+						if(duration % 100 == 0) {
 							mc.world.playSound(mc.player.posX, mc.player.posY, mc.player.posZ, SoundRegistry.potionHeartbeat, SoundCategory.PLAYERS, 100, 1, true);
-						if(currentParadoxTicks > 0)
+						}
+						if(currentParadoxTicks > 0) {
 							--currentParadoxTicks;
+						}
 						if(currentParadoxTicks == 0 && duration < 1600) {
 							paradoxID = -1;
 							isParadoxActive = false;
@@ -747,8 +750,9 @@ public class RenderHandlerEC {
 
 				if(renderPartialTicksCheck > 0) {
 					--renderPartialTicksCheck;
-					if(renderPartialTicksCheck <= 0)
+					if(renderPartialTicksCheck <= 0) {
 						Minecraft.getMinecraft().world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1F, 2F, false);
+					}
 				}
 
 				if(!ClientProxy.kbArmorVision.isKeyDown() && isNightVisionKeyDown) {
@@ -785,16 +789,18 @@ public class RenderHandlerEC {
 						player.motionX += lookVec.x*3;
 						player.motionY += lookVec.y*3;
 						player.motionZ += lookVec.z*3;
-						for(int i = 0; i < 10; ++i)
+						for(int i = 0; i < 10; ++i) {
 							player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_FIREWORK_LARGE_BLAST, SoundCategory.PLAYERS, 1, 0.01F+player.getEntityWorld().rand.nextFloat(), false);
+						}
 						renderPartialTicksCheck = 20;
 					}
 				}
 
 				if(!player.capabilities.isFlying && player.isInWater() && ItemComputerArmor.hasFullset(player) && Minecraft.getMinecraft().gameSettings.keyBindForward.isKeyDown()) {
 					player.motionX *= 1.2D;
-					if(player.motionY > 0)
+					if(player.motionY > 0) {
 						player.motionY *= 1.2D;
+					}
 					player.motionZ *= 1.2D;
 
 					double d8, d9, d2, d4;
@@ -805,10 +811,12 @@ public class RenderHandlerEC {
 
 					d8 = player.posX - d2 * d5 * 0.8D + d4 * d6;
 					d9 = player.posZ - d4 * d5 * 0.8D - d2 * d6;
-					for(int i = 0; i < 10; ++i)
+					for(int i = 0; i < 10; ++i) {
 						player.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_BUBBLE, d8, player.posY - 0.125D, d9, player.motionX, player.motionY, player.motionZ);
+					}
 				}
 			}
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -844,8 +852,9 @@ public class RenderHandlerEC {
 					GlStateManager.glBegin(GL11.GL_TRIANGLE_FAN);
 
 					float renderTime = Minecraft.getMinecraft().player.ticksExisted % 40;
-					if(renderTime > 20)
+					if(renderTime > 20) {
 						renderTime = 40 - renderTime;
+					}
 
 					GlStateManager.color(0, 1, 1, MathHelper.clamp(renderTime/20,0.1F,0.8F));
 
@@ -905,13 +914,15 @@ public class RenderHandlerEC {
 					GlStateManager.glBegin(GL11.GL_TRIANGLE_FAN);
 
 					float renderTime = Minecraft.getMinecraft().player.ticksExisted % 40;
-					if(renderTime > 20)
+					if(renderTime > 20) {
 						renderTime = 40 - renderTime;
+					}
 
 					float cB = 0.2F;
 
-					if(isNightVisionActive)
+					if(isNightVisionActive) {
 						cB = 1F;
+					}
 
 					GlStateManager.color(0, 0, cB, MathHelper.clamp(renderTime/20,0.1F,0.8F));
 
@@ -959,9 +970,9 @@ public class RenderHandlerEC {
 				RayTraceResult target = p.rayTrace(mc.playerController.getBlockReachDistance(), event.getPartialTicks());
 
 				if(target != null && target.typeOfHit == RayTraceResult.Type.BLOCK) {
-					int x = target.getBlockPos().getX();
-					int y = target.getBlockPos().getY();
-					int z = target.getBlockPos().getZ();
+					target.getBlockPos().getX();
+					target.getBlockPos().getY();
+					target.getBlockPos().getZ();
 					Block b = p.getEntityWorld().getBlockState(target.getBlockPos()).getBlock();
 					if(b != null && b instanceof BlockWindRune) {
 						TileWindRune rune = (TileWindRune)p.getEntityWorld().getTileEntity(target.getBlockPos());
@@ -975,15 +986,18 @@ public class RenderHandlerEC {
 									int color;
 									boolean creative = p.capabilities.isCreativeMode;
 
-									if(energy < energyReq && !creative)
+									if(energy < energyReq && !creative) {
 										color = 0xFF0000;
-									else
+									}
+									else {
 										color = 0x00FF66;
+									}
 
 									ScaledResolution res = new ScaledResolution(mc);
 									String displayed = energyReq+" ESPE";
-									if(creative)
+									if(creative) {
 										displayed += " [Creative]";
+									}
 									String energyDisplay = energy+" ESPE";
 									Minecraft.getMinecraft().fontRenderer.drawString(displayed, res.getScaledWidth()/2-displayed.length()*3, res.getScaledHeight()/2, color);
 									Minecraft.getMinecraft().fontRenderer.drawString(energyDisplay, res.getScaledWidth()/2-energyDisplay.length()*3, res.getScaledHeight()/2+10, 0xFFFFFF);
@@ -1141,8 +1155,12 @@ public class RenderHandlerEC {
 					ScaledResolution scaledresolution = new ScaledResolution(mc);
 					int k = scaledresolution.getScaledWidth();
 					int l = scaledresolution.getScaledHeight();
-					if(k < l) k = l;
-					if(k > l) k = l;
+					if(k < l) {
+						k = l;
+					}
+					if(k > l) {
+						k = l;
+					}
 
 					Minecraft.getMinecraft().getTextureManager().bindTexture(loc);
 					GlStateManager.depthMask(false);

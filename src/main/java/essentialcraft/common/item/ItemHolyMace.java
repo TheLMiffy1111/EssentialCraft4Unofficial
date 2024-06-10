@@ -33,9 +33,9 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 
 	public ItemHolyMace() {
 		super(ItemsCore.elemental);
-		this.maxStackSize = 1;
-		this.bFull3D = true;
-		this.setMaxDamage(0);
+		maxStackSize = 1;
+		bFull3D = true;
+		setMaxDamage(0);
 	}
 
 	public static Capability<IMRUHandlerItem> MRU_HANDLER_ITEM_CAPABILITY = CapabilityMRUHandler.MRU_HANDLER_ITEM_CAPABILITY;
@@ -56,7 +56,7 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
 	{
-		if(this.isInCreativeTab(par2CreativeTabs)) {
+		if(isInCreativeTab(par2CreativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);

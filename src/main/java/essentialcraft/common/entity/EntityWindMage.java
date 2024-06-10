@@ -2,7 +2,6 @@ package essentialcraft.common.entity;
 
 import essentialcraft.common.item.ItemsCore;
 import essentialcraft.common.registry.LootTableRegistry;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,7 +20,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -45,28 +43,28 @@ public class EntityWindMage extends EntityMob implements IRangedAttackMob {
 
 	public EntityWindMage(World world) {
 		super(world);
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 0, true, false, null));
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(6, new EntityAILookIdle(this));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, 0, true, false, null));
 
 		if(world != null && !world.isRemote) {
-			this.setCombatTask();
+			setCombatTask();
 		}
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.getDataManager().register(TYPE, new Byte((byte)0));
+		getDataManager().register(TYPE, new Byte((byte)0));
 	}
 
 	@Override
@@ -88,15 +86,15 @@ public class EntityWindMage extends EntityMob implements IRangedAttackMob {
 	public void updateRidden() {
 		super.updateRidden();
 
-		if(this.getRidingEntity() instanceof EntityCreature) {
-			EntityCreature entitycreature = (EntityCreature)this.getRidingEntity();
-			this.renderYawOffset = entitycreature.renderYawOffset;
+		if(getRidingEntity() instanceof EntityCreature) {
+			EntityCreature entitycreature = (EntityCreature)getRidingEntity();
+			renderYawOffset = entitycreature.renderYawOffset;
 		}
 	}
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		switch(this.getType()) {
+		switch(getType()) {
 		case 0: return LootTableRegistry.ENTITY_WINDMAGE_APPRENTICE;
 		case 1: return LootTableRegistry.ENTITY_WINDMAGE_NORMAL;
 		case 2: return LootTableRegistry.ENTITY_WINDMAGE_ARCHMAGE;
@@ -106,29 +104,29 @@ public class EntityWindMage extends EntityMob implements IRangedAttackMob {
 
 
 	public void setCombatTask() {
-		this.tasks.removeTask(this.aiAttackOnCollide);
-		this.tasks.removeTask(this.aiArrowAttack);
-		this.tasks.addTask(4, this.aiArrowAttack);
+		tasks.removeTask(aiAttackOnCollide);
+		tasks.removeTask(aiArrowAttack);
+		tasks.addTask(4, aiArrowAttack);
 	}
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-		EntityMRUArrow entityarrow = new EntityMRUArrow(this.getEntityWorld(), this, 1.6F);
-		double d0 = target.posX - this.posX;
+		EntityMRUArrow entityarrow = new EntityMRUArrow(getEntityWorld(), this, 1.6F);
+		double d0 = target.posX - posX;
 		double d1 = target.getEntityBoundingBox().minY + target.height / 3.0F - entityarrow.posY;
-		double d2 = target.posZ - this.posZ;
+		double d2 = target.posZ - posZ;
 		double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
-		entityarrow.setThrowableHeading(d0, d1 + d3 * 0.2D, d2, 1.6F, 14 - this.getEntityWorld().getDifficulty().getDifficultyId() * 4);
-		entityarrow.setDamage((this.getType()+1)*3);
-		this.getEntityWorld().spawnEntity(entityarrow);
+		entityarrow.shoot(d0, d1 + d3 * 0.2D, d2, 1.6F, 14 - getEntityWorld().getDifficulty().getId() * 4);
+		entityarrow.setDamage((getType()+1)*3);
+		getEntityWorld().spawnEntity(entityarrow);
 	}
 
 	public int getType() {
-		return this.getDataManager().get(TYPE);
+		return getDataManager().get(TYPE);
 	}
 
 	public void setType(int type) {
-		this.getDataManager().set(TYPE, Byte.valueOf((byte)type));
+		getDataManager().set(TYPE, Byte.valueOf((byte)type));
 	}
 
 	@Override
@@ -137,22 +135,22 @@ public class EntityWindMage extends EntityMob implements IRangedAttackMob {
 
 		if(nbt.hasKey("Type")) {
 			byte b0 = nbt.getByte("Type");
-			this.setType(b0);
+			setType(b0);
 		}
 
-		this.setCombatTask();
+		setCombatTask();
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setByte("Type", (byte)this.getType());
+		nbt.setByte("Type", (byte)getType());
 	}
 
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingData) {
 		livingData = super.onInitialSpawn(difficulty, livingData);
-		this.setType(this.getEntityWorld().rand.nextInt(3));
+		setType(getEntityWorld().rand.nextInt(3));
 		return livingData;
 	}
 

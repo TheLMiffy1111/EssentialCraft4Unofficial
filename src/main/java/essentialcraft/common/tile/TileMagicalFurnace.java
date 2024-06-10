@@ -53,8 +53,9 @@ public class TileMagicalFurnace extends TileMRUGeneric {
 		super.update();
 		spawnParticles();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			smelt();
+		}
 	}
 
 	protected static boolean testBlock(IBlockAccess world, BlockPos pos, Block block) {
@@ -132,16 +133,18 @@ public class TileMagicalFurnace extends TileMRUGeneric {
 				}
 			}
 		}
-		else
+		else {
 			progressLevel = 0;
+		}
 	}
 
 	public EntityItem getSmeltingItem() {
 		EntityItem ret = null;
 		List<EntityItem> l = getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+2, pos.getZ()+1));
 		for(EntityItem item : l) {
-			if(!FurnaceRecipes.instance().getSmeltingResult(item.getItem()).isEmpty())
+			if(!FurnaceRecipes.instance().getSmeltingResult(item.getItem()).isEmpty()) {
 				return item;
+			}
 		}
 		return ret;
 	}

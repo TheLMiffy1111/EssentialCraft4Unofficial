@@ -10,9 +10,9 @@ public class PotionWindTouch extends Potion {
 
 	public PotionWindTouch(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(6, 1);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.windTouch");
+		setIconIndex(6, 1);
+		setEffectiveness(0.25D);
+		setPotionName("potion.windTouch");
 		this.setRegistryName("essentialcraft", "potion.windtouch");
 	}
 

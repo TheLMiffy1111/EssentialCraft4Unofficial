@@ -13,6 +13,6 @@ public class ContainerDemon extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotGeneric(inv, 0, 80, 30));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

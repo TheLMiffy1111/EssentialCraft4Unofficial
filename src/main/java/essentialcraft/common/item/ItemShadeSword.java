@@ -49,16 +49,19 @@ public class ItemShadeSword extends ItemSwordEC {
 	@Override
 	public void onUpdate(ItemStack sword, World w, Entity e, int slotNum, boolean held)
 	{
-		if(e instanceof IShadeHandlerEntity)
+		if(e instanceof IShadeHandlerEntity) {
 			toggleActivity(sword,true);
+		}
 
 		if(e instanceof EntityPlayer)
 		{
 			EntityPlayer p = (EntityPlayer)e;
-			if(ECUtils.getData(p).getMatrixTypeID() == 4)
+			if(ECUtils.getData(p).getMatrixTypeID() == 4) {
 				toggleActivity(sword,true);
-			else
+			}
+			else {
 				toggleActivity(sword,false);
+			}
 		}
 	}
 
@@ -99,14 +102,17 @@ public class ItemShadeSword extends ItemSwordEC {
 					//swap
 					Vec3d offsetVec = new Vec3d(attacker.posX-attacked.posX, attacked.posY-attacker.posY, attacker.posZ-attacked.posZ);
 					float newYaw = 0;
-					if(attacker.rotationYawHead >= 180)
+					if(attacker.rotationYawHead >= 180) {
 						newYaw = attacker.rotationYawHead - 180;
-					else
+					}
+					else {
 						newYaw = attacker.rotationYawHead + 180;
+					}
 					attacker.setPositionAndRotation(attacked.posX-offsetVec.x, attacker.posY, attacked.posZ-offsetVec.z, newYaw, attacker.rotationPitch);
 					attacker.rotationYawHead = newYaw;
-					if(attacker instanceof EntityPlayer)
+					if(attacker instanceof EntityPlayer) {
 						ECUtils.changePlayerPositionOnClient((EntityPlayer)attacker);
+					}
 				}
 				if(attacker.getEntityWorld().rand.nextDouble() <= 0.1D)
 				{

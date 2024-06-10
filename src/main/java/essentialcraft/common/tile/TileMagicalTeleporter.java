@@ -62,8 +62,9 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 		spawnParticles();
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			tryTeleport();
+		}
 	}
 
 	protected static boolean testBlock(IBlockAccess world, BlockPos pos, Block block) {
@@ -107,7 +108,7 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 			);
 
 	public void tryTeleport() {
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(hasRequiredItemToTeleport() && hasPlayer() && structureChecker.test(getWorld(), getPos())) {
 				if(mruStorage.getMRU() >= getTPCost()) {
 					EntityPlayer player = getPlayer();
@@ -115,8 +116,9 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 					getWorld().playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_MINECART_RIDING, SoundCategory.BLOCKS, 0.1F, 0.8F + (float)progressLevel/teleportTime, false);
 					if(progressLevel >= teleportTime) {
 						mruStorage.extractMRU(getTPCost(), true);
-						if(generatesCorruption)
+						if(generatesCorruption) {
 							ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+						}
 						int[] tpCoords = getCoordsToTP();
 						for(int i = 0; i < 20; ++i) {
 							getWorld().playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_FIREWORK_LARGE_BLAST_FAR, SoundCategory.BLOCKS, 1.0F, 0.5F+MathUtils.randomFloat(getWorld().rand));
@@ -140,8 +142,9 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 					}
 				}
 			}
-			else
+			else {
 				progressLevel = 0;
+			}
 		}
 	}
 
@@ -164,15 +167,17 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 
 	public EntityPlayer getPlayer() {
 		List<EntityPlayer> l = getWorld().<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+2, pos.getZ()+1));
-		if(!l.isEmpty())
+		if(!l.isEmpty()) {
 			return l.get(0);
+		}
 		return null;
 	}
 
 	public boolean hasPlayer() {
 		List<EntityPlayer> l = getWorld().<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+2, pos.getZ()+1));
-		if(!l.isEmpty())
+		if(!l.isEmpty()) {
 			return true;
+		}
 		return false;
 	}
 

@@ -23,14 +23,15 @@ public class TileMoonWell extends TileMRUGeneric {
 	@Override
 	public void update() {
 		super.update();
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			int moonPhase = getWorld().provider.getMoonPhase(getWorld().getWorldTime());
 			double moonFactor = Math.abs(1D-moonPhase*0.25D);
 			double mruGen = mruGenerated;
 			mruGen *= moonFactor;
 			double heightFactor = 1D;
-			if(pos.getY() > maxHeight)
+			if(pos.getY() > maxHeight) {
 				heightFactor = 0D;
+			}
 			else {
 				heightFactor = 1D - (double)pos.getY()/maxHeight;
 				mruGen *= heightFactor;

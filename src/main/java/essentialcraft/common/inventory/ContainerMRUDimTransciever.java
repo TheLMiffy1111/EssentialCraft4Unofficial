@@ -13,6 +13,6 @@ public class ContainerMRUDimTransciever extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 29, 32));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

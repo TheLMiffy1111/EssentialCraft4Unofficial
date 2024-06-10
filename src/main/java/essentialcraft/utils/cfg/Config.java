@@ -29,8 +29,9 @@ public class Config implements IDummyConfig {
 			int index_0 = s.indexOf(":");
 			int index_1 = s.indexOf("|");
 			int index_2 = s.indexOf("?");
-			if(index_0 == -1 || index_1 == -1 || index_2 == -1)
+			if(index_0 == -1 || index_1 == -1 || index_2 == -1) {
 				continue;
+			}
 			String oredOreName = s.substring(0, index_0);
 			int oreColor = Integer.parseInt(s.substring(index_0+1, index_1));
 			int oreOutput = Integer.parseInt(s.substring(index_1+1, index_2));
@@ -72,9 +73,9 @@ public class Config implements IDummyConfig {
 	@Override
 	public void load(Configuration config) {
 		Config.config = config;
-		this.loadGUIs();
-		this.loadMisc();
-		this.loadTiles();
+		loadGUIs();
+		loadMisc();
+		loadTiles();
 		config.save();
 	}
 

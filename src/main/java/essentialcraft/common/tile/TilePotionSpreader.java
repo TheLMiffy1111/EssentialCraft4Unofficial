@@ -39,8 +39,8 @@ public class TilePotionSpreader extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
-			if(potionID == null)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
+			if(potionID == null) {
 				for(int i = 1; i < 9; ++i) {
 					ItemStack stk = getStackInSlot(i);
 					if(!stk.isEmpty() && stk.getItem() instanceof ItemPotion) {
@@ -56,13 +56,13 @@ public class TilePotionSpreader extends TileMRUGeneric {
 						}
 					}
 				}
+			}
 			else {
 				Potion actualPotion = Potion.REGISTRY.getObject(potionID);
 				List<EntityLivingBase> lst = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.getX()-8, pos.getY()-8, pos.getZ()-8, pos.getX()+9, pos.getY()+9, pos.getZ()+9));
 				if(!lst.isEmpty() && !getWorld().isRemote) {
 					boolean haveUsedPotion = false;
-					for(int i = 0; i < lst.size(); ++i) {
-						EntityLivingBase base = lst.get(i);
+					for(EntityLivingBase base : lst) {
 						boolean shouldUsePotion = false;
 						PotionEffect effect = new PotionEffect(actualPotion,potionDuration,potionAmplifier,true,true);
 						if(actualPotion == MobEffects.INSTANT_HEALTH) {
@@ -87,14 +87,17 @@ public class TilePotionSpreader extends TileMRUGeneric {
 							f += (j >> 16 & 255) / 255.0F;
 							f1 += (j >> 8 & 255) / 255.0F;
 							f2 += (j >> 0 & 255) / 255.0F;
-							for(int i1 = 0; i1 < 100; ++i1)
+							for(int i1 = 0; i1 < 100; ++i1) {
 								MiscUtils.spawnParticlesOnServer("spell_mob", (float)(base.posX + MathUtils.randomFloat(getWorld().rand)), (float)(base.posY+1 + MathUtils.randomFloat(getWorld().rand)), (float)(base.posZ + MathUtils.randomFloat(getWorld().rand)), f, f1, f2);
+							}
 						}
-						if(generatesCorruption)
+						if(generatesCorruption) {
 							ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+						}
 					}
-					if(haveUsedPotion)
+					if(haveUsedPotion) {
 						--potionUseTime;
+					}
 				}
 				if(potionUseTime <= 0) {
 					potionID = null;

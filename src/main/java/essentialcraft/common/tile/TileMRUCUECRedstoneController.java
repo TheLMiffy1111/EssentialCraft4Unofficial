@@ -36,8 +36,9 @@ public class TileMRUCUECRedstoneController extends TileEntity implements IStruct
 
 	@Override
 	public void setStructureController(TileEntity tile, EnumStructureType structure) {
-		if(tile instanceof TileMRUCUECController && structure == getStructure())
+		if(tile instanceof TileMRUCUECController && structure == getStructure()) {
 			controller = (TileMRUCUECController)tile;
+		}
 	}
 
 	@Override
@@ -50,8 +51,9 @@ public class TileMRUCUECRedstoneController extends TileEntity implements IStruct
 	}
 
 	public boolean outputRedstone() {
-		if(controller != null && controller.getMRUCU() != null && (float)controller.mruStorage.getMRU()/(float)controller.mruStorage.getMaxMRU()*10 >= setting)
+		if(controller != null && controller.getMRUCU() != null && (float)controller.mruStorage.getMRU()/(float)controller.mruStorage.getMaxMRU()*10 >= setting) {
 			return true;
+		}
 
 		return false;
 	}

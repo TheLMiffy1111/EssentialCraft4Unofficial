@@ -10,7 +10,7 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 
 	public TileMIM parent;
 	int tickTime;
-	public ArrayList<CraftingPattern> allCrafts = new ArrayList<CraftingPattern>();
+	public ArrayList<CraftingPattern> allCrafts = new ArrayList<>();
 
 	public static class CraftingPattern {
 		public ItemStack result = ItemStack.EMPTY;
@@ -43,8 +43,9 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 		}
 
 		public boolean isResultTheSame(ItemStack is) {
-			if(is.isEmpty() || !isValidRecipe())
+			if(is.isEmpty() || !isValidRecipe()) {
 				return false;
+			}
 
 			return is.isItemEqual(result) && ItemStack.areItemStackTagsEqual(is, result);
 		}
@@ -72,19 +73,23 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 
 	@Override
 	public void update() {
-		if(syncTick == 20)
+		if(syncTick == 20) {
 			rebuildRecipes();
+		}
 
 		super.update();
 
 		if(tickTime == 0) {
 			tickTime = 20;
-			if(parent != null)
-				if(!parent.isParent(this))
+			if(parent != null) {
+				if(!parent.isParent(this)) {
 					parent = null;
+				}
+			}
 		}
-		else
+		else {
 			--tickTime;
+		}
 	}
 
 	@Override
@@ -102,34 +107,36 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 					allCrafts.add(p);
 					continue;
 				}
-				else
-					p = null;
+				p = null;
 			}
 		}
 	}
 
 	public ItemStack findCraftingFrameByRecipe(ItemStack result) {
-		for(int i = 0; i < allCrafts.size(); ++i) {
-			if(allCrafts.get(i).isResultTheSame(result))
-				return allCrafts.get(i).crafter;
+		for(CraftingPattern craft : allCrafts) {
+			if(craft.isResultTheSame(result)) {
+				return craft.crafter;
+			}
 		}
 
 		return ItemStack.EMPTY;
 	}
 
 	public ItemStack[] findCraftingComponentsByRecipe(ItemStack result) {
-		for(int i = 0; i < allCrafts.size(); ++i) {
-			if(allCrafts.get(i).isResultTheSame(result))
-				return allCrafts.get(i).input;
+		for(CraftingPattern craft : allCrafts) {
+			if(craft.isResultTheSame(result)) {
+				return craft.input;
+			}
 		}
 
 		return null;
 	}
 
 	public ItemStack findResultByCraftingFrame(ItemStack frame) {
-		for(int i = 0; i < allCrafts.size(); ++i) {
-			if(ItemStack.areItemStacksEqual(allCrafts.get(i).crafter, frame) && ItemStack.areItemStackTagsEqual(allCrafts.get(i).crafter, frame))
-				return allCrafts.get(i).result;
+		for(CraftingPattern craft : allCrafts) {
+			if(ItemStack.areItemStacksEqual(craft.crafter, frame) && ItemStack.areItemStackTagsEqual(craft.crafter, frame)) {
+				return craft.result;
+			}
 		}
 
 		return ItemStack.EMPTY;
@@ -138,8 +145,9 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 	public int craft(ItemStack result, int times) {
 		ItemStack stk = findCraftingFrameByRecipe(result);
 
-		if(stk.isEmpty())
+		if(stk.isEmpty()) {
 			return 0;
+		}
 
 		int crafted = 0;
 
@@ -157,26 +165,23 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 	}
 
 	public boolean canCraft(ItemStack[] components, ItemStack crafter) {
-		if(crafter == null)
+		if((crafter == null) || !crafter.hasTagCompound()) {
 			return false;
+		}
 
-		if(!crafter.hasTagCompound())
-			return false;
-
-		for(int i = 0; i < components.length; ++i) {
-			if(parent.retrieveItemStackFromSystem(components[i], !crafter.getTagCompound().getBoolean("ignoreOreDict"), false) > 0)
+		for(ItemStack component : components) {
+			if(parent.retrieveItemStackFromSystem(component, !crafter.getTagCompound().getBoolean("ignoreOreDict"), false) > 0) {
 				return false;
+			}
 		}
 
 		return true;
 	}
 
 	public boolean craft(ItemStack[] components, ItemStack crafter) {
-		if(crafter == null)
+		if((crafter == null) || !crafter.hasTagCompound()) {
 			return false;
-
-		if(!crafter.hasTagCompound())
-			return false;
+		}
 
 		for(int i = 0; i < components.length; ++i) {
 			if(parent.retrieveItemStackFromSystem(components[i], !crafter.getTagCompound().getBoolean("ignoreOreDict"), true) > 0) {
@@ -195,27 +200,30 @@ public class TileMIMCraftingManager extends TileMRUGeneric {
 	}
 
 	public ArrayList<ItemStack> getAllResults() {
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> ret = new ArrayList<>();
 
 		for(int i = 0; i < allCrafts.size(); ++i) {
 			CraftingPattern par = allCrafts.get(i);
-			if(par.isValidRecipe())
+			if(par.isValidRecipe()) {
 				ret.add(par.result);
+			}
 		}
 
 		return ret;
 	}
 
 	public boolean hasRecipe(ItemStack is) {
-		if(is.isEmpty())
+		if(is.isEmpty()) {
 			return false;
+		}
 
 		for(int i = 0; i < getSizeInventory(); ++i) {
 			if(!getStackInSlot(i).isEmpty() && getStackInSlot(i).getItem() instanceof ItemCraftingFrame) {
 				InventoryCraftingFrame inv = new InventoryCraftingFrame(getStackInSlot(i));
 				if(inv != null) {
-					if(!inv.getStackInSlot(9).isEmpty() && inv.getStackInSlot(9).isItemEqual(is) && ItemStack.areItemStackTagsEqual(is, inv.getStackInSlot(9)))
+					if(!inv.getStackInSlot(9).isEmpty() && inv.getStackInSlot(9).isItemEqual(is) && ItemStack.areItemStackTagsEqual(is, inv.getStackInSlot(9))) {
 						return true;
+					}
 				}
 			}
 		}

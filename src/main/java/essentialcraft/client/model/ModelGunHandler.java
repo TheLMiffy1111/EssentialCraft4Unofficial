@@ -105,36 +105,38 @@ public class ModelGunHandler implements IBakedModel {
 					base = GunRegistry.GUN_MATERIALS.get(rnd.nextInt(GunRegistry.GUN_MATERIALS.size()));
 					handle = GunRegistry.GUN_MATERIALS.get(rnd.nextInt(GunRegistry.GUN_MATERIALS.size()));
 					device = GunRegistry.GUN_MATERIALS.get(rnd.nextInt(GunRegistry.GUN_MATERIALS.size()));
-					if(iGun.gunType.equalsIgnoreCase("sniper"))
+					if(iGun.gunType.equalsIgnoreCase("sniper")) {
 						scope = GunRegistry.SCOPE_MATERIALS_SNIPER.get(rnd.nextInt(GunRegistry.SCOPE_MATERIALS_SNIPER.size()));
-					else if(!iGun.gunType.equalsIgnoreCase("gatling"))
+					}
+					else if(!iGun.gunType.equalsIgnoreCase("gatling")) {
 						scope = GunRegistry.SCOPE_MATERIALS.get(rnd.nextInt(GunRegistry.SCOPE_MATERIALS.size()));
+					}
 					lense = GunRegistry.LENSE_MATERIALS.get(rnd.nextInt(GunRegistry.LENSE_MATERIALS.size()));
 				}
 				else {
 					base = GunRegistry.getGunFromID(tag.getString("base"));
 					handle = GunRegistry.getGunFromID(tag.getString("handle"));
 					device = GunRegistry.getGunFromID(tag.getString("device"));
-					if(iGun.gunType.equalsIgnoreCase("sniper"))
+					if(iGun.gunType.equalsIgnoreCase("sniper")) {
 						scope = GunRegistry.getScopeSniperFromID(tag.getString("scope"));
-					else
+					}
+					else {
 						scope = GunRegistry.getScopeFromID(tag.getString("scope"));
+					}
 					lense = GunRegistry.getLenseFromID(tag.getString("lense"));
 				}
 
 				if(entity != null && entity.isSneaking() && tag.hasKey("scope") && iGun.gunType.equalsIgnoreCase("sniper")) {
 					return new ModelGun(blankItem);
 				}
-				else {
-					return new ModelGun(
-							originalModel,
-							base == null ? null : new ResourceLocation(base.baseTextures.get(iGun.gunType)),
-									handle == null ? null : new ResourceLocation(handle.handleTextures.get(iGun.gunType)),
-											device == null ? null : new ResourceLocation(device.deviceTextures.get(iGun.gunType)),
-													scope == null ? null : new ResourceLocation(scope.textures.get(iGun.gunType)),
-															lense == null ? null : new ResourceLocation(lense.textures.get(iGun.gunType))
-							);
-				}
+				return new ModelGun(
+						originalModel,
+						base == null ? null : new ResourceLocation(base.baseTextures.get(iGun.gunType)),
+								handle == null ? null : new ResourceLocation(handle.handleTextures.get(iGun.gunType)),
+										device == null ? null : new ResourceLocation(device.deviceTextures.get(iGun.gunType)),
+												scope == null ? null : new ResourceLocation(scope.textures.get(iGun.gunType)),
+														lense == null ? null : new ResourceLocation(lense.textures.get(iGun.gunType))
+						);
 			}
 			return originalModel;
 		}

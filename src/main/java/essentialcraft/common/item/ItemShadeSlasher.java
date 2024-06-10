@@ -50,18 +50,22 @@ public class ItemShadeSlasher extends ItemSwordEC {
 	@Override
 	public void onUpdate(ItemStack sword, World w, Entity e, int slotNum, boolean held)
 	{
-		if(e instanceof EntityLivingBase && !w.isRemote && held)
+		if(e instanceof EntityLivingBase && !w.isRemote && held) {
 			((EntityLivingBase)e).addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE,3,3,true,true));
-		if(e instanceof IShadeHandlerEntity)
+		}
+		if(e instanceof IShadeHandlerEntity) {
 			toggleActivity(sword,true);
+		}
 
 		if(e instanceof EntityPlayer)
 		{
 			EntityPlayer p = (EntityPlayer)e;
-			if(ECUtils.getData(p).getMatrixTypeID() == 4)
+			if(ECUtils.getData(p).getMatrixTypeID() == 4) {
 				toggleActivity(sword,true);
-			else
+			}
+			else {
 				toggleActivity(sword,false);
+			}
 		}
 	}
 

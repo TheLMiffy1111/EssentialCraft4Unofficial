@@ -45,16 +45,21 @@ public class ModelGun implements IBakedModel {
 		this.device = device;
 		this.scope = scope;
 		this.lense = lense;
-		if(this.base == null)
+		if(this.base == null) {
 			this.base = new ResourceLocation("essentialcraft:items/null");
-		if(this.handle == null)
+		}
+		if(this.handle == null) {
 			this.handle = new ResourceLocation("essentialcraft:items/null");
-		if(this.device == null)
+		}
+		if(this.device == null) {
 			this.device = new ResourceLocation("essentialcraft:items/null");
-		if(this.scope == null)
+		}
+		if(this.scope == null) {
 			this.scope = new ResourceLocation("essentialcraft:items/null");
-		if(this.lense == null)
+		}
+		if(this.lense == null) {
 			this.lense = new ResourceLocation("essentialcraft:items/null");
+		}
 	}
 
 	@Override

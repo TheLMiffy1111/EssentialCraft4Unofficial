@@ -13,10 +13,10 @@ public class GuiMagicianTable extends GuiCommon{
 
 	public GuiMagicianTable(Container c, TileMagicianTable tile) {
 		super(c,tile);
-		this.elementList.add(new GuiMRUStorage(7, 4, tile));
-		this.elementList.add(new GuiProgressBar_MagicianTable(25, 4, tile));
-		this.elementList.add(new GuiMRUState(25, 58, tile, 0));
-		this.elementList.add(new GuiBalanceState(88, 22, tile));
-		this.elementList.add(new GuiBoundGemState(88, 40, tile, 0));
+		elementList.add(new GuiMRUStorage(7, 4, tile));
+		elementList.add(new GuiProgressBar_MagicianTable(25, 4, tile));
+		elementList.add(new GuiMRUState(25, 58, tile, 0));
+		elementList.add(new GuiBalanceState(88, 22, tile));
+		elementList.add(new GuiBoundGemState(88, 40, tile, 0));
 	}
 }

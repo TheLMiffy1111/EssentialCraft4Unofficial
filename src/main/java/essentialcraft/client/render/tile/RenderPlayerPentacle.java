@@ -46,15 +46,17 @@ public class RenderPlayerPentacle extends TileEntitySpecialRenderer<TilePlayerPe
 			GlStateManager.color(1F, 0F, 0F);
 		}
 
-		if(p.tier != -1)
+		if(p.tier != -1) {
 			GlStateManager.rotate(p.getWorld().getTotalWorldTime()%360, 0, 1, 0);
+		}
 		model.renderPart("pPlane1");
 		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void render(TilePlayerPentacle tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 }

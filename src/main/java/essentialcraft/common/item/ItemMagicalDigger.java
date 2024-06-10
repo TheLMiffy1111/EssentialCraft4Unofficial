@@ -39,9 +39,9 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 
 	public ItemMagicalDigger() {
 		super(ItemsCore.elemental);
-		this.maxStackSize = 1;
-		this.bFull3D = false;
-		this.setMaxDamage(0);
+		maxStackSize = 1;
+		bFull3D = false;
+		setMaxDamage(0);
 	}
 
 	public static Capability<IMRUHandlerItem> MRU_HANDLER_ITEM_CAPABILITY = CapabilityMRUHandler.MRU_HANDLER_ITEM_CAPABILITY;
@@ -64,7 +64,7 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
 	{
-		if(this.isInCreativeTab(par2CreativeTabs)) {
+		if(isInCreativeTab(par2CreativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
@@ -89,7 +89,7 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState par2Block)
+	public float getDestroySpeed(ItemStack stack, IBlockState par2Block)
 	{
 		if(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() >= 9)
 		{
@@ -106,9 +106,9 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState par3, BlockPos par4, EntityLivingBase par7EntityLivingBase)
 	{
-		if(par7EntityLivingBase instanceof EntityPlayer && !par7EntityLivingBase.isSneaking() && this.canBreak(stack))
+		if(par7EntityLivingBase instanceof EntityPlayer && !par7EntityLivingBase.isSneaking() && canBreak(stack))
 		{
-			this.break3x3x3Blocks((EntityPlayer)par7EntityLivingBase, new Coord3D(par4.getX(),par4.getY(),par4.getZ()),stack,world.getBlockState(par4).getBlock());
+			break3x3x3Blocks((EntityPlayer)par7EntityLivingBase, new Coord3D(par4.getX(),par4.getY(),par4.getZ()),stack,world.getBlockState(par4).getBlock());
 		}
 		return true;
 	}
@@ -122,15 +122,16 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 				for(int z = -1; z <= 1; ++z)
 				{
 					Coord3D c00rd = new Coord3D(c.x+x,c.y+y,c.z+z);
-					for(int v = 0; v < 10; ++v)
+					for(int v = 0; v < 10; ++v) {
 						e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, c.x+x+e.getEntityWorld().rand.nextFloat(),c.y+y+e.getEntityWorld().rand.nextFloat(),c.z+z+e.getEntityWorld().rand.nextFloat(), 1.0D, 0.0D, 1.0D);
+					}
 					e.getEntityWorld().playSound(e, e.getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.2F, 6.0F);
 					Block b = e.getEntityWorld().getBlockState(new BlockPos((int)c.x+x,(int)c.y+y,(int)c.z+z)).getBlock();
 					if(b != null && b == id)
 					{
 						if(ECUtils.playerUseMRU(e, s, 9) && !e.getEntityWorld().isRemote)
 						{
-							this.breakBlock(e, c00rd, s);
+							breakBlock(e, c00rd, s);
 						}
 					}
 				}
@@ -144,14 +145,16 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 		int y = (int) coord.y;
 		int z = (int) coord.z;
 		BlockPos p = new BlockPos(x,y,z);
-		if(this.canBreak(s))
+		if(canBreak(s))
 		{
 			Block b = e.getEntityWorld().getBlockState(p).getBlock();
 			GameType type = GameType.SURVIVAL;
-			if(e.capabilities.isCreativeMode)
+			if(e.capabilities.isCreativeMode) {
 				type = GameType.CREATIVE;
-			if(!e.capabilities.allowEdit)
+			}
+			if(!e.capabilities.allowEdit) {
 				type = GameType.ADVENTURE;
+			}
 
 			int be = ForgeHooks.onBlockBreakEvent(e.getEntityWorld(), type, (EntityPlayerMP)e, p);
 			if(be != -1)

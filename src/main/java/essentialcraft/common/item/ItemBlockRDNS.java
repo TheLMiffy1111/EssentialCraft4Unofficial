@@ -9,8 +9,8 @@ public class ItemBlockRDNS extends ItemBlock{
 
 	public ItemBlockRDNS(Block block) {
 		super(block);
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class ItemBlockRDNS extends ItemBlock{
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName(stack)+"."+BlockRedstoneDeviceNotSided.NAMES[stack.getItemDamage()];
+	public String getTranslationKey(ItemStack stack) {
+		return super.getTranslationKey(stack)+"."+BlockRedstoneDeviceNotSided.NAMES[stack.getItemDamage()];
 	}
 }

@@ -16,9 +16,9 @@ public class PotionMRUCorruption extends Potion {
 
 	public PotionMRUCorruption(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(3, 1);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.mruCorruption");
+		setIconIndex(3, 1);
+		setEffectiveness(0.25D);
+		setPotionName("potion.mruCorruption");
 		this.setRegistryName("essentialcraft", "potion.mrucorruption");
 	}
 

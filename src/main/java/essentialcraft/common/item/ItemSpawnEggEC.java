@@ -47,30 +47,28 @@ public class ItemSpawnEggEC extends ItemMonsterPlacer implements IItemColor, IMo
 		if(world.isRemote) {
 			return EnumActionResult.SUCCESS;
 		}
-		else {
-			Block block = world.getBlockState(pos).getBlock();
-			pos = pos.offset(facing);
-			double d0 = 0.0D;
+		Block block = world.getBlockState(pos).getBlock();
+		pos = pos.offset(facing);
+		double d0 = 0.0D;
 
-			if(facing == EnumFacing.UP) {
-				d0 = block.getCollisionBoundingBox(world.getBlockState(pos.down()), world, pos.down()).maxY - 1;
-			}
-
-			Entity entity = spawnCreature(world, stack.getItemDamage(), pos.getX() + 0.5D, pos.getY()+ d0, pos.getZ() + 0.5D);
-
-			if(entity != null) {
-				if(entity instanceof EntityLivingBase && stack.hasDisplayName()) {
-					((EntityLiving)entity).setCustomNameTag(stack.getDisplayName());
-				}
-			}
-
-			return EnumActionResult.SUCCESS;
+		if(facing == EnumFacing.UP) {
+			d0 = block.getCollisionBoundingBox(world.getBlockState(pos.down()), world, pos.down()).maxY - 1;
 		}
+
+		Entity entity = spawnCreature(world, stack.getItemDamage(), pos.getX() + 0.5D, pos.getY()+ d0, pos.getZ() + 0.5D);
+
+		if(entity != null) {
+			if(entity instanceof EntityLivingBase && stack.hasDisplayName()) {
+				((EntityLiving)entity).setCustomNameTag(stack.getDisplayName());
+			}
+		}
+
+		return EnumActionResult.SUCCESS;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		String s = ("" + I18n.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
+		String s = ("" + I18n.translateToLocal(this.getTranslationKey() + ".name")).trim();
 		String s1 = EntitiesCore.REGISTERED_ENTITIES.get(stack.getItemDamage()).getName();
 
 		if(s1 != null) {
@@ -82,7 +80,7 @@ public class ItemSpawnEggEC extends ItemMonsterPlacer implements IItemColor, IMo
 
 	@Override
 	public void getSubItems(CreativeTabs t, NonNullList<ItemStack> l) {
-		if(this.isInCreativeTab(t)) {
+		if(isInCreativeTab(t)) {
 			for(int j = 0; j < EntitiesCore.REGISTERED_ENTITIES.size(); ++j) {
 				l.add(new ItemStack(this, 1, j));
 			}

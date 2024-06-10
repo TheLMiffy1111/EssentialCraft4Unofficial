@@ -52,8 +52,9 @@ public class RadiatingChamber {
 
 		Ingredient[] input = new Ingredient[ingredients.length];
 		for(int i = 0; i < ingredients.length; i++) {
-			if(ingredients[i] != null)
+			if(ingredients[i] != null) {
 				allNull = false;
+			}
 			input[i] = CraftTweakerUtils.toIngredient(ingredients[i]);
 		}
 
@@ -83,9 +84,10 @@ public class RadiatingChamber {
 		}
 
 		boolean hasNull = false;
-		for(int i = 0; i < ingredients.length; i++) {
-			if(ingredients[i] == null)
+		for(IIngredient ingredient : ingredients) {
+			if(ingredient == null) {
 				hasNull = true;
+			}
 		}
 
 		if(hasNull) {
@@ -127,18 +129,20 @@ public class RadiatingChamber {
 
 		@Override
 		public void apply() {
-			ArrayList<RadiatingChamberRecipe> toRemove = new ArrayList<RadiatingChamberRecipe>();
+			ArrayList<RadiatingChamberRecipe> toRemove = new ArrayList<>();
 			for(RadiatingChamberRecipe rec : RadiatingChamberRecipes.RECIPES) {
 				if(
 						ingredients[0].contains(CraftTweakerMC.getIIngredient(rec.recipeItems[0])) &&
 						(rec.recipeItems[1] == Ingredient.EMPTY || ingredients.length == 2 && ingredients[1].contains(CraftTweakerMC.getIIngredient(rec.recipeItems[2])) &&
 						(output == null || output.matches(CraftTweakerMC.getIItemStack(rec.result))) &&
-						(Float.isNaN(balance) || balance <= rec.upperBalanceLine && balance >= rec.lowerBalanceLine)))
+						(Float.isNaN(balance) || balance <= rec.upperBalanceLine && balance >= rec.lowerBalanceLine))) {
 					toRemove.add(rec);
+				}
 			}
 
-			if(toRemove.isEmpty())
+			if(toRemove.isEmpty()) {
 				CraftTweakerAPI.logWarning("No recipe for "+Arrays.toString(ingredients));
+			}
 			else {
 				for(RadiatingChamberRecipe entry : toRemove) {
 					RadiatingChamberRecipes.removeRecipe(entry);

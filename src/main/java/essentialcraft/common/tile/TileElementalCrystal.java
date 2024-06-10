@@ -53,55 +53,69 @@ public class TileElementalCrystal extends TileEntity implements ITickable {
 	}
 
 	public double getElementByNum(int num) {
-		if(num == 0)
+		if(num == 0) {
 			return fire;
-		if(num == 1)
+		}
+		if(num == 1) {
 			return water;
-		if(num == 2)
+		}
+		if(num == 2) {
 			return earth;
-		if(num == 3)
+		}
+		if(num == 3) {
 			return air;
+		}
 		return -1;
 	}
 
 	public void setElementByNum(int num, double amount) {
-		if(num == 0)
+		if(num == 0) {
 			fire += amount;
-		if(num == 1)
+		}
+		if(num == 1) {
 			water += amount;
-		if(num == 2)
+		}
+		if(num == 2) {
 			earth += amount;
-		if(num == 3)
+		}
+		if(num == 3) {
 			air += amount;
+		}
 	}
 
 	public void randomlyMutate() {
 		Random r = getWorld().rand;
-		if(r.nextDouble() <= mutationChance)
+		if(r.nextDouble() <= mutationChance) {
 			mutate(r.nextInt(4), r.nextInt(3)-r.nextInt(3));
+		}
 	}
 
 	public boolean mutate(int element, int amount)  {
-		if(getElementByNum(element) + amount <= 100 && getElementByNum(element) + amount >= 0)
+		if(getElementByNum(element) + amount <= 100 && getElementByNum(element) + amount >= 0) {
 			setElementByNum(element, amount);
+		}
 		return false;
 	}
 
 	public int getDominant() {
-		if(fire > water && fire > earth && fire > air)
+		if(fire > water && fire > earth && fire > air) {
 			return 0;
-		if(water > fire && water > earth && water > air)
+		}
+		if(water > fire && water > earth && water > air) {
 			return 1;
-		if(earth > water && earth > fire && earth > air)
+		}
+		if(earth > water && earth > fire && earth > air) {
 			return 2;
-		if(air > fire && air > earth && air > water)
+		}
+		if(air > fire && air > earth && air > water) {
 			return 3;
+		}
 		return -1;
 	}
 
 	@Override
 	public void update() {
-		int metadata = this.getBlockMetadata();
+		int metadata = getBlockMetadata();
 
 		if(metadata == 1) {
 			IBlockState b = getWorld().getBlockState(pos.down());
@@ -161,15 +175,17 @@ public class TileElementalCrystal extends TileEntity implements ITickable {
 
 		//Sending the sync packets to the CLIENT.
 		if(syncTick == 0) {
-			if(tracker == null)
+			if(tracker == null) {
 				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + ","  + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
+			}
 			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);
 			}
 			syncTick = 60;
 		}
-		else
+		else {
 			--syncTick;
+		}
 
 		if(requestSync && getWorld().isRemote) {
 			requestSync = false;
@@ -186,8 +202,9 @@ public class TileElementalCrystal extends TileEntity implements ITickable {
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	public static void setupConfig(Configuration cfg) {

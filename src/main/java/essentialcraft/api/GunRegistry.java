@@ -11,188 +11,151 @@ import net.minecraft.util.ResourceLocation;
 
 public class GunRegistry {
 
-	public static final List<GunMaterial> GUN_MATERIALS = new ArrayList<GunMaterial>();
-	public static final List<LenseMaterial> LENSE_MATERIALS = new ArrayList<LenseMaterial>();
-	public static final List<ScopeMaterial> SCOPE_MATERIALS = new ArrayList<ScopeMaterial>();
-	public static final List<ScopeMaterial> SCOPE_MATERIALS_SNIPER = new ArrayList<ScopeMaterial>();
+	public static final List<GunMaterial> GUN_MATERIALS = new ArrayList<>();
+	public static final List<LenseMaterial> LENSE_MATERIALS = new ArrayList<>();
+	public static final List<ScopeMaterial> SCOPE_MATERIALS = new ArrayList<>();
+	public static final List<ScopeMaterial> SCOPE_MATERIALS_SNIPER = new ArrayList<>();
 
-	public static ScopeMaterial getScopeFromID(String s) {
-		for(int i = 0; i < GunRegistry.SCOPE_MATERIALS.size(); ++i)
-		{
-			if(GunRegistry.SCOPE_MATERIALS.get(i).id.equalsIgnoreCase(s))
-			{
-				return GunRegistry.SCOPE_MATERIALS.get(i);
+	public static ScopeMaterial getScopeFromID(String id) {
+		for(ScopeMaterial material : SCOPE_MATERIALS) {
+			if(material.id.equalsIgnoreCase(id)) {
+				return material;
 			}
 		}
 		return null;
 	}
 
-	public static ScopeMaterial getScopeSniperFromID(String s) {
-		for(int i = 0; i < GunRegistry.SCOPE_MATERIALS_SNIPER.size(); ++i)
-		{
-			if(GunRegistry.SCOPE_MATERIALS_SNIPER.get(i).id.equalsIgnoreCase(s))
-			{
-				return GunRegistry.SCOPE_MATERIALS_SNIPER.get(i);
+	public static ScopeMaterial getScopeSniperFromID(String id) {
+		for(ScopeMaterial material : SCOPE_MATERIALS_SNIPER) {
+			if(material.id.equalsIgnoreCase(id)) {
+				return material;
 			}
 		}
 		return null;
 	}
 
-	public static LenseMaterial getLenseFromID(String s) {
-		for(int i = 0; i < GunRegistry.LENSE_MATERIALS.size(); ++i)
-		{
-			if(GunRegistry.LENSE_MATERIALS.get(i).id.equalsIgnoreCase(s))
-			{
-				return GunRegistry.LENSE_MATERIALS.get(i);
+	public static LenseMaterial getLenseFromID(String id) {
+		for(LenseMaterial material : LENSE_MATERIALS) {
+			if(material.id.equalsIgnoreCase(id)) {
+				return material;
 			}
 		}
 		return null;
 	}
 
-	public static GunMaterial getGunFromID(String s) {
-		for(int i = 0; i < GunRegistry.GUN_MATERIALS.size(); ++i)
-		{
-			if(GunRegistry.GUN_MATERIALS.get(i).id.equalsIgnoreCase(s))
-			{
-				return GunRegistry.GUN_MATERIALS.get(i);
+	public static GunMaterial getGunFromID(String id) {
+		for(GunMaterial material : GUN_MATERIALS) {
+			if(material.id.equalsIgnoreCase(id)) {
+				return material;
 			}
 		}
 		return null;
 	}
 
-	public static class ScopeMaterial
-	{
+	public static class ScopeMaterial {
+
 		public String id;
 		public ItemStack recipe = ItemStack.EMPTY;
 		public boolean sniper;
-		public HashMap<GunType,ArrayList<DummyData>> materialData = new HashMap<GunType,ArrayList<DummyData>>();
-		public HashMap<String,String> textures = new HashMap<String,String>();
+		public HashMap<GunType, ArrayList<DummyData>> materialData = new HashMap<>();
+		public HashMap<String, String> textures = new HashMap<>();
 
-		public ScopeMaterial(String s, boolean sniper)
-		{
-			id = s;
+		public ScopeMaterial(String id, boolean sniper) {
+			this.id = id;
 			this.sniper = sniper;
 		}
 
-		public ScopeMaterial setRecipe(ItemStack is)
-		{
-			recipe = is;
+		public ScopeMaterial setRecipe(ItemStack recipe) {
+			this.recipe = recipe;
 			return this;
 		}
 
-		public ScopeMaterial setTextures(String... rl) {
-			if(rl.length == 3) {
-				textures.put("pistol", rl[0]);
-				textures.put("rifle", rl[1]);
-				textures.put("sniper", rl[2]);
-
-				for(int i = 0; i < 3; i++)
-					ApiCore.registerTexture(new ResourceLocation(rl[i]));
-			}
-			return this;
-		}
-
-		public ScopeMaterial setTexture(String rl) {
-			textures.put("sniper", rl);
-
-			ApiCore.registerTexture(new ResourceLocation(rl));
-			return this;
-		}
-
-		public ScopeMaterial appendData(String s, float value, GunType gun)
-		{
-			if(!materialData.containsKey(gun))
-			{
-				materialData.put(gun, new ArrayList<DummyData>());
-			}
-			ArrayList<DummyData> d = materialData.get(gun);
-			d.add(new DummyData(s,value));
-			materialData.put(gun, d);
-
-			return this;
-		}
-
-		public ScopeMaterial appendData(String s, float value)
-		{
-			for(int i = 0; i < GunType.values().length; ++i)
-			{
-				GunType gun = GunType.values()[i];
-				if(!materialData.containsKey(gun))
-				{
-					materialData.put(gun, new ArrayList<DummyData>());
+		public ScopeMaterial setTextures(String... textures) {
+			if(textures.length == 3) {
+				this.textures.put("pistol", textures[0]);
+				this.textures.put("rifle", textures[1]);
+				this.textures.put("sniper", textures[2]);
+				for(int i = 0; i < 3; i++) {
+					ApiCore.registerTexture(new ResourceLocation(textures[i]));
 				}
-				ArrayList<DummyData> d = materialData.get(gun);
-				d.add(new DummyData(s,value));
+			}
+			return this;
+		}
+
+		public ScopeMaterial setTexture(String texture) {
+			textures.put("sniper", texture);
+			ApiCore.registerTexture(new ResourceLocation(texture));
+			return this;
+		}
+
+		public ScopeMaterial appendData(String key, float value, GunType gun) {
+			ArrayList<DummyData> data = materialData.computeIfAbsent(gun, k->new ArrayList<>());
+			data.add(new DummyData(key, value));
+			materialData.put(gun, data);
+			return this;
+		}
+
+		public ScopeMaterial appendData(String key, float value) {
+			for(GunType gun : GunType.values()) {
+				ArrayList<DummyData> d = materialData.computeIfAbsent(gun, k->new ArrayList<>());
+				d.add(new DummyData(key, value));
 				materialData.put(gun, d);
 			}
 			return this;
 		}
 
 		public ScopeMaterial register() {
-			if(!sniper)
+			if(!sniper) {
 				SCOPE_MATERIALS.add(this);
-			else
+			}
+			else {
 				SCOPE_MATERIALS_SNIPER.add(this);
+			}
 			return this;
 		}
 	}
 
-	public static class LenseMaterial
-	{
-		public HashMap<GunType,ArrayList<DummyData>> materialData = new HashMap<GunType,ArrayList<DummyData>>();
+	public static class LenseMaterial {
+
+		public HashMap<GunType, ArrayList<DummyData>> materialData = new HashMap<>();
 		public String id;
 		public ItemStack recipe = ItemStack.EMPTY;
-		public HashMap<String,String> textures = new HashMap<String,String>();
+		public HashMap<String,String> textures = new HashMap<>();
 
-		public LenseMaterial(String s)
-		{
-			id = s;
+		public LenseMaterial(String id) {
+			this.id = id;
 		}
 
-		public LenseMaterial setRecipe(ItemStack is)
-		{
-			recipe = is;
+		public LenseMaterial setRecipe(ItemStack recipe) {
+			this.recipe = recipe;
 			return this;
 		}
 
-		public LenseMaterial setTextures(String... rl) {
-			if(rl.length == 4) {
-				textures.put("pistol", rl[0]);
-				textures.put("rifle", rl[1]);
-				textures.put("sniper", rl[2]);
-				textures.put("gatling", rl[3]);
-
-				for(int i = 0; i < 4; i++)
-					ApiCore.registerTexture(new ResourceLocation(rl[i]));
-			}
-			return this;
-		}
-
-		public LenseMaterial appendData(String s, float value, GunType gun)
-		{
-			if(!materialData.containsKey(gun))
-			{
-				materialData.put(gun, new ArrayList<DummyData>());
-			}
-			ArrayList<DummyData> d = materialData.get(gun);
-			d.add(new DummyData(s,value));
-			materialData.put(gun, d);
-
-			return this;
-		}
-
-		public LenseMaterial appendData(String s, float value)
-		{
-			for(int i = 0; i < GunType.values().length; ++i)
-			{
-				GunType gun = GunType.fromIndex(i);
-				if(!materialData.containsKey(gun))
-				{
-					materialData.put(gun, new ArrayList<DummyData>());
+		public LenseMaterial setTextures(String... textures) {
+			if(textures.length == 4) {
+				this.textures.put("pistol", textures[0]);
+				this.textures.put("rifle", textures[1]);
+				this.textures.put("sniper", textures[2]);
+				this.textures.put("gatling", textures[3]);
+				for(int i = 0; i < 4; i++) {
+					ApiCore.registerTexture(new ResourceLocation(textures[i]));
 				}
-				ArrayList<DummyData> d = materialData.get(gun);
-				d.add(new DummyData(s,value));
-				materialData.put(gun, d);
+			}
+			return this;
+		}
+
+		public LenseMaterial appendData(String key, float value, GunType gun) {
+			ArrayList<DummyData> data = materialData.computeIfAbsent(gun, k->new ArrayList<>());
+			data.add(new DummyData(key, value));
+			materialData.put(gun, data);
+			return this;
+		}
+
+		public LenseMaterial appendData(String key, float value) {
+			for(GunType gun : GunType.values()) {
+				ArrayList<DummyData> data = materialData.computeIfAbsent(gun, k->new ArrayList<>());
+				data.add(new DummyData(key, value));
+				materialData.put(gun, data);
 			}
 			return this;
 		}
@@ -203,74 +166,60 @@ public class GunRegistry {
 		}
 	}
 
-	public static class GunMaterial
-	{
-		public HashMap<GunType,ArrayList<DummyData>> materialData = new HashMap<GunType,ArrayList<DummyData>>();
+	public static class GunMaterial {
+
+		public HashMap<GunType, ArrayList<DummyData>> materialData = new HashMap<>();
 		public String id;
 		public ItemStack recipe = ItemStack.EMPTY;
-		public HashMap<String,String> baseTextures = new HashMap<String,String>();
-		public HashMap<String,String> handleTextures = new HashMap<String,String>();
-		public HashMap<String,String> deviceTextures = new HashMap<String,String>();
+		public HashMap<String, String> baseTextures = new HashMap<>();
+		public HashMap<String, String> handleTextures = new HashMap<>();
+		public HashMap<String, String> deviceTextures = new HashMap<>();
 
-		public GunMaterial(String s)
-		{
-			id = s;
+		public GunMaterial(String id) {
+			this.id = id;
 		}
 
-		public GunMaterial setRecipe(ItemStack is)
-		{
-			recipe = is;
+		public GunMaterial setRecipe(ItemStack recipe) {
+			this.recipe = recipe;
 			return this;
 		}
 
-		public GunMaterial setTextures(String... rl) {
-			if(rl.length == 12) {
-				baseTextures.put("pistol", rl[0]);
-				baseTextures.put("rifle", rl[1]);
-				baseTextures.put("sniper", rl[2]);
-				baseTextures.put("gatling", rl[3]);
+		public GunMaterial setTextures(String... textures) {
+			if(textures.length == 12) {
+				baseTextures.put("pistol", textures[0]);
+				baseTextures.put("rifle", textures[1]);
+				baseTextures.put("sniper", textures[2]);
+				baseTextures.put("gatling", textures[3]);
 
-				handleTextures.put("pistol", rl[4]);
-				handleTextures.put("rifle", rl[5]);
-				handleTextures.put("sniper", rl[6]);
-				handleTextures.put("gatling", rl[7]);
+				handleTextures.put("pistol", textures[4]);
+				handleTextures.put("rifle", textures[5]);
+				handleTextures.put("sniper", textures[6]);
+				handleTextures.put("gatling", textures[7]);
 
-				deviceTextures.put("pistol", rl[8]);
-				deviceTextures.put("rifle", rl[9]);
-				deviceTextures.put("sniper", rl[10]);
-				deviceTextures.put("gatling", rl[11]);
+				deviceTextures.put("pistol", textures[8]);
+				deviceTextures.put("rifle", textures[9]);
+				deviceTextures.put("sniper", textures[10]);
+				deviceTextures.put("gatling", textures[11]);
 
-				for(int i = 0; i < 12; i++)
-					ApiCore.registerTexture(new ResourceLocation(rl[i]));
-			}
-			return this;
-		}
-
-		public GunMaterial appendData(String s, float value, GunType gun)
-		{
-			if(!materialData.containsKey(gun))
-			{
-				materialData.put(gun, new ArrayList<DummyData>());
-			}
-			ArrayList<DummyData> d = materialData.get(gun);
-			d.add(new DummyData(s,value));
-			materialData.put(gun, d);
-
-			return this;
-		}
-
-		public GunMaterial appendData(String s, float value)
-		{
-			for(int i = 0; i < GunType.values().length; ++i)
-			{
-				GunType gun = GunType.values()[i];
-				if(!materialData.containsKey(gun))
-				{
-					materialData.put(gun, new ArrayList<DummyData>());
+				for(int i = 0; i < 12; i++) {
+					ApiCore.registerTexture(new ResourceLocation(textures[i]));
 				}
-				ArrayList<DummyData> d = materialData.get(gun);
-				d.add(new DummyData(s,value));
-				materialData.put(gun, d);
+			}
+			return this;
+		}
+
+		public GunMaterial appendData(String key, float value, GunType gun) {
+			ArrayList<DummyData> data = materialData.computeIfAbsent(gun, k->new ArrayList<>());
+			data.add(new DummyData(key, value));
+			materialData.put(gun, data);
+			return this;
+		}
+
+		public GunMaterial appendData(String key, float value) {
+			for(GunType gun : GunType.values()) {
+				ArrayList<DummyData> data = materialData.computeIfAbsent(gun, k->new ArrayList<>());
+				data.add(new DummyData(key, value));
+				materialData.put(gun, data);
 			}
 			return this;
 		}
@@ -281,12 +230,12 @@ public class GunRegistry {
 		}
 	}
 
-	public static enum GunType implements IStringSerializable
-	{
-		PISTOL(0,"pistol"),
-		RIFLE(1,"rifle"),
-		SNIPER(2,"sniper"),
-		GATLING(3,"gatling");
+	public static enum GunType implements IStringSerializable {
+
+		PISTOL(0, "pistol"),
+		RIFLE(1, "rifle"),
+		SNIPER(2, "sniper"),
+		GATLING(3, "gatling");
 
 		private int index;
 		private String name;

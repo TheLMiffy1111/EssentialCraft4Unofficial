@@ -32,6 +32,6 @@ public class ContainerMIMCraftingManager extends ContainerInventory {
 				});
 			}
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

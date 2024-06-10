@@ -26,13 +26,13 @@ public class RenderHologram extends RenderBiped<EntityHologram>
 	public RenderHologram()
 	{
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(1,0,64,32), 0.5F);
-		this.model = (ModelBiped)super.mainModel;
+		model = (ModelBiped)super.mainModel;
 	}
 
 	public RenderHologram(RenderManager rm)
 	{
 		super(rm, new ModelBiped(0,0,64,32), 0.5F);
-		this.model = (ModelBiped)super.mainModel;
+		model = (ModelBiped)super.mainModel;
 	}
 
 	@Override
@@ -58,20 +58,25 @@ public class RenderHologram extends RenderBiped<EntityHologram>
 
 		int meta = 76;
 
-		if(h.attackID == -1)
+		if(h.attackID == -1) {
 			meta = 76;
+		}
 
-		if(h.attackID == 0)
+		if(h.attackID == 0) {
 			meta = 70;
+		}
 
-		if(h.attackID == 1)
+		if(h.attackID == 1) {
 			meta = 73;
+		}
 
-		if(h.attackID == 2)
+		if(h.attackID == 2) {
 			meta = 72;
+		}
 
-		if(h.attackID == 3)
+		if(h.attackID == 3) {
 			meta = 71;
+		}
 
 		DrawUtils.renderItemStack_Full(new ItemStack(ItemsCore.genericItem,1,meta), x, y, z, (h.ticksExisted+partialTicks)%360, 0, 1, 1, 1, 0, 2.4F, 0);
 	}

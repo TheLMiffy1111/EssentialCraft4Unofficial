@@ -8,13 +8,10 @@ import DummyCore.Utils.DataStorage;
 import DummyCore.Utils.DummyData;
 import DummyCore.Utils.MathUtils;
 import DummyCore.Utils.MiscUtils;
-import DummyCore.Utils.WeightedRandomChestContent;
-import essentialcraft.common.item.ItemBaublesResistance;
 import essentialcraft.common.item.ItemsCore;
 import essentialcraft.common.mod.EssentialCraftCore;
 import essentialcraft.common.registry.LootTableRegistry;
 import essentialcraft.common.registry.SoundRegistry;
-import essentialcraft.common.world.gen.structure.StructureOldCatacombs;
 import essentialcraft.utils.common.ECUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -24,7 +21,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -53,8 +49,8 @@ public class EntityHologram extends EntityLiving {
 	public int prevAttackID = -1;
 	public int damage = 1;
 	public double basePosX, basePosY, basePosZ;
-	public List<UUID> players = new ArrayList<UUID>();
-	public final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
+	public List<UUID> players = new ArrayList<>();
+	public final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {}
@@ -62,7 +58,7 @@ public class EntityHologram extends EntityLiving {
 	@Override
 	protected ResourceLocation getLootTable() {
 		if(prevAttackID == -1) {
-			prevAttackID = this.getEntityWorld().rand.nextInt(4);
+			prevAttackID = getEntityWorld().rand.nextInt(4);
 		}
 		switch(prevAttackID) {
 		case 0: return LootTableRegistry.ENTITY_HOLOGRAM_ADDITION;
@@ -76,9 +72,9 @@ public class EntityHologram extends EntityLiving {
 	@Override
 	public void onDeath(DamageSource cause) {
 		super.onDeath(cause);
-		if(!this.getEntityWorld().isRemote) {
-			for(int i = 0; i < this.players.size(); ++i) {
-				EntityPlayer p = MiscUtils.getPlayerFromUUID(this.players.get(i));
+		if(!getEntityWorld().isRemote) {
+			for(UUID player : players) {
+				EntityPlayer p = MiscUtils.getPlayerFromUUID(player);
 				boolean addBig = true;
 				for(int j = 0; j < 4; ++j) {
 					if(!p.inventory.armorInventory.get(j).isEmpty()) {
@@ -91,9 +87,9 @@ public class EntityHologram extends EntityLiving {
 			}
 		}
 		EssentialCraftCore.proxy.stopSound("hologram");
-		World w = this.getEntityWorld();
-		w.setBlockState(this.getPosition(), Blocks.CHEST.getDefaultState());
-		TileEntityChest chest = (TileEntityChest)w.getTileEntity(this.getPosition());
+		World w = getEntityWorld();
+		w.setBlockState(getPosition(), Blocks.CHEST.getDefaultState());
+		TileEntityChest chest = (TileEntityChest)w.getTileEntity(getPosition());
 		if(chest != null) {
 			chest.setLootTable(LootTableRegistry.CHEST_HOLOGRAM, w.rand.nextLong());
 		}
@@ -106,15 +102,15 @@ public class EntityHologram extends EntityLiving {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.getDataManager().register(DATA, "||null:null");
+		getDataManager().register(DATA, "||null:null");
 	}
 
 	@Override
@@ -133,14 +129,14 @@ public class EntityHologram extends EntityLiving {
 	}
 
 	public void dwWrite() {
-		if(!this.getEntityWorld().isRemote) {
-			this.getDataManager().set(DATA, "||aID:"+attackID+"||aTi:"+attackTimer+"||rTi:"+restingTime);
+		if(!getEntityWorld().isRemote) {
+			getDataManager().set(DATA, "||aID:"+attackID+"||aTi:"+attackTimer+"||rTi:"+restingTime);
 		}
 	}
 
 	public void dwRead() {
-		if(this.getEntityWorld().isRemote) {
-			String str = this.getDataManager().get(DATA);
+		if(getEntityWorld().isRemote) {
+			String str = getDataManager().get(DATA);
 			if(str != null && !str.isEmpty() && !str.equals("||null:null")) {
 				try {
 					DummyData[] genDat = DataStorage.parseData(str);
@@ -157,38 +153,38 @@ public class EntityHologram extends EntityLiving {
 
 	@Override
 	public void onUpdate() {
-		if(this.ticksExisted == 1) {
-			this.basePosX = posX;
-			this.basePosY = posY;
-			this.basePosZ = posZ;
+		if(ticksExisted == 1) {
+			basePosX = posX;
+			basePosY = posY;
+			basePosZ = posZ;
 		}
-		if(this.posX != this.basePosX || this.posY != this.basePosY || this.posZ != this.basePosZ) {
-			this.setPositionAndRotation(basePosX, basePosY, basePosZ, rotationYaw, rotationPitch);
+		if(posX != basePosX || posY != basePosY || posZ != basePosZ) {
+			setPositionAndRotation(basePosX, basePosY, basePosZ, rotationYaw, rotationPitch);
 		}
-		if(this.deathTime != 0) {
+		if(deathTime != 0) {
 			EssentialCraftCore.proxy.stopSound("hologram");
 		}
-		else if(!this.isDead) {
+		else if(!isDead) {
 			EssentialCraftCore.proxy.startRecord("hologram", "essentialcraft:records.hologram", getPosition());
 		}
 		dwWrite();
-		if(this.motionY < 0.002) {
-			this.motionY = 0.002;
+		if(motionY < 0.002) {
+			motionY = 0.002;
 		}
 		super.onUpdate();
 		dwRead();
-		if(this.isBurning()) {
-			this.extinguish();
+		if(isBurning()) {
+			extinguish();
 		}
-		if(!this.getActivePotionEffects().isEmpty()) {
-			this.clearActivePotions();
+		if(!getActivePotionEffects().isEmpty()) {
+			clearActivePotions();
 		}
-		if(!this.getEntityWorld().isRemote) {
+		if(!getEntityWorld().isRemote) {
 			if(restingTime == 0 && attackID == -1) {
-				int rndID = this.getEntityWorld().rand.nextInt(4);
+				int rndID = getEntityWorld().rand.nextInt(4);
 				attackID = rndID;
 				attackTimer = 100;
-				ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.stop", 5, 2F, 16, this.dimension);
+				ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.stop", 5, 2F, 16, dimension);
 				damage = 1;
 			}
 			if(attackTimer != 0 && attackID != -1) {
@@ -196,12 +192,12 @@ public class EntityHologram extends EntityLiving {
 				if(attackID == 0) {
 					if(attackTimer == 20) {
 						int hMax = 3 - MathHelper.floor(getHealth()/getMaxHealth() * 3);
-						for(int i = 0; i < players.size(); ++i) {
-							EntityPlayer p = MiscUtils.getPlayerFromUUID(players.get(i));
+						for(UUID player : players) {
+							EntityPlayer p = MiscUtils.getPlayerFromUUID(player);
 							if(p != null) {
 								for(int j = 0; j < 1 + hMax; ++j) {
 									EntityPlayerClone clone = new EntityPlayerClone(p.getEntityWorld());
-									clone.setClonedPlayer(players.get(i));
+									clone.setClonedPlayer(player);
 									clone.setPositionAndRotation(p.posX+MathUtils.randomDouble(rand)*6, p.posY, p.posZ+MathUtils.randomDouble(rand)*6, p.rotationYaw, p.rotationPitch);
 									clone.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, !p.getHeldItemMainhand().isEmpty() ? p.getHeldItemMainhand().copy() : ItemStack.EMPTY);
 									clone.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, p.getHeldItemOffhand().isEmpty() ? p.getHeldItemOffhand().copy() : ItemStack.EMPTY);
@@ -210,47 +206,47 @@ public class EntityHologram extends EntityLiving {
 									clone.setItemStackToSlot(EntityEquipmentSlot.LEGS, p.inventory.armorInventory.get(1).isEmpty() ? p.inventory.armorInventory.get(1).copy() : ItemStack.EMPTY);
 									clone.setItemStackToSlot(EntityEquipmentSlot.FEET, p.inventory.armorInventory.get(0).isEmpty() ? p.inventory.armorInventory.get(0).copy() : ItemStack.EMPTY);
 
-									this.getEntityWorld().spawnEntity(clone);
+									getEntityWorld().spawnEntity(clone);
 								}
 							}
 						}
 					}
 				}
 				if(attackID == 1) {
-					for(int i = 0; i < players.size(); ++i) {
-						if(players.get(i) == null) {
+					for(UUID player : players) {
+						if(player == null) {
 							continue;
 						}
-						this.faceEntity(MiscUtils.getPlayerFromUUID(players.get(i)), 360F, 180F);
-						EntityArmorDestroyer destr = new EntityArmorDestroyer(this.getEntityWorld(),this);
-						destr.setHeadingFromThrower(this, this.rotationPitch, this.rotationYaw, 0.0F, 1.5F, 0.5F);
-						this.rotationYaw = this.getEntityWorld().rand.nextFloat()*360;
-						this.rotationPitch = 90-this.getEntityWorld().rand.nextFloat()*180;
-						this.getEntityWorld().spawnEntity(destr);
+						faceEntity(MiscUtils.getPlayerFromUUID(player), 360F, 180F);
+						EntityArmorDestroyer destr = new EntityArmorDestroyer(getEntityWorld(),this);
+						destr.shoot(this, rotationPitch, rotationYaw, 0.0F, 1.5F, 0.5F);
+						rotationYaw = getEntityWorld().rand.nextFloat()*360;
+						rotationPitch = 90-getEntityWorld().rand.nextFloat()*180;
+						getEntityWorld().spawnEntity(destr);
 					}
 				}
 				if(attackID == 2) {
-					if(this.attackTimer % 10 == 0) {
-						if(this.players.size() > 0) {
-							int i = this.getEntityWorld().rand.nextInt(this.players.size());
+					if(attackTimer % 10 == 0) {
+						if(players.size() > 0) {
+							int i = getEntityWorld().rand.nextInt(players.size());
 							EntityPlayer p = MiscUtils.getPlayerFromUUID(players.get(i));
 							if(p != null) {
-								EntityOrbitalStrike strike = new EntityOrbitalStrike(getEntityWorld(), p.posX, p.posY, p.posZ, damage, 3 - (2 - this.getHealth()/this.getMaxHealth()*2), this);
-								this.getEntityWorld().spawnEntity(strike);
+								EntityOrbitalStrike strike = new EntityOrbitalStrike(getEntityWorld(), p.posX, p.posY, p.posZ, damage, 3 - (2 - getHealth()/getMaxHealth()*2), this);
+								getEntityWorld().spawnEntity(strike);
 							}
 							damage *= 2;
 						}
 					}
 				}
 				if(attackID == 3) {
-					if(this.attackTimer % 20 == 0) {
-						for(int i = 0; i < 1 + 5 - MathHelper.floor(this.getHealth()/this.getMaxHealth()*5); ++i) {
-							if(this.players.size() > 0) {
-								int i1 = this.getEntityWorld().rand.nextInt(this.players.size());
+					if(attackTimer % 20 == 0) {
+						for(int i = 0; i < 1 + 5 - MathHelper.floor(getHealth()/getMaxHealth()*5); ++i) {
+							if(players.size() > 0) {
+								int i1 = getEntityWorld().rand.nextInt(players.size());
 								EntityPlayer p = MiscUtils.getPlayerFromUUID(players.get(i1));
 								if(p != null) {
 									EntityDivider d = new EntityDivider(getEntityWorld(), p.posX, p.posY, p.posZ, damage, 2, this);
-									this.getEntityWorld().spawnEntity(d);
+									getEntityWorld().spawnEntity(d);
 								}
 							}
 						}
@@ -260,8 +256,8 @@ public class EntityHologram extends EntityLiving {
 			if(attackTimer == 0 && attackID != -1) {
 				prevAttackID = attackID;
 				attackID = -1;
-				restingTime = 100 - MathHelper.floor(80-this.getHealth()/this.getMaxHealth()*80);
-				ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.stop", 5, 0.01F, 16, this.dimension);
+				restingTime = 100 - MathHelper.floor(80-getHealth()/getMaxHealth()*80);
+				ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.stop", 5, 0.01F, 16, dimension);
 			}
 			if(restingTime > 0) {
 				--restingTime;
@@ -269,12 +265,12 @@ public class EntityHologram extends EntityLiving {
 		}
 		else {
 			EntityPlayer p = EssentialCraftCore.proxy.getClientPlayer();
-			if(p != null && !p.isCreative() && !p.isSpectator() && p.capabilities.isFlying && p.getDistanceToEntity(this) <= RANGE && p.dimension == this.dimension) {
+			if(p != null && !p.isCreative() && !p.isSpectator() && p.capabilities.isFlying && p.getDistance(this) <= RANGE && p.dimension == dimension) {
 				p.capabilities.isFlying = false;
 			}
 		}
 
-		if(!this.getEntityWorld().isRemote && this.ticksExisted % 10 == 0) {
+		if(!getEntityWorld().isRemote && ticksExisted % 10 == 0) {
 			MinecraftServer server = getEntityWorld().getMinecraftServer();
 			PlayerList manager = server.getPlayerList();
 			for(int i = 0; i < players.size(); ++i) {
@@ -289,32 +285,32 @@ public class EntityHologram extends EntityLiving {
 				if(player == null) {
 					continue;
 				}
-				if(this.players.contains(MiscUtils.getUUIDFromPlayer(player))) {
+				if(players.contains(MiscUtils.getUUIDFromPlayer(player))) {
 					if(player.isDead) {
 						players.remove(MiscUtils.getUUIDFromPlayer(player));
 						continue;
 					}
-					if(this.dimension != player.dimension) {
-						manager.changePlayerDimension(player, this.dimension);
+					if(dimension != player.dimension) {
+						manager.changePlayerDimension(player, dimension);
 					}
-					double distance = player.getDistanceToEntity(this);
+					double distance = player.getDistance(this);
 					if(distance > RANGE) {
 						player.setPositionAndRotation(posX, posY, posZ, player.rotationYaw, player.rotationPitch);
 						ECUtils.changePlayerPositionOnClient(player);
 						player.attackEntityFrom(DamageSource.causeMobDamage(this), 5);
-						ECUtils.playSoundToAllNearby(posX, posY, posZ, "random.anvil_break", 1, 0.01F, 8, this.dimension);
+						ECUtils.playSoundToAllNearby(posX, posY, posZ, "random.anvil_break", 1, 0.01F, 8, dimension);
 					}
 					if(player.capabilities.isFlying) {
 						player.capabilities.isFlying = false;
 					}
 				}
 				else {
-					if(this.dimension != player.dimension) {
+					if(dimension != player.dimension) {
 						continue;
 					}
-					double distance = player.getDistanceToEntity(this);
+					double distance = player.getDistance(this);
 					if(distance <= RANGE) {
-						this.players.add(MiscUtils.getUUIDFromPlayer(player));
+						players.add(MiscUtils.getUUIDFromPlayer(player));
 					}
 				}
 			}
@@ -365,33 +361,24 @@ public class EntityHologram extends EntityLiving {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource src, float f) {
-		if(src == null) {
+		if((src == null) || (src.getTrueSource() == null) || !(src.getTrueSource() instanceof EntityPlayer) || (src.getTrueSource() instanceof FakePlayer)) {
 			return false;
 		}
-		if(src.getTrueSource() == null) {
-			return false;
-		}
-		if(!(src.getTrueSource() instanceof EntityPlayer)) {
-			return false;
-		}
-		if(src.getTrueSource() instanceof FakePlayer) {
-			return false;
-		}
-		if(!((EntityPlayer)src.getTrueSource()).isCreative() && this.attackID != -1) {
+		if(!((EntityPlayer)src.getTrueSource()).isCreative() && attackID != -1) {
 			return false;
 		}
 		damage += f;
 		if(f > 40 || damage > 40) {
-			this.restingTime = 1;
+			restingTime = 1;
 		}
 		if(src.isProjectile()) {
 			f /= 4;
 		}
 		if(src.isProjectile()) {
-			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.damage.projectile", 5, this.getEntityWorld().rand.nextFloat()*2, 16, this.dimension);
+			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.damage.projectile", 5, getEntityWorld().rand.nextFloat()*2, 16, dimension);
 		}
 		else {
-			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.damage.melee", 0.3F, this.getEntityWorld().rand.nextFloat()*2, 16, this.dimension);
+			ECUtils.playSoundToAllNearby(posX, posY, posZ, "essentialcraft:sound.mob.hologram.damage.melee", 0.3F, getEntityWorld().rand.nextFloat()*2, 16, dimension);
 		}
 		return super.attackEntityFrom(src, f);
 	}

@@ -35,7 +35,7 @@ public class EntityMRURay extends Entity {
 	public float damage;
 	public EntityLivingBase shootingEntity;
 	public double pX,pY,pZ;
-	List<EntityLivingBase> hitEntities = new ArrayList<EntityLivingBase>();
+	List<EntityLivingBase> hitEntities = new ArrayList<>();
 
 	public EntityMRURay(World w)
 	{
@@ -45,19 +45,19 @@ public class EntityMRURay extends Entity {
 	@Override
 	public void onEntityUpdate()
 	{
-		if(this.ticksExisted >= 60)
+		if(ticksExisted >= 60)
 		{
-			this.setDead();
+			setDead();
 		}
 
-		if(!this.getEntityWorld().isRemote)
+		if(!getEntityWorld().isRemote)
 		{
-			this.getDataManager().set(DATA, "||x:"+pX+"||y:"+pY+"||z:"+pZ+"||b:"+(double)balance);
+			getDataManager().set(DATA, "||x:"+pX+"||y:"+pY+"||z:"+pZ+"||b:"+(double)balance);
 		}
 
-		if(this.getEntityWorld().isRemote)
+		if(getEntityWorld().isRemote)
 		{
-			String dataStr = this.getDataManager().get(DATA);
+			String dataStr = getDataManager().get(DATA);
 			if(dataStr != null && !dataStr.isEmpty())
 			{
 				DummyData[] posData = DataStorage.parseData(dataStr);
@@ -73,24 +73,24 @@ public class EntityMRURay extends Entity {
 	public EntityMRURay(World w, EntityLivingBase base)
 	{
 		super(w);
-		this.rotationYaw = base.rotationYawHead;
-		this.rotationPitch = base.rotationPitch;
-		this.shootingEntity = base;
-		pX = this.shootingEntity.posX;
-		pY = this.shootingEntity.posY+this.shootingEntity.getEyeHeight();
-		pZ = this.shootingEntity.posZ;
-		this.posX = base.posX;
-		this.posY = base.posY+this.shootingEntity.getEyeHeight();
-		this.posZ = base.posZ;
+		rotationYaw = base.rotationYawHead;
+		rotationPitch = base.rotationPitch;
+		shootingEntity = base;
+		pX = shootingEntity.posX;
+		pY = shootingEntity.posY+shootingEntity.getEyeHeight();
+		pZ = shootingEntity.posZ;
+		posX = base.posX;
+		posY = base.posY+shootingEntity.getEyeHeight();
+		posZ = base.posZ;
 	}
 
 	public EntityMRURay(World w, EntityLivingBase base, float damage, float offset, float balance)
 	{
 
 		super(w);
-		this.posX = base.posX;
-		this.posY = base.posY+base.getEyeHeight();
-		this.posZ = base.posZ;
+		posX = base.posX;
+		posY = base.posY+base.getEyeHeight();
+		posZ = base.posZ;
 		float rY = base.rotationYaw;
 		float rP = base.rotationPitch;
 		if(!w.isRemote)
@@ -100,13 +100,13 @@ public class EntityMRURay extends Entity {
 		}
 		this.damage = damage;
 		this.balance = balance;
-		this.shootingEntity = base;
-		pX = this.shootingEntity.posX;
-		pY = this.shootingEntity.posY+this.shootingEntity.getEyeHeight();
-		pZ = this.shootingEntity.posZ;
-		if(!this.getEntityWorld().isRemote)
+		shootingEntity = base;
+		pX = shootingEntity.posX;
+		pY = shootingEntity.posY+shootingEntity.getEyeHeight();
+		pZ = shootingEntity.posZ;
+		if(!getEntityWorld().isRemote)
 		{
-			this.shoot(rY,rP);
+			shoot(rY,rP);
 		}
 	}
 
@@ -115,19 +115,22 @@ public class EntityMRURay extends Entity {
 		if(attacked instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)attacked;
-			if(!player.getEntityWorld().isRemote && this.getEntityWorld().getMinecraftServer().isPVPEnabled())
+			if(!player.getEntityWorld().isRemote && getEntityWorld().getMinecraftServer().isPVPEnabled())
 			{
 				if(attacker instanceof EntityPlayer)
 				{
 					EntityPlayer attackerPlayer = (EntityPlayer) attacker;
-					if(attackerPlayer.getTeam() == null || player == null || !player.getTeam().isSameTeam(attackerPlayer.getTeam()))
-						if(!this.getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage"))
-							ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(this.damage*100));
+					if(attackerPlayer.getTeam() == null || player == null || !player.getTeam().isSameTeam(attackerPlayer.getTeam())) {
+						if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
+							ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
+						}
+					}
 				}else
-					if(!this.getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage"))
-						ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(this.damage*100));
+					if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
+						ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
+					}
 			}
-			if(this.balance == 4)
+			if(balance == 4)
 			{
 				ShadeUtils.attackPlayerWithShade(player, attacker, ItemStack.EMPTY);
 			}
@@ -146,42 +149,42 @@ public class EntityMRURay extends Entity {
 
 	public void shoot(float f, float f1)
 	{
-		Vec3d vec = this.shootingEntity.getLookVec();
+		Vec3d vec = shootingEntity.getLookVec();
 		for(int i = 0; i < 128; ++i)
 		{
-			float vX = (float) (vec.x*i/2F+this.posX);
-			float vY = (float) (vec.y*i/2F+this.posY);
-			float vZ = (float) (vec.z*i/2F+this.posZ);
+			float vX = (float) (vec.x*i/2F+posX);
+			float vY = (float) (vec.y*i/2F+posY);
+			float vZ = (float) (vec.z*i/2F+posZ);
 			int bVX = MathHelper.floor(vX);
 			int bVY = MathHelper.floor(vY);
 			int bVZ = MathHelper.floor(vZ);
 			double d = 0.5D;
 			AxisAlignedBB aabb = new AxisAlignedBB(vX-d, vY-d, vZ-d, vX+d, vY+d, vZ+d);
-			List<EntityLivingBase> entities = this.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, aabb);
+			List<EntityLivingBase> entities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, aabb);
 			for(int j = 0; j < entities.size(); ++j)
 			{
 				EntityLivingBase base = entities.get(j);
 				if(base != shootingEntity && !base.isDead && !hitEntities.contains(base))
 				{
-					base.attackEntityFrom(causeMRUDamage(this.shootingEntity, base), this.damage);
-					this.hitEntities.add(base);
+					base.attackEntityFrom(causeMRUDamage(shootingEntity, base), damage);
+					hitEntities.add(base);
 				}
 			}
-			IBlockState b = this.getEntityWorld().getBlockState(new BlockPos(bVX, bVY, bVZ));
+			IBlockState b = getEntityWorld().getBlockState(new BlockPos(bVX, bVY, bVZ));
 			if(b.isNormalCube() || i == 127)
 			{
-				this.setPositionAndRotation(vX, vY, vZ, 0, 0);
+				setPositionAndRotation(vX, vY, vZ, 0, 0);
 				break;
 			}
 		}
-		this.shootingEntity.rotationYaw = f;
-		this.shootingEntity.rotationPitch = f1;
+		shootingEntity.rotationYaw = f;
+		shootingEntity.rotationPitch = f1;
 	}
 
 	@Override
 	protected void entityInit()
 	{
-		this.getDataManager().register(DATA, "");
+		getDataManager().register(DATA, "");
 	}
 
 	@Override

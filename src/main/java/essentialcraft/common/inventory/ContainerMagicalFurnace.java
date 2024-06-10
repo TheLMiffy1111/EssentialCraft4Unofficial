@@ -13,6 +13,6 @@ public class ContainerMagicalFurnace extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 23));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

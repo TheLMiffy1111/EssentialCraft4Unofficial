@@ -25,7 +25,7 @@ public interface IPlayerData {
 
 	public int getPlayerUBMRU();
 
-	public void modifyUBMRU(int newubmru);
+	public void modifyUBMRU(int newUBMRU);
 
 	public int getMatrixTypeID();
 

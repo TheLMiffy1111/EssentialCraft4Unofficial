@@ -85,7 +85,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileRegistry {
 
-	public static final List<Class<? extends TileEntity>> CONFIG_DEPENDANT = new ArrayList<Class<? extends TileEntity>>();
+	public static final List<Class<? extends TileEntity>> CONFIG_DEPENDANT = new ArrayList<>();
 
 	public static void register() {
 		addTileToMapping(TileMRUCUECController.class);

@@ -38,7 +38,7 @@ public class BlockSolarPrism extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}

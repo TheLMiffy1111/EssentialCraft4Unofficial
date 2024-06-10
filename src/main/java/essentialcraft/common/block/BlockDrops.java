@@ -62,8 +62,9 @@ public class BlockDrops extends Block implements IModelRegisterer {
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		for(int i = 0; i < 4; ++i)
+		for(int i = 0; i < 4; ++i) {
 			list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class BlockDrops extends Block implements IModelRegisterer {
 
 	@Override
 	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> ret = new ArrayList<>();
 
 		int count = quantityDropped(state, fortune, world instanceof World ? ((World)world).rand : RANDOM);
 		for(int i = 0; i < count; i++)

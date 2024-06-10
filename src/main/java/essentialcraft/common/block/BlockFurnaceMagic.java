@@ -86,7 +86,7 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	public void onBlockAdded(World w, BlockPos p, IBlockState s)
 	{
 		super.onBlockAdded(w, p, s);
-		this.setBlockRotation(w, p, s);
+		setBlockRotation(w, p, s);
 	}
 
 	private void setBlockRotation(World w, BlockPos p, IBlockState s)
@@ -133,7 +133,7 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(TYPE, FurnaceType.fromIndex(meta/4)).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return getDefaultState().withProperty(TYPE, FurnaceType.fromIndex(meta/4)).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(TYPE, FurnaceType.fromIndex(meta/4)).withProperty(FACING, EnumFacing.getHorizontal(meta%4));
+		return getDefaultState().withProperty(TYPE, FurnaceType.fromIndex(meta/4)).withProperty(FACING, EnumFacing.byHorizontalIndex(meta%4));
 	}
 
 	@Override

@@ -14,6 +14,6 @@ public class ContainerMatrixAbsorber extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new Slot(inv, 0, 26, 5));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

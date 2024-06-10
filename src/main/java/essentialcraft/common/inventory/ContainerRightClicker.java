@@ -25,6 +25,6 @@ public class ContainerRightClicker extends ContainerInventory {
 			sizeInventory = 11;
 		}
 		addSlotToContainer(new SlotGeneric(inv, 10, 156, 4, "minecraft:items/dye_powder_gray"));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

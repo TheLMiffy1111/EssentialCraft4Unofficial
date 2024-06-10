@@ -36,8 +36,9 @@ public class MagicianTable {
 		boolean allNull = true;
 		Ingredient[] input = new Ingredient[ingredients.length];
 		for(int i = 0; i < ingredients.length; i++) {
-			if(ingredients[i] != null)
+			if(ingredients[i] != null) {
 				allNull = false;
+			}
 			input[i] = CraftTweakerUtils.toIngredient(ingredients[i]);
 		}
 
@@ -57,9 +58,10 @@ public class MagicianTable {
 		}
 
 		boolean hasNull = false;
-		for(int i = 0; i < ingredients.length; i++) {
-			if(ingredients[i] == null)
+		for(IIngredient ingredient : ingredients) {
+			if(ingredient == null) {
 				hasNull = true;
+			}
 		}
 
 		if(hasNull) {
@@ -98,26 +100,30 @@ public class MagicianTable {
 
 		@Override
 		public void apply() {
-			ArrayList<MagicianTableRecipe> toRemove = new ArrayList<MagicianTableRecipe>();
+			ArrayList<MagicianTableRecipe> toRemove = new ArrayList<>();
 
 			for(MagicianTableRecipe entry : MagicianTableRecipes.RECIPES) {
 				if(entry.requiredItems.length <= ingredients.length) {
 					boolean flag = true;
 					for(int i = 0; i < entry.requiredItems.length; i++) {
-						if(entry.requiredItems[i] == null || entry.requiredItems[i] == Ingredient.EMPTY)
+						if(entry.requiredItems[i] == null || entry.requiredItems[i] == Ingredient.EMPTY) {
 							continue;
-						if(!ingredients[i].contains(CraftTweakerMC.getIIngredient(entry.requiredItems[i])))
+						}
+						if(!ingredients[i].contains(CraftTweakerMC.getIIngredient(entry.requiredItems[i]))) {
 							flag = false;
+						}
 					}
 					if(flag) {
-						if(output == null || output.matches(CraftTweakerMC.getIItemStack(entry.result)))
+						if(output == null || output.matches(CraftTweakerMC.getIItemStack(entry.result))) {
 							toRemove.add(entry);
+						}
 					}
 				}
 			}
 
-			if(toRemove.isEmpty())
+			if(toRemove.isEmpty()) {
 				CraftTweakerAPI.logWarning("No recipe for "+Arrays.toString(ingredients));
+			}
 			else {
 				for(MagicianTableRecipe entry : toRemove) {
 					MagicianTableRecipes.removeRecipe(entry);

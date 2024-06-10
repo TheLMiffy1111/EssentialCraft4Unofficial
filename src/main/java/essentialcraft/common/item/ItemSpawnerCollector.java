@@ -22,9 +22,9 @@ public class ItemSpawnerCollector extends ItemMRUGeneric implements IModelRegist
 
 	public ItemSpawnerCollector() {
 		super();
-		this.setMaxMRU(10000);
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		setMaxMRU(10000);
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override
@@ -33,8 +33,9 @@ public class ItemSpawnerCollector extends ItemMRUGeneric implements IModelRegist
 		Block b = world.getBlockState(pos).getBlock();
 		if(b != null && b instanceof BlockMobSpawner)
 		{
-			if(world.getTileEntity(pos) == null || !(world.getTileEntity(pos) instanceof TileEntityMobSpawner))
+			if(world.getTileEntity(pos) == null || !(world.getTileEntity(pos) instanceof TileEntityMobSpawner)) {
 				return EnumActionResult.PASS;
+			}
 
 			if(ECUtils.playerUseMRU(player, player.getHeldItem(hand), 5000))
 			{
@@ -44,8 +45,9 @@ public class ItemSpawnerCollector extends ItemMRUGeneric implements IModelRegist
 				ItemStack collectedSpawner = new ItemStack(ItemsCore.collectedSpawner,1,0);
 				MiscUtils.getStackTag(collectedSpawner).setTag("monsterSpawner", mobTag);
 				EntityItem item = new EntityItem(world,pos.getX()+0.5D,pos.getY()+0.5D,pos.getZ()+0.5D,collectedSpawner);
-				if(!world.isRemote)
+				if(!world.isRemote) {
 					world.spawnEntity(item);
+				}
 
 				world.setBlockToAir(pos);
 				player.swingArm(hand);

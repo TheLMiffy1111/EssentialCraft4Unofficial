@@ -39,9 +39,9 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 
 	public ItemFrostMace() {
 		super(ItemsCore.elemental);
-		this.maxStackSize = 1;
-		this.bFull3D = true;
-		this.setMaxDamage(0);
+		maxStackSize = 1;
+		bFull3D = true;
+		setMaxDamage(0);
 	}
 
 	public static Capability<IMRUHandlerItem> MRU_HANDLER_ITEM_CAPABILITY = CapabilityMRUHandler.MRU_HANDLER_ITEM_CAPABILITY;
@@ -62,7 +62,7 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
 	{
-		if(this.isInCreativeTab(par2CreativeTabs)) {
+		if(isInCreativeTab(par2CreativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
@@ -106,7 +106,7 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,1000,eff.getAmplifier()+1));
 							return true;
 						}
-						else if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15)
+						if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15)
 						{
 							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS,1000,0));
 							return true;

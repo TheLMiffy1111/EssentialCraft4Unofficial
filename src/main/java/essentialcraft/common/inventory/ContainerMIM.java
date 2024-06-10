@@ -26,26 +26,27 @@ public class ContainerMIM extends ContainerInventory {
 
 		@Override
 		public boolean isItemValid(ItemStack stk) {
-			if(!(stk.getItem() instanceof ItemBoundGem))
+			if(!(stk.getItem() instanceof ItemBoundGem) || stk.getTagCompound() == null || !stk.getTagCompound().hasKey("pos")) {
 				return false;
-
-			if(stk.getTagCompound() == null || !stk.getTagCompound().hasKey("pos"))
-				return false;
+			}
 
 			TileEntity tile = (TileEntity)inventory;
 
-			if(stk.getTagCompound().getInteger("dim") != tile.getWorld().provider.getDimension())
+			if(stk.getTagCompound().getInteger("dim") != tile.getWorld().provider.getDimension()) {
 				return false;
+			}
 
 			int[] coords = ItemBoundGem.getCoords(stk);
 
 			TileEntity t = tile.getWorld().getTileEntity(new BlockPos(coords[0], coords[1], coords[2]));
 
-			if(t == null)
+			if(t == null) {
 				return false;
+			}
 
-			if(!dependant.isAssignableFrom(t.getClass()))
+			if(!dependant.isAssignableFrom(t.getClass())) {
 				return false;
+			}
 
 			return true;
 		}
@@ -86,11 +87,13 @@ public class ContainerMIM extends ContainerInventory {
 		addSlotToContainer(new SlotBGTEClassDepenant(inv, 15, 154, 38, cmc));
 		addSlotToContainer(new SlotBGTEClassDepenant(inv, 16, 172, 38, cmc));
 
-		for(int i = 0; i < 18; ++i)
+		for(int i = 0; i < 18; ++i) {
 			addSlotToContainer(new SlotBGTEClassDepenant(inv, 17+i, 28+i%9*18, 74+i/9*18,inc));
+		}
 
-		for(int i = 0; i < 18; ++i)
+		for(int i = 0; i < 18; ++i) {
 			addSlotToContainer(new SlotBGTEClassDepenant(inv, 35+i, 28+i%9*18, 128+i/9*18,enc));
-		this.setupPlayerInventory();
+		}
+		setupPlayerInventory();
 	}
 }

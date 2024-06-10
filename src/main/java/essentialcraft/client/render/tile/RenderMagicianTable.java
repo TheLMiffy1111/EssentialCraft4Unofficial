@@ -23,7 +23,7 @@ public class RenderMagicianTable extends TileEntitySpecialRenderer<TileMagicianT
 		GlStateManager.translate((float)x+0.5F, (float)y, (float)z+0.5F);
 		if(table.upgrade != -1)
 		{
-			this.bindTexture(MagicianTableUpgrades.UPGRADE_TEXTURES.get(table.upgrade));
+			bindTexture(MagicianTableUpgrades.UPGRADE_TEXTURES.get(table.upgrade));
 			float scale = 0.99F;
 			GlStateManager.translate(0, 0.005F, 0);
 			GlStateManager.scale(scale, scale, scale);
@@ -35,7 +35,8 @@ public class RenderMagicianTable extends TileEntitySpecialRenderer<TileMagicianT
 
 	@Override
 	public void render(TileMagicianTable tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 }

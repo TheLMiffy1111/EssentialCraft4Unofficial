@@ -36,15 +36,18 @@ public class BlockMRUCUECRedstoneController extends BlockContainer implements IM
 		if(player.isSneaking()) {
 			TileMRUCUECRedstoneController rc = (TileMRUCUECRedstoneController)world.getTileEntity(par2);
 			rc.setting += 1;
-			if(rc.setting >= 11)
+			if(rc.setting >= 11) {
 				rc.setting = 0;
-			if(player.getEntityWorld().isRemote)
+			}
+			if(player.getEntityWorld().isRemote) {
 				player.sendMessage(new TextComponentString(I18n.translateToLocal("essentialcraft.txt.redstone_"+rc.setting)));
+			}
 		}
 		else {
 			TileMRUCUECRedstoneController rc = (TileMRUCUECRedstoneController)world.getTileEntity(par2);
-			if(player.getEntityWorld().isRemote)
+			if(player.getEntityWorld().isRemote) {
 				player.sendMessage(new TextComponentString(I18n.translateToLocal("essentialcraft.txt.redstone_"+rc.setting)));
+			}
 		}
 		return true;
 	}

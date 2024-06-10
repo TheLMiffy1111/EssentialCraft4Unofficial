@@ -21,8 +21,9 @@ public class ContainerFilter extends ContainerInventory {
 	}
 
 	public void saveToNBT(ItemStack itemStack) {
-		if(!itemStack.hasTagCompound())
+		if(!itemStack.hasTagCompound()) {
 			itemStack.setTagCompound(new NBTTagCompound());
+		}
 		inventory.writeToNBT(itemStack.getTagCompound());
 	}
 
@@ -31,6 +32,6 @@ public class ContainerFilter extends ContainerInventory {
 		for(int o = 0; o < 9; ++o) {
 			addSlotToContainer(new Slot(inv, o, 62+o%3*18, 17+o/3*18));
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

@@ -18,6 +18,6 @@ public class ContainerPotionSpreader extends ContainerInventory {
 				addSlotToContainer(new SlotGeneric(inv, j + k*4 + 1, 26 + j*18, 23 + k*18));
 			}
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

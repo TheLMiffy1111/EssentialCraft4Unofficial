@@ -23,22 +23,23 @@ public class ItemPlayerList extends Item implements IModelRegisterer {
 
 	public ItemPlayerList() {
 		super();
-		this.maxStackSize = 1;
+		maxStackSize = 1;
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
 		NBTTagCompound itemTag = MiscUtils.getStackTag(player.getHeldItem(hand));
-		if(!itemTag.hasKey("usernames"))
+		if(!itemTag.hasKey("usernames")) {
 			itemTag.setString("usernames", "||username:null");
+		}
 		String str = itemTag.getString("usernames");
 		DummyData[] dt = DataStorage.parseData(str);
 		boolean canAddUsername = true;
-		for(int i = 0; i < dt.length; ++i)
-		{
-			if(dt[i].fieldValue.equals(MiscUtils.getUUIDFromPlayer(player).toString()))
+		for(DummyData element : dt) {
+			if(element.fieldValue.equals(MiscUtils.getUUIDFromPlayer(player).toString())) {
 				canAddUsername = false;
+			}
 		}
 		if(canAddUsername)
 		{
@@ -56,13 +57,13 @@ public class ItemPlayerList extends Item implements IModelRegisterer {
 		{
 			list.add("Allowed Players:");
 			NBTTagCompound itemTag = MiscUtils.getStackTag(stack);
-			if(!itemTag.hasKey("usernames"))
+			if(!itemTag.hasKey("usernames")) {
 				itemTag.setString("usernames", "||username:null");
+			}
 			String str = itemTag.getString("usernames");
 			DummyData[] dt = DataStorage.parseData(str);
-			for(int i = 0; i < dt.length; ++i)
-			{
-				String name = dt[i].fieldValue;
+			for(DummyData element : dt) {
+				String name = element.fieldValue;
 				if(!name.equals("null"))
 				{
 					list.add(" -"+MiscUtils.getUsernameFromUUID(name));

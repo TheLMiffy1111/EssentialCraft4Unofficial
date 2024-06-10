@@ -1,15 +1,7 @@
 package essentialcraft.common.tile;
 
-import DummyCore.Utils.MiscUtils;
-import DummyCore.Utils.Notifier;
-import DummyCore.Utils.TileStatTracker;
 import essentialcraft.common.capabilities.espe.CapabilityESPEHandler;
 import essentialcraft.common.capabilities.espe.ESPEStorage;
-import essentialcraft.common.mod.EssentialCraftCore;
-import essentialcraft.utils.common.ECUtils;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;

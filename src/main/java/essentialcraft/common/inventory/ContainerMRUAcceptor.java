@@ -13,6 +13,6 @@ public class ContainerMRUAcceptor extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 80, 32));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

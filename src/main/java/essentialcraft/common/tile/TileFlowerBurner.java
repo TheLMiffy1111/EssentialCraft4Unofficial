@@ -50,7 +50,7 @@ public class TileFlowerBurner extends TileMRUGeneric {
 		}
 		super.update();
 		firstTick = false;
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(!getWorld().isRemote) {
 				if(burnedFlower == null && mruStorage.getMRU() < mruStorage.getMaxMRU()) {
 					int offsetX = (int)(MathUtils.randomDouble(getWorld().rand)*8);
@@ -61,8 +61,7 @@ public class TileFlowerBurner extends TileMRUGeneric {
 						int[] ids = OreDictionary.getOreIDs(new ItemStack(b, 1, b.damageDropped(state)));
 						String name = "";
 						if(ids != null && ids.length > 0) {
-							for(int i = 0; i < ids.length; ++i) {
-								int oreDictID = ids[i];
+							for(int oreDictID : ids) {
 								String n = OreDictionary.getOreName(oreDictID);
 								if(n != null && !n.isEmpty()) {
 									name = n;
@@ -104,15 +103,17 @@ public class TileFlowerBurner extends TileMRUGeneric {
 			}
 			if(world.isRemote && burnedFlower != null && burnTime > 0) {
 				getWorld().spawnParticle(EnumParticleTypes.FLAME, burnedFlower.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, burnedFlower.getY()+0.1F + getWorld().rand.nextFloat()/2, burnedFlower.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, 0, 0, 0);
-				for(int t = 0; t < 200; ++t)
+				for(int t = 0; t < 200; ++t) {
 					EssentialCraftCore.proxy.SmokeFX(burnedFlower.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, burnedFlower.getY()+0.1F + getWorld().rand.nextFloat()/2, burnedFlower.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, 0, 0, 0, 1);
+				}
 			}
 		}
 		if(world.isRemote) {
 			EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.4F, pos.getY()+0.1F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.4F, 0, 0.01F, 0, 1D, 0.5D, 1, 1);
 			EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.2F, pos.getY()+0.2F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.2F, 0, 0.01F, 0, 1D, 0.5D, 1, 1);
-			for(int i = 0; i < 10; ++i)
+			for(int i = 0; i < 10; ++i) {
 				EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.1F, pos.getY()+0.6F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.1F, 0, 0, 0,1);
+			}
 		}
 	}
 

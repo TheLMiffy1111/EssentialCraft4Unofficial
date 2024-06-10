@@ -47,15 +47,17 @@ public class ContainerCraftingFrame extends ContainerInventory {
 
 			crafting = null;
 
-			if(slotNumber == 9 && result.isEmpty())
+			if(slotNumber == 9 && result.isEmpty()) {
 				inventory.setInventorySlotContents(slotNumber, ItemStack.EMPTY);
+			}
 
 			if(slotNumber != 9) {
 				inventory.setInventorySlotContents(slotNumber, ItemStack.EMPTY);
 
 				crafting = new InventoryCrafting(parent, 3, 3);
-				for(int i = 0; i < 9; ++i)
+				for(int i = 0; i < 9; ++i) {
 					crafting.setInventorySlotContents(i, parent.inventory.getStackInSlot(i));
+				}
 
 				result = CraftingManager.findMatchingResult(crafting, player.getEntityWorld());
 
@@ -98,8 +100,9 @@ public class ContainerCraftingFrame extends ContainerInventory {
 
 					if(!getHasStack()) {
 						IRecipe rec = ECUtils.findRecipeByIS(stk, 0);
-						if(rec == null && !parent.player.getHeldItemMainhand().getTagCompound().getBoolean("ignoreOreDict"))
+						if(rec == null && !parent.player.getHeldItemMainhand().getTagCompound().getBoolean("ignoreOreDict")) {
 							rec = ECUtils.findRecipeByIS(stk, 2);
+						}
 
 						settedRec = rec;
 
@@ -111,8 +114,9 @@ public class ContainerCraftingFrame extends ContainerInventory {
 									UnformedItemStack ust = new UnformedItemStack(srec.getIngredients().get(i).getMatchingStacks());
 									parent.inventory.setInventorySlotContents(i, ust.possibleStacks.get(player.getEntityWorld().rand.nextInt(ust.possibleStacks.size())));
 								}
-								else
+								else {
 									parent.inventory.setInventorySlotContents(i, ItemStack.EMPTY);
+								}
 
 								parent.inventorySlots.get(i).onSlotChanged();
 							}
@@ -137,21 +141,25 @@ public class ContainerCraftingFrame extends ContainerInventory {
 	}
 
 	public void saveToNBT(ItemStack itemStack) {
-		if(!itemStack.hasTagCompound())
+		if(!itemStack.hasTagCompound()) {
 			itemStack.setTagCompound(new NBTTagCompound());
+		}
 		inventory.writeToNBT(itemStack.getTagCompound());
 	}
 
 	@Override
 	public ItemStack slotClick(int slotID, int buttonPressed, ClickType flag, EntityPlayer player) {
 		Slot tmpSlot;
-		if(slotID >= 0 && slotID < inventorySlots.size())
+		if(slotID >= 0 && slotID < inventorySlots.size()) {
 			tmpSlot = inventorySlots.get(slotID);
-		else
+		}
+		else {
 			tmpSlot = null;
+		}
 
-		if(tmpSlot != null && tmpSlot.isHere(player.inventory, player.inventory.currentItem))
+		if(tmpSlot != null && tmpSlot.isHere(player.inventory, player.inventory.currentItem)) {
 			return tmpSlot.getStack();
+		}
 
 		return super.slotClick(slotID, buttonPressed, flag, player);
 	}
@@ -168,6 +176,6 @@ public class ContainerCraftingFrame extends ContainerInventory {
 		}
 
 		addSlotToContainer(new SlotFake(player, this, inv, 9, 124, 17+18));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

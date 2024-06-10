@@ -34,7 +34,7 @@ public class TileColdDistillator extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.setBalance(balanceProduced);
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			int mruGenerated = (int)(getMRU()*mruGenModifier);
 			mruStorage.addMRU(mruGenerated, true);
 			if(mruGenerated > 0 && !getWorld().isRemote && harmEntities) {

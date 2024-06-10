@@ -50,7 +50,7 @@ public class BlockMRUIntersector extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 

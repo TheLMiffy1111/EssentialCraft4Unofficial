@@ -33,7 +33,7 @@ public class BlockWeatherController extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 

@@ -7,8 +7,8 @@ public class ItemBlockGeneric extends ItemBlock {
 
 	public ItemBlockGeneric(Block block) {
 		super(block);
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override

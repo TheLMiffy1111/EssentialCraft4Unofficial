@@ -81,7 +81,9 @@ public class RenderSkyParadox  extends IRenderHandler {
 		f7 = 0.0F;
 		f8 = 0.0F;
 		f9 = 0.0F;
-		if(rotationSpeed == 0)rotationSpeed = 0.01F;
+		if(rotationSpeed == 0) {
+			rotationSpeed = 0.01F;
+		}
 		GlStateManager.color(1.0F, 1.0F, 1.0F, f6);
 		GlStateManager.translate(f7, f8, f9);
 		GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);

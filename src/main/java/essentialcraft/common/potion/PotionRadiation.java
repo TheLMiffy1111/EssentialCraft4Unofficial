@@ -14,9 +14,9 @@ public class PotionRadiation extends Potion {
 
 	public PotionRadiation(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(4, 2);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.radiation");
+		setIconIndex(4, 2);
+		setEffectiveness(0.25D);
+		setPotionName("potion.radiation");
 		this.setRegistryName("essentialcraft", "potion.radiation");
 	}
 

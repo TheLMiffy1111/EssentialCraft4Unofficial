@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class EntitiesCore {
-	public static final List<EntityEntry> REGISTERED_ENTITIES = new ArrayList<EntityEntry>();
+	public static final List<EntityEntry> REGISTERED_ENTITIES = new ArrayList<>();
 
 	public static void registerEntities() {
 		registerEntity(EntityMRUPresence.class, 64, 1, true);

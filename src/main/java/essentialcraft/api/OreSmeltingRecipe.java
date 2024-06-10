@@ -24,30 +24,32 @@ public class OreSmeltingRecipe {
 	public int color;
 	public int dropAmount;
 
-	public OreSmeltingRecipe(String i, int j) {
-		this(i,j,1);
+	public OreSmeltingRecipe(String oreName, int color) {
+		this(oreName, color, 1);
 	}
 
-	public OreSmeltingRecipe(String i, int j, int k) {
-		this(i,"",j,k);
+	public OreSmeltingRecipe(String oreName, int color, int dropAmount) {
+		this(oreName, "", color, dropAmount);
 	}
 
-	public OreSmeltingRecipe(String i, String s, int j, int k) {
-		oreName = i;
-		color = j;
-		dropAmount = k;
-		outputName = s;
+	public OreSmeltingRecipe(String oreName, String outputName, int color, int dropAmount) {
+		this.oreName = oreName;
+		this.outputName = outputName;
+		this.color = color;
+		this.dropAmount = dropAmount;
 	}
 
-	public OreSmeltingRecipe(String i, String s, int j) {
-		this(i, s, j, 1);
+	public OreSmeltingRecipe(String oreName, String outputName, int color) {
+		this(oreName, outputName, color, 1);
 	}
 
 	public OreSmeltingRecipe register() {
 		boolean flag = true;
-		for(OreSmeltingRecipe rec : RECIPES)
-			if(rec.oreName == this.oreName)
+		for(OreSmeltingRecipe rec : RECIPES) {
+			if(rec.oreName == oreName) {
 				flag = false;
+			}
+		}
 		if(flag) {
 			RECIPES.add(this);
 			RECIPE_MAP.put(oreName, this);
@@ -55,20 +57,20 @@ public class OreSmeltingRecipe {
 		return this;
 	}
 
-	public static OreSmeltingRecipe addRecipe(String i, int j) {
-		return new OreSmeltingRecipe(i, j).register();
+	public static OreSmeltingRecipe addRecipe(String oreName, int color) {
+		return new OreSmeltingRecipe(oreName, color).register();
 	}
 
-	public static OreSmeltingRecipe addRecipe(String i, int j, int k) {
-		return new OreSmeltingRecipe(i, j, k).register();
+	public static OreSmeltingRecipe addRecipe(String oreName, int color, int dropAmount) {
+		return new OreSmeltingRecipe(oreName, color, dropAmount).register();
 	}
 
-	public static OreSmeltingRecipe addRecipe(String i, String s, int j, int k) {
-		return new OreSmeltingRecipe(i, s, j, k).register();
+	public static OreSmeltingRecipe addRecipe(String oreName, String outputName, int color, int dropAmount) {
+		return new OreSmeltingRecipe(oreName, outputName, color, dropAmount).register();
 	}
 
-	public static OreSmeltingRecipe addRecipe(String i, String s, int j) {
-		return new OreSmeltingRecipe(i, s, j).register();
+	public static OreSmeltingRecipe addRecipe(String oreName, String outputName, int color) {
+		return new OreSmeltingRecipe(oreName, outputName, color).register();
 	}
 
 	public static boolean removeRecipe(OreSmeltingRecipe rec) {
@@ -78,46 +80,49 @@ public class OreSmeltingRecipe {
 	public static int getColorFromItemStack(ItemStack stk) {
 		if(stk.getItem() == ItemsCore.magicalAlloy) {
 			if(!stk.hasTagCompound()) {
-				if(stk.getItemDamage() < RECIPES.size())
+				if(stk.getItemDamage() < RECIPES.size()) {
 					return RECIPES.get(stk.getItemDamage()).color;
+				}
 				return 0xFFFFFF;
 			}
 			NBTTagCompound tag = stk.getTagCompound();
-			if(tag.hasKey("ore"))
+			if(tag.hasKey("ore")) {
 				return RECIPE_MAP.get(tag.getString("ore")).color;
+			}
 		}
 		return 0xFFFFFF;
 	}
 
 	public static String getLocalizedOreName(ItemStack stk) {
 		if(stk.getItem() == ItemsCore.magicalAlloy) {
-			if(stk.getItemDamage() >= OreSmeltingRecipe.RECIPES.size())
+			if(stk.getItemDamage() >= OreSmeltingRecipe.RECIPES.size()) {
 				return "";
+			}
 			OreSmeltingRecipe ore;
 			if(!stk.hasTagCompound()) {
-				if(stk.getItemDamage() < RECIPES.size())
-					ore = OreSmeltingRecipe.RECIPES.get(stk.getItemDamage());
-				else
+				if(stk.getItemDamage() >= RECIPES.size()) {
 					return "";
+				}
+				ore = OreSmeltingRecipe.RECIPES.get(stk.getItemDamage());
 			}
 			else {
 				NBTTagCompound tag = stk.getTagCompound();
-				if(tag.hasKey("ore"))
-					ore = RECIPE_MAP.get(tag.getString("ore"));
-				else
+				if(!tag.hasKey("ore")) {
 					return "";
+				}
+				ore = RECIPE_MAP.get(tag.getString("ore"));
 			}
 			List<ItemStack> oreLst = OreDictionary.getOres(ore.oreName, false);
-			if(oreLst != null && !oreLst.isEmpty())
+			if(oreLst != null && !oreLst.isEmpty()) {
 				return oreLst.get(0).getDisplayName();
-			else
-				return I18n.translateToLocal("tile."+ore.oreName+".name");
+			}
+			return I18n.translateToLocal("tile."+ore.oreName+".name");
 		}
 		return "";
 	}
 
 	public static ItemStack getAlloyStack(OreSmeltingRecipe rec, int stackSize) {
-		ItemStack ret = new ItemStack(ItemsCore.magicalAlloy,stackSize,0);
+		ItemStack ret = new ItemStack(ItemsCore.magicalAlloy, stackSize, 0);
 		NBTTagCompound tag = MiscUtils.getStackTag(ret);
 		tag.setString("ore", rec.oreName);
 		return ret;
@@ -126,41 +131,42 @@ public class OreSmeltingRecipe {
 	public static int getIndex(ItemStack stk) {
 		if(stk.getItem() == ItemsCore.magicalAlloy && stk.hasTagCompound()) {
 			NBTTagCompound tag = stk.getTagCompound();
-			if(tag.hasKey("ore"))
+			if(tag.hasKey("ore")) {
 				return RECIPES.indexOf(RECIPE_MAP.get(tag.getString("ore")));
+			}
 		}
 		return stk.getItemDamage();
 	}
 
 	static {
-		addRecipe("oreCoal","gemCoal",0x343434);
-		addRecipe("oreIron",0xe2c0aa);
-		addRecipe("oreGold",0xf8af2b);
-		addRecipe("oreDiamond","gemDiamond",0x5decf5);
-		addRecipe("oreEmerald","gemEmerald",0x17dd62);
-		addRecipe("oreQuartz","gemQuartz",0xd1beb1);
-		addRecipe("oreRedstone","dustRedstone",0x8f0303,8);
-		addRecipe("oreLapis","gemLapis",0x1c40a9,16);
-		addRecipe("oreCopper",0xbc4800);
-		addRecipe("oreTin",0xc3e9ff);
-		addRecipe("oreLead",0x7c8cc7);
-		addRecipe("oreSilver",0xf0fdfe);
-		addRecipe("oreCobalt",0x002568);
-		addRecipe("oreArdite",0xc9a537);
-		addRecipe("oreNickel",0xe5e4bd);
-		addRecipe("oreAluminum",0xc5c5c5);
-		addRecipe("oreUranium",0x41b200);
-		addRecipe("oreIridium",0xebffff);
-		addRecipe("oreAlchemite","gemAlchemite",0xff0e27,5);
-		addRecipe("oreFireElemental","gemFireElemental",0xff0000,3);
-		addRecipe("oreWaterElemental","gemWaterElemental",0x0000ff,3);
-		addRecipe("oreEarthElemental","gemEarthElemental",0x7d5a3a,3);
-		addRecipe("oreAirElemental","gemAirElemental",0xffffff,3);
-		addRecipe("oreElemental","gemElemental",0xff00ff,3);
-		addRecipe("oreMithriline","dustMithriline",0x00ff00,8);
-		addRecipe("oreSaltpeter","dustSaltpeter",0x999595,5);
-		addRecipe("oreSulfur","dustSulfur",0xffff99,5);
-		addRecipe("orePlatinum",0x6f7889);
-		addRecipe("oreMithril",0x3b525f);
+		addRecipe("oreCoal", "gemCoal", 0x343434);
+		addRecipe("oreIron", 0xE2C0AA);
+		addRecipe("oreGold", 0xF8AF2B);
+		addRecipe("oreDiamond", "gemDiamond", 0x5DECF5);
+		addRecipe("oreEmerald", "gemEmerald", 0x17DD62);
+		addRecipe("oreQuartz", "gemQuartz", 0xD1BEB1);
+		addRecipe("oreRedstone", "dustRedstone", 0x8F0303, 8);
+		addRecipe("oreLapis", "gemLapis", 0x1C40A9, 16);
+		addRecipe("oreCopper", 0xBC4800);
+		addRecipe("oreTin", 0xC3E9FF);
+		addRecipe("oreLead", 0x7C8CC7);
+		addRecipe("oreSilver", 0xF0FDFE);
+		addRecipe("oreCobalt", 0x002568);
+		addRecipe("oreArdite", 0xC9A537);
+		addRecipe("oreNickel", 0xE5E4BD);
+		addRecipe("oreAluminum", 0xC5C5C5);
+		addRecipe("oreUranium", 0x41B200);
+		addRecipe("oreIridium", 0xEBFFFF);
+		addRecipe("oreAlchemite", "gemAlchemite", 0xFF0E27, 5);
+		addRecipe("oreFireElemental", "gemFireElemental", 0xFF0000, 3);
+		addRecipe("oreWaterElemental", "gemWaterElemental", 0x0000FF, 3);
+		addRecipe("oreEarthElemental", "gemEarthElemental", 0x7D5A3A, 3);
+		addRecipe("oreAirElemental", "gemAirElemental", 0xFFFFFF, 3);
+		addRecipe("oreElemental", "gemElemental", 0xFF00FF, 3);
+		addRecipe("oreMithriline", "dustMithriline", 0x00FF00, 8);
+		addRecipe("oreSaltpeter", "dustSaltpeter", 0x999595, 5);
+		addRecipe("oreSulfur", "dustSulfur", 0xFFFF99, 5);
+		addRecipe("orePlatinum", 0x6F7889);
+		addRecipe("oreMithril", 0x3B525F);
 	}
 }

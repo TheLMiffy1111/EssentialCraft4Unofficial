@@ -35,7 +35,7 @@ public class TileEnderGenerator extends TileMRUGeneric {
 		}
 		super.update();
 		firstTick = false;
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			AxisAlignedBB endermenTPRadius = new AxisAlignedBB(pos.getX()-endermenCatchRadius, pos.getY()-endermenCatchRadius, pos.getZ()-endermenCatchRadius, pos.getX()+endermenCatchRadius+1, pos.getY()+endermenCatchRadius+1, pos.getZ()+endermenCatchRadius+1);
 			List<EntityEnderman> l = getWorld().getEntitiesWithinAABB(EntityEnderman.class, endermenTPRadius);
 			if(Loader.isModLoaded("hardcoreenderexpansion")) {
@@ -51,8 +51,8 @@ public class TileEnderGenerator extends TileMRUGeneric {
 				}
 			}
 			if(!l.isEmpty()) {
-				for(int i = 0; i < l.size(); ++i) {
-					l.get(i).setPositionAndRotation(pos.getX()+0.5D, pos.getY()+1D, pos.getZ()+0.5D, 0, 0);
+				for(EntityEnderman element : l) {
+					element.setPositionAndRotation(pos.getX()+0.5D, pos.getY()+1D, pos.getZ()+0.5D, 0, 0);
 				}
 			}
 			AxisAlignedBB endermanAttackRad = new AxisAlignedBB(pos.getX()-2, pos.getY()-2, pos.getZ()-2, pos.getX()+2, pos.getY()+2, pos.getZ()+2);
@@ -70,8 +70,8 @@ public class TileEnderGenerator extends TileMRUGeneric {
 				}
 			}
 			if(!l1.isEmpty()) {
-				for(int i = 0; i < l1.size(); ++i) {
-					if(l1.get(i).attackEntityFrom(DamageSource.MAGIC, 1)) {
+				for(EntityEnderman element : l1) {
+					if(element.attackEntityFrom(DamageSource.MAGIC, 1)) {
 						mruStorage.addMRU(mruGenerated, true);
 					}
 				}

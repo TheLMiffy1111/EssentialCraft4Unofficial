@@ -10,9 +10,9 @@ public class PotionPurpleFlame extends Potion {
 
 	public PotionPurpleFlame(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(6, 2);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.purpleFlame");
+		setIconIndex(6, 2);
+		setEffectiveness(0.25D);
+		setPotionName("potion.purpleFlame");
 		this.setRegistryName("essentialcraft", "potion.purpleflame");
 	}
 

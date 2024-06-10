@@ -75,7 +75,7 @@ public class RenderCorruptionCleaner extends TileEntitySpecialRenderer<TileCorru
 
 	@Override
 	public void render(TileCorruptionCleaner tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 
 	@Override

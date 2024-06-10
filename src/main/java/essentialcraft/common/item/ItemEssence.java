@@ -25,42 +25,50 @@ public class ItemEssence extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName()+dropNames[stack.getItemDamage()%4];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey()+dropNames[stack.getItemDamage()%4];
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(this.isInCreativeTab(p_150895_2_))
+		if(isInCreativeTab(p_150895_2_)) {
 			for(int var4 = 0; var4 < 16; ++var4) {
 				ItemStack min = new ItemStack(this, 1, var4);
 				p_150895_3_.add(min);
 			}
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
 		int t = stack.getItemDamage()/4;
-		if(t == 0)
+		if(t == 0) {
 			list.add("Rarity: \247f"+"Common");
-		if(t == 1)
+		}
+		if(t == 1) {
 			list.add("Rarity: \247e"+"Uncommon");
-		if(t == 2)
+		}
+		if(t == 2) {
 			list.add("Rarity: \247b"+"Rare");
-		if(t == 3)
+		}
+		if(t == 3) {
 			list.add("Rarity: \247d"+"Exceptional");
+		}
 	}
 
 	@Override
 	public EnumRarity getRarity(ItemStack stack) {
 		int t = stack.getItemDamage()/4;
-		if(t == 1)
+		if(t == 1) {
 			return EnumRarity.UNCOMMON;
-		if(t == 2)
+		}
+		if(t == 2) {
 			return EnumRarity.RARE;
-		if(t == 3)
+		}
+		if(t == 3) {
 			return EnumRarity.EPIC;
+		}
 		return EnumRarity.COMMON;
 	}
 

@@ -63,14 +63,18 @@ public class TilePlayerPentacle extends TileEntity implements ITickable {
 
 	public boolean consumeEnderstarEnergy(int consumed) {
 		int tierCheck = 0;
-		if(tier == 0)
+		if(tier == 0) {
 			tierCheck = 8;
-		if(tier == 1)
+		}
+		if(tier == 1) {
 			tierCheck = 12;
-		if(tier == 2)
+		}
+		if(tier == 2) {
 			tierCheck = 16;
-		if(tier >= 3)
+		}
+		if(tier >= 3) {
 			tierCheck = 20;
+		}
 		double aconsumed = 0;
 		double consumeModifier = 0.36D;
 		consumed /= consumeModifier;
@@ -232,21 +236,21 @@ public class TilePlayerPentacle extends TileEntity implements ITickable {
 		World w = getWorld();
 		BlockPos cp = pos.down();
 		tier = -1;
-		if(tier0Checker.test(w, cp)) {
-			tier = 0;
+		if(!tier0Checker.test(w, cp)) {
+			return;
 		}
-		else return;
-		if(tier1Checker.test(w, cp)) {
-			tier = 1;
+		tier = 0;
+		if(!tier1Checker.test(w, cp)) {
+			return;
 		}
-		else return;
-		if(tier2Checker.test(w, cp)) {
-			tier = 2;
+		tier = 1;
+		if(!tier2Checker.test(w, cp)) {
+			return;
 		}
-		else return;
-		if(tier3Checker.test(w, cp)) {
-			tier = 3;
+		tier = 2;
+		if(!tier3Checker.test(w, cp)) {
+			return;
 		}
-		else return;
+		tier = 3;
 	}
 }

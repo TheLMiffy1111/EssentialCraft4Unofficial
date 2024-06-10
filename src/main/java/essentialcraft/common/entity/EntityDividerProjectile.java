@@ -23,11 +23,12 @@ public class EntityDividerProjectile extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult p_70184_1_) {
 		if (p_70184_1_.typeOfHit == Type.BLOCK) {
-			EntityDivider div = new EntityDivider(this.getEntityWorld(),this.posX,this.posY,this.posZ,0,2,this.getThrower());
-			if(!this.getEntityWorld().isRemote)
-				this.getEntityWorld().spawnEntity(div);
+			EntityDivider div = new EntityDivider(getEntityWorld(),posX,posY,posZ,0,2,getThrower());
+			if(!getEntityWorld().isRemote) {
+				getEntityWorld().spawnEntity(div);
+			}
 
-			this.setDead();
+			setDead();
 		}
 	}
 

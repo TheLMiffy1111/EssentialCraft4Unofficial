@@ -29,7 +29,7 @@ public class TileCrafter extends TileMRUGeneric {
 
 	@Override
 	public void update() {
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) > 0 || getWorld().getStrongPower(pos) > 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) > 0 || getWorld().getStrongPower(pos) > 0) {
 			if(!hasFrame()) {
 				makeRecipe();
 			}
@@ -41,8 +41,9 @@ public class TileCrafter extends TileMRUGeneric {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		if(stack.isEmpty())
+		if(stack.isEmpty()) {
 			return false;
+		}
 
 		return slot == 10 ? isFrame(stack) : slot == 9 ? false : isItemFineForSlot(stack, slot);
 	}
@@ -56,9 +57,7 @@ public class TileCrafter extends TileMRUGeneric {
 		if(hasFrame()) {
 			return areStacksTheSame(getRecipeFromFrame()[slotNum], compared, hasOreDict());
 		}
-		else {
-			return true;
-		}
+		return true;
 	}
 
 	public boolean hasOreDict() {
@@ -70,22 +69,21 @@ public class TileCrafter extends TileMRUGeneric {
 	}
 
 	public boolean areStacksTheSame(ItemStack stk1, ItemStack stk2, boolean oreDict) {
-		if(stk1.isEmpty() && stk2.isEmpty())
+		if(stk1.isEmpty() && stk2.isEmpty()) {
 			return true;
+		}
 
-		if(stk1.isEmpty() || stk2.isEmpty())
+		if(stk1.isEmpty() || stk2.isEmpty()) {
 			return false;
+		}
 
 		if(!oreDict) {
-			if(!stk1.isItemEqual(stk2))
+			if(!stk1.isItemEqual(stk2) || !ItemStack.areItemStacksEqual(stk1, stk2)) {
 				return false;
-
-			if(!ItemStack.areItemStacksEqual(stk1, stk2))
-				return false;
+			}
 		}
-		else {
-			if(!ECUtils.oreDictionaryCompare(stk1, stk2))
-				return false;
+		else if(!ECUtils.oreDictionaryCompare(stk1, stk2)) {
+			return false;
 		}
 
 		return true;
@@ -95,8 +93,9 @@ public class TileCrafter extends TileMRUGeneric {
 		ItemStack[] frame = getRecipeFromFrame();
 		for(int i = 0; i < 9; ++i) {
 			ItemStack stk = getStackInSlot(i);
-			if(!areStacksTheSame(frame[i],stk,hasOreDict()))
+			if(!areStacksTheSame(frame[i],stk,hasOreDict())) {
 				return false;
+			}
 		}
 
 		return true;
@@ -153,9 +152,7 @@ public class TileCrafter extends TileMRUGeneric {
 				int k = row + column * inventoryWidth;
 				return getStackInSlot(k);
 			}
-			else {
-				return ItemStack.EMPTY;
-			}
+			return ItemStack.EMPTY;
 		}
 
 		@Override
@@ -165,33 +162,29 @@ public class TileCrafter extends TileMRUGeneric {
 				stackList[slot] = ItemStack.EMPTY;
 				return itemstack;
 			}
-			else {
-				return ItemStack.EMPTY;
-			}
+			return ItemStack.EMPTY;
 		}
 
 		@Override
 		public ItemStack decrStackSize(int slot, int amount) {
-			if(!stackList[slot].isEmpty()) {
-				ItemStack itemstack;
+			if(stackList[slot].isEmpty()) {
+				return ItemStack.EMPTY;
+			}
+			ItemStack itemstack;
 
-				if(stackList[slot].getCount() <= amount) {
-					itemstack = stackList[slot];
-					stackList[slot] = ItemStack.EMPTY;
-					return itemstack;
-				}
-				else {
-					itemstack = stackList[slot].splitStack(amount);
-
-					if(stackList[slot].getCount() == 0) {
-						stackList[slot] = ItemStack.EMPTY;
-					}
-
-					return itemstack;
-				}
+			if(stackList[slot].getCount() <= amount) {
+				itemstack = stackList[slot];
+				stackList[slot] = ItemStack.EMPTY;
+				return itemstack;
 			}
 			else {
-				return ItemStack.EMPTY;
+				itemstack = stackList[slot].splitStack(amount);
+
+				if(stackList[slot].getCount() == 0) {
+					stackList[slot] = ItemStack.EMPTY;
+				}
+
+				return itemstack;
 			}
 		}
 

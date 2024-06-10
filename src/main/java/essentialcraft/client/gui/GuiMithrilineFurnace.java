@@ -10,7 +10,7 @@ public class GuiMithrilineFurnace extends GuiCommon{
 
 	public GuiMithrilineFurnace(Container c, TileMithrilineFurnace tile) {
 		super(c,tile);
-		this.elementList.add(new GuiESPEStorage(4, 64, tile));
-		this.elementList.add(new GuiProgressBar_MithrilineFurnace(81, 62, tile));
+		elementList.add(new GuiESPEStorage(4, 64, tile));
+		elementList.add(new GuiProgressBar_MithrilineFurnace(81, 62, tile));
 	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.google.common.collect.HashMultimap;
 
+import DummyCore.Utils.Coord3D;
 import DummyCore.Utils.DummyDistance;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -42,22 +43,22 @@ public class ApiCore {
 	/**
 	 * A list of all items, which allow the player to see MRUCUs and MRU particles
 	 */
-	public static final List<Item> MRU_VISIBLE_LIST = new ArrayList<Item>();
+	public static final List<Item> MRU_VISIBLE_LIST = new ArrayList<>();
 
 	/**
 	 * A list of reductions the armor can have
 	 */
-	public static final HashMap<Item, ArrayList<Float>> ITEM_RESISTANCE_MAP = new HashMap<Item, ArrayList<Float>>();
+	public static final HashMap<Item, ArrayList<Float>> ITEM_RESISTANCE_MAP = new HashMap<>();
 
 	/**
 	 * All categories the Book Of Knowledge can have
 	 */
-	public static final List<CategoryEntry> CATEGORY_LIST = new ArrayList<CategoryEntry>();
+	public static final List<CategoryEntry> CATEGORY_LIST = new ArrayList<>();
 
 	/**
 	 * A list of all discoveries bound to generic ItemStack
 	 */
-	public static final HashMap<String, DiscoveryEntry> IS_TO_DISCOVERY_MAP = new HashMap<String, DiscoveryEntry>();
+	public static final HashMap<String, DiscoveryEntry> IS_TO_DISCOVERY_MAP = new HashMap<>();
 
 	@CapabilityInject(IMRUHandler.class)
 	public static Capability<IMRUHandler> MRU_HANDLER_CAPABILITY = null;
@@ -70,19 +71,16 @@ public class ApiCore {
 
 	/**
 	 * Use this to get a full information on the player - it's UBMRU, Balance and Corruption status
-	 * @param p - the player to get the data of. Please check, that it is not null and is not a FakePlayer!
+	 * @param player - the player to get the data of. Please check, that it is not null and is not a FakePlayer!
 	 * @return The corresponding player data, or null if something went wrong
 	 */
-	public static IPlayerData getPlayerData(EntityPlayer p)
-	{
-		try
-		{
+	public static IPlayerData getPlayerData(EntityPlayer player) {
+		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
 			Method getData = ecUtilsClass.getMethod("getData", EntityPlayer.class);
-			return (IPlayerData)getData.invoke(null, p);
-
-		}catch(Exception e)
-		{
+			return (IPlayerData)getData.invoke(null, player);
+		}
+		catch(Exception e) {
 			return null;
 		}
 	}
@@ -92,17 +90,15 @@ public class ApiCore {
 	 * @param structure - the structure the block can be a part of
 	 * @param registered - the block that is registered. Not metadata sensitive!
 	 */
-	public static void registerBlockInStructure(EnumStructureType structure, Block registered)
-	{
-		try
-		{
+	public static void registerBlockInStructure(EnumStructureType structure, Block registered) {
+		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
 			Field hashMultimapFld = ecUtilsClass.getDeclaredField("STRUCTURE_TO_BLOCKS_MAP");
 			hashMultimapFld.setAccessible(true);
-			HashMultimap<EnumStructureType,Block> hashMap = (HashMultimap<EnumStructureType, Block>)hashMultimapFld.get(null);
+			HashMultimap<EnumStructureType, Block> hashMap = (HashMultimap<EnumStructureType, Block>)hashMultimapFld.get(null);
 			hashMap.put(structure, registered);
-		}catch(Exception e)
-		{
+		}
+		catch(Exception e) {
 			return;
 		}
 	}
@@ -113,16 +109,14 @@ public class ApiCore {
 	 * @param metadata - the block's metadata. Use -1 or OreDictionary.WILDCARD_VALUE to make the check ignore metadata.
 	 * @param resistance - the resistance the block will have. All non-registered have 1.
 	 */
-	public static void registerBlockMRUResistance(Block registered, int metadata, float resistance)
-	{
-		try
-		{
+	public static void registerBlockMRUResistance(Block registered, int metadata, float resistance) {
+		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
-			Method regBlk = ecUtilsClass.getMethod("registerBlockResistance", Block.class,int.class,float.class);
+			Method regBlk = ecUtilsClass.getMethod("registerBlockResistance", Block.class, int.class, float.class);
 			regBlk.setAccessible(true);
-			regBlk.invoke(null,registered,metadata,resistance);
-		}catch(Exception e)
-		{
+			regBlk.invoke(null, registered, metadata, resistance);
+		}
+		catch(Exception e) {
 			return;
 		}
 	}
@@ -132,10 +126,10 @@ public class ApiCore {
 	 * @param referal - the ItemStack to lookup.
 	 * @return A valid DiscoveryEntry if was found, null otherwise
 	 */
-	public static DiscoveryEntry findDiscoveryByIS(ItemStack referal)
-	{
-		if(referal.isEmpty() || referal.getItem() == null)
+	public static DiscoveryEntry findDiscoveryByIS(ItemStack referal) {
+		if(referal.isEmpty() || referal.getItem() == null) {
 			return null;
+		}
 		int size = referal.getCount();
 		referal.setCount(1);
 		DiscoveryEntry de = ApiCore.IS_TO_DISCOVERY_MAP.get(referal.toString());
@@ -145,89 +139,74 @@ public class ApiCore {
 
 	/**
 	 * Registers an item as one allowed to grant the player MRUCU and MRU vision
-	 * @param i - the item to register
+	 * @param item - the item to register
 	 */
-	public static void allowItemToSeeMRU(Item i)
-	{
-		MRU_VISIBLE_LIST.add(i);
+	public static void allowItemToSeeMRU(Item item) {
+		MRU_VISIBLE_LIST.add(item);
 	}
 
-	public static void setItemResistances(Item item_0, float i, float j, float k)
-	{
-		ArrayList<Float> red = new ArrayList<Float>();
-		red.add(i);
-		red.add(j);
-		red.add(k);
-		ITEM_RESISTANCE_MAP.put(item_0, red);
+	public static void setItemResistances(Item item, float cResist, float rResist, float cAffect) {
+		ArrayList<Float> res = new ArrayList<>();
+		res.add(cResist);
+		res.add(rResist);
+		res.add(cAffect);
+		ITEM_RESISTANCE_MAP.put(item, res);
 	}
 
-	public static boolean tryToDecreaseMRUInStorage(EntityPlayer player, int amount)
-	{
-		try
-		{
+	public static boolean tryToDecreaseMRUInStorage(EntityPlayer player, int amount) {
+		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
 			Method tryToDecreaseMRUInStorage = ecUtilsClass.getMethod("tryToDecreaseMRUInStorage", EntityPlayer.class,int.class);
 			return Boolean.parseBoolean(tryToDecreaseMRUInStorage.invoke(null, player,-amount).toString());
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 			return false;
 		}
 	}
 
-	public static void increaseCorruptionAt(World w, float x, float y, float z, int amount)
-	{
-		try
-		{
+	public static void increaseCorruptionAt(World world, float x, float y, float z, int amount) {
+		try {
 			Class<?> ecUtilsClass = Class.forName("essentialcraft.utils.common.ECUtils");
 			Method increaseCorruptionAt = ecUtilsClass.getMethod("increaseCorruptionAt", World.class,float.class,float.class,float.class,int.class);
 			increaseCorruptionAt.setAccessible(true);
-			increaseCorruptionAt.invoke(null, w,x,y,z,amount);
-		}catch(Exception e)
-		{
+			increaseCorruptionAt.invoke(null, world, x, y, z, amount);
+		}
+		catch(Exception e) {
 			return;
 		}
 	}
 
-	public static Entity getClosestMRUCUEntity(World w, BlockPos c, int radius) {
-		List<Entity> l = w.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(c).grow(radius, radius/2, radius), e->e.hasCapability(MRU_HANDLER_ENTITY_CAPABILITY, null));
+	public static Entity getClosestMRUCUEntity(World world, BlockPos pos, int radius) {
+		List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos).grow(radius, radius/2, radius), e->e.hasCapability(MRU_HANDLER_ENTITY_CAPABILITY, null));
 		Entity ret = null;
-		if(!l.isEmpty()) {
-			double currentDistance = 0;
-			double dominatingDistance = 0;
-			int dominatingIndex = 0;
-			DummyCore.Utils.Coord3D main = new DummyCore.Utils.Coord3D(c.getX()+0.5D,c.getY()+0.5D,c.getZ()+0.5D);
-			for(int i = 0; i < l.size(); ++i) 	{
-				Entity pressence = l.get(i);
-				DummyCore.Utils.Coord3D current = new DummyCore.Utils.Coord3D(pressence.posX,pressence.posY,pressence.posZ);
-				DummyDistance dist = new DummyDistance(main,current);
+		if(!entities.isEmpty()) {
+			double minDistance = 0;
+			Coord3D main = new Coord3D(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5);
+			for(int i = 0; i < entities.size(); ++i) 	{
+				Entity presence = entities.get(i);
+				Coord3D current = new Coord3D(presence.posX, presence.posY, presence.posZ);
+				DummyDistance dist = new DummyDistance(main, current);
 				if(i == 0) {
-					dominatingIndex = i;
-					dominatingDistance = dist.getDistance();
+					ret = presence;
+					minDistance = dist.getDistance();
 				}
-				else {
-					currentDistance = dist.getDistance();
-					if(currentDistance < dominatingDistance) {
-						dominatingIndex = i;
-						dominatingDistance = dist.getDistance();
-					}
+				else if(dist.getDistance() < minDistance) {
+					ret = presence;
+					minDistance = dist.getDistance();
 				}
 			}
-			try {
-				ret = l.get(dominatingIndex);
-			}
-			catch(IndexOutOfBoundsException e) {}
 		}
 		return ret;
 	}
 
-	public static IMRUHandlerEntity getClosestMRUCU(World w, BlockPos c, int radius) {
-		return getClosestMRUCUEntity(w, c, radius).getCapability(MRU_HANDLER_ENTITY_CAPABILITY, null);
+	public static IMRUHandlerEntity getClosestMRUCU(World world, BlockPos pos, int radius) {
+		return getClosestMRUCUEntity(world, pos, radius).getCapability(MRU_HANDLER_ENTITY_CAPABILITY, null);
 	}
 
-	public static void registerTexture(ResourceLocation rl) {
-		if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+	public static void registerTexture(ResourceLocation texture) {
+		if(FMLCommonHandler.instance().getEffectiveSide().isServer()) {
 			return;
+		}
 		try {
 			Class<?> coreClass = Class.forName("essentialcraft.common.mod.EssentialCraftCore");
 			Class<?> proxyClass = Class.forName("essentialcraft.proxy.CommonProxy");
@@ -235,10 +214,8 @@ public class ApiCore {
 			proxyField.setAccessible(true);
 			Method regMethod = proxyClass.getDeclaredMethod("registerTexture", ResourceLocation.class);
 			regMethod.setAccessible(true);
-			regMethod.invoke(proxyField.get(null), rl);
+			regMethod.invoke(proxyField.get(null), texture);
 		}
-		catch(Exception e) {
-
-		}
+		catch(Exception e) {}
 	}
 }

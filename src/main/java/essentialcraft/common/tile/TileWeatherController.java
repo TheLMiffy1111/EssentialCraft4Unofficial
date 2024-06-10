@@ -27,7 +27,7 @@ public class TileWeatherController extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(world.isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(world.getRedstonePowerFromNeighbors(pos) == 0) {
 			if(getStackInSlot(2).isEmpty() || (getStackInSlot(2).getItem() == Items.GLASS_BOTTLE && getStackInSlot(2).getCount() < getInventoryStackLimit() && getStackInSlot(2).getCount() < getStackInSlot(2).getMaxStackSize())) {
 				if(getStackInSlot(1).getItem() == ItemsCore.clearing_catalyst && world.isRaining()) {
 					if(mruStorage.getMRU() >= mruUsage) {

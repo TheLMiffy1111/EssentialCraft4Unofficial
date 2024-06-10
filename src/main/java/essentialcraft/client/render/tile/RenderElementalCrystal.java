@@ -66,7 +66,7 @@ public class RenderElementalCrystal extends TileEntitySpecialRenderer<TileElemen
 			GlStateManager.rotate(90, 0, 0, 1);
 		}
 
-		this.bindTexture(textures);
+		bindTexture(textures);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableLighting();
 		GlStateManager.disableCull();
@@ -76,19 +76,19 @@ public class RenderElementalCrystal extends TileEntitySpecialRenderer<TileElemen
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 		crystal.renderModel(0.0625F);
 
-		this.bindTexture(fire);
+		bindTexture(fire);
 		GlStateManager.color(1, 1, 1, (float)(crystal_tile.fire/100));
 		crystal.renderModel(0.0625F);
 
-		this.bindTexture(water);
+		bindTexture(water);
 		GlStateManager.color(1, 1, 1, (float)(crystal_tile.water/100));
 		crystal.renderModel(0.0625F);
 
-		this.bindTexture(earth);
+		bindTexture(earth);
 		GlStateManager.color(1, 1, 1, (float)(crystal_tile.earth/100));
 		crystal.renderModel(0.0625F);
 
-		this.bindTexture(air);
+		bindTexture(air);
 		GlStateManager.color(1, 1, 1, (float)(crystal_tile.air/100));
 		crystal.renderModel(0.0625F);
 
@@ -99,6 +99,6 @@ public class RenderElementalCrystal extends TileEntitySpecialRenderer<TileElemen
 
 	@Override
 	public void render(TileElementalCrystal tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

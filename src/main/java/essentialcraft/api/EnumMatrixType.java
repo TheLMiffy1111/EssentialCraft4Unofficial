@@ -13,9 +13,8 @@ public enum EnumMatrixType implements IStringSerializable {
 	private int index;
 	private String name;
 
-	private EnumMatrixType(String s)
-	{
-		index = this.ordinal();
+	private EnumMatrixType(String s) {
+		index = ordinal();
 		name = s;
 	}
 
@@ -29,8 +28,7 @@ public enum EnumMatrixType implements IStringSerializable {
 		return name;
 	}
 
-	public int getIndex()
-	{
+	public int getIndex() {
 		return index;
 	}
 

@@ -63,9 +63,7 @@ public class ModMRUReinforced extends ModifierTrait {
 
 			return ImmutableList.of(Util.translateFormatted(loc, new Object[] { chanceStr }));
 		}
-		else {
-			return super.getExtraInfo(tool, modifierTag);
-		}
+		return super.getExtraInfo(tool, modifierTag);
 	}
 
 	private float getReinforcedChance(NBTTagCompound modifierTag) {

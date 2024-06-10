@@ -21,12 +21,12 @@ public class BlockDreadCactus extends BlockCactus implements IModelRegisterer {
 
 	public BlockDreadCactus() {
 		super();
-		this.setSoundType(SoundType.PLANT);
+		setSoundType(SoundType.PLANT);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World p_149670_1_, BlockPos p_149670_2_, IBlockState p_149670_3_, Entity p_149670_5_) {
-		super.onEntityCollidedWithBlock(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_5_);
+	public void onEntityCollision(World p_149670_1_, BlockPos p_149670_2_, IBlockState p_149670_3_, Entity p_149670_5_) {
+		super.onEntityCollision(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_5_);
 		if(p_149670_5_ instanceof EntityLivingBase) {
 			EntityLivingBase base = (EntityLivingBase) p_149670_5_;
 			base.addPotionEffect(new PotionEffect(MobEffects.POISON,100,0));

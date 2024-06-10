@@ -50,14 +50,17 @@ public class TileMagicalDisplay extends TileEntity implements IInventory, ITicka
 	public void update() {
 		//Sending the sync packets to the CLIENT.
 		if(syncTick == 0) {
-			if(tracker == null)
+			if(tracker == null) {
 				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + "," + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
-			else if(!getWorld().isRemote && tracker.tileNeedsSyncing())
+			}
+			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);
+			}
 			syncTick = 20;
 		}
-		else
+		else {
 			--syncTick;
+		}
 
 		if(requestSync && getWorld().isRemote) {
 			requestSync = false;
@@ -74,8 +77,9 @@ public class TileMagicalDisplay extends TileEntity implements IInventory, ITicka
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	@Override
@@ -90,26 +94,24 @@ public class TileMagicalDisplay extends TileEntity implements IInventory, ITicka
 
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if(!items[par1].isEmpty()) {
-			ItemStack itemstack;
+		if(items[par1].isEmpty()) {
+			return ItemStack.EMPTY;
+		}
+		ItemStack itemstack;
 
-			if(items[par1].getCount() <= par2) {
-				itemstack = items[par1];
-				items[par1] = ItemStack.EMPTY;
-				return itemstack;
-			}
-			else {
-				itemstack = items[par1].splitStack(par2);
-
-				if(items[par1].getCount() == 0) {
-					items[par1] = ItemStack.EMPTY;
-				}
-
-				return itemstack;
-			}
+		if(items[par1].getCount() <= par2) {
+			itemstack = items[par1];
+			items[par1] = ItemStack.EMPTY;
+			return itemstack;
 		}
 		else {
-			return ItemStack.EMPTY;
+			itemstack = items[par1].splitStack(par2);
+
+			if(items[par1].getCount() == 0) {
+				items[par1] = ItemStack.EMPTY;
+			}
+
+			return itemstack;
 		}
 	}
 
@@ -120,9 +122,7 @@ public class TileMagicalDisplay extends TileEntity implements IInventory, ITicka
 			items[par1] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		else {
-			return ItemStack.EMPTY;
-		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -168,8 +168,9 @@ public class TileMagicalDisplay extends TileEntity implements IInventory, ITicka
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < getSizeInventory(); i++)
+		for(int i = 0; i < getSizeInventory(); i++) {
 			setInventorySlotContents(i, ItemStack.EMPTY);
+		}
 	}
 
 	@Override

@@ -59,21 +59,19 @@ public class TileUltraFlowerBurner extends TileMRUGeneric {
 		}
 		super.update();
 		firstTick = false;
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(!getWorld().isRemote) {
 				if(getWorld().getWorldTime()%80 == 0) {
 					List<EntityItem> sapplings = getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.getX()-16, pos.getY()-0.5D, pos.getZ()-16, pos.getX()+17, pos.getY()+1.5D, pos.getZ()+17));
 					if(!sapplings.isEmpty()) {
-						for(int i = 0; i < sapplings.size(); ++i) {
-							EntityItem sappling = sapplings.get(i);
+						for(EntityItem sappling : sapplings) {
 							if(!sappling.isDead) {
 								ItemStack sStk = sappling.getItem();
 								if(!sStk.isEmpty()) {
 									int[] ids = OreDictionary.getOreIDs(sStk);
 									String name = "";
 									if(ids != null && ids.length > 0) {
-										for(int i1 = 0; i1 < ids.length; ++i1) {
-											int oreDictID = ids[i1];
+										for(int oreDictID : ids) {
 											String n = OreDictionary.getOreName(oreDictID);
 											if(n != null && !n.isEmpty()) {
 												name = n;
@@ -85,7 +83,6 @@ public class TileUltraFlowerBurner extends TileMRUGeneric {
 										int pBIDX = MathHelper.floor(sappling.posX);
 										int pBIDY = MathHelper.floor(sappling.posY);
 										int pBIDZ = MathHelper.floor(sappling.posZ);
-										Block b = getWorld().getBlockState(new BlockPos(pBIDX, pBIDY, pBIDZ)).getBlock();
 										if(getWorld().isAirBlock(new BlockPos(pBIDX, pBIDY, pBIDZ))) {
 											Block sBlk = Block.getBlockFromItem(sStk.getItem());
 											if(sBlk != null) {
@@ -109,8 +106,7 @@ public class TileUltraFlowerBurner extends TileMRUGeneric {
 							int[] ids = b != Blocks.AIR && Item.getItemFromBlock(b) != null ? OreDictionary.getOreIDs(new ItemStack(b, 1, b.damageDropped(state))) : null;
 							String name = "";
 							if(ids != null && ids.length > 0) {
-								for(int i = 0; i < ids.length; ++i) {
-									int oreDictID = ids[i];
+								for(int oreDictID : ids) {
 									String n = OreDictionary.getOreName(oreDictID);
 									if(n != null && !n.isEmpty()) {
 										name = n;
@@ -138,8 +134,9 @@ public class TileUltraFlowerBurner extends TileMRUGeneric {
 								burnTime = 2400;
 								mruProduced = 100;
 							}
-							if(mruProduced > 0)
+							if(mruProduced > 0) {
 								break y;
+							}
 						}
 				}
 				else if(burnedFlower != null) {
@@ -168,16 +165,18 @@ public class TileUltraFlowerBurner extends TileMRUGeneric {
 				EssentialCraftCore.proxy.FlameFX(burnedFlower.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, burnedFlower.getY()+0.1F + getWorld().rand.nextFloat()/2, burnedFlower.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, (pos.getX()-0.5D-burnedFlower.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F)/20, (pos.getY()-burnedFlower.getY()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F)/20, (pos.getZ()-0.5D-burnedFlower.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F)/20, 1, 1, 1, 1);
 				--burnTime;
 				if(burnTime <= 0) {
-					for(int t = 0; t < 600; ++t)
+					for(int t = 0; t < 600; ++t) {
 						EssentialCraftCore.proxy.SmokeFX(burnedFlower.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, burnedFlower.getY()+0.1F + getWorld().rand.nextFloat()/2, burnedFlower.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.3F, 0, 0, 0,1);
+					}
 				}
 			}
 		}
 		if(world.isRemote) {
 			EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.4F, pos.getY()+0.1F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.4F, 0, 0.01F, 0, 1D, 0.5D, 1, 1);
 			EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.2F, pos.getY()+0.2F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.2F, 0, 0.01F, 0, 1D, 0.5D, 1, 1);
-			for(int i = 0; i < 10; ++i)
+			for(int i = 0; i < 10; ++i) {
 				EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.1F, pos.getY()+0.6F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.1F, 0, 0, 0,1);
+			}
 		}
 	}
 

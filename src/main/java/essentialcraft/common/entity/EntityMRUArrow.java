@@ -21,15 +21,16 @@ public class EntityMRUArrow extends EntityArrow {
 	public EntityMRUArrow(World p_i1756_1_, EntityLivingBase p_i1756_2_,float p_i1756_3_)
 	{
 		super(p_i1756_1_, p_i1756_2_);
-		this.pickupStatus = PickupStatus.DISALLOWED;
+		pickupStatus = PickupStatus.DISALLOWED;
 	}
 
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if(this.ticksExisted > 60)
-			this.setDead();
+		if(ticksExisted > 60) {
+			setDead();
+		}
 		//this.motionX *= 0.9F;
 		//this.motionY *= 0.9F;
 		//this.motionZ *= 0.9F;

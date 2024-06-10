@@ -19,15 +19,15 @@ public class ParticleSmokeEC extends ParticleSmokeNormal {
 	public ParticleSmokeEC(World w, double x, double y,	double z, double mX, double mY,	double mZ, float scale)
 	{
 		super(w, x, y, z, mX, mY,mZ, scale);
-		this.particleAlpha = 0.99F;
+		particleAlpha = 0.99F;
 	}
 
 	public ParticleSmokeEC(World w, double x, double y,	double z, double mX, double mY,	double mZ, float scale, double r, double g, double b)
 	{
 		this(w, x, y, z, mX, mY,mZ, scale);
-		this.particleRed = (float) r;
-		this.particleGreen = (float) g;
-		this.particleBlue = (float) b;
+		particleRed = (float) r;
+		particleGreen = (float) g;
+		particleBlue = (float) b;
 	}
 
 	@Override
@@ -46,8 +46,9 @@ public class ParticleSmokeEC extends ParticleSmokeNormal {
 		super.renderParticle(var1, var2, par2, par3, par4, par5, par6, par7);
 		TessellatorWrapper.getInstance().draw().begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 		Minecraft.getMinecraft().renderEngine.bindTexture(particleTextures);
-		if(!enabled)
+		if(!enabled) {
 			GlStateManager.disableBlend();
+		}
 		//GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
 	}

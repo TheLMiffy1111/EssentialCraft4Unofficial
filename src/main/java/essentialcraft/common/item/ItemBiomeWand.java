@@ -20,8 +20,8 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 
 	public ItemBiomeWand() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	public static boolean isBiomeSaved(ItemStack stack)
@@ -33,8 +33,9 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 	public static int getBiomeID(ItemStack stack)
 	{
 		NBTTagCompound tag = MiscUtils.getStackTag(stack);
-		if(isBiomeSaved(stack))
+		if(isBiomeSaved(stack)) {
 			return tag.getInteger("biome");
+		}
 		return -1;
 	}
 
@@ -45,10 +46,8 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 		{
 			tag.removeTag("biome");
 			return;
-		}else
-		{
-			tag.setInteger("biome", bID);
 		}
+		tag.setInteger("biome", bID);
 		stack.setTagCompound(tag);
 	}
 
@@ -88,8 +87,9 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int par2)
 	{
-		if(isBiomeSaved(stack))
+		if(isBiomeSaved(stack)) {
 			return Biome.getBiome(getBiomeID(stack)).getFoliageColorAtPos(BlockPos.ORIGIN);
+		}
 		return 0xffffff;
 	}
 

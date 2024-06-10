@@ -32,8 +32,9 @@ public class RenderDarknessObelisk extends TileEntitySpecialRenderer<TileDarknes
 		GlStateManager.translate(x+0.5F, y, z+0.5F);
 
 		float upperRotationIndex = (tile.getWorld().getWorldTime()+partialTicks)%100;
-		if(upperRotationIndex > 50)
+		if(upperRotationIndex > 50) {
 			upperRotationIndex = 50-upperRotationIndex+50;
+		}
 
 		GlStateManager.translate(0, upperRotationIndex/200-0.1F, 0);
 		GlStateManager.rotate(System.currentTimeMillis()/50F%360, 0, 1, 0);
@@ -45,6 +46,6 @@ public class RenderDarknessObelisk extends TileEntitySpecialRenderer<TileDarknes
 
 	@Override
 	public void render(TileDarknessObelisk tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

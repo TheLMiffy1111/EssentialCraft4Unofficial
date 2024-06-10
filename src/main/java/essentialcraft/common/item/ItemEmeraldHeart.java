@@ -16,8 +16,8 @@ public class ItemEmeraldHeart extends ItemMRUGeneric implements IModelRegisterer
 
 	public ItemEmeraldHeart() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override

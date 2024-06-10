@@ -12,9 +12,9 @@ public class GuiColdDistillator extends GuiCommon{
 
 	public GuiColdDistillator(Container c, TileEntity tile) {
 		super(c,tile);
-		this.elementList.add(new GuiMRUStorage(7, 4, tile));
-		this.elementList.add(new GuiMRUState(25, 58, tile, 0));
-		this.elementList.add(new GuiMRUGenerated(25, 40,tile,"cold"));
-		this.elementList.add(new GuiBalanceState(25, 22, tile));
+		elementList.add(new GuiMRUStorage(7, 4, tile));
+		elementList.add(new GuiMRUState(25, 58, tile, 0));
+		elementList.add(new GuiMRUGenerated(25, 40,tile,"cold"));
+		elementList.add(new GuiBalanceState(25, 22, tile));
 	}
 }

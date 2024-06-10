@@ -11,8 +11,8 @@ public class ItemMonocle extends Item implements IMRUVisibilityHandler, IModelRe
 
 	public ItemMonocle() {
 		super();
-		this.maxStackSize = 1;
-		this.setMaxDamage(16);
+		maxStackSize = 1;
+		setMaxDamage(16);
 	}
 
 	@Override

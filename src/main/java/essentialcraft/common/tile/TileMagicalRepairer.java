@@ -22,8 +22,9 @@ public class TileMagicalRepairer extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			repare();
+		}
 		spawnParticles();
 	}
 
@@ -33,8 +34,9 @@ public class TileMagicalRepairer extends TileMRUGeneric {
 			if(mruStorage.getMRU() >= mruUsage) {
 				mruStorage.extractMRU(mruUsage, true);
 				repareItem.setItemDamage(repareItem.getItemDamage() - 1);
-				if(generatesCorruption)
+				if(generatesCorruption) {
 					ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+				}
 			}
 		}
 	}

@@ -18,7 +18,7 @@ public class MapGenOldCatacombs extends MapGenStructure {
 	public MapGenOldCatacombs(Map<String, String> settings) {
 		for(Entry<String, String> entry : settings.entrySet()) {
 			if(entry.getKey().equals("chance")) {
-				this.chance = MathHelper.getDouble(entry.getValue(), this.chance);
+				chance = MathHelper.getDouble(entry.getValue(), chance);
 			}
 		}
 	}
@@ -30,17 +30,16 @@ public class MapGenOldCatacombs extends MapGenStructure {
 
 	@Override
 	protected boolean canSpawnStructureAtCoords(int chunkX, int chunkZ) {
-		return this.rand.nextDouble() < this.chance;
+		return rand.nextDouble() < chance;
 	}
 
 	@Override
 	protected StructureStart getStructureStart(int chunkX, int chunkZ) {
-		return new StructureOldCatacombs.Start(this.world, this.rand, chunkX, chunkZ);
+		return new StructureOldCatacombs.Start(world, rand, chunkX, chunkZ);
 	}
 
 	@Override
 	public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored) {
-		int i = 1000;
 		int j = pos.getX() >> 4;
 		int k = pos.getZ() >> 4;
 
@@ -54,10 +53,10 @@ public class MapGenOldCatacombs extends MapGenStructure {
 					if(flag || flag1) {
 						int k1 = j + i1;
 						int l1 = k + j1;
-						this.rand.setSeed(k1 ^ l1 ^ worldIn.getSeed());
-						this.rand.nextInt();
+						rand.setSeed(k1 ^ l1 ^ worldIn.getSeed());
+						rand.nextInt();
 
-						if(this.canSpawnStructureAtCoords(k1, l1) && (!findUnexplored || !worldIn.isChunkGeneratedAt(k1, l1))) {
+						if(canSpawnStructureAtCoords(k1, l1) && (!findUnexplored || !worldIn.isChunkGeneratedAt(k1, l1))) {
 							return new BlockPos((k1 << 4) + 8, 64, (l1 << 4) + 8);
 						}
 					}

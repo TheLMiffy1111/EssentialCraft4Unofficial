@@ -42,26 +42,27 @@ public class ItemCraftingFrame extends Item implements IModelRegisterer {
 			{
 				ItemStack stk = inv.getStackInSlot(i);
 
-				if(stk.isEmpty())
+				if(stk.isEmpty()) {
 					list.add(i+": Empty");
-				else
+				}
+				else {
 					list.add(i+": "+stk.getDisplayName());
+				}
 			}
 
 			ItemStack stk = inv.getStackInSlot(9);
-			if(stk.isEmpty())
+			if(stk.isEmpty()) {
 				list.add("Result: None");
-			else
+			}
+			else {
 				list.add("Result: "+stk.getDisplayName());
+			}
 		}
 	}
 
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
-		if(!isCurrentItem || !(entity instanceof EntityPlayer)) {
-			return;
-		}
-		if(((EntityPlayer)entity).openContainer == null || !(((EntityPlayer)entity).openContainer instanceof ContainerCraftingFrame))
+		if(!isCurrentItem || !(entity instanceof EntityPlayer) || ((EntityPlayer)entity).openContainer == null || !(((EntityPlayer)entity).openContainer instanceof ContainerCraftingFrame))
 		{
 			return;
 		}
@@ -70,7 +71,7 @@ public class ItemCraftingFrame extends Item implements IModelRegisterer {
 	}
 
 	public ItemCraftingFrame() {
-		this.setMaxStackSize(1);
+		setMaxStackSize(1);
 	}
 
 	@Override

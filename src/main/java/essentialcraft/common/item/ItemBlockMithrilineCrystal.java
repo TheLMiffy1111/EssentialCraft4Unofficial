@@ -8,8 +8,8 @@ public class ItemBlockMithrilineCrystal extends ItemBlock {
 
 	public ItemBlockMithrilineCrystal(Block block) {
 		super(block);
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
+		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override
@@ -18,17 +18,21 @@ public class ItemBlockMithrilineCrystal extends ItemBlock {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		int meta = stack.getItemDamage()/3;
 		String added = "mithriline";
-		if(meta == 1)
+		if(meta == 1) {
 			added = "pale";
-		if(meta == 2)
+		}
+		if(meta == 2) {
 			added = "void";
-		if(meta == 3)
+		}
+		if(meta == 3) {
 			added = "demonic";
-		if(meta == 4)
+		}
+		if(meta == 4) {
 			added = "shade";
-		return super.getUnlocalizedName(stack)+"."+added;
+		}
+		return super.getTranslationKey(stack)+"."+added;
 	}
 }

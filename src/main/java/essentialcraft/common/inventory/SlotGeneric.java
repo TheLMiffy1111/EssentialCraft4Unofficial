@@ -16,17 +16,17 @@ public class SlotGeneric extends Slot {
 	public SlotGeneric(IInventory inv, int slot, int xPos, int yPos, ResourceLocation background) {
 		super(inv, slot, xPos, yPos);
 		this.slot = slot;
-		this.setBackgroundName(background.toString());
+		setBackgroundName(background.toString());
 	}
 
 	public SlotGeneric(IInventory inv, int slot, int xPos, int yPos, String background) {
 		super(inv, slot, xPos, yPos);
 		this.slot = slot;
-		this.setBackgroundName(background);
+		setBackgroundName(background);
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return this.inventory.isItemValidForSlot(this.slot, stack);
+		return inventory.isItemValidForSlot(slot, stack);
 	}
 }

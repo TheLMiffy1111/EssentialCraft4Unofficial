@@ -54,7 +54,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -70,6 +69,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -77,11 +77,11 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ECUtils {
 	public static final HashMultimap<EnumStructureType,Block> STRUCTURE_TO_BLOCKS_MAP = HashMultimap.<EnumStructureType, Block>create();
-	public static final HashMap<String, Float> MRU_RESISTANCES = new HashMap<String, Float>();
-	public static final HashMap<String, Boolean> IGNORE_META = new HashMap<String, Boolean>();
-	public static final List<SpellEntry> SPELL_LIST = new ArrayList<SpellEntry>();
-	public static final HashMap<UUID,PlayerGenericData> PLAYER_DATA_MAP = new HashMap<UUID, PlayerGenericData>();
-	private static final List<ScheduledServerAction> ACTION_LIST = new ArrayList<ScheduledServerAction>();
+	public static final HashMap<String, Float> MRU_RESISTANCES = new HashMap<>();
+	public static final HashMap<String, Boolean> IGNORE_META = new HashMap<>();
+	public static final List<SpellEntry> SPELL_LIST = new ArrayList<>();
+	public static final HashMap<UUID,PlayerGenericData> PLAYER_DATA_MAP = new HashMap<>();
+	private static final List<ScheduledServerAction> ACTION_LIST = new ArrayList<>();
 	public static NBTTagCompound ec3WorldTag = new NBTTagCompound();
 
 	public static void requestSync(EntityPlayer e) {
@@ -132,8 +132,7 @@ public class ECUtils {
 			PLAYER_DATA_MAP.put(uuid, dat);
 			return dat;
 		}
-		else
-			return null;
+		return null;
 	}
 
 	public static void changePlayerPositionOnClient(EntityPlayer e)
@@ -205,8 +204,8 @@ public class ECUtils {
 
 	public static void registerBlockResistance(Block blk, int meta, float resistance)
 	{
-		DummyData dt = new DummyData(blk.getUnlocalizedName(), meta);
-		IGNORE_META.put(blk.getUnlocalizedName(), meta == -1);
+		DummyData dt = new DummyData(blk.getTranslationKey(), meta);
+		IGNORE_META.put(blk.getTranslationKey(), meta == -1);
 		MRU_RESISTANCES.put(dt.toString(), resistance);
 	}
 
@@ -240,14 +239,12 @@ public class ECUtils {
 					}
 				}
 			}
-		}else
+		}
+		else if(ubmru >= spell_2.getUBMRURequired(spell))
 		{
-			if(ubmru >= spell_2.getUBMRURequired(spell))
+			if(spell_2.getAttunementRequired(spell) == -1 || spell_2.getAttunementRequired(spell) == attune)
 			{
-				if(spell_2.getAttunementRequired(spell) == -1 || spell_2.getAttunementRequired(spell) == attune)
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 		return false;
@@ -430,7 +427,7 @@ public class ECUtils {
 				ItemStack stk = baublesInventory.getStackInSlot(i);
 				if(stk.getItem() instanceof ItemBaublesResistance && MiscUtils.getStackTag(stk).hasKey("type")) {
 					NBTTagCompound bTag = MiscUtils.getStackTag(stk);
-					List<Float> fltLst = new ArrayList<Float>();
+					List<Float> fltLst = new ArrayList<>();
 					fltLst.add(bTag.getFloat("mrucr"));
 					fltLst.add(bTag.getFloat("mrurr"));
 					fltLst.add(bTag.getFloat("car"));
@@ -448,8 +445,9 @@ public class ECUtils {
 		}
 
 		float retFlt = 1.0F - resistance;
-		if(retFlt < 0)
+		if(retFlt < 0) {
 			retFlt = 0;
+		}
 		return retFlt;
 	}
 
@@ -504,7 +502,7 @@ public class ECUtils {
 	}
 
 	public static boolean hasActiveEvent() {
-		return !ec3WorldTag.hasNoTags() && ec3WorldTag.getString("currentEvent") != null && !ec3WorldTag.getString("currentEvent").isEmpty();
+		return !ec3WorldTag.isEmpty() && ec3WorldTag.getString("currentEvent") != null && !ec3WorldTag.getString("currentEvent").isEmpty();
 	}
 
 	public static boolean isEventActive(String id) {
@@ -536,40 +534,42 @@ public class ECUtils {
 	{
 		if(recipeType == 0 || recipeType == 1)
 		{
-			for(IRecipe recipe : CraftingManager.REGISTRY)
+			for(IRecipe recipe : ForgeRegistries.RECIPES)
 			{
 				if(recipe instanceof ShapedRecipes)
 				{
 					ShapedRecipes mRecipe = (ShapedRecipes) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
-					if(ItemStack.areItemStackTagsEqual(output, searched) && output.isItemEqual(searched))
+					if(ItemStack.areItemStackTagsEqual(output, searched) && output.isItemEqual(searched)) {
 						return new ShapedRecipes(mRecipe.getGroup(),mRecipe.recipeWidth,mRecipe.recipeHeight,mRecipe.recipeItems,mRecipe.getRecipeOutput());
+					}
 				}
 				if(recipe instanceof ShapelessRecipes)
 				{
 					ShapelessRecipes mRecipe = (ShapelessRecipes) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
-					if(output.isItemEqual(searched))
+					if(output.isItemEqual(searched)) {
 						return new ShapelessRecipes(mRecipe.getGroup(),mRecipe.getRecipeOutput(),mRecipe.recipeItems);
+					}
 				}
 			}
 		}
 		if(recipeType == 2 || recipeType == 3)
 		{
-			for(IRecipe recipe : CraftingManager.REGISTRY) {
-				if(recipe instanceof ShapedOreRecipe)
-				{
+			for(IRecipe recipe : ForgeRegistries.RECIPES) {
+				if(recipe instanceof ShapedOreRecipe) {
 					ShapedOreRecipe mRecipe = (ShapedOreRecipe) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
-					if(ItemStack.areItemStackTagsEqual(output, searched) && output.isItemEqual(searched))
+					if(ItemStack.areItemStackTagsEqual(output, searched) && output.isItemEqual(searched)) {
 						return copyShapedOreRecipe(mRecipe);
+					}
 				}
-				if(recipe instanceof ShapelessOreRecipe)
-				{
+				if(recipe instanceof ShapelessOreRecipe) {
 					ShapelessOreRecipe mRecipe = (ShapelessOreRecipe) recipe;
 					ItemStack output = mRecipe.getRecipeOutput();
-					if(output.isItemEqual(searched))
+					if(output.isItemEqual(searched)) {
 						return copyShapelessOreRecipe(mRecipe);
+					}
 				}
 			}
 		}
@@ -620,22 +620,26 @@ public class ECUtils {
 
 
 	public static boolean oreDictionaryCompare(ItemStack stk, ItemStack stk1) {
-		if(stk.isEmpty() || stk1.isEmpty())
+		if(stk.isEmpty() || stk1.isEmpty()) {
 			return false;
+		}
 
-		if(OreDictionary.getOreIDs(stk) == null && OreDictionary.getOreIDs(stk1) == null || OreDictionary.getOreIDs(stk).length == 0 && OreDictionary.getOreIDs(stk1).length == 0)
+		if(OreDictionary.getOreIDs(stk) == null && OreDictionary.getOreIDs(stk1) == null || OreDictionary.getOreIDs(stk).length == 0 && OreDictionary.getOreIDs(stk1).length == 0) {
 			return true;
+		}
 
-		if(OreDictionary.getOreIDs(stk) == null || OreDictionary.getOreIDs(stk1) == null || OreDictionary.getOreIDs(stk).length == 0 || OreDictionary.getOreIDs(stk1).length == 0)
+		if(OreDictionary.getOreIDs(stk) == null || OreDictionary.getOreIDs(stk1) == null || OreDictionary.getOreIDs(stk).length == 0 || OreDictionary.getOreIDs(stk1).length == 0) {
 			return false;
+		}
 
 		int[] ids = OreDictionary.getOreIDs(stk);
 		int[] ids1 = OreDictionary.getOreIDs(stk1);
 
 		for (int id : ids) {
 			for (int element : ids1) {
-				if(id == element)
+				if(id == element) {
 					return true;
+				}
 			}
 		}
 
@@ -647,17 +651,19 @@ public class ECUtils {
 			for(int i = 0; i < filterInventory.getSizeInventory(); ++i) {
 				ItemStack f = filterInventory.getStackInSlot(i);
 				if(f.getItem() instanceof ItemFilter) {
-					if(canFilterAcceptItem(new InventoryMagicFilter(f),is,f))
+					if(canFilterAcceptItem(new InventoryMagicFilter(f),is,f)) {
 						return true;
+					}
 				}
 				else if(filter.getItemDamage() == 2) {
-					if(!f.isItemEqual(is) || !ItemStack.areItemStackTagsEqual(f, is))
+					if(!f.isItemEqual(is) || !ItemStack.areItemStackTagsEqual(f, is)) {
 						return true;
-					else
-						return false;
+					}
+					return false;
 				}
-				else if(f.isItemEqual(is) && ItemStack.areItemStackTagsEqual(f, is))
+				else if(f.isItemEqual(is) && ItemStack.areItemStackTagsEqual(f, is)) {
 					return true;
+				}
 			}
 		}else
 		{
@@ -669,49 +675,52 @@ public class ECUtils {
 				ItemStack f = filterInventory.getStackInSlot(i);
 				if(f.getItem() instanceof ItemFilter)
 				{
-					if(canFilterAcceptItem(new InventoryMagicFilter(f),is,f))
+					if(canFilterAcceptItem(new InventoryMagicFilter(f),is,f)) {
 						return true;
-				}else
+					}
+				}
+				else if(filter.getItemDamage() == 1)
 				{
-					if(filter.getItemDamage() == 1)
+					if(oreDictionaryCompare(is,f) || ignoreOreDict)
 					{
-						if(oreDictionaryCompare(is,f) || ignoreOreDict)
+						if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
+						{
+							return true;
+						}
+					}else
+					{
+						if(ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta)
 						{
 							if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
 							{
 								return true;
 							}
-						}else
-						{
-							if(ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta)
-							{
-								if(ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-								{
-									return true;
-								}
-							}
 						}
-					}else
+					}
+				}else
+				{
+					if(!oreDictionaryCompare(is,f) || ignoreOreDict)
 					{
-						if(!oreDictionaryCompare(is,f) || ignoreOreDict)
+						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
 						{
-							if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-							{
-								return true;
-							}else
-								return false;
-						}else
-						{
-							if(!ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta)
-							{
-								if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
-								{
-									return true;
-								}else
-									return false;
-							}else
-								return false;
+							return true;
 						}
+						else {
+							return false;
+						}
+					}
+					if(!ItemStack.areItemStacksEqual(is, f) || is.getItem() == f.getItem() && ignoreMeta)
+					{
+						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT)
+						{
+							return true;
+						}
+						else {
+							return false;
+						}
+					}
+					else {
+						return false;
 					}
 				}
 			}
@@ -763,8 +772,9 @@ public class ECUtils {
 	}
 
 	public static void addScheduledAction(ScheduledServerAction ssa) {
-		if(FMLCommonHandler.instance().getEffectiveSide() != Side.SERVER)
+		if(FMLCommonHandler.instance().getEffectiveSide() != Side.SERVER) {
 			Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]Trying to add a scheduled server action not on server side, aborting!");
+		}
 
 		ACTION_LIST.add(ssa);
 	}
@@ -772,8 +782,9 @@ public class ECUtils {
 	public static void requestScheduledTileSync(TileEntity tile, EntityPlayer requester) {
 		Side s = FMLCommonHandler.instance().getEffectiveSide();
 		if(s == Side.CLIENT) {
-			if(tile.getWorld() == null || tile.getWorld().provider == null)
+			if(tile.getWorld() == null || tile.getWorld().provider == null) {
 				return;
+			}
 
 			NBTTagCompound clientData = new NBTTagCompound();
 			clientData.setString("playername", MiscUtils.getUUIDFromPlayer(requester).toString());

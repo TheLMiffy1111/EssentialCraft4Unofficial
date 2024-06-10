@@ -28,26 +28,32 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockDyeable extends Block implements IBlockColor, IModelRegisterer {
 
-	public static final String[] field_150921_b = {"white", "red", "green", "brown", "blue", "purple", "cyan", "lightgray", "gray", "pink", "lime", "yellow", "lightblue", "magenta", "orange", "black"};
-	public static final int[] field_150922_c = {15790320, 11743532, 3887386, 5320730, 2437522, 8073150, 2651799, 11250603, 4408131, 14188952, 4312372, 14602026, 6719955, 12801229, 15435844,1973019};
+	public static final String[] COLOR_NAMES = {
+			"white", "red", "green", "brown", "blue", "purple", "cyan", "lightgray",
+			"gray", "pink", "lime", "yellow", "lightblue", "magenta", "orange", "black"};
+	public static final int[] COLOR_VALUES = {
+			0xF0F0F0, 0xB3312C, 0x3B511A, 0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB,
+			0x434343, 0xD88198, 0x41CD34, 0xDECF2A, 0x6689D3, 0xC354CD, 0xEB8844, 0x1E1B1B};
 	public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
 	@Override
-	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tint)
-	{
+	public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tint) {
 		int metadata = state.getValue(COLOR).getDyeDamage();
-		if(metadata == 0)
+		if(metadata == 0) {
 			metadata = 15;
-		else if(metadata == 15)
+		}
+		else if(metadata == 15) {
 			metadata = 0;
-		if(metadata == OreDictionary.WILDCARD_VALUE)
+		}
+		if(metadata == OreDictionary.WILDCARD_VALUE) {
 			metadata = 0;
-		return field_150922_c[metadata];
+		}
+		return COLOR_VALUES[metadata];
 	}
 
 	public BlockDyeable(Material material, MapColor mapColor) {
 		super(material, mapColor);
-		setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
+		setDefaultState(blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
 	}
 
 	public BlockDyeable(Material material) {
@@ -55,74 +61,57 @@ public class BlockDyeable extends Block implements IBlockColor, IModelRegisterer
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState s)
-	{
-		return this.blockMaterial != Material.GLASS;
+	public boolean isOpaqueCube(IBlockState s) {
+		return material != Material.GLASS;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState s)
-	{
-		return this.blockMaterial != Material.GLASS;
+	public boolean isFullCube(IBlockState s) {
+		return material != Material.GLASS;
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
-	{
-		return this.blockMaterial == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
+	public BlockRenderLayer getRenderLayer() {
+		return material == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
 	}
 
 	@Override
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+		return blockAccess.getBlockState(pos.offset(side)).getBlock() != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack is = player.getHeldItem(hand);
-		if(!is.isEmpty() && OreDictionary.getOreIDs(is).length > 0 && !(is.getItem() instanceof ItemBlock))
-		{
-			for(int i = 0; i < OreDictionary.getOreIDs(is).length; ++i)
-			{
-				String oreDisctName = OreDictionary.getOreName(OreDictionary.getOreIDs(is)[i]);
-				if(oreDisctName != null && !oreDisctName.isEmpty() && !oreDisctName.equalsIgnoreCase("unknown"))
-				{
+		if(!is.isEmpty() && OreDictionary.getOreIDs(is).length > 0 && !(is.getItem() instanceof ItemBlock)) {
+			for(int i = 0; i < OreDictionary.getOreIDs(is).length; ++i) {
+				String oreDictName = OreDictionary.getOreName(OreDictionary.getOreIDs(is)[i]);
+				if(oreDictName != null && !oreDictName.isEmpty() && !oreDictName.equalsIgnoreCase("unknown")) {
 					int color = -1;
-					for(int i1 = 0; i1 < field_150921_b.length; ++i1)
-					{
-						String dyeName = "dye"+field_150921_b[i1];
-						if(oreDisctName.equalsIgnoreCase(dyeName))
-						{
+					for(int i1 = 0; i1 < COLOR_NAMES.length; ++i1) {
+						String dyeName = "dye"+COLOR_NAMES[i1];
+						if(oreDictName.equalsIgnoreCase(dyeName)) {
 							color = i1;
 							break;
 						}
 					}
-					if(color != -1)
-					{
-						if(color == 0)
+					if(color != -1) {
+						if(color == 0) {
 							color = 15;
-						else if(color == 15)
+						}
+						else if(color == 15) {
 							color = 0;
-						if(player.isSneaking())
-						{
-							for(int dx = -2; dx <= 2; ++dx)
-							{
-								for(int dy = -2; dy <= 2; ++dy)
-								{
-									for(int dz = -2; dz <= 2; ++dz)
-									{
-										Block b = world.getBlockState(pos.add(dx, dy, dz)).getBlock();
-										if(b == this)
-										{
-											b.recolorBlock(world, pos.add(dx, dy, dz), side, EnumDyeColor.byDyeDamage(color));
-											world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getY()-2, pos.getY()+2);
-										}
-									}
+						}
+						if(player.isSneaking()) {
+							for(BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(2, 2, 2), pos.add(-2, -2, -2))) {
+								Block b = world.getBlockState(blockPos).getBlock();
+								if(b == this) {
+									b.recolorBlock(world, blockPos, side, EnumDyeColor.byDyeDamage(color));
+									world.markBlocksDirtyVertical(blockPos.getX(), blockPos.getZ(), blockPos.getY()-2, blockPos.getY()+2);
 								}
 							}
-						}else
-						{
+						}
+						else {
 							recolorBlock(world, pos, side, EnumDyeColor.byDyeDamage(color));
 							world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getY()-2, pos.getY()+2);
 						}
@@ -135,21 +124,23 @@ public class BlockDyeable extends Block implements IBlockColor, IModelRegisterer
 	}
 
 	@Override
-	public boolean recolorBlock(World world, BlockPos pos, EnumFacing side, EnumDyeColor color)
-	{
-		int meta = this.getMetaFromState(world.getBlockState(pos));
-		if(meta == 0)
+	public boolean recolorBlock(World world, BlockPos pos, EnumFacing side, EnumDyeColor color) {
+		int meta = getMetaFromState(world.getBlockState(pos));
+		if(meta == 0) {
 			meta = 15;
-		else if(meta == 15)
+		}
+		else if(meta == 15) {
 			meta = 0;
-		if (meta != color.getDyeDamage())
-		{
+		}
+		if(meta != color.getDyeDamage()) {
 			meta = color.getDyeDamage();
-			if(meta == 0)
+			if(meta == 0) {
 				meta = 15;
-			else if(meta == 15)
+			}
+			else if(meta == 15) {
 				meta = 0;
-			world.setBlockState(pos, this.getStateFromMeta(meta), 2);
+			}
+			world.setBlockState(pos, getStateFromMeta(meta), 2);
 			return true;
 		}
 		return false;
@@ -158,20 +149,24 @@ public class BlockDyeable extends Block implements IBlockColor, IModelRegisterer
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		int color = meta;
-		if(color == 0)
+		if(color == 0) {
 			color = 15;
-		else if(color == 15)
+		}
+		else if(color == 15) {
 			color = 0;
+		}
 		return getDefaultState().withProperty(COLOR, EnumDyeColor.byDyeDamage(color));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int color = state.getValue(COLOR).getDyeDamage();
-		if(color == 0)
+		if(color == 0) {
 			color = 15;
-		else if(color == 15)
+		}
+		else if(color == 15) {
 			color = 0;
+		}
 		return color;
 	}
 
@@ -184,6 +179,6 @@ public class BlockDyeable extends Block implements IBlockColor, IModelRegisterer
 	@Override
 	public void registerModels() {
 		ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(COLOR).build());
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("essentialcraft:" + getRegistryName().getResourcePath(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("essentialcraft:"+getRegistryName().getPath(), "inventory"));
 	}
 }

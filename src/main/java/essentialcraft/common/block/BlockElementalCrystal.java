@@ -153,7 +153,7 @@ public class BlockElementalCrystal extends BlockContainer implements IModelRegis
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

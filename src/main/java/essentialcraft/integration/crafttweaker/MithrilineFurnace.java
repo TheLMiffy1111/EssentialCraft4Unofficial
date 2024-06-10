@@ -62,10 +62,12 @@ public class MithrilineFurnace {
 				}
 			}
 
-			if(flag)
+			if(flag) {
 				MithrilineFurnaceRecipes.addRecipe(new MithrilineFurnaceRecipe(CraftTweakerUtils.toIngredient(input), CraftTweakerMC.getItemStack(output), enderpower, input.getAmount()));
-			else
+			}
+			else {
 				CraftTweakerAPI.logWarning("Recipe already exists!");
+			}
 		}
 
 		@Override
@@ -85,13 +87,14 @@ public class MithrilineFurnace {
 
 		@Override
 		public void apply() {
-			ArrayList<MithrilineFurnaceRecipe> toRemove = new ArrayList<MithrilineFurnaceRecipe>();
+			ArrayList<MithrilineFurnaceRecipe> toRemove = new ArrayList<>();
 			MithrilineFurnaceRecipes.RECIPES.stream().
 			filter(entry->input.contains(CraftTweakerMC.getIIngredient(entry.input)) && (output == null || output.matches(CraftTweakerMC.getIItemStack(entry.result)))).
 			forEach(entry->toRemove.add(entry));
 
-			if(toRemove.isEmpty())
+			if(toRemove.isEmpty()) {
 				CraftTweakerAPI.logWarning("No recipe for "+input.toString());
+			}
 			else {
 				for(MithrilineFurnaceRecipe entry : toRemove) {
 					MithrilineFurnaceRecipes.removeRecipe(entry);

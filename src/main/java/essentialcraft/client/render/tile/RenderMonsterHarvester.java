@@ -41,7 +41,8 @@ public class RenderMonsterHarvester extends TileEntitySpecialRenderer<TileMonste
 
 	@Override
 	public void render(TileMonsterHarvester tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 }

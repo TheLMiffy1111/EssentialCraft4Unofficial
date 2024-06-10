@@ -20,7 +20,7 @@ public class MagicianTableRecipes {
 	public static final List<MagicianTableRecipe> RECIPES = Lists.newArrayList();
 
 	public static List<MagicianTableRecipe> getRecipesByComponent(ItemStack component) {
-		List<MagicianTableRecipe> retLst = new ArrayList<MagicianTableRecipe>();
+		List<MagicianTableRecipe> retLst = new ArrayList<>();
 		for(MagicianTableRecipe rec : RECIPES) {
 			for(Ingredient ing : rec.requiredItems) {
 				if(ing.apply(component)) {
@@ -56,7 +56,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+rec+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+rec+" on side "+side);
 			return false;
 		}
 	}
@@ -68,7 +68,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -84,7 +84,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -116,7 +116,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -132,7 +132,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to add recipe "+Arrays.toString(input)+" with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -144,7 +144,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe "+rec+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe "+rec+" on side "+side);
 			return false;
 		}
 	}
@@ -156,7 +156,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe with the result "+result+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe with the result "+result+" on side "+side);
 			return false;
 		}
 	}
@@ -168,7 +168,7 @@ public class MagicianTableRecipes {
 		}
 		catch(Exception e) {
 			Side side = FMLCommonHandler.instance().getEffectiveSide();
-			Notifier.notifyCustomMod("EssentialCraftAPI","Unable to remove recipe "+Arrays.toString(input)+" on side "+side);
+			Notifier.notifyCustomMod("EssentialCraftAPI", "Unable to remove recipe "+Arrays.toString(input)+" on side "+side);
 			return false;
 		}
 	}

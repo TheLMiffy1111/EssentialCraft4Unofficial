@@ -13,6 +13,6 @@ public class ContainerMagicalHopper extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotGeneric(inv, 0, 80, 32));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

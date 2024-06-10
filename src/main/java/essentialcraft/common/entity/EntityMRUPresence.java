@@ -53,21 +53,21 @@ public class EntityMRUPresence extends EntityLivingBase {
 
 	public EntityMRUPresence(World world) {
 		super(world);
-		this.setSize(0.3F, 0.3F);
+		setSize(0.3F, 0.3F);
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(MRU_STORAGE, new NBTTagCompound());
+		dataManager.register(MRU_STORAGE, new NBTTagCompound());
 	}
 
 	@Override
@@ -95,12 +95,11 @@ public class EntityMRUPresence extends EntityLivingBase {
 	protected void setOnFireFromLava() {}
 
 	public void merge() {
-		if(!this.isDead) {
-			List<EntityMRUPresence> l = this.getEntityWorld().getEntitiesWithinAABB(EntityMRUPresence.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D),
-					entity->entity != this && entity.mruStorage.getMRU() <= this.mruStorage.getMRU());
+		if(!isDead) {
+			List<EntityMRUPresence> l = getEntityWorld().getEntitiesWithinAABB(EntityMRUPresence.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D),
+					entity->entity != this && entity.mruStorage.getMRU() <= mruStorage.getMRU());
 			if(!l.isEmpty()) {
-				for(int i = 0; i < l.size(); ++i) {
-					EntityMRUPresence presence = l.get(i);
+				for(EntityMRUPresence presence : l) {
 					if(!presence.isDead) {
 						presence.setDead();
 						mruStorage.setBalance((mruStorage.getBalance()*mruStorage.getMRU()+presence.mruStorage.getBalance()*presence.mruStorage.getMRU())/(mruStorage.getMRU()+presence.mruStorage.getMRU()));
@@ -115,13 +114,13 @@ public class EntityMRUPresence extends EntityLivingBase {
 	public void onEntityUpdate() {
 		updateMRUStorage();
 		super.onEntityUpdate();
-		this.motionY = 0;
-		this.motionX = 0;
-		this.motionZ = 0;
-		this.noClip = true;
-		this.ignoreFrustumCheck = true;
-		this.merge();
-		if(!this.getEntityWorld().isRemote && !this.isDead) {
+		motionY = 0;
+		motionX = 0;
+		motionZ = 0;
+		noClip = true;
+		ignoreFrustumCheck = true;
+		merge();
+		if(!getEntityWorld().isRemote && !isDead) {
 			if(tickTimer <= 0) {
 				tickTimer = 20;
 				float diff = 0F;
@@ -137,20 +136,20 @@ public class EntityMRUPresence extends EntityLivingBase {
 				float mainMRUState = diff*mruStorage.getMRU()/6000F;
 				Vec3d vec = new Vec3d(1, 0, 0);
 
-				vec = vec.rotatePitch(this.getEntityWorld().rand.nextFloat()*360);
-				vec = vec.rotateYaw(this.getEntityWorld().rand.nextFloat()*360);
+				vec = vec.rotatePitch(getEntityWorld().rand.nextFloat()*360);
+				vec = vec.rotateYaw(getEntityWorld().rand.nextFloat()*360);
 				if(!mruStorage.getFlag()) {
 					for(int i = 0; i < mainMRUState; ++i) {
 						Vec3d vc = new Vec3d(vec.x*i, vec.y*i, vec.z*i);
 						Vec3d vc1 = new Vec3d(vec.x*(i+1), vec.y*(i+1), vec.z*(i+1));
-						Block blk = this.getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ))).getBlock();
-						Block blk1 = this.getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX),(int)(vc1.y+posY),(int)(vc1.z+posZ))).getBlock();
-						int meta = blk1.getMetaFromState(this.getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX),(int)(vc1.y+posY),(int)(vc1.z+posZ))));
+						Block blk = getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ))).getBlock();
+						Block blk1 = getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX),(int)(vc1.y+posY),(int)(vc1.z+posZ))).getBlock();
+						int meta = blk1.getMetaFromState(getEntityWorld().getBlockState(new BlockPos((int)(vc1.x+posX),(int)(vc1.y+posY),(int)(vc1.z+posZ))));
 						float resistance = 1F;
-						if(ECUtils.IGNORE_META.containsKey(blk1.getUnlocalizedName()) && ECUtils.IGNORE_META.get(blk1.getUnlocalizedName())) {
+						if(ECUtils.IGNORE_META.containsKey(blk1.getTranslationKey()) && ECUtils.IGNORE_META.get(blk1.getTranslationKey())) {
 							meta = -1;
 						}
-						DummyData dt = new DummyData(blk1.getUnlocalizedName(),meta);
+						DummyData dt = new DummyData(blk1.getTranslationKey(),meta);
 						if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
 							resistance = ECUtils.MRU_RESISTANCES.get(dt.toString());
 						}
@@ -159,53 +158,55 @@ public class EntityMRUPresence extends EntityLivingBase {
 						}
 						if(Config.isCorruptionAllowed) {
 							if(!(blk1 instanceof BlockCorruption) && !(blk instanceof BlockCorruption) && blk1 != Blocks.AIR && blk == Blocks.AIR) {
-								if(!this.getEntityWorld().isRemote && this.getEntityWorld().rand.nextInt((int) (1000*resistance)) <= mainMRUState) {
-									this.getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ)), id.getStateFromMeta(0), 3);
+								if(!getEntityWorld().isRemote && getEntityWorld().rand.nextInt((int) (1000*resistance)) <= mainMRUState) {
+									getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ)), id.getStateFromMeta(0), 3);
 									break;
 								}
 							}
 							if(blk instanceof BlockCorruption) {
-								int metadata = blk.getMetaFromState(this.getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ))));
-								if(metadata < 7 && this.getEntityWorld().rand.nextInt((int) (1000*resistance)) <= mainMRUState) {
-									this.getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ)), blk.getStateFromMeta(metadata+1), 3);
+								int metadata = blk.getMetaFromState(getEntityWorld().getBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ))));
+								if(metadata < 7 && getEntityWorld().rand.nextInt((int) (1000*resistance)) <= mainMRUState) {
+									getEntityWorld().setBlockState(new BlockPos((int)(vc.x+posX),(int)(vc.y+posY),(int)(vc.z+posZ)), blk.getStateFromMeta(metadata+1), 3);
 								}
 							}
 						}
 					}
-					List<EntityPlayer> players = this.getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D).grow(12, 12, 12));
-					for(int i = 0; i < players.size(); ++i) {
-						EntityPlayer player = players.get(i);
-						Vec3d playerCheck = new Vec3d(player.posX-this.posX, player.posY-this.posY, player.posZ-this.posZ);
+					List<EntityPlayer> players = getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-0.5D, posY-0.5D, posZ-0.5D, posX+0.5D, posY+0.5D, posZ+0.5D).grow(12, 12, 12));
+					for(EntityPlayer player : players) {
+						Vec3d playerCheck = new Vec3d(player.posX-posX, player.posY-posY, player.posZ-posZ);
 						float resistance = 1F;
-						for(double j = 0; j < playerCheck.lengthVector(); j += 0.5D) {
-							double checkIndexX = playerCheck.x / playerCheck.lengthVector() * j;
-							double checkIndexY = playerCheck.y / playerCheck.lengthVector() * j;
-							double checkIndexZ = playerCheck.z / playerCheck.lengthVector() * j;
+						for(double j = 0; j < playerCheck.length(); j += 0.5D) {
+							double checkIndexX = playerCheck.x / playerCheck.length() * j;
+							double checkIndexY = playerCheck.y / playerCheck.length() * j;
+							double checkIndexZ = playerCheck.z / playerCheck.length() * j;
 							int dX = MathHelper.floor(posX+checkIndexX);
 							int dY = MathHelper.floor(posY+checkIndexY);
 							int dZ = MathHelper.floor(posZ+checkIndexZ);
-							Block b = this.getEntityWorld().getBlockState(new BlockPos(dX, dY, dZ)).getBlock();
-							int meta = b.getMetaFromState(this.getEntityWorld().getBlockState(new BlockPos(dX, dY, dZ)));
+							Block b = getEntityWorld().getBlockState(new BlockPos(dX, dY, dZ)).getBlock();
+							int meta = b.getMetaFromState(getEntityWorld().getBlockState(new BlockPos(dX, dY, dZ)));
 
-							if(ECUtils.IGNORE_META.containsKey(b.getUnlocalizedName()) && ECUtils.IGNORE_META.get(b.getUnlocalizedName())) {
+							if(ECUtils.IGNORE_META.containsKey(b.getTranslationKey()) && ECUtils.IGNORE_META.get(b.getTranslationKey())) {
 								meta = -1;
 							}
-							DummyData dt = new DummyData(b.getUnlocalizedName(),meta);
+							DummyData dt = new DummyData(b.getTranslationKey(),meta);
 							if(ECUtils.MRU_RESISTANCES.containsKey(dt.toString())) {
-								if(resistance < ECUtils.MRU_RESISTANCES.get(dt.toString()))
+								if(resistance < ECUtils.MRU_RESISTANCES.get(dt.toString())) {
 									resistance = ECUtils.MRU_RESISTANCES.get(dt.toString());
+								}
 							}
 							else {
-								if(resistance < 1)
+								if(resistance < 1) {
 									resistance = 1F;
+								}
 							}
 						}
-						if(this.getEntityWorld().rand.nextInt(MathHelper.floor(resistance)) == 0) {
+						if(getEntityWorld().rand.nextInt(MathHelper.floor(resistance)) == 0) {
 							float genResistance = ECUtils.getGenResistance(0, player);
-							if(genResistance >= 1.0F)genResistance = 0.99F;
+							if(genResistance >= 1.0F) {
+								genResistance = 0.99F;
+							}
 							float matrixDamage = 4 * (mruStorage.getMRU() / 10000 / (10-genResistance*10));
-							if(matrixDamage >= 1)
-							{
+							if(matrixDamage >= 1) {
 								ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage()+MathHelper.floor(matrixDamage));
 							}
 						}
@@ -221,24 +222,24 @@ public class EntityMRUPresence extends EntityLivingBase {
 				--tickTimer;
 			}
 		}
-		else {
-			if(this.getEntityWorld().rand.nextFloat() < 0.025F)
-				this.getEntityWorld().playSound(posX, posY, posZ, SoundRegistry.entityMRUCUNoise, SoundCategory.BLOCKS, mruStorage.getMRU()/60000F, 0.1F+this.getEntityWorld().rand.nextFloat(), false);
+		else if(getEntityWorld().rand.nextFloat() < 0.025F) {
+			getEntityWorld().playSound(posX, posY, posZ, SoundRegistry.entityMRUCUNoise, SoundCategory.BLOCKS, mruStorage.getMRU()/60000F, 0.1F+getEntityWorld().rand.nextFloat(), false);
 		}
 
 		renderIndex += 0.001F*mruStorage.getBalance();
-		if(renderIndex>4F)
+		if(renderIndex>4F) {
 			renderIndex=0F;
+		}
 
 		firstTick = false;
 	}
 
 	protected void updateMRUStorage() {
-		if(!this.world.isRemote) {
-			this.dataManager.set(MRU_STORAGE, this.mruStorage.writeToNBT(new NBTTagCompound()));
+		if(!world.isRemote) {
+			dataManager.set(MRU_STORAGE, mruStorage.writeToNBT(new NBTTagCompound()));
 		}
 		else {
-			this.mruStorage.readFromNBT(this.dataManager.get(MRU_STORAGE));
+			mruStorage.readFromNBT(dataManager.get(MRU_STORAGE));
 		}
 	}
 

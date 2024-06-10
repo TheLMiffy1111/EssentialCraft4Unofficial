@@ -21,8 +21,8 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 
 	public ItemSpikyShield() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override
@@ -33,9 +33,7 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 			List<EntityMob> mobs = p_77654_2_.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(p_77654_3_.posX-5, p_77654_3_.posY-2, p_77654_3_.posZ-5, p_77654_3_.posX+5, p_77654_3_.posY+2, p_77654_3_.posZ+5));
 			if(!mobs.isEmpty())
 			{
-				for(int i = 0; i < mobs.size(); ++i)
-				{
-					EntityMob mob = mobs.get(i);
+				for(EntityMob mob : mobs) {
 					mob.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p_77654_3_), 12F);
 				}
 			}
@@ -73,7 +71,9 @@ public class ItemSpikyShield extends ItemMRUGeneric implements IModelRegisterer 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand)
 	{
-		if(ECUtils.playerUseMRU(p_77659_3_, p_77659_3_.getHeldItem(hand), 2000));
+		if(ECUtils.playerUseMRU(p_77659_3_, p_77659_3_.getHeldItem(hand), 2000)) {
+			;
+		}
 		{
 			p_77659_3_.setActiveHand(hand);
 		}

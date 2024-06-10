@@ -33,9 +33,9 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 
 public class BlockMimic extends BlockContainer implements IModelRegisterer {
 
-	public static final UnlistedPropertyObject<IBlockState> STATE = new UnlistedPropertyObject<IBlockState>("state", IBlockState.class);
-	public static final UnlistedPropertyObject<IBlockAccess> WORLD = new UnlistedPropertyObject<IBlockAccess>("world", IBlockAccess.class);
-	public static final UnlistedPropertyObject<BlockPos> POS = new UnlistedPropertyObject<BlockPos>("pos", BlockPos.class);
+	public static final UnlistedPropertyObject<IBlockState> STATE = new UnlistedPropertyObject<>("state", IBlockState.class);
+	public static final UnlistedPropertyObject<IBlockAccess> WORLD = new UnlistedPropertyObject<>("world", IBlockAccess.class);
+	public static final UnlistedPropertyObject<BlockPos> POS = new UnlistedPropertyObject<>("pos", BlockPos.class);
 
 	public BlockMimic() {
 		super(Material.ROCK);
@@ -65,8 +65,9 @@ public class BlockMimic extends BlockContainer implements IModelRegisterer {
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		state = ((IExtendedBlockState)state).withProperty(WORLD, world).withProperty(POS, pos);
 		TileEntity tile = world.getTileEntity(pos);
-		if(tile != null && tile instanceof TileMimic)
+		if(tile != null && tile instanceof TileMimic) {
 			return ((IExtendedBlockState)state).withProperty(STATE, ((TileMimic)tile).getState());
+		}
 		return state;
 	}
 

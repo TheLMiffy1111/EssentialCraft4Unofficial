@@ -32,8 +32,8 @@ public class EntityPoisonFume extends EntityMob {
 
 	public EntityPoisonFume(World p_i1731_1_) {
 		super(p_i1731_1_);
-		this.isImmuneToFire = true;
-		this.setSize(0.6F, 0.6F);
+		isImmuneToFire = true;
+		setSize(0.6F, 0.6F);
 	}
 
 	@Override
@@ -53,36 +53,38 @@ public class EntityPoisonFume extends EntityMob {
 
 	@Override
 	public void onLivingUpdate() {
-		if(!(this.dimension == Config.dimensionID && ECUtils.isEventActive("essentialcraft.event.fumes")))
-			this.setDead();
+		if(!(dimension == Config.dimensionID && ECUtils.isEventActive("essentialcraft.event.fumes"))) {
+			setDead();
+		}
 
-		if(!this.getEntityWorld().isRemote) {
-			--this.heightOffsetUpdateTime;
+		if(!getEntityWorld().isRemote) {
+			--heightOffsetUpdateTime;
 
-			if(this.heightOffsetUpdateTime <= 0) {
-				this.heightOffsetUpdateTime = 100;
-				this.mX = MathUtils.randomDouble(this.getEntityWorld().rand);
-				this.mY = MathUtils.randomDouble(this.getEntityWorld().rand);
-				this.mZ = MathUtils.randomDouble(this.getEntityWorld().rand);
-				this.setHeightOffset(0.5F + (float)this.rand.nextGaussian() * 3.0F);
+			if(heightOffsetUpdateTime <= 0) {
+				heightOffsetUpdateTime = 100;
+				mX = MathUtils.randomDouble(getEntityWorld().rand);
+				mY = MathUtils.randomDouble(getEntityWorld().rand);
+				mZ = MathUtils.randomDouble(getEntityWorld().rand);
+				setHeightOffset(0.5F + (float)rand.nextGaussian() * 3.0F);
 			}
-			this.motionX = mX/10;
-			this.motionY = mY/10;
-			this.motionZ = mZ/10;
-			if(this.ticksExisted > 1000)
-				this.setDead();
+			motionX = mX/10;
+			motionY = mY/10;
+			motionZ = mZ/10;
+			if(ticksExisted > 1000) {
+				setDead();
+			}
 		}
 		EssentialCraftCore.proxy.spawnParticle("fogFX", (float)posX, (float)posY+2, (float)posZ, 0.0F, 1.0F, 0.0F);
-		List<EntityPlayer> players = this.getEntityWorld().<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-1, posY-1, posZ-1, posX+1, posY+1, posZ+1).grow(6, 3, 6));
-		for(int i = 0; i < players.size(); ++i) {
-			EntityPlayer p = players.get(i);
+		List<EntityPlayer> players = getEntityWorld().<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-1, posY-1, posZ-1, posX+1, posY+1, posZ+1).grow(6, 3, 6));
+		for(EntityPlayer p : players) {
 			boolean ignorePoison = false;
 			IBaublesItemHandler b = BaublesApi.getBaublesHandler(p);
 			if(b != null) {
 				for(int i1 = 0; i1 < b.getSlots(); ++i1) {
 					ItemStack is = b.getStackInSlot(i1);
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 19 || p.capabilities.isCreativeMode)
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 19 || p.capabilities.isCreativeMode) {
 						ignorePoison = true;
+					}
 				}
 			}
 			if(!p.getEntityWorld().isRemote && !ignorePoison) {
@@ -113,7 +115,7 @@ public class EntityPoisonFume extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		return this.dimension == Config.dimensionID && ECUtils.isEventActive("essentialcraft.event.fumes");
+		return dimension == Config.dimensionID && ECUtils.isEventActive("essentialcraft.event.fumes");
 	}
 
 	public float getHeightOffset() {

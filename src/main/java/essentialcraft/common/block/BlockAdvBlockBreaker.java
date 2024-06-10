@@ -32,7 +32,7 @@ public class BlockAdvBlockBreaker extends BlockContainer implements IModelRegist
 
 	public BlockAdvBlockBreaker() {
 		super(Material.ROCK);
-		setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.DOWN));
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.DOWN));
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class BlockAdvBlockBreaker extends BlockContainer implements IModelRegist
 
 	@Override
 	public void neighborChanged(IBlockState s, World w, BlockPos p, Block n, BlockPos fp) {
-		if(w instanceof World && w.isBlockIndirectlyGettingPowered(p) > 0) {
+		if(w instanceof World && w.getRedstonePowerFromNeighbors(p) > 0) {
 			((TileAdvancedBlockBreaker)w.getTileEntity(p)).breakBlocks();
 		}
 	}
@@ -85,7 +85,7 @@ public class BlockAdvBlockBreaker extends BlockContainer implements IModelRegist
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

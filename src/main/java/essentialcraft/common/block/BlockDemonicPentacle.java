@@ -72,10 +72,8 @@ public class BlockDemonicPentacle extends BlockContainer implements IModelRegist
 				world.spawnEntity(demon);
 			}
 		}
-		else {
-			if(world.isRemote) {
-				player.sendMessage(new TextComponentTranslation("essentialcraft.txt.noEnergy").setStyle(new Style().setColor(TextFormatting.RED)));
-			}
+		else if(world.isRemote) {
+			player.sendMessage(new TextComponentTranslation("essentialcraft.txt.noEnergy").setStyle(new Style().setColor(TextFormatting.RED)));
 		}
 		return true;
 	}

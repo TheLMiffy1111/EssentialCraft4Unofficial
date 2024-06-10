@@ -39,7 +39,7 @@ public class ItemBalanceSetter extends Item implements IModelRegisterer {
 			}
 			MiscUtils.getStackTag(stackIn).setInteger("Mode", currentMode);
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, stackIn);
+		return new ActionResult<>(EnumActionResult.PASS, stackIn);
 	}
 
 	@Override

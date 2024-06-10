@@ -15,6 +15,6 @@ public class ContainerMRUCoil extends ContainerInventory {
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 23));
 		addSlotToContainer(new Slot(inv, 1, 140, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

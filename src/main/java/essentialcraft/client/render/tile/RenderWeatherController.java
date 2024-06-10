@@ -26,8 +26,8 @@ public class RenderWeatherController extends TileEntitySpecialRenderer<TileWeath
 			DrawUtils.bindTexture("minecraft", "textures/entity/beacon_beam.png");
 			GlStateManager.translate(-0.5F, 0, -0.5F);
 			float[] colors = id == 0 ? new float[] {127/255F, 170/255F, 1F} : id == 1 ? new float[] {102/255F, 113/255F, 137/255F} : id == 2 ? new float[] {43/255F, 46/255F, 52/255F} : new float[3];
-			double beamRad = (double)te.progressLevel/te.requiredTicks/5;
-			double glowRad = (double)te.progressLevel/te.requiredTicks/2;
+			double beamRad = (double)te.progressLevel/TileWeatherController.requiredTicks/5;
+			double glowRad = (double)te.progressLevel/TileWeatherController.requiredTicks/2;
 			TileEntityBeaconRenderer.renderBeamSegment(x+0.5D, y, z+0.5D, 0, 1, te.getWorld().getTotalWorldTime(), 0, 255-te.getPos().getY(), colors, beamRad, glowRad);
 			GlStateManager.enableLighting();
 			GlStateManager.enableFog();

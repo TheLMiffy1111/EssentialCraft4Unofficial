@@ -5,5 +5,4 @@ public enum EnumSpellType {
 	CONSUMING,
 	MIRACLE,
 	SORCERY;
-
 }

@@ -23,13 +23,13 @@ public class RenderMIM extends TileEntitySpecialRenderer<TileMIM>
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y, (float)z+0.5F);
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
-		this.bindTexture(vtextures);
+		bindTexture(vtextures);
 		model.renderPart("Cube.001_Cube.002");
 		model.renderPart("Cube_Cube.001");
 
 		GlStateManager.rotate(t.innerRotation+partialTicks, 0, 1, 0);
 
-		this.bindTexture(textures);
+		bindTexture(textures);
 		model.renderPart("Cube.002_Cube.003");
 
 		GlStateManager.popMatrix();
@@ -38,6 +38,6 @@ public class RenderMIM extends TileEntitySpecialRenderer<TileMIM>
 
 	@Override
 	public void render(TileMIM tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

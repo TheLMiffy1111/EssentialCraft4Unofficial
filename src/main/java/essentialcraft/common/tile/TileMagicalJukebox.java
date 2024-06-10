@@ -70,13 +70,16 @@ public class TileMagicalJukebox extends TileMRUGeneric {
 				double randomColorG = getWorld().rand.nextDouble();
 				double randomColorB = getWorld().rand.nextDouble();
 				boolean randomBool = getWorld().rand.nextBoolean();
-				for(int i = 0; i < 50; ++i)
+				for(int i = 0; i < 50; ++i) {
 					getWorld().spawnParticle(EnumParticleTypes.SPELL_MOB, pos.getX()+randomX, pos.getY()+randomY, pos.getZ()+randomZ, randomColorR, randomColorG, randomColorB);
+				}
 				for(int i = 0; i < 100; ++i) {
-					if(randomBool)
+					if(randomBool) {
 						getWorld().spawnParticle(EnumParticleTypes.CRIT, pos.getX()+randomX, pos.getY()+randomY, pos.getZ()+randomZ, MathUtils.randomDouble(getWorld().rand), 1.1D+MathUtils.randomDouble(getWorld().rand), MathUtils.randomDouble(getWorld().rand));
-					else
+					}
+					else {
 						getWorld().spawnParticle(EnumParticleTypes.CRIT_MAGIC, pos.getX()+randomX, pos.getY()+randomY, pos.getZ()+randomZ, MathUtils.randomDouble(getWorld().rand), 1.1D+MathUtils.randomDouble(getWorld().rand), MathUtils.randomDouble(getWorld().rand));
+					}
 				}
 			}
 			else if(!getWorld().isRemote) {
@@ -98,16 +101,14 @@ public class TileMagicalJukebox extends TileMRUGeneric {
 				}
 				List<EntitySheep> sheepLst = getWorld().getEntitiesWithinAABB(EntitySheep.class, new AxisAlignedBB(pos.getX()-16, pos.getY()-16, pos.getZ()-16, pos.getX()+17, pos.getY()+17, pos.getZ()+17));
 				if(!sheepLst.isEmpty() && getWorld().getWorldTime() % 20 == 0) {
-					for(int t = 0; t < sheepLst.size(); ++t) {
-						EntitySheep sheep = sheepLst.get(t);
+					for(EntitySheep sheep : sheepLst) {
 						sheep.setFleeceColor(EnumDyeColor.byMetadata(getWorld().rand.nextInt(16)));
 						sheep.setCustomNameTag(monsterNames[getWorld().rand.nextInt(monsterNames.length)]);
 					}
 				}
 				List<EntityLiving> baseLst = getWorld().getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos.getX()-16, pos.getY()-16, pos.getZ()-16, pos.getX()+17, pos.getY()+17, pos.getZ()+17));
 				if(!baseLst.isEmpty() && getWorld().getWorldTime() % 10 == 0) {
-					for(int t = 0; t < baseLst.size(); ++t) {
-						EntityLiving sheep = baseLst.get(t);
+					for(EntityLiving sheep : baseLst) {
 						sheep.setCustomNameTag(monsterNames[getWorld().rand.nextInt(monsterNames.length)]);
 					}
 				}
@@ -174,7 +175,7 @@ public class TileMagicalJukebox extends TileMRUGeneric {
 			--recordCooldownTime;
 		}
 
-		if(!getStackInSlot(1).isEmpty() && getStackInSlot(1).getItem() instanceof ItemRecord && recordPlayed == 1 && recordCooldownTime == 0 && getWorld().isBlockIndirectlyGettingPowered(pos) > 0 && mruStorage.getMRU() >= 500) {
+		if(!getStackInSlot(1).isEmpty() && getStackInSlot(1).getItem() instanceof ItemRecord && recordPlayed == 1 && recordCooldownTime == 0 && getWorld().getRedstonePowerFromNeighbors(pos) > 0 && mruStorage.getMRU() >= 500) {
 			stopRecord();
 			mruStorage.extractMRU(500, true);
 			recordCooldownTime = 100;

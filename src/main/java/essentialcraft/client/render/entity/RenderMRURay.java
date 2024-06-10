@@ -28,8 +28,9 @@ public class RenderMRURay extends Render<EntityMRURay> {
 			float partialTicks) {
 		EntityMRURay ray = entity;
 
-		if(ray.pX == 0 && ray.pY == 0 && ray.pZ == 0)
+		if(ray.pX == 0 && ray.pY == 0 && ray.pZ == 0) {
 			return;
+		}
 
 		float r = 0;
 		float g = 1;
@@ -99,7 +100,7 @@ public class RenderMRURay extends Render<EntityMRURay> {
 			float f12 = MathHelper.cos(i1 % b0 * (float)Math.PI * 2.0F / b0) * 0.75F * size;
 			float f13 = i1 % b0 * 1.0F / b0;
 			tessellator.getBuffer().pos(f11, f12, 0.0D).tex(f13, f10).color(colorRB, colorGB, colorBB, (float) posX).endVertex();
-			tessellator.getBuffer().pos(f11, f12, f8).tex(f13, f9).color(colorR, colorG, colorB, (float) posX).endVertex();;
+			tessellator.getBuffer().pos(f11, f12, f8).tex(f13, f9).color(colorR, colorG, colorB, (float) posX).endVertex();
 		}
 
 		tessellator.draw();

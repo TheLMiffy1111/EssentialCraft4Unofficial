@@ -23,6 +23,6 @@ public class RenderRadiatingChamber extends TileEntitySpecialRenderer<TileRadiat
 
 	@Override
 	public void render(TileRadiatingChamber tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

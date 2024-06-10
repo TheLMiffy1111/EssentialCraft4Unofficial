@@ -21,14 +21,17 @@ import net.minecraftforge.fml.relauncher.Side;
 public class CoreRegistry {
 
 	public static void register() {
-		if(EssentialCraftCore.proxy != null)
+		if(EssentialCraftCore.proxy != null) {
 			NetworkRegistry.INSTANCE.registerGuiHandler(EssentialCraftCore.core, EssentialCraftCore.proxy);
+		}
 		else {
 			Side s = FMLCommonHandler.instance().getEffectiveSide();
-			if(s == Side.CLIENT)
+			if(s == Side.CLIENT) {
 				EssentialCraftCore.proxy = new ClientProxy();
-			else
+			}
+			else {
 				EssentialCraftCore.proxy = new CommonProxy();
+			}
 
 			NetworkRegistry.INSTANCE.registerGuiHandler(EssentialCraftCore.core, EssentialCraftCore.proxy);
 		}

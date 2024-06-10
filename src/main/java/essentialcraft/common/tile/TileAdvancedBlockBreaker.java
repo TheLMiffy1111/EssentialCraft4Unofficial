@@ -14,15 +14,16 @@ public class TileAdvancedBlockBreaker extends TileMRUGeneric {
 
 	public TileAdvancedBlockBreaker() {
 		super(0);
-		this.slot0IsBoundGem = false;
+		slot0IsBoundGem = false;
 		setSlotsNum(1);
 	}
 
 	public EnumFacing getRotation() {
 		int metadata = getWorld().getBlockState(pos).getValue(BlockAdvBlockBreaker.FACING).getIndex();
-		if(metadata > 5)
+		if(metadata > 5) {
 			metadata %= 6;
-		return EnumFacing.getFront(metadata);
+		}
+		return EnumFacing.byIndex(metadata);
 	}
 
 	@Override
@@ -44,13 +45,13 @@ public class TileAdvancedBlockBreaker extends TileMRUGeneric {
 				World w = getWorld();
 				if(getStackInSlot(0).isEmpty() || !(getStackInSlot(0).getItem() instanceof ItemFilter)) {
 					b.breakBlock(w, p, w.getBlockState(p));
-					b.onBlockDestroyedByPlayer(w, p, w.getBlockState(p));
+					b.onPlayerDestroy(w, p, w.getBlockState(p));
 					b.dropBlockAsItem(w, p, w.getBlockState(p), 0);
 					w.setBlockToAir(p);
 				}
 				else if(ECUtils.canFilterAcceptItem(new InventoryMagicFilter(getStackInSlot(0)), fromBlock, getStackInSlot(0))) {
 					b.breakBlock(w, p, w.getBlockState(p));
-					b.onBlockDestroyedByPlayer(w, p, w.getBlockState(p));
+					b.onPlayerDestroy(w, p, w.getBlockState(p));
 					b.dropBlockAsItem(w, p, w.getBlockState(p), 0);
 					w.setBlockToAir(p);
 				}

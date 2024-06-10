@@ -27,39 +27,42 @@ public class EntityArmorDestroyer extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult p_70184_1_) {
 		if(p_70184_1_.entityHit != null) {
-			if(p_70184_1_.entityHit == this.getThrower())
+			if((p_70184_1_.entityHit == getThrower()) || !(p_70184_1_.entityHit instanceof EntityPlayer)) {
 				return;
-
-			if(!(p_70184_1_.entityHit instanceof EntityPlayer))
-				return;
+			}
 
 			EntityPlayer p = (EntityPlayer) p_70184_1_.entityHit;
 
 			if(p != null) {
 				ItemStack c = p.getHeldItemMainhand();
 				ItemStack c1 = p.getHeldItemOffhand();
-				if(!c.isEmpty())
+				if(!c.isEmpty()) {
 					c.damageItem(5, p);
-				if(!c1.isEmpty())
+				}
+				if(!c1.isEmpty()) {
 					c1.damageItem(5, p);
+				}
 
 				for(int j = 0; j < 4; ++j) {
 					ItemStack a = p.inventory.armorInventory.get(j);
 
-					if(!a.isEmpty())
-						if(a.getItem() instanceof ISpecialArmor)
+					if(!a.isEmpty()) {
+						if(a.getItem() instanceof ISpecialArmor) {
 							((ISpecialArmor)a.getItem()).damageArmor(p, a, DamageSource.ANVIL, 5, j);
-						else
+						}
+						else {
 							a.damageItem(5, p);
+						}
+					}
 				}
 			}
 		}
 
-		if(!this.getEntityWorld().isRemote) {
-			this.setDead();
+		if(!getEntityWorld().isRemote) {
+			setDead();
 		}
 
-		this.getEntityWorld().playSound(posX, posY, posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 0.3F, 2, false);
+		getEntityWorld().playSound(posX, posY, posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 0.3F, 2, false);
 	}
 
 	@Override

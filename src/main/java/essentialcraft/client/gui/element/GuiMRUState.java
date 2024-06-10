@@ -46,7 +46,7 @@ public class GuiMRUState extends GuiTextElement {
 		this.drawTexturedModalRect(posX+17+80, posY, 1, 0, 16, 18);
 		this.drawTexturedModalRect(posX+17+96, posY, 1, 0, 16, 18);
 		this.drawTexturedModalRect(posX+17+111, posY, 1, 0, 17, 18);
-		this.drawText(posX,posY);
+		drawText(posX,posY);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class GuiMRUState extends GuiTextElement {
 
 	@Override
 	public void drawText(int posX, int posY) {
-		Minecraft.getMinecraft().fontRenderer.drawString(""+this.tile.getMRU()+"/"+this.tile.getMaxMRU()+" MRU", posX+2, posY+5, 0xffffff, true);
+		Minecraft.getMinecraft().fontRenderer.drawString(""+tile.getMRU()+"/"+tile.getMaxMRU()+" MRU", posX+2, posY+5, 0xffffff, true);
 	}
 
 }

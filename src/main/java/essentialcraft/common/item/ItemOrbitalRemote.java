@@ -19,7 +19,7 @@ import net.minecraftforge.client.model.ModelLoader;
 public class ItemOrbitalRemote extends ItemMRUGeneric implements IModelRegisterer {
 
 	public ItemOrbitalRemote() {
-		this.setMaxMRU(20000);
+		setMaxMRU(20000);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ItemOrbitalRemote extends ItemMRUGeneric implements IModelRegistere
 		float f7 = f4 * f5;
 		float f8 = f3 * f5;
 		double d3 = 32.0D;
-		Vec3d distanced = lookVec.addVector(f7 * d3, f6 * d3, f8 * d3);
+		Vec3d distanced = lookVec.add(f7 * d3, f6 * d3, f8 * d3);
 		RayTraceResult mop = p.getEntityWorld().rayTraceBlocks(lookVec, distanced, true, false, false);
 		if(mop != null && mop.typeOfHit == Type.BLOCK) {
 			if(ECUtils.playerUseMRU(p, stk, 10000)) {

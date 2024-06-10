@@ -46,7 +46,7 @@ public class ItemMRUMover extends Item implements IModelRegisterer {
 		Vec3d mainLookVec = player.getLookVec();
 		for(int i = 0; i < 20; ++i)
 		{
-			Vec3d additionalVec = mainLookVec.addVector(mainLookVec.x*i, mainLookVec.y*i, mainLookVec.z*i);
+			Vec3d additionalVec = mainLookVec.add(mainLookVec.x*i, mainLookVec.y*i, mainLookVec.z*i);
 			List<EntityMRUPresence> entityList = player.getEntityWorld().getEntitiesWithinAABB(EntityMRUPresence.class, new AxisAlignedBB(player.posX+additionalVec.x-1, player.posY+additionalVec.y-2, player.posZ+additionalVec.z-1, player.posX+additionalVec.x+1, player.posY+additionalVec.y+2, player.posZ+additionalVec.z+1));
 			if(!entityList.isEmpty())
 			{
@@ -60,12 +60,15 @@ public class ItemMRUMover extends Item implements IModelRegisterer {
 				moveZ = (float) -(mainLookVec.z/10);
 				//if(!presence.getEntityWorld().isRemote)
 				{
-					if(!player.isSneaking())
+					if(!player.isSneaking()) {
 						presence.setPositionAndRotation(presence.posX+moveX, presence.posY+moveY, presence.posZ+moveZ, 0, 0);
-					else
+					}
+					else {
 						presence.setPositionAndRotation(presence.posX-moveX, presence.posY-moveY, presence.posZ-moveZ, 0, 0);
-					if(count % 20 == 0)
+					}
+					if(count % 20 == 0) {
 						stack.damageItem(1, player);
+					}
 				}
 
 				break;
@@ -98,6 +101,6 @@ public class ItemMRUMover extends Item implements IModelRegisterer {
 
 	@Override
 	public void registerModels() {
-		ModelUtils.setItemModelNBTActive(this, "essentialcraft:item/" + getRegistryName().getResourcePath());
+		ModelUtils.setItemModelNBTActive(this, "essentialcraft:item/" + getRegistryName().getPath());
 	}
 }

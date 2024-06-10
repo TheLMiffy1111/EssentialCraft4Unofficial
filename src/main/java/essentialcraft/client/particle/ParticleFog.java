@@ -25,24 +25,24 @@ public class ParticleFog extends Particle{
 	{
 		super(w, x, y, z, i, j,k);
 		if(w != null && w.rand != null) {
-			this.motionX = MathUtils.randomDouble(w.rand);
-			this.motionY = MathUtils.randomDouble(w.rand);
-			this.motionZ = MathUtils.randomDouble(w.rand);
-			this.red = i;
-			this.green = j;
-			this.blue = k;
-			this.mruPosX = this.posX = x;
-			this.mruPosY = this.posY = y;
-			this.mruPosZ = this.posZ = z;
-			this.rand.nextFloat();
-			this.particleScale = 10F;
-			this.particleRed = (float) red;
-			this.particleGreen = (float) green;
-			this.particleBlue = (float) blue;
-			this.particleAlpha = 0.99F;
-			this.particleMaxAge = (int)(Math.random() * 10.0D) + 100;
-			this.canCollide = true;
-			this.setParticleTextureIndex((int)(Math.random() * 8.0D));
+			motionX = MathUtils.randomDouble(w.rand);
+			motionY = MathUtils.randomDouble(w.rand);
+			motionZ = MathUtils.randomDouble(w.rand);
+			red = i;
+			green = j;
+			blue = k;
+			mruPosX = posX = x;
+			mruPosY = posY = y;
+			mruPosZ = posZ = z;
+			rand.nextFloat();
+			particleScale = 10F;
+			particleRed = (float) red;
+			particleGreen = (float) green;
+			particleBlue = (float) blue;
+			particleAlpha = 0.99F;
+			particleMaxAge = (int)(Math.random() * 10.0D) + 100;
+			canCollide = true;
+			setParticleTextureIndex((int)(Math.random() * 8.0D));
 		}
 	}
 
@@ -57,15 +57,16 @@ public class ParticleFog extends Particle{
 		super.renderParticle(var1, var2, p_70539_2_, p_70539_3_, p_70539_4_, p_70539_5_, p_70539_6_, p_70539_7_);
 		var3.draw().begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 		Minecraft.getMinecraft().renderEngine.bindTexture(particleTextures);
-		if(!enabled)
+		if(!enabled) {
 			GlStateManager.disableBlend();
+		}
 	}
 
 	@Override
 	public int getBrightnessForRender(float p_70070_1_)
 	{
 		int i = super.getBrightnessForRender(p_70070_1_);
-		float f1 = (float)this.particleAge / (float)this.particleMaxAge;
+		float f1 = (float)particleAge / (float)particleMaxAge;
 		f1 *= f1;
 		f1 *= f1;
 		int j = i & 255;
@@ -86,7 +87,7 @@ public class ParticleFog extends Particle{
 	public float getBrightness(float p_70013_1_)
 	{
 		float f1 = super.getBrightnessForRender(p_70013_1_);
-		float f2 = (float)this.particleAge / (float)this.particleMaxAge;
+		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
 		return f1 * (1.0F - f2) + f2;
 	}
@@ -97,17 +98,17 @@ public class ParticleFog extends Particle{
 	@Override
 	public void onUpdate()
 	{
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		float f = (float)this.particleAge / (float)this.particleMaxAge;
-		this.posX = this.mruPosX + this.motionX * f;
-		this.posY = this.mruPosY + this.motionY * f;
-		this.posZ = this.mruPosZ + this.motionZ * f;
-		this.particleScale *= 1.01F;
-		if (this.particleAge++ >= this.particleMaxAge)
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
+		float f = (float)particleAge / (float)particleMaxAge;
+		posX = mruPosX + motionX * f;
+		posY = mruPosY + motionY * f;
+		posZ = mruPosZ + motionZ * f;
+		particleScale *= 1.01F;
+		if (particleAge++ >= particleMaxAge)
 		{
-			this.setExpired();
+			setExpired();
 		}
 	}
 }

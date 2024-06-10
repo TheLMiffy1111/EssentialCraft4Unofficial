@@ -16,20 +16,20 @@ public interface IMRUHandlerEntity extends IMRUHandler {
 
 	/**
 	 * You can change will the MRUPressence create corruption
-	 * @param b : boolean - true if you do not want, false if you do
+	 * @param flag : boolean - true if you do not want, false if you do
 	 */
-	public void setFlag(boolean b);
+	public void setFlag(boolean flag);
 
 
 	/**
-	 * This is a chesk, if can the MRUPressence leave in the world, if it has 0 mru left.
+	 * This is a check, if can the MRUPressence leave in the world, if it has 0 MRU left.
 	 * @return true if it stays, false if it will be removed from the world.
 	 */
 	public boolean canAlwaysStay();
 
 	/**
-	 * You can change will the MRUPressence stay in the world if it has 0 energy left.
-	 * @param b : boolean - true if you want it to stay, false if you want it to dissapear
+	 * You can change will the MRUPressence stay in the world if it has 0 MRU left.
+	 * @param alwaysStay : boolean - true if you want it to stay, false if you want it to disappear
 	 */
-	public void setAlwaysStay(boolean b);
+	public void setAlwaysStay(boolean alwaysStay);
 }

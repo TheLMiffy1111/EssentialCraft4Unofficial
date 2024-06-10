@@ -36,7 +36,7 @@ public class TileMatrixAbsorber extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		boolean t = false;
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			ItemStack stk = getStackInSlot(0);
 			if(stk.getItem() instanceof ItemSoulStone) {
 				if(stk.getTagCompound() != null) {
@@ -68,8 +68,9 @@ public class TileMatrixAbsorber extends TileMRUGeneric {
 				sndTime = 400;
 				getWorld().playSound(pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, SoundRegistry.machineDeepNoise, SoundCategory.BLOCKS, 0.01F, 2F, false);
 			}
-			if(!t)
+			if(!t) {
 				sndTime = 0;
+			}
 		}
 	}
 

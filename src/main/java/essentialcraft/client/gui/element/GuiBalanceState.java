@@ -55,8 +55,9 @@ public class GuiBalanceState extends GuiTextElement{
 	public void drawText(int posX, int posY) {
 		float balance = tile.getBalance();
 		String str = Float.toString(tile.getBalance());
-		if(str.length() > 6)
+		if(str.length() > 6) {
 			str = str.substring(0, 6);
+		}
 
 		for(int i = str.length()-1; i > 0; --i)
 		{

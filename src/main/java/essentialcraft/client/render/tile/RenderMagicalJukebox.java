@@ -59,17 +59,20 @@ public class RenderMagicalJukebox extends TileEntitySpecialRenderer<TileMagicalJ
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-		if(is.getItem() == ItemsCore.record_secret && tile.recordCooldownTime > 0)
+		if(is.getItem() == ItemsCore.record_secret && tile.recordCooldownTime > 0) {
 			DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.65F-upperIndex1/40F,0.5F);
-		else
+		}
+		else {
 			DrawUtils.renderItemStack_Full(tile.getStackInSlot(1), x, y, z, rotation,0F, 1, 1, 1, 0.5F, 0.65F,0.5F);
+		}
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 	}
 
 	@Override
 	public void render(TileMagicalJukebox tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 }

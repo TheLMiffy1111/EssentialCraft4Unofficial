@@ -17,21 +17,23 @@ public class ItemDrop extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName()+dropNames[Math.min(stack.getItemDamage(), dropNames.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey()+dropNames[Math.min(stack.getItemDamage(), dropNames.length-1)];
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(this.isInCreativeTab(p_150895_2_))
+		if(isInCreativeTab(p_150895_2_)) {
 			for(int i = 0; i < 5; ++i) {
 				p_150895_3_.add(new ItemStack(this, 1, i));
 			}
+		}
 	}
 
 	@Override
 	public void registerModels() {
-		for(int i = 0; i < 5; i++)
+		for(int i = 0; i < 5; i++) {
 			ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation("essentialcraft:item/gem_elemental", "type=" + dropNames[i]));
+		}
 	}
 }

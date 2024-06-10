@@ -21,6 +21,7 @@ import DummyCore.Utils.MiscUtils;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import essentialcraft.api.ApiCore;
+import essentialcraft.api.DiscoveryEntry;
 import essentialcraft.api.GunRegistry;
 import essentialcraft.api.GunRegistry.GunMaterial;
 import essentialcraft.api.GunRegistry.GunType;
@@ -88,19 +89,11 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.storage.loot.LootEntryItem;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraft.world.storage.loot.functions.LootFunction;
-import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -146,8 +139,7 @@ public class ECEventHandler {
 			NBTTagCompound tag = MiscUtils.getStackTag(event.getLeft());
 			if(tag.hasKey("base")) {
 				GunMaterial material = null;
-				for(int i = 0; i < GunRegistry.GUN_MATERIALS.size(); ++i) {
-					GunMaterial gm = GunRegistry.GUN_MATERIALS.get(i);
+				for(GunMaterial gm : GunRegistry.GUN_MATERIALS) {
 					if(gm.recipe.isItemEqual(event.getRight())) {
 						material = gm;
 						break;
@@ -166,26 +158,36 @@ public class ECEventHandler {
 
 	public ItemStack findShearItem(Entity e) {
 		int rN = 1+e.getEntityWorld().rand.nextInt(3);
-		if(e instanceof EntityCow)
+		if(e instanceof EntityCow) {
 			return new ItemStack(Items.LEATHER,rN,0);
-		if(e instanceof EntityChicken)
+		}
+		if(e instanceof EntityChicken) {
 			return new ItemStack(Items.FEATHER,rN,0);
-		if(e instanceof EntitySquid)
+		}
+		if(e instanceof EntitySquid) {
 			return new ItemStack(Items.DYE,rN,0);
-		if(e instanceof EntitySpider)
+		}
+		if(e instanceof EntitySpider) {
 			return new ItemStack(Items.STRING,rN,0);
-		if(e instanceof EntityCreeper)
+		}
+		if(e instanceof EntityCreeper) {
 			return new ItemStack(Items.GUNPOWDER,rN,0);
-		if(e instanceof EntitySkeleton)
+		}
+		if(e instanceof EntitySkeleton) {
 			return new ItemStack(Items.DYE,rN,15);
-		if(e instanceof EntityMagmaCube)
+		}
+		if(e instanceof EntityMagmaCube) {
 			return new ItemStack(Items.MAGMA_CREAM,rN,0);
-		if(e instanceof EntitySlime)
+		}
+		if(e instanceof EntitySlime) {
 			return new ItemStack(Items.SLIME_BALL,rN,0);
-		if(e instanceof EntityZombie)
+		}
+		if(e instanceof EntityZombie) {
 			return new ItemStack(Items.ROTTEN_FLESH,rN,0);
-		if(e instanceof EntitySnowman)
+		}
+		if(e instanceof EntitySnowman) {
 			return new ItemStack(Blocks.SNOW,rN,0);
+		}
 		return ItemStack.EMPTY;
 	}
 
@@ -264,7 +266,7 @@ public class ECEventHandler {
 			if(shear) {
 				Entity base = event.getTarget();
 				stk.damageItem(32, player);
-				ItemStack is = this.findShearItem(base);
+				ItemStack is = findShearItem(base);
 				if(!is.isEmpty()) {
 					EntityItem ent = new EntityItem(base.getEntityWorld(),base.posX,base.posY,base.posZ,is);
 					Random rand = base.getEntityWorld().rand;
@@ -272,8 +274,9 @@ public class ECEventHandler {
 					ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
 					ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
 					player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.PLAYERS, 1, 1, false);
-					if(!player.getEntityWorld().isRemote)
+					if(!player.getEntityWorld().isRemote) {
 						player.getEntityWorld().spawnEntity(ent);
+					}
 					player.swingArm(EnumHand.MAIN_HAND);
 					ApiCore.getPlayerData(player).modifyUBMRU(ApiCore.getPlayerData(player).getPlayerUBMRU()-cost);
 				}
@@ -293,8 +296,9 @@ public class ECEventHandler {
 					if(b != null) {
 						for(int i = 0; i < b.getSlots(); ++i) {
 							ItemStack is = b.getStackInSlot(i);
-							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 27)
+							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 27) {
 								stopTeleportation = true;
+							}
 						}
 					}
 					if(stopTeleportation) {
@@ -315,14 +319,14 @@ public class ECEventHandler {
 				if(b != null) {
 					for(int i = 0; i < b.getSlots(); ++i) {
 						ItemStack is = b.getStackInSlot(i);
-						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 26)
+						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 26) {
 							increaseDrops = true;
+						}
 					}
 				}
 				if(increaseDrops && ApiCore.getPlayerData(player).getPlayerUBMRU() >= 1000) {
 					ApiCore.getPlayerData(player).modifyUBMRU(ApiCore.getPlayerData(player).getPlayerUBMRU()-1000);
-					for(int i = 0; i < event.getDrops().size(); ++i) {
-						EntityItem ei = event.getDrops().get(i);
+					for(EntityItem ei : event.getDrops()) {
 						if(ei != null) {
 							ItemStack is = ei.getItem();
 							if(!is.isEmpty()) {
@@ -345,10 +349,12 @@ public class ECEventHandler {
 			if(b != null) {
 				for(int i = 0; i < b.getSlots(); ++i) {
 					ItemStack is = b.getStackInSlot(i);
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 23)
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 23) {
 						gainXP = true;
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 24)
+					}
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 24) {
 						xpToU = true;
+					}
 				}
 			}
 			if(gainXP) {
@@ -375,14 +381,14 @@ public class ECEventHandler {
 			if(b != null) {
 				for(int i = 0; i < b.getSlots(); ++i) {
 					ItemStack is = b.getStackInSlot(i);
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 22)
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 22) {
 						increaseFortune = true;
+					}
 				}
 			}
 			if(increaseFortune && ApiCore.getPlayerData(event.getHarvester()).getPlayerUBMRU() >= 500) {
 				ECUtils.getData(event.getHarvester()).modifyUBMRU(ECUtils.getData(event.getHarvester()).getPlayerUBMRU() - 500);
-				for(int i = 0; i < event.getDrops().size(); ++i) {
-					ItemStack is = event.getDrops().get(i);
+				for(ItemStack is : event.getDrops()) {
 					if(!is.isEmpty() && is.getItem() != null && !(is.getItem() instanceof ItemBlock)) {
 						is.grow(1);
 					}
@@ -413,14 +419,18 @@ public class ECEventHandler {
 						for(int i = 0; i < b.getSlots(); ++i)
 						{
 							ItemStack is = b.getStackInSlot(i);
-							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 13)
+							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 13) {
 								reset = true;
-							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 14)
+							}
+							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 14) {
 								dd = true;
-							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 16)
+							}
+							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 16) {
 								damageScrewup = true;
-							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 21)
+							}
+							if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 21) {
 								radiation = true;
+							}
 						}
 					}
 					if(dd)
@@ -475,14 +485,18 @@ public class ECEventHandler {
 				for(int i = 0; i < b.getSlots(); ++i)
 				{
 					ItemStack is = b.getStackInSlot(i);
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 14)
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 14) {
 						dd = true;
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 15)
+					}
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 15) {
 						saveFromDeath = true;
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 21)
+					}
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 21) {
 						radiation = true;
-					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 25)
+					}
+					if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 25) {
 						++timesToReflect;
+					}
 				}
 			}
 			if(dd)
@@ -548,22 +562,28 @@ public class ECEventHandler {
 			ItemStack is = p.getHeldItemMainhand();
 			NBTTagCompound itemTag = MiscUtils.getStackTag(is);
 			if(event.buttonID == 0) {
-				if(itemTag.getBoolean("ignoreMeta"))
+				if(itemTag.getBoolean("ignoreMeta")) {
 					itemTag.setBoolean("ignoreMeta", false);
-				else
+				}
+				else {
 					itemTag.setBoolean("ignoreMeta", true);
+				}
 			}
 			if(event.buttonID == 1) {
-				if(itemTag.getBoolean("ignoreNBT"))
+				if(itemTag.getBoolean("ignoreNBT")) {
 					itemTag.setBoolean("ignoreNBT", false);
-				else
+				}
+				else {
 					itemTag.setBoolean("ignoreNBT", true);
+				}
 			}
 			if(event.buttonID == 2) {
-				if(itemTag.getBoolean("ignoreOreDict"))
+				if(itemTag.getBoolean("ignoreOreDict")) {
 					itemTag.setBoolean("ignoreOreDict", false);
-				else
+				}
+				else {
 					itemTag.setBoolean("ignoreOreDict", true);
+				}
 			}
 			is.setTagCompound(itemTag);
 		}
@@ -572,10 +592,12 @@ public class ECEventHandler {
 			ItemStack is = p.getHeldItemMainhand();
 			NBTTagCompound itemTag = MiscUtils.getStackTag(is);
 			if(event.buttonID == 0) {
-				if(itemTag.getBoolean("ignoreOreDict"))
+				if(itemTag.getBoolean("ignoreOreDict")) {
 					itemTag.setBoolean("ignoreOreDict", false);
-				else
+				}
+				else {
 					itemTag.setBoolean("ignoreOreDict", true);
+				}
 			}
 			is.setTagCompound(itemTag);
 		}
@@ -614,16 +636,21 @@ public class ECEventHandler {
 			//Setting the current tool type via
 			//Hard-coded tool check. Hmmm....
 			String currentToolClass = "";
-			if(currentTool.getItem() instanceof ItemPickaxe)
+			if(currentTool.getItem() instanceof ItemPickaxe) {
 				currentToolClass = "pickaxe";
-			if(currentTool.getItem() instanceof ItemAxe)
+			}
+			if(currentTool.getItem() instanceof ItemAxe) {
 				currentToolClass = "axe";
-			if(currentTool.getItem() instanceof ItemSpade)
+			}
+			if(currentTool.getItem() instanceof ItemSpade) {
 				currentToolClass = "shovel";
-			if(currentTool.getItem() instanceof ItemHoe)
+			}
+			if(currentTool.getItem() instanceof ItemHoe) {
 				currentToolClass = "hoe";
-			if(currentTool.getItem() instanceof ItemSword)
+			}
+			if(currentTool.getItem() instanceof ItemSword) {
 				currentToolClass = "sword";
+			}
 
 			//If the player is using an improper tool, or the current stack is a sword
 			if (!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(),event.getPos(),currentTool) || currentToolClass.equalsIgnoreCase("sword"))
@@ -636,46 +663,66 @@ public class ECEventHandler {
 					if(event.getState()!=null && event.getState()!=null)
 					{
 						//Bunch of material checks to make sure lazy modders like me will still get their blocks recognized properly
-						if(event.getState().getMaterial()==Material.ANVIL)
+						if(event.getState().getMaterial()==Material.ANVIL) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.CACTUS)
+						}
+						if(event.getState().getMaterial()==Material.CACTUS) {
 							clazz = "axe";
-						if(event.getState().getMaterial()==Material.CLAY)
+						}
+						if(event.getState().getMaterial()==Material.CLAY) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.CORAL)
+						}
+						if(event.getState().getMaterial()==Material.CORAL) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.CRAFTED_SNOW)
+						}
+						if(event.getState().getMaterial()==Material.CRAFTED_SNOW) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.GLASS)
+						}
+						if(event.getState().getMaterial()==Material.GLASS) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.GOURD)
+						}
+						if(event.getState().getMaterial()==Material.GOURD) {
 							clazz = "axe";
-						if(event.getState().getMaterial()==Material.GRASS)
+						}
+						if(event.getState().getMaterial()==Material.GRASS) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.GROUND)
+						}
+						if(event.getState().getMaterial()==Material.GROUND) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.ICE)
+						}
+						if(event.getState().getMaterial()==Material.ICE) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.IRON)
+						}
+						if(event.getState().getMaterial()==Material.IRON) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.PACKED_ICE)
+						}
+						if(event.getState().getMaterial()==Material.PACKED_ICE) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.PISTON)
+						}
+						if(event.getState().getMaterial()==Material.PISTON) {
 							clazz = "axe";
-						if(event.getState().getMaterial()==Material.ROCK)
+						}
+						if(event.getState().getMaterial()==Material.ROCK) {
 							clazz = "pickaxe";
-						if(event.getState().getMaterial()==Material.SAND)
+						}
+						if(event.getState().getMaterial()==Material.SAND) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.SNOW)
+						}
+						if(event.getState().getMaterial()==Material.SNOW) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.SPONGE)
+						}
+						if(event.getState().getMaterial()==Material.SPONGE) {
 							clazz = "shovel";
-						if(event.getState().getMaterial()==Material.TNT)
+						}
+						if(event.getState().getMaterial()==Material.TNT) {
 							clazz = "sword";
-						if(event.getState().getMaterial()==Material.WEB)
+						}
+						if(event.getState().getMaterial()==Material.WEB) {
 							clazz = "sword";
-						if(event.getState().getMaterial()==Material.WOOD)
+						}
+						if(event.getState().getMaterial()==Material.WOOD) {
 							clazz = "axe";
+						}
 					}
 				}
 				//If the proper tool type exists
@@ -720,7 +767,7 @@ public class ECEventHandler {
 					Set<String> tags = genericTag.getKeySet();
 
 					//Blank list
-					List<String> tagKeyLst = new ArrayList<String>();
+					List<String> tagKeyLst = new ArrayList<>();
 
 					//Getting the Iterator, since this is a Set, and we do not want the StackOverflow exception
 					Iterator<String> $i = tags.iterator();
@@ -733,22 +780,26 @@ public class ECEventHandler {
 
 					//Removing all the tool tags from the list.
 					//Before removing making sure, that that element actually exists.
-					if(tagKeyLst.indexOf("pickaxe") != -1)
+					if(tagKeyLst.indexOf("pickaxe") != -1) {
 						tagKeyLst.remove("pickaxe");
-					if(tagKeyLst.indexOf("axe") != -1)
+					}
+					if(tagKeyLst.indexOf("axe") != -1) {
 						tagKeyLst.remove("axe");
-					if(tagKeyLst.indexOf("shovel") != -1)
+					}
+					if(tagKeyLst.indexOf("shovel") != -1) {
 						tagKeyLst.remove("shovel");
-					if(tagKeyLst.indexOf("hoe") != -1)
+					}
+					if(tagKeyLst.indexOf("hoe") != -1) {
 						tagKeyLst.remove("hoe");
-					if(tagKeyLst.indexOf("sword") != -1)
+					}
+					if(tagKeyLst.indexOf("sword") != -1) {
 						tagKeyLst.remove("sword");
+					}
 
 					//Iterating through our list, which should have everything, except for our tools in it.
 					//In other words we worked as a gc - we've collected everything we DO NOT need, and now we are deleting it.
-					for(int i = 0; i < tagKeyLst.size(); ++i)
-					{
-						genericTag.removeTag(tagKeyLst.get(i));
+					for(String element : tagKeyLst) {
+						genericTag.removeTag(element);
 					}
 
 					//Initializing our blank ItemStack, that will replace the current one.
@@ -766,16 +817,21 @@ public class ECEventHandler {
 					}else //Or, if the tool was not found, we are creating a new blank one
 					{
 						//Another hard-coded tool initialization.
-						if(clazz.equalsIgnoreCase("pickaxe"))
+						if(clazz.equalsIgnoreCase("pickaxe")) {
 							efficent = new ItemStack(ItemsCore.wind_elemental_pick,1,currentTool.getItemDamage());
-						if(clazz.equalsIgnoreCase("shovel"))
+						}
+						if(clazz.equalsIgnoreCase("shovel")) {
 							efficent = new ItemStack(ItemsCore.wind_elemental_shovel,1,currentTool.getItemDamage());
-						if(clazz.equalsIgnoreCase("hoe")) //Will that ever happen?
+						}
+						if(clazz.equalsIgnoreCase("hoe")) { //Will that ever happen?
 							efficent = new ItemStack(ItemsCore.wind_elemental_hoe,1,currentTool.getItemDamage());
-						if(clazz.equalsIgnoreCase("sword"))
+						}
+						if(clazz.equalsIgnoreCase("sword")) {
 							efficent = new ItemStack(ItemsCore.wind_elemental_sword,1,currentTool.getItemDamage());
-						if(clazz.equalsIgnoreCase("axe"))
+						}
+						if(clazz.equalsIgnoreCase("axe")) {
 							efficent = new ItemStack(ItemsCore.wind_elemental_axe,1,currentTool.getItemDamage());
+						}
 					}
 
 					//If our tool got replaced. Also, if our tool is a valid item. Should be valid all the times, but...
@@ -791,21 +847,27 @@ public class ECEventHandler {
 
 						//Setting our tags, if needed
 						//I mean, saving our tools into the NBT data! Yea, that sounds better!
-						if(genericTag.hasKey("pickaxe"))
+						if(genericTag.hasKey("pickaxe")) {
 							anotherTag.setTag("pickaxe", genericTag.getTag("pickaxe"));
-						if(genericTag.hasKey("axe"))
+						}
+						if(genericTag.hasKey("axe")) {
 							anotherTag.setTag("axe", genericTag.getTag("axe"));
-						if(genericTag.hasKey("shovel"))
+						}
+						if(genericTag.hasKey("shovel")) {
 							anotherTag.setTag("shovel", genericTag.getTag("shovel"));
-						if(genericTag.hasKey("hoe"))
+						}
+						if(genericTag.hasKey("hoe")) {
 							anotherTag.setTag("hoe", genericTag.getTag("hoe"));
-						if(genericTag.hasKey("sword"))
+						}
+						if(genericTag.hasKey("sword")) {
 							anotherTag.setTag("sword", genericTag.getTag("sword"));
+						}
 
 						//Also setting our current tool into the NBT.
 						//I mean saving, sure.
-						if(toolTag != null)
+						if(toolTag != null) {
 							anotherTag.setTag(currentToolClass, toolTag);
+						}
 
 						//And giving our player the new, awesome tool!
 						event.getEntityPlayer().inventory.setInventorySlotContents(event.getEntityPlayer().inventory.currentItem, efficent);
@@ -902,21 +964,21 @@ public class ECEventHandler {
 						ECUtils.ec3WorldTag.removeTag("currentEventDuration");
 						ECUtils.ec3WorldTag.removeTag("currentEvent");
 						ECUtils.requestCurrentEventSync();
-					}else
-						WorldEventRegistry.currentEventDuration = ECUtils.getActiveEventDuration();
-				}
-			}else
-			{
-				if(event.world.getWorldTime() % 20 == 0)
-				{
-					IWorldEvent wevent = WorldEventRegistry.selectRandomEvent(event.world);
-					if(wevent != null)
-					{
-						wevent.onEventBeginning(event.world);
-						ECUtils.ec3WorldTag.setString("currentEvent", wevent.getEventID());
-						ECUtils.ec3WorldTag.setInteger("currentEventDuration", wevent.getEventDuration(event.world));
-						ECUtils.requestCurrentEventSync();
 					}
+					else {
+						WorldEventRegistry.currentEventDuration = ECUtils.getActiveEventDuration();
+					}
+				}
+			}
+			else if(event.world.getWorldTime() % 20 == 0)
+			{
+				IWorldEvent wevent = WorldEventRegistry.selectRandomEvent(event.world);
+				if(wevent != null)
+				{
+					wevent.onEventBeginning(event.world);
+					ECUtils.ec3WorldTag.setString("currentEvent", wevent.getEventID());
+					ECUtils.ec3WorldTag.setInteger("currentEventDuration", wevent.getEventDuration(event.world));
+					ECUtils.requestCurrentEventSync();
 				}
 			}
 		}
@@ -942,20 +1004,22 @@ public class ECEventHandler {
 			if(s != null)
 			{
 				GunType g = null;
-				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper"))
+				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("sniper")) {
 					g = GunType.SNIPER;
-				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("pistol"))
+				}
+				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("pistol")) {
 					g = GunType.PISTOL;
-				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("rifle"))
+				}
+				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("rifle")) {
 					g = GunType.RIFLE;
-				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("gatling"))
+				}
+				if(((ItemGun)p.getHeldItemMainhand().getItem()).gunType.equalsIgnoreCase("gatling")) {
 					g = GunType.GATLING;
+				}
 				if(g != null)
 				{
 					ArrayList<DummyData> ls = s.materialData.get(g);
-					for(int i = 0; i < ls.size(); ++i)
-					{
-						DummyData dt = ls.get(i);
+					for(DummyData dt : ls) {
 						if(dt != null && dt.fieldName.equalsIgnoreCase("scope.zoom"))
 						{
 							float value = Float.parseFloat(dt.fieldValue)*1F;
@@ -1007,11 +1071,10 @@ public class ECEventHandler {
 					if(GuiResearchBook.currentCategory != null && GuiResearchBook.currentDiscovery != null)
 					{
 						String id = GuiResearchBook.currentDiscovery.id;
-						for(int i = 0; i < GuiResearchBook.currentCategory.discoveries.size(); ++i)
-						{
-							if(GuiResearchBook.currentCategory.discoveries.get(i).id.equals(id))
+						for(DiscoveryEntry element : GuiResearchBook.currentCategory.discoveries) {
+							if(element.id.equals(id))
 							{
-								GuiResearchBook.currentDiscovery=GuiResearchBook.currentCategory.discoveries.get(i);
+								GuiResearchBook.currentDiscovery=element;
 								break;
 							}
 						}
@@ -1087,7 +1150,7 @@ public class ECEventHandler {
 					}
 					addedEnergy += (20+MathUtils.randomFloat(e.getEntityWorld().rand)*10)*maxHp;
 				}
-				if(BaublesApi.getBaublesHandler(player) != null && addedEnergy > 0)
+				if(BaublesApi.getBaublesHandler(player) != null && addedEnergy > 0) {
 					for(int i = 0; i < 7; ++i)
 					{
 						ItemStack bStk = BaublesApi.getBaublesHandler(player).getStackInSlot(i);
@@ -1097,6 +1160,7 @@ public class ECEventHandler {
 							addedEnergy = MathHelper.floor(gmod.getModifiedValue(addedEnergy, bStk, player.getEntityWorld().rand,player));
 						}
 					}
+				}
 				int currentEnergy_int = ECUtils.getData(player).getPlayerUBMRU();
 				currentEnergy_int += addedEnergy;
 				ECUtils.getData(player).modifyUBMRU(currentEnergy_int);
@@ -1107,8 +1171,9 @@ public class ECEventHandler {
 					for(int i = 0; i < b.getSlots(); ++i)
 					{
 						ItemStack is = b.getStackInSlot(i);
-						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 12)
+						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 12) {
 							canDropEmber = true;
+						}
 					}
 				}
 				if(canDropEmber)
@@ -1117,16 +1182,18 @@ public class ECEventHandler {
 					{
 						ItemStack emberStack = new ItemStack(ItemsCore.ember,1,player.getEntityWorld().rand.nextInt(8));
 						EntityItem emberItem = new EntityItem(base.getEntityWorld(), base.posX, base.posY, base.posZ, emberStack);
-						if(!base.getEntityWorld().isRemote)
+						if(!base.getEntityWorld().isRemote) {
 							base.getEntityWorld().spawnEntity(emberItem);
+						}
 					}
 				}
 			}
 		}
 		if(base instanceof EntityPlayer)
 		{
-			if(!(base instanceof FakePlayer))
+			if(!(base instanceof FakePlayer)) {
 				ECUtils.getData((EntityPlayer) base).modifyUBMRU(0);
+			}
 		}
 	}
 
@@ -1143,8 +1210,9 @@ public class ECEventHandler {
 					double mX = Double.parseDouble(packetData[4].fieldValue);
 					double mY = Double.parseDouble(packetData[5].fieldValue);
 					double mZ = Double.parseDouble(packetData[6].fieldValue);
-					if(event.effectiveSide == Side.CLIENT)
+					if(event.effectiveSide == Side.CLIENT) {
 						EssentialCraftCore.proxy.ItemFX(sX,sY,sZ,mX,mY,mZ);
+					}
 				}
 				else if(modData.fieldName.equalsIgnoreCase("mod") && modData.fieldValue.equalsIgnoreCase("essentialcraft.item.wings")) {
 					double sX = Double.parseDouble(packetData[1].fieldValue);
@@ -1174,7 +1242,7 @@ public class ECEventHandler {
 		}
 	}
 
-	public static ArrayList<ResourceLocation> textures = new ArrayList<ResourceLocation>();
+	public static ArrayList<ResourceLocation> textures = new ArrayList<>();
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -1185,10 +1253,12 @@ public class ECEventHandler {
 		ClientProxy.frozenIcon = map.registerSprite(new ResourceLocation("essentialcraft:blocks/frozen"));
 		ClientProxy.mruParticleIcon = map.registerSprite(new ResourceLocation("essentialcraft:items/particles/particle_mru_dummy_icon"));
 		ClientProxy.fogIcon = map.registerSprite(new ResourceLocation("essentialcraft:items/particles/fog"));
-		for(int i = 0; i < 4; ++i)
+		for(int i = 0; i < 4; ++i) {
 			ClientProxy.c_spell_particle_array[i] = map.registerSprite(new ResourceLocation("essentialcraft:items/particles/c_spell_"+i));
-		for(ResourceLocation rl : textures)
+		}
+		for(ResourceLocation rl : textures) {
 			map.registerSprite(rl);
+		}
 		map.registerSprite(new ResourceLocation("essentialcraft:blocks/null"));
 		map.registerSprite(new ResourceLocation("essentialcraft:special/whitebox"));
 	}
@@ -1197,7 +1267,7 @@ public class ECEventHandler {
 	public void onMissingMappingsEntity(MissingMappings<EntityEntry> event) {
 		for(Mapping<EntityEntry> mapping : event.getAllMappings()) {
 			for(EntityEntry entry : EntitiesCore.REGISTERED_ENTITIES) {
-				if(mapping.key.getResourcePath().equals(entry.getEntityClass().getName().toLowerCase(Locale.US))) {
+				if(mapping.key.getPath().equals(entry.getEntityClass().getName().toLowerCase(Locale.US))) {
 					mapping.remap(entry);
 				}
 			}

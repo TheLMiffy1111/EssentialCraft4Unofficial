@@ -15,6 +15,6 @@ public class ContainerFurnaceMagic extends ContainerInventory {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 41));
 		addSlotToContainer(new SlotGeneric(inv, 1, 108, 5));
 		addSlotToContainer(new SlotGeneric(inv, 2, 153, 5));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

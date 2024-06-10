@@ -32,12 +32,17 @@ public class RenderDemonicPentacle extends TileEntitySpecialRenderer<TileDemonic
 
 		float movement = Minecraft.getMinecraft().world.getTotalWorldTime()%60F+partialTicks;
 
-		if(movement > 30)
+		if(movement > 30) {
 			movement = 30 - movement+30F;
+		}
 
 		float c = movement/30F;
-		if(c < 0.02F)c = 0.02F;
-		if(c > 0.8F)c= 0.8F;
+		if(c < 0.02F) {
+			c = 0.02F;
+		}
+		if(c > 0.8F) {
+			c= 0.8F;
+		}
 
 		if(p.tier == 0)
 		{
@@ -52,6 +57,6 @@ public class RenderDemonicPentacle extends TileEntitySpecialRenderer<TileDemonic
 
 	@Override
 	public void render(TileDemonicPentacle tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

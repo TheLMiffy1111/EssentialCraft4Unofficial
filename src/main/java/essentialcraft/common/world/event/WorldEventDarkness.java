@@ -18,8 +18,9 @@ public class WorldEventDarkness implements IWorldEvent{
 
 	@Override
 	public void worldTick(World w, int leftoverTime) {
-		if(w.provider.getDimension() == Config.dimensionID)
+		if(w.provider.getDimension() == Config.dimensionID) {
 			((WorldProviderHoanna)w.provider).generateLightBrightnessTable();
+		}
 	}
 
 	@Override
@@ -30,8 +31,9 @@ public class WorldEventDarkness implements IWorldEvent{
 	@Override
 	public void onEventEnd(World w) {
 		ECUtils.sendChatMessageToAllPlayersInDim(Config.dimensionID, TextFormatting.GREEN+"The lights are back!");
-		if(w.provider.getDimension() == Config.dimensionID)
+		if(w.provider.getDimension() == Config.dimensionID) {
 			((WorldProviderHoanna)w.provider).generateLightBrightnessTable();
+		}
 	}
 
 	@Override

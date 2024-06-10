@@ -7,19 +7,17 @@ import net.minecraft.world.World;
 
 public class WorldEventRegistry {
 
-	public static final List<IWorldEvent> EVENTS = new ArrayList<IWorldEvent>();
-
+	public static final List<IWorldEvent> EVENTS = new ArrayList<>();
 	public static IWorldEvent currentEvent = null;
-
 	public static int currentEventDuration = -1;
 
 	public static void registerWorldEvent(IWorldEvent event) {
 		EVENTS.add(event);
 	}
 
-	public static IWorldEvent selectRandomEvent(World w) {
-		IWorldEvent event = EVENTS.get(w.rand.nextInt(EVENTS.size()));
-		if(w.rand.nextFloat() <= event.getEventProbability(w) && event.possibleToApply(w) && event.getEventDuration(w) > 0) {
+	public static IWorldEvent selectRandomEvent(World world) {
+		IWorldEvent event = EVENTS.get(world.rand.nextInt(EVENTS.size()));
+		if(world.rand.nextFloat() <= event.getEventProbability(world) && event.possibleToApply(world) && event.getEventDuration(world) > 0) {
 			return event;
 		}
 		return null;

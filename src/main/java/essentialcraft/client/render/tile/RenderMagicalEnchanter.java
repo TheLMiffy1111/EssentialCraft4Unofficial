@@ -34,7 +34,7 @@ public class RenderMagicalEnchanter extends TileEntitySpecialRenderer<TileMagica
 		float f2 = te.bookRotationPrev + f1 * partialTicks;
 		GlStateManager.rotate((float)(-f2 * (180F / Math.PI)), 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
-		this.bindTexture(TEXTURE_BOOK);
+		bindTexture(TEXTURE_BOOK);
 		float f3 = te.pageFlipPrev + (te.pageFlip - te.pageFlipPrev) * partialTicks + 0.25F;
 		float f4 = te.pageFlipPrev + (te.pageFlip - te.pageFlipPrev) * partialTicks + 0.75F;
 		f3 = (f3 - MathHelper.fastFloor(f3)) * 1.6F - 0.3F;
@@ -58,7 +58,7 @@ public class RenderMagicalEnchanter extends TileEntitySpecialRenderer<TileMagica
 
 		float f5 = te.bookSpreadPrev + (te.bookSpread - te.bookSpreadPrev) * partialTicks;
 		GlStateManager.enableCull();
-		this.modelBook.render(null, f, f3, f4, f5, 0.0F, 0.0625F);
+		modelBook.render(null, f, f3, f4, f5, 0.0F, 0.0625F);
 		GlStateManager.popMatrix();
 	}
 }

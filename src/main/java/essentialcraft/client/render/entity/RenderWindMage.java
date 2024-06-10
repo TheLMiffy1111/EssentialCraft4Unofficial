@@ -23,13 +23,13 @@ public class RenderWindMage extends RenderLiving<EntityWindMage> {
 
 	public RenderWindMage() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(0.0F), 0.5F);
-		this.villagerModel = (ModelBiped)this.mainModel;
+		villagerModel = (ModelBiped)mainModel;
 		this.addLayer(new LayerBipedArmor(this));
 	}
 
 	public RenderWindMage(RenderManager rm) {
 		super(rm, new ModelBiped(0.0F), 0.5F);
-		this.villagerModel = (ModelBiped)this.mainModel;
+		villagerModel = (ModelBiped)mainModel;
 	}
 
 	@Override

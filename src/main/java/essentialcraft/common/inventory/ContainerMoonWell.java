@@ -24,6 +24,6 @@ public class ContainerMoonWell extends ContainerInventory {
 
 	@Override
 	public void setupSlots() {
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

@@ -18,6 +18,6 @@ public class ThrowableRenderFactory<T extends Entity> implements IRenderFactory<
 
 	@Override
 	public Render<? super T> createRenderFor(RenderManager manager) {
-		return new RenderSnowball<T>(manager, itemToRender, Minecraft.getMinecraft().getRenderItem());
+		return new RenderSnowball<>(manager, itemToRender, Minecraft.getMinecraft().getRenderItem());
 	}
 }

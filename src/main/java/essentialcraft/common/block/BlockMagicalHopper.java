@@ -55,7 +55,7 @@ public class BlockMagicalHopper extends BlockContainer implements IModelRegister
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, facing);
+		return getDefaultState().withProperty(FACING, facing);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class BlockMagicalHopper extends BlockContainer implements IModelRegister
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

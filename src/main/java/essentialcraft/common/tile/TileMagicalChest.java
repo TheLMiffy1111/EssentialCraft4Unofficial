@@ -9,7 +9,6 @@ import essentialcraft.common.mod.EssentialCraftCore;
 import essentialcraft.utils.common.ECUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -107,9 +106,7 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 			inventory[slotIndex] = ItemStack.EMPTY;
 			return itemStack;
 		}
-		else {
-			return ItemStack.EMPTY;
-		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -163,46 +160,55 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 	@Override
 	public void update() {
 		if(syncTick == 0) {
-			if(tracker == null)
+			if(tracker == null) {
 				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + "," + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
+			}
 			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);
 			}
 			syncTick = 60;
 		}
-		else
+		else {
 			--syncTick;
+		}
 
 		if(requestSync && getWorld().isRemote) {
 			requestSync = false;
 			ECUtils.requestScheduledTileSync(this, EssentialCraftCore.proxy.getClientPlayer());
 		}
 
-		if(++ticksSinceSync % 20 * 4 == 0)
+		if(++ticksSinceSync % 20 * 4 == 0) {
 			getWorld().addBlockEvent(pos, getWorld().getBlockState(pos).getBlock(), 1, numUsingPlayers);
+		}
 
 		prevLidAngle = lidAngle;
 		float angleIncrement = 0.1F;
 
-		if(numUsingPlayers > 0 && lidAngle == 0.0F)
+		if(numUsingPlayers > 0 && lidAngle == 0.0F) {
 			getWorld().playSound(null, pos, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, getWorld().rand.nextFloat()*0.1F + 0.9F);
+		}
 
 		if(numUsingPlayers == 0 && lidAngle > 0.0F || numUsingPlayers > 0 && lidAngle < 1.0F) {
 			float var8 = lidAngle;
 
-			if(numUsingPlayers > 0)
+			if(numUsingPlayers > 0) {
 				lidAngle += angleIncrement;
-			else
+			}
+			else {
 				lidAngle -= angleIncrement;
+			}
 
-			if(lidAngle > 1.0F)
+			if(lidAngle > 1.0F) {
 				lidAngle = 1.0F;
+			}
 
-			if(lidAngle < 0.5F && var8 >= 0.5F)
+			if(lidAngle < 0.5F && var8 >= 0.5F) {
 				getWorld().playSound(null, pos, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, getWorld().rand.nextFloat() * 0.1F + 0.9F);
+			}
 
-			if(lidAngle < 0.0F)
+			if(lidAngle < 0.0F) {
 				lidAngle = 0.0F;
+			}
 		}
 	}
 
@@ -215,9 +221,7 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 			this.numUsingPlayers = numUsingPlayers;
 			return true;
 		}
-		else {
-			return super.receiveClientEvent(eventID, numUsingPlayers);
-		}
+		return super.receiveClientEvent(eventID, numUsingPlayers);
 	}
 
 	@Override
@@ -229,16 +233,18 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 		int[] ret = new int[inventory.length];
 
-		for(int i = 0; i < ret.length; ++i)
+		for(int i = 0; i < ret.length; ++i) {
 			ret[i] = i;
+		}
 
 		return ret;
 	}
@@ -255,8 +261,9 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < getSizeInventory(); i++)
+		for(int i = 0; i < getSizeInventory(); i++) {
 			setInventorySlotContents(i, ItemStack.EMPTY);
+		}
 	}
 
 	@Override

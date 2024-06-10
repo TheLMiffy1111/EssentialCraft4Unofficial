@@ -36,8 +36,9 @@ public class ModelFancyMimic implements IBakedModel {
 
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		if(!(state.getBlock() instanceof BlockFancyMimic))
+		if(!(state.getBlock() instanceof BlockFancyMimic)) {
 			return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getMissingModel().getQuads(state, side, rand);
+		}
 
 		ImmutableList.Builder<BakedQuad> ret = ImmutableList.<BakedQuad>builder();
 		BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();

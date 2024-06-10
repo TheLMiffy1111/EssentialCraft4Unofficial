@@ -31,15 +31,16 @@ public class ItemControlRod extends Item implements IModelRegisterer {
 
 	public ItemControlRod() {
 		super();
-		this.maxStackSize = 1;
+		maxStackSize = 1;
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = player.getHeldItem(hand);
-		if(world.isRemote)
+		if(world.isRemote) {
 			return EnumActionResult.SUCCESS;
+		}
 		if(stack.getTagCompound() == null) {
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile != null) {

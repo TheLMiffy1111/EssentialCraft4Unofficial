@@ -13,6 +13,6 @@ public class ContainerMonsterHolder extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 26, 5));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

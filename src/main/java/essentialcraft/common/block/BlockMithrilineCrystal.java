@@ -40,7 +40,7 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 
 	public BlockMithrilineCrystal() {
 		super(Material.ROCK);
-		this.setSoundType(SoundType.GLASS);
+		setSoundType(SoundType.GLASS);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, CrystalType.MITHRILINE).withProperty(LAYER, EnumLayer.BOTTOM));
 	}
 
@@ -140,8 +140,7 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 			int meta = world.getBlockState(pos).getValue(TYPE).getIndex();
 			return meta == 0 ? 7.5F : meta == 1 ? 15 : meta == 2 ? 30 : meta == 3 ? 60 : meta == 4 ? 120 : 0;
 		}
-		else
-			return 0;
+		return 0;
 	}
 
 	@Override

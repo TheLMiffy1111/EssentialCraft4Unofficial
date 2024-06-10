@@ -13,41 +13,41 @@ public class MRUStorage implements IMRUHandler {
 	protected final boolean maxMRUSettable;
 
 	public MRUStorage() {
-		this.maxMRUSettable = true;
+		maxMRUSettable = true;
 	}
 
 	public MRUStorage(int maxMRU) {
 		this.maxMRU = maxMRU;
-		this.maxMRUSettable = false;
+		maxMRUSettable = false;
 	}
 
 	@Override
 	public int getMaxMRU() {
-		return this.maxMRU;
+		return maxMRU;
 	}
 
 	@Override
 	public void setMaxMRU(int amount) {
 		if(maxMRUSettable && amount >= 0) {
-			this.maxMRU = amount;
+			maxMRU = amount;
 		}
 	}
 
 	@Override
 	public int getMRU() {
-		return this.mru;
+		return mru;
 	}
 
 	@Override
 	public void setMRU(int amount) {
 		if(amount <= 0) {
-			this.mru = 0;
+			mru = 0;
 		}
 		else if(amount >= maxMRU) {
-			this.mru = maxMRU;
+			mru = maxMRU;
 		}
 		else {
-			this.mru = amount;
+			mru = amount;
 		}
 	}
 
@@ -107,7 +107,7 @@ public class MRUStorage implements IMRUHandler {
 
 	@Override
 	public boolean getShade() {
-		return this.shade;
+		return shade;
 	}
 
 	@Override
@@ -118,21 +118,21 @@ public class MRUStorage implements IMRUHandler {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		if(maxMRUSettable) {
-			nbt.setInteger("maxMRU", this.maxMRU);
+			nbt.setInteger("maxMRU", maxMRU);
 		}
-		nbt.setInteger("mru", this.mru);
-		nbt.setFloat("balance", this.balance);
-		nbt.setBoolean("shade", this.shade);
+		nbt.setInteger("mru", mru);
+		nbt.setFloat("balance", balance);
+		nbt.setBoolean("shade", shade);
 		return nbt;
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		if(maxMRUSettable) {
-			this.maxMRU = nbt.getInteger("maxMRU");
+			maxMRU = nbt.getInteger("maxMRU");
 		}
-		this.mru = nbt.getInteger("mru");
-		this.balance = nbt.getFloat("balance");
-		this.shade = nbt.getBoolean("shade");
+		mru = nbt.getInteger("mru");
+		balance = nbt.getFloat("balance");
+		shade = nbt.getBoolean("shade");
 	}
 }

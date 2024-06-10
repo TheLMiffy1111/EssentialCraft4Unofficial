@@ -45,7 +45,7 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int renderPass)
 	{
-		int j = this.getColor(stack);
+		int j = getColor(stack);
 
 		if (j < 0)
 		{
@@ -69,11 +69,8 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 		{
 			return 0xffffff;
 		}
-		else
-		{
-			NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
-			return nbttagcompound1 == null ? 0xffffff : nbttagcompound1.hasKey("color", 3) ? nbttagcompound1.getInteger("color") : 0xffffff;
-		}
+		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
+		return nbttagcompound1 == null ? 0xffffff : nbttagcompound1.hasKey("color", 3) ? nbttagcompound1.getInteger("color") : 0xffffff;
 	}
 
 	@Override
@@ -118,8 +115,9 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	{
 		Multimap<String, AttributeModifier> mods = HashMultimap.<String, AttributeModifier>create();
 
-		if(this == ItemsCore.wind_chestplate && equipmentSlot == EntityEquipmentSlot.CHEST)
+		if(this == ItemsCore.wind_chestplate && equipmentSlot == EntityEquipmentSlot.CHEST) {
 			mods.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "mSpeed", 0.075D, 0));
+		}
 
 		return mods;
 	}
@@ -131,6 +129,6 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getResourcePath(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getPath(), "inventory"));
 	}
 }

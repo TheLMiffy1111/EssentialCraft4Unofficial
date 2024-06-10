@@ -53,7 +53,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 	@Override
 	public void update() {
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(getPos()) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(getPos()) == 0) {
 			if(getStackInSlot(1).isEmpty() || !(getStackInSlot(1).getItem() instanceof ItemCollectedMonsterSpawner)) {
 				Biome biome = getWorld().getBiome(getPos());
 				List<Biome.SpawnListEntry> l = biome.getSpawnableList(EnumCreatureType.MONSTER);
@@ -78,8 +78,9 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 									if(canSpawn == Result.ALLOW || canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()) {
 										wrld.spawnEntity(entityliving);
 										mruStorage.extractMRU(mruUsage, true);
-										if(generatesCorruption)
+										if(generatesCorruption) {
 											ECUtils.randomIncreaseCorruptionAt(getWorld(), getPos(), getWorld().rand, genCorruption);
+										}
 										if(!ForgeEventFactory.doSpecialSpawn(entityliving, wrld, rndOffsetX+0.5F, rndOffsetY, rndOffsetZ+0.5F)) {
 											ientitylivingdata = entityliving.onInitialSpawn(getWorld().getDifficultyForLocation(rndPos), ientitylivingdata);
 										}
@@ -103,7 +104,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 						if(mobTag != null && mobTag.hasKey("id")) {
 							String id = mobTag.getString("id");
 							innerRotation = 0;
-							int metadata = getStackInSlot(1).getItemDamage();
+							getStackInSlot(1).getItemDamage();
 							Entity base = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id)).newInstance(getWorld());
 							if(base != null && base instanceof EntityLiving) {
 								EntityLiving entityliving = (EntityLiving) base;
@@ -112,16 +113,19 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 								int rndOffsetZ = (int)(pos.getZ() + MathUtils.randomDouble(getWorld().rand)*mobSpawnerRadius);
 								entityliving.setLocationAndAngles(rndOffsetX+0.5D, rndOffsetY, rndOffsetZ+0.5D, getWorld().rand.nextFloat()*360.0F, 0.0F);
 								if(entityliving.getCanSpawnHere()) {
-									if(!getWorld().isRemote)
+									if(!getWorld().isRemote) {
 										getWorld().spawnEntity(entityliving);
+									}
 
 									getWorld().playEvent(2004, pos, 0);
 
-									if(entityliving != null)
+									if(entityliving != null) {
 										entityliving.spawnExplosionParticle();
+									}
 									mruStorage.extractMRU(mruUsage, true);
-									if(generatesCorruption)
+									if(generatesCorruption) {
 										ECUtils.randomIncreaseCorruptionAt(getWorld(), getPos(), getWorld().rand, genCorruption);
+									}
 								}
 							}
 						}
@@ -149,7 +153,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 				NBTTagList nbttaglist = nbt.getTagList("SpawnPotentials", 10);
 
 				for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-					this.potentialSpawns.add(new WeightedSpawnerEntity(nbttaglist.getCompoundTagAt(i)));
+					potentialSpawns.add(new WeightedSpawnerEntity(nbttaglist.getCompoundTagAt(i)));
 				}
 			}
 		}
@@ -157,7 +161,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 		if(nbt.hasKey("SpawnData", 10)) {
 			return nbt.getCompoundTag("SpawnData");
 		}
-		else if(!potentialSpawns.isEmpty()) {
+		if(!potentialSpawns.isEmpty()) {
 			return WeightedRandom.getRandomItem(getWorld().rand, potentialSpawns).getNbt();
 		}
 		return null;

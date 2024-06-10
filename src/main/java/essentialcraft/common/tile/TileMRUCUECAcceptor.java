@@ -54,8 +54,9 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 
 	@Override
 	public void setStructureController(TileEntity tile, EnumStructureType structure) {
-		if(tile instanceof TileMRUCUECController && structure == getStructure())
+		if(tile instanceof TileMRUCUECController && structure == getStructure()) {
 			controller = (TileMRUCUECController)tile;
+		}
 	}
 
 	@Override
@@ -64,12 +65,14 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 			mruStorageWrapper.update(getPos(), getWorld(), getStackInSlot(0));
 		}
 		if(syncTick == 0) {
-			if(!getWorld().isRemote)
+			if(!getWorld().isRemote) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 16);
+			}
 			syncTick = 10;
 		}
-		else
+		else {
 			--syncTick;
+		}
 	}
 
 	@Override
@@ -81,8 +84,9 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	@Override
@@ -97,25 +101,25 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if(!items[par1].isEmpty()) {
-			ItemStack itemstack;
-
-			if(items[par1].getCount() <= par2) {
-				itemstack = items[par1];
-				items[par1] = ItemStack.EMPTY;
-				return itemstack;
-			}
-			else {
-				itemstack = items[par1].splitStack(par2);
-
-				if(items[par1].getCount() == 0)
-					items[par1] = ItemStack.EMPTY;
-
-				return itemstack;
-			}
-		}
-		else
+		if(items[par1].isEmpty()) {
 			return ItemStack.EMPTY;
+		}
+		ItemStack itemstack;
+
+		if(items[par1].getCount() <= par2) {
+			itemstack = items[par1];
+			items[par1] = ItemStack.EMPTY;
+			return itemstack;
+		}
+		else {
+			itemstack = items[par1].splitStack(par2);
+
+			if(items[par1].getCount() == 0) {
+				items[par1] = ItemStack.EMPTY;
+			}
+
+			return itemstack;
+		}
 	}
 
 	@Override
@@ -125,17 +129,16 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 			items[par1] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		else {
-			return ItemStack.EMPTY;
-		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack stack) {
 		items[par1] = stack;
 
-		if(!stack.isEmpty() && stack.getCount() > getInventoryStackLimit())
+		if(!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
 			stack.setCount(getInventoryStackLimit());
+		}
 	}
 
 	@Override
@@ -184,8 +187,9 @@ public class TileMRUCUECAcceptor extends TileEntity implements IStructurePiece, 
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < getSizeInventory(); i++)
+		for(int i = 0; i < getSizeInventory(); i++) {
 			setInventorySlotContents(i, ItemStack.EMPTY);
+		}
 	}
 
 	public IItemHandler itemHandler = new InvWrapper(this);

@@ -15,6 +15,6 @@ public class ContainerWeatherController extends ContainerInventory {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 23));
 		addSlotToContainer(new SlotGeneric(inv, 1, 135, 23));
 		addSlotToContainer(new SlotGeneric(inv, 2, 153, 23));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

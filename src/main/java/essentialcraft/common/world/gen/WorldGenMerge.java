@@ -35,8 +35,8 @@ public class WorldGenMerge {
 	}
 
 	public boolean generate(World world, Random rand, BlockPos pos) {
-		if(this.generate != null) {
-			if(this.generate == EnumGenerationType.ORES) {
+		if(generate != null) {
+			if(generate == EnumGenerationType.ORES) {
 				Stream<IBlockState> stream0 = Stream.<String>of(OreDictionary.getOreNames()).filter(str->str.startsWith("ore")).<ItemStack>flatMap(str->OreDictionary.getOres(str).stream()).filter(stack->stack.getItem() instanceof ItemBlock).<IBlockState>map(stack->Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getItemDamage()));
 				Stream<IBlockState> stream1 = Stream.<IBlockState>of(
 						Blocks.DIRT.getDefaultState(),
@@ -71,21 +71,21 @@ public class WorldGenMerge {
 					}
 				}
 			}
-			if(this.generate == EnumGenerationType.DUNGEON) {
+			if(generate == EnumGenerationType.DUNGEON) {
 				genDungeon(world, rand, pos, false);
 			}
-			if(this.generate == EnumGenerationType.DUNGEON_LOOT) {
+			if(generate == EnumGenerationType.DUNGEON_LOOT) {
 				genDungeon(world, rand, pos, true);
 			}
-			if(this.generate == EnumGenerationType.HOUSE) {
+			if(generate == EnumGenerationType.HOUSE) {
 				genHouse(world, rand, pos, true);
 			}
-			if(this.generate == EnumGenerationType.BIOME) {
+			if(generate == EnumGenerationType.BIOME) {
 				Biome rndBiome = Biome.REGISTRY.getRandomObject(rand);
 				for(int x = -4; x <= 4; x++) {
 					for(int z = -4; z <= 4; z++) {
 						world.setBlockState(pos.add(x, 0, z), rndBiome.topBlock, 2);
-						Chunk chunk = world.getChunkFromBlockCoords(pos.add(x, 0, z));
+						Chunk chunk = world.getChunk(pos.add(x, 0, z));
 						byte[] biome = chunk.getBiomeArray();
 						int index = (pos.getZ()+z & 0xF) << 4 | pos.getX()+x & 0xF;
 						int cbiome = biome[index];
@@ -240,7 +240,7 @@ public class WorldGenMerge {
 		public static List<WeightedEnum<EnumGenerationType>> getWeightedList() {
 			ArrayList<WeightedEnum<EnumGenerationType>> ret = Lists.<WeightedEnum<EnumGenerationType>>newArrayList();
 			for(EnumGenerationType type : values()) {
-				ret.add(new WeightedEnum<EnumGenerationType>(type.weight, type));
+				ret.add(new WeightedEnum<>(type.weight, type));
 			}
 			return ret;
 		}

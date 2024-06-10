@@ -23,8 +23,8 @@ public class ItemMagmaticWand extends ItemMRUGeneric implements IModelRegisterer
 
 	public ItemMagmaticWand() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override
@@ -34,8 +34,9 @@ public class ItemMagmaticWand extends ItemMRUGeneric implements IModelRegisterer
 			int[] oreIds = OreDictionary.getOreIDs(ore);
 
 			String oreName = "Unknown";
-			if(oreIds.length > 0)
+			if(oreIds.length > 0) {
 				oreName = OreDictionary.getOreName(oreIds[0]);
+			}
 			int metadata = -1;
 			for(int i = 0; i < OreSmeltingRecipe.RECIPES.size(); ++i) {
 				OreSmeltingRecipe oreColor = OreSmeltingRecipe.RECIPES.get(i);
@@ -46,15 +47,18 @@ public class ItemMagmaticWand extends ItemMRUGeneric implements IModelRegisterer
 			}
 			if(metadata != -1 && ECUtils.playerUseMRU(player, player.getHeldItem(hand), 500) && !player.getEntityWorld().isRemote) {
 				int suggestedStackSize = OreSmeltingRecipe.RECIPES.get(metadata).dropAmount;
-				if(world.rand.nextFloat() <= 0.33F)
+				if(world.rand.nextFloat() <= 0.33F) {
 					suggestedStackSize = OreSmeltingRecipe.RECIPES.get(metadata).dropAmount*2;
+				}
 				ItemStack sugStk = OreSmeltingRecipe.getAlloyStack(OreSmeltingRecipe.RECIPES.get(metadata), suggestedStackSize);
 
 				GameType type = GameType.SURVIVAL;
-				if(player.capabilities.isCreativeMode)
+				if(player.capabilities.isCreativeMode) {
 					type = GameType.CREATIVE;
-				if(!player.capabilities.allowEdit)
+				}
+				if(!player.capabilities.allowEdit) {
 					type = GameType.ADVENTURE;
+				}
 
 				int be = ForgeHooks.onBlockBreakEvent(player.getEntityWorld(), type, (EntityPlayerMP)player, pos);
 				if(be != -1 && !world.isRemote) {

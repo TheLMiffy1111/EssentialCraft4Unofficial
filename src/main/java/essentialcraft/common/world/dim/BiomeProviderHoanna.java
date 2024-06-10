@@ -32,7 +32,7 @@ public class BiomeProviderHoanna extends BiomeProvider {
 
 	public BiomeProviderHoanna() {
 		biomeCache = new BiomeCache(this);
-		biomesToSpawnIn = new ArrayList<Biome>();
+		biomesToSpawnIn = new ArrayList<>();
 	}
 
 	public BiomeProviderHoanna(WorldInfo info) {
@@ -60,7 +60,7 @@ public class BiomeProviderHoanna extends BiomeProvider {
 
 	@Override
 	public Biome getBiome(BlockPos pos, Biome defaultBiome) {
-		return this.biomeCache.getBiome(pos.getX(), pos.getZ(), defaultBiome);
+		return biomeCache.getBiome(pos.getX(), pos.getZ(), defaultBiome);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class BiomeProviderHoanna extends BiomeProvider {
 			biomes = new Biome[width * height];
 		}
 
-		int[] aint = this.biomeToUse.getInts(x, z, width, height);
+		int[] aint = biomeToUse.getInts(x, z, width, height);
 
 		try {
 			for(int i = 0; i < width * height; ++i) {
@@ -112,19 +112,17 @@ public class BiomeProviderHoanna extends BiomeProvider {
 		}
 
 		if(cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0) {
-			Biome[] abiome = this.biomeCache.getCachedBiomes(x, z);
+			Biome[] abiome = biomeCache.getCachedBiomes(x, z);
 			System.arraycopy(abiome, 0, listToReuse, 0, width * length);
 			return listToReuse;
 		}
-		else {
-			int[] aint = this.biomeIndexLayer.getInts(x, z, width, length);
+		int[] aint = biomeIndexLayer.getInts(x, z, width, length);
 
-			for(int i = 0; i < width * length; ++i) {
-				listToReuse[i] = Biome.getBiome(aint[i], Biomes.DEFAULT);
-			}
-
-			return listToReuse;
+		for(int i = 0; i < width * length; ++i) {
+			listToReuse[i] = Biome.getBiome(aint[i], Biomes.DEFAULT);
 		}
+
+		return listToReuse;
 	}
 
 	@Override
@@ -136,7 +134,7 @@ public class BiomeProviderHoanna extends BiomeProvider {
 			int l = z + radius >> 2;
 			int i1 = k - i + 1;
 			int j1 = l - j + 1;
-			int[] aint = this.biomeToUse.getInts(i, j, i1, j1);
+			int[] aint = biomeToUse.getInts(i, j, i1, j1);
 
 			try {
 				for(int k1 = 0; k1 < i1 * j1; ++k1) {
@@ -152,7 +150,7 @@ public class BiomeProviderHoanna extends BiomeProvider {
 			catch (Throwable throwable) {
 				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Invalid Biome id");
 				CrashReportCategory crashreportcategory = crashreport.makeCategory("Layer");
-				crashreportcategory.addCrashSection("Layer", this.biomeToUse.toString());
+				crashreportcategory.addCrashSection("Layer", biomeToUse.toString());
 				crashreportcategory.addCrashSection("x", Integer.valueOf(x));
 				crashreportcategory.addCrashSection("z", Integer.valueOf(z));
 				crashreportcategory.addCrashSection("radius", Integer.valueOf(radius));
@@ -164,13 +162,13 @@ public class BiomeProviderHoanna extends BiomeProvider {
 	@Override
 	public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random) {
 		IntCache.resetIntCache();
-		int i = x - range >> 2;;
+		int i = x - range >> 2;
 		int j = z - range >> 2;
 		int k = x + range >> 2;
 		int l = z + range >> 2;
 		int i1 = k - i + 1;
 		int j1 = l - j + 1;
-		int[] aint = this.biomeToUse.getInts(i, j, i1, j1);
+		int[] aint = biomeToUse.getInts(i, j, i1, j1);
 		BlockPos blockpos = null;
 		int k1 = 0;
 

@@ -40,8 +40,9 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getTagCompound() != null && MiscUtils.getStackTag(stack).hasKey("pos"))
+		if(stack.getTagCompound() != null && MiscUtils.getStackTag(stack).hasKey("pos")) {
 			return EnumActionResult.PASS;
+		}
 
 		if(world.getBlockState(pos).getBlock() == BlocksCore.rayTower && world.getBlockState(pos).getValue(BlockRayTower.LAYER).getIndexTwo() == 1)
 		{
@@ -54,14 +55,17 @@ public class ItemInventoryGem extends Item implements IItemColor, IModelRegister
 				MiscUtils.getStackTag(is).setIntArray("pos", new int[]{pos.getX(),pos.getY(),pos.getZ()});
 				MiscUtils.getStackTag(is).setInteger("dim", player.dimension);
 				MiscUtils.getStackTag(is).setBoolean("created", !player.isSneaking());
-				if(stack.getCount() <= 0)
+				if(stack.getCount() <= 0) {
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+				}
 
-				if(!player.inventory.addItemStackToInventory(is))
+				if(!player.inventory.addItemStackToInventory(is)) {
 					player.dropItem(is, false);
+				}
 
-				if(player.openContainer != null)
+				if(player.openContainer != null) {
 					player.openContainer.detectAndSendChanges();
+				}
 
 				world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0F, 2.0F);
 				return EnumActionResult.SUCCESS;

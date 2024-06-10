@@ -151,7 +151,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 	@Override
 	public void onPlayerTick(EntityPlayer player) {
 		if(!player.getEntityWorld().isRemote) {
-			switch(this.meta) {
+			switch(meta) {
 			case 0: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.001F) {
 					message(player, "essentialcraft.effect.desc_"+meta);
@@ -207,7 +207,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 			}
 			case 8: {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.00005F) {
-					List<ItemStack> playerItems = new ArrayList<ItemStack>();
+					List<ItemStack> playerItems = new ArrayList<>();
 					for(int i = 0; i < player.inventory.getSizeInventory(); ++i) {
 						if(!player.inventory.getStackInSlot(i).isEmpty()) {
 							playerItems.add(player.inventory.getStackInSlot(i).copy());
@@ -216,7 +216,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 							playerItems.add(ItemStack.EMPTY);
 						}
 					}
-					List<ItemStack> messedItems = new ArrayList<ItemStack>();
+					List<ItemStack> messedItems = new ArrayList<>();
 					while(!playerItems.isEmpty()) {
 						int randomInt = player.getEntityWorld().rand.nextInt(playerItems.size());
 						messedItems.add(playerItems.get(randomInt));
@@ -297,14 +297,18 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 				if(player.getEntityWorld().rand.nextFloat() <= 0.01F && !player.getEntityWorld().isRaining() && !player.getEntityWorld().isDaytime() && player.getEntityWorld().isDaytime() && player.getEntityWorld().canBlockSeeSky(new BlockPos(MathHelper.floor(player.posX), MathHelper.floor(player.posY+player.eyeHeight), MathHelper.floor(player.posZ)))) {
 					int moonPhase = (int) (player.getEntityWorld().getWorldTime() / 24000L % 8L + 8L) % 8;
 					int damage = 0;
-					if(moonPhase == 0)
+					if(moonPhase == 0) {
 						damage = 5;
-					if(moonPhase == 1 || moonPhase == 7)
+					}
+					if(moonPhase == 1 || moonPhase == 7) {
 						damage = 3;
-					if(moonPhase == 2 || moonPhase == 6)
+					}
+					if(moonPhase == 2 || moonPhase == 6) {
 						damage = 2;
-					if(moonPhase == 3 || moonPhase == 5)
+					}
+					if(moonPhase == 3 || moonPhase == 5) {
 						damage = 1;
+					}
 
 					message(player, "essentialcraft.effect.desc_"+meta);
 					player.attackEntityFrom(DamageSource.MAGIC, damage);
@@ -378,7 +382,7 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 	@Override
 	public ICorruptionEffect copy() {
 		NBTTagCompound tag = new NBTTagCompound();
-		this.writeToNBTTagCompound(tag,-1);
+		writeToNBTTagCompound(tag,-1);
 		CorruptionEffectECNBTBased effect = new CorruptionEffectECNBTBased();
 		effect.readFromNBTTagCompound(tag,-1);
 		return effect;
@@ -391,21 +395,21 @@ public class CorruptionEffectECNBTBased implements ICorruptionEffect {
 
 	@Override
 	public ArrayList<UnformedItemStack> cureItems() {
-		return new ArrayList<UnformedItemStack>();
+		return new ArrayList<>();
 	}
 
 	@Override
 	public boolean effectEquals(ICorruptionEffect effect) {
-		return effect.getClass() == this.getClass() && ((CorruptionEffectECNBTBased)effect).cost == this.cost && ((CorruptionEffectECNBTBased)effect).meta == this.meta && ((CorruptionEffectECNBTBased)effect).type == this.type;
+		return effect.getClass() == this.getClass() && ((CorruptionEffectECNBTBased)effect).cost == cost && ((CorruptionEffectECNBTBased)effect).meta == meta && ((CorruptionEffectECNBTBased)effect).type == type;
 	}
 
 	@Override
 	public String getLocalizedName() {
-		return I18n.translateToLocal("essentialcraft.effect.name_"+this.meta);
+		return I18n.translateToLocal("essentialcraft.effect.name_"+meta);
 	}
 
 	@Override
 	public String getLocalizedDesc() {
-		return I18n.translateToLocal("essentialcraft.effect.desc_"+this.meta);
+		return I18n.translateToLocal("essentialcraft.effect.desc_"+meta);
 	}
 }

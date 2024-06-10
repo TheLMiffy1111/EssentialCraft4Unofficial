@@ -39,7 +39,7 @@ public class BlockMoonWell extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}

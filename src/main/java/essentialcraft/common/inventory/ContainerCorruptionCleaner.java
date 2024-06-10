@@ -13,6 +13,6 @@ public class ContainerCorruptionCleaner extends ContainerInventory {
 	@Override
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 29, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

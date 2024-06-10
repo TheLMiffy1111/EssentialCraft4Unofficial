@@ -35,7 +35,7 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {}
 
 	@Override
-	public void onEntityCollidedWithBlock(World p_149670_1_, BlockPos p_149670_2_, IBlockState s, Entity p_149670_5_) {
+	public void onEntityCollision(World p_149670_1_, BlockPos p_149670_2_, IBlockState s, Entity p_149670_5_) {
 		if(!p_149670_1_.isRemote) {
 			DummyPortalHandler.transferEntityToDimension(p_149670_5_);
 		}
@@ -82,35 +82,33 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 		if(!blockportal$size.isValid()) {
 			return new BlockPattern.PatternHelper(p_181089_2_, EnumFacing.NORTH, EnumFacing.UP, loadingcache, 1, 1, 1);
 		}
-		else {
-			int[] aint = new int[EnumFacing.AxisDirection.values().length];
-			EnumFacing enumfacing = blockportal$size.rightDir.rotateYCCW();
-			BlockPos blockpos = blockportal$size.bottomLeft.up(blockportal$size.getHeight() - 1);
+		int[] aint = new int[EnumFacing.AxisDirection.values().length];
+		EnumFacing enumfacing = blockportal$size.rightDir.rotateYCCW();
+		BlockPos blockpos = blockportal$size.bottomLeft.up(blockportal$size.getHeight() - 1);
 
-			for(EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values()) {
-				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
+		for(EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values()) {
+			BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
 
-				for(int i = 0; i < blockportal$size.getWidth(); ++i) {
-					for(int j = 0; j < blockportal$size.getHeight(); ++j) {
-						BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
+			for(int i = 0; i < blockportal$size.getWidth(); ++i) {
+				for(int j = 0; j < blockportal$size.getHeight(); ++j) {
+					BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
 
-						if(blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.AIR) {
-							++aint[enumfacing$axisdirection.ordinal()];
-						}
+					if(blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.AIR) {
+						++aint[enumfacing$axisdirection.ordinal()];
 					}
 				}
 			}
-
-			EnumFacing.AxisDirection enumfacing$axisdirection1 = EnumFacing.AxisDirection.POSITIVE;
-
-			for(EnumFacing.AxisDirection enumfacing$axisdirection2 : EnumFacing.AxisDirection.values()) {
-				if(aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()]) {
-					enumfacing$axisdirection1 = enumfacing$axisdirection2;
-				}
-			}
-
-			return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
 		}
+
+		EnumFacing.AxisDirection enumfacing$axisdirection1 = EnumFacing.AxisDirection.POSITIVE;
+
+		for(EnumFacing.AxisDirection enumfacing$axisdirection2 : EnumFacing.AxisDirection.values()) {
+			if(aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()]) {
+				enumfacing$axisdirection1 = enumfacing$axisdirection2;
+			}
+		}
+
+		return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
 	}
 
 	@Override
@@ -121,16 +119,14 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 			blockportal$size.placePortalBlocks();
 			return true;
 		}
-		else {
-			BlockHoannaPortal.Size blockportal$size1 = new BlockHoannaPortal.Size(worldIn, pos, EnumFacing.Axis.Z);
+		BlockHoannaPortal.Size blockportal$size1 = new BlockHoannaPortal.Size(worldIn, pos, EnumFacing.Axis.Z);
 
-			if(blockportal$size1.isValid() && blockportal$size1.portalBlockCount == 0) {
-				blockportal$size1.placePortalBlocks();
-				return true;
-			}
-			else {
-				return false;
-			}
+		if(blockportal$size1.isValid() && blockportal$size1.portalBlockCount == 0) {
+			blockportal$size1.placePortalBlocks();
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
@@ -247,12 +243,10 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 			if(height <= 21 && height >= 3) {
 				return height;
 			}
-			else {
-				bottomLeft = null;
-				width = 0;
-				height = 0;
-				return 0;
-			}
+			bottomLeft = null;
+			width = 0;
+			height = 0;
+			return 0;
 		}
 
 		protected boolean isEmptyBlock(Block blockIn) {
@@ -268,7 +262,7 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 				BlockPos blockpos = bottomLeft.offset(rightDir, i);
 
 				for(int j = 0; j < height; ++j) {
-					world.setBlockState(blockpos.up(j), BlocksCore.portal.getDefaultState().withProperty(BlockHoannaPortal.AXIS, axis), 2);
+					world.setBlockState(blockpos.up(j), BlocksCore.portal.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
 				}
 			}
 		}

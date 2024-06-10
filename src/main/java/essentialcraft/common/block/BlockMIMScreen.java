@@ -68,7 +68,7 @@ public class BlockMIMScreen extends BlockContainer implements IModelRegisterer {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

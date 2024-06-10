@@ -118,8 +118,9 @@ public class ItemGenericEC extends Item implements IModelRegisterer {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase base) {
 		if(base instanceof EntityPlayer) {
-			if(!((EntityPlayer)base).capabilities.isCreativeMode)
+			if(!((EntityPlayer)base).capabilities.isCreativeMode) {
 				stack.shrink(1);
+			}
 
 			if(!world.isRemote && stack.getItemDamage() == 6) {
 				int addedEnergy = 0;
@@ -127,8 +128,9 @@ public class ItemGenericEC extends Item implements IModelRegisterer {
 				if(b != null) {
 					for(int i = 0; i < b.getSlots(); ++i) {
 						ItemStack is = b.getStackInSlot(i);
-						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 8)
+						if(is.getItem() instanceof ItemBaublesSpecial && is.getItemDamage() == 8) {
 							addedEnergy = 500;
+						}
 					}
 				}
 				int current = ApiCore.getPlayerData((EntityPlayer)base).getPlayerUBMRU();
@@ -170,13 +172,13 @@ public class ItemGenericEC extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName()+names[Math.min(stack.getItemDamage(), names.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey()+names[Math.min(stack.getItemDamage(), names.length-1)];
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(tab)) {
+		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < names.length-1; ++i) {
 				list.add(new ItemStack(this,1,i));
 			}

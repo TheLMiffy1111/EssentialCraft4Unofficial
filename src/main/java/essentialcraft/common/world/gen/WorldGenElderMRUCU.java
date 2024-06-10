@@ -137,19 +137,15 @@ public class WorldGenElderMRUCU extends WorldGenerator {
 			for(int dz = minZ; dz <= maxZ; ++dz) {
 				BlockPos dp = new BlockPos(dx,y,dz);
 				Block b = w.getBlockState(dp).getBlock();
-				if(!b.isAir(w.getBlockState(dp), w, dp) && w.getBlockState(dp).isBlockNormalCube()) {
-					if(requiresSolidBlocks) {
-						if(w.getBlockState(dp.up()).isBlockNormalCube() && !w.getBlockState(dp.up()).getBlock().isAir(w.getBlockState(dp), w, dp.up())) {
-							return false;
-						}
-					}
-					else {
-						if(!w.getBlockState(dp).getBlock().isReplaceableOreGen(w.getBlockState(dp), w, dp, BlockMatcher.forBlock(Blocks.STONE))) {
-							return false;
-						}
+				if(b.isAir(w.getBlockState(dp), w, dp) || !w.getBlockState(dp).isBlockNormalCube()) {
+					return false;
+				}
+				if(requiresSolidBlocks) {
+					if(w.getBlockState(dp.up()).isBlockNormalCube() && !w.getBlockState(dp.up()).getBlock().isAir(w.getBlockState(dp), w, dp.up())) {
+						return false;
 					}
 				}
-				else {
+				else if(!w.getBlockState(dp).getBlock().isReplaceableOreGen(w.getBlockState(dp), w, dp, BlockMatcher.forBlock(Blocks.STONE))) {
 					return false;
 				}
 			}

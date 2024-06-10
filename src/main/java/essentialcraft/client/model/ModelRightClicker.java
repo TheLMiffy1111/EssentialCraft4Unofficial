@@ -29,8 +29,9 @@ public class ModelRightClicker implements IBakedModel {
 
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		if(!(state.getBlock() instanceof BlockRightClicker))
+		if(!(state.getBlock() instanceof BlockRightClicker)) {
 			return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getMissingModel().getQuads(state, side, rand);
+		}
 
 		BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
 		IBlockState heldState = ((IExtendedBlockState)state).getValue(BlockRightClicker.STATE);
@@ -46,7 +47,7 @@ public class ModelRightClicker implements IBakedModel {
 			ModelResourceLocation path = new ModelResourceLocation("essentialcraft:rightClicker", "facing=" + state.getValue(BlockRightClicker.FACING).getName() + "," + "type=" + state.getValue(BlockRightClicker.TYPE).getName());
 			return mc.getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getModel(path).getQuads(state, side, rand);
 		}
-		else if(heldState != null) {
+		if(heldState != null) {
 			if(heldState.getBlock().canRenderInLayer(heldState, layer)) {
 				IBlockState actual = heldState.getBlock().getActualState(heldState, new FakeBlockAccess(heldWorld), heldPos);
 

@@ -40,7 +40,7 @@ public class TileHeatGenerator extends TileMRUGeneric {
 		}
 		super.update();
 		firstTick = false;
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(currentBurnTime > 0) {
 				--currentBurnTime;
 				double mruGen = mruGenerated;
@@ -53,18 +53,24 @@ public class TileHeatGenerator extends TileMRUGeneric {
 				int[] ox = {2, -2, 0, 0};
 				int[] oz = {0, 0, 2, -2};
 				for(int i = 0; i < 4; ++i) {
-					if(b[i] == Blocks.AIR)
+					if(b[i] == Blocks.AIR) {
 						mruFactor *= 0;
-					else if(b[i] == Blocks.NETHERRACK)
+					}
+					else if(b[i] == Blocks.NETHERRACK) {
 						mruFactor *= 0.75D;
-					else if(b[i] == Blocks.LAVA)
+					}
+					else if(b[i] == Blocks.LAVA) {
 						mruFactor *= 0.95D;
-					else if(b[i] == Blocks.FIRE)
+					}
+					else if(b[i] == Blocks.FIRE) {
 						mruFactor *= 0.7D;
-					else if(b[i] instanceof IHotBlock)
+					}
+					else if(b[i] instanceof IHotBlock) {
 						mruFactor *= ((IHotBlock)b[i]).getHeatModifier(getWorld(), pos.add(ox[i], 0, oz[i]));
-					else
+					}
+					else {
 						mruFactor *= 0.5D;
+					}
 				}
 
 				mruGen *= mruFactor;
@@ -101,9 +107,9 @@ public class TileHeatGenerator extends TileMRUGeneric {
 		}
 		if(getWorld().isRemote) {
 			for(int i = 2; i < 6; ++i) {
-				EnumFacing rotation = EnumFacing.getFront(i);
-				float rotXAdv = rotation.getFrontOffsetX()-0.5F;
-				float rotZAdv = rotation.getFrontOffsetZ()-0.5F;
+				EnumFacing rotation = EnumFacing.byIndex(i);
+				float rotXAdv = rotation.getXOffset()-0.5F;
+				float rotZAdv = rotation.getZOffset()-0.5F;
 				EssentialCraftCore.proxy.FlameFX(pos.getX()+0.725F + rotXAdv/2.2F, pos.getY()+0.4F, pos.getZ()+0.725F + rotZAdv/2.2F, 0, 0F, 0, 0.8D, 0.5D, 0.5F, 0.5F);
 				EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.2F, pos.getY()+0.65F, pos.getZ()+0.5F + MathUtils.randomFloat(getWorld().rand)*0.2F, 0, 0.01F, 0, 0.8D, 0.5D, 0.5F, 1F);
 			}

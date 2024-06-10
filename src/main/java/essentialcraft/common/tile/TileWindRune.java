@@ -42,8 +42,8 @@ public class TileWindRune extends TileEntity implements ITickable {
 
 		double energy = 0;
 
-		for(int i = 0; i < coords.length; ++i) {
-			TileEntity tile = getWorld().getTileEntity(pos.add(coords[i]));
+		for(Vec3i coord : coords) {
+			TileEntity tile = getWorld().getTileEntity(pos.add(coord));
 			if(tile == null) {
 				continue;
 			}
@@ -85,22 +85,28 @@ public class TileWindRune extends TileEntity implements ITickable {
 										player.sendMessage(new TextComponentTranslation("essentialcraft.txt.windImbue").setStyle(new Style().setColor(TextFormatting.AQUA)));
 										ECUtils.requestSync(player);
 									}
-									if(player.world.isRemote)
-										for(int j = 0; j < 300; ++j)
+									if(player.world.isRemote) {
+										for(int j = 0; j < 300; ++j) {
 											EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.7D, 1.0D, 0.85D);
+										}
+									}
 
 									return true;
 								}
 
 								player.inventory.decrStackSize(player.inventory.currentItem, 1);
-								if(player.inventory.getStackInSlot(player.inventory.currentItem).isEmpty())
+								if(player.inventory.getStackInSlot(player.inventory.currentItem).isEmpty()) {
 									player.inventory.setInventorySlotContents(player.inventory.currentItem, rec.result.copy());
-								else if(!player.inventory.addItemStackToInventory(rec.result.copy()))
+								}
+								else if(!player.inventory.addItemStackToInventory(rec.result.copy())) {
 									player.dropItem(rec.result.copy(), true);
+								}
 
-								if(player.world.isRemote)
-									for(int j = 0; j < 300; ++j)
+								if(player.world.isRemote) {
+									for(int j = 0; j < 300; ++j) {
 										EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.7D, 1.0D, 0.85D);
+									}
+								}
 
 								return true;
 							}
@@ -124,8 +130,9 @@ public class TileWindRune extends TileEntity implements ITickable {
 
 		if(getWorld().isRemote && tier >= 0) {
 			int movement = (int)(getWorld().getWorldTime() % 60);
-			if(movement > 30)
+			if(movement > 30) {
 				movement = 60 - movement;
+			}
 			EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.2D, 1.0D, 0.45D);
 
 			for(int i = 0; i < 8; ++i) {

@@ -25,6 +25,6 @@ public class ContainerMIMInventoryStorage extends ContainerInventory {
 				addSlotToContainer(new Slot(inv, chestColumnIndex + chestRowIndex*chestInventoryColumns, 8 + chestColumnIndex*18, 18 + chestRowIndex*18));
 			}
 		}
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

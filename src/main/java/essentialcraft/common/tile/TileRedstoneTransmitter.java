@@ -27,7 +27,7 @@ public class TileRedstoneTransmitter extends TileMRUGeneric {
 				}
 
 				if(getWorld().getBlockState(other).getBlock() instanceof BlockRedstoneTransmitter) {
-					return getWorld().isBlockIndirectlyGettingPowered(other);
+					return getWorld().getRedstonePowerFromNeighbors(other);
 				}
 			}
 		}

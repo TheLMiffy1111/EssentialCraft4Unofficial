@@ -24,6 +24,6 @@ public class ContainerColdDistillator extends ContainerInventory {
 
 	@Override
 	public void setupSlots() {
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

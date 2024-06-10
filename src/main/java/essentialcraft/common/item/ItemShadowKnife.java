@@ -26,16 +26,18 @@ public class ItemShadowKnife extends ItemSwordEC {
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		if(stack.getCount() >= 2 && (entityLiving instanceof IShadeHandlerEntity || entityLiving instanceof EntityPlayer && ECUtils.getData((EntityPlayer)entityLiving).getMatrixTypeID() == 4)) {
-			if(!(entityLiving instanceof EntityPlayer && ((EntityPlayer)entityLiving).capabilities.isCreativeMode))
+			if(!(entityLiving instanceof EntityPlayer && ((EntityPlayer)entityLiving).capabilities.isCreativeMode)) {
 				stack.shrink(1);
+			}
 			if(stack.getCount() <= 0) {
 				EntityEquipmentSlot slot = entityLiving.swingingHand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : entityLiving.swingingHand == EnumHand.OFF_HAND ? EntityEquipmentSlot.OFFHAND : null;
 				entityLiving.setItemStackToSlot(slot, ItemStack.EMPTY);
 			}
 			EntityShadowKnife knife = new EntityShadowKnife(entityLiving.getEntityWorld(), entityLiving);
-			knife.setHeadingFromThrower(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 1.5F, 1.0F);
-			if(!entityLiving.getEntityWorld().isRemote)
+			knife.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 1.5F, 1.0F);
+			if(!entityLiving.getEntityWorld().isRemote) {
 				entityLiving.getEntityWorld().spawnEntity(knife);
+			}
 		}
 		return false;
 	}
@@ -63,18 +65,22 @@ public class ItemShadowKnife extends ItemSwordEC {
 	public void onUpdate(ItemStack sword, World w, Entity e, int slotNum, boolean held) {
 		if(e.ticksExisted % 20 == 0 && !w.isRemote && held) {
 			sword.grow(1);
-			if(sword.getCount() >= 32)
+			if(sword.getCount() >= 32) {
 				sword.setCount(32);
+			}
 		}
-		if(e instanceof IShadeHandlerEntity)
+		if(e instanceof IShadeHandlerEntity) {
 			toggleActivity(sword,true);
+		}
 
 		if(e instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer)e;
-			if(ECUtils.getData(p).getMatrixTypeID() == 4)
+			if(ECUtils.getData(p).getMatrixTypeID() == 4) {
 				toggleActivity(sword,true);
-			else
+			}
+			else {
 				toggleActivity(sword,false);
+			}
 		}
 	}
 

@@ -14,6 +14,6 @@ public class ContainerMithrilineFurnace extends ContainerInventory {
 	public void setupSlots() {
 		addSlotToContainer(new SlotGeneric(inv, 0, 80, 64));
 		addSlotToContainer(new SlotGeneric(inv, 1, 80, 21));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

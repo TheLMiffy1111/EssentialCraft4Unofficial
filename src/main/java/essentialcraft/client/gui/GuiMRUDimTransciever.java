@@ -12,9 +12,9 @@ public class GuiMRUDimTransciever extends GuiCommon {
 
 	public GuiMRUDimTransciever(Container c, TileEntity tile) {
 		super(c,tile);
-		this.elementList.add(new GuiMRUStorage(7, 4, tile));
-		this.elementList.add(new GuiBoundGemStateDimTransciever(88, 4, tile,0));
-		this.elementList.add(new GuiBalanceState(46, 31, tile));
-		this.elementList.add(new GuiMRUState(25, 58, tile,0));
+		elementList.add(new GuiMRUStorage(7, 4, tile));
+		elementList.add(new GuiBoundGemStateDimTransciever(88, 4, tile,0));
+		elementList.add(new GuiBalanceState(46, 31, tile));
+		elementList.add(new GuiMRUState(25, 58, tile,0));
 	}
 }

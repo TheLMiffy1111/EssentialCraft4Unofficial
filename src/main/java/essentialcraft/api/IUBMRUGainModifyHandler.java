@@ -10,6 +10,5 @@ import net.minecraft.item.ItemStack;
  */
 public interface IUBMRUGainModifyHandler {
 
-	public float getModifiedValue(float original, ItemStack mod, Random rng, EntityPlayer p);
-
+	public float getModifiedValue(float original, ItemStack mod, Random rng, EntityPlayer player);
 }

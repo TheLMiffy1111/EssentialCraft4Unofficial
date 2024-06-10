@@ -10,5 +10,5 @@ import net.minecraft.item.ItemStack;
  */
 public interface IMRUResistHandler {
 
-	List<Float> getMRUResistances(ItemStack stk);
+	List<Float> getMRUResistances(ItemStack stack);
 }

@@ -15,6 +15,6 @@ public class ContainerMagicalEnchanter extends ContainerInventory {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 155, 23));
 		addSlotToContainer(new SlotGeneric(inv, 1, 26, 23));
 		addSlotToContainer(new SlotGeneric(inv, 2, 94, 23));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

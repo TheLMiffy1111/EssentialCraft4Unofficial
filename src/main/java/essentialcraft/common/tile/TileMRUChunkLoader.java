@@ -56,8 +56,9 @@ public class TileMRUChunkLoader extends TileMRUGeneric implements IChunkLoader {
 	@Override
 	public void invalidate() {
 		super.invalidate();
-		if(!this.getWorld().isRemote)
+		if(!getWorld().isRemote) {
 			loader.invalidate();
+		}
 	}
 
 	@Override

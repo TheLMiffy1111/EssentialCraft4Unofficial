@@ -28,10 +28,12 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 		GlStateManager.translate((float)x+0.5F, (float)y-0.25F, (float)z+0.5F);
 		float timeIndex = (tile.getWorld().getWorldTime()+partialTicks)%120;
 		float yIndex = 1.0F;
-		if(timeIndex <= 60)
+		if(timeIndex <= 60) {
 			yIndex = timeIndex/240F;
-		else
+		}
+		else {
 			yIndex = 0.5F-timeIndex/240F;
+		}
 		GlStateManager.translate(0, yIndex-0.25F, 0);
 		if(tile.inventoryPos != null) {
 			double d0 = tile.inventoryPos.getX() - tile.getPos().getX();
@@ -46,9 +48,9 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 		}
 
 
-		this.bindTexture(textures);
+		bindTexture(textures);
 		model.renderPart("pCube2");
-		this.bindTexture(glass);
+		bindTexture(glass);
 		if(tile.pulsing)
 		{
 			timeIndex = Minecraft.getMinecraft().world.getWorldTime()%20;
@@ -93,8 +95,9 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 
 	@Override
 	public void render(TileMagicalMirror tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 
 	@Override

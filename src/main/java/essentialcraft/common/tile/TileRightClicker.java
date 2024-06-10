@@ -50,7 +50,7 @@ public class TileRightClicker extends TileMRUGeneric {
 	public ItemStack prevMimic = ItemStack.EMPTY;
 
 	public EnumFacing getRotation() {
-		return EnumFacing.getFront(rotation);
+		return EnumFacing.byIndex(rotation);
 	}
 
 	public void finishClick(int slot, boolean setupAll) {
@@ -76,11 +76,13 @@ public class TileRightClicker extends TileMRUGeneric {
 					}
 				}
 				setInventorySlotContents(1+i, setted);
-				if(setted.getCount() <= 0)
+				if(setted.getCount() <= 0) {
 					setInventorySlotContents(1+i, ItemStack.EMPTY);
+				}
 			}
-			else
+			else {
 				setInventorySlotContents(1+i, ItemStack.EMPTY);
+			}
 
 			fakePlayer.inventory.setInventorySlotContents(fakePlayer.inventory.currentItem, ItemStack.EMPTY);
 			fakePlayer.inventory.currentItem += 1;
@@ -94,13 +96,14 @@ public class TileRightClicker extends TileMRUGeneric {
 
 	public void setupFake(int slot, boolean setupAll) {
 		EnumFacing r = getRotation();
-		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer)getWorld(), ECUtils.EC3FakePlayerProfile)).get();
+		fakePlayer = new WeakReference<>(FakePlayerFactory.get((WorldServer)getWorld(), ECUtils.EC3FakePlayerProfile)).get();
 		fakePlayer.inventory.currentItem = 0;
 		if(setupAll) {
 			for(int i = 0; i < 9; ++i) {
 				fakePlayer.inventory.setInventorySlotContents(fakePlayer.inventory.currentItem+i, getStackInSlot(1+i).isEmpty() ? ItemStack.EMPTY : getStackInSlot(1+i).copy());
-				if(i + 1 != slot)
+				if(i + 1 != slot) {
 					setInventorySlotContents(i+1, ItemStack.EMPTY);
+				}
 			}
 		}
 
@@ -127,29 +130,33 @@ public class TileRightClicker extends TileMRUGeneric {
 			setInventorySlotContents(slot, ItemStack.EMPTY);
 			float rotation = 0F;
 
-			if(rotation == 2)
+			if(rotation == 2) {
 				rotation = 0;
-			if(rotation == 3)
+			}
+			if(rotation == 3) {
 				rotation = 90;
-			if(rotation == 4)
+			}
+			if(rotation == 4) {
 				rotation = 180;
-			if(rotation == 5)
+			}
+			if(rotation == 5) {
 				rotation = 270;
-			fakePlayer.setPositionAndRotation(pos.getX()+0.5D+r.getFrontOffsetX(), pos.getY()+0.5D+r.getFrontOffsetY(), pos.getZ()+0.5D+r.getFrontOffsetZ(), rotation, rotation == 0 ? -90 : rotation == 1 ? 90 : 0);
+			}
+			fakePlayer.setPositionAndRotation(pos.getX()+0.5D+r.getXOffset(), pos.getY()+0.5D+r.getYOffset(), pos.getZ()+0.5D+r.getZOffset(), rotation, rotation == 0 ? -90 : rotation == 1 ? 90 : 0);
 		}
 	}
 
 	public boolean rightClick(boolean sneak) {
 		EnumFacing faceDir = getRotation();
-		int dx = faceDir.getFrontOffsetX();
-		int dy = faceDir.getFrontOffsetY();
-		int dz = faceDir.getFrontOffsetZ();
+		int dx = faceDir.getXOffset();
+		int dy = faceDir.getYOffset();
+		int dz = faceDir.getZOffset();
 		int x = pos.getX() + dx;
 		int y = pos.getY() + dy;
 		int z = pos.getZ() + dz;
 		BlockPos p = pos.offset(faceDir);
 		fakePlayer.setPosition(x + 0.5, y + 0.5 - fakePlayer.eyeHeight, z + 0.5);
-		fakePlayer.rotationPitch = faceDir.getFrontOffsetY() * -90;
+		fakePlayer.rotationPitch = faceDir.getYOffset() * -90;
 		fakePlayer.setSneaking(sneak);
 
 		switch(faceDir) {
@@ -171,8 +178,9 @@ public class TileRightClicker extends TileMRUGeneric {
 		try {
 			PlayerInteractEvent event = new PlayerInteractEvent.RightClickEmpty(fakePlayer, EnumHand.MAIN_HAND);
 			MinecraftForge.EVENT_BUS.post(event);
-			if(event.isCanceled())
+			if(event.isCanceled()) {
 				return false;
+			}
 
 			Block block = getWorld().getBlockState(p).getBlock();
 			List<EntityLivingBase> detectedEntities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(p));
@@ -180,32 +188,34 @@ public class TileRightClicker extends TileMRUGeneric {
 			Entity entity = detectedEntities.isEmpty() ? null : detectedEntities.get(getWorld().rand.nextInt(detectedEntities.size()));
 
 			ItemStack stack = fakePlayer.getHeldItemMainhand();
-			if(stack.isEmpty())
+			if(stack.isEmpty()) {
 				stack = new ItemStack(Items.STICK,1,0);
-			if(stack.getItem().itemInteractionForEntity(stack, fakePlayer, (EntityLivingBase)entity, EnumHand.MAIN_HAND))
+			}
+			if(stack.getItem().itemInteractionForEntity(stack, fakePlayer, (EntityLivingBase)entity, EnumHand.MAIN_HAND) || (entity instanceof EntityAnimal && ((EntityAnimal)entity).processInteract(fakePlayer, EnumHand.MAIN_HAND)) || (stack.getItem().onItemUseFirst(fakePlayer, getWorld(), p, faceDir, dx, dy, dz, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS)) {
 				return true;
-			if(entity instanceof EntityAnimal && ((EntityAnimal)entity).processInteract(fakePlayer, EnumHand.MAIN_HAND))
+			}
+			if(!getWorld().isAirBlock(p) && block.onBlockActivated(getWorld(), p, getWorld().getBlockState(p), fakePlayer, EnumHand.MAIN_HAND, faceDir, dx, dy, dz)) {
 				return true;
-			if(stack.getItem().onItemUseFirst(fakePlayer, getWorld(), p, faceDir, dx, dy, dz, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS)
-				return true;
-			if(!getWorld().isAirBlock(p) && block.onBlockActivated(getWorld(), p, getWorld().getBlockState(p), fakePlayer, EnumHand.MAIN_HAND, faceDir, dx, dy, dz))
-				return true;
+			}
 
 			boolean isGoingToShift = false;
 			if(!stack.isEmpty()) {
-				if(stack.getItem() instanceof ItemBlockSpecial || stack.getItem() instanceof ItemRedstone)
+				if(stack.getItem() instanceof ItemBlockSpecial || stack.getItem() instanceof ItemRedstone) {
 					isGoingToShift = true;
+				}
 				int useX = isGoingToShift ? pos.getX() : x;
 				int useY = isGoingToShift ? pos.getY() : y;
 				int useZ = isGoingToShift ? pos.getZ() : z;
-				if(stack.getItem().onItemUse(fakePlayer, getWorld(), new BlockPos(useX, useY, useZ), EnumHand.MAIN_HAND, faceDir, dx, dy, dz) == EnumActionResult.SUCCESS)
+				if(stack.getItem().onItemUse(fakePlayer, getWorld(), new BlockPos(useX, useY, useZ), EnumHand.MAIN_HAND, faceDir, dx, dy, dz) == EnumActionResult.SUCCESS) {
 					return true;
+				}
 			}
 
 			ItemStack copy = stack.copy();
 			fakePlayer.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, stack.getItem().onItemRightClick(getWorld(), fakePlayer, EnumHand.MAIN_HAND).getResult());
-			if(!copy.isItemEqual(stack))
+			if(!copy.isItemEqual(stack)) {
 				return true;
+			}
 
 			return false;
 		}
@@ -245,7 +255,7 @@ public class TileRightClicker extends TileMRUGeneric {
 
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) > 0 && !wasPowered && canAct()) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) > 0 && !wasPowered && canAct()) {
 			if(getBlockMetadata() <= 1) {
 				if(!getWorld().isRemote) {
 					setupFake(1, false);
@@ -273,11 +283,13 @@ public class TileRightClicker extends TileMRUGeneric {
 			}
 			wasPowered = true;
 		}
-		if(wasPowered && getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(wasPowered && getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			wasPowered = false;
+		}
 
-		if(wasPowered)
+		if(wasPowered) {
 			getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)/1.5D, pos.getY()+0.5D + MathUtils.randomDouble(getWorld().rand)/1.5D, pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)/1.5D, 1, 0, 0);
+		}
 
 		manageMimic();
 	}
@@ -306,19 +318,22 @@ public class TileRightClicker extends TileMRUGeneric {
 	public void manageMimic() {
 		ItemStack stk = getStackInSlot(10);
 
-		if(prevMimic == stk)
+		if(prevMimic == stk) {
 			return;
+		}
 
 		if(!stk.isEmpty() && stk.getItem() instanceof ItemBlock && !(Block.getBlockFromItem(stk.getItem()) instanceof BlockRightClicker)) {
 			IBlockState state = Block.getBlockFromItem(stk.getItem()).getStateFromMeta(stk.getItemDamage());
 			if(isValidBlock(state)) {
 				mimickedBlock = state;
 			}
-			else
+			else {
 				mimickedBlock = null;
+			}
 		}
-		else
+		else {
 			mimickedBlock = null;
+		}
 
 		prevMimic = stk;
 		getWorld().markBlockRangeForRenderUpdate(pos.add(-1, -1, -1), pos.add(1, 1, 1));

@@ -46,7 +46,9 @@ public class GuiPotionState extends GuiTextElement{
 			GlStateManager.color(f, f1, f2);
 			int scale = MathUtils.pixelatedTextureSize(8-tile.potionUseTime/2, 8, 16);
 			int scaledPos = scale - 4;
-			if(scaledPos < 0)scaledPos = 0;
+			if(scaledPos < 0) {
+				scaledPos = 0;
+			}
 			DrawUtils.drawTexture_Items(posX+9, posY+9+scaledPos, icon, 18, 18-scale, 10);
 		}
 		GlStateManager.popMatrix();

@@ -86,8 +86,9 @@ public class ECPacketDispatcher implements IMessageHandler<PacketNBT,IMessage>{
 
 			EntityPlayerMP requester = (EntityPlayerMP)MiscUtils.getPlayerFromUUID(message.theTag.getString("requester"));
 
-			if(!message.theTag.getBoolean("craft"))
+			if(!message.theTag.getBoolean("craft")) {
 				retrieved.setCount(message.theTag.getInteger("size"));
+			}
 
 			int size = message.theTag.getInteger("size");
 			TileEntity tile = requester.getEntityWorld().getTileEntity(new BlockPos(message.theTag.getInteger("px"), message.theTag.getInteger("py"), message.theTag.getInteger("pz")));
@@ -113,13 +114,15 @@ public class ECPacketDispatcher implements IMessageHandler<PacketNBT,IMessage>{
 						for(int i = 0; i < times64; ++i) {
 							ItemStack added = retrieved.copy();
 							added.setCount(64);
-							if(!requester.inventory.addItemStackToInventory(added))
+							if(!requester.inventory.addItemStackToInventory(added)) {
 								requester.dropItem(added, false);
+							}
 						}
 						ItemStack added = retrieved.copy();
 						added.setCount(left64);
-						if(!requester.inventory.addItemStackToInventory(added))
+						if(!requester.inventory.addItemStackToInventory(added)) {
 							requester.dropItem(added, false);
+						}
 
 						NBTTagCompound canDo = new NBTTagCompound();
 						PacketNBT packet = new PacketNBT(canDo).setID(6);
@@ -141,7 +144,7 @@ public class ECPacketDispatcher implements IMessageHandler<PacketNBT,IMessage>{
 		}
 		case 7: {
 			NBTTagCompound tag = message.theTag;
-			if(tag != null && !tag.hasNoTags()) {
+			if(tag != null && !tag.isEmpty()) {
 				String playername = tag.getString("playername");
 				EntityPlayer requester = MiscUtils.getPlayerFromUUID(playername);
 				if(requester != null) {

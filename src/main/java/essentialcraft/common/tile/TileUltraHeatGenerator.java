@@ -41,7 +41,7 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 		}
 		super.update();
 		firstTick = false;
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(currentBurnTime > 0) {
 				double mruFactor = 1.0F;
 				Block[] b = new Block[4];
@@ -52,18 +52,24 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 				int[] ox = {2,-2, 0, 0};
 				int[] oz = {0, 0, 2,-2};
 				for(int i = 0; i < 4; ++i) {
-					if(b[i] == Blocks.AIR)
+					if(b[i] == Blocks.AIR) {
 						mruFactor*=0;
-					else if(b[i] == Blocks.NETHERRACK)
+					}
+					else if(b[i] == Blocks.NETHERRACK) {
 						mruFactor*=0.75D;
-					else if(b[i] == Blocks.LAVA)
+					}
+					else if(b[i] == Blocks.LAVA) {
 						mruFactor*=0.95D;
-					else if(b[i] == Blocks.FIRE)
+					}
+					else if(b[i] == Blocks.FIRE) {
 						mruFactor*=0.7D;
-					else if(b[i] instanceof IHotBlock)
+					}
+					else if(b[i] instanceof IHotBlock) {
 						mruFactor*=((IHotBlock)b[i]).getHeatModifier(getWorld(), pos.add(ox[i], 0, oz[i]));
-					else
+					}
+					else {
 						mruFactor*=0.5D;
+					}
 				}
 
 				double scaledHeatFactor = 0;
@@ -112,8 +118,9 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 									setInventorySlotContents(1, stk);
 								}
 							}
-							if(getStackInSlot(0).getCount() == 0)
+							if(getStackInSlot(0).getCount() == 0) {
 								setInventorySlotContents(0, getStackInSlot(0).getItem().getContainerItem(getStackInSlot(0)));
+							}
 							decrStackSize(0, 1);
 						}
 					}
@@ -122,22 +129,26 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 			if(getWorld().isRemote && heat > 0) {
 				getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5F, pos.getY()+0.5F, pos.getZ()+0.5F, 0, 0.1f, 0);
 				for(int i = 0; i < 4; ++i) {
-					if(i == 0)
+					if(i == 0) {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.05D, pos.getY()+1.2F, pos.getZ()+0.05D, 0, 0.01f, 0);
-					if(i == 1)
+					}
+					if(i == 1) {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.95D, pos.getY()+1.2F, pos.getZ()+0.05D, 0, 0.01f, 0);
-					if(i == 2)
+					}
+					if(i == 2) {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.05D, pos.getY()+1.2F, pos.getZ()+0.95D, 0, 0.01f, 0);
-					if(i == 3)
+					}
+					if(i == 3) {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.95D, pos.getY()+1.2F, pos.getZ()+0.95D, 0, 0.01f, 0);
+					}
 				}
 			}
 		}
 
 		for(int i = 2; i < 6; ++i) {
-			EnumFacing rotation = EnumFacing.getFront(i);
-			float rotXAdv = rotation.getFrontOffsetX()-0.5F;
-			float rotZAdv = rotation.getFrontOffsetZ()-0.5F;
+			EnumFacing rotation = EnumFacing.byIndex(i);
+			float rotXAdv = rotation.getXOffset()-0.5F;
+			float rotZAdv = rotation.getZOffset()-0.5F;
 			EssentialCraftCore.proxy.FlameFX(pos.getX()+0.725F+rotXAdv/2.2F, pos.getY()+0.4F, pos.getZ()+0.725F+rotZAdv/2.2F, 0, 0F, 0, 0.8D, 0.5D, 0.5F, 0.5F);
 			EssentialCraftCore.proxy.FlameFX(pos.getX()+0.5F+MathUtils.randomFloat(getWorld().rand)*0.2F, pos.getY()+0.65F, pos.getZ()+0.5F+MathUtils.randomFloat(getWorld().rand)*0.2F, 0, 0.01F, 0, 0.8D, 0.5D, 0.5F, 1F);
 		}

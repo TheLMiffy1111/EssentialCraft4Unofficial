@@ -82,14 +82,16 @@ public class WorldGenElementalDrops extends WorldGenerator {
 	public boolean generate(World w, Random rnd, BlockPos pos) {
 		int meta = 0;
 
-		if(isNether)
+		if(isNether) {
 			meta += 5;
-		if(isEnd)
+		}
+		if(isEnd) {
 			meta += 10;
+		}
 
 		int[] selection = {rnd.nextInt(6), rnd.nextInt(6), rnd.nextInt(6)};
-		for(int i = 0; i < selection.length; i++) {
-			switch(selection[i]) {
+		for(int element : selection) {
+			switch(element) {
 			case 0:
 				new WorldGenMinable(BlocksCore.oreDrops.getStateFromMeta(meta),16,BlockMatcher.forBlock(minableReplacable)).generate(w, rnd, new BlockPos(x, y, z));
 				break;

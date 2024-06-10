@@ -45,8 +45,9 @@ public class WailaDataProvider implements IWailaDataProvider {
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		if(accessor.getTileEntity() != null) {
-			if(accessor.getTileEntity() instanceof TileRightClicker && !((IInventory)accessor.getTileEntity()).getStackInSlot(10).isEmpty())
+			if(accessor.getTileEntity() instanceof TileRightClicker && !((IInventory)accessor.getTileEntity()).getStackInSlot(10).isEmpty()) {
 				return currenttip;
+			}
 			if(accessor.getTileEntity().hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 				getMRUBody(accessor.getTileEntity().getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null), currenttip, accessor);
 			}
@@ -63,18 +64,22 @@ public class WailaDataProvider implements IWailaDataProvider {
 			currenttip.add("MRU: " + mruHandler.getMRU() + "/" + mruHandler.getMaxMRU());
 			float balance = mruHandler.getBalance();
 			String str = Float.toString(mruHandler.getBalance());
-			if(str.length() > 6)
+			if(str.length() > 6) {
 				str = str.substring(0, 6);
+			}
 			for(int i = str.length()-1; i > 2; --i) {
 				char c = str.charAt(i);
-				if(c == '0')
+				if(c == '0') {
 					str = str.substring(0, i);
+				}
 			}
 			TextFormatting color = TextFormatting.AQUA;
-			if(balance < 1)
+			if(balance < 1) {
 				color = TextFormatting.BLUE;
-			if(balance > 1)
+			}
+			if(balance > 1) {
 				color = TextFormatting.RED;
+			}
 			currenttip.add("Balance: " + color + str);
 			if(accessor.getTileEntity() instanceof IInventory) {
 				IInventory tInv = (IInventory)accessor.getTileEntity();

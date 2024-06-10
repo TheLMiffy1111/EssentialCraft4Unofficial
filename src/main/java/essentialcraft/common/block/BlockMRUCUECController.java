@@ -31,8 +31,9 @@ public class BlockMRUCUECController extends BlockContainer implements IModelRegi
 	@Override
 	public boolean onBlockActivated(World world, BlockPos par2, IBlockState par3, EntityPlayer player, EnumHand par5, EnumFacing par7, float par8, float par9, float par10) {
 		TileMRUCUECController tile = (TileMRUCUECController)world.getTileEntity(par2);
-		if(!world.isRemote)
+		if(!world.isRemote) {
 			tile.checkStructure();
+		}
 		return true;
 	}
 

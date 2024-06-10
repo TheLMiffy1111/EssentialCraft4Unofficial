@@ -66,8 +66,9 @@ public class TileMagicalMirror extends TileMRUGeneric {
 												dZ = sZ;
 												sY -= 1;
 											}
-											if(getWorld().getWorldTime()%5 == 0)
+											if(getWorld().getWorldTime()%5 == 0) {
 												ECUtils.spawnItemFX(sX, sY, sZ, dX, dY, dZ);
+											}
 										}
 										if(transferTime >= 60) {
 											ItemStack set = invBelow.extractItem(w, 1, false);
@@ -92,15 +93,17 @@ public class TileMagicalMirror extends TileMRUGeneric {
 			DummyData[] coordData = DataStorage.parseData(i.getString("coord"));
 			inventoryPos = new BlockPos(Integer.parseInt(coordData[0].fieldValue), Integer.parseInt(coordData[1].fieldValue), Integer.parseInt(coordData[2].fieldValue));
 		}
-		else
+		else {
 			inventoryPos = null;
+		}
 		transferTime = i.getInteger("transferTime");
 		pulsing = i.getBoolean("pulse");
 		if(i.hasKey("transferingStack")) {
 			NBTTagCompound tag = i.getCompoundTag("transferingStack");
 			ItemStack is = new ItemStack(tag);
-			if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+			if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 				is.setCount(1);
+			}
 			transferingStack = is;
 		}
 		else {

@@ -22,8 +22,9 @@ public class TileChargingChamber extends TileMRUGeneric {
 	public void update() {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			tryChargeTools();
+		}
 	}
 
 	public void tryChargeTools(){

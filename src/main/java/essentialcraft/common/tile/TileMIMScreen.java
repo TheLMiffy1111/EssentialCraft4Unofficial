@@ -29,19 +29,23 @@ public class TileMIMScreen extends TileMRUGeneric {
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 		if(tickTime == 0) {
 			tickTime = 20;
-			if(parent != null)
-				if(!parent.isParent(this))
+			if(parent != null) {
+				if(!parent.isParent(this)) {
 					parent = null;
+				}
+			}
 		}
-		else
+		else {
 			--tickTime;
+		}
 
 		if(parent != null) {
 			if(!getStackInSlot(1).isEmpty()) {
 				if(mruStorage.getMRU() >= mruForIns) {
 					mruStorage.extractMRU(mruForIns, true);
-					if(parent.addItemStackToSystem(getStackInSlot(1)))
+					if(parent.addItemStackToSystem(getStackInSlot(1))) {
 						setInventorySlotContents(1, ItemStack.EMPTY);
+					}
 
 					syncTick = 0;
 				}

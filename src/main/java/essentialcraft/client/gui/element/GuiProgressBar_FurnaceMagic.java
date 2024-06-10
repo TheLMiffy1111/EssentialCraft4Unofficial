@@ -23,8 +23,9 @@ public class GuiProgressBar_FurnaceMagic extends GuiTextElement{
 	public void draw(int posX, int posY, int mouseX, int mouseY) {
 		DrawUtils.bindTexture("essentialcraft", "textures/gui/progressbars.png");
 		int current = tile.progressLevel;
-		if(current == 0)
+		if(current == 0) {
 			current = tile.smeltingLevel;
+		}
 
 		int max = TileFurnaceMagic.smeltingTime/(tile.getBlockMetadata()/4+1);
 		//System.out.println(current);

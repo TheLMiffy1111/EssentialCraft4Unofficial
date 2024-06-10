@@ -21,23 +21,23 @@ public class ParticleItem extends Particle {
 		red = r;
 		green = g;
 		blue = b;
-		this.motionX = mX/20;
-		this.motionY = mY/20;
-		this.motionZ = mZ/20;
-		this.particleMaxAge = 25;
+		motionX = mX/20;
+		motionY = mY/20;
+		motionZ = mZ/20;
+		particleMaxAge = 25;
 	}
 
 	@Override
 	public void renderParticle(BufferBuilder var1, Entity var2, float x, float y, float z, float u1, float u2, float u3) {
-		this.canCollide = true;
+		canCollide = true;
 		prevPosX = posX;
 		prevPosY = posY;
 		prevPosZ = posZ;
-		float f11 = (float)(this.prevPosX + (this.posX - this.prevPosX) * x - interpPosX);
-		float f12 = (float)(this.prevPosY + (this.posY - this.prevPosY) * x - interpPosY);
-		float f13 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * x - interpPosZ);
+		float f11 = (float)(prevPosX + (posX - prevPosX) * x - interpPosX);
+		float f12 = (float)(prevPosY + (posY - prevPosY) * x - interpPosY);
+		float f13 = (float)(prevPosZ + (posZ - prevPosZ) * x - interpPosZ);
 
-		Random var6 = new Random((long) (this.posX*100+this.posY*100+this.posZ*100));
+		Random var6 = new Random((long) (posX*100+posY*100+posZ*100));
 		GlStateManager.shadeModel(GL11.GL_SMOOTH);
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.pushMatrix();

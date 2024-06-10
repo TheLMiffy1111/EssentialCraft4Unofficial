@@ -21,7 +21,7 @@ public class TileSunRayAbsorber extends TileMRUGeneric {
 	@Override
 	public void update() {
 		super.update();
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0) {
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			List<EntitySolarBeam> l = getWorld().getEntitiesWithinAABB(EntitySolarBeam.class, new AxisAlignedBB(pos.getX()-1, pos.getY()-1, pos.getZ()-1, pos.getX()+2, pos.getY()+2, pos.getZ()+2));
 			if(!l.isEmpty()) {
 				mruStorage.addMRU(mruGenerated, true);

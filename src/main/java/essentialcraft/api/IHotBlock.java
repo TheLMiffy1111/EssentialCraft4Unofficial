@@ -15,6 +15,5 @@ public interface IHotBlock {
 	 * This is used to check how the mru gain will get affected(it is basically a multiplier)
 	 * @return the multiplier of MRU gain
 	 */
-	public float getHeatModifier(IBlockAccess w, BlockPos pos);
-
+	public float getHeatModifier(IBlockAccess world, BlockPos pos);
 }

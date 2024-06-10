@@ -23,16 +23,16 @@ public class ECExplosion extends Explosion {
 		super(world, exploder, x, y, z, size, false, true);
 		this.world = world;
 		this.exploder = exploder;
-		this.explosionX = x;
-		this.explosionY = y;
-		this.explosionZ = z;
-		this.explosionSize = size;
+		explosionX = x;
+		explosionY = y;
+		explosionZ = z;
+		explosionSize = size;
 	}
 
 	@Override
 	public void doExplosionA() {
-		float f = this.explosionSize;
-		HashSet<BlockPos> hashset = new HashSet<BlockPos>();
+		float f = explosionSize;
+		HashSet<BlockPos> hashset = new HashSet<>();
 		int i;
 		int j;
 		int k;
@@ -51,24 +51,24 @@ public class ECExplosion extends Explosion {
 						d0 /= d3;
 						d1 /= d3;
 						d2 /= d3;
-						float f1 = this.explosionSize * (0.7F + this.world.rand.nextFloat() * 0.6F);
-						d5 = this.explosionX;
-						d6 = this.explosionY;
-						d7 = this.explosionZ;
+						float f1 = explosionSize * (0.7F + world.rand.nextFloat() * 0.6F);
+						d5 = explosionX;
+						d6 = explosionY;
+						d7 = explosionZ;
 
 						for(float f2 = 0.3F; f1 > 0.0F; f1 -= f2 * 0.75F) {
 							int j1 = MathHelper.floor(d5);
 							int k1 = MathHelper.floor(d6);
 							int l1 = MathHelper.floor(d7);
 							BlockPos pos = new BlockPos(j1,k1,l1);
-							IBlockState block = this.world.getBlockState(pos);
+							IBlockState block = world.getBlockState(pos);
 
 							if(block.getMaterial() != Material.AIR) {
-								float f3 = this.exploder != null ? this.exploder.getExplosionResistance(this, this.world, pos, block) : block.getBlock().getExplosionResistance(world, pos, this.exploder, this);
+								float f3 = exploder != null ? exploder.getExplosionResistance(this, world, pos, block) : block.getBlock().getExplosionResistance(world, pos, exploder, this);
 								f1 -= (f3 + 0.3F) * f2;
 							}
 
-							if(f1 > 0.0F && (this.exploder == null || this.exploder.canExplosionDestroyBlock(this, this.world, pos, block, f1))) {
+							if(f1 > 0.0F && (exploder == null || exploder.canExplosionDestroyBlock(this, world, pos, block, f1))) {
 								hashset.add(new BlockPos(j1, k1, l1));
 							}
 
@@ -81,29 +81,26 @@ public class ECExplosion extends Explosion {
 			}
 		}
 
-		this.getAffectedBlockPositions().addAll(hashset);
-		this.explosionSize *= 2.0F;
-		i = MathHelper.floor(this.explosionX - this.explosionSize - 1.0D);
-		j = MathHelper.floor(this.explosionX + this.explosionSize + 1.0D);
-		k = MathHelper.floor(this.explosionY - this.explosionSize - 1.0D);
-		this.explosionSize = f;
+		getAffectedBlockPositions().addAll(hashset);
+		explosionSize *= 2.0F;
+		i = MathHelper.floor(explosionX - explosionSize - 1.0D);
+		j = MathHelper.floor(explosionX + explosionSize + 1.0D);
+		k = MathHelper.floor(explosionY - explosionSize - 1.0D);
+		explosionSize = f;
 	}
 
 	@Override
 	public void doExplosionB(boolean p_77279_1_) {
-		int i;
-		int j;
-		int k;
 		IBlockState block;
 
-		for(BlockPos chunkposition : this.getAffectedBlockPositions()) {
-			i = chunkposition.getX();
-			j = chunkposition.getY();
-			k = chunkposition.getZ();
-			block = this.world.getBlockState(chunkposition);
+		for(BlockPos chunkposition : getAffectedBlockPositions()) {
+			chunkposition.getX();
+			chunkposition.getY();
+			chunkposition.getZ();
+			block = world.getBlockState(chunkposition);
 
 			if(block.getMaterial() != Material.AIR) {
-				block.getBlock().onBlockExploded(this.world, chunkposition, this);
+				block.getBlock().onBlockExploded(world, chunkposition, this);
 			}
 		}
 	}

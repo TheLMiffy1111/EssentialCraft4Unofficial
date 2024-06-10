@@ -14,9 +14,9 @@ public class PotionFrozenMind extends Potion {
 
 	public PotionFrozenMind(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(5, 1);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.frozenMind");
+		setIconIndex(5, 1);
+		setEffectiveness(0.25D);
+		setPotionName("potion.frozenMind");
 		this.setRegistryName("essentialcraft", "potion.frozenmind");
 	}
 

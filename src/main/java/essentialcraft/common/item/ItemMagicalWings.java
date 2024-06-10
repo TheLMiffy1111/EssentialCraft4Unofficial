@@ -21,8 +21,8 @@ public class ItemMagicalWings extends ItemMRUGeneric implements IBauble, IModelR
 
 	public ItemMagicalWings() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override
@@ -74,8 +74,9 @@ public class ItemMagicalWings extends ItemMRUGeneric implements IBauble, IModelR
 				e.fallDistance = 0F;
 				e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, e.posX+MathUtils.randomDouble(e.getEntityWorld().rand)/2, e.posY-1+MathUtils.randomDouble(e.getEntityWorld().rand), e.posZ+MathUtils.randomDouble(e.getEntityWorld().rand)/2, 0, 1, 1);
 			}
-			if(itemstack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() >= 1)
+			if(itemstack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() >= 1) {
 				EssentialCraftCore.proxy.wingsAction(e, itemstack);
+			}
 			MiscUtils.applyPlayerModifier((EntityPlayer)player, SharedMonsterAttributes.MOVEMENT_SPEED, "EC300", 0.1F, false, 0, "bauble");
 		}
 	}
@@ -85,8 +86,9 @@ public class ItemMagicalWings extends ItemMRUGeneric implements IBauble, IModelR
 
 	@Override
 	public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
-		if(player instanceof EntityPlayer)
+		if(player instanceof EntityPlayer) {
 			MiscUtils.applyPlayerModifier((EntityPlayer)player, SharedMonsterAttributes.MOVEMENT_SPEED, "EC300", 0.1F, true, 0, "bauble");
+		}
 	}
 
 	@Override

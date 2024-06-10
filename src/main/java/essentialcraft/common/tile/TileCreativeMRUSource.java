@@ -8,7 +8,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class TileCreativeMRUSource extends TileEntity implements ITickable {
 

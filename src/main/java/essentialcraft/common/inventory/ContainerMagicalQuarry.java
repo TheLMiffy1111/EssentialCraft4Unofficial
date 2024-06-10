@@ -16,6 +16,6 @@ public class ContainerMagicalQuarry extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 1, 108, 41));
 		addSlotToContainer(new SlotGeneric(inv, 2, 126, 41));
 		addSlotToContainer(new SlotGeneric(inv, 3, 144, 41));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

@@ -13,26 +13,26 @@ public class ESPEStorage implements IESPEHandler {
 	protected final boolean tierSettable;
 
 	public ESPEStorage() {
-		this.maxESPESettable = true;
-		this.tierSettable = true;
+		maxESPESettable = true;
+		tierSettable = true;
 	}
 
 	public ESPEStorage(double maxESPE) {
 		this.maxESPE = maxESPE;
-		this.maxESPESettable = false;
-		this.tierSettable = true;
+		maxESPESettable = false;
+		tierSettable = true;
 	}
 	public ESPEStorage(int tier) {
 		this.tier = tier;
-		this.maxESPESettable = true;
-		this.tierSettable = false;
+		maxESPESettable = true;
+		tierSettable = false;
 	}
 
 	public ESPEStorage(double maxESPE, int tier) {
 		this.maxESPE = maxESPE;
 		this.tier = tier;
-		this.maxESPESettable = false;
-		this.tierSettable = false;
+		maxESPESettable = false;
+		tierSettable = false;
 	}
 
 	@Override
@@ -42,19 +42,19 @@ public class ESPEStorage implements IESPEHandler {
 
 	@Override
 	public void setMaxESPE(double amount) {
-		if(this.maxESPESettable) {
-			this.maxESPE = amount;
+		if(maxESPESettable) {
+			maxESPE = amount;
 		}
 	}
 
 	@Override
 	public double getESPE() {
-		return this.espe;
+		return espe;
 	}
 
 	@Override
 	public void setESPE(double amount) {
-		this.espe = amount;
+		espe = amount;
 	}
 
 	@Override
@@ -95,41 +95,41 @@ public class ESPEStorage implements IESPEHandler {
 
 	@Override
 	public int getTier() {
-		return this.tier;
+		return tier;
 	}
 
 	@Override
 	public void setTier(int tier) {
-		if(this.tierSettable) {
+		if(tierSettable) {
 			this.tier = tier;
 		}
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		if(this.maxESPESettable) {
-			nbt.setDouble("maxESPE", this.maxESPE);
+		if(maxESPESettable) {
+			nbt.setDouble("maxESPE", maxESPE);
 		}
-		nbt.setDouble("espe", this.espe);
-		if(this.tierSettable) {
-			nbt.setInteger("tier", this.tier);
+		nbt.setDouble("espe", espe);
+		if(tierSettable) {
+			nbt.setInteger("tier", tier);
 		}
 		return nbt;
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		if(this.maxESPESettable) {
-			this.maxESPE = nbt.getDouble("maxESPE");
+		if(maxESPESettable) {
+			maxESPE = nbt.getDouble("maxESPE");
 		}
-		this.espe = nbt.getDouble("espe");
-		if(this.tierSettable) {
-			this.tier = nbt.getInteger("tier");
+		espe = nbt.getDouble("espe");
+		if(tierSettable) {
+			tier = nbt.getInteger("tier");
 		}
 
 		//backwards compatibility
 		if(nbt.hasKey("energy")) {
-			this.espe = nbt.getFloat("energy");
+			espe = nbt.getFloat("energy");
 		}
 	}
 }

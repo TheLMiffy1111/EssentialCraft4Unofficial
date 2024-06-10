@@ -40,8 +40,9 @@ public class ItemCollectedMonsterSpawner extends Item implements IModelRegistere
 				spawnerTag.setInteger("z", nP.getZ());
 				if(w.setBlockState(nP, Blocks.MOB_SPAWNER.getDefaultState(), 3)) {
 					TileEntity tile = w.getTileEntity(nP);
-					if(tile != null)
+					if(tile != null) {
 						tile.readFromNBT(spawnerTag);
+					}
 
 					placer.swingArm(hand);
 					stk.shrink(1);

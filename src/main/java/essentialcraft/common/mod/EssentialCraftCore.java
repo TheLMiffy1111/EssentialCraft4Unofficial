@@ -37,7 +37,6 @@ import essentialcraft.utils.commands.CommandSetMRUInMRUCU;
 import essentialcraft.utils.commands.CommandSetUBMRU;
 import essentialcraft.utils.commands.CommandSetWindPoints;
 import essentialcraft.utils.commands.CommandSetWindbound;
-import essentialcraft.utils.common.ECEventHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -147,7 +146,9 @@ public class EssentialCraftCore {
 
 	@EventHandler
 	public void thirdMovement(FMLPostInitializationEvent event) {
-		BloodMagicRegistry.register();
+		if(Loader.isModLoaded("bloodmagic")) {
+			BloodMagicRegistry.register();
+		}
 		GameRegistry.registerWorldGenerator(new WorldGenManager(), 16);
 		ResearchRegistry.init();
 		if(Loader.isModLoaded("crafttweaker")) {

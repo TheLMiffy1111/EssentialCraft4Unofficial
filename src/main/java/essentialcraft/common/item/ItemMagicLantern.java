@@ -21,8 +21,8 @@ public class ItemMagicLantern extends ItemMRUGeneric implements IModelRegisterer
 
 	public ItemMagicLantern() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override

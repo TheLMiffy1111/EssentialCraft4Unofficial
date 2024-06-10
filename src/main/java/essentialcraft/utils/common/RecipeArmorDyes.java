@@ -17,7 +17,7 @@ public class RecipeArmorDyes extends Impl<IRecipe> implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting invCrafting, World world) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> arraylist = new ArrayList<>();
 
 		for(int i = 0; i < invCrafting.getSizeInventory(); ++i) {
 			ItemStack itemstack1 = invCrafting.getStackInSlot(i);
@@ -106,20 +106,18 @@ public class RecipeArmorDyes extends Impl<IRecipe> implements IRecipe {
 		if(itemarmor == null) {
 			return ItemStack.EMPTY;
 		}
-		else {
-			k = aint[0] / j;
-			int i1 = aint[1] / j;
-			l = aint[2] / j;
-			f = (float)i / (float)j;
-			f1 = Math.max(k, Math.max(i1, l));
-			k = (int)(k * f / f1);
-			i1 = (int)(i1 * f / f1);
-			l = (int)(l * f / f1);
-			l1 = (k << 8) + i1;
-			l1 = (l1 << 8) + l;
-			itemarmor.setColor(itemstack, l1);
-			return itemstack;
-		}
+		k = aint[0] / j;
+		int i1 = aint[1] / j;
+		l = aint[2] / j;
+		f = (float)i / (float)j;
+		f1 = Math.max(k, Math.max(i1, l));
+		k = (int)(k * f / f1);
+		i1 = (int)(i1 * f / f1);
+		l = (int)(l * f / f1);
+		l1 = (k << 8) + i1;
+		l1 = (l1 << 8) + l;
+		itemarmor.setColor(itemstack, l1);
+		return itemstack;
 	}
 
 	@Override

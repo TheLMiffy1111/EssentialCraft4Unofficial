@@ -75,12 +75,15 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 		}
 		}
 
-		if(this.hasFirstPoint(stack))
-			list.add(I18n.translateToLocal("essentialcraft.txt.p1")+"| X:"+this.getFirstPoint(stack).x+", Y:"+this.getFirstPoint(stack).y+", Z:"+this.getFirstPoint(stack).z);
-		if(this.hasSecondPoint(stack))
-			list.add(I18n.translateToLocal("essentialcraft.txt.p2")+"| X:"+this.getSecondPoint(stack).x+", Y:"+this.getSecondPoint(stack).y+", Z:"+this.getSecondPoint(stack).z);
-		if(this.hasStoredBlock(stack) && !this.retrieveStackFromNBT(stack).isEmpty())
-			list.add(I18n.translateToLocal("essentialcraft.txt.storedStack")+": "+this.retrieveStackFromNBT(stack).getDisplayName());
+		if(hasFirstPoint(stack)) {
+			list.add(I18n.translateToLocal("essentialcraft.txt.p1")+"| X:"+getFirstPoint(stack).x+", Y:"+getFirstPoint(stack).y+", Z:"+getFirstPoint(stack).z);
+		}
+		if(hasSecondPoint(stack)) {
+			list.add(I18n.translateToLocal("essentialcraft.txt.p2")+"| X:"+getSecondPoint(stack).x+", Y:"+getSecondPoint(stack).y+", Z:"+getSecondPoint(stack).z);
+		}
+		if(hasStoredBlock(stack) && !retrieveStackFromNBT(stack).isEmpty()) {
+			list.add(I18n.translateToLocal("essentialcraft.txt.storedStack")+": "+retrieveStackFromNBT(stack).getDisplayName());
+		}
 
 		list.add(" ");
 
@@ -90,7 +93,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list)
 	{
-		if(this.isInCreativeTab(par2CreativeTabs))
+		if(isInCreativeTab(par2CreativeTabs)) {
 			for(int i = 0; i < 5; ++i)
 			{
 				ItemStack min = new ItemStack(this, 1, i);
@@ -100,59 +103,63 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 				list.add(min);
 				list.add(max);
 			}
+		}
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand hand)
 	{
 		ItemStack is = p.getHeldItem(hand);
-		RayTraceResult mop = this.rayTrace(w, p, p.capabilities.isCreativeMode);
+		RayTraceResult mop = rayTrace(w, p, p.capabilities.isCreativeMode);
 
 		if(mop!=null && mop.typeOfHit==Type.BLOCK)
 		{
 			if(!p.isSneaking())
 			{
-				boolean hasPos1 = this.hasFirstPoint(is);
-				boolean hasPos2 = this.hasSecondPoint(is);
+				boolean hasPos1 = hasFirstPoint(is);
+				boolean hasPos2 = hasSecondPoint(is);
 
 				if(!hasPos1)
 				{
-					this.setFirstPoint(is, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
-					if(p.getEntityWorld().isRemote)
+					setFirstPoint(is, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
+					if(p.getEntityWorld().isRemote) {
 						p.sendMessage(new TextComponentString("[Magical Builder] First position: "+mop.getBlockPos().getX()+","+mop.getBlockPos().getY()+","+mop.getBlockPos().getZ()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+					}
 					return super.onItemRightClick(w, p, hand);
 				}
 
 				if(!hasPos2)
 				{
-					Coord3D first = this.getFirstPoint(is);
+					Coord3D first = getFirstPoint(is);
 					Coord3D second = new Coord3D(mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
 					DummyDistance dist = new DummyDistance(first,second);
 					if(dist.getDistance() > 48)
 					{
-						if(p.getEntityWorld().isRemote)
+						if(p.getEntityWorld().isRemote) {
 							p.sendMessage(new TextComponentString("[Magical Builder]The distance between points ("+dist.getDistance()+") is too large, max: 48!").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+						}
 						return super.onItemRightClick(w, p, hand);
 					}
-					this.setSecondPoint(is, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
-					if(p.getEntityWorld().isRemote)
+					setSecondPoint(is, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ());
+					if(p.getEntityWorld().isRemote) {
 						p.sendMessage(new TextComponentString("[Magical Builder] Second position: "+mop.getBlockPos().getX()+","+mop.getBlockPos().getY()+","+mop.getBlockPos().getZ()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+					}
 					return super.onItemRightClick(w, p, hand);
 				}
 
 				if(hasPos1 && hasPos2)
 				{
-					if(p.getEntityWorld().isRemote)
+					if(p.getEntityWorld().isRemote) {
 						p.sendMessage(new TextComponentString("[Magical Builder]Both points already set! Shift-rightclick air to reset!").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+					}
 				}
-			}else
+			}
+			else if(setStoredStack(is, w, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ()))
 			{
-				if(this.setStoredStack(is, w, mop.getBlockPos().getX(), mop.getBlockPos().getY(), mop.getBlockPos().getZ()))
+				if(!retrieveStackFromNBT(is).isEmpty())
 				{
-					if(!this.retrieveStackFromNBT(is).isEmpty())
-					{
-						if(p.getEntityWorld().isRemote)
-							p.sendMessage(new TextComponentString("[Magical Builder]Set the block to: "+this.retrieveStackFromNBT(is).getDisplayName()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+					if(p.getEntityWorld().isRemote) {
+						p.sendMessage(new TextComponentString("[Magical Builder]Set the block to: "+retrieveStackFromNBT(is).getDisplayName()).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 					}
 				}
 			}
@@ -160,19 +167,18 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 		{
 			if(p.isSneaking())
 			{
-				this.resetPoints(is);
+				resetPoints(is);
 
-				if(p.getEntityWorld().isRemote)
+				if(p.getEntityWorld().isRemote) {
 					p.sendMessage(new TextComponentString("[Magical Builder]Both points reseted!").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
-			}else
-			{
-				if(this.hasFirstPoint(is) && this.hasSecondPoint(is) && (this.hasStoredBlock(is) && !this.retrieveStackFromNBT(is).isEmpty() || is.getItemDamage() == 1))
-				{
-					int setted = this.setAreaToBlock(p, is);
-					if(p.getEntityWorld().isRemote)
-						p.sendMessage(new TextComponentString("[Magical Builder]Filled selected area! "+setted+" blocks got replaced!").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 				}
-
+			}
+			else if(hasFirstPoint(is) && hasSecondPoint(is) && (hasStoredBlock(is) && !retrieveStackFromNBT(is).isEmpty() || is.getItemDamage() == 1))
+			{
+				int setted = setAreaToBlock(p, is);
+				if(p.getEntityWorld().isRemote) {
+					p.sendMessage(new TextComponentString("[Magical Builder]Filled selected area! "+setted+" blocks got replaced!").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+				}
 			}
 		}
 
@@ -192,8 +198,9 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 	public boolean resetPoints(ItemStack is)
 	{
 		NBTTagCompound tag = MiscUtils.getStackTag(is);
-		if(!tag.hasKey("p1_x") && !tag.hasKey("p2_x"))
+		if(!tag.hasKey("p1_x") && !tag.hasKey("p2_x")) {
 			return false;
+		}
 
 		tag.removeTag("p1_x");
 		tag.removeTag("p1_y");
@@ -236,8 +243,9 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 
 	public ItemStack retrieveStackFromNBT(ItemStack is)
 	{
-		if(!hasStoredBlock(is))
+		if(!hasStoredBlock(is)) {
 			return ItemStack.EMPTY;
+		}
 
 		return new ItemStack(MiscUtils.getStackTag(is).getCompoundTag("storedStackTag"));
 	}
@@ -262,74 +270,87 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 
 	public int findPlayerISSlot(EntityPlayer e, ItemStack is)
 	{
-		if(is.isEmpty())
+		if(is.isEmpty()) {
 			return -1;
+		}
 
-		if(e.capabilities.isCreativeMode)
+		if(e.capabilities.isCreativeMode) {
 			return Integer.MAX_VALUE;
+		}
 
 		for(int i = 0; i < e.inventory.getSizeInventory(); ++i)
 		{
 			ItemStack stk = e.inventory.getStackInSlot(i);
-			if(!stk.isEmpty() && stk.isItemEqual(is))
+			if(!stk.isEmpty() && stk.isItemEqual(is)) {
 				return i;
+			}
 		}
 		return -1;
 	}
 
 	public int decreasePlayerStackInSlot(EntityPlayer e, ItemStack is, int slot)
 	{
-		if(e.capabilities.isCreativeMode)
+		if(e.capabilities.isCreativeMode) {
 			return Integer.MAX_VALUE;
+		}
 
 		e.inventory.decrStackSize(slot, 1);
-		if(e.inventory.getStackInSlot(slot).isEmpty() || e.inventory.getStackInSlot(slot).getCount() <= 0)
+		if(e.inventory.getStackInSlot(slot).isEmpty() || e.inventory.getStackInSlot(slot).getCount() <= 0) {
 			return findPlayerISSlot(e,is);
+		}
 
 		return slot;
 	}
 
 	public int setAreaToBlock(EntityPlayer e, ItemStack is)
 	{
-		Coord3D start = this.getFirstPoint(is);
-		Coord3D end = this.getSecondPoint(is);
+		Coord3D start = getFirstPoint(is);
+		Coord3D end = getSecondPoint(is);
 		int diffX = MathHelper.floor(MathUtils.module(end.x-start.x));
 		int diffY = MathHelper.floor(MathUtils.module(end.y-start.y));
 		int diffZ = MathHelper.floor(MathUtils.module(end.z-start.z));
-		ItemStack setTo = this.retrieveStackFromNBT(is);
+		ItemStack setTo = retrieveStackFromNBT(is);
 		int slotNum = findPlayerISSlot(e,setTo);
 		int itemsSet = 0;
-		if(is.getItemDamage() == 1)
+		if(is.getItemDamage() == 1) {
 			slotNum = Integer.MAX_VALUE;
+		}
 
-		if(is.getItemDamage() == 2 || is.getItemDamage() == 3)
-			slotNum = this.hasStoredBlock(is) && !setTo.isEmpty() ? Integer.MAX_VALUE : -1;
+		if(is.getItemDamage() == 2 || is.getItemDamage() == 3) {
+			slotNum = hasStoredBlock(is) && !setTo.isEmpty() ? Integer.MAX_VALUE : -1;
+		}
 
 		if(slotNum != -1)
 		{
 			for(int x = 0; x <= diffX; ++x)
 			{
 				int dx = x;
-				if(start.x >= end.x)
+				if(start.x >= end.x) {
 					dx = MathHelper.floor(end.x + x);
-				else
+				}
+				else {
 					dx = MathHelper.floor(start.x + x);
+				}
 
 				for(int y = 0; y <= diffY; ++y)
 				{
 					int dy = y;
-					if(start.y >= end.y)
+					if(start.y >= end.y) {
 						dy = MathHelper.floor(end.y + y);
-					else
+					}
+					else {
 						dy = MathHelper.floor(start.y + y);
+					}
 
 					for(int z = 0; z <= diffZ; ++z)
 					{
 						int dz = z;
-						if(start.z >= end.z)
+						if(start.z >= end.z) {
 							dz = (int) (end.z + z);
-						else
+						}
+						else {
 							dz = (int) (start.z + z);
+						}
 
 						ItemStack settedTo = setTo.isEmpty() ? ItemStack.EMPTY : setTo.copy();
 						BlockPos dp = new BlockPos(dx, dy, dz);
@@ -338,42 +359,51 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 						{
 							if(e.getEntityWorld().isAirBlock(dp))
 							{
-								if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo))
+								if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo)) {
 									continue;
+								}
 
-								if(!ECUtils.playerUseMRU(e, is, 25))
+								if(!ECUtils.playerUseMRU(e, is, 25)) {
 									return itemsSet;
+								}
 
-								slotNum = this.decreasePlayerStackInSlot(e, settedTo, slotNum);
+								slotNum = decreasePlayerStackInSlot(e, settedTo, slotNum);
 								//e.getEntityWorld().setBlock(dx, dy, dz, Block.getBlockFromItem(setTo.getItem()), setTo.getItemDamage(), 3);
-								if(ForgeHooks.onPlaceItemIntoWorld(settedTo, e, e.getEntityWorld(), dp, EnumFacing.DOWN, 0, 0, 0, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS)
+								if(ForgeHooks.onPlaceItemIntoWorld(settedTo, e, e.getEntityWorld(), dp, EnumFacing.DOWN, 0, 0, 0, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS) {
 									++itemsSet;
+								}
 								else
 								{
 									settedTo.setCount(1);
-									if(!e.inventory.addItemStackToInventory(settedTo))
+									if(!e.inventory.addItemStackToInventory(settedTo)) {
 										e.dropItem(settedTo, false);
+									}
 								}
 
-								if(slotNum == -1)
+								if(slotNum == -1) {
 									return itemsSet;
+								}
 							}
 						}
 						if(is.getItemDamage() == 1)
 						{
-							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo))
+							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo)) {
 								continue;
+							}
 
-							if(!ECUtils.playerUseMRU(e, is, 250))
+							if(!ECUtils.playerUseMRU(e, is, 250)) {
 								return itemsSet;
+							}
 
 							if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote)
 							{
 								GameType type = GameType.SURVIVAL;
-								if(e.capabilities.isCreativeMode)
+								if(e.capabilities.isCreativeMode) {
 									type = GameType.CREATIVE;
-								if(!e.capabilities.allowEdit)
+								}
+								if(!e.capabilities.allowEdit) {
 									type = GameType.ADVENTURE;
+								}
 
 								int be = ForgeHooks.onBlockBreakEvent(e.getEntityWorld(), type, (EntityPlayerMP)e, dp);
 								if(be != -1)
@@ -386,22 +416,26 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 						}
 						if(is.getItemDamage() == 2)
 						{
-							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo))
+							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo)) {
 								continue;
+							}
 
 							if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote)
 							{
 								ItemStack worldStack = new ItemStack(e.getEntityWorld().getBlockState(dp).getBlock(),1,e.getEntityWorld().getBlockState(dp).getBlock().getMetaFromState(e.getEntityWorld().getBlockState(dp)));
 								if(!worldStack.isEmpty() && setTo.isItemEqual(worldStack))
 								{
-									if(!ECUtils.playerUseMRU(e, is, 250))
+									if(!ECUtils.playerUseMRU(e, is, 250)) {
 										return itemsSet;
+									}
 
 									GameType type = GameType.SURVIVAL;
-									if(e.capabilities.isCreativeMode)
+									if(e.capabilities.isCreativeMode) {
 										type = GameType.CREATIVE;
-									if(!e.capabilities.allowEdit)
+									}
+									if(!e.capabilities.allowEdit) {
 										type = GameType.ADVENTURE;
+									}
 
 									int be = ForgeHooks.onBlockBreakEvent(e.getEntityWorld(), type, (EntityPlayerMP)e, dp);
 									if(be != -1)
@@ -415,22 +449,26 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 						}
 						if(is.getItemDamage() == 3)
 						{
-							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo))
+							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo)) {
 								continue;
+							}
 
 							if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote)
 							{
 								ItemStack worldStack = new ItemStack(e.getEntityWorld().getBlockState(dp).getBlock(),1,e.getEntityWorld().getBlockState(dp).getBlock().getMetaFromState(e.getEntityWorld().getBlockState(dp)));
 								if(!worldStack.isEmpty() && !setTo.isItemEqual(worldStack))
 								{
-									if(!ECUtils.playerUseMRU(e, is, 250))
+									if(!ECUtils.playerUseMRU(e, is, 250)) {
 										return itemsSet;
+									}
 
 									GameType type = GameType.SURVIVAL;
-									if(e.capabilities.isCreativeMode)
+									if(e.capabilities.isCreativeMode) {
 										type = GameType.CREATIVE;
-									if(!e.capabilities.allowEdit)
+									}
+									if(!e.capabilities.allowEdit) {
 										type = GameType.ADVENTURE;
+									}
 
 									int be = ForgeHooks.onBlockBreakEvent(e.getEntityWorld(), type, (EntityPlayerMP)e, dp);
 									if(be != -1)
@@ -444,39 +482,47 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 						}
 						if(is.getItemDamage() == 4)
 						{
-							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo))
+							if(!e.canPlayerEdit(dp, EnumFacing.DOWN, settedTo)) {
 								continue;
+							}
 
 							if(e.getEntityWorld().isAirBlock(dp))
 							{
-								if(!ECUtils.playerUseMRU(e, is, 25))
+								if(!ECUtils.playerUseMRU(e, is, 25)) {
 									return itemsSet;
+								}
 
-								slotNum = this.decreasePlayerStackInSlot(e, setTo, slotNum);
+								slotNum = decreasePlayerStackInSlot(e, setTo, slotNum);
 
-								if(ForgeHooks.onPlaceItemIntoWorld(settedTo, e, e.getEntityWorld(), dp, EnumFacing.DOWN, 0, 0, 0, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS)
+								if(ForgeHooks.onPlaceItemIntoWorld(settedTo, e, e.getEntityWorld(), dp, EnumFacing.DOWN, 0, 0, 0, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS) {
 									++itemsSet;
+								}
 								else
 								{
 									settedTo.setCount(1);
-									if(!e.inventory.addItemStackToInventory(settedTo))
+									if(!e.inventory.addItemStackToInventory(settedTo)) {
 										e.dropItem(settedTo, false);
+									}
 								}
 
-								if(slotNum == -1)
+								if(slotNum == -1) {
 									return itemsSet;
+								}
 							}else if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote)
 							{
-								slotNum = this.decreasePlayerStackInSlot(e, setTo, slotNum);
+								slotNum = decreasePlayerStackInSlot(e, setTo, slotNum);
 
-								if(!ECUtils.playerUseMRU(e, is, 300))
+								if(!ECUtils.playerUseMRU(e, is, 300)) {
 									return itemsSet;
+								}
 
 								GameType type = GameType.SURVIVAL;
-								if(e.capabilities.isCreativeMode)
+								if(e.capabilities.isCreativeMode) {
 									type = GameType.CREATIVE;
-								if(!e.capabilities.allowEdit)
+								}
+								if(!e.capabilities.allowEdit) {
 									type = GameType.ADVENTURE;
+								}
 
 								int be = ForgeHooks.onBlockBreakEvent(e.getEntityWorld(), type, (EntityPlayerMP)e, dp);
 								if(be != -1)
@@ -486,8 +532,9 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 									++itemsSet;
 								}
 
-								if(slotNum == -1)
+								if(slotNum == -1) {
 									return itemsSet;
+								}
 							}
 						}
 					}

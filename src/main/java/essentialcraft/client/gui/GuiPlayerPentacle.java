@@ -39,24 +39,29 @@ public class GuiPlayerPentacle extends GuiScreen {
 			listIndex = index;
 			PlayerGenericData data = ECUtils.getData(Minecraft.getMinecraft().player);
 			ArrayList<ICorruptionEffect> effects = (ArrayList<ICorruptionEffect>) data.getEffects();
-			if(effects.size() <= listIndex)
-				this.enabled = false;
-			else if(effects.get(listIndex) == null)
-				this.enabled = false;
+			if(effects.size() <= listIndex) {
+				enabled = false;
+			}
+			else if(effects.get(listIndex) == null) {
+				enabled = false;
+			}
 		}
 
 		@Override
 		public void drawButton(Minecraft mc, int mX, int mY, float pt) {
-			if(!this.enabled)
+			if(!enabled) {
 				return;
+			}
 
 			super.drawButton(mc, mX, mY, pt);
 			PlayerGenericData data = ECUtils.getData(mc.player);
 			ArrayList<ICorruptionEffect> effects = (ArrayList<ICorruptionEffect>) data.getEffects();
-			if(effects.size() <= listIndex)
-				this.enabled = false;
-			else if(effects.get(listIndex) == null)
-				this.enabled = false;
+			if(effects.size() <= listIndex) {
+				enabled = false;
+			}
+			else if(effects.get(listIndex) == null) {
+				enabled = false;
+			}
 			else {
 				ICorruptionEffect effect = effects.get(listIndex);
 				FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
@@ -72,30 +77,31 @@ public class GuiPlayerPentacle extends GuiScreen {
 					loc = effects.get(listIndex).getEffectIcon();
 				}
 				mc.renderEngine.bindTexture(loc);
-				int p_73729_1_ = this.x+2;
-				int p_73729_2_ = this.y+2;
+				int p_73729_1_ = x+2;
+				int p_73729_2_ = y+2;
 				int p_73729_5_ = 16;
 				int p_73729_6_ = 16;
 
 				TessellatorWrapper tessellator = TessellatorWrapper.getInstance();
 				tessellator.startDrawingQuads();
-				tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + p_73729_6_, this.zLevel, 0, 1);
-				tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + p_73729_6_, this.zLevel, 1, 1);
-				tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + 0, this.zLevel, 1, 0);
-				tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + 0, this.zLevel, 0, 0);
+				tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + p_73729_6_, zLevel, 0, 1);
+				tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + p_73729_6_, zLevel, 1, 1);
+				tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + 0, zLevel, 1, 0);
+				tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + 0, zLevel, 0, 0);
 				tessellator.draw();
 
-				if(mX >= this.x && mX <= this.x+20) {
-					if(mY >= this.y && mY <= this.y+20) {
+				if(mX >= x && mX <= x+20) {
+					if(mY >= y && mY <= y+20) {
 						GlStateManager.translate(0, 0, 100);
 						String name = effect.getLocalizedName();
 						String desc = effect.getLocalizedDesc();
 						int length = name.length();
-						if(desc.length()/2 >= name.length())
+						if(desc.length()/2 >= name.length()) {
 							length = desc.length()/2;
-						this.drawGradientRect(mX+5, mY+5, mX+length*6, mY+25, 0x22FFFFFF, 0x22FFFFFF);
+						}
+						drawGradientRect(mX+5, mY+5, mX+length*6, mY+25, 0x22FFFFFF, 0x22FFFFFF);
 
-						this.drawString(renderer, name, mX+5, mY+5, 0xFFFFFF);
+						drawString(renderer, name, mX+5, mY+5, 0xFFFFFF);
 						boolean enable = effect.getStickiness() <= gui.energy;
 						String additional = "";
 						if(GuiScreen.isShiftKeyDown() && mc.player.capabilities.isCreativeMode) {
@@ -104,8 +110,8 @@ public class GuiPlayerPentacle extends GuiScreen {
 						}
 						GlStateManager.scale(1F/2F, 1F/2F, 1);
 						//GlStateManager.translate(0, 0, 200);
-						this.drawString(renderer, TextFormatting.ITALIC+desc, (mX+5)*2, (mY+15)*2, 0xffffff);
-						this.drawString(renderer, TextFormatting.ITALIC+""+(enable ? TextFormatting.DARK_GREEN : TextFormatting.RED)+""+effect.getStickiness()+" ESPE"+additional, (mX+5)*2, (mY+20)*2, 0xffffff);
+						drawString(renderer, TextFormatting.ITALIC+desc, (mX+5)*2, (mY+15)*2, 0xffffff);
+						drawString(renderer, TextFormatting.ITALIC+""+(enable ? TextFormatting.DARK_GREEN : TextFormatting.RED)+""+effect.getStickiness()+" ESPE"+additional, (mX+5)*2, (mY+20)*2, 0xffffff);
 						//GlStateManager.translate(0, 0, -200);
 						GlStateManager.scale(2, 2, 1);
 						GlStateManager.translate(0, 0, -100);
@@ -146,13 +152,13 @@ public class GuiPlayerPentacle extends GuiScreen {
 			List<ICorruptionEffect> effects = ECUtils.getData(Minecraft.getMinecraft().player).getEffects();
 			if(effects.size() > button.id) {
 				ICorruptionEffect effect = effects.get(eb.listIndex);
-				if(effect.getType().ordinal() <= this.pentacle.tier || GuiScreen.isShiftKeyDown() && Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
+				if(effect.getType().ordinal() <= pentacle.tier || GuiScreen.isShiftKeyDown() && Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
 					if(GuiScreen.isShiftKeyDown() && Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
-						MiscUtils.handleButtonPress(eb.listIndex, getClass(), eb.getClass(), Minecraft.getMinecraft().player, this.pentacle.getPos().getX(), this.pentacle.getPos().getY(), this.pentacle.getPos().getZ(),"||isCreative:true");
+						MiscUtils.handleButtonPress(eb.listIndex, getClass(), eb.getClass(), Minecraft.getMinecraft().player, pentacle.getPos().getX(), pentacle.getPos().getY(), pentacle.getPos().getZ(),"||isCreative:true");
 					}
 					else {
-						this.pentacle.consumeEnderstarEnergy(effects.get(button.id).getStickiness());
-						MiscUtils.handleButtonPress(eb.listIndex, getClass(), eb.getClass(), Minecraft.getMinecraft().player, this.pentacle.getPos().getX(), this.pentacle.getPos().getY(), this.pentacle.getPos().getZ());
+						pentacle.consumeEnderstarEnergy(effects.get(button.id).getStickiness());
+						MiscUtils.handleButtonPress(eb.listIndex, getClass(), eb.getClass(), Minecraft.getMinecraft().player, pentacle.getPos().getX(), pentacle.getPos().getY(), pentacle.getPos().getZ());
 					}
 				}
 			}
@@ -161,34 +167,35 @@ public class GuiPlayerPentacle extends GuiScreen {
 
 	@Override
 	public void initGui() {
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.buttonList.add(new EffectButton(0,k + 76,l - 40,20,20,"0",0));
-		this.buttonList.add(new EffectButton(1,k - 36 ,l + 40,20,20,"1",1));
-		this.buttonList.add(new EffectButton(2,k + 186 ,l + 40,20,20,"2",2));
-		this.buttonList.add(new EffectButton(3,k + 76 ,l + 16,20,20,"3",3));
-		this.buttonList.add(new EffectButton(4,k + 30 ,l + 10,20,20,"4",4));
-		this.buttonList.add(new EffectButton(5,k + 126 ,l + 10,20,20,"5",5));
-		this.buttonList.add(new EffectButton(6,k + 20 ,l + 57,20,20,"6",6));
-		this.buttonList.add(new EffectButton(7,k + 132 ,l + 57,20,20,"7",7));
-		this.buttonList.add(new EffectButton(8,k + 0 ,l + 101,20,20,"8",8));
-		this.buttonList.add(new EffectButton(9,k + 150 ,l + 101,20,20,"9",9));
-		this.buttonList.add(new EffectButton(10,k + 42 ,l + 126,20,20,"10",10));
-		this.buttonList.add(new EffectButton(11,k + 110 ,l + 126,20,20,"11",11));
-		this.buttonList.add(new EffectButton(12,k + 76 ,l + 156,20,20,"12",12));
-		this.buttonList.add(new EffectButton(13,k + 0 ,l + 174,20,20,"13",13));
-		this.buttonList.add(new EffectButton(14,k + 150 ,l + 174,20,20,"14",14));
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		buttonList.add(new EffectButton(0,k + 76,l - 40,20,20,"0",0));
+		buttonList.add(new EffectButton(1,k - 36 ,l + 40,20,20,"1",1));
+		buttonList.add(new EffectButton(2,k + 186 ,l + 40,20,20,"2",2));
+		buttonList.add(new EffectButton(3,k + 76 ,l + 16,20,20,"3",3));
+		buttonList.add(new EffectButton(4,k + 30 ,l + 10,20,20,"4",4));
+		buttonList.add(new EffectButton(5,k + 126 ,l + 10,20,20,"5",5));
+		buttonList.add(new EffectButton(6,k + 20 ,l + 57,20,20,"6",6));
+		buttonList.add(new EffectButton(7,k + 132 ,l + 57,20,20,"7",7));
+		buttonList.add(new EffectButton(8,k + 0 ,l + 101,20,20,"8",8));
+		buttonList.add(new EffectButton(9,k + 150 ,l + 101,20,20,"9",9));
+		buttonList.add(new EffectButton(10,k + 42 ,l + 126,20,20,"10",10));
+		buttonList.add(new EffectButton(11,k + 110 ,l + 126,20,20,"11",11));
+		buttonList.add(new EffectButton(12,k + 76 ,l + 156,20,20,"12",12));
+		buttonList.add(new EffectButton(13,k + 0 ,l + 174,20,20,"13",13));
+		buttonList.add(new EffectButton(14,k + 150 ,l + 174,20,20,"14",14));
 	}
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		renderTime = (int)(Minecraft.getMinecraft().world.getTotalWorldTime() - this.timeOpened);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
+		renderTime = (int)(Minecraft.getMinecraft().world.getTotalWorldTime() - timeOpened);
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
 
 		float opacityIndex = renderTime / 100F;
-		if(opacityIndex > 1)
+		if(opacityIndex > 1) {
 			opacityIndex = 1;
+		}
 
 		GlStateManager.pushMatrix();
 		GlStateManager.enableBlend();
@@ -212,7 +219,7 @@ public class GuiPlayerPentacle extends GuiScreen {
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.popMatrix();
 
-		TilePlayerPentacle p = this.pentacle;
+		TilePlayerPentacle p = pentacle;
 		if(p.tier == -1) {
 			GlStateManager.color(0.2F, 0.2F, 0.2F, opacityIndex);
 		}
@@ -252,12 +259,13 @@ public class GuiPlayerPentacle extends GuiScreen {
 				int index = MathUtils.pixelatedTextureSize(data.getOverhaulDamage(), 72000, 61);
 				GlStateManager.color(0.73F, 0F, 0F);
 				this.drawTexturedModalRect((int) (k+uv/2.9F) - 32, (int) (l+uu/2.5F) + 2, 0, 0, index, 5);
-				this.energy = this.pentacle.getEnderstarEnergy();
+				energy = pentacle.getEnderstarEnergy();
 				String displayEnergy = energy+"";
-				while(5-displayEnergy.length() > 0)
+				while(5-displayEnergy.length() > 0) {
 					displayEnergy = " "+displayEnergy;
+				}
 				displayEnergy += " ESPE";
-				this.drawString(fontRenderer, displayEnergy, (int) (k+uv/2.9F) - 32, (int) (l+uu/2.5F) + 22, 0xffffff);
+				drawString(fontRenderer, displayEnergy, (int) (k+uv/2.9F) - 32, (int) (l+uu/2.5F) + 22, 0xffffff);
 			}
 		}
 		if(opacityIndex==1) {

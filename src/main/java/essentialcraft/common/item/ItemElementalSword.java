@@ -52,9 +52,9 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 
 	public ItemElementalSword() {
 		super(ItemsCore.elemental);
-		this.maxStackSize = 1;
-		this.bFull3D = true;
-		this.setMaxDamage(0);
+		maxStackSize = 1;
+		bFull3D = true;
+		setMaxDamage(0);
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 
 	@Override
 	public void getSubItems(CreativeTabs creativeTabs, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(creativeTabs)) {
+		if(isInCreativeTab(creativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
@@ -211,7 +211,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 		if(tag.hasKey("primary")) {
 			return;
 		}
-		else if(tag.hasKey("focus_0")) {
+		if(tag.hasKey("focus_0")) {
 			String s_0 = tag.getString("focus_0");
 			String s_1 = tag.getString("focus_1");
 			String s_2 = tag.getString("focus_2");
@@ -221,38 +221,54 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 			s_2 = s_2.toLowerCase();
 			s_3 = s_3.toLowerCase();
 			int fire = 0,water = 0,earth = 0,air = 0;
-			if(s_0.toLowerCase().contains("ffocus"))
+			if(s_0.toLowerCase().contains("ffocus")) {
 				++fire;
-			if(s_1.toLowerCase().contains("ffocus"))
+			}
+			if(s_1.toLowerCase().contains("ffocus")) {
 				++fire;
-			if(s_2.toLowerCase().contains("ffocus"))
+			}
+			if(s_2.toLowerCase().contains("ffocus")) {
 				++fire;
-			if(s_3.toLowerCase().contains("ffocus"))
+			}
+			if(s_3.toLowerCase().contains("ffocus")) {
 				++fire;
-			if(s_0.toLowerCase().contains("wfocus"))
+			}
+			if(s_0.toLowerCase().contains("wfocus")) {
 				++water;
-			if(s_1.toLowerCase().contains("wfocus"))
+			}
+			if(s_1.toLowerCase().contains("wfocus")) {
 				++water;
-			if(s_2.toLowerCase().contains("wfocus"))
+			}
+			if(s_2.toLowerCase().contains("wfocus")) {
 				++water;
-			if(s_3.toLowerCase().contains("wfocus"))
+			}
+			if(s_3.toLowerCase().contains("wfocus")) {
 				++water;
-			if(s_0.toLowerCase().contains("efocus"))
+			}
+			if(s_0.toLowerCase().contains("efocus")) {
 				++earth;
-			if(s_1.toLowerCase().contains("efocus"))
+			}
+			if(s_1.toLowerCase().contains("efocus")) {
 				++earth;
-			if(s_2.toLowerCase().contains("efocus"))
+			}
+			if(s_2.toLowerCase().contains("efocus")) {
 				++earth;
-			if(s_3.toLowerCase().contains("efocus"))
+			}
+			if(s_3.toLowerCase().contains("efocus")) {
 				++earth;
-			if(s_0.toLowerCase().contains("afocus"))
+			}
+			if(s_0.toLowerCase().contains("afocus")) {
 				++air;
-			if(s_1.toLowerCase().contains("afocus"))
+			}
+			if(s_1.toLowerCase().contains("afocus")) {
 				++air;
-			if(s_2.toLowerCase().contains("afocus"))
+			}
+			if(s_2.toLowerCase().contains("afocus")) {
 				++air;
-			if(s_3.toLowerCase().contains("afocus"))
+			}
+			if(s_3.toLowerCase().contains("afocus")) {
 				++air;
+			}
 			if(fire > water && fire > earth && fire > air) {
 				tag.setString("primary", "Fire");
 			}
@@ -268,7 +284,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 			else {
 				tag.setString("primary", "Combined");
 			}
-			List<String> secondaryAttribs = new ArrayList<String>();
+			List<String> secondaryAttribs = new ArrayList<>();
 			if(fire != 0) {
 				secondaryAttribs.add("Fire");
 			}
@@ -294,38 +310,44 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 	}
 
 	public static String getPrimaryAttribute(ItemStack s) {
-		if(s.hasTagCompound())
+		if(s.hasTagCompound()) {
 			return s.getTagCompound().getString("primary");
-		else
-			return "combined";
+		}
+		return "combined";
 	}
 
 	public static String getSecondaryAttribute(ItemStack s) {
-		if(s.hasTagCompound())
+		if(s.hasTagCompound()) {
 			return s.getTagCompound().getString("secondary");
-		else
-			return "combined";
+		}
+		return "combined";
 	}
 
 	public static String getA(ItemStack s, int pass) {
 		String a = "";
-		if(pass == 0)
+		if(pass == 0) {
 			a = getPrimaryAttribute(s);
-		else
+		}
+		else {
 			a = getSecondaryAttribute(s);
-		if(a.contains("Fire"))
+		}
+		if(a.contains("Fire")) {
 			return "fire";
-		if(a.contains("Water"))
+		}
+		if(a.contains("Water")) {
 			return "water";
-		if(a.contains("Earth"))
+		}
+		if(a.contains("Earth")) {
 			return "earth";
-		if(a.contains("Air"))
+		}
+		if(a.contains("Air")) {
 			return "air";
+		}
 		return "normal";
 	}
 
 	public static List<String> getEmberEffects(ItemStack stack) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		if(stack.hasTagCompound()) {
 			String allEmbers = stack.getTagCompound().getString("ember_0")+" "+stack.getTagCompound().getString("ember_1")+" "+stack.getTagCompound().getString("ember_2")+" "+stack.getTagCompound().getString("ember_3");
 			allEmbers = allEmbers.toLowerCase();
@@ -433,8 +455,7 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 				player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 50, 0));
 				List<EntityLivingBase> l = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX-2, player.posY-1, player.posZ-2, player.posX+2, player.posY+3, player.posZ+2), Predicates.and(EntitySelectors.NOT_SPECTATING, e->e != player));
 				if(!l.isEmpty()) {
-					for(int i = 0; i < l.size(); ++i) {
-						EntityLivingBase b = l.get(i);
+					for(EntityLivingBase b : l) {
 						b.setFire(2);
 					}
 				}
@@ -468,10 +489,10 @@ public class ItemElementalSword extends ItemSword implements IModelRegisterer {
 	@Override
 	public void registerModels() {
 		ModelLoader.setCustomMeshDefinition(this, new MeshDefinitionElementalSword());
-		ArrayList<ModelResourceLocation> locations = new ArrayList<ModelResourceLocation>();
-		for(int i = 0; i < names.length; i++) {
-			for(int j = 0; j < names.length; j++) {
-				locations.add(new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + names[i] + "," + "top=" + names[j]));
+		ArrayList<ModelResourceLocation> locations = new ArrayList<>();
+		for(String name : names) {
+			for(String name2 : names) {
+				locations.add(new ModelResourceLocation("essentialcraft:item/elementalsword", "bottom=" + name + "," + "top=" + name2));
 			}
 		}
 		ModelBakery.registerItemVariants(this, locations.toArray(new ModelResourceLocation[0]));

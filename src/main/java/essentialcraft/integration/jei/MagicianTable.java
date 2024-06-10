@@ -50,10 +50,12 @@ public class MagicianTable {
 		public void getIngredients(IIngredients arg0) {
 			ArrayList<List<ItemStack>> ret = Lists.<List<ItemStack>>newArrayList();
 			for(Ingredient ing : rec.requiredItems) {
-				if(ing == Ingredient.EMPTY)
+				if(ing == Ingredient.EMPTY) {
 					ret.add(Collections.emptyList());
-				else
+				}
+				else {
 					ret.add(Arrays.asList(ing.getMatchingStacks()));
+				}
 			}
 			arg0.setInputLists(ItemStack.class, ret);
 			arg0.setOutput(ItemStack.class, rec.result);
@@ -93,8 +95,9 @@ public class MagicianTable {
 			arg0.getItemStacks().init(5, false, 108, 18);
 
 			for(int i = 0; i < 5; i++) {
-				if(arg2.getInputs(ItemStack.class).size()>i)
+				if(arg2.getInputs(ItemStack.class).size()>i) {
 					arg0.getItemStacks().set(i, arg2.getInputs(ItemStack.class).get(i));
+				}
 			}
 			arg0.getItemStacks().set(5, arg2.getOutputs(ItemStack.class).get(0));
 		}

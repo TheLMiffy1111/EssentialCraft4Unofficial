@@ -46,14 +46,18 @@ public class ArmorRenderer implements IItemRenderer {
 				modelbiped.bipedLeftArm.showModel = atype == EntityEquipmentSlot.CHEST;
 				modelbiped.bipedRightLeg.showModel = atype == EntityEquipmentSlot.LEGS || atype == EntityEquipmentSlot.FEET;
 				modelbiped.bipedLeftLeg.showModel = atype == EntityEquipmentSlot.LEGS || atype == EntityEquipmentSlot.FEET;
-				if(atype == EntityEquipmentSlot.HEAD)
+				if(atype == EntityEquipmentSlot.HEAD) {
 					GlStateManager.translate(0.5F, 1.7F, 0.5F);
-				if(atype == EntityEquipmentSlot.CHEST)
+				}
+				if(atype == EntityEquipmentSlot.CHEST) {
 					GlStateManager.translate(0.5F, 2.5F, 0.5F);
-				if(atype == EntityEquipmentSlot.LEGS)
+				}
+				if(atype == EntityEquipmentSlot.LEGS) {
 					GlStateManager.translate(0.5F, 3.2F, 0.5F);
-				if(atype == EntityEquipmentSlot.FEET)
+				}
+				if(atype == EntityEquipmentSlot.FEET) {
 					GlStateManager.translate(0.5F, 3.2F, 0.5F);
+				}
 				GlStateManager.rotate(180, 1, 0, 0);
 				GlStateManager.scale(2F, 2F, 2F);
 				modelbiped.render(Minecraft.getMinecraft().player, 0, 0, 0F, 0F, 0, 0.0625F);

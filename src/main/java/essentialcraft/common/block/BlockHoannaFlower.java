@@ -11,7 +11,7 @@ public class BlockHoannaFlower extends BlockBush implements IModelRegisterer {
 
 	public BlockHoannaFlower() {
 		super();
-		this.setSoundType(SoundType.PLANT);
+		setSoundType(SoundType.PLANT);
 	}
 
 	@Override

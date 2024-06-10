@@ -87,7 +87,9 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 			}else {
 				ItemStack dropped = display.getStackInSlot(0);
 				if(!dropped.isEmpty() && !w.isRemote) {
-					if(dropped.getCount() == 0)dropped.setCount(1);
+					if(dropped.getCount() == 0) {
+						dropped.setCount(1);
+					}
 					EntityItem itm = new EntityItem(w, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, dropped);
 					itm.setPickupDelay(30);
 					display.setInventorySlotContents(0, ItemStack.EMPTY);
@@ -96,27 +98,27 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 			}
 			display.syncTick = 0;
 		}
-		else
+		else if(p.isSneaking())
 		{
-			if(p.isSneaking())
-			{
-				ItemStack dropped = display.getStackInSlot(0);
-				if(!dropped.isEmpty() && !w.isRemote) {
-					if(dropped.getCount() == 0)dropped.setCount(1);
-					EntityItem itm = new EntityItem(w, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, dropped);
-					itm.setPickupDelay(30);
-					display.setInventorySlotContents(0, ItemStack.EMPTY);
-					w.spawnEntity(itm);
-					display.syncTick = 1;
+			ItemStack dropped = display.getStackInSlot(0);
+			if(!dropped.isEmpty() && !w.isRemote) {
+				if(dropped.getCount() == 0) {
+					dropped.setCount(1);
 				}
-			}
-			else
-			{
-				++display.type;
-				if(display.type >= 3)
-					display.type = 0;
+				EntityItem itm = new EntityItem(w, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, dropped);
+				itm.setPickupDelay(30);
+				display.setInventorySlotContents(0, ItemStack.EMPTY);
+				w.spawnEntity(itm);
 				display.syncTick = 1;
 			}
+		}
+		else
+		{
+			++display.type;
+			if(display.type >= 3) {
+				display.type = 0;
+			}
+			display.syncTick = 1;
 		}
 		return true;
 	}
@@ -124,7 +126,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 	@Override
 	public IBlockState getStateForPlacement(World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase p)
 	{
-		return this.getDefaultState().withProperty(FACING, side);
+		return getDefaultState().withProperty(FACING, side);
 	}
 
 	@Override
@@ -187,7 +189,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

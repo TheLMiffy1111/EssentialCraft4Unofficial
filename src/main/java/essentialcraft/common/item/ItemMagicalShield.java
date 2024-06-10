@@ -16,8 +16,8 @@ public class ItemMagicalShield extends ItemMRUGeneric implements IModelRegistere
 
 	public ItemMagicalShield() {
 		super();
-		this.maxStackSize = 1;
-		this.bFull3D = true;
+		maxStackSize = 1;
+		bFull3D = true;
 	}
 
 	@Override

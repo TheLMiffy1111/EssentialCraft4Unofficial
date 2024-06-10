@@ -5,9 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
+public class RadiatingChamberRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
 	public Ingredient[] recipeItems = {Ingredient.EMPTY, Ingredient.EMPTY};
 	public ItemStack result = ItemStack.EMPTY;
@@ -18,7 +18,7 @@ public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
 	public RadiatingChamberRecipe(Ingredient[] ingred, ItemStack res, int mruReq, float balancePoint1, float balancePoint2) {
 		for(int i = 0; i < 2 && i < ingred.length; ++i) {
 			Ingredient ing = ingred[i];
-			this.recipeItems[i] = ing == null ? Ingredient.EMPTY : ing;
+			recipeItems[i] = ing == null ? Ingredient.EMPTY : ing;
 		}
 		result = res;
 		mruRequired = mruReq;
@@ -30,7 +30,7 @@ public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
 	public RadiatingChamberRecipe(Ingredient[] ingred, ItemStack res, int mruReq, float balancePoint1, float balancePoint2, float modifier) {
 		for(int i = 0; i < 2 && i < ingred.length; ++i) {
 			Ingredient ing = ingred[i];
-			this.recipeItems[i] = ing == null ? Ingredient.EMPTY : ing;
+			recipeItems[i] = ing == null ? Ingredient.EMPTY : ing;
 		}
 		result = res;
 		mruRequired = mruReq;
@@ -49,14 +49,11 @@ public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
 	}
 
 	public boolean matches(ItemStack[] input, float balance) {
-		if(input.length < 2) {
-			return false;
-		}
-		if(balance < this.lowerBalanceLine || balance > this.upperBalanceLine) {
+		if((input.length < 2) || balance < lowerBalanceLine || balance > upperBalanceLine) {
 			return false;
 		}
 		for(int i = 0; i < 2; ++i) {
-			if(!this.recipeItems[i].apply(input[i])) {
+			if(!recipeItems[i].apply(input[i])) {
 				return false;
 			}
 		}
@@ -68,7 +65,7 @@ public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
 			return false;
 		}
 		for(int i = 0; i < 2; ++i) {
-			if(!this.recipeItems[i].apply(input[i])) {
+			if(!recipeItems[i].apply(input[i])) {
 				return false;
 			}
 		}
@@ -78,7 +75,7 @@ public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
 	@Override
 	public String toString() {
 		String retStr = super.toString();
-		for(int i = 0; i < this.recipeItems.length; ++i)
+		for(int i = 0; i < recipeItems.length; ++i)
 		{
 			retStr+="||item_"+i+":"+recipeItems[i];
 		}
@@ -110,7 +107,7 @@ public class RadiatingChamberRecipe extends Impl<IRecipe> implements IRecipe {
 
 	@Override
 	public boolean canFit(int width, int height) {
-		return width*height>=2;
+		return width*height >= 2;
 	}
 
 	@Override

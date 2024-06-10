@@ -11,7 +11,7 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public class MithrilineFurnaceRecipes {
 
-	public static final List<MithrilineFurnaceRecipe> RECIPES = new ArrayList<MithrilineFurnaceRecipe>();
+	public static final List<MithrilineFurnaceRecipe> RECIPES = new ArrayList<>();
 
 	public static void addRecipe(Ingredient input, ItemStack result, float cost, int req) {
 		addRecipe(new MithrilineFurnaceRecipe(input, result, cost, req));
@@ -52,8 +52,7 @@ public class MithrilineFurnaceRecipes {
 	}
 
 	public static void removeRecipe(ItemStack input, ItemStack result) {
-		for(int i = 0; i < RECIPES.size(); ++i) {
-			MithrilineFurnaceRecipe rec = RECIPES.get(i);
+		for(MithrilineFurnaceRecipe rec : RECIPES) {
 			if(rec != null && rec.input.apply(input) && rec.result.isItemEqual(result)) {
 				removeRecipe(rec);
 				return;
@@ -63,8 +62,7 @@ public class MithrilineFurnaceRecipes {
 
 	public static void removeRecipe(String input, ItemStack result) {
 		try {
-			for(int i = 0; i < RECIPES.size(); ++i) {
-				MithrilineFurnaceRecipe rec = RECIPES.get(i);
+			for(MithrilineFurnaceRecipe rec : RECIPES) {
 				if(rec != null && rec.input.apply(OreDictionary.getOres(input).get(0)) && rec.result.isItemEqual(result)) {
 					removeRecipe(rec);
 					return;

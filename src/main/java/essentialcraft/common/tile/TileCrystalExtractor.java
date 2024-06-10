@@ -24,8 +24,9 @@ public class TileCrystalExtractor extends TileMRUGeneric {
 		super.update();
 		mruStorage.update(getPos(), getWorld(), getStackInSlot(0));
 
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) == 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			doWork();
+		}
 		spawnParticles();
 	}
 
@@ -74,8 +75,9 @@ public class TileCrystalExtractor extends TileMRUGeneric {
 				return false;
 			}
 		}
-		if(getCrystal() == null)
+		if(getCrystal() == null) {
 			return false;
+		}
 		return true;
 	}
 

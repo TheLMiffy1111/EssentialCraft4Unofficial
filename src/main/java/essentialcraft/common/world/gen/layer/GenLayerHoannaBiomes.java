@@ -36,14 +36,15 @@ public class GenLayerHoannaBiomes extends GenLayer {
 
 	public GenLayerHoannaBiomes(long seed, GenLayer prevLayer, WorldType worldType, ChunkGeneratorSettings settings) {
 		super(seed);
-		this.parent = prevLayer;
+		parent = prevLayer;
 
 		for(BiomeType type : BiomeType.values()) {
 			ImmutableList<BiomeEntry> biomesToAdd = BiomeManager.getBiomes(type);
 			int idx = type.ordinal();
 
-			if(biomes[idx] == null)
-				biomes[idx] = new ArrayList<BiomeEntry>();
+			if(biomes[idx] == null) {
+				biomes[idx] = new ArrayList<>();
+			}
 			if(biomesToAdd != null) {
 				biomes[idx].addAll(biomesToAdd.stream().filter(entry->biomehasAnyType(entry.biome, Type.FOREST, Type.DENSE)).collect(Collectors.toList()));
 				biomes[idx].addAll(HOANNA_BIOMES);
@@ -70,18 +71,18 @@ public class GenLayerHoannaBiomes extends GenLayer {
 
 	@Override
 	public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight) {
-		int[] aint = this.parent.getInts(areaX, areaY, areaWidth, areaHeight);
+		int[] aint = parent.getInts(areaX, areaY, areaWidth, areaHeight);
 		int[] aint1 = IntCache.getIntCache(areaWidth * areaHeight);
 
 		for (int i = 0; i < areaHeight; ++i) {
 			for (int j = 0; j < areaWidth; ++j) {
-				this.initChunkSeed(j + areaX, i + areaY);
+				initChunkSeed(j + areaX, i + areaY);
 				int k = aint[j + i * areaWidth];
 				int l = (k & 3840) >> 8;
 			k = k & -3841;
 
-			if (this.settings != null && this.settings.fixedBiome >= 0) {
-				aint1[j + i * areaWidth] = this.settings.fixedBiome;
+			if (settings != null && settings.fixedBiome >= 0) {
+				aint1[j + i * areaWidth] = settings.fixedBiome;
 			}
 			else if (isBiomeOceanic(k)) {
 				aint1[j + i * areaWidth] = k;
@@ -91,7 +92,7 @@ public class GenLayerHoannaBiomes extends GenLayer {
 			}
 			else if (k == 1) {
 				if (l > 0) {
-					if (this.nextInt(3) == 0) {
+					if (nextInt(3) == 0) {
 						aint1[j + i * areaWidth] = Biome.getIdForBiome(Biomes.MESA_CLEAR_ROCK);
 					}
 					else {

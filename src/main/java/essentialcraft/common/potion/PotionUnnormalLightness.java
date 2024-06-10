@@ -12,11 +12,11 @@ public class PotionUnnormalLightness extends Potion{
 
 	public PotionUnnormalLightness(boolean isBad, int color) {
 		super(isBad, color);
-		this.setIconIndex(3, 2);
-		this.setEffectiveness(0.25D);
-		this.setPotionName("potion.paranormalLightness");
+		setIconIndex(3, 2);
+		setEffectiveness(0.25D);
+		setPotionName("potion.paranormalLightness");
 		this.setRegistryName("essentialcraft", "potion.paranormalLightness");
-		this.registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070636", 0.4D, 2);
+		registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070636", 0.4D, 2);
 	}
 
 	@Override

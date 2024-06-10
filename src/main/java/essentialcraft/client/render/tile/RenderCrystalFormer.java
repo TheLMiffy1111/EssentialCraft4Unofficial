@@ -20,7 +20,7 @@ public class RenderCrystalFormer extends TileEntitySpecialRenderer<TileCrystalFo
 		GlStateManager.translate((float)x+0.8F, (float)y+1.1F, (float)z+0.5F);
 		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.rotate(180, 1, 0, 0);
-		this.bindTexture(RenderElementalCrystal.neutral);
+		bindTexture(RenderElementalCrystal.neutral);
 		RenderElementalCrystal.crystal.renderModel(0.0625F);
 		GlStateManager.popMatrix();
 
@@ -28,7 +28,7 @@ public class RenderCrystalFormer extends TileEntitySpecialRenderer<TileCrystalFo
 		GlStateManager.translate((float)x+0.2F, (float)y+1.1F, (float)z+0.5F);
 		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.rotate(180, 1, 0, 0);
-		this.bindTexture(RenderElementalCrystal.neutral);
+		bindTexture(RenderElementalCrystal.neutral);
 		RenderElementalCrystal.crystal.renderModel(0.0625F);
 		GlStateManager.popMatrix();
 
@@ -36,7 +36,7 @@ public class RenderCrystalFormer extends TileEntitySpecialRenderer<TileCrystalFo
 		GlStateManager.translate((float)x+0.5F, (float)y+1.1F, (float)z+0.8F);
 		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.rotate(180, 1, 0, 0);
-		this.bindTexture(RenderElementalCrystal.neutral);
+		bindTexture(RenderElementalCrystal.neutral);
 		RenderElementalCrystal.crystal.renderModel(0.0625F);
 		GlStateManager.popMatrix();
 
@@ -44,7 +44,7 @@ public class RenderCrystalFormer extends TileEntitySpecialRenderer<TileCrystalFo
 		GlStateManager.translate((float)x+0.5F, (float)y+1.1F, (float)z+0.2F);
 		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.rotate(180, 1, 0, 0);
-		this.bindTexture(RenderElementalCrystal.neutral);
+		bindTexture(RenderElementalCrystal.neutral);
 		RenderElementalCrystal.crystal.renderModel(0.0625F);
 		GlStateManager.popMatrix();
 
@@ -53,7 +53,8 @@ public class RenderCrystalFormer extends TileEntitySpecialRenderer<TileCrystalFo
 
 	@Override
 	public void render(TileCrystalFormer tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata() == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata() == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 }

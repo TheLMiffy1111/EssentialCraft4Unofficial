@@ -25,16 +25,17 @@ public class ItemEssentialFuel extends Item implements IModelRegisterer {
 
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(par2CreativeTabs))
+		if(isInCreativeTab(par2CreativeTabs)) {
 			for(int var4 = 0; var4 < 4; ++var4) {
 				ItemStack min = new ItemStack(this, 1, var4);
 				list.add(min);
 			}
+		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName()+name[Math.min(stack.getItemDamage(), name.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey()+name[Math.min(stack.getItemDamage(), name.length-1)];
 	}
 
 	@Override

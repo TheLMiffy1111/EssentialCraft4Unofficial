@@ -57,10 +57,12 @@ public class RadiatingChamber {
 		public void getIngredients(IIngredients arg0) {
 			ArrayList<List<ItemStack>> ret = Lists.<List<ItemStack>>newArrayList();
 			for(Ingredient ing : rec.recipeItems) {
-				if(ing == Ingredient.EMPTY)
+				if(ing == Ingredient.EMPTY) {
 					ret.add(Collections.emptyList());
-				else
+				}
+				else {
 					ret.add(Arrays.asList(ing.getMatchingStacks()));
+				}
 			}
 			arg0.setInputLists(ItemStack.class, ret);
 			arg0.setOutput(ItemStack.class, rec.result);
@@ -97,8 +99,9 @@ public class RadiatingChamber {
 			arg0.getItemStacks().init(2, false, 36, 18);
 
 			arg0.getItemStacks().set(0, arg2.getInputs(ItemStack.class).get(0));
-			if(arg2.getInputs(ItemStack.class).size()>1)
+			if(arg2.getInputs(ItemStack.class).size()>1) {
 				arg0.getItemStacks().set(1, arg2.getInputs(ItemStack.class).get(1));
+			}
 			arg0.getItemStacks().set(2, arg2.getOutputs(ItemStack.class).get(0));
 		}
 

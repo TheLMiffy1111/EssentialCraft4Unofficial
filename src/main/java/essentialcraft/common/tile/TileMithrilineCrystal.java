@@ -54,15 +54,17 @@ public class TileMithrilineCrystal extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 		if(syncTick == 0) {
-			if(tracker == null)
+			if(tracker == null) {
 				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + "," + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
+			}
 			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);
 			}
 			syncTick = 20;
 		}
-		else
+		else {
 			--syncTick;
+		}
 
 		boolean hasSky = getWorld().canBlockSeeSky(pos.up(3)) || !requiresUnobstructedSky;
 		if(hasSky) {
@@ -85,8 +87,9 @@ public class TileMithrilineCrystal extends TileEntity implements ITickable {
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	public static void setupConfig(Configuration cfg) {

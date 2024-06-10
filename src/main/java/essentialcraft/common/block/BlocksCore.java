@@ -23,51 +23,51 @@ import net.minecraft.item.ItemStack;
 public class BlocksCore {
 
 	public static void loadBlocks() {
-		drops = new BlockDrops().setUnlocalizedName("essentialcraft.drops");
+		drops = new BlockDrops().setTranslationKey("essentialcraft.drops");
 		registerBlockSimple(new ItemBlockMeta(drops), "Drops");
-		magicPlating = new BlockDyeable(Material.ROCK, MapColor.PURPLE).setHardness(3.0F).setResistance(15.0F).setUnlocalizedName("essentialcraft.magicPlatingBlock");
+		magicPlating = new BlockDyeable(Material.ROCK, MapColor.PURPLE).setHardness(3.0F).setResistance(15.0F).setTranslationKey("essentialcraft.magicPlatingBlock");
 		registerBlockSimple(magicPlating, "magicPlating");
-		fortifiedGlass = new BlockDyeable(Material.GLASS).setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.fortifiedGlass");
+		fortifiedGlass = new BlockDyeable(Material.GLASS).setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.fortifiedGlass");
 		registerBlockSimple(fortifiedGlass, "fortifiedGlass");
-		ecController = new BlockMRUCUECController().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecController");
+		ecController = new BlockMRUCUECController().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecController");
 		registerBlockSimple(ecController, "ecController");
-		ecAcceptor = new BlockMRUCUECAcceptor().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecAcceptor");
+		ecAcceptor = new BlockMRUCUECAcceptor().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecAcceptor");
 		registerBlockSimple(ecAcceptor, "ecAcceptor");
-		ecBalancer = new BlockMRUCUECBalancer().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecBalancer");
+		ecBalancer = new BlockMRUCUECBalancer().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecBalancer");
 		registerBlockSimple(ecBalancer, "ecBalancer");
-		ecEjector = new BlockMRUCUECEjector().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecEjector");
+		ecEjector = new BlockMRUCUECEjector().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecEjector");
 		registerBlockSimple(ecEjector, "ecEjector");
-		ecHoldingChamber = new BlockMRUCUECHoldingChamber().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecHoldingChamber");
+		ecHoldingChamber = new BlockMRUCUECHoldingChamber().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecHoldingChamber");
 		registerBlockSimple(ecHoldingChamber, "ecHoldingChamber");
-		ecStateChecker = new BlockMRUCUECStateChecker().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecStateChecker");
+		ecStateChecker = new BlockMRUCUECStateChecker().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecStateChecker");
 		registerBlockSimple(ecStateChecker, "ecStateChecker");
-		ecRedstoneController = new BlockMRUCUECRedstoneController().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.ecRedstoneController");
+		ecRedstoneController = new BlockMRUCUECRedstoneController().setHardness(3.0F).setResistance(15.0F).setLightOpacity(0).setTranslationKey("essentialcraft.ecRedstoneController");
 		registerBlockSimple(ecRedstoneController, "ecRedstoneController");
-		rayTower = new BlockRayTower().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.rayTower");
+		rayTower = new BlockRayTower().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.rayTower");
 		registerBlockSimple(rayTower, "rayTower");
-		solarPrism = new BlockSolarPrism().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.solarPrism");
+		solarPrism = new BlockSolarPrism().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.solarPrism");
 		registerBlockSimple(solarPrism, "solarPrism");
-		sunRayAbsorber = new BlockSunRayAbsorber().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.sunRayAbsorber");
+		sunRayAbsorber = new BlockSunRayAbsorber().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.sunRayAbsorber");
 		registerBlockSimple(sunRayAbsorber, "sunRayAbsorber");
-		coldStone = new BlockColdStone().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.coldStone");
+		coldStone = new BlockColdStone().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.coldStone");
 		registerBlockSimple(coldStone, "coldStone");
-		coldDistillator = new BlockColdDistillator().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.coldDistillator");
+		coldDistillator = new BlockColdDistillator().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.coldDistillator");
 		registerBlockSimple(coldDistillator, "coldDistillator");
-		naturalFurnace = new BlockFlowerBurner().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.naturalFurnace");
+		naturalFurnace = new BlockFlowerBurner().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.naturalFurnace");
 		registerBlockSimple(naturalFurnace, "naturalFurnace");
-		heatGenerator = new BlockHeatGenerator().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.heatGenerator");
+		heatGenerator = new BlockHeatGenerator().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.heatGenerator");
 		registerBlockSimple(heatGenerator, "heatGenerator");
-		enderGenerator = new BlockEnderGenerator().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.enderGenerator");
+		enderGenerator = new BlockEnderGenerator().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.enderGenerator");
 		registerBlockSimple(enderGenerator, "enderGenerator");
 		String[] corruptionNames = {"chaos", "frozen", "magic", "shade"};
 		for(int i = 0; i < 4; ++i) {
-			lightCorruption[i] = new BlockCorruption().setBlockTextureName("essentialcraft:"+corruptionNames[i]).setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.corruption."+corruptionNames[i]);
+			lightCorruption[i] = new BlockCorruption().setBlockTextureName("essentialcraft:"+corruptionNames[i]).setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.corruption."+corruptionNames[i]);
 			registerBlockSimple(lightCorruption[i], corruptionNames[i]);
 		}
-		moonWell = new BlockMoonWell().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setUnlocalizedName("essentialcraft.moonWell");
+		moonWell = new BlockMoonWell().setHardness(1.0F).setResistance(1.0F).setLightOpacity(0).setTranslationKey("essentialcraft.moonWell");
 		registerBlockSimple(moonWell, "moonWell");
 		magicianTable = registerBlockSimple(new BlockMagicianTable(), "magicianTable", 1, 1, 0);
-		fortifiedStone = new BlockDyeable(Material.ROCK).setHardness(3.0F).setResistance(15.0F).setUnlocalizedName("essentialcraft.fortifiedStone");
+		fortifiedStone = new BlockDyeable(Material.ROCK).setHardness(3.0F).setResistance(15.0F).setTranslationKey("essentialcraft.fortifiedStone");
 		registerBlockSimple(fortifiedStone, "fortifiedStone");
 		magicalQuarry = registerBlockSimple(new BlockMagicalQuarry(), "magicalQuarry", 1, 1, 0);
 		monsterClinger = registerBlockSimple(new BlockMonsterHolder(), "monsterClinger", 1, 1, 0);
@@ -79,15 +79,15 @@ public class BlocksCore {
 		radiatingChamber = registerBlockSimple(new BlockRadiatingChamber(), "radiatingChamber", 1, 1, 0);
 		magmaticSmeltery = registerBlockSimple(new BlockMagmaticSmeltery(), "magmaticSmeltery", 1, 1, 0);
 		magicalJukebox = registerBlockSimple(new BlockMagicalJukebox(), "magicalJukebox", 1, 1, 0);
-		elementalCrystal = new BlockElementalCrystal().setHardness(3.0F).setResistance(15.0F).setUnlocalizedName("essentialcraft.elementalCrystal");
+		elementalCrystal = new BlockElementalCrystal().setHardness(3.0F).setResistance(15.0F).setTranslationKey("essentialcraft.elementalCrystal");
 		registerBlockSimple(elementalCrystal, "elementalCrystal", ItemBlockElementalCrystal.class);
 		crystalFormer = registerBlockSimple(new BlockCrystalFormer(), "crystalFormer", 1, 1, 0);
 		crystalController = registerBlockSimple(new BlockCrystalController(), "crystalController", 1, 1, 0);
 		crystalExtractor = registerBlockSimple(new BlockCrystalExtractor(), "crystalExtractor", 1, 1, 0);
 		chargingChamber = registerBlockSimple(new BlockChargingChamber(), "chargingChamber", 1, 1, 0);
-		voidStone = new BlockDyeable(Material.ROCK, MapColor.BLACK).setHardness(8.0F).setResistance(150.0F).setUnlocalizedName("essentialcraft.voidStone");
+		voidStone = new BlockDyeable(Material.ROCK, MapColor.BLACK).setHardness(8.0F).setResistance(150.0F).setTranslationKey("essentialcraft.voidStone");
 		registerBlockSimple(voidStone, "voidStone");
-		voidGlass = new BlockDyeable(Material.GLASS, MapColor.BLACK).setHardness(8.0F).setResistance(150.0F).setUnlocalizedName("essentialcraft.voidGlass");
+		voidGlass = new BlockDyeable(Material.GLASS, MapColor.BLACK).setHardness(8.0F).setResistance(150.0F).setTranslationKey("essentialcraft.voidGlass");
 		registerBlockSimple(voidGlass, "voidGlass");
 
 		concrete = registerBlockSimple(new BlockEC(Material.ROCK), "concrete", 1, 1, 0);
@@ -104,26 +104,26 @@ public class BlocksCore {
 		levitator = registerBlockSimple(new BlockMRULevitator(), "levitator", 1, 100, 0);
 		spreader = registerBlockSimple(new BlockMRUSpreader(), "spreader", 1, 100, 0);
 
-		fence[0] = new BlockFenceEC(Material.ROCK, MapColor.BLACK).setHardness(8.0F).setResistance(150.0F).setUnlocalizedName("essentialcraft.voidFence");
+		fence[0] = new BlockFenceEC(Material.ROCK, MapColor.BLACK).setHardness(8.0F).setResistance(150.0F).setTranslationKey("essentialcraft.voidFence");
 		registerBlockSimple(fence[0], "voidFence");
-		fence[1] = new BlockFenceEC(Material.ROCK, MapColor.PURPLE).setHardness(3.0F).setResistance(15.0F).setUnlocalizedName("essentialcraft.magicFence");
+		fence[1] = new BlockFenceEC(Material.ROCK, MapColor.PURPLE).setHardness(3.0F).setResistance(15.0F).setTranslationKey("essentialcraft.magicFence");
 		registerBlockSimple(fence[1], "magicFence");
-		fence[2] = new BlockFenceEC(Material.ROCK).setHardness(3.0F).setResistance(15.0F).setUnlocalizedName("essentialcraft.fFence");
+		fence[2] = new BlockFenceEC(Material.ROCK).setHardness(3.0F).setResistance(15.0F).setTranslationKey("essentialcraft.fFence");
 		registerBlockSimple(fence[2], "fFence");
 
 		torch = registerBlockSimple(new BlockMagicLight(), "torch", 0, 0, 1);
 		torch.setLightLevel(1.0F);
 
 		blockPale = registerBlockSimple(new BlockEC(Material.ROCK, MapColor.LAPIS), "blockPale", 2, 100, 0).setSoundType(SoundType.METAL);
-		platingPale = new BlockDyeable(Material.ROCK, MapColor.LAPIS).setHardness(3.0F).setResistance(100.0F).setUnlocalizedName("essentialcraft.platingPale");
+		platingPale = new BlockDyeable(Material.ROCK, MapColor.LAPIS).setHardness(3.0F).setResistance(100.0F).setTranslationKey("essentialcraft.platingPale");
 		registerBlockSimple(platingPale, "platingPale");
 		mruCoilHardener = registerBlockSimple(new BlockMRUCoilHardener(), "mruCoilHardener", 1, 100, 0);
 		mruCoil = registerBlockSimple(new BlockMRUCoil(), "mruCoil", 1, 100, 0);
 		corruptionCleaner = registerBlockSimple(new BlockCorruptionCleaner(), "corruptionCleaner", 1, 100, 0);
-		reactorSupport = new BlockReactorSupport().setUnlocalizedName("essentialcraft.reactorSupport").setHardness(1).setResistance(10).setLightOpacity(0);
+		reactorSupport = new BlockReactorSupport().setTranslationKey("essentialcraft.reactorSupport").setHardness(1).setResistance(10).setLightOpacity(0);
 		registerBlockSimple(reactorSupport, "reactorSupport");
 		reactor = registerBlockSimple(new BlockMRUReactor(), "reactor", 1, 10, 0);
-		air = new BlockEC(Material.ROCK).setHardness(-1).setResistance(-1).setLightLevel(0).setUnlocalizedName("air");
+		air = new BlockEC(Material.ROCK).setHardness(-1).setResistance(-1).setLightLevel(0).setTranslationKey("air");
 		registerBlockSimple(air, "air");
 		darknessObelisk = registerBlockSimple(new BlockDarknessObelisk(), "darknessObelisk", 1, 1, 0);
 
@@ -135,13 +135,13 @@ public class BlocksCore {
 		portal = registerBlockSimple(new BlockHoannaPortal(), "portal", -1, -1, 1);
 		oreDrops = registerBlockSimple(new BlockDropsOre(), "oreDrops", 1, 1, 1);
 
-		invertedBlock = new BlockDyeable(Material.ROCK, MapColor.GREEN).setHardness(4.0F).setResistance(100.0F).setUnlocalizedName("essentialcraft.mithrilinePlating");
+		invertedBlock = new BlockDyeable(Material.ROCK, MapColor.GREEN).setHardness(4.0F).setResistance(100.0F).setTranslationKey("essentialcraft.mithrilinePlating");
 		registerBlockSimple(invertedBlock, "invertedPlating");
-		mithrilineCrystal = new BlockMithrilineCrystal().setUnlocalizedName("essentialcraft.mithrilineCrystal").setHardness(1).setResistance(1).setLightOpacity(1);
+		mithrilineCrystal = new BlockMithrilineCrystal().setTranslationKey("essentialcraft.mithrilineCrystal").setHardness(1).setResistance(1).setLightOpacity(1);
 		registerBlockSimple(mithrilineCrystal, "mithrilineCrystal", ItemBlockMithrilineCrystal.class);
 		mithrilineFurnace = registerBlockSimple(new BlockMithrilineFurnace(), "mithrilineFurnace",1,1,1);
 
-		demonicPlating = new BlockDyeable(Material.ROCK, MapColor.RED).setHardness(3.0F).setResistance(100.0F).setUnlocalizedName("essentialcraft.demonicPlating");
+		demonicPlating = new BlockDyeable(Material.ROCK, MapColor.RED).setHardness(3.0F).setResistance(100.0F).setTranslationKey("essentialcraft.demonicPlating");
 		registerBlockSimple(demonicPlating, "demonicPlating");
 		playerPentacle = registerBlockSimple(new BlockPlayerPentacle(), "playerPentacle", 0, 0, 0);
 		windRune = registerBlockSimple(new BlockWindRune(), "windRune", 3, 10, 0);
@@ -150,39 +150,39 @@ public class BlocksCore {
 		magicalHopper = registerBlockSimple(new BlockMagicalHopper(), "magicalHopper", 1, 1, 15);
 		metadataManager = registerBlockSimple(new BlockMetadataManager(), "metadataManager",1, 1, 15);
 		blockBreaker = registerBlockSimple(new BlockBlockBreaker(), "blockBreaker", 1, 1, 15);
-		compressed = new BlockCompressedDrops().setUnlocalizedName("essentialcraft.compressed").setHardness(0.4F).setResistance(1).setLightOpacity(15);
+		compressed = new BlockCompressedDrops().setTranslationKey("essentialcraft.compressed").setHardness(0.4F).setResistance(1).setLightOpacity(15);
 		registerBlockSimple(new ItemBlockMeta(compressed), "compressed");
 		demonicPentacle = registerBlockSimple(new BlockDemonicPentacle(), "demonicPentacle", 0, 0, 0);
 		weaponMaker = registerBlockSimple(new BlockWeaponMaker(), "weaponMaker", 1, 1, 15);
-		furnaceMagic = new BlockFurnaceMagic().setUnlocalizedName("essentialcraft.furnaceMagic").setHardness(1).setResistance(1).setLightOpacity(15);
+		furnaceMagic = new BlockFurnaceMagic().setTranslationKey("essentialcraft.furnaceMagic").setHardness(1).setResistance(1).setLightOpacity(15);
 		registerBlockSimple(furnaceMagic, "furnaceMagic");
 		holopad = registerBlockSimple(new BlockHologramSpawner(), "holopad", 1, 1, 15);
 		chest = registerBlockSimple(new BlockChestEC(), "chest", 1, 1, 0);
 		mimInvStorage = registerBlockSimple(new BlockMIMInventoryStorage(), "mimInvStorage", 1, 1, 15);
-		newMim = new BlockMIM().setResistance(1).setHardness(1).setLightOpacity(0).setUnlocalizedName("essentialcraft.newMim");
+		newMim = new BlockMIM().setResistance(1).setHardness(1).setLightOpacity(0).setTranslationKey("essentialcraft.newMim");
 		registerBlockSimple(newMim, "newMim");
 		mimScreen = registerBlockSimple(new BlockMIMScreen(), "mimScreen", 1, 1, 15);
 		mimCrafter = registerBlockSimple(new BlockMIMCraftingManager(), "mimCrafter", 1, 1, 15);
 		mimEjector = registerBlockSimple(new BlockMIMExporter(), "mimEjector", 1, 1, 0);
 		mimInjector = registerBlockSimple(new BlockMIMImporter(), "mimInjector", 1, 1, 0);
-		device = new BlockRedstoneDeviceNotSided().setHardness(1).setResistance(1).setUnlocalizedName("essentialcraft.device");
+		device = new BlockRedstoneDeviceNotSided().setHardness(1).setResistance(1).setTranslationKey("essentialcraft.device");
 		registerBlockSimple(device, "device", ItemBlockRDNS.class);
 		advBreaker = registerBlockSimple(new BlockAdvBlockBreaker(), "advBreaker", 1, 1, 0);
 		mimEjectorP = registerBlockSimple(new BlockMIMExporterPersistant(), "mimEjectorP", 1, 1, 0);
 		mimInjectorP = registerBlockSimple(new BlockMIMImporterPersistant(), "mimInjectorP", 1, 1, 0);
 
-		oreMithriline = new BlockMithrilineOre().setUnlocalizedName("essentialcraft.oreMithriline").setHardness(0.4F).setResistance(1).setLightOpacity(15);
+		oreMithriline = new BlockMithrilineOre().setTranslationKey("essentialcraft.oreMithriline").setHardness(0.4F).setResistance(1).setLightOpacity(15);
 		registerBlockSimple(oreMithriline, "oreMithriline");
-		crystalLamp = new BlockCrystalLamp().setUnlocalizedName("essentialcraft.crystalLamp").setHardness(0.4F).setResistance(1).setLightOpacity(15);
+		crystalLamp = new BlockCrystalLamp().setTranslationKey("essentialcraft.crystalLamp").setHardness(0.4F).setResistance(1).setLightOpacity(15);
 		registerBlockSimple(new ItemBlockMeta(crystalLamp), "crystalLamp");
-		mimic = new BlockMimic().setUnlocalizedName("essentialcraft.mimic").setResistance(15).setHardness(3).setLightOpacity(15);
+		mimic = new BlockMimic().setTranslationKey("essentialcraft.mimic").setResistance(15).setHardness(3).setLightOpacity(15);
 		registerBlockSimple(mimic, "mimic");
 
-		water = new BlockEC(Material.WATER).setHardness(-1).setResistance(-1).setLightLevel(0).setUnlocalizedName("water");
+		water = new BlockEC(Material.WATER).setHardness(-1).setResistance(-1).setLightLevel(0).setTranslationKey("water");
 		registerBlockSimple(water, "water");
-		lava = new BlockEC(Material.LAVA).setHardness(-1).setResistance(-1).setLightLevel(0).setUnlocalizedName("lava");
+		lava = new BlockEC(Material.LAVA).setHardness(-1).setResistance(-1).setLightLevel(0).setTranslationKey("lava");
 		registerBlockSimple(lava, "lava");
-		fire = new BlockEC(Material.FIRE).setHardness(-1).setResistance(-1).setLightLevel(0).setUnlocalizedName("fire");
+		fire = new BlockEC(Material.FIRE).setHardness(-1).setResistance(-1).setLightLevel(0).setTranslationKey("fire");
 		registerBlockSimple(fire, "fire");
 
 		chunkLoader = registerBlockSimple(new BlockChunkLoader(), "chunkLoader", 1, 1, 0);
@@ -204,13 +204,13 @@ public class BlocksCore {
 		createFancyBlock(Material.ROCK, "mithrilinePlating", "mithrilinePlating", 3F, 100, new ItemStack(invertedBlock));
 		createFancyBlock(Material.ROCK, "demonicPlating", "demonicPlating", 3F, 100, new ItemStack(demonicPlating));
 
-		Block mimicFancy = new BlockFancyMimic().setUnlocalizedName("essentialcraft.fancyBlock.mimic").setResistance(15).setHardness(3).setLightOpacity(15);
+		Block mimicFancy = new BlockFancyMimic().setTranslationKey("essentialcraft.fancyBlock.mimic").setResistance(15).setHardness(3).setLightOpacity(15);
 		registerFancyBlock(mimicFancy, "mimic", new ItemStack(mimic));
 	}
 
 	public static <T extends Block> T registerBlockSimple(T c, String name, float hardness, float resistance, int opacity) {
 		try {
-			c.setUnlocalizedName("essentialcraft."+name).setResistance(resistance).setHardness(hardness).setLightOpacity(opacity);
+			c.setTranslationKey("essentialcraft."+name).setResistance(resistance).setHardness(hardness).setLightOpacity(opacity);
 			BlockRegistry.registerBlock(new ItemBlockGeneric(c), name, EssentialCraftCore.class);
 			EssentialCraftCore.proxy.handleBlockRegister(c);
 			return c;
@@ -247,7 +247,7 @@ public class BlocksCore {
 	}
 
 	public static void createFancyBlock(Material m, String name, String texture, float hardness, float resistance, ItemStack createdFrom) {
-		Block fancy = new BlockFancy(m).setUnlocalizedName("essentialcraft.fancyBlock."+name).setResistance(resistance).setHardness(hardness);
+		Block fancy = new BlockFancy(m).setTranslationKey("essentialcraft.fancyBlock."+name).setResistance(resistance).setHardness(hardness);
 		BlockRegistry.registerBlock(new ItemBlockFancy(fancy), "fancyBlock."+name, EssentialCraftCore.class);
 		EssentialCraftCore.proxy.handleBlockRegister(fancy);
 		fancyBlocks.add(fancy);
@@ -383,7 +383,7 @@ public class BlocksCore {
 	public static Block lava;
 	public static Block fire;
 
-	public static List<Block> fancyBlocks = new ArrayList<Block>();
+	public static List<Block> fancyBlocks = new ArrayList<>();
 
 	public static Block[] lightCorruption = new Block[4];
 }

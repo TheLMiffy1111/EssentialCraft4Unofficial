@@ -18,20 +18,25 @@ public class RadiationManager {
 	}
 
 	public static void setPlayerRadiation(EntityPlayer player, int amount) {
-		if(amount < 0)
+		if(amount < 0) {
 			amount = 0;
-		if(!(player instanceof FakePlayer))
+		}
+		if(!(player instanceof FakePlayer)) {
 			ECUtils.getData(player).modifyRadiation(amount);
+		}
 	}
 
 	public static int getPlayerRadiation(EntityPlayer player) {
-		if(player instanceof FakePlayer) return 0;
+		if(player instanceof FakePlayer) {
+			return 0;
+		}
 		return ECUtils.getData(player).getPlayerRadiation();
 	}
 
 	public static void playerTick(EntityPlayer player) {
-		if(player instanceof FakePlayer)
+		if(player instanceof FakePlayer) {
 			return;
+		}
 		int dimID = player.dimension;
 		if(player.ticksExisted % 20 == 0 && dimID == Config.dimensionID && !player.capabilities.isCreativeMode) {
 			int chunkX = player.chunkCoordX;

@@ -40,7 +40,7 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 
 	protected BlockCorruption() {
 		super(Material.CIRCUITS);
-		setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0).withProperty(DOWN, false).withProperty(UP, false).withProperty(SOUTH, false).withProperty(NORTH, false).withProperty(EAST, false).withProperty(WEST, false));
+		setDefaultState(blockState.getBaseState().withProperty(LEVEL, 0).withProperty(DOWN, false).withProperty(UP, false).withProperty(SOUTH, false).withProperty(NORTH, false).withProperty(EAST, false).withProperty(WEST, false));
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
@@ -76,8 +76,9 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		for(int i = 0; i < 8; ++i)
+		for(int i = 0; i < 8; ++i) {
 			list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override
@@ -142,7 +143,7 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 	@Override
 	public void registerModels() {
 		for(int i = 0; i < 8; i++) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:" + getRegistryName().getResourcePath() + "Inv", "level=" + i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation("essentialcraft:" + getRegistryName().getPath() + "Inv", "level=" + i));
 		}
 	}
 }

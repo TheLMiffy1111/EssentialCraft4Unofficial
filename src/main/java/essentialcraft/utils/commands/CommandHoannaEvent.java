@@ -29,36 +29,34 @@ public class CommandHoannaEvent extends CommandBase {
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		if(args.length > 0) {
-			WorldServer world = server.getWorld(Config.dimensionID);
-			IWorldEvent event = WorldEventRegistry.getEventByID(args[0]);
-			if(event != null || args[0].equalsIgnoreCase("stop")) {
-				if(WorldEventRegistry.currentEvent != null) {
-					ECUtils.ec3WorldTag.setInteger("currentEventDuration", -1);
-					WorldEventRegistry.currentEvent.onEventEnd(world);
-					WorldEventRegistry.currentEvent = null;
-					WorldEventRegistry.currentEventDuration = -1;
-					ECUtils.ec3WorldTag.removeTag("currentEventDuration");
-					ECUtils.ec3WorldTag.removeTag("currentEvent");
-					ECUtils.requestCurrentEventSync();
-
-					if(args[0].equalsIgnoreCase("stop")) {
-						notifyCommandListener(sender, this, "Sucessfully stopped Hoanna event");
-						return;
-					}
-				}
-				event.onEventBeginning(world);
-				ECUtils.ec3WorldTag.setString("currentEvent", event.getEventID());
-				ECUtils.ec3WorldTag.setInteger("currentEventDuration", event.getEventDuration(world));
+		if(args.length <= 0) {
+			throw new WrongUsageException("Usage: /hoannaevent <id|stop>");
+		}
+		WorldServer world = server.getWorld(Config.dimensionID);
+		IWorldEvent event = WorldEventRegistry.getEventByID(args[0]);
+		if(event != null || args[0].equalsIgnoreCase("stop")) {
+			if(WorldEventRegistry.currentEvent != null) {
+				ECUtils.ec3WorldTag.setInteger("currentEventDuration", -1);
+				WorldEventRegistry.currentEvent.onEventEnd(world);
+				WorldEventRegistry.currentEvent = null;
+				WorldEventRegistry.currentEventDuration = -1;
+				ECUtils.ec3WorldTag.removeTag("currentEventDuration");
+				ECUtils.ec3WorldTag.removeTag("currentEvent");
 				ECUtils.requestCurrentEventSync();
-				notifyCommandListener(sender, this, "Sucessfully set Hoanna event to "+args[0]);
+
+				if(args[0].equalsIgnoreCase("stop")) {
+					notifyCommandListener(sender, this, "Sucessfully stopped Hoanna event");
+					return;
+				}
 			}
-			else {
-				throw new CommandException("Cannot find event with name "+args[0]);
-			}
+			event.onEventBeginning(world);
+			ECUtils.ec3WorldTag.setString("currentEvent", event.getEventID());
+			ECUtils.ec3WorldTag.setInteger("currentEventDuration", event.getEventDuration(world));
+			ECUtils.requestCurrentEventSync();
+			notifyCommandListener(sender, this, "Sucessfully set Hoanna event to "+args[0]);
 		}
 		else {
-			throw new WrongUsageException("Usage: /hoannaevent <id|stop>");
+			throw new CommandException("Cannot find event with name "+args[0]);
 		}
 	}
 

@@ -34,6 +34,6 @@ public class RenderChargingChamber extends TileEntitySpecialRenderer<TileChargin
 
 	@Override
 	public void render(TileChargingChamber tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }

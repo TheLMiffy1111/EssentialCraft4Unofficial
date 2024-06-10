@@ -16,6 +16,6 @@ public class ContainerRadiatingChamber extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 1, 108, 5));
 		addSlotToContainer(new SlotGeneric(inv, 2, 108, 41));
 		addSlotToContainer(new SlotGeneric(inv, 3, 126, 23));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

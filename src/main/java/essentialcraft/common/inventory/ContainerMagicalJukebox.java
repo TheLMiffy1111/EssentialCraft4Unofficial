@@ -14,6 +14,6 @@ public class ContainerMagicalJukebox extends ContainerInventory {
 	public void setupSlots() {
 		addSlotToContainer(new SlotBoundEssence(inv, 0, 108, 23));
 		addSlotToContainer(new SlotRecord(inv, 1, 26, 5));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

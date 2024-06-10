@@ -25,9 +25,9 @@ public class TileMIMImportNode extends TileMRUGeneric {
 	}
 
 	public EnumFacing getRotation() {
-		int metadata = this.getBlockMetadata();
+		int metadata = getBlockMetadata();
 		metadata %= 6;
-		return EnumFacing.getFront(metadata);
+		return EnumFacing.byIndex(metadata);
 	}
 
 	@Override
@@ -39,8 +39,9 @@ public class TileMIMImportNode extends TileMRUGeneric {
 		EnumFacing side = getRotation();
 		if(getWorld().getTileEntity(pos.offset(side)) != null) {
 			TileEntity tile = getWorld().getTileEntity(pos.offset(side));
-			if(tile.hasCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()))
+			if(tile.hasCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite())) {
 				return tile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite());
+			}
 		}
 
 		return null;
@@ -50,36 +51,41 @@ public class TileMIMImportNode extends TileMRUGeneric {
 		EnumFacing side = getRotation();
 		if(getWorld().getTileEntity(pos.offset(side)) != null) {
 			TileEntity tile = getWorld().getTileEntity(pos.offset(side));
-			if(tile.hasCapability(ITEM_HANDLER_CAPABILITY, null))
+			if(tile.hasCapability(ITEM_HANDLER_CAPABILITY, null)) {
 				return tile.getCapability(ITEM_HANDLER_CAPABILITY, null);
+			}
 		}
 
 		return null;
 	}
 
 	public void importAllPossibleItems(TileMIM parent) {
-		if(getWorld().isBlockIndirectlyGettingPowered(pos) > 0)
+		if(getWorld().getRedstonePowerFromNeighbors(pos) > 0) {
 			return;
+		}
 
 		IItemHandler inv = getConnectedInventory();
 		if(inv == null) {
-			IItemHandler iinv = getConnectedInventoryNonSided();
+			getConnectedInventoryNonSided();
 		}
 		int slots = inv.getSlots();
 
-		if(slots <= 0)
+		if(slots <= 0) {
 			return;
+		}
 
 		for(int j = 0; j < slots; ++j) {
 			ItemStack stk = inv.getStackInSlot(j);
 			if(!stk.isEmpty()) {
 				if(getStackInSlot(0).isEmpty() || !(getStackInSlot(0).getItem() instanceof ItemFilter)) {
-					if(parent.addItemStackToSystem(stk.copy()))
+					if(parent.addItemStackToSystem(stk.copy())) {
 						inv.extractItem(j, stk.getCount(), false);
+					}
 				}
 				else if(ECUtils.canFilterAcceptItem(new InventoryMagicFilter(getStackInSlot(0)), stk, getStackInSlot(0))) {
-					if(parent.addItemStackToSystem(stk.copy()))
+					if(parent.addItemStackToSystem(stk.copy())) {
 						inv.extractItem(j, stk.getCount(), false);
+					}
 				}
 			}
 		}

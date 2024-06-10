@@ -19,6 +19,6 @@ public class ContainerMagicianTable extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 4, 26, 41));
 		addSlotToContainer(new SlotGeneric(inv, 5, 62, 41));
 		addSlotToContainer(new SlotGeneric(inv, 6, 89, 5));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

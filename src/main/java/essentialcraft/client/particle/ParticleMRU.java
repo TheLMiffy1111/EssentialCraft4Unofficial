@@ -25,29 +25,29 @@ public class ParticleMRU extends Particle{
 	public ParticleMRU(World w, double x, double y,double z, double i, double j,double k)
 	{
 		super(w, x, y, z, i, j,k);
-		this.motionX = i;
-		this.motionY = j;
-		this.motionZ = k;
-		this.mruPosX = this.posX = x;
-		this.mruPosY = this.posY = y;
-		this.mruPosZ = this.posZ = z;
-		this.rand.nextFloat();
-		this.particleScale = 0.5F;
-		this.particleRed = 0;
-		this.particleGreen = 0F;
-		this.particleBlue = 0.8F;
-		this.particleAlpha = 0.99F;
-		this.particleMaxAge = (int)(Math.random() * 10.0D) + 40;
-		this.canCollide = true;
-		this.setParticleTextureIndex((int)(Math.random() * 8.0D));
+		motionX = i;
+		motionY = j;
+		motionZ = k;
+		mruPosX = posX = x;
+		mruPosY = posY = y;
+		mruPosZ = posZ = z;
+		rand.nextFloat();
+		particleScale = 0.5F;
+		particleRed = 0;
+		particleGreen = 0F;
+		particleBlue = 0.8F;
+		particleAlpha = 0.99F;
+		particleMaxAge = (int)(Math.random() * 10.0D) + 40;
+		canCollide = true;
+		setParticleTextureIndex((int)(Math.random() * 8.0D));
 	}
 
 	public ParticleMRU(World w, double x, double y,double z, double i, double j,double k, double cR, double cG, double cB)
 	{
 		this(w,x,y,z,i,j,k);
-		this.particleRed = (float) cR;
-		this.particleGreen = (float) cG;
-		this.particleBlue = (float) cB;
+		particleRed = (float) cR;
+		particleGreen = (float) cG;
+		particleBlue = (float) cB;
 	}
 
 	@Override
@@ -64,28 +64,29 @@ public class ParticleMRU extends Particle{
 		GlStateManager.enableBlend();
 		if(ECUtils.canPlayerSeeMRU(Minecraft.getMinecraft().player))
 		{
-			float sc = this.particleScale;
-			float cR = this.particleRed;
-			float cG = this.particleGreen;
-			float cB = this.particleBlue;
-			float cA = this.particleAlpha;
-			this.particleScale *= 1.5F;
-			this.particleRed = 1;
-			this.particleGreen = 0F;
-			this.particleBlue = 1F;
-			this.particleAlpha = 0.99F;
+			float sc = particleScale;
+			float cR = particleRed;
+			float cG = particleGreen;
+			float cB = particleBlue;
+			float cA = particleAlpha;
+			particleScale *= 1.5F;
+			particleRed = 1;
+			particleGreen = 0F;
+			particleBlue = 1F;
+			particleAlpha = 0.99F;
 			super.renderParticle(var1, var2, par2, par3, par4, par5, par6, par7);
-			this.particleScale = sc;
-			this.particleRed = cR;
-			this.particleGreen =  cG;
-			this.particleBlue =  cB;
-			this.particleAlpha = cA;
+			particleScale = sc;
+			particleRed = cR;
+			particleGreen =  cG;
+			particleBlue =  cB;
+			particleAlpha = cA;
 			super.renderParticle(var1, var2, par2, par3, par4, par5, par6, par7);
 		}
 		TessellatorWrapper.getInstance().draw().begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 		Minecraft.getMinecraft().renderEngine.bindTexture(particleTextures);
-		if(!enabled)
+		if(!enabled) {
 			GlStateManager.disableBlend();
+		}
 	}
 
 	@Override
@@ -100,7 +101,7 @@ public class ParticleMRU extends Particle{
 	public float getBrightness(float p_70013_1_)
 	{
 		float f1 = super.getBrightnessForRender(p_70013_1_);
-		float f2 = (float)this.particleAge / (float)this.particleMaxAge;
+		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
 		return f1 * (1.0F - f2) + f2;
 	}
@@ -111,22 +112,24 @@ public class ParticleMRU extends Particle{
 	@Override
 	public void onUpdate()
 	{
-		tickPos += 15+this.world.rand.nextFloat()*15;
-		if(this.particleAge < this.particleMaxAge/2)
-			this.setParticleTextureIndex(7 - this.particleAge * 8 / (this.particleMaxAge/2));
-		else
-			this.setParticleTextureIndex((this.particleAge-this.particleMaxAge/2) * 8 / (this.particleMaxAge/2));
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		float f = (float)this.particleAge / (float)this.particleMaxAge;
-		this.posX = this.mruPosX + this.motionX * f + Math.sin(Math.toRadians(tickPos + this.world.getWorldTime()*10))/10;
-		this.posY = this.mruPosY + this.motionY * f + Math.cos(Math.toRadians(tickPos + this.world.getWorldTime()*10))/10;
-		this.posZ = this.mruPosZ + this.motionZ * f - Math.sin(Math.toRadians(tickPos + this.world.getWorldTime()*10))/10;
+		tickPos += 15+world.rand.nextFloat()*15;
+		if(particleAge < particleMaxAge/2) {
+			setParticleTextureIndex(7 - particleAge * 8 / (particleMaxAge/2));
+		}
+		else {
+			setParticleTextureIndex((particleAge-particleMaxAge/2) * 8 / (particleMaxAge/2));
+		}
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
+		float f = (float)particleAge / (float)particleMaxAge;
+		posX = mruPosX + motionX * f + Math.sin(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
+		posY = mruPosY + motionY * f + Math.cos(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
+		posZ = mruPosZ + motionZ * f - Math.sin(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
 
-		if (this.particleAge++ >= this.particleMaxAge)
+		if (particleAge++ >= particleMaxAge)
 		{
-			this.setExpired();
+			setExpired();
 		}
 	}
 }

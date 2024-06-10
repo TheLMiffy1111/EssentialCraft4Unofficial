@@ -27,7 +27,7 @@ public class GuiRepairState extends GuiTextElement{
 		this.drawTexturedModalRect(posX+17+48, posY, 1, 0, 16, 18);
 		this.drawTexturedModalRect(posX+17+64, posY, 1, 0, 16, 18);
 		this.drawTexturedModalRect(posX+17+80, posY, 1, 0, 17, 18);
-		this.drawText(posX, posY);
+		drawText(posX, posY);
 	}
 
 	@Override

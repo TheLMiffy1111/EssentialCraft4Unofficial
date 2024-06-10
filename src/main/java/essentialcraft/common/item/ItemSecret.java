@@ -44,13 +44,15 @@ public class ItemSecret extends Item implements IModelRegisterer {
 		int metadata = stack.getItemDamage();
 		switch(metadata) {
 		case 0: {
-			for(int i = 0; i < 5; ++i)
+			for(int i = 0; i < 5; ++i) {
 				list.add(I18n.translateToLocal("essentialcraft.text.desc.secret_"+metadata+"_"+i));
+			}
 			break;
 		}
 		case 1: {
-			for(int i = 0; i < 4; ++i)
+			for(int i = 0; i < 4; ++i) {
 				list.add(I18n.translateToLocal("essentialcraft.text.desc.secret_"+metadata+"_"+i));
+			}
 			break;
 		}
 		case 2: {
@@ -127,13 +129,13 @@ public class ItemSecret extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName()+dropNames[Math.min(stack.getItemDamage(), dropNames.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey()+dropNames[Math.min(stack.getItemDamage(), dropNames.length-1)];
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(tab)) {
+		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 7; ++i) {
 				list.add(new ItemStack(this,1,i));
 			}

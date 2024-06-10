@@ -1,7 +1,6 @@
 package essentialcraft.common.world.gen.structure;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,18 +27,18 @@ public class MapGenTown extends MapGenStructure {
 	private int minTownSeparation;
 
 	public MapGenTown() {
-		this.distance = 32;
-		this.minTownSeparation = 8;
+		distance = 32;
+		minTownSeparation = 8;
 	}
 
 	public MapGenTown(Map<String, String> map) {
 		this();
 		for(Entry<String, String> entry : map.entrySet()) {
 			if(entry.getKey().equals("size")) {
-				this.size = MathHelper.getInt(entry.getValue(), this.size, 0);
+				size = MathHelper.getInt(entry.getValue(), size, 0);
 			}
 			else if(entry.getKey().equals("distance")) {
-				this.distance = MathHelper.getInt(entry.getValue(), this.distance, 9);
+				distance = MathHelper.getInt(entry.getValue(), distance, 9);
 			}
 		}
 	}
@@ -55,20 +54,20 @@ public class MapGenTown extends MapGenStructure {
 		int l = chunkZ;
 
 		if(chunkX < 0) {
-			chunkX -= this.distance - 1;
+			chunkX -= distance - 1;
 		}
 
 		if(chunkZ < 0) {
-			chunkZ -= this.distance - 1;
+			chunkZ -= distance - 1;
 		}
 
-		int i1 = chunkX / this.distance;
-		int j1 = chunkZ / this.distance;
-		Random random = this.world.setRandomSeed(i1, j1, 10387312);
-		i1 *= this.distance;
-		j1 *= this.distance;
-		i1 += random.nextInt(this.distance - 8);
-		j1 += random.nextInt(this.distance - 8);
+		int i1 = chunkX / distance;
+		int j1 = chunkZ / distance;
+		Random random = world.setRandomSeed(i1, j1, 10387312);
+		i1 *= distance;
+		j1 *= distance;
+		i1 += random.nextInt(distance - 8);
+		j1 += random.nextInt(distance - 8);
 		if(k == i1 && l == j1) {
 			return true;
 		}
@@ -78,13 +77,13 @@ public class MapGenTown extends MapGenStructure {
 
 	@Override
 	public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored)  {
-		this.world = worldIn;
-		return findNearestStructurePosBySpacing(worldIn, this, pos, this.distance, 8, 10387312, false, 100, findUnexplored);
+		world = worldIn;
+		return findNearestStructurePosBySpacing(worldIn, this, pos, distance, 8, 10387312, false, 100, findUnexplored);
 	}
 
 	@Override
 	protected StructureStart getStructureStart(int chunkX, int chunkZ) {
-		return new MapGenTown.Start(this.world, this.rand, chunkX, chunkZ, this.size);
+		return new MapGenTown.Start(world, rand, chunkX, chunkZ, size);
 	}
 
 	public static class Start extends StructureStart {
@@ -96,8 +95,8 @@ public class MapGenTown extends MapGenStructure {
 			super(chunkX, chunkZ);
 			List<StructureTownPieces.PieceWeight> list = StructureTownPieces.getStructureTownWeightedPieceList();
 			StructureTownPieces.Start start = new StructureTownPieces.Start(world.getBiomeProvider(), 0, rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, size);
-			this.components.add(start);
-			start.buildComponent(start, this.components, rand);
+			components.add(start);
+			start.buildComponent(start, components, rand);
 			List<StructureComponent> list1 = start.pendingRoads;
 			List<StructureComponent> list2 = start.pendingHouses;
 			int l;
@@ -108,45 +107,41 @@ public class MapGenTown extends MapGenStructure {
 				if(list1.isEmpty()) {
 					l = rand.nextInt(list2.size());
 					structurecomponent = list2.remove(l);
-					structurecomponent.buildComponent(start, this.components, rand);
+					structurecomponent.buildComponent(start, components, rand);
 				}
 				else {
 					l = rand.nextInt(list1.size());
 					structurecomponent = list1.remove(l);
-					structurecomponent.buildComponent(start, this.components, rand);
+					structurecomponent.buildComponent(start, components, rand);
 				}
 			}
 
-			this.updateBoundingBox();
+			updateBoundingBox();
 			l = 0;
-			Iterator<StructureComponent> iterator = this.components.iterator();
-
-			while(iterator.hasNext()) {
-				StructureComponent structurecomponent1 = iterator.next();
-
+			for(StructureComponent structurecomponent1 : components) {
 				if(!(structurecomponent1 instanceof StructureTownPieces.Road)) {
 					++l;
 				}
 			}
 
-			this.hasMoreThanTwoComponents = l > 2;
+			hasMoreThanTwoComponents = l > 2;
 		}
 
 		@Override
 		public boolean isSizeableStructure() {
-			return this.hasMoreThanTwoComponents;
+			return hasMoreThanTwoComponents;
 		}
 
 		@Override
 		public void writeToNBT(NBTTagCompound nbt) {
 			super.writeToNBT(nbt);
-			nbt.setBoolean("Valid", this.hasMoreThanTwoComponents);
+			nbt.setBoolean("Valid", hasMoreThanTwoComponents);
 		}
 
 		@Override
 		public void readFromNBT(NBTTagCompound nbt) {
 			super.readFromNBT(nbt);
-			this.hasMoreThanTwoComponents = nbt.getBoolean("Valid");
+			hasMoreThanTwoComponents = nbt.getBoolean("Valid");
 		}
 	}
 }

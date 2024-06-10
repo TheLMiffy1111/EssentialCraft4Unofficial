@@ -20,6 +20,6 @@ public class ContainerCrystalFormer extends ContainerInventory {
 		addSlotToContainer(new SlotGeneric(inv, 6, 144, 23));
 		addSlotToContainer(new SlotGeneric(inv, 7, 126, 5));
 		addSlotToContainer(new SlotGeneric(inv, 1, 82, 5));
-		this.setupPlayerInventory();
+		setupPlayerInventory();
 	}
 }

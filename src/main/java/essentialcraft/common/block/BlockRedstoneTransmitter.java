@@ -42,7 +42,7 @@ public class BlockRedstoneTransmitter extends BlockContainer implements IModelRe
 		if(metadata == 0) {
 			return new AxisAlignedBB(0.35F, 0F, 0.35F, 0.65F, 0.5F, 0.65F);
 		}
-		else if(metadata == 1) {
+		if(metadata == 1) {
 			return new AxisAlignedBB(0.35F, 0.45F, 0.35F, 0.65F, 1F, 0.65F);
 		}
 		else if(metadata == 2) {
@@ -83,7 +83,7 @@ public class BlockRedstoneTransmitter extends BlockContainer implements IModelRe
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
@@ -127,7 +127,7 @@ public class BlockRedstoneTransmitter extends BlockContainer implements IModelRe
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta%6));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta%6));
 	}
 
 	@Override

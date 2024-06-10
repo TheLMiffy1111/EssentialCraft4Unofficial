@@ -24,7 +24,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ResearchRegistry {
 
-	public static HashMap<String, Integer> stringIDS = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> stringIDS = new HashMap<>();
 
 	public static void registerBasicCategory()
 	{
@@ -2308,8 +2308,9 @@ public class ResearchRegistry {
 
 	public static PageEntry next(String genID)
 	{
-		if(!stringIDS.containsKey(genID))
+		if(!stringIDS.containsKey(genID)) {
 			stringIDS.put(genID, 0);
+		}
 		int ptt = stringIDS.get(genID);
 		stringIDS.put(genID, ptt+1);
 		return new PageEntry("essentialcraft.page."+genID+"_"+ptt);

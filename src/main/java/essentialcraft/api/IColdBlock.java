@@ -16,5 +16,5 @@ public interface IColdBlock {
 	 * @param meta - the metadata of the block
 	 * @return amount of mru per tick will this block add
 	 */
-	public float getColdModifier(IBlockAccess w, BlockPos p);
+	public float getColdModifier(IBlockAccess world, BlockPos pos);
 }

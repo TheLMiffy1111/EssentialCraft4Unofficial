@@ -42,7 +42,7 @@ public class BlockMagicalQuarry extends BlockContainer implements IModelRegister
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}

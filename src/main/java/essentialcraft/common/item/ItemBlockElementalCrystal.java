@@ -10,8 +10,8 @@ public class ItemBlockElementalCrystal extends ItemBlock implements IItemColor {
 
 	public ItemBlockElementalCrystal(Block block) {
 		super(block);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 
 	//Neutral: D5F3F4  213 243 244

@@ -25,8 +25,9 @@ public class TileMRUCUECEjector extends TileEntity implements IStructurePiece {
 
 	@Override
 	public void setStructureController(TileEntity tile, EnumStructureType structure) {
-		if(tile instanceof TileMRUCUECController && structure == getStructure())
+		if(tile instanceof TileMRUCUECController && structure == getStructure()) {
 			controller = (TileMRUCUECController)tile;
+		}
 	}
 
 	@Override

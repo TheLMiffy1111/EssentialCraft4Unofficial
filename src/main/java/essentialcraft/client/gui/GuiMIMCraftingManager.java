@@ -21,15 +21,15 @@ public class GuiMIMCraftingManager extends GuiContainer{
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		this.drawDefaultBackground();
+		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.renderHoveredToolTip(mouseX, mouseY);
+		renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks,int mX, int mY) {
-		int k = (this.width - this.xSize)/2;
-		int l = (this.height - this.ySize)/2;
+		int k = (width - xSize)/2;
+		int l = (height - ySize)/2;
 
 		DrawUtils.bindTexture("essentialcraft", "textures/gui/magical_chest.png");
 

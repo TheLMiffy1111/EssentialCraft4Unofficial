@@ -48,7 +48,7 @@ public class ItemMRUStorageEC extends Item implements IBauble, IItemColor, IMode
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-		if(this.isInCreativeTab(tab)) {
+		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 5; ++i) {
 				ItemStack min = new ItemStack(this, 1, i);
 				ItemStack max = new ItemStack(this, 1, i);
@@ -61,8 +61,8 @@ public class ItemMRUStorageEC extends Item implements IBauble, IItemColor, IMode
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName()+dropNames[Math.min(stack.getItemDamage(), dropNames.length-1)];
+	public String getTranslationKey(ItemStack stack) {
+		return getTranslationKey()+dropNames[Math.min(stack.getItemDamage(), dropNames.length-1)];
 	}
 
 	@Override

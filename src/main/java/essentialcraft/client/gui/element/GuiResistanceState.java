@@ -41,8 +41,9 @@ public class GuiResistanceState extends GuiTextElement{
 		if(tile instanceof TileMRUCUECStateChecker)
 		{
 			TileMRUCUECController controllerTile = (TileMRUCUECController) ((TileMRUCUECStateChecker)tile).structureController();
-			if(controllerTile != null)
+			if(controllerTile != null) {
 				Minecraft.getMinecraft().fontRenderer.drawString(controllerTile.resistance+" MROV", posX+2, posY+5, 0xffffff, true);
+			}
 		}
 	}
 

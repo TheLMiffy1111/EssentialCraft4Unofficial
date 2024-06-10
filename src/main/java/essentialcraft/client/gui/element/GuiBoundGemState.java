@@ -52,10 +52,10 @@ public class GuiBoundGemState extends GuiTextElement {
 		else {
 			int o[] = ItemBoundGem.getCoords(inventory.getStackInSlot(slotNum));
 			BlockPos pos = new BlockPos(o[0], o[1], o[2]);
-			if(this.tile.getWorld().getTileEntity(pos) == null) {
+			if(tile.getWorld().getTileEntity(pos) == null) {
 				Minecraft.getMinecraft().fontRenderer.drawString("No Tile At Pos!", posX+5, posY+5, 0xff0000, true);
 			}
-			else if(!this.tile.getWorld().getTileEntity(pos).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
+			else if(!tile.getWorld().getTileEntity(pos).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 				Minecraft.getMinecraft().fontRenderer.drawString("Not Magical!", posX+12, posY+5, 0xff0000, true);
 			}
 			else if(MathUtils.getDifference(tile.getPos().getX(), o[0]) > 16 || MathUtils.getDifference(tile.getPos().getY(), o[1]) > 16 || MathUtils.getDifference(tile.getPos().getZ(), o[2]) > 16) {

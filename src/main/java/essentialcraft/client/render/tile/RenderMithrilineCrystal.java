@@ -35,13 +35,14 @@ public class RenderMithrilineCrystal extends TileEntitySpecialRenderer<TileMithr
 		float time = (tile.getWorld().getWorldTime()+partialTicks)%45*8;
 		float movement = (tile.getWorld().getWorldTime()+partialTicks)%60;
 
-		if(movement > 30)
+		if(movement > 30) {
 			movement = 30 - movement+30F;
+		}
 
 		GlStateManager.translate((float)x+0.5F, (float)y+movement/30, (float)z+0.5F);
 		GlStateManager.rotate(time, 0, 1, 0);
 		GlStateManager.scale(2, 2, 2);
-		this.bindTexture(meta == 0 ? textures_mithriline : meta == 3 ? textures_pale : meta == 6 ? textures_void : meta == 9 ? textures_demonic : textures_shade);
+		bindTexture(meta == 0 ? textures_mithriline : meta == 3 ? textures_pale : meta == 6 ? textures_void : meta == 9 ? textures_demonic : textures_shade);
 		model.renderAll();
 		GlStateManager.enableLighting();
 		GlStateManager.enableAlpha();
@@ -52,7 +53,8 @@ public class RenderMithrilineCrystal extends TileEntitySpecialRenderer<TileMithr
 
 	@Override
 	public void render(TileMithrilineCrystal tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if(tile.getBlockMetadata()%3 == 0)
-			this.doRender(tile, x, y, z, partialTicks);
+		if(tile.getBlockMetadata()%3 == 0) {
+			doRender(tile, x, y, z, partialTicks);
+		}
 	}
 }

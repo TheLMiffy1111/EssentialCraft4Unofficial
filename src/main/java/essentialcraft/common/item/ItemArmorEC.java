@@ -76,9 +76,10 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 	public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag par4)
 	{
 		super.addInformation(stack, world, list, par4);
-		if(!desc.isEmpty())
+		if(!desc.isEmpty()) {
 			list.add(desc);
-		if(this.aType == 1)
+		}
+		if(aType == 1)
 		{
 			list.add(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() + "/" + stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMaxMRU() + " MRU");
 		}
@@ -89,17 +90,21 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 	{
 		Multimap<String,AttributeModifier> mods = HashMultimap.<String,AttributeModifier>create();
 
-		if(this == ItemsCore.magicArmorItems[5] && s == EntityEquipmentSlot.CHEST)
+		if(this == ItemsCore.magicArmorItems[5] && s == EntityEquipmentSlot.CHEST) {
 			mods.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "hp", 20D, 0));
+		}
 
-		if(this == ItemsCore.magicArmorItems[7] && s == EntityEquipmentSlot.FEET)
+		if(this == ItemsCore.magicArmorItems[7] && s == EntityEquipmentSlot.FEET) {
 			mods.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "movespeed", 0.075D, 0));
+		}
 
-		if(this == ItemsCore.magicArmorItems[9] && s == EntityEquipmentSlot.CHEST)
+		if(this == ItemsCore.magicArmorItems[9] && s == EntityEquipmentSlot.CHEST) {
 			mods.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "hp", 30D, 0));
+		}
 
-		if(this == ItemsCore.magicArmorItems[11] && s == EntityEquipmentSlot.FEET)
+		if(this == ItemsCore.magicArmorItems[11] && s == EntityEquipmentSlot.FEET) {
 			mods.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(UUID.fromString("1bca943c-3cf5-42cc-a3df-2ed994ae0000"), "movespeed", 0.1D, 0));
+		}
 
 		return mods;
 	}
@@ -114,9 +119,10 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 
 	@Override
 	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
-		if(this.aType != 1)
+		if(aType != 1) {
 			super.getSubItems(par2CreativeTabs, list);
-		else if(this.isInCreativeTab(par2CreativeTabs)) {
+		}
+		else if(isInCreativeTab(par2CreativeTabs)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
@@ -189,22 +195,22 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-		if(this.aType != 1) {
+		if(aType != 1) {
 			if(!source.isUnblockable()) {
 				ItemArmor aarmor = (ItemArmor)armor.getItem();
 				return new ArmorProperties(0, aarmor.damageReduceAmount / 25D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
 			}
-			else
+			else {
 				return new ArmorProperties(0,0,armor.getMaxDamage() + 1 - armor.getItemDamage());
+			}
+		}
+		int mru = armor.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU();
+		if(mru > 0) {
+			ItemArmor aarmor = (ItemArmor)armor.getItem();
+			return new ArmorProperties(0, aarmor.damageReduceAmount / 20D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
 		}
 		else {
-			int mru = armor.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU();
-			if(mru > 0) {
-				ItemArmor aarmor = (ItemArmor)armor.getItem();
-				return new ArmorProperties(0, aarmor.damageReduceAmount / 20D, aarmor.getMaxDamage() + 1 - armor.getItemDamage());
-			}
-			else
-				return new ArmorProperties(0,0,armor.getMaxDamage() + 1 - armor.getItemDamage());
+			return new ArmorProperties(0,0,armor.getMaxDamage() + 1 - armor.getItemDamage());
 		}
 	}
 
@@ -215,7 +221,7 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 
 	@Override
 	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-		if(this.aType == 1 && entity instanceof EntityPlayer) {
+		if(aType == 1 && entity instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer) entity;
 			if(ECUtils.playerUseMRU(p, stack, damage*800)) {}
 			else {}
@@ -227,7 +233,7 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-		if(this.aType != 1) {
+		if(aType != 1) {
 			return super.initCapabilities(stack, nbt);
 		}
 		return new MRUItemStorage(stack, maxMRU);
@@ -235,9 +241,11 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 
 	@Override
 	public void registerModels() {
-		if(!Loader.isModLoaded("codechickenlib"))
-			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getResourcePath(), "inventory"));
-		else
+		if(!Loader.isModLoaded("codechickenlib")) {
+			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:item/" + getRegistryName().getPath(), "inventory"));
+		}
+		else {
 			ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("essentialcraft:armor", "inventory"));
+		}
 	}
 }

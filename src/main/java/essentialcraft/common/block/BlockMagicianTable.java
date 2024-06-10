@@ -90,7 +90,7 @@ public class BlockMagicianTable extends BlockContainer implements IModelRegister
 			}
 			return true;
 		}
-		else if(!player.isSneaking()) {
+		if(!player.isSneaking()) {
 			TileMagicianTable table = (TileMagicianTable) world.getTileEntity(par2);
 			if(table.upgrade == -1) {
 				table.upgrade = MagicianTableUpgrades.getUpgradeIDByItemStack(currentItem);

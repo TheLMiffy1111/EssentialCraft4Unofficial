@@ -27,8 +27,7 @@ public class WindRelations {
 
 	public static float getPlayerWindRevModifier(EntityPlayer player) {
 		float retFlt = 0.1F;
-		for(int i = 0; i < player.inventory.armorInventory.size(); ++i) {
-			ItemStack armor = player.inventory.armorInventory.get(i);
+		for(ItemStack armor : player.inventory.armorInventory) {
 			if(!armor.isEmpty()) {
 				if(armor.getItem() == ItemsCore.magicArmorItems[12] || armor.getItem() == ItemsCore.magicArmorItems[13] || armor.getItem() == ItemsCore.magicArmorItems[14] || armor.getItem() == ItemsCore.magicArmorItems[15]) {
 					retFlt += 0.23F;
@@ -63,10 +62,7 @@ public class WindRelations {
 	}
 
 	public static void playerTick(EntityPlayer player) {
-		if(player instanceof FakePlayer) {
-			return;
-		}
-		if(!ECUtils.getData(player).isWindbound()) {
+		if((player instanceof FakePlayer) || !ECUtils.getData(player).isWindbound()) {
 			return;
 		}
 
@@ -132,10 +128,10 @@ public class WindRelations {
 					}
 
 					if(player.inventory != null) {
-						for(int i = 0; i < player.inventory.armorInventory.size(); ++i) {
-							if(player.inventory.armorInventory.get(i).getItem() instanceof IWindResistHandler) {
+						for(ItemStack element : player.inventory.armorInventory) {
+							if(element.getItem() instanceof IWindResistHandler) {
 								if(addBuff) {
-									addBuff &= !((IWindResistHandler)player.inventory.armorInventory.get(i).getItem()).resistWind(player, player.inventory.armorInventory.get(i));
+									addBuff &= !((IWindResistHandler)element.getItem()).resistWind(player, element);
 								}
 							}
 						}

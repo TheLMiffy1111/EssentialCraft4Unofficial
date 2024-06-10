@@ -97,10 +97,12 @@ public class DemonTrading {
 					break;
 				}
 			}
-			if(flag)
+			if(flag) {
 				rec = new DemonTrade(new ResourceLocation(input));
-			else
+			}
+			else {
 				CraftTweakerAPI.logWarning("Demon Trade already exists for "+rec);
+			}
 		}
 
 		@Override
@@ -118,13 +120,14 @@ public class DemonTrading {
 
 		@Override
 		public void apply() {
-			ArrayList<DemonTrade> toRemove = new ArrayList<DemonTrade>();
+			ArrayList<DemonTrade> toRemove = new ArrayList<>();
 			DemonTrade.TRADES.stream().
 			filter(entry->input.matches(CraftTweakerMC.getIItemStack(entry.desiredItem))).
 			forEach(entry->toRemove.add(entry));
 
-			if(toRemove.isEmpty())
+			if(toRemove.isEmpty()) {
 				CraftTweakerAPI.logWarning("No recipe for "+input.toString());
+			}
 			else {
 				for(DemonTrade entry : toRemove) {
 					DemonTrade.removeTrade(entry);

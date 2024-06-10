@@ -74,8 +74,9 @@ public abstract class TileMRUGeneric extends TileEntity implements ISidedInvento
 		++innerRotation;
 		//Sending the sync packets to the CLIENT.
 		if(syncTick == 0) {
-			if(tracker == null)
+			if(tracker == null) {
 				Notifier.notifyCustomMod("EssentialCraft", "[WARNING][SEVERE]TileEntity " + this + " at pos " + pos.getX() + "," + pos.getY() + ","  + pos.getZ() + " tries to sync itself, but has no TileTracker attached to it! SEND THIS MESSAGE TO THE DEVELOPER OF THE MOD!");
+			}
 			else if(!getWorld().isRemote && tracker.tileNeedsSyncing()) {
 				MiscUtils.sendPacketToAllAround(getWorld(), getUpdatePacket(), pos.getX(), pos.getY(), pos.getZ(), getWorld().provider.getDimension(), 32);
 			}
@@ -100,8 +101,9 @@ public abstract class TileMRUGeneric extends TileEntity implements ISidedInvento
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		if(pkt.getTileEntityType() == -10)
+		if(pkt.getTileEntityType() == -10) {
 			readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
 	@Override
@@ -116,26 +118,24 @@ public abstract class TileMRUGeneric extends TileEntity implements ISidedInvento
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		if(!items[slot].isEmpty()) {
-			ItemStack itemstack;
+		if(items[slot].isEmpty()) {
+			return ItemStack.EMPTY;
+		}
+		ItemStack itemstack;
 
-			if(items[slot].getCount() <= amount) {
-				itemstack = items[slot];
-				items[slot] = ItemStack.EMPTY;
-				return itemstack;
-			}
-			else {
-				itemstack = items[slot].splitStack(amount);
-
-				if(items[slot].getCount() == 0) {
-					items[slot] = ItemStack.EMPTY;
-				}
-
-				return itemstack;
-			}
+		if(items[slot].getCount() <= amount) {
+			itemstack = items[slot];
+			items[slot] = ItemStack.EMPTY;
+			return itemstack;
 		}
 		else {
-			return ItemStack.EMPTY;
+			itemstack = items[slot].splitStack(amount);
+
+			if(items[slot].getCount() == 0) {
+				items[slot] = ItemStack.EMPTY;
+			}
+
+			return itemstack;
 		}
 	}
 
@@ -146,9 +146,7 @@ public abstract class TileMRUGeneric extends TileEntity implements ISidedInvento
 			items[slot] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		else {
-			return ItemStack.EMPTY;
-		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override

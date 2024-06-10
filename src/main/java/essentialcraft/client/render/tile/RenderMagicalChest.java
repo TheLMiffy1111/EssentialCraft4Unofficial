@@ -32,7 +32,7 @@ public class RenderMagicalChest extends TileEntitySpecialRenderer<TileMagicalChe
 
 		float f1 = tile.prevLidAngle + (tile.lidAngle - tile.prevLidAngle) * partialTicks;
 		chest.chestLid.rotateAngleX = -(f1 * (float)Math.PI / 2.0F);
-		this.bindTexture(tile.getBlockMetadata() == 0 ? magicalTextures : voidTextures);
+		bindTexture(tile.getBlockMetadata() == 0 ? magicalTextures : voidTextures);
 		chest.renderAll();
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
@@ -41,6 +41,6 @@ public class RenderMagicalChest extends TileEntitySpecialRenderer<TileMagicalChe
 
 	@Override
 	public void render(TileMagicalChest tile, double x,double y, double z, float partialTicks, int destroyStage, float alpha) {
-		this.doRender(tile, x, y, z, partialTicks);
+		doRender(tile, x, y, z, partialTicks);
 	}
 }
