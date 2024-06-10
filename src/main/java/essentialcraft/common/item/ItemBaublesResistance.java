@@ -116,7 +116,7 @@ public class ItemBaublesResistance extends Item implements IBauble, IModelRegist
 				case 6: return new ModelResourceLocation("essentialcraft:item/baublescharm", "bottom=" + bottomInt + "," + "top=" + topInt);
 				}
 			}
-			return new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=0, top=0");
+			return new ModelResourceLocation("essentialcraft:item/baublesamulet", "bottom=0,top=0");
 		}
 	}
 }
