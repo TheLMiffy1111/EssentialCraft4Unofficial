@@ -94,7 +94,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 		super.onUpdate();
 
 		if(!getStackInSlot(0).isEmpty() && !desiredItem.isEmpty()) {
-			if(desiredItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && getStackInSlot(0).isItemEqual(desiredItem) && ItemStack.areItemStackTagsEqual(getStackInSlot(0), desiredItem) && getStackInSlot(0).getCount() >= desiredItem.getCount() || desiredItem.getItemDamage() == OreDictionary.WILDCARD_VALUE && getStackInSlot(0).getItem() == desiredItem.getItem() && getStackInSlot(0).getCount() >= desiredItem.getCount()) {
+			if(desiredItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && getStackInSlot(0).isItemEqual(desiredItem) && ItemStack.areItemsEqual(getStackInSlot(0), desiredItem) && getStackInSlot(0).getCount() >= desiredItem.getCount() || desiredItem.getItemDamage() == OreDictionary.WILDCARD_VALUE && getStackInSlot(0).getItem() == desiredItem.getItem() && getStackInSlot(0).getCount() >= desiredItem.getCount()) {
 				setDead();
 				for(int i = 0; i < 400; ++i) {
 					double d2 = rand.nextGaussian() * 0.02D;
@@ -141,10 +141,9 @@ public class EntityDemon extends EntityLiving implements IInventory {
 				}
 			}
 		}
-		if(getEntityWorld().isRemote)
-		 {
+		if(getEntityWorld().isRemote) {
 			desiredItem = getDataManager().get(DESIRED);
-		//EssentialCraftCore.proxy.SmokeFX(posX, posY+1.5D+MathUtils.randomDouble(getRNG()), posZ, MathUtils.randomDouble(getRNG())/18, -0.09D+MathUtils.randomDouble(getRNG())/18, MathUtils.randomDouble(getRNG())/18, 3, 1, 0.6D-this.getEntityWorld().rand.nextDouble()/3D, 0.2D);
+			//EssentialCraftCore.proxy.SmokeFX(posX, posY+1.5D+MathUtils.randomDouble(getRNG()), posZ, MathUtils.randomDouble(getRNG())/18, -0.09D+MathUtils.randomDouble(getRNG())/18, MathUtils.randomDouble(getRNG())/18, 3, 1, 0.6D-this.getEntityWorld().rand.nextDouble()/3D, 0.2D);
 		}
 	}
 

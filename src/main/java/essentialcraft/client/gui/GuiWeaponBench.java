@@ -89,7 +89,7 @@ public class GuiWeaponBench extends GuiCommon {
 		if(!w.areIngridientsCorrect()) {
 			buttonList.get(0).enabled = false;
 		}
-else {
+		else {
 			buttonList.get(0).enabled = true;
 		}
 	}

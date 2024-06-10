@@ -112,7 +112,7 @@ public class EntityMRURay extends Entity {
 						}
 					}
 				}
-else
+				else
 					if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
 						ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
 					}

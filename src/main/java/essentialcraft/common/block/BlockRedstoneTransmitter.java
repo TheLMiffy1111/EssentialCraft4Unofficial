@@ -51,7 +51,7 @@ public class BlockRedstoneTransmitter extends BlockContainer implements IModelRe
 		if(metadata == 3) {
 			return new AxisAlignedBB(0.35F, 0.35F, 0.5F, 0.65F, 0.65F, 1F);
 		}
-		else if(metadata == 4) {
+		if(metadata == 4) {
 			return new AxisAlignedBB(0F, 0.35F, 0.35F, 0.5F, 0.65F, 0.65F);
 		}
 		else if(metadata == 5) {

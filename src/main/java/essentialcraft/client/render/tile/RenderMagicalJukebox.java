@@ -26,7 +26,7 @@ public class RenderMagicalJukebox extends TileEntitySpecialRenderer<TileMagicalJ
 		if(upperIndex < 20) {
 			upperIndex = 20 - upperIndex;
 		}
-else {
+		else {
 			upperIndex -= 20;
 		}
 
@@ -35,7 +35,7 @@ else {
 		if(upperIndex1 < 15) {
 			upperIndex1 = 15 - upperIndex1;
 		}
-else {
+		else {
 			upperIndex1 -= 15;
 		}
 

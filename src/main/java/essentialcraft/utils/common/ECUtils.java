@@ -452,7 +452,7 @@ public class ECUtils {
 				WorldEventRegistry.currentEvent = null;
 				WorldEventRegistry.currentEventDuration = -1;
 			}
-else {
+			else {
 				WorldEventRegistry.currentEventDuration -= 20;
 			}
 		}
@@ -635,7 +635,7 @@ else {
 				}
 			}
 		}
-else {
+		else {
 			boolean ignoreMeta = MiscUtils.getStackTag(filter).getBoolean("ignoreMeta");
 			boolean ignoreNBT = MiscUtils.getStackTag(filter).getBoolean("ignoreNBT");
 			boolean ignoreOreDict = MiscUtils.getStackTag(filter).getBoolean("ignoreOreDict");
@@ -658,7 +658,7 @@ else {
 						}
 					}
 				}
-else {
+				else {
 					if(!oreDictionaryCompare(is, f) || ignoreOreDict) {
 						if(!ItemStack.areItemStackTagsEqual(f, is) || ignoreNBT) {
 							return true;

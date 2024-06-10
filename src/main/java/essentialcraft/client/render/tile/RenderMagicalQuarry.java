@@ -19,7 +19,7 @@ public class RenderMagicalQuarry extends TileEntitySpecialRenderer<TileMagicalQu
 	public void doRender(TileMagicalQuarry tile, double x, double y, double z, float partialTicks) {
 		RenderHelper.disableStandardItemLighting();
 		if(tile.miningX == 0 && tile.miningY == 0 && tile.miningZ == 0) {}
-else {
+		else {
 			GlStateManager.pushMatrix();
 			float[] o = {tile.miningX, tile.miningY+0.5F, tile.miningZ};
 			GlStateManager.popMatrix();

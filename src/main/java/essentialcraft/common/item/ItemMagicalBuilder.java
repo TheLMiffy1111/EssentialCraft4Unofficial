@@ -151,7 +151,7 @@ public class ItemMagicalBuilder extends ItemMRUGeneric implements IModelRegister
 				}
 			}
 		}
-else if(mop==null) {
+		else if(mop==null) {
 			if(p.isSneaking()) {
 				resetPoints(is);
 
@@ -457,7 +457,7 @@ else if(mop==null) {
 									return itemsSet;
 								}
 							}
-else if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote) {
+							else if(e.getEntityWorld().getBlockState(dp).getBlockHardness(e.getEntityWorld(), dp) >= 0 && !e.getEntityWorld().isRemote) {
 								slotNum = decreasePlayerStackInSlot(e, setTo, slotNum);
 
 								if(!ECUtils.playerUseMRU(e, is, 300)) {

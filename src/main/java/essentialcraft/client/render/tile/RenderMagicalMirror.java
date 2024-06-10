@@ -57,7 +57,7 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 			if(timeIndex <= 10) {
 				colorIndex = 1F - timeIndex/10;
 			}
-else {
+			else {
 				colorIndex = (timeIndex-10)/10;
 			}
 			GlStateManager.color(1, colorIndex, 1);
@@ -73,7 +73,7 @@ else {
 			if(tile.transferTime < 20) {
 				DrawUtils.renderItemStack_Full(tile.transferingStack, x, y, z, (tile.getWorld().getWorldTime()+partialTicks)%360, 0, 1, 1, 1, 0.5F, -0.3F+tile.transferTime/20F, 0.5F);
 			}
-else {
+			else {
 				Vec3d vec = new Vec3d(tile.inventoryPos.getX() - tile.getPos().getX(), tile.inventoryPos.getY() - tile.getPos().getY(), tile.inventoryPos.getZ() - tile.getPos().getZ());
 
 				DrawUtils.renderItemStack_Full(tile.transferingStack, x, y, z, (tile.getWorld().getWorldTime()+partialTicks)%360, 0, 1, 1, 1, 0.5F+(float)vec.x*(tile.transferTime-20F)/40, 0.5F+(float)vec.y*(tile.transferTime-20F)/40, 0.5F+(float)vec.z*(tile.transferTime-20F)/40);

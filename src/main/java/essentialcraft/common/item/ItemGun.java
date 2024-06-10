@@ -102,7 +102,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.zoom")+" "+MathHelper.floor(stats.getFloat("zoom")));
 			list.add(I18n.translateToLocal("essentialcraft.gun.txt.balance_"+""+MathHelper.floor(stats.getFloat("balance"))));
 		}
-else if(MiscUtils.getStackTag(stack).hasKey("stats")) {
+		else if(MiscUtils.getStackTag(stack).hasKey("stats")) {
 			list.add(TextFormatting.BLUE+""+TextFormatting.ITALIC+I18n.translateToLocal("essentialcraft.txt.viewInfoHotkey"));
 		}
 		super.addInformation(stack, player, list, par4);

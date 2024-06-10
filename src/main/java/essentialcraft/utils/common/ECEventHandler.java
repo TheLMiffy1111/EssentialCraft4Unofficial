@@ -451,7 +451,7 @@ public class ECEventHandler {
 						if(event.getEntityLiving() instanceof EntityPlayer) {
 							RadiationManager.increasePlayerRadiation((EntityPlayer) event.getEntityLiving(), (int) (event.getAmount()*1000*5));
 						}
-else {
+						else {
 							event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier(SharedMonsterAttributes.MAX_HEALTH.getName(), -event.getAmount(), 0));
 						}
 					}
@@ -505,7 +505,7 @@ else {
 				RadiationManager.increasePlayerRadiation(player, (int) (event.getAmount()*1000));
 			}
 		}
-else {
+		else {
 
 		}
 		if(event.getSource() != null && event.getSource().getTrueSource() instanceof EntityLivingBase) {
@@ -780,7 +780,7 @@ else {
 						//Loading our tool from the NBT
 						efficent = new ItemStack(loadFrom);
 					}
-else //Or, if the tool was not found, we are creating a new blank one
+					else //Or, if the tool was not found, we are creating a new blank one
 					{
 						//Another hard-coded tool initialization.
 						if(clazz.equalsIgnoreCase("pickaxe")) {
@@ -915,7 +915,7 @@ else //Or, if the tool was not found, we are creating a new blank one
 					WorldEventRegistry.currentEvent = WorldEventRegistry.getEventByID(ECUtils.getActiveEvent());
 					WorldEventRegistry.currentEventDuration = ECUtils.getActiveEventDuration();
 				}
-else {
+				else {
 					ECUtils.ec3WorldTag.setInteger("currentEventDuration", ECUtils.getActiveEventDuration()-1);
 					if(ECUtils.getActiveEventDuration() <= 0) {
 						WorldEventRegistry.currentEvent.onEventEnd(event.world);

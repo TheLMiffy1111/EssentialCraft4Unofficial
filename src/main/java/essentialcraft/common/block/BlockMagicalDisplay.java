@@ -80,7 +80,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 				p.inventory.decrStackSize(p.inventory.currentItem, 1);
 
 			}
-else {
+			else {
 				ItemStack dropped = display.getStackInSlot(0);
 				if(!dropped.isEmpty() && !w.isRemote) {
 					if(dropped.getCount() == 0) {

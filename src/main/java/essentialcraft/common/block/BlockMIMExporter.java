@@ -50,14 +50,14 @@ public class BlockMIMExporter extends BlockContainer implements IModelRegisterer
 			return new AxisAlignedBB(0.35F, 0.35F, 0F, 0.65F, 0.65F, 0.2F);
 		}
 		if(metadata == 3) {
-					return new AxisAlignedBB(0.35F, 0.35F, 0.8F, 0.65F, 0.65F, 1F);
-				}
-		else if(metadata == 4) {
-					return new AxisAlignedBB(0F, 0.35F, 0.35F, 0.2F, 0.65F, 0.65F);
-				}
+			return new AxisAlignedBB(0.35F, 0.35F, 0.8F, 0.65F, 0.65F, 1F);
+		}
+		if(metadata == 4) {
+			return new AxisAlignedBB(0F, 0.35F, 0.35F, 0.2F, 0.65F, 0.65F);
+		}
 		else if(metadata == 5) {
-					return new AxisAlignedBB(0.8F, 0.35F, 0.35F, 1F, 0.65F, 0.65F);
-				}
+			return new AxisAlignedBB(0.8F, 0.35F, 0.35F, 1F, 0.65F, 0.65F);
+		}
 		return super.getBoundingBox(s, p_149719_1_, p_149719_2_);
 	}
 

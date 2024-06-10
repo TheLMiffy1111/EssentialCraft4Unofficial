@@ -69,7 +69,7 @@ public class GuiCraftingFrame extends GuiContainer{
 				if(MiscUtils.getStackTag(crafter.filterStack).getBoolean("ignoreOreDict")) {
 					this.drawTexturedModalRect(btn.x, btn.y, 20, 40, 20, 20);
 				}
-else {
+				else {
 					this.drawTexturedModalRect(btn.x, btn.y, 0, 40, 20, 20);
 				}
 			}
@@ -79,7 +79,7 @@ else {
 					if(MiscUtils.getStackTag(crafter.filterStack).getBoolean("ignoreOreDict")) {
 						drawedLst.add("Ore Dictionary: Ignored");
 					}
-else {
+					else {
 						drawedLst.add("Ore Dictionary: Not Ignored");
 					}
 					drawHoveringText(drawedLst, mX, mY, fontRenderer);

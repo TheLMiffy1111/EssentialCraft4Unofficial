@@ -32,7 +32,7 @@ public class RenderMRUReactor extends TileEntitySpecialRenderer<TileMRUReactor>
 			GlStateManager.scale(0.55F, 0.55F, 0.55F);
 			smodel.renderAll();
 		}
-else {
+		else {
 			float wTime = 0F;
 			GlStateManager.translate(0, 0.5F+wTime, 0);
 			GlStateManager.scale(0.55F, 0.55F, 0.55F);

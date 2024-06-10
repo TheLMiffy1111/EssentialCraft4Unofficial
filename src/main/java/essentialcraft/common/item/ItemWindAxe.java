@@ -108,7 +108,7 @@ public class ItemWindAxe extends ItemAxeEC {
 					genericTag.removeTag(clazz);
 					efficent = new ItemStack(loadFrom);
 				}
-else {
+				else {
 					if(clazz.equalsIgnoreCase("pickaxe")) {
 						efficent = new ItemStack(ItemsCore.wind_elemental_pick, 1, currentTool.getItemDamage());
 					}

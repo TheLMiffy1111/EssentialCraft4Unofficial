@@ -504,7 +504,7 @@ public class GuiMIMScreen extends GuiContainer {
 										}
 										setupMaxInt();
 									}
-else {
+									else {
 										selectedStack = drawnItems.get(i).copy();
 										recipeSelected = i;
 									}

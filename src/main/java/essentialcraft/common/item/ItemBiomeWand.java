@@ -61,13 +61,13 @@ public class ItemBiomeWand extends ItemMRUGeneric implements IModelRegisterer, I
 					}
 				}
 			}
-else {
+			else {
 				int cbiome = Biome.getIdForBiome(world.getBiome(pos));
 				setBiomeID(stack, cbiome, false);
 				player.swingArm(hand);
 			}
 		}
-else {
+		else {
 			setBiomeID(stack, 0, true);
 			player.swingArm(hand);
 		}
