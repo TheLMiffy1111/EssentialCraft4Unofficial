@@ -76,7 +76,6 @@ import essentialcraft.common.tile.TileUltraHeatGenerator;
 import essentialcraft.common.tile.TileWeaponMaker;
 import essentialcraft.common.tile.TileWeatherController;
 import essentialcraft.common.tile.TileWindRune;
-import essentialcraft.common.tile.TileWorldMerger;
 import essentialcraft.utils.cfg.Config;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -159,7 +158,6 @@ public class TileRegistry {
 		addTileToMapping(TileMRUChunkLoader.class);
 		addTileToMapping(TileMRUDimensionalTransciever.class);
 		addTileToMapping(TileMRUIntersector.class);
-		addTileToMapping(TileWorldMerger.class);
 		addTileToMapping(TileWeatherController.class);
 		addTileToMapping(TileCreativeESPESource.class);
 

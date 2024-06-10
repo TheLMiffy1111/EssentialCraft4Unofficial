@@ -189,7 +189,6 @@ public class BlocksCore {
 		dimTransciever = registerBlockSimple(new BlockDimensionalTransciever(), "dimTransciever", 1, 1, 0);
 
 		intersector = registerBlockSimple(new BlockMRUIntersector(), "intersector", 1, 1, 15);
-		worldMerger = registerBlockSimple(new BlockWorldMerger(), "worldMerger", 1, 1, 0);
 		weatherController = registerBlockSimple(new BlockWeatherController(), "weatherController", 1, 1, 15);
 	}
 
@@ -376,7 +375,6 @@ public class BlocksCore {
 	public static Block dimTransciever;
 
 	public static Block intersector;
-	public static Block worldMerger;
 	public static Block weatherController;
 
 	public static Block water;

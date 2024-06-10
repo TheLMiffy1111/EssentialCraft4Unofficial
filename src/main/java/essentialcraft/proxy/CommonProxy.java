@@ -110,7 +110,6 @@ import essentialcraft.common.tile.TileUltraFlowerBurner;
 import essentialcraft.common.tile.TileUltraHeatGenerator;
 import essentialcraft.common.tile.TileWeaponMaker;
 import essentialcraft.common.tile.TileWeatherController;
-import essentialcraft.common.tile.TileWorldMerger;
 import essentialcraft.utils.cfg.Config;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
@@ -291,9 +290,6 @@ public class CommonProxy implements IGuiHandler {
 			}
 			if(tile instanceof TileMRUIntersector) {
 				return new ContainerMRUIntersector(player.inventory, tile);
-			}
-			if(tile instanceof TileWorldMerger) {
-				return new ContainerRayTower(player.inventory, tile);
 			}
 			if(tile instanceof TileWeatherController) {
 				return new ContainerWeatherController(player.inventory, tile);

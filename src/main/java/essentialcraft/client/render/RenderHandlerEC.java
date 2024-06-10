@@ -1088,7 +1088,6 @@ public class RenderHandlerEC {
 		IBakedModel gatlingModel = event.getModelRegistry().getObject(new ModelResourceLocation("essentialcraft:item/gun.gatling", "inventory"));
 		event.getModelRegistry().putObject(new ModelResourceLocation("essentialcraft:item/gun.gatling", "internal"), new ModelGunHandler(gatlingModel));
 
-		//CCL made GL rendering, why should I make one as well? Why don't I just use theirs?
 		if(Loader.isModLoaded("codechickenlib")) {
 			event.getModelRegistry().putObject(new ModelResourceLocation("essentialcraft:elementalcrystal", "inventory"), new RenderElementalCrystalAsItem());
 			event.getModelRegistry().putObject(new ModelResourceLocation("essentialcraft:mithrilinecrystal", "inventory"), new RenderMithrilineCrystalAsItem());

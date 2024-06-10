@@ -115,7 +115,6 @@ import essentialcraft.client.render.tile.RenderRadiatingChamber;
 import essentialcraft.client.render.tile.RenderRayTower;
 import essentialcraft.client.render.tile.RenderWeatherController;
 import essentialcraft.client.render.tile.RenderWindRune;
-import essentialcraft.client.render.tile.RenderWorldMerger;
 import essentialcraft.common.entity.EntityArmorDestroyer;
 import essentialcraft.common.entity.EntityDemon;
 import essentialcraft.common.entity.EntityDivider;
@@ -241,7 +240,6 @@ import essentialcraft.common.tile.TileUltraHeatGenerator;
 import essentialcraft.common.tile.TileWeaponMaker;
 import essentialcraft.common.tile.TileWeatherController;
 import essentialcraft.common.tile.TileWindRune;
-import essentialcraft.common.tile.TileWorldMerger;
 import essentialcraft.utils.cfg.Config;
 import essentialcraft.utils.common.ECEventHandler;
 import net.minecraft.block.Block;
@@ -499,9 +497,6 @@ public class ClientProxy extends CommonProxy {
 			if(tile instanceof TileMRUIntersector) {
 				return new GuiMRUIntersector(new ContainerMRUIntersector(player.inventory, tile), tile);
 			}
-			if(tile instanceof TileWorldMerger) {
-				return new GuiRayTower(new ContainerRayTower(player.inventory, tile), tile);
-			}
 			if(tile instanceof TileWeatherController) {
 				return new GuiWeatherController(new ContainerWeatherController(player.inventory, tile), (TileWeatherController)tile);
 			}
@@ -573,7 +568,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileDemonicPentacle.class, new RenderDemonicPentacle());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMagicalChest.class, new RenderMagicalChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMIM.class, new RenderMIM());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileWorldMerger.class, new RenderWorldMerger());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileWeatherController.class, new RenderWeatherController());
 		{
 			ClientRegistry.bindTileEntitySpecialRenderer(TileEnderGenerator.class, new RenderEnderGenerator());
