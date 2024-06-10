@@ -1,15 +1,13 @@
 package essentialcraft.integration.jei;
 
-import com.google.common.collect.Lists;
-
 import DummyCore.Utils.MiscUtils;
 import essentialcraft.api.DemonTrade;
-import essentialcraft.common.block.BlocksCore;
 import essentialcraft.common.item.ItemsCore;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -30,7 +28,7 @@ public class DemonTrading {
 		}
 
 		@Override
-		public void getIngredients(IIngredients arg0) {
+		public void getIngredients(IIngredients ingredients) {
 			ItemStack ret;
 			if(rec.entityType != null) {
 				ret = new ItemStack(ItemsCore.soul, 1, 0);
@@ -39,7 +37,8 @@ public class DemonTrading {
 			else {
 				ret = rec.desiredItem;
 			}
-			arg0.setInputs(ItemStack.class, Lists.newArrayList(ret, new ItemStack(BlocksCore.demonicPentacle)));
+			ingredients.setInput(VanillaTypes.ITEM, ret);
+			ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(ItemsCore.genericItem, 1, 52));
 		}
 	}
 
@@ -90,11 +89,12 @@ public class DemonTrading {
 		}
 
 		@Override
-		public void setRecipe(IRecipeLayout arg0, DemonTrading.Wrapper arg1, IIngredients arg2) {
-			arg0.getItemStacks().init(0, true, 79, 29);
-			arg0.getItemStacks().init(1, true, 79, 47);
-			arg0.getItemStacks().set(0, arg2.getInputs(ItemStack.class).get(0));
-			arg0.getItemStacks().set(1, arg2.getInputs(ItemStack.class).get(1));
+		public void setRecipe(IRecipeLayout recipeLayout, DemonTrading.Wrapper recipeWrapper, IIngredients ingredients) {
+			recipeLayout.getItemStacks().init(0, true, 79, 29);
+			recipeLayout.getItemStacks().init(1, false, 79, 47);
+
+			recipeLayout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+			recipeLayout.getItemStacks().set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 		}
 
 		@Override

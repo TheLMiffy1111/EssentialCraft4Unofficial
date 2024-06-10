@@ -10,6 +10,8 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IIngredientType;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -32,16 +34,18 @@ public class WindImbue {
 
 		@Override
 		public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-			minecraft.fontRenderer.drawString(MathHelper.floor(rec.enderEnergy)+" ESPE", 0, 36, 0x000000, false);
+			String text = MathHelper.floor(rec.enderEnergy)+" ESPE";
+			minecraft.fontRenderer.drawString(text, 45-minecraft.fontRenderer.getStringWidth(text)/2, 20, 0x000000, false);
 			if(rec.result.getItem() instanceof ItemSoulStone) {
-				minecraft.fontRenderer.drawString("+Wind Relations", 0, 46, 0x81d17d, true);
+				text = "+Wind Relations";
+				minecraft.fontRenderer.drawString(text, 45-minecraft.fontRenderer.getStringWidth(text)/2, 30, 0x81D17D, true);
 			}
 		}
 
 		@Override
-		public void getIngredients(IIngredients paramIIngredients) {
-			paramIIngredients.setInputLists(ItemStack.class, Arrays.asList(Arrays.asList(rec.input.getMatchingStacks()), Collections.singletonList(new ItemStack(BlocksCore.windRune))));
-			paramIIngredients.setOutput(ItemStack.class, rec.result);
+		public void getIngredients(IIngredients ingredients) {
+			ingredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(Arrays.asList(rec.input.getMatchingStacks())));
+			ingredients.setOutput(VanillaTypes.ITEM, rec.result);
 		}
 	}
 
@@ -50,7 +54,7 @@ public class WindImbue {
 		private final IDrawable BG;
 
 		public Category(IGuiHelper gh) {
-			BG = gh.createDrawable(new ResourceLocation("essentialcraft:textures/gui/jei/wind_imbue.png"), 0, 0, 57, 60);
+			BG = gh.createDrawable(new ResourceLocation("essentialcraft:textures/gui/jei/wind_imbue.png"), 0, 0, 90, 40);
 		}
 
 		@Override
@@ -69,14 +73,12 @@ public class WindImbue {
 		}
 
 		@Override
-		public void setRecipe(IRecipeLayout arg0, WindImbue.Wrapper arg1, IIngredients arg2) {
-			arg0.getItemStacks().init(0, true, 2, 0);
-			arg0.getItemStacks().init(1, true, 20, 18);
-			arg0.getItemStacks().init(2, false, 38, 0);
+		public void setRecipe(IRecipeLayout recipeLayout, WindImbue.Wrapper recipeWrapper, IIngredients ingredients) {
+			recipeLayout.getItemStacks().init(0, true, 18, 0);
+			recipeLayout.getItemStacks().init(1, false, 54, 0);
 
-			arg0.getItemStacks().set(0, arg2.getInputs(ItemStack.class).get(0));
-			arg0.getItemStacks().set(1, arg2.getInputs(ItemStack.class).get(1));
-			arg0.getItemStacks().set(2, arg2.getOutputs(ItemStack.class).get(0));
+			recipeLayout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+			recipeLayout.getItemStacks().set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 		}
 
 		@Override

@@ -47,7 +47,7 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 					setInventorySlotContents(2, consumeItem(getStackInSlot(1)));
 					decrStackSize(1, 1);
 				}
-				else if(lavaTank.getFluidAmount() != 8000 && lavaTank.getFluid().isFluidEqual(FluidUtil.getFluidContained(getStackInSlot(1)))) {
+				else if(lavaTank.getFluidAmount() < 8000 && lavaTank.getFluid().isFluidEqual(FluidUtil.getFluidContained(getStackInSlot(1)))) {
 					lavaTank.fill(FluidUtil.getFluidContained(getStackInSlot(1)), true);
 					setInventorySlotContents(2, consumeItem(getStackInSlot(1)));
 					decrStackSize(1, 1);
@@ -82,7 +82,7 @@ public class TileMagmaticSmelter extends TileMRUGeneric {
 							}
 							++progressLevel;
 							if(generatesCorruption) {
-								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, (genCorruption));
+								ECUtils.randomIncreaseCorruptionAt(getWorld(), pos, getWorld().rand, genCorruption);
 							}
 							if(progressLevel >= oreSmeltingTime) {
 								progressLevel = 0;

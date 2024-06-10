@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 import DummyCore.Utils.DrawUtils;
 import DummyCore.Utils.MathUtils;
 import essentialcraft.api.RadiatingChamberRecipe;
@@ -15,6 +13,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -54,18 +53,13 @@ public class RadiatingChamber {
 		}
 
 		@Override
-		public void getIngredients(IIngredients arg0) {
-			ArrayList<List<ItemStack>> ret = Lists.<List<ItemStack>>newArrayList();
+		public void getIngredients(IIngredients ingredients) {
+			List<List<ItemStack>> ret = new ArrayList<>();
 			for(Ingredient ing : rec.recipeItems) {
-				if(ing == Ingredient.EMPTY) {
-					ret.add(Collections.emptyList());
-				}
-				else {
-					ret.add(Arrays.asList(ing.getMatchingStacks()));
-				}
+				ret.add(Arrays.asList(ing.getMatchingStacks()));
 			}
-			arg0.setInputLists(ItemStack.class, ret);
-			arg0.setOutput(ItemStack.class, rec.result);
+			ingredients.setInputLists(VanillaTypes.ITEM, ret);
+			ingredients.setOutput(VanillaTypes.ITEM, rec.result);
 		}
 	}
 
@@ -93,16 +87,16 @@ public class RadiatingChamber {
 		}
 
 		@Override
-		public void setRecipe(IRecipeLayout arg0, RadiatingChamber.Wrapper arg1, IIngredients arg2) {
-			arg0.getItemStacks().init(0, true, 18, 0);
-			arg0.getItemStacks().init(1, true, 18, 36);
-			arg0.getItemStacks().init(2, false, 36, 18);
+		public void setRecipe(IRecipeLayout recipeLayout, RadiatingChamber.Wrapper recipeWrapper, IIngredients ingredients) {
+			recipeLayout.getItemStacks().init(0, true, 18, 0);
+			recipeLayout.getItemStacks().init(1, true, 18, 36);
+			recipeLayout.getItemStacks().init(2, false, 36, 18);
 
-			arg0.getItemStacks().set(0, arg2.getInputs(ItemStack.class).get(0));
-			if(arg2.getInputs(ItemStack.class).size()>1) {
-				arg0.getItemStacks().set(1, arg2.getInputs(ItemStack.class).get(1));
+			recipeLayout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+			if(ingredients.getInputs(VanillaTypes.ITEM).size()>1) {
+				recipeLayout.getItemStacks().set(1, ingredients.getInputs(VanillaTypes.ITEM).get(1));
 			}
-			arg0.getItemStacks().set(2, arg2.getOutputs(ItemStack.class).get(0));
+			recipeLayout.getItemStacks().set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 		}
 
 		@Override

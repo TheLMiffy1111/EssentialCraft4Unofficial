@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 import DummyCore.Utils.DrawUtils;
 import DummyCore.Utils.MathUtils;
 import essentialcraft.api.MagicianTableRecipe;
@@ -15,6 +13,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -47,18 +46,13 @@ public class MagicianTable {
 		}
 
 		@Override
-		public void getIngredients(IIngredients arg0) {
-			ArrayList<List<ItemStack>> ret = Lists.<List<ItemStack>>newArrayList();
+		public void getIngredients(IIngredients ingredients) {
+			List<List<ItemStack>> ret = new ArrayList<>();
 			for(Ingredient ing : rec.requiredItems) {
-				if(ing == Ingredient.EMPTY) {
-					ret.add(Collections.emptyList());
-				}
-				else {
-					ret.add(Arrays.asList(ing.getMatchingStacks()));
-				}
+				ret.add(Arrays.asList(ing.getMatchingStacks()));
 			}
-			arg0.setInputLists(ItemStack.class, ret);
-			arg0.setOutput(ItemStack.class, rec.result);
+			ingredients.setInputLists(VanillaTypes.ITEM, ret);
+			ingredients.setOutput(VanillaTypes.ITEM, rec.result);
 		}
 	}
 
@@ -86,20 +80,20 @@ public class MagicianTable {
 		}
 
 		@Override
-		public void setRecipe(IRecipeLayout arg0, MagicianTable.Wrapper arg1, IIngredients arg2) {
-			arg0.getItemStacks().init(0, true, 36, 18);
-			arg0.getItemStacks().init(1, true, 18, 0);
-			arg0.getItemStacks().init(2, true, 54, 0);
-			arg0.getItemStacks().init(3, true, 18, 36);
-			arg0.getItemStacks().init(4, true, 54, 36);
-			arg0.getItemStacks().init(5, false, 108, 18);
+		public void setRecipe(IRecipeLayout recipeLayout, MagicianTable.Wrapper recipeWrapper, IIngredients ingredients) {
+			recipeLayout.getItemStacks().init(0, true, 36, 18);
+			recipeLayout.getItemStacks().init(1, true, 18, 0);
+			recipeLayout.getItemStacks().init(2, true, 54, 0);
+			recipeLayout.getItemStacks().init(3, true, 18, 36);
+			recipeLayout.getItemStacks().init(4, true, 54, 36);
+			recipeLayout.getItemStacks().init(5, false, 108, 18);
 
 			for(int i = 0; i < 5; i++) {
-				if(arg2.getInputs(ItemStack.class).size()>i) {
-					arg0.getItemStacks().set(i, arg2.getInputs(ItemStack.class).get(i));
+				if(ingredients.getInputs(VanillaTypes.ITEM).size() > i) {
+					recipeLayout.getItemStacks().set(i, ingredients.getInputs(VanillaTypes.ITEM).get(i));
 				}
 			}
-			arg0.getItemStacks().set(5, arg2.getOutputs(ItemStack.class).get(0));
+			recipeLayout.getItemStacks().set(5, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 		}
 
 		@Override
