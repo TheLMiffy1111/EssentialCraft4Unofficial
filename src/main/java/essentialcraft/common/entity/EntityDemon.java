@@ -92,9 +92,8 @@ public class EntityDemon extends EntityLiving implements IInventory {
 		}
 		super.onUpdate();
 		if(!getStackInSlot(0).isEmpty() && !desiredItem.isEmpty() && getStackInSlot(0).getCount() >= desiredItem.getCount()) {
-			if(desiredItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && (
-					!desiredItem.hasTagCompound() && ItemStack.areItemsEqual(desiredItem, getStackInSlot(0)) ||
-					desiredItem.hasTagCompound() && ItemStack.areItemStacksEqualUsingNBTShareTag(desiredItem, getStackInSlot(0))) ||
+			if(desiredItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && desiredItem.isItemEqual(getStackInSlot(0)) && (
+					!desiredItem.hasTagCompound() || ItemStack.areItemStackTagsEqual(desiredItem, getStackInSlot(0))) ||
 					desiredItem.getItemDamage() == OreDictionary.WILDCARD_VALUE && getStackInSlot(0).getItem() == desiredItem.getItem()) {
 				setDead();
 				for(int i = 0; i < 400; ++i) {

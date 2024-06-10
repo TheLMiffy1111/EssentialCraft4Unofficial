@@ -128,7 +128,9 @@ public class EssentialCraftCore {
 		VillagersRegistry.register();
 		EnchantRegistry.register();
 
-		TConstructRegistry.register();
+		if(Loader.isModLoaded("tconstruct")) {
+			TConstructRegistry.register();
+		}
 		OreDictionaryRegistry.register();
 		GunInitialization.register();
 	}
