@@ -38,7 +38,7 @@ public class BlockMIMImporter extends BlockContainer implements IModelRegisterer
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState s, IBlockAccess p_149719_1_, BlockPos p_149719_2_) {
+	public AxisAlignedBB getBoundingBox(IBlockState s, IBlockAccess world, BlockPos pos) {
 		int metadata = s.getValue(FACING).getIndex();
 		if(metadata == 0) {
 			return new AxisAlignedBB(0.35F, 0F, 0.35F, 0.65F, 0.2F, 0.65F);
@@ -55,10 +55,10 @@ public class BlockMIMImporter extends BlockContainer implements IModelRegisterer
 		if(metadata == 4) {
 			return new AxisAlignedBB(0F, 0.35F, 0.35F, 0.2F, 0.65F, 0.65F);
 		}
-		else if(metadata == 5) {
+		if(metadata == 5) {
 			return new AxisAlignedBB(0.8F, 0.35F, 0.35F, 1F, 0.65F, 0.65F);
 		}
-		return super.getBoundingBox(s, p_149719_1_, p_149719_2_);
+		return super.getBoundingBox(s, world, pos);
 	}
 
 	@Override

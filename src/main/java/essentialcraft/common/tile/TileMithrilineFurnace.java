@@ -291,18 +291,18 @@ public class TileMithrilineFurnace extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing p_94128_1_) {
+	public int[] getSlotsForFace(EnumFacing side) {
 		return new int[] {0, 1};
 	}
 
 	@Override
-	public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, EnumFacing p_102007_3_) {
-		return isItemValidForSlot(p_102007_1_, p_102007_2_);
+	public boolean canInsertItem(int slot, ItemStack stack, EnumFacing side) {
+		return isItemValidForSlot(slot, stack);
 	}
 
 	@Override
-	public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, EnumFacing p_102008_3_) {
-		return p_102008_1_ == 1;
+	public boolean canExtractItem(int slot, ItemStack stack, EnumFacing side) {
+		return slot == 1;
 	}
 
 	@Override

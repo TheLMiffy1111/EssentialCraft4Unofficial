@@ -70,7 +70,7 @@ public class ItemShadeSword extends ItemSwordEC {
 	}
 
 
-	public boolean isItemTool(ItemStack p_77616_1_) {
+	public boolean isItemTool(ItemStack stack) {
 		return true;
 	}
 

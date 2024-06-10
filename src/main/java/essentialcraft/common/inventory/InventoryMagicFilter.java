@@ -86,14 +86,14 @@ public class InventoryMagicFilter implements IInventory {
 	public void markDirty() {
 		for(int i = 0; i < inventory.length; i++) {
 			ItemStack tempStack = getStackInSlot(i);
-			if (!tempStack.isEmpty() && tempStack.getCount() == 0) {
+			if(!tempStack.isEmpty() && tempStack.getCount() == 0) {
 				setInventorySlotContents(i, ItemStack.EMPTY);
 			}
 		}
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer p_70300_1_) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 		return true;
 	}
 

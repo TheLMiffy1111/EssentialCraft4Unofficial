@@ -119,7 +119,7 @@ public class TileMRUIntersector extends TileEntity implements IInventory, ITicka
 
 	@Override
 	public ItemStack removeStackFromSlot(int par1) {
-		if (!items[par1].isEmpty()) {
+		if(!items[par1].isEmpty()) {
 			ItemStack itemstack = items[par1];
 			items[par1] = ItemStack.EMPTY;
 			return itemstack;

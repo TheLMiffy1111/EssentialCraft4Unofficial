@@ -62,13 +62,13 @@ public class EntityShadowKnife extends EntityThrowable {
 		int j = MathHelper.floor(e.posY);
 		int k = MathHelper.floor(e.posZ);
 
-		if (getEntityWorld().isBlockLoaded(new BlockPos(i, j, k))) {
+		if(getEntityWorld().isBlockLoaded(new BlockPos(i, j, k))) {
 			boolean flag1 = false;
 
 			while (!flag1 && j > 0) {
 				IBlockState block = e.getEntityWorld().getBlockState(new BlockPos(i, j-1, k));
 
-				if (block.getMaterial().blocksMovement()) {
+				if(block.getMaterial().blocksMovement()) {
 					flag1 = true;
 				}
 				else {
@@ -77,22 +77,22 @@ public class EntityShadowKnife extends EntityThrowable {
 				}
 			}
 
-			if (flag1) {
+			if(flag1) {
 				e.setPosition(e.posX, e.posY, e.posZ);
 
-				if (e.getEntityWorld().getCollisionBoxes(e, e.getEntityBoundingBox()).isEmpty() && !e.getEntityWorld().containsAnyLiquid(e.getEntityBoundingBox())) {
+				if(e.getEntityWorld().getCollisionBoxes(e, e.getEntityBoundingBox()).isEmpty() && !e.getEntityWorld().containsAnyLiquid(e.getEntityBoundingBox())) {
 					flag = true;
 				}
 			}
 		}
 
-		if (!flag) {
+		if(!flag) {
 			e.setPosition(d3, d4, d5);
 			return false;
 		}
 		short short1 = 128;
 
-		for (int l = 0; l < short1; ++l) {
+		for(int l = 0; l < short1; ++l) {
 			double d6 = l / (short1 - 1D);
 			float f = (rand.nextFloat() - 0.5F) * 0.2F;
 			float f1 = (rand.nextFloat() - 0.5F) * 0.2F;

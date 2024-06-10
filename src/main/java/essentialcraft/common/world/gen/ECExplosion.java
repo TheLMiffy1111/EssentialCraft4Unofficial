@@ -90,7 +90,7 @@ public class ECExplosion extends Explosion {
 	}
 
 	@Override
-	public void doExplosionB(boolean p_77279_1_) {
+	public void doExplosionB(boolean spawnParticles) {
 		IBlockState block;
 
 		for(BlockPos chunkposition : getAffectedBlockPositions()) {

@@ -165,7 +165,7 @@ public class ContainerCraftingFrame extends ContainerInventory {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
 		return ItemStack.EMPTY;
 	}
 

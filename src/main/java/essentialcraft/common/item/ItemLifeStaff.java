@@ -55,7 +55,7 @@ public class ItemLifeStaff extends ItemMRUGeneric implements IModelRegisterer {
 				EntityVillager entityvillager = new EntityVillager(e.getEntityWorld());
 				entityvillager.copyLocationAndAnglesFrom(e);
 				entityvillager.onInitialSpawn(entity.getEntityWorld().getDifficultyForLocation(entity.getPosition()), (IEntityLivingData)null);
-				if (e.isChild()) {
+				if(e.isChild()) {
 					entityvillager.setGrowingAge(-24000);
 				}
 

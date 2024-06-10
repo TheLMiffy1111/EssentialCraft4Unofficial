@@ -16,12 +16,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDemon extends RenderLiving<EntityDemon>
-{
+public class RenderDemon extends RenderLiving<EntityDemon> {
+
 	private static final ResourceLocation endermanEyesTexture = new ResourceLocation("essentialcraft", "textures/entities/demon_eyes.png");
 	private static final ResourceLocation endermanTextures = new ResourceLocation("essentialcraft", "textures/entities/demon.png");
-	/** The model of the enderman */
 	private ModelDemon endermanModel;
+
 	public RenderDemon() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelDemon(1, 0, 64, 32), 0.5F);
 		endermanModel = (ModelDemon)super.mainModel;
@@ -43,16 +43,13 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-	 */
 	@Override
 	protected ResourceLocation getEntityTexture(EntityDemon entity) {
 		return endermanTextures;
 	}
 
-	protected int shouldRenderPass(EntityDemon partialTicks, int p_77032_2_, float p_77032_3_) {
-		if(p_77032_2_ != 0) {
+	protected int shouldRenderPass(EntityDemon entity, int pass, float partialTicks) {
+		if(pass != 0) {
 			return -1;
 		}
 		bindTexture(endermanEyesTexture);
@@ -62,7 +59,7 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 		GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 		GlStateManager.disableLighting();
 
-		if (partialTicks.isInvisible()) {
+		if(entity.isInvisible()) {
 			GlStateManager.depthMask(false);
 		}
 		else {

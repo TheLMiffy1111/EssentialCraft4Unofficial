@@ -32,7 +32,7 @@ public class BlockMagicalFurnace extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileMagicalFurnace();
 	}
 

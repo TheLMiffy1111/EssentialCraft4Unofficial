@@ -127,7 +127,7 @@ public class TileMagicalDisplay extends TileEntity implements IInventory, ITicka
 	public void setInventorySlotContents(int par1, ItemStack stack) {
 		items[par1] = stack;
 
-		if (!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
+		if(!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
 			stack.setCount(getInventoryStackLimit());
 		}
 	}

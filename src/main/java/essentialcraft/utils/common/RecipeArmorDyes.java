@@ -43,11 +43,8 @@ public class RecipeArmorDyes extends Impl<IRecipe> implements IRecipe {
 		return !itemstack.isEmpty() && !arraylist.isEmpty();
 	}
 
-	/**
-	 * Returns an Item that is the result of this recipe
-	 */
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting p_77572_1_) {
+	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		int[] aint = new int[3];
 		int i = 0;
@@ -59,8 +56,8 @@ public class RecipeArmorDyes extends Impl<IRecipe> implements IRecipe {
 		float f1;
 		int l1;
 
-		for(k = 0; k < p_77572_1_.getSizeInventory(); ++k) {
-			ItemStack itemstack1 = p_77572_1_.getStackInSlot(k);
+		for(k = 0; k < inv.getSizeInventory(); ++k) {
+			ItemStack itemstack1 = inv.getStackInSlot(k);
 
 			if(!itemstack1.isEmpty()) {
 				if(itemstack1.getItem() instanceof ItemGenericArmor) {

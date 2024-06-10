@@ -11,7 +11,7 @@ public class WorldGenDreadCacti extends WorldGenerator {
 
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
-		for (int l = 0; l < 10; ++l) {
+		for(int l = 0; l < 10; ++l) {
 			BlockPos blockpos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
 			if(world.isAirBlock(blockpos)) {

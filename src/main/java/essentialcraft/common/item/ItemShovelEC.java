@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemShovelEC extends ItemSpade implements IModelRegisterer {
 
-	public ItemShovelEC(ToolMaterial p_i45347_1_) {
-		super(p_i45347_1_);
+	public ItemShovelEC(ToolMaterial material) {
+		super(material);
 	}
 
 	@Override

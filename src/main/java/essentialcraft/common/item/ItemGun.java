@@ -571,9 +571,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
-		if(p_77661_1_.hasTagCompound()) {
-			NBTTagCompound tag = MiscUtils.getStackTag(p_77661_1_);
+	public EnumAction getItemUseAction(ItemStack stack) {
+		if(stack.hasTagCompound()) {
+			NBTTagCompound tag = MiscUtils.getStackTag(stack);
 			if(tag.hasKey("stats")) {
 				float current = tag.getFloat("gunShots")+1;
 				float max = tag.getCompoundTag("stats").getFloat("shots");
@@ -587,9 +587,9 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
-		if(p_77626_1_.hasTagCompound()) {
-			NBTTagCompound tag = MiscUtils.getStackTag(p_77626_1_);
+	public int getMaxItemUseDuration(ItemStack stack) {
+		if(stack.hasTagCompound()) {
+			NBTTagCompound tag = MiscUtils.getStackTag(stack);
 			if(tag.hasKey("stats")) {
 				float current = tag.getFloat("gunShots")+1;
 				float max = tag.getCompoundTag("stats").getFloat("shots");

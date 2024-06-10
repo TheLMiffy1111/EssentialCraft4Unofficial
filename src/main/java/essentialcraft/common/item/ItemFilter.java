@@ -61,14 +61,14 @@ public class ItemFilter extends Item implements IModelRegisterer {
 
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
-		if (world.isRemote || !isCurrentItem || !(entity instanceof EntityPlayer)) {
+		if(world.isRemote || !isCurrentItem || !(entity instanceof EntityPlayer)) {
 			return;
 		}
 		if(((EntityPlayer)entity).openContainer == null || !(((EntityPlayer) entity).openContainer instanceof ContainerFilter)) {
 			return;
 		}
 		int containerType = containerMatchesItem(((EntityPlayer)entity).openContainer);
-		if (containerType == 0) {
+		if(containerType == 0) {
 			ContainerFilter c = (ContainerFilter)((EntityPlayer)entity).openContainer;
 			c.saveToNBT(itemStack);
 		}

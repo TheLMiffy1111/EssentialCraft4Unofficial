@@ -35,9 +35,9 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {}
 
 	@Override
-	public void onEntityCollision(World p_149670_1_, BlockPos p_149670_2_, IBlockState s, Entity p_149670_5_) {
-		if(!p_149670_1_.isRemote) {
-			DummyPortalHandler.transferEntityToDimension(p_149670_5_);
+	public void onEntityCollision(World world, BlockPos pos, IBlockState s, Entity entity) {
+		if(!world.isRemote) {
+			DummyPortalHandler.transferEntityToDimension(entity);
 		}
 	}
 
@@ -52,7 +52,7 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		EnumFacing.Axis enumfacing$axis = state.getValue(AXIS);
 
-		if (enumfacing$axis == EnumFacing.Axis.X) {
+		if(enumfacing$axis == EnumFacing.Axis.X) {
 			BlockHoannaPortal.Size blockportal$size = new BlockHoannaPortal.Size(worldIn, pos, EnumFacing.Axis.X);
 
 			if(!blockportal$size.isValid() || blockportal$size.portalBlockCount < blockportal$size.width * blockportal$size.height) {
@@ -69,60 +69,58 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 	}
 
 	@Override
-	public BlockPattern.PatternHelper createPatternHelper(World worldIn, BlockPos p_181089_2_) {
-		EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
-		BlockHoannaPortal.Size blockportal$size = new BlockHoannaPortal.Size(worldIn, p_181089_2_, EnumFacing.Axis.X);
-		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.createLoadingCache(worldIn, true);
+	public BlockPattern.PatternHelper createPatternHelper(World world, BlockPos pos) {
+		EnumFacing.Axis axis = EnumFacing.Axis.Z;
+		BlockHoannaPortal.Size size = new BlockHoannaPortal.Size(world, pos, EnumFacing.Axis.X);
+		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.createLoadingCache(world, true);
 
-		if(!blockportal$size.isValid()) {
-			enumfacing$axis = EnumFacing.Axis.X;
-			blockportal$size = new BlockHoannaPortal.Size(worldIn, p_181089_2_, EnumFacing.Axis.Z);
+		if(!size.isValid()) {
+			axis = EnumFacing.Axis.X;
+			size = new BlockHoannaPortal.Size(world, pos, EnumFacing.Axis.Z);
 		}
 
-		if(!blockportal$size.isValid()) {
-			return new BlockPattern.PatternHelper(p_181089_2_, EnumFacing.NORTH, EnumFacing.UP, loadingcache, 1, 1, 1);
+		if(!size.isValid()) {
+			return new BlockPattern.PatternHelper(pos, EnumFacing.NORTH, EnumFacing.UP, loadingcache, 1, 1, 1);
 		}
 		int[] aint = new int[EnumFacing.AxisDirection.values().length];
-		EnumFacing enumfacing = blockportal$size.rightDir.rotateYCCW();
-		BlockPos blockpos = blockportal$size.bottomLeft.up(blockportal$size.getHeight() - 1);
+		EnumFacing enumfacing = size.rightDir.rotateYCCW();
+		BlockPos blockpos = size.bottomLeft.up(size.getHeight() - 1);
 
-		for(EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values()) {
-			BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
+		for(EnumFacing.AxisDirection dir : EnumFacing.AxisDirection.values()) {
+			BlockPattern.PatternHelper patternHelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == dir ? blockpos : blockpos.offset(size.rightDir, size.getWidth() - 1), EnumFacing.getFacingFromAxis(dir, axis), EnumFacing.UP, loadingcache, size.getWidth(), size.getHeight(), 1);
 
-			for(int i = 0; i < blockportal$size.getWidth(); ++i) {
-				for(int j = 0; j < blockportal$size.getHeight(); ++j) {
-					BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
+			for(int i = 0; i < size.getWidth(); ++i) {
+				for(int j = 0; j < size.getHeight(); ++j) {
+					BlockWorldState blockworldstate = patternHelper.translateOffset(i, j, 1);
 
 					if(blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.AIR) {
-						++aint[enumfacing$axisdirection.ordinal()];
+						++aint[dir.ordinal()];
 					}
 				}
 			}
 		}
 
-		EnumFacing.AxisDirection enumfacing$axisdirection1 = EnumFacing.AxisDirection.POSITIVE;
+		EnumFacing.AxisDirection axisDir = EnumFacing.AxisDirection.POSITIVE;
 
-		for(EnumFacing.AxisDirection enumfacing$axisdirection2 : EnumFacing.AxisDirection.values()) {
-			if(aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()]) {
-				enumfacing$axisdirection1 = enumfacing$axisdirection2;
+		for(EnumFacing.AxisDirection dir : EnumFacing.AxisDirection.values()) {
+			if(aint[dir.ordinal()] < aint[axisDir.ordinal()]) {
+				axisDir = dir;
 			}
 		}
 
-		return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
+		return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == axisDir ? blockpos : blockpos.offset(size.rightDir, size.getWidth() - 1), EnumFacing.getFacingFromAxis(axisDir, axis), EnumFacing.UP, loadingcache, size.getWidth(), size.getHeight(), 1);
 	}
 
 	@Override
-	public boolean trySpawnPortal(World worldIn, BlockPos pos) {
-		BlockHoannaPortal.Size blockportal$size = new BlockHoannaPortal.Size(worldIn, pos, EnumFacing.Axis.X);
-
-		if(blockportal$size.isValid() && blockportal$size.portalBlockCount == 0) {
-			blockportal$size.placePortalBlocks();
+	public boolean trySpawnPortal(World world, BlockPos pos) {
+		BlockHoannaPortal.Size size = new BlockHoannaPortal.Size(world, pos, EnumFacing.Axis.X);
+		if(size.isValid() && size.portalBlockCount == 0) {
+			size.placePortalBlocks();
 			return true;
 		}
-		BlockHoannaPortal.Size blockportal$size1 = new BlockHoannaPortal.Size(worldIn, pos, EnumFacing.Axis.Z);
-
-		if(blockportal$size1.isValid() && blockportal$size1.portalBlockCount == 0) {
-			blockportal$size1.placePortalBlocks();
+		size = new BlockHoannaPortal.Size(world, pos, EnumFacing.Axis.Z);
+		if(size.isValid() && size.portalBlockCount == 0) {
+			size.placePortalBlocks();
 			return true;
 		}
 		return false;
@@ -143,11 +141,11 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 		private int height;
 		private int width;
 
-		public Size(World worldIn, BlockPos p_i45694_2_, EnumFacing.Axis p_i45694_3_) {
-			world = worldIn;
-			axis = p_i45694_3_;
+		public Size(World world, BlockPos pos, EnumFacing.Axis axis) {
+			this.world = world;
+			this.axis = axis;
 
-			if(p_i45694_3_ == EnumFacing.Axis.X) {
+			if(axis == EnumFacing.Axis.X) {
 				leftDir = EnumFacing.EAST;
 				rightDir = EnumFacing.WEST;
 			}
@@ -156,12 +154,12 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 				rightDir = EnumFacing.SOUTH;
 			}
 
-			for(BlockPos blockpos = p_i45694_2_; p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0 && isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {}
+			for(BlockPos blockpos = pos; pos.getY() > blockpos.getY() - 21 && pos.getY() > 0 && isEmptyBlock(world.getBlockState(pos.down()).getBlock()); pos = pos.down()) {}
 
-			int i = getDistanceUntilEdge(p_i45694_2_, leftDir) - 1;
+			int i = getDistanceUntilEdge(pos, leftDir) - 1;
 
 			if(i >= 0) {
-				bottomLeft = p_i45694_2_.offset(leftDir, i);
+				bottomLeft = pos.offset(leftDir, i);
 				width = getDistanceUntilEdge(bottomLeft, rightDir);
 
 				if(width < 2 || width > 21) {
@@ -175,18 +173,15 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 			}
 		}
 
-		protected int getDistanceUntilEdge(BlockPos p_180120_1_, EnumFacing p_180120_2_) {
+		protected int getDistanceUntilEdge(BlockPos pos, EnumFacing side) {
 			int i;
-
 			for(i = 0; i < 22; ++i) {
-				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
-
+				BlockPos blockpos = pos.offset(side, i);
 				if(!isEmptyBlock(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != Blocks.OBSIDIAN) {
 					break;
 				}
 			}
-
-			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
+			Block block = world.getBlockState(pos.offset(side, i)).getBlock();
 			return block == Blocks.OBSIDIAN ? i : 0;
 		}
 
@@ -199,33 +194,31 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 		}
 
 		protected int calculatePortalHeight() {
-			{
-				label24: for (height = 0; height < 21; ++height) {
-					for(int i = 0; i < width; ++i) {
-						BlockPos blockpos = bottomLeft.offset(rightDir, i).up(height);
-						Block block = world.getBlockState(blockpos).getBlock();
+			label24: for(height = 0; height < 21; ++height) {
+				for(int i = 0; i < width; ++i) {
+					BlockPos blockpos = bottomLeft.offset(rightDir, i).up(height);
+					Block block = world.getBlockState(blockpos).getBlock();
 
-						if(!isEmptyBlock(block)) {
+					if(!isEmptyBlock(block)) {
+						break label24;
+					}
+
+					if(block == BlocksCore.portal) {
+						++portalBlockCount;
+					}
+
+					if(i == 0) {
+						block = world.getBlockState(blockpos.offset(leftDir)).getBlock();
+
+						if(block != Blocks.OBSIDIAN) {
 							break label24;
 						}
+					}
+					else if(i == width - 1) {
+						block = world.getBlockState(blockpos.offset(rightDir)).getBlock();
 
-						if(block == BlocksCore.portal) {
-							++portalBlockCount;
-						}
-
-						if(i == 0) {
-							block = world.getBlockState(blockpos.offset(leftDir)).getBlock();
-
-							if(block != Blocks.OBSIDIAN) {
-								break label24;
-							}
-						}
-						else if(i == width - 1) {
-							block = world.getBlockState(blockpos.offset(rightDir)).getBlock();
-
-							if(block != Blocks.OBSIDIAN) {
-								break label24;
-							}
+						if(block != Blocks.OBSIDIAN) {
+							break label24;
 						}
 					}
 				}
@@ -256,7 +249,7 @@ public class BlockHoannaPortal extends BlockPortal implements IModelRegisterer {
 		}
 
 		public void placePortalBlocks() {
-			for (int i = 0; i < width; ++i) {
+			for(int i = 0; i < width; ++i) {
 				BlockPos blockpos = bottomLeft.offset(rightDir, i);
 
 				for(int j = 0; j < height; ++j) {

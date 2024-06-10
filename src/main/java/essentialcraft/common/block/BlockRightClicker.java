@@ -97,7 +97,7 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 	}
 
 	@Override
-	public void onBlockPlacedBy(World w, BlockPos p, IBlockState s, EntityLivingBase placer, ItemStack p_149689_6_) {
+	public void onBlockPlacedBy(World w, BlockPos p, IBlockState s, EntityLivingBase placer, ItemStack stack) {
 		int l = EnumFacing.getDirectionFromEntityLiving(p, placer).getIndex();
 		TileEntity tile = w.getTileEntity(p);
 		if(tile != null && tile instanceof TileRightClicker) {

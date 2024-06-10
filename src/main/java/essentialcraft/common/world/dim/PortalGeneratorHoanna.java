@@ -107,11 +107,11 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 			f = 1F;
 			f1 = 1F;
 		}
-		else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.getOpposite()) {
+		else if(blockpattern$patternhelper.getForwards().getOpposite() == eTD.getOpposite()) {
 			f = -1F;
 			f1 = -1F;
 		}
-		else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.rotateY()) {
+		else if(blockpattern$patternhelper.getForwards().getOpposite() == eTD.rotateY()) {
 			f2 = 1F;
 			f3 = -1F;
 		}
@@ -162,11 +162,11 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 							--j3;
 						}
 
-						for (int k3 = i2; k3 < i2 + 4; ++k3) {
+						for(int k3 = i2; k3 < i2 + 4; ++k3) {
 							int l3 = k3 % 2;
 							int i4 = 1 - l3;
 
-							if (k3 % 4 >= 2) {
+							if(k3 % 4 >= 2) {
 								l3 = -l3;
 								i4 = -i4;
 							}

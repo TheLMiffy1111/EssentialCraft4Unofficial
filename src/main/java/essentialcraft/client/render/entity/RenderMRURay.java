@@ -91,7 +91,7 @@ public class RenderMRURay extends Render<EntityMRURay> {
 		float f10 = MathHelper.sqrt(f4 * f4 + f5 * f5 + f6 * f6) / 32F - 1 * 0.0001F;
 		tessellator.getBuffer().begin(5, DefaultVertexFormats.POSITION_TEX_COLOR);
 		byte b0 = 8;
-		for (int i1 = 0; i1 <= b0; ++i1) {
+		for(int i1 = 0; i1 <= b0; ++i1) {
 			float f11 = MathHelper.sin(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * size;
 			float f12 = MathHelper.cos(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * size;
 			float f13 = i1 % b0 * 1F / b0;

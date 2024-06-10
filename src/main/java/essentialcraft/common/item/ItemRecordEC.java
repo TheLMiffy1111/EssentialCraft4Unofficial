@@ -8,8 +8,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemRecordEC extends ItemRecord implements IModelRegisterer {
 
-	protected ItemRecordEC(String p_i45350_1_, SoundEvent sound) {
-		super(p_i45350_1_, sound);
+	protected ItemRecordEC(String name, SoundEvent sound) {
+		super(name, sound);
 	}
 
 	@Override

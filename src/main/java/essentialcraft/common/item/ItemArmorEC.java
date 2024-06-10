@@ -54,10 +54,11 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 	public int aType;
 	public ArmorMaterial mat;
 	public int maxMRU = 5000;
-	public ItemArmorEC(ArmorMaterial p_i45325_1_, int p_i45325_2_, int p_i45325_3_, int it) {
-		super(p_i45325_1_, p_i45325_2_, EntityEquipmentSlot.values()[5-p_i45325_3_]);
+
+	public ItemArmorEC(ArmorMaterial material, int renderIndex, int slot, int it) {
+		super(material, renderIndex, EntityEquipmentSlot.values()[5-slot]);
 		aType = it;
-		mat = p_i45325_1_;
+		mat = material;
 	}
 
 	public ItemArmorEC setArmorTexture(String path) {

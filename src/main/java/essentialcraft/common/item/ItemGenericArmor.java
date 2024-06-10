@@ -42,7 +42,7 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	public int getColorFromItemstack(ItemStack stack, int renderPass) {
 		int j = getColor(stack);
 
-		if (j < 0) {
+		if(j < 0) {
 			j = 0xffffff;
 		}
 
@@ -55,9 +55,9 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	}
 
 	@Override
-	public int getColor(ItemStack p_82814_1_) {
-		NBTTagCompound nbttagcompound = p_82814_1_.getTagCompound();
-		if (nbttagcompound == null) {
+	public int getColor(ItemStack stack) {
+		NBTTagCompound nbttagcompound = stack.getTagCompound();
+		if(nbttagcompound == null) {
 			return 0xffffff;
 		}
 		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
@@ -68,10 +68,10 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	public void removeColor(ItemStack stk) {
 		NBTTagCompound nbttagcompound = stk.getTagCompound();
 
-		if (nbttagcompound != null) {
+		if(nbttagcompound != null) {
 			NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
 
-			if (nbttagcompound1.hasKey("color")) {
+			if(nbttagcompound1.hasKey("color")) {
 				nbttagcompound1.removeTag("color");
 			}
 		}
@@ -81,14 +81,14 @@ public class ItemGenericArmor extends ItemArmor implements IItemColor, IModelReg
 	public void setColor(ItemStack stk, int newColor) {
 		NBTTagCompound nbttagcompound = stk.getTagCompound();
 
-		if (nbttagcompound == null) {
+		if(nbttagcompound == null) {
 			nbttagcompound = new NBTTagCompound();
 			stk.setTagCompound(nbttagcompound);
 		}
 
 		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
 
-		if (!nbttagcompound.hasKey("display", 10)) {
+		if(!nbttagcompound.hasKey("display", 10)) {
 			nbttagcompound.setTag("display", nbttagcompound1);
 		}
 

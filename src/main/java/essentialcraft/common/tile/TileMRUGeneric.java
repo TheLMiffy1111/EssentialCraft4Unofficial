@@ -151,7 +151,7 @@ public abstract class TileMRUGeneric extends TileEntity implements ISidedInvento
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		items[slot] = stack;
 
-		if (!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
+		if(!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
 			stack.setCount(getInventoryStackLimit());
 		}
 	}

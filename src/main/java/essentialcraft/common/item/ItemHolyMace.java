@@ -42,7 +42,7 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 	public int maxMRU = 5000;
 
 	@Override
-	public boolean isEnchantable(ItemStack p_77616_1_) {
+	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}
 
@@ -66,9 +66,9 @@ public class ItemHolyMace extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
-		if(p_77644_3_ instanceof EntityPlayer) {
-			if(ECUtils.playerUseMRU((EntityPlayer)p_77644_3_, p_77644_1_, 250)) {
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if(attacker instanceof EntityPlayer) {
+			if(ECUtils.playerUseMRU((EntityPlayer)attacker, stack, 250)) {
 				return true;
 			}
 		}

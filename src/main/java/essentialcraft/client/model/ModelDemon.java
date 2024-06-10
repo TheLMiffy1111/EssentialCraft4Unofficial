@@ -14,6 +14,7 @@ public class ModelDemon extends ModelBiped {
 	public ModelRenderer bipedWings;
 	public ModelRenderer bipedWingsBack;
 	private static final ResourceLocation wingsTexture = new ResourceLocation("essentialcraft", "textures/entities/demon_wings.png");
+
 	public ModelDemon(float scale, float bodyPos, int textureWidth, int textureHeight) {
 		bipedWings = new ModelRenderer(this, 0, 0);
 		bipedWings.addBox(-16F, -4F, 2.1F, 32, 16, 0, 0);
@@ -21,17 +22,17 @@ public class ModelDemon extends ModelBiped {
 	}
 
 	@Override
-	public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
-		super.render(p_78088_1_, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float yaw, float pitch, float scale) {
+		super.render(entity, limbSwing, limbSwingAmount, age, yaw, pitch, scale);
 		Minecraft.getMinecraft().renderEngine.bindTexture(wingsTexture);
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		bipedWings.render(p_78088_7_);
+		bipedWings.render(scale);
 	}
 
 	@Override
-	public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-		super.setRotationAngles(p_78087_1_, p_78087_2_, p_78087_3_, p_78087_4_, p_78087_5_, p_78087_6_, p_78087_7_);
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float yaw, float pitch, float scale, Entity entity) {
+		super.setRotationAngles(limbSwing, limbSwingAmount, age, yaw, pitch, scale, entity);
 		bipedWings.rotateAngleX = bipedBody.rotateAngleX;
 		bipedWings.rotateAngleY = bipedBody.rotateAngleY;
 		bipedWings.rotateAngleZ = bipedBody.rotateAngleZ;

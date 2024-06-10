@@ -21,36 +21,27 @@ public class ItemMagicalWater extends ItemMRUGeneric implements IModelRegisterer
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_) {
-		if(p_77654_3_ instanceof EntityPlayer && ECUtils.playerUseMRU((EntityPlayer)p_77654_3_, p_77654_1_, 500)) {
-			p_77654_3_.clearActivePotions();
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
+		if(entityLiving instanceof EntityPlayer && ECUtils.playerUseMRU((EntityPlayer)entityLiving, stack, 500)) {
+			entityLiving.clearActivePotions();
 		}
-		return p_77654_1_;
+		return stack;
 	}
 
-	/**
-	 * How long it takes to use or consume an item
-	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
+	public int getMaxItemUseDuration(ItemStack stack) {
 		return 32;
 	}
 
-	/**
-	 * returns the action that specifies what animation to play when the items is being used
-	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
+	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.DRINK;
 	}
 
-	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer, enumHand
-	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand) {
-		p_77659_3_.setActiveHand(hand);
-		return super.onItemRightClick(p_77659_2_, p_77659_3_, hand);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		player.setActiveHand(hand);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	@Override

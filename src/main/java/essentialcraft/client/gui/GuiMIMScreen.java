@@ -124,22 +124,22 @@ public class GuiMIMScreen extends GuiContainer {
 		}
 
 		@Override
-		public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_, float partial) {
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float partial) {
 			if(visible) {
-				FontRenderer fontrenderer = p_146112_1_.fontRenderer;
-				p_146112_1_.getTextureManager().bindTexture(BUTTON_TEXTURES);
+				FontRenderer fontrenderer = mc.fontRenderer;
+				mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
 				GlStateManager.color(1F, 1F, 1F, 1F);
-				hovered = p_146112_2_ >= x && p_146112_3_ >= y && p_146112_2_ < x + width && p_146112_3_ < y + height;
+				hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 				int k = getHoverState(hovered);
 				GlStateManager.enableBlend();
-				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+				OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				this.drawTexturedModalRect(x, y, 0, 46 + k * 20, width / 2, height);
 				this.drawTexturedModalRect(x + width / 2, y, 200 - width / 2, 46 + k * 20, width / 2, height);
-				mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
+				mouseDragged(mc, mouseX, mouseY);
 				int l = 14737632;
 
-				if (packedFGColour != 0) {
+				if(packedFGColour != 0) {
 					l = packedFGColour;
 				}
 				else if(!enabled) {
@@ -167,7 +167,6 @@ public class GuiMIMScreen extends GuiContainer {
 				}
 			}
 		}
-
 	}
 
 	@Override

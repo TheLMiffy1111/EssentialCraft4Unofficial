@@ -43,26 +43,26 @@ public class RenderSkyHoanna extends IRenderHandler {
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder BufferBuilder = tessellator.getBuffer();
 
-		for (int i = 0; i < 6; ++i) {
+		for(int i = 0; i < 6; ++i) {
 			GlStateManager.pushMatrix();
 
-			if (i == 1) {
+			if(i == 1) {
 				GlStateManager.rotate(90F, 1F, 0F, 0F);
 			}
 
-			if (i == 2) {
+			if(i == 2) {
 				GlStateManager.rotate(-90F, 1F, 0F, 0F);
 			}
 
-			if (i == 3) {
+			if(i == 3) {
 				GlStateManager.rotate(180F, 1F, 0F, 0F);
 			}
 
-			if (i == 4) {
+			if(i == 4) {
 				GlStateManager.rotate(90F, 0F, 0F, 1F);
 			}
 
-			if (i == 5) {
+			if(i == 5) {
 				GlStateManager.rotate(-90F, 0F, 0F, 1F);
 			}
 
@@ -85,7 +85,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 		float f3 = (float)Vec3d.z;
 		float f6;
 
-		if (mc.gameSettings.anaglyph) {
+		if(mc.gameSettings.anaglyph) {
 			float f4 = (f1 * 30F + f2 * 59F + f3 * 11F) / 100F;
 			float f5 = (f1 * 30F + f2 * 70F) / 100F;
 			f6 = (f1 * 30F + f3 * 70F) / 100F;
@@ -110,7 +110,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 		float f9;
 		float f10;
 
-		if (afloat != null) {
+		if(afloat != null) {
 			GlStateManager.disableTexture2D();
 			GlStateManager.shadeModel(GL11.GL_SMOOTH);
 			GlStateManager.pushMatrix();
@@ -122,7 +122,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 			f8 = afloat[2];
 			float f11;
 
-			if (mc.gameSettings.anaglyph) {
+			if(mc.gameSettings.anaglyph) {
 				f9 = (f6 * 30F + f7 * 59F + f8 * 11F) / 100F;
 				f10 = (f6 * 30F + f7 * 70F) / 100F;
 				f11 = (f6 * 30F + f8 * 70F) / 100F;
@@ -134,7 +134,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 			BufferBuilder.begin(6, DefaultVertexFormats.POSITION_TEX_COLOR);
 			BufferBuilder.pos(0D, 100D, 0D).color(f6, f7, f8, afloat[3]).endVertex();
 
-			for (int j = 0; j <= 16; ++j) {
+			for(int j = 0; j <= 16; ++j) {
 				f11 = j * (float)Math.PI * 2F / 16F;
 				float f12 = MathHelper.sin(f11);
 				float f13 = MathHelper.cos(f11);
@@ -216,7 +216,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 		GlStateManager.disableTexture2D();
 		float f18 = world.getStarBrightness(partialTicks) * f6;
 
-		if (f18 > 0F) {
+		if(f18 > 0F) {
 			GlStateManager.color(f18, f18, f18, f18);
 			//GL11.glCallList(this.starGLCallList);
 		}
@@ -230,7 +230,7 @@ public class RenderSkyHoanna extends IRenderHandler {
 		GlStateManager.color(0F, 0F, 0F);
 		double d0 = mc.player.getPositionEyes(partialTicks).y - world.getHorizon();
 
-		if (d0 < 0D) {
+		if(d0 < 0D) {
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0F, 12F, 0F);
 			//GL11.glCallList(this.glSkyList2);

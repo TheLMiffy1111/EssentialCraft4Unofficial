@@ -84,13 +84,13 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 	@Override
 	public ItemStack decrStackSize(int slotIndex, int decrementAmount) {
 		ItemStack itemStack = getStackInSlot(slotIndex);
-		if (!itemStack.isEmpty()) {
-			if (itemStack.getCount() <= decrementAmount) {
+		if(!itemStack.isEmpty()) {
+			if(itemStack.getCount() <= decrementAmount) {
 				setInventorySlotContents(slotIndex, ItemStack.EMPTY);
 			}
 			else {
 				itemStack = itemStack.splitStack(decrementAmount);
-				if (itemStack.getCount() == 0) {
+				if(itemStack.getCount() == 0) {
 					setInventorySlotContents(slotIndex, ItemStack.EMPTY);
 				}
 			}
@@ -101,7 +101,7 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 
 	@Override
 	public ItemStack removeStackFromSlot(int slotIndex) {
-		if (!inventory[slotIndex].isEmpty()) {
+		if(!inventory[slotIndex].isEmpty()) {
 			ItemStack itemStack = inventory[slotIndex];
 			inventory[slotIndex] = ItemStack.EMPTY;
 			return itemStack;
@@ -212,9 +212,6 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 		}
 	}
 
-	/**
-	 * Called when a client event is received with the event number and argument, see World.sendClientEvent
-	 */
 	@Override
 	public boolean receiveClientEvent(int eventID, int numUsingPlayers) {
 		if(eventID == 1) {
@@ -250,12 +247,12 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 	}
 
 	@Override
-	public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, EnumFacing p_102007_3_) {
+	public boolean canInsertItem(int slot, ItemStack stack, EnumFacing side) {
 		return true;
 	}
 
 	@Override
-	public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, EnumFacing p_102008_3_) {
+	public boolean canExtractItem(int slot, ItemStack stack, EnumFacing side) {
 		return true;
 	}
 

@@ -24,13 +24,13 @@ public class BlockMRULevitator extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState s, World p_149734_1_, BlockPos p_149734_2_, Random p_149734_5_) {
+	public void randomDisplayTick(IBlockState s, World state, BlockPos world, Random rand) {
 		for(int i = 0; i < 12; ++i) {
-			EssentialCraftCore.proxy.spawnParticle("mruFX", p_149734_2_.getX()+0.5F+MathUtils.randomFloat(p_149734_5_)/5, p_149734_2_.getY()+0.5F, p_149734_2_.getZ()+0.5F+MathUtils.randomFloat(p_149734_5_)/5, 0, -5-MathUtils.randomFloat(p_149734_5_)*5, 0);
+			EssentialCraftCore.proxy.spawnParticle("mruFX", world.getX()+0.5F+MathUtils.randomFloat(rand)/5, world.getY()+0.5F, world.getZ()+0.5F+MathUtils.randomFloat(rand)/5, 0, -5-MathUtils.randomFloat(rand)*5, 0);
 			Vec3d rotateVec = new Vec3d(1, 0, 1);
 			rotateVec = rotateVec.rotateYaw(i*30);
 			for(int i1 = 0; i1 < 3; ++i1) {
-				EssentialCraftCore.proxy.spawnParticle("mruFX", p_149734_2_.getX()+0.5F+MathUtils.randomFloat(p_149734_5_)/5, p_149734_2_.getY()+0.25F, p_149734_2_.getZ()+0.5F+MathUtils.randomFloat(p_149734_5_)/5, rotateVec.x, 0, rotateVec.z);
+				EssentialCraftCore.proxy.spawnParticle("mruFX", world.getX()+0.5F+MathUtils.randomFloat(rand)/5, world.getY()+0.25F, world.getZ()+0.5F+MathUtils.randomFloat(rand)/5, rotateVec.x, 0, rotateVec.z);
 			}
 		}
 	}

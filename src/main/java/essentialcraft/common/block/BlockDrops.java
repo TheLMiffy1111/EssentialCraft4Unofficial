@@ -63,12 +63,12 @@ public class BlockDrops extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_) {
-		return p_149692_1_.getValue(TYPE).getIndex();
+	public int damageDropped(IBlockState state) {
+		return state.getValue(TYPE).getIndex();
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemsCore.drops;
 	}
 
@@ -78,8 +78,8 @@ public class BlockDrops extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_) {
-		return 1+p_149745_1_.nextInt(6);
+	public int quantityDropped(Random rand) {
+		return 1+rand.nextInt(6);
 	}
 
 	@Override

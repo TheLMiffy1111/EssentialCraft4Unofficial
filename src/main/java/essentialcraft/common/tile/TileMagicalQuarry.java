@@ -469,7 +469,7 @@ public class TileMagicalQuarry extends TileMRUGeneric {
 	}
 
 	private static boolean isEmpty(IItemHandler itemHandler) {
-		for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
+		for(int slot = 0; slot < itemHandler.getSlots(); slot++) {
 			ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
 			if(stackInSlot.getCount() > 0) {
 				return false;

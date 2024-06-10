@@ -44,8 +44,8 @@ public class BlockRayTower extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World p_149742_1_, BlockPos p_149742_2_) {
-		return p_149742_1_.getBlockState(p_149742_2_).getBlock().isReplaceable(p_149742_1_, p_149742_2_) && p_149742_1_.isAirBlock(p_149742_2_.up());
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
+		return world.getBlockState(pos).getBlock().isReplaceable(world, pos) && world.isAirBlock(pos.up());
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class BlockRayTower extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileRayTower();
 	}
 

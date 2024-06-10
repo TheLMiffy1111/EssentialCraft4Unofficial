@@ -47,7 +47,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_) {
+	public int damageDropped(IBlockState state) {
 		return 27;
 	}
 
@@ -64,12 +64,12 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileMagicalDisplay();
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, BlockPos pos, IBlockState par3, EntityPlayer p, EnumHand par5, EnumFacing p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+	public boolean onBlockActivated(World w, BlockPos pos, IBlockState par3, EntityPlayer p, EnumHand par5, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack is = p.getHeldItem(par5);
 		TileMagicalDisplay display = (TileMagicalDisplay)w.getTileEntity(pos);
 		if(!is.isEmpty()) {

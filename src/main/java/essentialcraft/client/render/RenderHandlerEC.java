@@ -438,10 +438,10 @@ public class RenderHandlerEC {
 				GlStateManager.glEnd();
 
 
-				if (depth) {
+				if(depth) {
 					GlStateManager.enableDepth();
 				}
-				if (texture) {
+				if(texture) {
 					GlStateManager.enableTexture2D();
 				}
 
@@ -504,10 +504,10 @@ public class RenderHandlerEC {
 					GlStateManager.glEnd();
 
 
-					if (depth) {
+					if(depth) {
 						GlStateManager.enableDepth();
 					}
-					if (texture) {
+					if(texture) {
 						GlStateManager.enableTexture2D();
 					}
 
@@ -569,10 +569,10 @@ public class RenderHandlerEC {
 					GlStateManager.glEnd();
 
 
-					if (depth) {
+					if(depth) {
 						GlStateManager.enableDepth();
 					}
-					if (texture) {
+					if(texture) {
 						GlStateManager.enableTexture2D();
 					}
 
@@ -973,7 +973,8 @@ public class RenderHandlerEC {
 					}
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch(Exception e) {
 			return;
 		}
 	}
@@ -1063,7 +1064,8 @@ public class RenderHandlerEC {
 					Minecraft.getMinecraft().renderEngine.bindTexture(Gui.ICONS);
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch(Exception e) {
 			return;
 		}
 	}

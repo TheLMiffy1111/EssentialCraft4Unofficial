@@ -86,23 +86,17 @@ public class ParticleMRU extends Particle{
 	}
 
 	@Override
-	public int getBrightnessForRender(float p_70070_1_) {
+	public int getBrightnessForRender(float partialTick) {
 		return 255;
 	}
 
-	/**
-	 * Gets how bright this entity is.
-	 */
-	public float getBrightness(float p_70013_1_) {
-		float f1 = super.getBrightnessForRender(p_70013_1_);
+	public float getBrightness(float partialTick) {
+		float f1 = super.getBrightnessForRender(partialTick);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
 		return f1 * (1F - f2) + f2;
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate() {
 		tickPos += 15+world.rand.nextFloat()*15;
@@ -120,7 +114,7 @@ public class ParticleMRU extends Particle{
 		posY = mruPosY + motionY * f + Math.cos(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
 		posZ = mruPosZ + motionZ * f - Math.sin(Math.toRadians(tickPos + world.getWorldTime()*10))/10;
 
-		if (particleAge++ >= particleMaxAge) {
+		if(particleAge++ >= particleMaxAge) {
 			setExpired();
 		}
 	}

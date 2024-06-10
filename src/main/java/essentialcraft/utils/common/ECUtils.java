@@ -604,8 +604,8 @@ public class ECUtils {
 		int[] ids = OreDictionary.getOreIDs(stk);
 		int[] ids1 = OreDictionary.getOreIDs(stk1);
 
-		for (int id : ids) {
-			for (int element : ids1) {
+		for(int id : ids) {
+			for(int element : ids1) {
 				if(id == element) {
 					return true;
 				}

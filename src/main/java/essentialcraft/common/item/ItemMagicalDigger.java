@@ -48,7 +48,7 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 	public int maxMRU = 5000;
 
 	@Override
-	public boolean isEnchantable(ItemStack p_77616_1_) {
+	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}
 

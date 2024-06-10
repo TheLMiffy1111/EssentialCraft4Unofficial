@@ -74,25 +74,25 @@ public class GenLayerHoannaBiomes extends GenLayer {
 		int[] aint = parent.getInts(areaX, areaY, areaWidth, areaHeight);
 		int[] aint1 = IntCache.getIntCache(areaWidth * areaHeight);
 
-		for (int i = 0; i < areaHeight; ++i) {
-			for (int j = 0; j < areaWidth; ++j) {
+		for(int i = 0; i < areaHeight; ++i) {
+			for(int j = 0; j < areaWidth; ++j) {
 				initChunkSeed(j + areaX, i + areaY);
 				int k = aint[j + i * areaWidth];
 				int l = (k & 3840) >> 8;
 			k = k & -3841;
 
-			if (settings != null && settings.fixedBiome >= 0) {
+			if(settings != null && settings.fixedBiome >= 0) {
 				aint1[j + i * areaWidth] = settings.fixedBiome;
 			}
-			else if (isBiomeOceanic(k)) {
+			else if(isBiomeOceanic(k)) {
 				aint1[j + i * areaWidth] = k;
 			}
-			else if (k == Biome.getIdForBiome(Biomes.MUSHROOM_ISLAND)) {
+			else if(k == Biome.getIdForBiome(Biomes.MUSHROOM_ISLAND)) {
 				aint1[j + i * areaWidth] = k;
 			}
-			else if (k == 1) {
-				if (l > 0) {
-					if (nextInt(3) == 0) {
+			else if(k == 1) {
+				if(l > 0) {
+					if(nextInt(3) == 0) {
 						aint1[j + i * areaWidth] = Biome.getIdForBiome(Biomes.MESA_CLEAR_ROCK);
 					}
 					else {
@@ -103,23 +103,23 @@ public class GenLayerHoannaBiomes extends GenLayer {
 					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.DESERT).biome);
 				}
 			}
-			else if (k == 2) {
-				if (l > 0) {
+			else if(k == 2) {
+				if(l > 0) {
 					aint1[j + i * areaWidth] = Biome.getIdForBiome(Biomes.SWAMPLAND);
 				}
 				else {
 					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.WARM).biome);
 				}
 			}
-			else if (k == 3) {
-				if (l > 0) {
+			else if(k == 3) {
+				if(l > 0) {
 					aint1[j + i * areaWidth] = Biome.getIdForBiome(Biomes.EXTREME_HILLS);
 				}
 				else {
 					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.COOL).biome);
 				}
 			}
-			else if (k == 4) {
+			else if(k == 4) {
 				aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.ICY).biome);
 			}
 			else {

@@ -35,32 +35,32 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_) {
+	public int quantityDropped(Random rand) {
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
 	}
 
 	@Override
-	public void updateTick(World p_149674_1_, BlockPos p_149674_2_, IBlockState p_149674_3_, Random p_149674_4_) {
-		int meta = p_149674_3_.getValue(TYPE).getIndex();
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		int meta = state.getValue(TYPE).getIndex();
 		if(meta == 1) {
-			p_149674_1_.setBlockToAir(p_149674_2_);
+			world.setBlockToAir(pos);
 		}
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState p_149734_1_, World p_149734_2_, BlockPos p_149734_3_, Random p_149734_4_) {
-		int meta = p_149734_1_.getValue(TYPE).getIndex();
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		int meta = state.getValue(TYPE).getIndex();
 		if(meta == 0) {
 			for(int i = 0; i < 5; ++i) {
 				Vec3d rotateVec = new Vec3d(1, 1, 1);
-				rotateVec = rotateVec.rotatePitch(p_149734_4_.nextFloat()*360F);
-				rotateVec = rotateVec.rotateYaw(p_149734_4_.nextFloat()*360F);
-				EssentialCraftCore.proxy.spawnParticle("mruFX", p_149734_3_.getX()+0.5F, p_149734_3_.getY()+0.5F, p_149734_3_.getZ()+0.5F, rotateVec.x/5, rotateVec.y/5, rotateVec.z/5);
+				rotateVec = rotateVec.rotatePitch(rand.nextFloat()*360F);
+				rotateVec = rotateVec.rotateYaw(rand.nextFloat()*360F);
+				EssentialCraftCore.proxy.spawnParticle("mruFX", pos.getX()+0.5F, pos.getY()+0.5F, pos.getZ()+0.5F, rotateVec.x/5, rotateVec.y/5, rotateVec.z/5);
 				rotateVec = null;
 			}
 		}

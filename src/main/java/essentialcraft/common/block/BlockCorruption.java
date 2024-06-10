@@ -81,22 +81,22 @@ public class BlockCorruption extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_) {
-		return p_149692_1_.getValue(LEVEL);
+	public int damageDropped(IBlockState state) {
+		return state.getValue(LEVEL);
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
 	}
 
 	@Override
-	public int quantityDropped(Random p_149745_1_) {
+	public int quantityDropped(Random rand) {
 		return 0;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileCorruption();
 	}
 

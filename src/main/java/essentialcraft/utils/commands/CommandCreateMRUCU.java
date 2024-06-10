@@ -25,9 +25,6 @@ public class CommandCreateMRUCU extends CommandBase
 		return "/createmrucu <x> <y> <z> <mruAmount> <balance>";
 	}
 
-	/**
-	 * Return the required permission level for this command.
-	 */
 	@Override
 	public int getRequiredPermissionLevel() {
 		return 3;

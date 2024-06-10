@@ -65,7 +65,7 @@ public class RenderMonsterHolder extends TileEntitySpecialRenderer<TileMonsterHo
 						tessellator.startDrawingWithColor(5);
 						byte b0 = 8;
 
-						for (int i1 = 0; i1 <= b0; ++i1) {
+						for(int i1 = 0; i1 <= b0; ++i1) {
 							float f11 = MathHelper.sin(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 							float f12 = MathHelper.cos(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 							float f13 = i1 % b0 * 1F / b0;

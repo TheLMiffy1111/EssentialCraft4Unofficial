@@ -54,7 +54,7 @@ public class BlockMagicalRepairer extends BlockContainer implements IModelRegist
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileMagicalRepairer();
 	}
 

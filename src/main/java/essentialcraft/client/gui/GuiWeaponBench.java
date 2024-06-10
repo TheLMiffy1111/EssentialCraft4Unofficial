@@ -39,10 +39,10 @@ public class GuiWeaponBench extends GuiCommon {
 
 	private void drawItemStack(ItemStack stack, int x, int y, String text) {
 		FontRenderer font = null;
-		if (stack != null) {
+		if(stack != null) {
 			font = stack.getItem().getFontRenderer(stack);
 		}
-		if (font == null) {
+		if(font == null) {
 			font = fontRenderer;
 		}
 		itemRender.renderItemAndEffectIntoGUI(stack, x, y);

@@ -36,8 +36,8 @@ public class BlockCrystalLamp extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public int damageDropped(IBlockState p_149692_1_) {
-		return p_149692_1_.getValue(TYPE).getIndex();
+	public int damageDropped(IBlockState state) {
+		return state.getValue(TYPE).getIndex();
 	}
 
 	@Override

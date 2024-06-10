@@ -154,7 +154,7 @@ public class StructureTownPieces {
 	}
 
 	private static StructureComponent generateAndAddComponent(StructureTownPieces.Start start, List<StructureComponent> components, Random rand, int sMinX, int sMinY, int sMinZ, EnumFacing facing, int index) {
-		if ((index > 500) || (Math.abs(sMinX - start.getBoundingBox().minX) > 600) || (Math.abs(sMinZ - start.getBoundingBox().minZ) > 600)) {
+		if((index > 500) || (Math.abs(sMinX - start.getBoundingBox().minX) > 600) || (Math.abs(sMinZ - start.getBoundingBox().minZ) > 600)) {
 			return null;
 		}
 		StructureTownPieces.Town town = generateComponent(start, components, rand, sMinX, sMinY, sMinZ, facing, index + 1);
@@ -553,7 +553,7 @@ public class StructureTownPieces {
 				}
 			}
 
-			if (flag && rand.nextInt(18) > 0) {
+			if(flag && rand.nextInt(18) > 0) {
 				switch(getCoordBaseMode()) {
 				case SOUTH:
 					StructureTownPieces.generateAndAddRoadPiece((StructureTownPieces.Start)component, components, rand, boundingBox.maxX + 1, boundingBox.minY, boundingBox.maxZ - 2, EnumFacing.EAST, getComponentType());

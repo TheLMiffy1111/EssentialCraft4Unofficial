@@ -12,16 +12,16 @@ public class TileMRUCUECRedstoneController extends TileEntity implements IStruct
 	public int tickTimer;
 
 	@Override
-	public void readFromNBT(NBTTagCompound p_145839_1_) {
-		super.readFromNBT(p_145839_1_);
-		setting = p_145839_1_.getInteger("setting");
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		setting = tag.getInteger("setting");
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound p_145841_1_) {
-		super.writeToNBT(p_145841_1_);
-		p_145841_1_.setInteger("setting", setting);
-		return p_145841_1_;
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setInteger("setting", setting);
+		return tag;
 	}
 
 	@Override

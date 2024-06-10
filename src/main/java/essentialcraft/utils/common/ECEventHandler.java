@@ -625,7 +625,7 @@ public class ECEventHandler {
 			}
 
 			//If the player is using an improper tool, or the current stack is a sword
-			if (!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(), event.getPos(), currentTool) || currentToolClass.equalsIgnoreCase("sword")) {
+			if(!ForgeHooks.isToolEffective(event.getEntityPlayer().getEntityWorld(), event.getPos(), currentTool) || currentToolClass.equalsIgnoreCase("sword")) {
 				//Getting the proper tool type
 				String clazz = event.getState().getBlock().getHarvestTool(event.getState());
 				if(clazz == null || clazz.isEmpty()) {

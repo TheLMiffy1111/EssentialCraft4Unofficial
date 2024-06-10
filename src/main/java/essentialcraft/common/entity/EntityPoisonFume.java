@@ -30,8 +30,8 @@ public class EntityPoisonFume extends EntityMob {
 	private int heightOffsetUpdateTime;
 	public double mX, mY, mZ;
 
-	public EntityPoisonFume(World p_i1731_1_) {
-		super(p_i1731_1_);
+	public EntityPoisonFume(World world) {
+		super(world);
 		isImmuneToFire = true;
 		setSize(0.6F, 0.6F);
 	}
@@ -96,12 +96,12 @@ public class EntityPoisonFume extends EntityMob {
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity p_70785_1_) {
+	public boolean attackEntityAsMob(Entity entity) {
 		return false;
 	}
 
 	@Override
-	public void fall(float p_70069_1_, float s) {}
+	public void fall(float distance, float s) {}
 
 	@Override
 	public boolean isBurning() {

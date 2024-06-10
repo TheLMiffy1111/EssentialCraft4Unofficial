@@ -16,13 +16,13 @@ public class EntityDividerProjectile extends EntityThrowable {
 		super(w);
 	}
 
-	public EntityDividerProjectile(World p_i1774_1_, EntityLivingBase p_i1774_2_) {
-		super(p_i1774_1_, p_i1774_2_);
+	public EntityDividerProjectile(World world, EntityLivingBase thower) {
+		super(world, thower);
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult p_70184_1_) {
-		if (p_70184_1_.typeOfHit == Type.BLOCK) {
+	protected void onImpact(RayTraceResult result) {
+		if(result.typeOfHit == Type.BLOCK) {
 			EntityDivider div = new EntityDivider(getEntityWorld(), posX, posY, posZ, 0, 2, getThrower());
 			if(!getEntityWorld().isRemote) {
 				getEntityWorld().spawnEntity(div);

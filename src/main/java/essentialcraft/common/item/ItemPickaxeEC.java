@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemPickaxeEC extends ItemPickaxe implements IModelRegisterer {
 
-	public ItemPickaxeEC(ToolMaterial p_i45347_1_) {
-		super(p_i45347_1_);
+	public ItemPickaxeEC(ToolMaterial material) {
+		super(material);
 	}
 
 	@Override

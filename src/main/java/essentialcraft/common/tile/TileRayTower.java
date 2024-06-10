@@ -117,7 +117,7 @@ public class TileRayTower extends TileEntity implements IInventory, ITickable {
 
 	@Override
 	public ItemStack removeStackFromSlot(int par1) {
-		if (!items[par1].isEmpty()) {
+		if(!items[par1].isEmpty()) {
 			ItemStack itemstack = items[par1];
 			items[par1] = ItemStack.EMPTY;
 			return itemstack;

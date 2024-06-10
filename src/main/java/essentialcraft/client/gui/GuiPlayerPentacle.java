@@ -77,17 +77,17 @@ public class GuiPlayerPentacle extends GuiScreen {
 					loc = effects.get(listIndex).getEffectIcon();
 				}
 				mc.renderEngine.bindTexture(loc);
-				int p_73729_1_ = x+2;
-				int p_73729_2_ = y+2;
-				int p_73729_5_ = 16;
-				int p_73729_6_ = 16;
+				int x0 = x+2;
+				int y0 = y+2;
+				int dx = 16;
+				int dy = 16;
 
 				TessellatorWrapper tessellator = TessellatorWrapper.getInstance();
 				tessellator.startDrawingQuads();
-				tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + p_73729_6_, zLevel, 0, 1);
-				tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + p_73729_6_, zLevel, 1, 1);
-				tessellator.addVertexWithUV(p_73729_1_ + p_73729_5_, p_73729_2_ + 0, zLevel, 1, 0);
-				tessellator.addVertexWithUV(p_73729_1_ + 0, p_73729_2_ + 0, zLevel, 0, 0);
+				tessellator.addVertexWithUV(x0 + 0, y0 + dy, zLevel, 0, 1);
+				tessellator.addVertexWithUV(x0 + dx, y0 + dy, zLevel, 1, 1);
+				tessellator.addVertexWithUV(x0 + dx, y0 + 0, zLevel, 1, 0);
+				tessellator.addVertexWithUV(x0 + 0, y0 + 0, zLevel, 0, 0);
 				tessellator.draw();
 
 				if(mX >= x && mX <= x+20) {

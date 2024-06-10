@@ -90,7 +90,7 @@ public class TileRadiatingChamber extends TileMRUGeneric {
 			if(getStackInSlot(3).isEmpty()) {
 				setInventorySlotContents(3, stk.copy());
 			}
-			else if (getStackInSlot(3).getItem() == stk.getItem()) {
+			else if(getStackInSlot(3).getItem() == stk.getItem()) {
 				setInventorySlotContents(3, new ItemStack(stk.getItem(), stk.getCount()+getStackInSlot(3).getCount(), stk.getItemDamage()));
 			}
 			for(int i = 1; i < 3; ++i) {

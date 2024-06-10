@@ -18,7 +18,7 @@ public class GuiMagicalChest extends GuiContainer{
 			xSize = 176;
 			ySize = 222;
 		}
-		else if (tile.getBlockMetadata() == 1) {
+		else if(tile.getBlockMetadata() == 1) {
 			xSize = 256;
 			ySize = 256;
 		}

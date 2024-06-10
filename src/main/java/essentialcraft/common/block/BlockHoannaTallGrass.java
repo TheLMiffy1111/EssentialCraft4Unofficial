@@ -54,8 +54,8 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	}
 
 	@Override
-	public int colorMultiplier(IBlockState s, IBlockAccess p_149720_1_, BlockPos p_149720_2_, int tint) {
-		return BiomeColorHelper.getGrassColorAtPos(p_149720_1_, p_149720_2_);
+	public int colorMultiplier(IBlockState s, IBlockAccess world, BlockPos pos, int tint) {
+		return BiomeColorHelper.getGrassColorAtPos(world, pos);
 	}
 
 	@Override
@@ -69,16 +69,13 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
 	}
 
-	/**
-	 * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
-	 */
 	@Override
-	public int quantityDroppedWithBonus(int p_149679_1_, Random p_149679_2_) {
-		return 1 + p_149679_2_.nextInt(p_149679_1_ * 2 + 1);
+	public int quantityDroppedWithBonus(int fortune, Random rand) {
+		return 1 + rand.nextInt(fortune * 2 + 1);
 	}
 
 	@Override
@@ -107,17 +104,17 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	}
 
 	@Override
-	public boolean canGrow(World p_149851_1_, BlockPos p_149851_2_, IBlockState state, boolean p_149851_5_) {
+	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World p_149852_1_, Random p_149852_2_, BlockPos p_149852_3_, IBlockState state) {
+	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(World p_149853_1_, Random p_149853_2_, BlockPos p_149853_3_, IBlockState state) {
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
 		int l = getMetaFromState(state);
 		byte b0 = 2;
 
@@ -125,14 +122,14 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 			b0 = 3;
 		}
 
-		if(Blocks.DOUBLE_PLANT.canPlaceBlockAt(p_149853_1_, p_149853_3_)) {
-			Blocks.DOUBLE_PLANT.placeAt(p_149853_1_, p_149853_3_, EnumPlantType.byMetadata(b0), 2);
+		if(Blocks.DOUBLE_PLANT.canPlaceBlockAt(world, pos)) {
+			Blocks.DOUBLE_PLANT.placeAt(world, pos, EnumPlantType.byMetadata(b0), 2);
 		}
 	}
 
 	@Override
-	protected boolean canSustainBush(IBlockState p_149854_1_) {
-		return p_149854_1_.getBlock() == Blocks.GRASS || p_149854_1_.getBlock() == Blocks.DIRT || p_149854_1_.getBlock() == Blocks.FARMLAND || p_149854_1_.getBlock() instanceof BlockHoannaTallGrass;
+	protected boolean canSustainBush(IBlockState state) {
+		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND || state.getBlock() instanceof BlockHoannaTallGrass;
 	}
 
 	@Override

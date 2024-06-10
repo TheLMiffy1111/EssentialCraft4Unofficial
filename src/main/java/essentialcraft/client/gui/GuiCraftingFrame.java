@@ -58,7 +58,7 @@ public class GuiCraftingFrame extends GuiContainer{
 		}
 
 		super.drawScreen(mX, mY, partialTicks);
-		for (int ik = 0; ik < buttonList.size(); ++ik) {
+		for(int ik = 0; ik < buttonList.size(); ++ik) {
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.color(1, 1, 1);
 			GuiButton btn  = buttonList.get(ik);
@@ -93,7 +93,7 @@ public class GuiCraftingFrame extends GuiContainer{
 	@Override
 	protected void drawHoveringText(List<String> list, int x, int y, FontRenderer font) {
 		GlStateManager.disableLighting();
-		if (!list.isEmpty()) {
+		if(!list.isEmpty()) {
 			GlStateManager.disableRescaleNormal();
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableLighting();
@@ -102,7 +102,7 @@ public class GuiCraftingFrame extends GuiContainer{
 			for(String s : list) {
 				int l = font.getStringWidth(s);
 
-				if (l > k) {
+				if(l > k) {
 					k = l;
 				}
 			}
@@ -111,15 +111,15 @@ public class GuiCraftingFrame extends GuiContainer{
 			int k2 = y - 12;
 			int i1 = 8;
 
-			if (list.size() > 1) {
+			if(list.size() > 1) {
 				i1 += 2 + (list.size() - 1) * 10;
 			}
 
-			if (j2 + k > width) {
+			if(j2 + k > width) {
 				j2 -= 28 + k;
 			}
 
-			if (k2 + i1 + 6 > height) {
+			if(k2 + i1 + 6 > height) {
 				k2 = height - i1 - 6;
 			}
 
@@ -138,11 +138,11 @@ public class GuiCraftingFrame extends GuiContainer{
 			drawGradientRect(j2 - 3, k2 - 3, j2 + k + 3, k2 - 3 + 1, k1, k1);
 			drawGradientRect(j2 - 3, k2 + i1 + 2, j2 + k + 3, k2 + i1 + 3, l1, l1);
 
-			for (int i2 = 0; i2 < list.size(); ++i2) {
+			for(int i2 = 0; i2 < list.size(); ++i2) {
 				String s1 = list.get(i2);
 				font.drawStringWithShadow(s1, j2, k2, -1);
 
-				if (i2 == 0) {
+				if(i2 == 0) {
 					k2 += 2;
 				}
 

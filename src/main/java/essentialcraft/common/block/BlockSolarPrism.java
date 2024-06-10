@@ -51,7 +51,7 @@ public class BlockSolarPrism extends BlockContainer implements IModelRegisterer 
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileSolarPrism();
 	}
 

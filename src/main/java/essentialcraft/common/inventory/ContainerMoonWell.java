@@ -13,7 +13,7 @@ public class ContainerMoonWell extends ContainerInventory {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+	public boolean canInteractWith(EntityPlayer player) {
 		return true;
 	}
 

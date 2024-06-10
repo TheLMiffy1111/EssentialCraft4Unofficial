@@ -85,32 +85,32 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	}
 
 	private void setBlockRotation(World w, BlockPos p, IBlockState s) {
-		if (!w.isRemote) {
+		if(!w.isRemote) {
 			IBlockState block = w.getBlockState(p.north());
 			IBlockState block1 = w.getBlockState(p.south());
 			IBlockState block2 = w.getBlockState(p.west());
 			IBlockState block3 = w.getBlockState(p.east());
 			int b0 = s.getValue(TYPE).getIndex();
 
-			if (block.isOpaqueCube() && !block1.isOpaqueCube()) {
+			if(block.isOpaqueCube() && !block1.isOpaqueCube()) {
 				b0 += 1;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
 			}
 
-			if (block1.isOpaqueCube() && !block.isOpaqueCube()) {
+			if(block1.isOpaqueCube() && !block.isOpaqueCube()) {
 				b0 += 0;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
 			}
 
-			if (block2.isOpaqueCube() && !block3.isOpaqueCube()) {
+			if(block2.isOpaqueCube() && !block3.isOpaqueCube()) {
 				b0 += 3;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;
 			}
 
-			if (block3.isOpaqueCube() && !block2.isOpaqueCube()) {
+			if(block3.isOpaqueCube() && !block2.isOpaqueCube()) {
 				b0 += 2;
 				w.setBlockState(p, getStateFromMeta(b0), 3);
 				return;

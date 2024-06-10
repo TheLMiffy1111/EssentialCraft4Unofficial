@@ -53,7 +53,7 @@ public class RenderMagicalQuarry extends TileEntitySpecialRenderer<TileMagicalQu
 			tessellator.startDrawing(5);
 			byte b0 = 8;
 
-			for (int i = 0; i <= b0; ++i) {
+			for(int i = 0; i <= b0; ++i) {
 				float f11 = MathHelper.sin(i % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 				float f12 = MathHelper.cos(i % b0 * (float)Math.PI * 2F / b0) * 0.75F * 0.1F;
 				float f13 = i % b0 * 1F / b0;

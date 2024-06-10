@@ -48,7 +48,7 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 	int maxMRU = 5000;
 
 	@Override
-	public boolean isEnchantable(ItemStack p_77616_1_) {
+	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}
 
@@ -72,40 +72,41 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_) {
-		Vec3d playerLookVec = p_77654_3_.getLookVec();
-		p_77654_3_.motionX += playerLookVec.x;
-		p_77654_3_.motionY += playerLookVec.y;
-		p_77654_3_.motionZ += playerLookVec.z;
-		return p_77654_1_;
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
+		Vec3d playerLookVec = entityLiving.getLookVec();
+		entityLiving.motionX += playerLookVec.x;
+		entityLiving.motionY += playerLookVec.y;
+		entityLiving.motionZ += playerLookVec.z;
+		return stack;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
+	public int getMaxItemUseDuration(ItemStack stack) {
 		return 32;
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 		try {
-			if(p_77644_3_ instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) p_77644_3_;
-				if(ECUtils.playerUseMRU(player, p_77644_1_, 250)) {
+			if(attacker instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) attacker;
+				if(ECUtils.playerUseMRU(player, stack, 250)) {
 					int att = ECUtils.getData(player).getMatrixTypeID();
 					if(att == 2) {
-						PotionEffect eff = p_77644_2_.getActivePotionEffect(MobEffects.SLOWNESS);
-						if(eff != null && p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15 && eff != null) {
-							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, eff.getAmplifier()+1));
+						PotionEffect eff = target.getActivePotionEffect(MobEffects.SLOWNESS);
+						if(eff != null && target.hurtResistantTime == 0 || target.hurtResistantTime >= 15 && eff != null) {
+							target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, eff.getAmplifier()+1));
 							return true;
 						}
-						if(p_77644_2_.hurtResistantTime == 0 || p_77644_2_.hurtResistantTime >= 15) {
-							p_77644_2_.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, 0));
+						if(target.hurtResistantTime == 0 || target.hurtResistantTime >= 15) {
+							target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, 0));
 							return true;
 						}
 					}
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch(Exception e) {
 			return false;
 		}
 		return false;
@@ -121,21 +122,15 @@ public class ItemFrostMace extends ItemSword implements IModelRegisterer {
 		return multimap;
 	}
 
-	/**
-	 * returns the action that specifies what animation to play when the items is being used
-	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
+	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}
 
-	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer, enumHand
-	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand) {
-		p_77659_3_.setActiveHand(hand);
-		return super.onItemRightClick(p_77659_2_, p_77659_3_, hand);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		player.setActiveHand(hand);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	@Override

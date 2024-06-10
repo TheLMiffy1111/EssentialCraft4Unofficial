@@ -97,8 +97,8 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World p_149742_1_, BlockPos p_149742_2_) {
-		return p_149742_1_.getBlockState(p_149742_2_).getBlock().isReplaceable(p_149742_1_, p_149742_2_) && p_149742_1_.getBlockState(p_149742_2_.up()).getBlock().isReplaceable(p_149742_1_, p_149742_2_.up()) && p_149742_1_.getBlockState(p_149742_2_.up(2)).getBlock().isReplaceable(p_149742_1_, p_149742_2_.up(2));
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
+		return world.getBlockState(pos).getBlock().isReplaceable(world, pos) && world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && world.getBlockState(pos.up(2)).getBlock().isReplaceable(world, pos.up(2));
 	}
 
 

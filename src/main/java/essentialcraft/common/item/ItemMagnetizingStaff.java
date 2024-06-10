@@ -26,7 +26,7 @@ public class ItemMagnetizingStaff extends ItemMRUGeneric implements IModelRegist
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
+	public int getMaxItemUseDuration(ItemStack stack) {
 		return Integer.MAX_VALUE;
 	}
 
@@ -87,14 +87,14 @@ public class ItemMagnetizingStaff extends ItemMRUGeneric implements IModelRegist
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
+	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World p_77659_2_, EntityPlayer p_77659_3_, EnumHand hand) {
-		p_77659_3_.setActiveHand(hand);
-		return super.onItemRightClick(p_77659_2_, p_77659_3_, hand);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		player.setActiveHand(hand);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	@Override

@@ -86,7 +86,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 										}
 									}
 								}
-								catch (Exception exception) {
+								catch(Exception exception) {
 									exception.printStackTrace();
 									return;
 								}

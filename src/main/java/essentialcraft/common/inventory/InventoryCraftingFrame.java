@@ -67,7 +67,7 @@ public class InventoryCraftingFrame implements IInventory {
 	public void markDirty() {}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer p_70300_1_) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 		return true;
 	}
 

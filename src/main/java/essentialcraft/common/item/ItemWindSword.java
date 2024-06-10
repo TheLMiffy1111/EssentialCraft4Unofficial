@@ -14,7 +14,7 @@ public class ItemWindSword extends ItemSwordEC {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand p_77648_6_, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return ItemsCore.wind_elemental_hoe.onItemUse(player, world, pos, p_77648_6_, facing, hitX, hitY, hitZ);
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return ItemsCore.wind_elemental_hoe.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 	}
 }

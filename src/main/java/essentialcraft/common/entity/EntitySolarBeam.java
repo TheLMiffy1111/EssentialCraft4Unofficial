@@ -24,32 +24,32 @@ public class EntitySolarBeam extends EntityWeatherEffect {
 
 	public int beamLiveTime = 20;
 
-	public EntitySolarBeam(World p_i1702_1_) {
-		super(p_i1702_1_);
+	public EntitySolarBeam(World world) {
+		super(world);
 		ignoreFrustumCheck = true;
 		setSize(0.3F, 0.3F);
 	}
 
-	public EntitySolarBeam(World p_i1703_1_, double p_i1703_2_, double p_i1703_4_, double p_i1703_6_) {
-		super(p_i1703_1_);
-		setLocationAndAngles(p_i1703_2_, p_i1703_4_, p_i1703_6_, 0F, 0F);
+	public EntitySolarBeam(World world, double x, double y, double z) {
+		super(world);
+		setLocationAndAngles(x, y, z, 0F, 0F);
 		beamLiveTime = 20;
-		if (!p_i1703_1_.isRemote && p_i1703_1_.getGameRules().getBoolean("doFireTick") && p_i1703_1_.isAreaLoaded(new BlockPos(MathHelper.floor(p_i1703_2_), MathHelper.floor(p_i1703_4_), MathHelper.floor(p_i1703_6_)), 10)) {
-			int i = MathHelper.floor(p_i1703_2_);
-			int j = MathHelper.floor(p_i1703_4_);
-			int k = MathHelper.floor(p_i1703_6_);
+		if(!world.isRemote && world.getGameRules().getBoolean("doFireTick") && world.isAreaLoaded(new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)), 10)) {
+			int i = MathHelper.floor(x);
+			int j = MathHelper.floor(y);
+			int k = MathHelper.floor(z);
 
-			if (p_i1703_1_.getBlockState(new BlockPos(i, j, k)).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(p_i1703_1_, new BlockPos(i, j, k))) {
-				p_i1703_1_.setBlockState(new BlockPos(i, j, k), Blocks.FIRE.getDefaultState());
+			if(world.getBlockState(new BlockPos(i, j, k)).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(world, new BlockPos(i, j, k))) {
+				world.setBlockState(new BlockPos(i, j, k), Blocks.FIRE.getDefaultState());
 			}
 
-			for (i = 0; i < 32; ++i) {
-				j = MathHelper.floor(p_i1703_2_) + rand.nextInt(13) - 1;
-				k = MathHelper.floor(p_i1703_4_) + rand.nextInt(13) - 1;
-				int l = MathHelper.floor(p_i1703_6_) + rand.nextInt(13) - 1;
+			for(i = 0; i < 32; ++i) {
+				j = MathHelper.floor(x) + rand.nextInt(13) - 1;
+				k = MathHelper.floor(y) + rand.nextInt(13) - 1;
+				int l = MathHelper.floor(z) + rand.nextInt(13) - 1;
 
-				if (p_i1703_1_.getBlockState(new BlockPos(j, k, l)).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(p_i1703_1_, new BlockPos(j, k, l))) {
-					p_i1703_1_.setBlockState(new BlockPos(j, k, l), Blocks.FIRE.getDefaultState());
+				if(world.getBlockState(new BlockPos(j, k, l)).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(world, new BlockPos(j, k, l))) {
+					world.setBlockState(new BlockPos(j, k, l), Blocks.FIRE.getDefaultState());
 				}
 			}
 		}

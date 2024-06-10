@@ -18,10 +18,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderHologram extends RenderBiped<EntityHologram>
-{
+public class RenderHologram extends RenderBiped<EntityHologram> {
+
 	private static final ResourceLocation textures = new ResourceLocation("essentialcraft", "textures/entities/boss.png");
-	/** The model of the enderman */
 	private ModelBiped model;
 	public RenderHologram() {
 		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(1, 0, 64, 32), 0.5F);

@@ -341,7 +341,7 @@ public class StructureModernShaftPieces {
 			}
 
 			if(hasRails) {
-				for (j = 0; j <= i; ++j) {
+				for(j = 0; j <= i; ++j) {
 					getBlockStateFromPos(world, 1, -1, j, structureBB);
 
 					randomlyPlaceBlock(world, structureBB, rand, 0.7F, 1, 0, j, Blocks.RAIL.getDefaultState());

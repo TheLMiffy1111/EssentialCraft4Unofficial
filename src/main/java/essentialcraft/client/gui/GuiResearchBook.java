@@ -748,7 +748,7 @@ public class GuiResearchBook extends GuiScreen {
 			if(height == 3) {
 				index = i*3+1;
 			}
-			else if (height == 2) {
+			else if(height == 2) {
 				index = i*3+1;
 			}
 			else {

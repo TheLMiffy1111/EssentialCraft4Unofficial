@@ -12,8 +12,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderMRUCoilHardener extends TileEntitySpecialRenderer<TileMRUCoilHardener>
-{
+public class RenderMRUCoilHardener extends TileEntitySpecialRenderer<TileMRUCoilHardener> {
+
 	public static final ResourceLocation textures = new ResourceLocation("essentialcraft:textures/models/mrucoilhardener.png");
 	public static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation("essentialcraft:models/block/mrucoilhardener.obj"));
 
@@ -27,9 +27,6 @@ public class RenderMRUCoilHardener extends TileEntitySpecialRenderer<TileMRUCoil
 		RenderHelper.enableStandardItemLighting();
 	}
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-	 */
 	protected ResourceLocation getEntityTexture(TileEntity entity) {
 		return textures;
 	}

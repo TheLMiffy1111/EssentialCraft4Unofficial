@@ -147,7 +147,7 @@ public class BiomeProviderHoanna extends BiomeProvider {
 
 				return true;
 			}
-			catch (Throwable throwable) {
+			catch(Throwable throwable) {
 				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Invalid Biome id");
 				CrashReportCategory crashreportcategory = crashreport.makeCategory("Layer");
 				crashreportcategory.addCrashSection("Layer", biomeToUse.toString());

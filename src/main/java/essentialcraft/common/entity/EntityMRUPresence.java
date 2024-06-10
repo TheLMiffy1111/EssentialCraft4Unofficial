@@ -284,7 +284,7 @@ public class EntityMRUPresence extends EntityLivingBase {
 	public ItemStack getItemStackFromSlot(EntityEquipmentSlot slot) { return ItemStack.EMPTY; }
 
 	@Override
-	public void setItemStackToSlot(EntityEquipmentSlot slot, ItemStack p_70062_2_) {}
+	public void setItemStackToSlot(EntityEquipmentSlot slot, ItemStack stack) {}
 
 	@Override
 	public Iterable<ItemStack> getArmorInventoryList() { return Collections.emptyList(); }

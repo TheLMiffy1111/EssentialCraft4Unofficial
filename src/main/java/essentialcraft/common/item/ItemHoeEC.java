@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemHoeEC extends ItemHoe implements IModelRegisterer {
 
-	public ItemHoeEC(ToolMaterial p_i45347_1_) {
-		super(p_i45347_1_);
+	public ItemHoeEC(ToolMaterial material) {
+		super(material);
 	}
 
 	@Override

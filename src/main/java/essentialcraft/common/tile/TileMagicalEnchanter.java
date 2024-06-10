@@ -204,7 +204,7 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 			}
 			return false;
 		}
-		catch (Exception e) {
+		catch(Exception e) {
 			return false;
 		}
 	}

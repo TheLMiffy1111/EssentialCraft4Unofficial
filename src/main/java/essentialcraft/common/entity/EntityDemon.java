@@ -165,7 +165,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 	}
 
 	@Override
-	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack p_70062_2_) {}
+	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {}
 
 	@Override
 	public int getSizeInventory() {

@@ -112,10 +112,9 @@ public class EntityMRURay extends Entity {
 						}
 					}
 				}
-				else
-					if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
-						ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
-					}
+				else if(!getEntityWorld().getGameRules().getBoolean("essentialcraft:weaponMatrixDamage")) {
+					ECUtils.getData(player).modifyOverhaulDamage(ECUtils.getData(player).getOverhaulDamage() + MathHelper.floor(damage*100));
+				}
 			}
 			if(balance == 4) {
 				ShadeUtils.attackPlayerWithShade(player, attacker, ItemStack.EMPTY);

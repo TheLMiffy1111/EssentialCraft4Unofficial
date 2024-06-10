@@ -20,18 +20,18 @@ public class EntityArmorDestroyer extends EntityThrowable {
 		super(w);
 	}
 
-	public EntityArmorDestroyer(World p_i1774_1_, EntityLivingBase p_i1774_2_) {
-		super(p_i1774_1_, p_i1774_2_);
+	public EntityArmorDestroyer(World world, EntityLivingBase thower) {
+		super(world, thower);
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult p_70184_1_) {
-		if(p_70184_1_.entityHit != null) {
-			if((p_70184_1_.entityHit == getThrower()) || !(p_70184_1_.entityHit instanceof EntityPlayer)) {
+	protected void onImpact(RayTraceResult result) {
+		if(result.entityHit != null) {
+			if((result.entityHit == getThrower()) || !(result.entityHit instanceof EntityPlayer)) {
 				return;
 			}
 
-			EntityPlayer p = (EntityPlayer) p_70184_1_.entityHit;
+			EntityPlayer p = (EntityPlayer) result.entityHit;
 
 			if(p != null) {
 				ItemStack c = p.getHeldItemMainhand();

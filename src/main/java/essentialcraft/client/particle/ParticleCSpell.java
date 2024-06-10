@@ -43,8 +43,8 @@ public class ParticleCSpell extends Particle{
 	}
 
 	@Override
-	public int getBrightnessForRender(float p_70070_1_) {
-		int i = super.getBrightnessForRender(p_70070_1_);
+	public int getBrightnessForRender(float partialTick) {
+		int i = super.getBrightnessForRender(partialTick);
 		float f1 = (float)particleAge / (float)particleMaxAge;
 		f1 *= f1;
 		f1 *= f1;
@@ -52,26 +52,20 @@ public class ParticleCSpell extends Particle{
 		int k = i >> 16 & 255;
 		k += (int)(f1 * 15F * 16F);
 
-		if (k > 240) {
+		if(k > 240) {
 			k = 240;
 		}
 
 		return j | k << 16;
 	}
 
-	/**
-	 * Gets how bright this entity is.
-	 */
-	public float getBrightness(float p_70013_1_) {
-		float f1 = super.getBrightnessForRender(p_70013_1_);
+	public float getBrightness(float partialTick) {
+		float f1 = super.getBrightnessForRender(partialTick);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
 		return f1 * (1F - f2) + f2;
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate() {
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
@@ -83,7 +77,7 @@ public class ParticleCSpell extends Particle{
 		posY = mruPosY + motionY * f;
 		posZ = mruPosZ + motionZ * f;
 
-		if (particleAge++ >= particleMaxAge) {
+		if(particleAge++ >= particleMaxAge) {
 			setExpired();
 			for(int t = 0; t < 10; ++t) {
 				//this.getEntityWorld().spawnParticle("smoke", posX, posY, posZ, MathUtils.randomFloat(rand)/6, MathUtils.randomFloat(rand)/6, MathUtils.randomFloat(rand)/6);

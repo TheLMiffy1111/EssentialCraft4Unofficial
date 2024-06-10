@@ -13,12 +13,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class EntityMRUArrow extends EntityArrow {
 
-	public EntityMRUArrow(World p_i1753_1_) {
-		super(p_i1753_1_);
+	public EntityMRUArrow(World world) {
+		super(world);
 	}
 
-	public EntityMRUArrow(World p_i1756_1_, EntityLivingBase p_i1756_2_, float p_i1756_3_) {
-		super(p_i1756_1_, p_i1756_2_);
+	public EntityMRUArrow(World world, EntityLivingBase shooter, float f) {
+		super(world, shooter);
 		pickupStatus = PickupStatus.DISALLOWED;
 	}
 

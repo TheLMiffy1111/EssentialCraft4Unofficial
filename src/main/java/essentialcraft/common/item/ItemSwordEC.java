@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemSwordEC extends ItemSword implements IModelRegisterer {
 
-	public ItemSwordEC(ToolMaterial p_i45347_1_) {
-		super(p_i45347_1_);
+	public ItemSwordEC(ToolMaterial material) {
+		super(material);
 	}
 
 	@Override

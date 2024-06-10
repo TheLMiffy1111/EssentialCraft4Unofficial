@@ -29,13 +29,13 @@ public class BlockMRUSpreader extends Block implements IModelRegisterer {
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState s, World p_149734_1_, BlockPos p_149734_2_, Random p_149734_5_) {
+	public void randomDisplayTick(IBlockState s, World state, BlockPos world, Random rand) {
 		for(int i = 0; i < 5; ++i) {
 			Vec3d rotateVec = new Vec3d(1, 1, 1);
-			rotateVec = rotateVec.rotatePitch(p_149734_5_.nextFloat()*360F);
-			rotateVec = rotateVec.rotateYaw(p_149734_5_.nextFloat()*360F);
+			rotateVec = rotateVec.rotatePitch(rand.nextFloat()*360F);
+			rotateVec = rotateVec.rotateYaw(rand.nextFloat()*360F);
 			for(int i1 = 0; i1 < 10; ++i1) {
-				EssentialCraftCore.proxy.spawnParticle("mruFX", p_149734_2_.getX()+0.5F, p_149734_2_.getY()+1F, p_149734_2_.getZ()+0.5F, rotateVec.x*10, rotateVec.y*10, rotateVec.z*10);
+				EssentialCraftCore.proxy.spawnParticle("mruFX", world.getX()+0.5F, world.getY()+1F, world.getZ()+0.5F, rotateVec.x*10, rotateVec.y*10, rotateVec.z*10);
 			}
 		}
 	}

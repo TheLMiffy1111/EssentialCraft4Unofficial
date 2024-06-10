@@ -144,7 +144,7 @@ public class GuiFilter extends GuiContainer{
 			int k = 0;
 			for(String s : list) {
 				int l = font.getStringWidth(s);
-				if (l > k) {
+				if(l > k) {
 					k = l;
 				}
 			}

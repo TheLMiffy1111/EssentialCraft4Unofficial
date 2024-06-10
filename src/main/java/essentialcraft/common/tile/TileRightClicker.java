@@ -219,7 +219,7 @@ public class TileRightClicker extends TileMRUGeneric {
 
 			return false;
 		}
-		catch (Throwable e) {
+		catch(Throwable e) {
 			return true;
 		}
 	}
