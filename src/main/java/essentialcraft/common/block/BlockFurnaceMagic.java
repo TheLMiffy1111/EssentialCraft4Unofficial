@@ -174,7 +174,7 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	@Override
 	public void registerModels() {
 		for(int i = 0; i < FurnaceType.values().length; i++) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i*4, new ModelResourceLocation("essentialcraft:furnacemagic", "facing=north, type=" + FurnaceType.fromIndex(i).getName()));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i*4, new ModelResourceLocation("essentialcraft:furnacemagic", "facing=north,type=" + FurnaceType.fromIndex(i).getName()));
 		}
 	}
 
