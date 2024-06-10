@@ -214,6 +214,7 @@ publishMods {
 		projectId = "254817"
 		minecraftVersions.add(mcVersion)
 		requires "dummycore-unofficial", "baubles", "codechicken-lib-1-8"
+		optional "ctm"
 	}
 
 	//modrinth {
@@ -221,5 +222,6 @@ publishMods {
 	//	projectId = ""
 	//	minecraftVersions.add(mcVersion)
 	//	requires "dummycore-unofficial", "codechicken-lib"
+	//  optional "ctm"
 	//}
 }
