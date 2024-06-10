@@ -105,7 +105,7 @@ public class ItemShadeSlasher extends ItemSwordEC {
 				{
 					//knockback
 					float i = 3F;
-					attacked.addVelocity(-MathHelper.sin(attacker.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F);
+					attacked.addVelocity(-MathHelper.sin(attacker.rotationYaw * (float)Math.PI / 180F) * i * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * (float)Math.PI / 180F) * i * 0.5F);
 				}
 				if(attacker.getEntityWorld().rand.nextFloat() <= 0.01F)
 				{

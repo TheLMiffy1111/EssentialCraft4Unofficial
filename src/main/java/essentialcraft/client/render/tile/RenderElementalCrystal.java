@@ -28,39 +28,39 @@ public class RenderElementalCrystal extends TileEntitySpecialRenderer<TileElemen
 		float scale = MathUtils.getPercentage((int)crystal_tile.size, 100)/100F;
 
 		if(metadata == 1) {
-			GlStateManager.translate((float)x+0.5F, (float)y+1.4F-(1.0F-scale)*1.4F, (float)z+0.5F);
+			GlStateManager.translate((float)x+0.5F, (float)y+1.4F-(1F-scale)*1.4F, (float)z+0.5F);
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.rotate(180, 1, 0, 0);
 		}
 
 		if(metadata == 0) {
-			GlStateManager.translate((float)x+0.5F, (float)y-0.4F+(1.0F-scale)*1.4F, (float)z+0.5F);
+			GlStateManager.translate((float)x+0.5F, (float)y-0.4F+(1F-scale)*1.4F, (float)z+0.5F);
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.rotate(0, 1, 0, 0);
 		}
 
 		if(metadata == 2) {
-			GlStateManager.translate((float)x+0.5F, (float)y+0.5F, (float)z-0.5F+(1.0F-scale)*1.5F);
+			GlStateManager.translate((float)x+0.5F, (float)y+0.5F, (float)z-0.5F+(1F-scale)*1.5F);
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.rotate(90, 1, 0, 0);
 		}
 
 		if(metadata == 4) {
-			GlStateManager.translate((float)x-0.5F+(1.0F-scale)*1.5F, (float)y+0.5F, (float)z+0.5F);
+			GlStateManager.translate((float)x-0.5F+(1F-scale)*1.5F, (float)y+0.5F, (float)z+0.5F);
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.rotate(90, 1, 0, 0);
 			GlStateManager.rotate(270, 0, 0, 1);
 		}
 
 		if(metadata == 3) {
-			GlStateManager.translate((float)x+0.5F, (float)y+0.5F, (float)z+1.5F-(1.0F-scale)*1.5F);
+			GlStateManager.translate((float)x+0.5F, (float)y+0.5F, (float)z+1.5F-(1F-scale)*1.5F);
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.rotate(-90, 1, 0, 0);
 
 		}
 
 		if(metadata == 5) {
-			GlStateManager.translate((float)x+1.5F-(1.0F-scale)*1.5F, (float)y+0.5F, (float)z+0.5F);
+			GlStateManager.translate((float)x+1.5F-(1F-scale)*1.5F, (float)y+0.5F, (float)z+0.5F);
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.rotate(90, 1, 0, 0);
 			GlStateManager.rotate(90, 0, 0, 1);

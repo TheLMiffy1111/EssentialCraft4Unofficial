@@ -68,11 +68,11 @@ public class TileWorldMerger extends TileMRUGeneric {
 					star.motionZ = 0;
 					if(mruStorage.getMRU() >= mruUsage) {
 						if(world.isRemote) {
-							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5D + MathUtils.randomDouble(world.rand) / 2.0D, pos.getY() + 2.1D, pos.getZ() + 2.5D + MathUtils.randomDouble(world.rand) / 2.0D, -0.12D, -0.05D, -0.12D);
-							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5D + MathUtils.randomDouble(world.rand) / 2.0D, pos.getY() + 2.1D, pos.getZ() - 1.5D + MathUtils.randomDouble(world.rand) / 2.0D, -0.12D, -0.05D, 0.12D);
-							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5D + MathUtils.randomDouble(world.rand) / 2.0D, pos.getY() + 2.1D, pos.getZ() - 1.5D + MathUtils.randomDouble(world.rand) / 2.0D, 0.12D, -0.05D, 0.12D);
-							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5D + MathUtils.randomDouble(world.rand) / 2.0D, pos.getY() + 2.1D, pos.getZ() + 2.5D + MathUtils.randomDouble(world.rand) / 2.0D, 0.12D, -0.05D, -0.12D);
-							world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5D + MathUtils.randomDouble(world.rand) / 3.0D, pos.getY() + 1.1D, pos.getZ() + 0.5D + MathUtils.randomDouble(world.rand) / 3.0D, 0.0D, 0.0D, 0.0D);
+							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5D + MathUtils.randomDouble(world.rand) / 2D, pos.getY() + 2.1D, pos.getZ() + 2.5D + MathUtils.randomDouble(world.rand) / 2D, -0.12D, -0.05D, -0.12D);
+							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5D + MathUtils.randomDouble(world.rand) / 2D, pos.getY() + 2.1D, pos.getZ() - 1.5D + MathUtils.randomDouble(world.rand) / 2D, -0.12D, -0.05D, 0.12D);
+							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5D + MathUtils.randomDouble(world.rand) / 2D, pos.getY() + 2.1D, pos.getZ() - 1.5D + MathUtils.randomDouble(world.rand) / 2D, 0.12D, -0.05D, 0.12D);
+							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5D + MathUtils.randomDouble(world.rand) / 2D, pos.getY() + 2.1D, pos.getZ() + 2.5D + MathUtils.randomDouble(world.rand) / 2D, 0.12D, -0.05D, -0.12D);
+							world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5D + MathUtils.randomDouble(world.rand) / 3D, pos.getY() + 1.1D, pos.getZ() + 0.5D + MathUtils.randomDouble(world.rand) / 3D, 0D, 0D, 0D);
 						}
 						mruStorage.extractMRU(mruUsage, true);
 						++progressLevel;

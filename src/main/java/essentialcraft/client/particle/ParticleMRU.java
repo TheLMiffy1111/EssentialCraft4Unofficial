@@ -37,9 +37,9 @@ public class ParticleMRU extends Particle{
 		particleGreen = 0F;
 		particleBlue = 0.8F;
 		particleAlpha = 0.99F;
-		particleMaxAge = (int)(Math.random() * 10.0D) + 40;
+		particleMaxAge = (int)(Math.random() * 10D) + 40;
 		canCollide = true;
-		setParticleTextureIndex((int)(Math.random() * 8.0D));
+		setParticleTextureIndex((int)(Math.random() * 8D));
 	}
 
 	public ParticleMRU(World w, double x, double y, double z, double i, double j, double k, double cR, double cG, double cB)
@@ -103,7 +103,7 @@ public class ParticleMRU extends Particle{
 		float f1 = super.getBrightnessForRender(p_70013_1_);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
-		return f1 * (1.0F - f2) + f2;
+		return f1 * (1F - f2) + f2;
 	}
 
 	/**

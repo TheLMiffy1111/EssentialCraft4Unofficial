@@ -134,45 +134,45 @@ public class ModelGun implements IBakedModel {
 
 		switch(face) {
 		case UP:
-			x1 = x2 = centreLR + width/2.0F;
-			x3 = x4 = centreLR - width/2.0F;
-			z1 = z4 = centreUD + height/2.0F;
-			z2 = z3 = centreUD - height/2.0F;
+			x1 = x2 = centreLR + width/2F;
+			x3 = x4 = centreLR - width/2F;
+			z1 = z4 = centreUD + height/2F;
+			z2 = z3 = centreUD - height/2F;
 			y1 = y2 = y3 = y4 = 1 + forwardDisplacement;
 			break;
 		case DOWN:
-			x1 = x2 = centreLR + width/2.0F;
-			x3 = x4 = centreLR - width/2.0F;
-			z1 = z4 = centreUD - height/2.0F;
-			z2 = z3 = centreUD + height/2.0F;
+			x1 = x2 = centreLR + width/2F;
+			x3 = x4 = centreLR - width/2F;
+			z1 = z4 = centreUD - height/2F;
+			z2 = z3 = centreUD + height/2F;
 			y1 = y2 = y3 = y4 = 0 - forwardDisplacement;
 			break;
 		case WEST:
-			z1 = z2 = centreLR + width/2.0F;
-			z3 = z4 = centreLR - width/2.0F;
-			y1 = y4 = centreUD - height/2.0F;
-			y2 = y3 = centreUD + height/2.0F;
+			z1 = z2 = centreLR + width/2F;
+			z3 = z4 = centreLR - width/2F;
+			y1 = y4 = centreUD - height/2F;
+			y2 = y3 = centreUD + height/2F;
 			x1 = x2 = x3 = x4 = 0 - forwardDisplacement;
 			break;
 		case EAST:
-			z1 = z2 = centreLR - width/2.0F;
-			z3 = z4 = centreLR + width/2.0F;
-			y1 = y4 = centreUD - height/2.0F;
-			y2 = y3 = centreUD + height/2.0F;
+			z1 = z2 = centreLR - width/2F;
+			z3 = z4 = centreLR + width/2F;
+			y1 = y4 = centreUD - height/2F;
+			y2 = y3 = centreUD + height/2F;
 			x1 = x2 = x3 = x4 = 1 + forwardDisplacement;
 			break;
 		case NORTH:
-			x1 = x2 = centreLR + width/2.0F;
-			x3 = x4 = centreLR - width/2.0F;
-			y1 = y4 = centreUD - height/2.0F;
-			y2 = y3 = centreUD + height/2.0F;
+			x1 = x2 = centreLR + width/2F;
+			x3 = x4 = centreLR - width/2F;
+			y1 = y4 = centreUD - height/2F;
+			y2 = y3 = centreUD + height/2F;
 			z1 = z2 = z3 = z4 = 0 - forwardDisplacement;
 			break;
 		case SOUTH:
-			x1 = x2 = centreLR + width/2.0F;
-			x3 = x4 = centreLR - width/2.0F;
-			y1 = y4 = centreUD - height/2.0F;
-			y2 = y3 = centreUD + height/2.0F;
+			x1 = x2 = centreLR + width/2F;
+			x3 = x4 = centreLR - width/2F;
+			y1 = y4 = centreUD - height/2F;
+			y2 = y3 = centreUD + height/2F;
 			z1 = z2 = z3 = z4 = 1 + forwardDisplacement;
 			break;
 		default:

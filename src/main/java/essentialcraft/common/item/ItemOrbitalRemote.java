@@ -45,7 +45,7 @@ public class ItemOrbitalRemote extends ItemMRUGeneric implements IModelRegistere
 		float f6 = MathHelper.sin(-f1 * 0.017453292F);
 		float f7 = f4 * f5;
 		float f8 = f3 * f5;
-		double d3 = 32.0D;
+		double d3 = 32D;
 		Vec3d distanced = lookVec.add(f7 * d3, f6 * d3, f8 * d3);
 		RayTraceResult mop = p.getEntityWorld().rayTraceBlocks(lookVec, distanced, true, false, false);
 		if(mop != null && mop.typeOfHit == Type.BLOCK) {

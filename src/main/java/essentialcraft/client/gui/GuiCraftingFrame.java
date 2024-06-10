@@ -140,8 +140,8 @@ public class GuiCraftingFrame extends GuiContainer{
 				k2 = height - i1 - 6;
 			}
 
-			zLevel = 600.0F;
-			itemRender.zLevel = 600.0F;
+			zLevel = 600F;
+			itemRender.zLevel = 600F;
 			int j1 = -267386872;
 			drawGradientRect(j2 - 3, k2 - 4, j2 + k + 3, k2 - 3, j1, j1);
 			drawGradientRect(j2 - 3, k2 + i1 + 3, j2 + k + 3, k2 + i1 + 4, j1, j1);
@@ -168,8 +168,8 @@ public class GuiCraftingFrame extends GuiContainer{
 				k2 += 10;
 			}
 
-			zLevel = 0.0F;
-			itemRender.zLevel = 0.0F;
+			zLevel = 0F;
+			itemRender.zLevel = 0F;
 			GlStateManager.enableLighting();
 			GlStateManager.enableDepth();
 			RenderHelper.enableStandardItemLighting();

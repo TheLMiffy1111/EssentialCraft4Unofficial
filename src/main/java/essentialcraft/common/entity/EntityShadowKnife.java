@@ -51,9 +51,9 @@ public class EntityShadowKnife extends EntityThrowable {
 
 	protected boolean teleportRandomly(Entity e)
 	{
-		double d0 = e.posX + (rand.nextDouble() - 0.5D) * 64.0D;
+		double d0 = e.posX + (rand.nextDouble() - 0.5D) * 64D;
 		double d1 = e.posY + (rand.nextInt(64) - 32);
-		double d2 = e.posZ + (rand.nextDouble() - 0.5D) * 64.0D;
+		double d2 = e.posZ + (rand.nextDouble() - 0.5D) * 64D;
 		return teleport(e, d0, d1, d2);
 	}
 
@@ -109,18 +109,18 @@ public class EntityShadowKnife extends EntityThrowable {
 
 		for (int l = 0; l < short1; ++l)
 		{
-			double d6 = l / (short1 - 1.0D);
+			double d6 = l / (short1 - 1D);
 			float f = (rand.nextFloat() - 0.5F) * 0.2F;
 			float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
 			float f2 = (rand.nextFloat() - 0.5F) * 0.2F;
-			double d7 = d3 + (e.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * e.width * 2.0D;
+			double d7 = d3 + (e.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * e.width * 2D;
 			double d8 = d4 + (e.posY - d4) * d6 + rand.nextDouble() * e.height;
-			double d9 = d5 + (e.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * e.width * 2.0D;
+			double d9 = d5 + (e.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * e.width * 2D;
 			e.getEntityWorld().spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
 		}
 
-		e.getEntityWorld().playSound(null, d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-		e.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
+		e.getEntityWorld().playSound(null, d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1F, 1F);
+		e.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1F, 1F);
 		return true;
 	}
 

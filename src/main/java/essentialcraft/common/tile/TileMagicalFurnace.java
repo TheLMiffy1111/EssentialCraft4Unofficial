@@ -88,14 +88,14 @@ public class TileMagicalFurnace extends TileMRUGeneric {
 		ItemStack smeltingStack = smeltingItem == null ? ItemStack.EMPTY : smeltingItem.getItem();
 		if(structureChecker.test(getWorld(), getPos()) && mruStorage.getMRU() >= mruUsage && !smeltingStack.isEmpty() && smeltingItem != null) {
 			if(progressLevel == 0) {
-				getWorld().playSound(null, pos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F, 1);
+				getWorld().playSound(null, pos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1F, 1);
 			}
 			ItemStack mainSmelting = smeltingStack.copy();
 			++progressLevel;
 			mruStorage.extractMRU(mruUsage, true);
 			if(progressLevel >= smeltingTime) {
 				progressLevel = 0;
-				getWorld().playSound(null, pos, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 1.0F, 1);
+				getWorld().playSound(null, pos, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 1F, 1);
 				ItemStack s = FurnaceRecipes.instance().getSmeltingResult(mainSmelting).copy();
 				if(!getWorld().isRemote) {
 					smeltingItem.getItem().shrink(1);

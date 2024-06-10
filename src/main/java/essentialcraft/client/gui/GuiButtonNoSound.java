@@ -13,6 +13,6 @@ public class GuiButtonNoSound extends GuiButton {
 
 	@Override
 	public void playPressSound(SoundHandler soundHandler) {
-		soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundRegistry.bookPageTurn, 1.0F));
+		soundHandler.playSound(PositionedSoundRecord.getMasterRecord(SoundRegistry.bookPageTurn, 1F));
 	}
 }

@@ -802,7 +802,7 @@ public class ClientProxy extends CommonProxy {
 	private static IRenderHandler skyedRenderer = new RenderSkyHoanna();
 	private static IRenderHandler cloudedRenderer = new RenderCloudsHoanna();
 
-	private static final ModelArmorEC chest = new ModelArmorEC(1.0F);
+	private static final ModelArmorEC chest = new ModelArmorEC(1F);
 	private static final ModelArmorEC chest1 = new ModelArmorEC(0.75F);
 	private static final ModelArmorEC legs = new ModelArmorEC(0.5F);
 

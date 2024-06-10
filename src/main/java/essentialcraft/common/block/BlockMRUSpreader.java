@@ -25,7 +25,7 @@ public class BlockMRUSpreader extends Block implements IModelRegisterer {
 	public BlockMRUSpreader() {
 		super(Material.ROCK, MapColor.PURPLE);
 		setTickRandomly(true);
-		setLightLevel(1.0F);
+		setLightLevel(1F);
 	}
 
 	@Override

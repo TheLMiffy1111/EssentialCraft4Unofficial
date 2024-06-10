@@ -37,7 +37,7 @@ public class RenderHologram extends RenderBiped<EntityHologram>
 
 	@Override
 	protected void preRenderCallback(EntityHologram entity, float partialTicks)  {
-		float s = 1.0F;
+		float s = 1F;
 		GlStateManager.scale(s, s, s);
 
 		GlStateManager.disableAlpha();

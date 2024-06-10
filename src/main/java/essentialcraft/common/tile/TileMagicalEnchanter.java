@@ -54,7 +54,7 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 
 		bookSpreadPrev = bookSpread;
 		bookRotationPrev = bookRotation;
-		EntityPlayer entityplayer = world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 3.0D, false);
+		EntityPlayer entityplayer = world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 3D, false);
 
 		if(entityplayer != null) {
 			double d0 = entityplayer.posX - (pos.getX() + 0.5D);
@@ -106,7 +106,7 @@ public class TileMagicalEnchanter extends TileMRUGeneric {
 		}
 
 		bookRotation += f2 * 0.4F;
-		bookSpread = MathHelper.clamp(bookSpread, 0.0F, 1.0F);
+		bookSpread = MathHelper.clamp(bookSpread, 0F, 1F);
 		++tickCount;
 		pageFlipPrev = pageFlip;
 		float f = (flipT - pageFlip) * 0.4F;

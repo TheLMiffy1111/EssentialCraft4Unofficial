@@ -147,7 +147,7 @@ public class BlockMagicalDisplay extends BlockContainer implements IModelRegiste
 		}
 		if(metadata == 3)
 		{
-			return new AxisAlignedBB(0, 0, 0.0F, 1, 1, 0.05F);
+			return new AxisAlignedBB(0, 0, 0F, 1, 1, 0.05F);
 		}
 		if(metadata == 4)
 		{

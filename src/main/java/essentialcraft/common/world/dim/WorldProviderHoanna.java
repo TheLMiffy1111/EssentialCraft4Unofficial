@@ -29,17 +29,17 @@ public class WorldProviderHoanna extends WorldProvider {
 
 	@Override
 	public void generateLightBrightnessTable() {
-		float f = 0.0F;
+		float f = 0F;
 
 		for(int i = 0; i <= 15; ++i) {
 			float f1;
 			if(!ECUtils.isEventActive("essentialcraft.event.darkness")) {
-				f1 = 1.0F - i / 15.0F;
+				f1 = 1F - i / 15F;
 			}
 			else {
-				f1 = 1.9F - i / 15.0F;
+				f1 = 1.9F - i / 15F;
 			}
-			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+			lightBrightnessTable[i] = (1F - f1) / (f1 * 3F + 1F) * (1F - f) + f;
 		}
 	}
 

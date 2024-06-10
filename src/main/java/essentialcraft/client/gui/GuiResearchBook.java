@@ -630,13 +630,13 @@ public class GuiResearchBook extends GuiScreen {
 		fontRenderer.drawString(I18n.translateToLocal("MRU Required: "+toDraw.mruRequired), k+26, l+83, 0x222222);
 		TextFormatting addeddCF = TextFormatting.RESET;
 		float upperBalance = toDraw.upperBalanceLine;
-		if(upperBalance > 2.0F) {
-			upperBalance = 2.0F;
+		if(upperBalance > 2F) {
+			upperBalance = 2F;
 		}
-		if(upperBalance > 1.0F) {
+		if(upperBalance > 1F) {
 			addeddCF = TextFormatting.RED;
 		}
-		else if(upperBalance < 1.0F) {
+		else if(upperBalance < 1F) {
 			addeddCF = TextFormatting.BLUE;
 		}
 		else {
@@ -649,13 +649,13 @@ public class GuiResearchBook extends GuiScreen {
 		fontRenderer.drawString(I18n.translateToLocal(I18n.translateToLocal("essentialcraft.txt.format.upperBalance")+addeddCF+balanceUpper), k+44, l+32, 0x222222);
 
 		float lowerBalance = toDraw.lowerBalanceLine;
-		if(lowerBalance < 0.0F) {
-			lowerBalance = 0.0F;
+		if(lowerBalance < 0F) {
+			lowerBalance = 0F;
 		}
-		if(lowerBalance > 1.0F) {
+		if(lowerBalance > 1F) {
 			addeddCF = TextFormatting.RED;
 		}
-		else if(lowerBalance < 1.0F) {
+		else if(lowerBalance < 1F) {
 			addeddCF = TextFormatting.BLUE;
 		}
 		else {
@@ -1391,8 +1391,8 @@ public class GuiResearchBook extends GuiScreen {
 				k2 = height - i1 - 6;
 			}
 
-			zLevel = 600.0F;
-			itemRender.zLevel = 600.0F;
+			zLevel = 600F;
+			itemRender.zLevel = 600F;
 			int j1 = 0xF0100008;
 			drawGradientRect(j2 - 3, k2 - 4, j2 + k + 3, k2 - 3, j1, j1);
 			drawGradientRect(j2 - 3, k2 + i1 + 3, j2 + k + 3, k2 + i1 + 4, j1, j1);
@@ -1417,8 +1417,8 @@ public class GuiResearchBook extends GuiScreen {
 				k2 += 10;
 			}
 
-			zLevel = 0.0F;
-			itemRender.zLevel = 0.0F;
+			zLevel = 0F;
+			itemRender.zLevel = 0F;
 			GlStateManager.enableLighting();
 			GlStateManager.enableDepth();
 			RenderHelper.enableStandardItemLighting();

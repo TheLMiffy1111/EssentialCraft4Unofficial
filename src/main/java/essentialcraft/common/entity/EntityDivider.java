@@ -68,7 +68,7 @@ public class EntityDivider extends Entity {
 		delay -= 0.05D;
 
 		if(ticksExisted % 10 == 0) {
-			playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+			playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1F, 0.5F);
 		}
 
 		getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, posX, posY, posZ, 1, 0, 1);

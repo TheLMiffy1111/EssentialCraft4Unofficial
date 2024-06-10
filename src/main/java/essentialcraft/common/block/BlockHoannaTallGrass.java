@@ -41,7 +41,7 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 	@Override
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		float f = 0.4F;
-		return new AxisAlignedBB(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.8F, 0.5F + f).offset(pos);
+		return new AxisAlignedBB(0.5F - f, 0F, 0.5F - f, 0.5F + f, 0.8F, 0.5F + f).offset(pos);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class BlockHoannaTallGrass extends BlockBush implements IGrowable, IShear
 
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-		return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+		return ColorizerGrass.getGrassColor(0.5D, 1D);
 	}
 
 	@Override

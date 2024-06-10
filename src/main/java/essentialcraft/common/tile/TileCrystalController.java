@@ -38,7 +38,7 @@ public class TileCrystalController extends TileMRUGeneric {
 	public void spawnParticles() {
 		if(world.isRemote && mruStorage.getMRU() > 0 && getCrystal() != null) {
 			for(int o = 0; o < 2; ++o) {
-				getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.3D + getWorld().rand.nextDouble()/2, pos.getY()+0.3F + (float)o/2, pos.getZ()+0.3D + getWorld().rand.nextDouble()/2D, -1.0D, 1.0D, 0.0D);
+				getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.3D + getWorld().rand.nextDouble()/2, pos.getY()+0.3F + (float)o/2, pos.getZ()+0.3D + getWorld().rand.nextDouble()/2D, -1D, 1D, 0D);
 			}
 		}
 	}

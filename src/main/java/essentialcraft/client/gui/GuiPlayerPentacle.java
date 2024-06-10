@@ -202,7 +202,7 @@ public class GuiPlayerPentacle extends GuiScreen {
 		GlStateManager.disableAlpha();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.shadeModel(GL11.GL_SMOOTH);
-		GlStateManager.color(0.0F, 0.2F, 0.05F, opacityIndex);
+		GlStateManager.color(0F, 0.2F, 0.05F, opacityIndex);
 
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
 

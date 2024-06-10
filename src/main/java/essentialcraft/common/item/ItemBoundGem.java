@@ -59,7 +59,7 @@ public class ItemBoundGem extends Item implements IModelRegisterer {
 			player.openContainer.detectAndSendChanges();
 		}
 
-		world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0F, 2.0F);
+		world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1F, 2F);
 		return EnumActionResult.SUCCESS;
 	}
 
@@ -69,7 +69,7 @@ public class ItemBoundGem extends Item implements IModelRegisterer {
 		if(stack.getTagCompound() != null && !world.isRemote && player.isSneaking()) {
 			if(stack.getTagCompound().getBoolean("created")) {
 				stack.setTagCompound(null);
-				world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_NOTE_BASS, SoundCategory.PLAYERS, 1.0F, 0.01F);
+				world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_NOTE_BASS, SoundCategory.PLAYERS, 1F, 0.01F);
 			}
 			else {
 				MiscUtils.getStackTag(stack).setBoolean("created", true);

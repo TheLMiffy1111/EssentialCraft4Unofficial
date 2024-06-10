@@ -16,8 +16,8 @@ public class ModelDemon extends ModelBiped {
 	private static final ResourceLocation wingsTexture = new ResourceLocation("essentialcraft", "textures/entities/demon_wings.png");
 	public ModelDemon(float scale, float bodyPos, int textureWidth, int textureHeight) {
 		bipedWings = new ModelRenderer(this, 0, 0);
-		bipedWings.addBox(-16.0F, -4.0F, 2.1F, 32, 16, 0, 0);
-		bipedWings.setRotationPoint(0.0F, 0.0F + bodyPos, 0.0F);
+		bipedWings.addBox(-16F, -4F, 2.1F, 32, 16, 0, 0);
+		bipedWings.setRotationPoint(0F, 0F + bodyPos, 0F);
 	}
 
 	@Override

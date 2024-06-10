@@ -40,9 +40,9 @@ public class GuiPotionState extends GuiTextElement{
 			float f = 0F;
 			float f1 = 0F;
 			float f2 = 0F;
-			f += (j >> 16 & 255) / 255.0F;
-			f1 += (j >> 8 & 255) / 255.0F;
-			f2 += (j >> 0 & 255) / 255.0F;
+			f += (j >> 16 & 255) / 255F;
+			f1 += (j >> 8 & 255) / 255F;
+			f2 += (j >> 0 & 255) / 255F;
 			GlStateManager.color(f, f1, f2);
 			int scale = MathUtils.pixelatedTextureSize(8-tile.potionUseTime/2, 8, 16);
 			int scaledPos = scale - 4;

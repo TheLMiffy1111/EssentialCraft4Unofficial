@@ -184,11 +184,11 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 		prevLidAngle = lidAngle;
 		float angleIncrement = 0.1F;
 
-		if(numUsingPlayers > 0 && lidAngle == 0.0F) {
+		if(numUsingPlayers > 0 && lidAngle == 0F) {
 			getWorld().playSound(null, pos, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, getWorld().rand.nextFloat()*0.1F + 0.9F);
 		}
 
-		if(numUsingPlayers == 0 && lidAngle > 0.0F || numUsingPlayers > 0 && lidAngle < 1.0F) {
+		if(numUsingPlayers == 0 && lidAngle > 0F || numUsingPlayers > 0 && lidAngle < 1F) {
 			float var8 = lidAngle;
 
 			if(numUsingPlayers > 0) {
@@ -198,16 +198,16 @@ public class TileMagicalChest extends TileEntity implements ISidedInventory, ITi
 				lidAngle -= angleIncrement;
 			}
 
-			if(lidAngle > 1.0F) {
-				lidAngle = 1.0F;
+			if(lidAngle > 1F) {
+				lidAngle = 1F;
 			}
 
 			if(lidAngle < 0.5F && var8 >= 0.5F) {
 				getWorld().playSound(null, pos, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, getWorld().rand.nextFloat() * 0.1F + 0.9F);
 			}
 
-			if(lidAngle < 0.0F) {
-				lidAngle = 0.0F;
+			if(lidAngle < 0F) {
+				lidAngle = 0F;
 			}
 		}
 	}

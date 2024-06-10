@@ -35,7 +35,7 @@ public class RenderPlayerClone extends RenderBiped<EntityPlayerClone> {
 
 	@Override
 	protected void preRenderCallback(EntityPlayerClone entity, float partialTicks) {
-		float s = 1.0F;
+		float s = 1F;
 		GlStateManager.scale(s, s, s);
 
 		GlStateManager.disableAlpha();

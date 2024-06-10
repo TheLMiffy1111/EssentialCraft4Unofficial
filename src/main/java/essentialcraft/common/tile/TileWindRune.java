@@ -87,7 +87,7 @@ public class TileWindRune extends TileEntity implements ITickable {
 									}
 									if(player.world.isRemote) {
 										for(int j = 0; j < 300; ++j) {
-											EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.7D, 1.0D, 0.85D);
+											EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.7D, 1D, 0.85D);
 										}
 									}
 
@@ -104,7 +104,7 @@ public class TileWindRune extends TileEntity implements ITickable {
 
 								if(player.world.isRemote) {
 									for(int j = 0; j < 300; ++j) {
-										EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.7D, 1.0D, 0.85D);
+										EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.7D, 1D, 0.85D);
 									}
 								}
 
@@ -133,7 +133,7 @@ public class TileWindRune extends TileEntity implements ITickable {
 			if(movement > 30) {
 				movement = 60 - movement;
 			}
-			EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.2D, 1.0D, 0.45D);
+			EssentialCraftCore.proxy.SmokeFX(pos.getX()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, pos.getY(), pos.getZ()+0.5D + MathUtils.randomDouble(getWorld().rand)*1.6D, 0, getWorld().rand.nextDouble()*0.3D, 0, 1, 0.2D, 1D, 0.45D);
 
 			for(int i = 0; i < 8; ++i) {
 				getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+coords[i].getX()+0.5D, pos.getY()+coords[i].getY()+movement/30D, pos.getZ()+coords[i].getZ()+0.5D, -1, 1, 0);

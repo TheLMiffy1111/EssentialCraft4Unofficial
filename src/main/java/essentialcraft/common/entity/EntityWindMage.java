@@ -38,14 +38,14 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class EntityWindMage extends EntityMob implements IRangedAttackMob {
 
 	public static final DataParameter<Byte> TYPE = EntityDataManager.<Byte>createKey(EntityWindMage.class, DataSerializers.BYTE);
-	private EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 1.0D, 20, 60, 15.0F);
+	private EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 1D, 20, 60, 15F);
 	private EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 1.2D, false);
 
 	public EntityWindMage(World world) {
 		super(world);
 		tasks.addTask(1, new EntityAISwimming(this));
-		tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(5, new EntityAIWander(this, 1D));
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
 		tasks.addTask(6, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, 0, true, false, null));
@@ -113,7 +113,7 @@ public class EntityWindMage extends EntityMob implements IRangedAttackMob {
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
 		EntityMRUArrow entityarrow = new EntityMRUArrow(getEntityWorld(), this, 1.6F);
 		double d0 = target.posX - posX;
-		double d1 = target.getEntityBoundingBox().minY + target.height / 3.0F - entityarrow.posY;
+		double d1 = target.getEntityBoundingBox().minY + target.height / 3F - entityarrow.posY;
 		double d2 = target.posZ - posZ;
 		double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
 		entityarrow.shoot(d0, d1 + d3 * 0.2D, d2, 1.6F, 14 - getEntityWorld().getDifficulty().getId() * 4);

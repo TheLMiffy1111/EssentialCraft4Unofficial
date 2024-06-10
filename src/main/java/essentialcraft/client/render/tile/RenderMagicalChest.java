@@ -23,20 +23,20 @@ public class RenderMagicalChest extends TileEntitySpecialRenderer<TileMagicalChe
 		GlStateManager.pushMatrix();
 
 		GlStateManager.enableRescaleNormal();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		GlStateManager.translate((float)x, (float)y + 1.0F, (float)z + 1.0F);
-		GlStateManager.scale(1.0F, -1.0F, -1.0F);
+		GlStateManager.color(1F, 1F, 1F, 1F);
+		GlStateManager.translate((float)x, (float)y + 1F, (float)z + 1F);
+		GlStateManager.scale(1F, -1F, -1F);
 		GlStateManager.translate(0.5F, 0.5F, 0.5F);
-		GlStateManager.rotate((float)tile.rotation*90+180, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate((float)tile.rotation*90+180, 0F, 1F, 0F);
 		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 
 		float f1 = tile.prevLidAngle + (tile.lidAngle - tile.prevLidAngle) * partialTicks;
-		chest.chestLid.rotateAngleX = -(f1 * (float)Math.PI / 2.0F);
+		chest.chestLid.rotateAngleX = -(f1 * (float)Math.PI / 2F);
 		bindTexture(tile.getBlockMetadata() == 0 ? magicalTextures : voidTextures);
 		chest.renderAll();
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1F, 1F, 1F, 1F);
 	}
 
 	@Override

@@ -141,7 +141,7 @@ public class GuiMIMScreen extends GuiContainer{
 			{
 				FontRenderer fontrenderer = p_146112_1_.fontRenderer;
 				p_146112_1_.getTextureManager().bindTexture(BUTTON_TEXTURES);
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1F, 1F, 1F, 1F);
 				hovered = p_146112_2_ >= x && p_146112_3_ >= y && p_146112_2_ < x + width && p_146112_3_ < y + height;
 				int k = getHoverState(hovered);
 				GlStateManager.enableBlend();

@@ -73,7 +73,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 
 								try {
 									entityliving = spawnlistentry.newInstance(world);
-									entityliving.setLocationAndAngles((double)rndOffsetX+0.5F, rndOffsetY, rndOffsetZ+0.5D, wrld.rand.nextFloat()*360.0F, 0.0F);
+									entityliving.setLocationAndAngles((double)rndOffsetX+0.5F, rndOffsetY, rndOffsetZ+0.5D, wrld.rand.nextFloat()*360F, 0F);
 									Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, wrld, rndOffsetX+0.5F, rndOffsetY, rndOffsetZ+0.5F, false);
 									if(canSpawn == Result.ALLOW || canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()) {
 										wrld.spawnEntity(entityliving);
@@ -111,7 +111,7 @@ public class TileDarknessObelisk extends TileMRUGeneric {
 								int rndOffsetX = (int)(pos.getX() + MathUtils.randomDouble(getWorld().rand)*mobSpawnerRadius);
 								int rndOffsetY = (int)(pos.getY() + MathUtils.randomDouble(getWorld().rand));
 								int rndOffsetZ = (int)(pos.getZ() + MathUtils.randomDouble(getWorld().rand)*mobSpawnerRadius);
-								entityliving.setLocationAndAngles(rndOffsetX+0.5D, rndOffsetY, rndOffsetZ+0.5D, getWorld().rand.nextFloat()*360.0F, 0.0F);
+								entityliving.setLocationAndAngles(rndOffsetX+0.5D, rndOffsetY, rndOffsetZ+0.5D, getWorld().rand.nextFloat()*360F, 0F);
 								if(entityliving.getCanSpawnHere()) {
 									if(!getWorld().isRemote) {
 										getWorld().spawnEntity(entityliving);

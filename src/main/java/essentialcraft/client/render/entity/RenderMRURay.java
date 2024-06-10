@@ -74,7 +74,7 @@ public class RenderMRURay extends Render<EntityMRURay> {
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		float f21 = 0 + partialTicks;
-		float f31 = MathHelper.sin(f21 * 0.2F) / 2.0F + 0.5F;
+		float f31 = MathHelper.sin(f21 * 0.2F) / 2F + 0.5F;
 		f31 = (f31 * f31 + f31) * 0.2F;
 		float f4;
 		float f5;
@@ -85,21 +85,21 @@ public class RenderMRURay extends Render<EntityMRURay> {
 		GlStateManager.translate(x, y + posY, z+posZ);
 		float f7 = MathHelper.sqrt(f4 * f4 + f6 * f6);
 		float f8 = MathHelper.sqrt(f4 * f4 + f5 * f5 + f6 * f6);
-		GlStateManager.rotate((float)-Math.atan2(f6, f4) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate((float)-Math.atan2(f7, f5) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate((float)-Math.atan2(f6, f4) * 180F / (float)Math.PI - 90F, 0F, 1F, 0F);
+		GlStateManager.rotate((float)-Math.atan2(f7, f5) * 180F / (float)Math.PI - 90F, 1F, 0F, 0F);
 		Tessellator tessellator = Tessellator.getInstance();
 		RenderHelper.disableStandardItemLighting();
 		DrawUtils.bindTexture("essentialcraft", "textures/special/mru_beam.png");
 		GlStateManager.shadeModel(GL11.GL_SMOOTH);
 		float f9 = 1;
-		float f10 = MathHelper.sqrt(f4 * f4 + f5 * f5 + f6 * f6) / 32.0F - 1 * 0.0001F;
+		float f10 = MathHelper.sqrt(f4 * f4 + f5 * f5 + f6 * f6) / 32F - 1 * 0.0001F;
 		tessellator.getBuffer().begin(5, DefaultVertexFormats.POSITION_TEX_COLOR);
 		byte b0 = 8;
 		for (int i1 = 0; i1 <= b0; ++i1) {
-			float f11 = MathHelper.sin(i1 % b0 * (float)Math.PI * 2.0F / b0) * 0.75F * size;
-			float f12 = MathHelper.cos(i1 % b0 * (float)Math.PI * 2.0F / b0) * 0.75F * size;
-			float f13 = i1 % b0 * 1.0F / b0;
-			tessellator.getBuffer().pos(f11, f12, 0.0D).tex(f13, f10).color(colorRB, colorGB, colorBB, (float) posX).endVertex();
+			float f11 = MathHelper.sin(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * size;
+			float f12 = MathHelper.cos(i1 % b0 * (float)Math.PI * 2F / b0) * 0.75F * size;
+			float f13 = i1 % b0 * 1F / b0;
+			tessellator.getBuffer().pos(f11, f12, 0D).tex(f13, f10).color(colorRB, colorGB, colorBB, (float) posX).endVertex();
 			tessellator.getBuffer().pos(f11, f12, f8).tex(f13, f9).color(colorR, colorG, colorB, (float) posX).endVertex();
 		}
 

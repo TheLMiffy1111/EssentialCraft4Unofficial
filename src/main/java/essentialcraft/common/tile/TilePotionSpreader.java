@@ -84,9 +84,9 @@ public class TilePotionSpreader extends TileMRUGeneric {
 							float f = 0F;
 							float f1 = 0F;
 							float f2 = 0F;
-							f += (j >> 16 & 255) / 255.0F;
-							f1 += (j >> 8 & 255) / 255.0F;
-							f2 += (j >> 0 & 255) / 255.0F;
+							f += (j >> 16 & 255) / 255F;
+							f1 += (j >> 8 & 255) / 255F;
+							f2 += (j >> 0 & 255) / 255F;
 							for(int i1 = 0; i1 < 100; ++i1) {
 								MiscUtils.spawnParticlesOnServer("spell_mob", (float)(base.posX + MathUtils.randomFloat(getWorld().rand)), (float)(base.posY+1 + MathUtils.randomFloat(getWorld().rand)), (float)(base.posZ + MathUtils.randomFloat(getWorld().rand)), f, f1, f2);
 							}
@@ -109,9 +109,9 @@ public class TilePotionSpreader extends TileMRUGeneric {
 					float f = 0F;
 					float f1 = 0F;
 					float f2 = 0F;
-					f += (j >> 16 & 255) / 255.0F;
-					f1 += (j >> 8 & 255) / 255.0F;
-					f2 += (j >> 0 & 255) / 255.0F;
+					f += (j >> 16 & 255) / 255F;
+					f1 += (j >> 8 & 255) / 255F;
+					f2 += (j >> 0 & 255) / 255F;
 					getWorld().spawnParticle(EnumParticleTypes.SPELL_MOB, pos.getX()+0.5F, pos.getY()+0.5F, pos.getZ()+0.5F, f, f1, f2);
 				}
 			}

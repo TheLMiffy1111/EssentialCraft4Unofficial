@@ -28,14 +28,14 @@ public class RenderCloudsHoanna extends IRenderHandler{
 			float f1 = (float)(mc.getRenderViewEntity().lastTickPosY + (mc.getRenderViewEntity().posY - mc.getRenderViewEntity().lastTickPosY) * partialTicks);
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder BufferBuilder = tessellator.getBuffer();
-			float f2 = 12.0F;
-			float f3 = 4.0F;
+			float f2 = 12F;
+			float f3 = 4F;
 			double d0 = cloudTickCounter + partialTicks;
 			double d1 = (mc.getRenderViewEntity().prevPosX + (mc.getRenderViewEntity().posX - mc.getRenderViewEntity().prevPosX) * partialTicks + d0* layer*layer * 0.03D) / f2 ;
 			double d2 = (mc.getRenderViewEntity().prevPosZ + (mc.getRenderViewEntity().posZ - mc.getRenderViewEntity().prevPosZ) * partialTicks) / f2* layer*layer + 0.33D ;
 			float f4 = world.provider.getCloudHeight() - f1 + 0.33F + layer*36;
-			int i = MathHelper.floor(d1 / 2048.0D);
-			int j = MathHelper.floor(d2 / 2048.0D);
+			int i = MathHelper.floor(d1 / 2048D);
+			int j = MathHelper.floor(d2 / 2048D);
 			d1 -= i * 2048;
 			d2 -= j * 2048;
 			mc.renderEngine.bindTexture(locationCloudsPng);
@@ -56,16 +56,16 @@ public class RenderCloudsHoanna extends IRenderHandler{
 			float f10;
 
 			if (mc.gameSettings.anaglyph) {
-				f8 = (f5 * 30.0F + f6 * 59.0F + f7 * 11.0F) / 100.0F;
-				f9 = (f5 * 30.0F + f6 * 70.0F) / 100.0F;
-				f10 = (f5 * 30.0F + f7 * 70.0F) / 100.0F;
+				f8 = (f5 * 30F + f6 * 59F + f7 * 11F) / 100F;
+				f9 = (f5 * 30F + f6 * 70F) / 100F;
+				f10 = (f5 * 30F + f7 * 70F) / 100F;
 				f5 = f8;
 				f6 = f9;
 				f7 = f10;
 			}
 
-			f8 = (float)(d1 * 0.0D);
-			f9 = (float)(d2 * 0.0D);
+			f8 = (float)(d1 * 0D);
+			f9 = (float)(d2 * 0D);
 			f10 = 0.00390625F;
 			f8 = MathHelper.floor(d1) * f10;
 			f9 = MathHelper.floor(d2) * f10;
@@ -74,7 +74,7 @@ public class RenderCloudsHoanna extends IRenderHandler{
 			byte b0 = 8;
 			byte b1 = 4;
 			float f13 = 9.765625E-4F;
-			GlStateManager.scale(f2, 1.0F, f2);
+			GlStateManager.scale(f2, 1F, f2);
 
 			for (int k = 0; k < 2; ++k) {
 				if (k == 0) {
@@ -102,55 +102,55 @@ public class RenderCloudsHoanna extends IRenderHandler{
 						float f16 = f14 - f11;
 						float f17 = f15 - f12;
 
-						if (f4 > -f3 - 1.0F) {
-							BufferBuilder.pos(f16 + 0.0F, f4 + 0.0F, f17 + b0).tex((f14 + 0.0F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0.0F, -1.0F, 0.0F).endVertex();
-							BufferBuilder.pos(f16 + b0, f4 + 0.0F, f17 + b0).tex((f14 + b0) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0.0F, -1.0F, 0.0F).endVertex();
-							BufferBuilder.pos(f16 + b0, f4 + 0.0F, f17 + 0.0F).tex((f14 + b0) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0.0F, -1.0F, 0.0F).endVertex();
-							BufferBuilder.pos(f16 + 0.0F, f4 + 0.0F, f17 + 0.0F).tex((f14 + 0.0F) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0.0F, -1.0F, 0.0F).endVertex();
+						if (f4 > -f3 - 1F) {
+							BufferBuilder.pos(f16 + 0F, f4 + 0F, f17 + b0).tex((f14 + 0F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0F, -1F, 0F).endVertex();
+							BufferBuilder.pos(f16 + b0, f4 + 0F, f17 + b0).tex((f14 + b0) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0F, -1F, 0F).endVertex();
+							BufferBuilder.pos(f16 + b0, f4 + 0F, f17 + 0F).tex((f14 + b0) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0F, -1F, 0F).endVertex();
+							BufferBuilder.pos(f16 + 0F, f4 + 0F, f17 + 0F).tex((f14 + 0F) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5 * 0.7F, f6 * 0.7F, f7 * 0.7F, 0.8F).normal(0F, -1F, 0F).endVertex();
 						}
 
-						if (f4 <= f3 + 1.0F) {
-							BufferBuilder.pos(f16 + 0.0F, f4 + f3 - f13, f17 + b0).tex((f14 + 0.0F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							BufferBuilder.pos(f16 + b0, f4 + f3 - f13, f17 + b0).tex((f14 + b0) * f10 + f8, (f15 + b0) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							BufferBuilder.pos(f16 + b0, f4 + f3 - f13, f17 + 0.0F).tex((f14 + b0) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							BufferBuilder.pos(f16 + 0.0F, f4 + f3 - f13, f17 + 0.0F).tex((f14 + 0.0F) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+						if (f4 <= f3 + 1F) {
+							BufferBuilder.pos(f16 + 0F, f4 + f3 - f13, f17 + b0).tex((f14 + 0F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0F, 1F, 0F).endVertex();
+							BufferBuilder.pos(f16 + b0, f4 + f3 - f13, f17 + b0).tex((f14 + b0) * f10 + f8, (f15 + b0) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0F, 1F, 0F).endVertex();
+							BufferBuilder.pos(f16 + b0, f4 + f3 - f13, f17 + 0F).tex((f14 + b0) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0F, 1F, 0F).endVertex();
+							BufferBuilder.pos(f16 + 0F, f4 + f3 - f13, f17 + 0F).tex((f14 + 0F) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5, f6, f7, 0.8F).normal(0F, 1F, 0F).endVertex();
 						}
 
 						int j1;
 
 						if (l > -1) {
 							for (j1 = 0; j1 < b0; ++j1) {
-								BufferBuilder.pos(f16 + j1 + 0.0F, f4 + 0.0F, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
-								BufferBuilder.pos(f16 + j1 + 0.0F, f4 + f3, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
-								BufferBuilder.pos(f16 + j1 + 0.0F, f4 + f3, f17 + 0.0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
-								BufferBuilder.pos(f16 + j1 + 0.0F, f4 + 0.0F, f17 + 0.0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 0F, f4 + 0F, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1F, 0F, 0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 0F, f4 + f3, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1F, 0F, 0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 0F, f4 + f3, f17 + 0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1F, 0F, 0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 0F, f4 + 0F, f17 + 0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(-1F, 0F, 0F).endVertex();
 							}
 						}
 
 						if (l <= 1) {
 							for (j1 = 0; j1 < b0; ++j1) {
-								BufferBuilder.pos(f16 + j1 + 1.0F - f13, f4 + 0.0F, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
-								BufferBuilder.pos(f16 + j1 + 1.0F - f13, f4 + f3, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
-								BufferBuilder.pos(f16 + j1 + 1.0F - f13, f4 + f3, f17 + 0.0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
-								BufferBuilder.pos(f16 + j1 + 1.0F - f13, f4 + 0.0F, f17 + 0.0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0.0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 1F - f13, f4 + 0F, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1F, 0F, 0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 1F - f13, f4 + f3, f17 + b0).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + b0) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1F, 0F, 0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 1F - f13, f4 + f3, f17 + 0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1F, 0F, 0F).endVertex();
+								BufferBuilder.pos(f16 + j1 + 1F - f13, f4 + 0F, f17 + 0F).tex((f14 + j1 + 0.5F) * f10 + f8, (f15 + 0F) * f10 + f9).color(f5 * 0.9F, f6 * 0.9F, f7 * 0.9F, 0.8F).normal(1F, 0F, 0F).endVertex();
 							}
 						}
 
 						if (i1 > -1) {
 							for (j1 = 0; j1 < b0; ++j1) {
-								BufferBuilder.pos(f16 + 0.0F, f4 + f3, f17 + j1 + 0.0F).tex((f14 + 0.0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
-								BufferBuilder.pos(f16 + b0, f4 + f3, f17 + j1 + 0.0F).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
-								BufferBuilder.pos(f16 + b0, f4 + 0.0F, f17 + j1 + 0.0F).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
-								BufferBuilder.pos(f16 + 0.0F, f4 + 0.0F, f17 + j1 + 0.0F).tex((f14 + 0.0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
+								BufferBuilder.pos(f16 + 0F, f4 + f3, f17 + j1 + 0F).tex((f14 + 0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, -1F).endVertex();
+								BufferBuilder.pos(f16 + b0, f4 + f3, f17 + j1 + 0F).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, -1F).endVertex();
+								BufferBuilder.pos(f16 + b0, f4 + 0F, f17 + j1 + 0F).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, -1F).endVertex();
+								BufferBuilder.pos(f16 + 0F, f4 + 0F, f17 + j1 + 0F).tex((f14 + 0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, -1F).endVertex();
 							}
 						}
 
 						if (i1 <= 1) {
 							for (j1 = 0; j1 < b0; ++j1) {
-								BufferBuilder.pos(f16 + 0.0F, f4 + f3, f17 + j1 + 1.0F - f13).tex((f14 + 0.0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
-								BufferBuilder.pos(f16 + b0, f4 + f3, f17 + j1 + 1.0F - f13).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
-								BufferBuilder.pos(f16 + b0, f4 + 0.0F, f17 + j1 + 1.0F - f13).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
-								BufferBuilder.pos(f16 + 0.0F, f4 + 0.0F, f17 + j1 + 1.0F - f13).tex((f14 + 0.0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
+								BufferBuilder.pos(f16 + 0F, f4 + f3, f17 + j1 + 1F - f13).tex((f14 + 0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, 1F).endVertex();
+								BufferBuilder.pos(f16 + b0, f4 + f3, f17 + j1 + 1F - f13).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, 1F).endVertex();
+								BufferBuilder.pos(f16 + b0, f4 + 0F, f17 + j1 + 1F - f13).tex((f14 + b0) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, 1F).endVertex();
+								BufferBuilder.pos(f16 + 0F, f4 + 0F, f17 + j1 + 1F - f13).tex((f14 + 0F) * f10 + f8, (f15 + j1 + 0.5F) * f10 + f9).color(f5 * 0.8F, f6 * 0.8F, f7 * 0.8F, 0.8F).normal(0F, 0F, 1F).endVertex();
 							}
 						}
 
@@ -159,7 +159,7 @@ public class RenderCloudsHoanna extends IRenderHandler{
 				}
 			}
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1F, 1F, 1F, 1F);
 			GlStateManager.disableBlend();
 			GlStateManager.enableCull();
 			GlStateManager.popMatrix();

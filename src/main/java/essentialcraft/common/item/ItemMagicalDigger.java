@@ -93,9 +93,9 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 	{
 		if(stack.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).getMRU() >= 9)
 		{
-			return 32.0F;
+			return 32F;
 		}
-		return 1.0F;
+		return 1F;
 	}
 
 	public boolean canBreak(ItemStack s)
@@ -123,9 +123,9 @@ public class ItemMagicalDigger extends ItemPickaxe implements IModelRegisterer {
 				{
 					Coord3D c00rd = new Coord3D(c.x+x, c.y+y, c.z+z);
 					for(int v = 0; v < 10; ++v) {
-						e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, c.x+x+e.getEntityWorld().rand.nextFloat(), c.y+y+e.getEntityWorld().rand.nextFloat(), c.z+z+e.getEntityWorld().rand.nextFloat(), 1.0D, 0.0D, 1.0D);
+						e.getEntityWorld().spawnParticle(EnumParticleTypes.REDSTONE, c.x+x+e.getEntityWorld().rand.nextFloat(), c.y+y+e.getEntityWorld().rand.nextFloat(), c.z+z+e.getEntityWorld().rand.nextFloat(), 1D, 0D, 1D);
 					}
-					e.getEntityWorld().playSound(e, e.getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.2F, 6.0F);
+					e.getEntityWorld().playSound(e, e.getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.2F, 6F);
 					Block b = e.getEntityWorld().getBlockState(new BlockPos((int)c.x+x, (int)c.y+y, (int)c.z+z)).getBlock();
 					if(b != null && b == id)
 					{

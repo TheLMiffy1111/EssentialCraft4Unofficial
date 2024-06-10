@@ -56,7 +56,7 @@ public class EntityPlayerClone extends EntityZombie {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D);
 	}
 
 	@Override
@@ -151,10 +151,10 @@ public class EntityPlayerClone extends EntityZombie {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIZombieAttack(this, 1.0D, false));
-		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		tasks.addTask(7, new EntityAIWander(this, 1.0D));
-		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(2, new EntityAIZombieAttack(this, 1D, false));
+		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1D));
+		tasks.addTask(7, new EntityAIWander(this, 1D));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
 		tasks.addTask(8, new EntityAILookIdle(this));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 	}

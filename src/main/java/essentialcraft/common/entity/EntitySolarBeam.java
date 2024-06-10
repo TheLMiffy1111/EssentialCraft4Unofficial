@@ -33,7 +33,7 @@ public class EntitySolarBeam extends EntityWeatherEffect {
 	public EntitySolarBeam(World p_i1703_1_, double p_i1703_2_, double p_i1703_4_, double p_i1703_6_)
 	{
 		super(p_i1703_1_);
-		setLocationAndAngles(p_i1703_2_, p_i1703_4_, p_i1703_6_, 0.0F, 0.0F);
+		setLocationAndAngles(p_i1703_2_, p_i1703_4_, p_i1703_6_, 0F, 0F);
 		beamLiveTime = 20;
 		if (!p_i1703_1_.isRemote && p_i1703_1_.getGameRules().getBoolean("doFireTick") && p_i1703_1_.isAreaLoaded(new BlockPos(MathHelper.floor(p_i1703_2_), MathHelper.floor(p_i1703_4_), MathHelper.floor(p_i1703_6_)), 10))
 		{
@@ -68,15 +68,15 @@ public class EntitySolarBeam extends EntityWeatherEffect {
 			setDead();
 		}
 		if(beamLiveTime%5 == 0) {
-			getEntityWorld().playSound(null, posX, posY, posZ, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.WEATHER, 10.0F, 2F);
+			getEntityWorld().playSound(null, posX, posY, posZ, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.WEATHER, 10F, 2F);
 		}
-		double d0 = 6.0D;
-		List<?> list = getEntityWorld().getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 128.0D + d0, posZ + d0));
+		double d0 = 6D;
+		List<?> list = getEntityWorld().getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 128D + d0, posZ + d0));
 
 		for(Object element : list) {
 			Entity entity = (Entity)element;
 			entity.setFire(5);
-			entity.attackEntityFrom(DamageSource.ON_FIRE, 3.0F);
+			entity.attackEntityFrom(DamageSource.ON_FIRE, 3F);
 		}
 	}
 

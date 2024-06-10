@@ -202,7 +202,7 @@ public class EntityMRUPresence extends EntityLivingBase {
 						}
 						if(getEntityWorld().rand.nextInt(MathHelper.floor(resistance)) == 0) {
 							float genResistance = ECUtils.getGenResistance(0, player);
-							if(genResistance >= 1.0F) {
+							if(genResistance >= 1F) {
 								genResistance = 0.99F;
 							}
 							float matrixDamage = 4 * (mruStorage.getMRU() / 10000 / (10-genResistance*10));

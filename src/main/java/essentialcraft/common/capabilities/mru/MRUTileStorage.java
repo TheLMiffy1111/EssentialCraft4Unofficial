@@ -74,39 +74,39 @@ public class MRUTileStorage extends MRUStorage implements IWorldUpdatable<ItemSt
 		if(world.getTileEntity(posOther) != null && world.getTileEntity(posOther).hasCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null)) {
 			IMRUHandler other = world.getTileEntity(posOther).getCapability(CapabilityMRUHandler.MRU_HANDLER_CAPABILITY, null);
 			float balance = other.getBalance();
-			float colorRRender = 0.0F;
-			float colorGRender = 1.0F;
-			float colorBRender = 1.0F;
+			float colorRRender = 0F;
+			float colorGRender = 1F;
+			float colorBRender = 1F;
 
-			float colorRNormal = 0.0F;
-			float colorGNormal = 1.0F;
-			float colorBNormal = 1.0F;
+			float colorRNormal = 0F;
+			float colorGNormal = 1F;
+			float colorBNormal = 1F;
 
-			float colorRChaos = 1.0F;
-			float colorGChaos = 0.0F;
-			float colorBChaos = 0.0F;
+			float colorRChaos = 1F;
+			float colorGChaos = 0F;
+			float colorBChaos = 0F;
 
-			float colorRFrozen = 0.0F;
-			float colorGFrozen = 0.0F;
-			float colorBFrozen = 1.0F;
-			if(balance!=1.0F) {
-				if(balance<1.0F) {
+			float colorRFrozen = 0F;
+			float colorGFrozen = 0F;
+			float colorBFrozen = 1F;
+			if(balance!=1F) {
+				if(balance<1F) {
 					float diff = balance;
 					if(diff < 0.01F) {
-						diff = 0.0F;
+						diff = 0F;
 					}
-					colorRRender = colorRNormal*diff + colorRFrozen*(1.0F-diff);
-					colorGRender = colorGNormal*diff + colorGFrozen*(1.0F-diff);
-					colorBRender = colorBNormal*diff + colorBFrozen*(1.0F-diff);
+					colorRRender = colorRNormal*diff + colorRFrozen*(1F-diff);
+					colorGRender = colorGNormal*diff + colorGFrozen*(1F-diff);
+					colorBRender = colorBNormal*diff + colorBFrozen*(1F-diff);
 				}
-				if(balance>1.0F) {
-					float diff = 2.0F-balance;
+				if(balance>1F) {
+					float diff = 2F-balance;
 					if(diff < 0.01F) {
-						diff = 0.0F;
+						diff = 0F;
 					}
-					colorRRender = colorRNormal*diff + colorRChaos*(1.0F-diff);
-					colorGRender = colorGNormal*diff + colorGChaos*(1.0F-diff);
-					colorBRender = colorBNormal*diff + colorBChaos*(1.0F-diff);
+					colorRRender = colorRNormal*diff + colorRChaos*(1F-diff);
+					colorGRender = colorGNormal*diff + colorGChaos*(1F-diff);
+					colorBRender = colorBNormal*diff + colorBChaos*(1F-diff);
 				}
 			}
 			//will change

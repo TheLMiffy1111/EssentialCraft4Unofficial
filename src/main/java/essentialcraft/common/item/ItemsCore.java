@@ -17,10 +17,10 @@ import net.minecraftforge.common.util.EnumHelper;
 public class ItemsCore {
 
 	public static void loadItems() {
-		elemental = EnumHelper.addToolMaterial("elemental", 6, 3568, 15.0F, 5.0F, 36);
-		weakElemental = EnumHelper.addToolMaterial("weakElemental", 3, 754, 7.0F, 2.5F, 36);
-		windElemental = EnumHelper.addToolMaterial("windElemental", 11, 15684, 15.0F, 6F, 42);
-		shade = EnumHelper.addToolMaterial("shade", 32, 754, 1.0F, 17.0F, 12);
+		elemental = EnumHelper.addToolMaterial("elemental", 6, 3568, 15F, 5F, 36);
+		weakElemental = EnumHelper.addToolMaterial("weakElemental", 3, 754, 7F, 2.5F, 36);
+		windElemental = EnumHelper.addToolMaterial("windElemental", 11, 15684, 15F, 6F, 42);
+		shade = EnumHelper.addToolMaterial("shade", 32, 754, 1F, 17F, 12);
 
 		testingItem = new ItemTestEC().setTranslationKey("essentialcraft.testItem").setMaxStackSize(1).setFull3D();
 		registerItemSimple(testingItem, "testItem");

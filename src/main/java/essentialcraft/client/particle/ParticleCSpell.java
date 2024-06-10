@@ -22,11 +22,11 @@ public class ParticleCSpell extends Particle{
 		particleScale = 1F;
 		particleRed = 0;
 		particleGreen = 0F;
-		particleBlue = 0.0F;
+		particleBlue = 0F;
 		particleAlpha = 0.99F;
-		particleMaxAge = (int)(Math.random() * 10.0D) + 40;
+		particleMaxAge = (int)(Math.random() * 10D) + 40;
 		canCollide = false;
-		setParticleTextureIndex((int)(Math.random() * 8.0D));
+		setParticleTextureIndex((int)(Math.random() * 8D));
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ParticleCSpell extends Particle{
 		particleScale = 1F;
 		particleRed = 0;
 		particleGreen = 0F;
-		particleBlue = 0.0F;
+		particleBlue = 0F;
 		super.renderParticle(var1, var2, par2, par3, par4, par5, par6, par7);
 		particleRed = 1;
 		particleGreen = 1F;
@@ -53,7 +53,7 @@ public class ParticleCSpell extends Particle{
 		f1 *= f1;
 		int j = i & 255;
 		int k = i >> 16 & 255;
-		k += (int)(f1 * 15.0F * 16.0F);
+		k += (int)(f1 * 15F * 16F);
 
 		if (k > 240)
 		{
@@ -71,7 +71,7 @@ public class ParticleCSpell extends Particle{
 		float f1 = super.getBrightnessForRender(p_70013_1_);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
-		return f1 * (1.0F - f2) + f2;
+		return f1 * (1F - f2) + f2;
 	}
 
 	/**

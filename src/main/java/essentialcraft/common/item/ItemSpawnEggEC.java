@@ -49,7 +49,7 @@ public class ItemSpawnEggEC extends ItemMonsterPlacer implements IItemColor, IMo
 		}
 		Block block = world.getBlockState(pos).getBlock();
 		pos = pos.offset(facing);
-		double d0 = 0.0D;
+		double d0 = 0D;
 
 		if(facing == EnumFacing.UP) {
 			d0 = block.getCollisionBoundingBox(world.getBlockState(pos.down()), world, pos.down()).maxY - 1;
@@ -96,7 +96,7 @@ public class ItemSpawnEggEC extends ItemMonsterPlacer implements IItemColor, IMo
 
 				if(entity != null && entity instanceof EntityLivingBase) {
 					EntityLivingBase entityliving = (EntityLivingBase)entity;
-					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
+					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(world.rand.nextFloat() * 360F), 0F);
 					entityliving.rotationYawHead = entityliving.rotationYaw;
 					entityliving.renderYawOffset = entityliving.rotationYaw;
 					if(entity instanceof EntityLiving) {

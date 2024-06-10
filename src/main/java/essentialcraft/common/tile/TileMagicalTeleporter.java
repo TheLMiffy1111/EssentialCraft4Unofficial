@@ -121,7 +121,7 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 						}
 						int[] tpCoords = getCoordsToTP();
 						for(int i = 0; i < 20; ++i) {
-							getWorld().playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_FIREWORK_LARGE_BLAST_FAR, SoundCategory.BLOCKS, 1.0F, 0.5F+MathUtils.randomFloat(getWorld().rand));
+							getWorld().playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_FIREWORK_LARGE_BLAST_FAR, SoundCategory.BLOCKS, 1F, 0.5F+MathUtils.randomFloat(getWorld().rand));
 						}
 						int currentPlayerDim = player.dimension;
 						int newDim = getDimensionToTP();
@@ -136,7 +136,7 @@ public class TileMagicalTeleporter extends TileMRUGeneric {
 							player.setPositionAndUpdate(tpCoords[0]+0.5D, tpCoords[1]+1D, tpCoords[2]+0.5D);
 						}
 						for(int i = 0; i < 20; ++i) {
-							player.world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_FIREWORK_LARGE_BLAST, SoundCategory.BLOCKS, 1.0F, 0.5F+MathUtils.randomFloat(getWorld().rand));
+							player.world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_FIREWORK_LARGE_BLAST, SoundCategory.BLOCKS, 1F, 0.5F+MathUtils.randomFloat(getWorld().rand));
 						}
 						progressLevel = 0;
 					}

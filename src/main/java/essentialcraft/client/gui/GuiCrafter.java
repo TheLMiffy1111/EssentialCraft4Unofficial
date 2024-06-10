@@ -75,12 +75,12 @@ public class GuiCrafter extends GuiCommon{
 					ItemStack[] retStk = crafter.getRecipeFromFrame();
 					if(!retStk[slt.slotNumber].isEmpty())
 					{
-						itemRender.zLevel = 100.0F;
-						zLevel = 100.0F;
+						itemRender.zLevel = 100F;
+						zLevel = 100F;
 						GL11.glColor4d(0.5D, 0.5D, 0.5D, 1D);
 						itemRender.renderItemAndEffectIntoGUI(retStk[slt.slotNumber], k+slt.xPos, l+slt.yPos);
-						itemRender.zLevel = 0.0F;
-						zLevel = 0.0F;
+						itemRender.zLevel = 0F;
+						zLevel = 0F;
 					}
 				}
 			}

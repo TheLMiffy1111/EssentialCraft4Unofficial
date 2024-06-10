@@ -353,7 +353,7 @@ public class ECUtils {
 			}
 			else {
 				Coord3D c = new Coord3D(p.getX()+0.5D, p.getY()+0.5D, p.getZ()+0.5D);
-				createMRUCUAt(w, c, amount, 1.0F+MathUtils.randomFloat(w.rand), true, false);
+				createMRUCUAt(w, c, amount, 1F+MathUtils.randomFloat(w.rand), true, false);
 			}
 			List<EntityPlayer> players = w.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(p).grow(6D, 3D, 6D));
 			for(EntityPlayer player : players) {
@@ -444,7 +444,7 @@ public class ECUtils {
 			}
 		}
 
-		float retFlt = 1.0F - resistance;
+		float retFlt = 1F - resistance;
 		if(retFlt < 0) {
 			retFlt = 0;
 		}

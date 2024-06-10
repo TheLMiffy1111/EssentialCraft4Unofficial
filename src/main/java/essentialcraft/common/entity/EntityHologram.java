@@ -102,9 +102,9 @@ public class EntityHologram extends EntityLiving {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
-		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1D);
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class EntityHologram extends EntityLiving {
 						}
 						faceEntity(MiscUtils.getPlayerFromUUID(player), 360F, 180F);
 						EntityArmorDestroyer destr = new EntityArmorDestroyer(getEntityWorld(), this);
-						destr.shoot(this, rotationPitch, rotationYaw, 0.0F, 1.5F, 0.5F);
+						destr.shoot(this, rotationPitch, rotationYaw, 0F, 1.5F, 0.5F);
 						rotationYaw = getEntityWorld().rand.nextFloat()*360;
 						rotationPitch = 90-getEntityWorld().rand.nextFloat()*180;
 						getEntityWorld().spawnEntity(destr);

@@ -31,7 +31,7 @@ public class BlockMagicLight extends Block implements IModelRegisterer {
 	public BlockMagicLight() {
 		super(Material.CIRCUITS);
 		setTickRandomly(true);
-		setLightLevel(1.0F);
+		setLightLevel(1F);
 	}
 
 	@Override

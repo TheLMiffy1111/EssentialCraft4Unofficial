@@ -95,7 +95,7 @@ public class TileCrystalExtractor extends TileMRUGeneric {
 			TileElementalCrystal t = getCrystal();
 			if(t != null) {
 				for(int o = 0; o < 10; ++o) {
-					getWorld().spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + getWorld().rand.nextDouble(), t.getPos().getY() + getWorld().rand.nextDouble(), pos.getZ() + getWorld().rand.nextDouble(), t.getPos().getX()-pos.getX(), 0.0D, t.getPos().getZ()-pos.getZ());
+					getWorld().spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + getWorld().rand.nextDouble(), t.getPos().getY() + getWorld().rand.nextDouble(), pos.getZ() + getWorld().rand.nextDouble(), t.getPos().getX()-pos.getX(), 0D, t.getPos().getZ()-pos.getZ());
 				}
 			}
 		}

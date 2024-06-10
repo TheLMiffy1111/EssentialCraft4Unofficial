@@ -121,7 +121,7 @@ public class EntityOrbitalStrike extends Entity {
 									}
 									getEntityWorld().playSound(x + 0.5F, y + 0.5F, z + 0.5F, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (getEntityWorld().rand.nextFloat() - getEntityWorld().rand.nextFloat()) * 0.8F, false);
 									for(int l = 0; l < 8; ++l) {
-										getEntityWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
+										getEntityWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, x + Math.random(), y + Math.random(), z + Math.random(), 0D, 0D, 0D);
 									}
 									continue;
 								}

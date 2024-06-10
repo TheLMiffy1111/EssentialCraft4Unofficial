@@ -48,7 +48,7 @@ public class EntityPoisonFume extends EntityMob {
 
 	@Override
 	public float getBrightness() {
-		return 1.0F;
+		return 1F;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class EntityPoisonFume extends EntityMob {
 				mX = MathUtils.randomDouble(getEntityWorld().rand);
 				mY = MathUtils.randomDouble(getEntityWorld().rand);
 				mZ = MathUtils.randomDouble(getEntityWorld().rand);
-				setHeightOffset(0.5F + (float)rand.nextGaussian() * 3.0F);
+				setHeightOffset(0.5F + (float)rand.nextGaussian() * 3F);
 			}
 			motionX = mX/10;
 			motionY = mY/10;
@@ -74,7 +74,7 @@ public class EntityPoisonFume extends EntityMob {
 				setDead();
 			}
 		}
-		EssentialCraftCore.proxy.spawnParticle("fogFX", (float)posX, (float)posY+2, (float)posZ, 0.0F, 1.0F, 0.0F);
+		EssentialCraftCore.proxy.spawnParticle("fogFX", (float)posX, (float)posY+2, (float)posZ, 0F, 1F, 0F);
 		List<EntityPlayer> players = getEntityWorld().<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-1, posY-1, posZ-1, posX+1, posY+1, posZ+1).grow(6, 3, 6));
 		for(EntityPlayer p : players) {
 			boolean ignorePoison = false;

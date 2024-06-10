@@ -61,7 +61,7 @@ public class TileMagicalJukebox extends TileMRUGeneric {
 		if(!getStackInSlot(1).isEmpty() && getStackInSlot(1).getItem() == ItemsCore.record_secret && recordCooldownTime > 0) {
 			--recordCooldownTime;
 			if(world.isRemote) {
-				getWorld().spawnParticle(EnumParticleTypes.NOTE, pos.getX() + 0.5D+MathUtils.randomDouble(getWorld().rand)*3, pos.getY() + 1.2D, pos.getZ() + 0.5D+MathUtils.randomDouble(getWorld().rand)*3, MathUtils.randomDouble(getWorld().rand)*24 / 24.0D, 0.0D, 0.0D);
+				getWorld().spawnParticle(EnumParticleTypes.NOTE, pos.getX() + 0.5D+MathUtils.randomDouble(getWorld().rand)*3, pos.getY() + 1.2D, pos.getZ() + 0.5D+MathUtils.randomDouble(getWorld().rand)*3, MathUtils.randomDouble(getWorld().rand)*24 / 24D, 0D, 0D);
 
 				double randomX = MathUtils.randomDouble(getWorld().rand)*12;
 				double randomY = MathUtils.randomDouble(getWorld().rand)*12;
@@ -167,7 +167,7 @@ public class TileMagicalJukebox extends TileMRUGeneric {
 
 		if(getWorld().isRemote && !getStackInSlot(1).isEmpty() && recordPlayed == 1) {
 			if(getWorld().rand.nextFloat() <= 0.33F) {
-				getWorld().spawnParticle(EnumParticleTypes.NOTE, pos.getX() + 0.5D, pos.getY() + 1.2D, pos.getZ() + 0.5D+MathUtils.randomDouble(getWorld().rand)/2, MathUtils.randomDouble(getWorld().rand)*24 / 24.0D, 0.0D, 0.0D);
+				getWorld().spawnParticle(EnumParticleTypes.NOTE, pos.getX() + 0.5D, pos.getY() + 1.2D, pos.getZ() + 0.5D+MathUtils.randomDouble(getWorld().rand)/2, MathUtils.randomDouble(getWorld().rand)*24 / 24D, 0D, 0D);
 			}
 		}
 

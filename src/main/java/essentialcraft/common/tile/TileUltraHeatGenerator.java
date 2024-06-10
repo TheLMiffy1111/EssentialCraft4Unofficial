@@ -43,7 +43,7 @@ public class TileUltraHeatGenerator extends TileMRUGeneric {
 		firstTick = false;
 		if(getWorld().getRedstonePowerFromNeighbors(pos) == 0) {
 			if(currentBurnTime > 0) {
-				double mruFactor = 1.0F;
+				double mruFactor = 1F;
 				Block[] b = new Block[4];
 				b[0] = getWorld().getBlockState(pos.east(2)).getBlock();
 				b[1] = getWorld().getBlockState(pos.west(2)).getBlock();

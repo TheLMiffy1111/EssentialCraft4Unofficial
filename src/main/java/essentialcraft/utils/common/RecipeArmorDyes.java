@@ -75,13 +75,13 @@ public class RecipeArmorDyes extends Impl<IRecipe> implements IRecipe {
 
 					if(itemarmor.hasColor(itemstack1)) {
 						l = itemarmor.getColor(itemstack);
-						f = (l >> 16 & 255) / 255.0F;
-						f1 = (l >> 8 & 255) / 255.0F;
-						float f2 = (l & 255) / 255.0F;
-						i = (int)(i + Math.max(f, Math.max(f1, f2)) * 255.0F);
-						aint[0] = (int)(aint[0] + f * 255.0F);
-						aint[1] = (int)(aint[1] + f1 * 255.0F);
-						aint[2] = (int)(aint[2] + f2 * 255.0F);
+						f = (l >> 16 & 255) / 255F;
+						f1 = (l >> 8 & 255) / 255F;
+						float f2 = (l & 255) / 255F;
+						i = (int)(i + Math.max(f, Math.max(f1, f2)) * 255F);
+						aint[0] = (int)(aint[0] + f * 255F);
+						aint[1] = (int)(aint[1] + f1 * 255F);
+						aint[2] = (int)(aint[2] + f2 * 255F);
 						++j;
 					}
 				}
@@ -91,9 +91,9 @@ public class RecipeArmorDyes extends Impl<IRecipe> implements IRecipe {
 					}
 
 					float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(itemstack1.getItemDamage()));
-					int j1 = (int)(afloat[0] * 255.0F);
-					int k1 = (int)(afloat[1] * 255.0F);
-					l1 = (int)(afloat[2] * 255.0F);
+					int j1 = (int)(afloat[0] * 255F);
+					int k1 = (int)(afloat[1] * 255F);
+					l1 = (int)(afloat[2] * 255F);
 					i += Math.max(j1, Math.max(k1, l1));
 					aint[0] += j1;
 					aint[1] += k1;

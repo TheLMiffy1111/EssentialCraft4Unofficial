@@ -56,7 +56,7 @@ public class ItemDividerGun extends ItemMRUGeneric implements IModelRegisterer {
 		if(p instanceof EntityPlayer && ECUtils.playerUseMRU((EntityPlayer)p, stk, 5000)) {
 			w.playSound(p.posX, p.posY, p.posZ, SoundRegistry.gunBeam, SoundCategory.PLAYERS, 1, 2, false);
 			EntityDividerProjectile proj = new EntityDividerProjectile(w, p);
-			proj.shoot(p, p.rotationPitch, p.rotationYaw, 0.0F, 1.5F, 1.0F);
+			proj.shoot(p, p.rotationPitch, p.rotationYaw, 0F, 1.5F, 1F);
 			if(!w.isRemote) {
 				w.spawnEntity(proj);
 			}

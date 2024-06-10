@@ -27,7 +27,7 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y-0.25F, (float)z+0.5F);
 		float timeIndex = (tile.getWorld().getWorldTime()+partialTicks)%120;
-		float yIndex = 1.0F;
+		float yIndex = 1F;
 		if(timeIndex <= 60) {
 			yIndex = timeIndex/240F;
 		}
@@ -40,8 +40,8 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 			double d1 = tile.inventoryPos.getY() - tile.getPos().getY() - yIndex;
 			double d2 = tile.inventoryPos.getZ() - tile.getPos().getZ();
 			double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
-			float f = -(float)(Math.atan2(d2, d0) * 180.0D / Math.PI)-90;
-			float f1 = -(float)-(Math.atan2(d1, d3) * 180.0D / Math.PI);
+			float f = -(float)(Math.atan2(d2, d0) * 180D / Math.PI)-90;
+			float f1 = -(float)-(Math.atan2(d1, d3) * 180D / Math.PI);
 
 			GlStateManager.rotate(f, 0, 1, 0);
 			GlStateManager.rotate(f1, 1, 0, 0);
@@ -54,10 +54,10 @@ public class RenderMagicalMirror extends TileEntitySpecialRenderer<TileMagicalMi
 		if(tile.pulsing)
 		{
 			timeIndex = Minecraft.getMinecraft().world.getWorldTime()%20;
-			float colorIndex = 1.0F;
+			float colorIndex = 1F;
 			if(timeIndex <= 10)
 			{
-				colorIndex = 1.0F - timeIndex/10;
+				colorIndex = 1F - timeIndex/10;
 			}else
 			{
 				colorIndex = (timeIndex-10)/10;

@@ -24,7 +24,7 @@ public class RadiatingChamberRecipe extends IForgeRegistryEntry.Impl<IRecipe> im
 		mruRequired = mruReq;
 		upperBalanceLine = Math.max(balancePoint1, balancePoint2);
 		lowerBalanceLine = Math.min(balancePoint1, balancePoint2);
-		costModifier = 1.0F;
+		costModifier = 1F;
 	}
 
 	public RadiatingChamberRecipe(Ingredient[] ingred, ItemStack res, int mruReq, float balancePoint1, float balancePoint2, float modifier) {

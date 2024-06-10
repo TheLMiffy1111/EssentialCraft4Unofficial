@@ -107,7 +107,7 @@ public class TileCrystalFormer extends TileMRUGeneric {
 	public void spawnParticles() {
 		if(world.isRemote && canWork() && mruStorage.getMRU() > 0) {
 			for(int o = 0; o < 10; ++o) {
-				getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.1D + getWorld().rand.nextDouble()/1.1D, pos.getY() + (float)o/10, pos.getZ()+0.1D + getWorld().rand.nextDouble()/1.1D, -1.0D, 1.0D, 1.0D);
+				getWorld().spawnParticle(EnumParticleTypes.REDSTONE, pos.getX()+0.1D + getWorld().rand.nextDouble()/1.1D, pos.getY() + (float)o/10, pos.getZ()+0.1D + getWorld().rand.nextDouble()/1.1D, -1D, 1D, 1D);
 			}
 		}
 	}

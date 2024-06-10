@@ -196,7 +196,7 @@ public class TileEmberForge extends TileMRUGeneric {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+2.5, pos.getY()+2, pos.getZ()+0.5, 0, 0, 0);
 					}
 					if(!flag) {
-						getWorld().playSound(null, ember_0.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2.0F);
+						getWorld().playSound(null, ember_0.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2F);
 					}
 				}
 				if(ember_1 != null) {
@@ -212,7 +212,7 @@ public class TileEmberForge extends TileMRUGeneric {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()-1.5, pos.getY()+2, pos.getZ()+0.5, 0, 0, 0);
 					}
 					if(!flag) {
-						getWorld().playSound(null, ember_1.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2.0F);
+						getWorld().playSound(null, ember_1.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2F);
 					}
 				}
 				if(ember_2 != null) {
@@ -228,7 +228,7 @@ public class TileEmberForge extends TileMRUGeneric {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5, pos.getY()+2, pos.getZ()+2.5, 0, 0, 0);
 					}
 					if(!flag) {
-						getWorld().playSound(null, ember_2.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2.0F);
+						getWorld().playSound(null, ember_2.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2F);
 					}
 				}
 				if(ember_3 != null) {
@@ -244,7 +244,7 @@ public class TileEmberForge extends TileMRUGeneric {
 						getWorld().spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5, pos.getY()+2, pos.getZ()-1.5, 0, 0, 0);
 					}
 					if(!flag) {
-						getWorld().playSound(null, ember_3.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2.0F);
+						getWorld().playSound(null, ember_3.getPosition(), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.2F, 2F);
 					}
 				}
 				if(focus_0 != null) {

@@ -46,12 +46,12 @@ public class ParticleItem extends Particle {
 		GlStateManager.scale(0.0000075F*mru, 0.0000075F*mru, 0.0000075F*mru);
 		GlStateManager.color((float)red, (float)green, (float)blue, 1F);
 		for(int var7 = 0; var7 < 100; ++var7) {
-			//GlStateManager.rotate(var6.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-			//GlStateManager.rotate(var6.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-			//GlStateManager.rotate(var6.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
-			GlStateManager.rotate(var6.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotate(var6.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-			GlStateManager.rotate(var6.nextFloat() * 360.0F + 1 * 90.0F, 0.0F, 0.0F, 1.0F);
+			//GlStateManager.rotate(var6.nextFloat() * 360F, 1F, 0F, 0F);
+			//GlStateManager.rotate(var6.nextFloat() * 360F, 0F, 1F, 0F);
+			//GlStateManager.rotate(var6.nextFloat() * 360F, 0F, 0F, 1F);
+			GlStateManager.rotate(var6.nextFloat() * 360F, 1F, 0F, 0F);
+			GlStateManager.rotate(var6.nextFloat() * 360F, 0F, 1F, 0F);
+			GlStateManager.rotate(var6.nextFloat() * 360F + 1 * 90F, 0F, 0F, 1F);
 			float var8 = var6.nextFloat() * 20F + 15F;
 			float var9 = var6.nextFloat() * 2F + 3F;
 			GlStateManager.glBegin(GL11.GL_TRIANGLE_FAN);

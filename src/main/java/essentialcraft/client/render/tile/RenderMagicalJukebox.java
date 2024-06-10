@@ -54,7 +54,7 @@ public class RenderMagicalJukebox extends TileEntitySpecialRenderer<TileMagicalJ
 
 		if(is.getItem() == ItemsCore.record_secret && tile.recordCooldownTime > 0)
 		{
-			GlStateManager.scale(1.0F-upperIndex/60F , 1.0F-upperIndex1/40F, 1.0F-(20-upperIndex)/60F);
+			GlStateManager.scale(1F-upperIndex/60F , 1F-upperIndex1/40F, 1F-(20-upperIndex)/60F);
 		}
 		GlStateManager.popMatrix();
 

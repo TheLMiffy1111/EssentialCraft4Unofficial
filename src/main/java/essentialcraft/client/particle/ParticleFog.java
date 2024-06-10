@@ -40,9 +40,9 @@ public class ParticleFog extends Particle{
 			particleGreen = (float) green;
 			particleBlue = (float) blue;
 			particleAlpha = 0.99F;
-			particleMaxAge = (int)(Math.random() * 10.0D) + 100;
+			particleMaxAge = (int)(Math.random() * 10D) + 100;
 			canCollide = true;
-			setParticleTextureIndex((int)(Math.random() * 8.0D));
+			setParticleTextureIndex((int)(Math.random() * 8D));
 		}
 	}
 
@@ -71,7 +71,7 @@ public class ParticleFog extends Particle{
 		f1 *= f1;
 		int j = i & 255;
 		int k = i >> 16 & 255;
-		k += (int)(f1 * 15.0F * 16.0F);
+		k += (int)(f1 * 15F * 16F);
 
 		if (k > 240)
 		{
@@ -89,7 +89,7 @@ public class ParticleFog extends Particle{
 		float f1 = super.getBrightnessForRender(p_70013_1_);
 		float f2 = (float)particleAge / (float)particleMaxAge;
 		f2 = f2 * f2 * f2 * f2;
-		return f1 * (1.0F - f2) + f2;
+		return f1 * (1F - f2) + f2;
 	}
 
 	/**

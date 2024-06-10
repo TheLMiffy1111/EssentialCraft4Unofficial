@@ -298,7 +298,7 @@ public class RenderHandlerEC {
 					float f6 = MathHelper.sin(-f1 * 0.017453292F);
 					float f7 = f4 * f5;
 					float f8 = f3 * f5;
-					double d3 = 32.0D;
+					double d3 = 32D;
 					Vec3d distanced = lookVec.add(f7 * d3, f6 * d3, f8 * d3);
 					RayTraceResult mop = p.getEntityWorld().rayTraceBlocks(lookVec, distanced, true, false, false);
 
@@ -804,9 +804,9 @@ public class RenderHandlerEC {
 					player.motionZ *= 1.2D;
 
 					double d8, d9, d2, d4;
-					d2 = Math.cos(player.rotationYaw * Math.PI / 180.0D);
-					d4 = Math.sin(player.rotationYaw * Math.PI / 180.0D);
-					double d5 = player.getEntityWorld().rand.nextFloat() * 2.0F - 1.0F;
+					d2 = Math.cos(player.rotationYaw * Math.PI / 180D);
+					d4 = Math.sin(player.rotationYaw * Math.PI / 180D);
+					double d5 = player.getEntityWorld().rand.nextFloat() * 2F - 1F;
 					double d6 = (player.getEntityWorld().rand.nextInt(2) * 2 - 1) * 0.7D;
 
 					d8 = player.posX - d2 * d5 * 0.8D + d4 * d6;
@@ -837,7 +837,7 @@ public class RenderHandlerEC {
 					float h = 11;
 
 					int circle_points = 100;
-					float angle = 2.0f * 3.1416f / circle_points;
+					float angle = 2F * 3.1416f / circle_points;
 
 					GlStateManager.pushMatrix();
 
@@ -860,7 +860,7 @@ public class RenderHandlerEC {
 
 					GL11.glVertex2f(k, h);
 
-					for(angle=2.0f;angle<8.3F-renderPartialTicksCheck/20*8.3F;angle+=0.01) {
+					for(angle=2F;angle<8.3F-renderPartialTicksCheck/20*8.3F;angle+=0.01) {
 						float x2 = (float) (k+Math.sin(angle)*r);
 						float y2 = (float) (h+Math.cos(angle)*r);
 
@@ -897,7 +897,7 @@ public class RenderHandlerEC {
 					float h = 11;
 
 					int circle_points = 100;
-					float angle = 2.0f * 3.1416f / circle_points;
+					float angle = 2F * 3.1416f / circle_points;
 
 					GlStateManager.pushMatrix();
 
@@ -928,7 +928,7 @@ public class RenderHandlerEC {
 
 					GL11.glVertex2f(k, h);
 
-					for(angle=2.0f;angle<8.3F;angle+=0.01) {
+					for(angle=2F;angle<8.3F;angle+=0.01) {
 						float x2 = (float) (k+Math.sin(angle)*r);
 						float y2 = (float) (h+Math.cos(angle)*r);
 
@@ -1027,7 +1027,7 @@ public class RenderHandlerEC {
 					GlStateManager.depthMask(false);
 					GlStateManager.enableBlend();
 					OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-					GlStateManager.color(1.0F, 1.0F, 1.0F, 0.3F);
+					GlStateManager.color(1F, 1F, 1F, 0.3F);
 					TextureAtlasSprite iicon = TextureUtils.fromBlock(BlocksCore.lightCorruption[0], 7);
 					mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 					float f1 = iicon.getMinU();
@@ -1036,14 +1036,14 @@ public class RenderHandlerEC {
 					float f4 = iicon.getMaxV();
 					TessellatorWrapper tessellator = TessellatorWrapper.getInstance();
 					tessellator.startDrawingQuads();
-					tessellator.addVertexWithUV(0.0D, l, -90.0D, f1, f4);
-					tessellator.addVertexWithUV(k, l, -90.0D, f3, f4);
-					tessellator.addVertexWithUV(k, 0.0D, -90.0D, f3, f2);
-					tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, f1, f2);
+					tessellator.addVertexWithUV(0D, l, -90D, f1, f4);
+					tessellator.addVertexWithUV(k, l, -90D, f3, f4);
+					tessellator.addVertexWithUV(k, 0D, -90D, f3, f2);
+					tessellator.addVertexWithUV(0D, 0D, -90D, f1, f2);
 					tessellator.draw();
 					GlStateManager.depthMask(true);
 					GlStateManager.enableDepth();
-					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1F, 1F, 1F, 1F);
 				}
 
 				if(mc.player.getActivePotionEffect(PotionRegistry.frozenMind) != null) {
@@ -1051,7 +1051,7 @@ public class RenderHandlerEC {
 					GlStateManager.depthMask(false);
 					GlStateManager.enableBlend();
 					OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-					GlStateManager.color(1.0F, 1.0F, 1.0F, 0.3F);
+					GlStateManager.color(1F, 1F, 1F, 0.3F);
 					TextureAtlasSprite iicon = TextureUtils.fromBlock(BlocksCore.lightCorruption[1], 7);
 					mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 					float f1 = iicon.getMinU();
@@ -1060,14 +1060,14 @@ public class RenderHandlerEC {
 					float f4 = iicon.getMaxV();
 					TessellatorWrapper tessellator = TessellatorWrapper.getInstance();
 					tessellator.startDrawingQuads();
-					tessellator.addVertexWithUV(0.0D, l, -90.0D, f1, f4);
-					tessellator.addVertexWithUV(k, l, -90.0D, f3, f4);
-					tessellator.addVertexWithUV(k, 0.0D, -90.0D, f3, f2);
-					tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, f1, f2);
+					tessellator.addVertexWithUV(0D, l, -90D, f1, f4);
+					tessellator.addVertexWithUV(k, l, -90D, f3, f4);
+					tessellator.addVertexWithUV(k, 0D, -90D, f3, f2);
+					tessellator.addVertexWithUV(0D, 0D, -90D, f1, f2);
 					tessellator.draw();
 					GlStateManager.depthMask(true);
 					GlStateManager.enableDepth();
-					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1F, 1F, 1F, 1F);
 				}
 
 				if(mc.player.getActivePotionEffect(PotionRegistry.paradox) != null) {
@@ -1167,26 +1167,26 @@ public class RenderHandlerEC {
 
 					TessellatorWrapper tessellator = TessellatorWrapper.getInstance();
 					tessellator.startDrawingQuads();
-					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90.0D, 0.0D, 1.0D);
-					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90.0D, 1.0D, 1.0D);
-					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0.0D, -90.0D, 1.0D, 0.0D);
-					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0.0D, -90.0D, 0.0D, 0.0D);
+					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90D, 0D, 1D);
+					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90D, 1D, 1D);
+					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0D, -90D, 1D, 0D);
+					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0D, -90D, 0D, 0D);
 					tessellator.draw();
 					Minecraft.getMinecraft().getTextureManager().bindTexture(RenderHandlerEC.whitebox);
 
 					GlStateManager.color(0, 0, 0);
 
 					tessellator.startDrawingQuads();
-					tessellator.addVertexWithUV(0, l, -90.0D, 0.0D, 1.0D);
-					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90.0D, 1.0D, 1.0D);
-					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0.0D, -90.0D, 1.0D, 0.0D);
-					tessellator.addVertexWithUV(0, 0.0D, -90.0D, 0.0D, 0.0D);
+					tessellator.addVertexWithUV(0, l, -90D, 0D, 1D);
+					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90D, 1D, 1D);
+					tessellator.addVertexWithUV(scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0D, -90D, 1D, 0D);
+					tessellator.addVertexWithUV(0, 0D, -90D, 0D, 0D);
 					tessellator.draw();
 					tessellator.startDrawingQuads();
-					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90.0D, 0.0D, 1.0D);
-					tessellator.addVertexWithUV(scaledresolution.getScaledWidth(), l, -90.0D, 1.0D, 1.0D);
-					tessellator.addVertexWithUV(scaledresolution.getScaledWidth(), 0.0D, -90.0D, 1.0D, 0.0D);
-					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0.0D, -90.0D, 0.0D, 0.0D);
+					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, l, -90D, 0D, 1D);
+					tessellator.addVertexWithUV(scaledresolution.getScaledWidth(), l, -90D, 1D, 1D);
+					tessellator.addVertexWithUV(scaledresolution.getScaledWidth(), 0D, -90D, 1D, 0D);
+					tessellator.addVertexWithUV((double)k+scaledresolution.getScaledWidth()/2-scaledresolution.getScaledWidth()/4, 0D, -90D, 0D, 0D);
 					tessellator.draw();
 
 					GlStateManager.color(1, 1, 1);
@@ -1208,14 +1208,14 @@ public class RenderHandlerEC {
 		mc.getTextureManager().bindTexture(image);
 		TessellatorWrapper tessellator = TessellatorWrapper.getInstance();
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(0.0D, scaledResY, -90.0D, 0.0D, 1.0D);
-		tessellator.addVertexWithUV(scaledResX, scaledResY, -90.0D, 1.0D, 1.0D);
-		tessellator.addVertexWithUV(scaledResX, 0.0D, -90.0D, 1.0D, 0.0D);
-		tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
+		tessellator.addVertexWithUV(0D, scaledResY, -90D, 0D, 1D);
+		tessellator.addVertexWithUV(scaledResX, scaledResY, -90D, 1D, 1D);
+		tessellator.addVertexWithUV(scaledResX, 0D, -90D, 1D, 0D);
+		tessellator.addVertexWithUV(0D, 0D, -90D, 0D, 0D);
 		tessellator.draw();
 		GlStateManager.depthMask(true);
 		GlStateManager.enableDepth();
 		GlStateManager.enableAlpha();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1F, 1F, 1F, 1F);
 	}
 }

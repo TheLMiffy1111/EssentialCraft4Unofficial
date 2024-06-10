@@ -722,7 +722,7 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 					health = current/max;
 				}
 			}
-			int j = (int)Math.round(13.0D - health * 13.0D);
+			int j = (int)Math.round(13D - health * 13D);
 			GlStateManager.disableLighting();
 			GlStateManager.disableDepth();
 			GlStateManager.disableTexture2D();
@@ -742,10 +742,10 @@ public class ItemGun extends ItemMRUGeneric implements IModelRegisterer {
 
 		private void draw(BufferBuilder renderer, int x, int y, int width, int height, int red, int green, int blue, int alpha) {
 			renderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
-			renderer.pos(x + 0, y + 0, 0.0D).color(red, green, blue, alpha).endVertex();
-			renderer.pos(x + 0, y + height, 0.0D).color(red, green, blue, alpha).endVertex();
-			renderer.pos(x + width, y + height, 0.0D).color(red, green, blue, alpha).endVertex();
-			renderer.pos(x + width, y + 0, 0.0D).color(red, green, blue, alpha).endVertex();
+			renderer.pos(x + 0, y + 0, 0D).color(red, green, blue, alpha).endVertex();
+			renderer.pos(x + 0, y + height, 0D).color(red, green, blue, alpha).endVertex();
+			renderer.pos(x + width, y + height, 0D).color(red, green, blue, alpha).endVertex();
+			renderer.pos(x + width, y + 0, 0D).color(red, green, blue, alpha).endVertex();
 			Tessellator.getInstance().draw();
 		}
 	}

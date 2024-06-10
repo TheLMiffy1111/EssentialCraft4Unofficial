@@ -25,7 +25,7 @@ import net.minecraftforge.common.model.IModelState;
 
 public class ArmorRenderer implements IItemRenderer {
 
-	public static final ModelArmorEC theModel = new ModelArmorEC(1.0F);
+	public static final ModelArmorEC theModel = new ModelArmorEC(1F);
 
 	@Override
 	public void renderItem(ItemStack item, TransformType type) {

@@ -50,7 +50,7 @@ public class GuiMRUGenerated extends GuiTextElement{
 					this.drawTexturedModalRect(posX+101, posY+2+15-scaledSize, 176, 15-scaledSize, 15, scaledSize);
 				}
 				float mruGenerated = TileHeatGenerator.mruGenerated;
-				float mruFactor = 1.0F;
+				float mruFactor = 1F;
 				Block[] b = new Block[4];
 				b[0] = furnace.getWorld().getBlockState(furnace.getPos().add(2, 0, 0)).getBlock();
 				b[1] = furnace.getWorld().getBlockState(furnace.getPos().add(-2, 0, 0)).getBlock();
@@ -180,7 +180,7 @@ public class GuiMRUGenerated extends GuiTextElement{
 			int moonPhase = tile.getWorld().provider.getMoonPhase(tile.getWorld().getWorldTime());
 			double moonFactor = Math.abs(1D - moonPhase*0.25D);
 			mruGenerated *= moonFactor;
-			double heightFactor = 1.0F;
+			double heightFactor = 1F;
 			if(tile.getPos().getY() > TileMoonWell.maxHeight) {
 				heightFactor = 0D;
 			}

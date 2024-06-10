@@ -17,11 +17,11 @@ public class RenderPoisonFume extends RenderLiving<EntityPoisonFume> {
 	private static final ResourceLocation villagerTextures = new ResourceLocation("essentialcraft", "textures/entities/windMage_apprentice.png");
 
 	public RenderPoisonFume() {
-		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(0.0F), 0.5F);
+		super(Minecraft.getMinecraft().getRenderManager(), new ModelBiped(0F), 0.5F);
 	}
 
 	public RenderPoisonFume(RenderManager rm) {
-		super(rm, new ModelBiped(0.0F), 0.5F);
+		super(rm, new ModelBiped(0F), 0.5F);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ItemShadowKnife extends ItemSwordEC {
 				entityLiving.setItemStackToSlot(slot, ItemStack.EMPTY);
 			}
 			EntityShadowKnife knife = new EntityShadowKnife(entityLiving.getEntityWorld(), entityLiving);
-			knife.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 1.5F, 1.0F);
+			knife.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0F, 1.5F, 1F);
 			if(!entityLiving.getEntityWorld().isRemote) {
 				entityLiving.getEntityWorld().spawnEntity(knife);
 			}

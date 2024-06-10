@@ -62,7 +62,7 @@ public class RenderElementalCrystalAsItem implements IItemRenderer {
 
 		GlStateManager.pushMatrix();
 		float scale = MathUtils.getPercentage((int) size, 100)/100F;
-		GlStateManager.translate(0.5F, 1.7F-(1.0F-scale)*1.4F, 0.5F);
+		GlStateManager.translate(0.5F, 1.7F-(1F-scale)*1.4F, 0.5F);
 
 		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.rotate(180, 1, 0, 0);

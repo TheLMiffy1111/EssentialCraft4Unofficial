@@ -24,7 +24,7 @@ public class TileElementalCrystal extends TileEntity implements ITickable {
 	public boolean requestSync = true;
 
 	public static double mutationChance = 0.001D;
-	public static double growthModifier = 1.0D;
+	public static double growthModifier = 1D;
 
 	public TileElementalCrystal() {
 		super();

@@ -27,7 +27,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 	@Override
 	public boolean placeInExistingPortal(WorldServer worldIn, Entity entityIn, float rotationYaw, double x,
 			double y, double z, Random random, Long2ObjectMap<PortalPosition> destinationCoordinateCache) {
-		double d0 = -1.0D;
+		double d0 = -1D;
 		int j = MathHelper.floor(entityIn.posX);
 		int k = MathHelper.floor(entityIn.posZ);
 		boolean flag = true;
@@ -36,7 +36,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 
 		if(destinationCoordinateCache.containsKey(l)) {
 			Teleporter.PortalPosition teleporter$portalposition = destinationCoordinateCache.get(l);
-			d0 = 0.0D;
+			d0 = 0D;
 			blockpos = teleporter$portalposition;
 			teleporter$portalposition.lastUpdateTime = worldIn.getTotalWorldTime();
 			flag = false;
@@ -56,7 +56,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 							}
 							double d1 = blockpos1.distanceSq(blockpos3);
 
-							if(d0 < 0.0D || d1 < d0) {
+							if(d0 < 0D || d1 < d0) {
 								d0 = d1;
 								blockpos = blockpos1;
 							}
@@ -66,7 +66,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 			}
 		}
 
-		if(d0 < 0.0D) {
+		if(d0 < 0D) {
 			return false;
 		}
 		if(flag) {
@@ -82,8 +82,8 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 		double aG0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
 		double aG1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entityIn.posZ : entityIn.posX;
 		aG1 = Math.abs(MathHelper.pct(aG1 - (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), aG0, aG0 - blockpattern$patternhelper.getWidth()));
-		double aG2 = MathHelper.pct(entityIn.posY - 1.0D, blockpattern$patternhelper.getFrontTopLeft().getY(), blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight());
-		Vec3d aG = new Vec3d(aG1, aG2, 0.0D);
+		double aG2 = MathHelper.pct(entityIn.posY - 1D, blockpattern$patternhelper.getFrontTopLeft().getY(), blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight());
+		Vec3d aG = new Vec3d(aG1, aG2, 0D);
 		EnumFacing eTD = blockpattern$patternhelper.getForwards();
 
 		d6 = blockpattern$patternhelper.getFrontTopLeft().getY() + 1 - aG.y * blockpattern$patternhelper.getHeight();
@@ -98,26 +98,26 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 			zP = 1;
 		}
 
-		float f = 0.0F;
-		float f1 = 0.0F;
-		float f2 = 0.0F;
-		float f3 = 0.0F;
+		float f = 0F;
+		float f1 = 0F;
+		float f2 = 0F;
+		float f3 = 0F;
 
 		if(blockpattern$patternhelper.getForwards().getOpposite() == eTD) {
-			f = 1.0F;
-			f1 = 1.0F;
+			f = 1F;
+			f1 = 1F;
 		}
 		else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.getOpposite()) {
-			f = -1.0F;
-			f1 = -1.0F;
+			f = -1F;
+			f1 = -1F;
 		}
 		else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.rotateY()) {
-			f2 = 1.0F;
-			f3 = -1.0F;
+			f2 = 1F;
+			f3 = -1F;
 		}
 		else {
-			f2 = -1.0F;
-			f3 = 1.0F;
+			f2 = -1F;
+			f3 = 1F;
 		}
 
 		double d3 = entityIn.motionX;
@@ -139,7 +139,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 	public boolean makePortal(WorldServer worldIn, Entity entityIn, double x, double y, double z, Random random,
 			Long2ObjectMap<PortalPosition> destinationCoordinateCache) {
 		int i = 16;
-		double d0 = -1.0D;
+		double d0 = -1D;
 		int j = MathHelper.floor(entityIn.posX);
 		int k = MathHelper.floor(entityIn.posY);
 		int l = MathHelper.floor(entityIn.posZ);
@@ -189,7 +189,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 							double d5 = j3 + 0.5D - entityIn.posY;
 							double d7 = d1 * d1 + d5 * d5 + d2 * d2;
 
-							if(d0 < 0.0D || d7 < d0) {
+							if(d0 < 0D || d7 < d0) {
 								d0 = d7;
 								i1 = j2;
 								j1 = j3;
@@ -202,7 +202,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 			}
 		}
 
-		if(d0 < 0.0D) {
+		if(d0 < 0D) {
 			for(int l5 = j - i; l5 <= j + i; ++l5) {
 				double d3 = l5 + 0.5D - entityIn.posX;
 
@@ -234,7 +234,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 								double d6 = i7 + 0.5D - entityIn.posY;
 								double d8 = d3 * d3 + d6 * d6 + d4 * d4;
 
-								if(d0 < 0.0D || d8 < d0) {
+								if(d0 < 0D || d8 < d0) {
 									d0 = d8;
 									i1 = l5;
 									j1 = i7;
@@ -259,7 +259,7 @@ public class PortalGeneratorHoanna extends DummyPortalGenerator {
 			i3 = -i3;
 		}
 
-		if(d0 < 0.0D) {
+		if(d0 < 0D) {
 			j1 = MathHelper.clamp(j1, 70, worldIn.getActualHeight() - 10);
 			k2 = j1;
 

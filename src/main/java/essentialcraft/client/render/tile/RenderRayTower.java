@@ -17,7 +17,7 @@ public class RenderRayTower extends TileEntitySpecialRenderer<TileRayTower> {
 	private ModelFloatingCube model;
 
 	public RenderRayTower() {
-		model = new ModelFloatingCube(0.0F, true);
+		model = new ModelFloatingCube(0F, true);
 	}
 
 	public void doRender(TileRayTower tile, double x, double y, double z, float partialTicks) {
@@ -26,10 +26,10 @@ public class RenderRayTower extends TileEntitySpecialRenderer<TileRayTower> {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float)x+0.5F, (float)y+1.6F, (float)z+0.5F);
 		bindTexture(enderCrystalTextures);
-		float f3 = MathHelper.sin(f2 * 0.2F) / 2.0F + 0.5F;
+		float f3 = MathHelper.sin(f2 * 0.2F) / 2F + 0.5F;
 		f3 += f3 * f3;
 		GlStateManager.scale(0.4F, 0.4F, 0.4F);
-		model.render(tile, 0.0F, f2 * 3.0F, 0.35F, 0.0F, 0.0F, 0.0625F);
+		model.render(tile, 0F, f2 * 3F, 0.35F, 0F, 0F, 0.0625F);
 		GlStateManager.popMatrix();
 		RenderHelper.enableStandardItemLighting();
 	}

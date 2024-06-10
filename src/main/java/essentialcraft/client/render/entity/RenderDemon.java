@@ -61,7 +61,7 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 			return -1;
 		}
 		bindTexture(endermanEyesTexture);
-		float f1 = 1.0F;
+		float f1 = 1F;
 		GlStateManager.enableBlend();
 		GlStateManager.disableAlpha();
 		GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -79,9 +79,9 @@ public class RenderDemon extends RenderLiving<EntityDemon>
 		char c0 = 61680;
 		int j = c0 % 65536;
 		int k = c0 / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1F, k / 1F);
 		GlStateManager.enableLighting();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, f1);
+		GlStateManager.color(1F, 1F, 1F, f1);
 		return 1;
 	}
 

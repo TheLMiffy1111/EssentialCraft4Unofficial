@@ -80,7 +80,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 			double d2 = rand.nextGaussian() * 0.02D;
 			double d0 = rand.nextGaussian() * 0.02D;
 			double d1 = rand.nextGaussian() * 0.02D;
-			getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + rand.nextFloat() * width * 2.0F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, d2, d0, d1);
+			getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + rand.nextFloat() * width * 2F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2F - width, d2, d0, d1);
 		}
 		return false;
 	}
@@ -100,7 +100,7 @@ public class EntityDemon extends EntityLiving implements IInventory {
 					double d2 = rand.nextGaussian() * 0.02D;
 					double d0 = rand.nextGaussian() * 0.02D;
 					double d1 = rand.nextGaussian() * 0.02D;
-					getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + rand.nextFloat() * width * 2.0F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, d2, d0, d1);
+					getEntityWorld().spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + rand.nextFloat() * width * 2F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2F - width, d2, d0, d1);
 				}
 				getEntityWorld().playSound(posX, posY, posZ, SoundRegistry.entityDemonDoom, SoundCategory.HOSTILE, getSoundVolume(), getSoundPitch(), false);
 				ItemStack result = new ItemStack(ItemsCore.genericItem, 3+getEntityWorld().rand.nextInt(6), 52);
