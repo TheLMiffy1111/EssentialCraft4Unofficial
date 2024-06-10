@@ -134,10 +134,10 @@ public class ItemSecret extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 7; ++i) {
-				list.add(new ItemStack(this, 1, i));
+				items.add(new ItemStack(this, 1, i));
 			}
 		}
 	}
@@ -154,8 +154,8 @@ public class ItemSecret extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EssentialCraftCore.proxy.itemHasEffect(p_77613_1_) ? EnumRarity.RARE : EnumRarity.COMMON;
+	public EnumRarity getRarity(ItemStack stack) {
+		return EssentialCraftCore.proxy.itemHasEffect(stack) ? EnumRarity.RARE : EnumRarity.COMMON;
 	}
 
 	@Override

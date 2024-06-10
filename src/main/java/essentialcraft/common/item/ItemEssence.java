@@ -30,11 +30,11 @@ public class ItemEssence extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(isInCreativeTab(p_150895_2_)) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if(isInCreativeTab(tab)) {
 			for(int var4 = 0; var4 < 16; ++var4) {
 				ItemStack min = new ItemStack(this, 1, var4);
-				p_150895_3_.add(min);
+				items.add(min);
 			}
 		}
 	}

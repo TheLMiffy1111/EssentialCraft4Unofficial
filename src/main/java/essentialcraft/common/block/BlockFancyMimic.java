@@ -44,9 +44,9 @@ public class BlockFancyMimic extends BlockMimic {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
 		for(int i = 0; i < 16; i++) {
-			list.add(new ItemStack(this, 1, i));
+			items.add(new ItemStack(this, 1, i));
 		}
 	}
 

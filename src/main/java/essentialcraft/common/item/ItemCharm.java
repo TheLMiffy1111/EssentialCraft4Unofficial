@@ -72,15 +72,15 @@ public class ItemCharm extends ItemMRUGeneric implements IBauble, IModelRegister
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
-		if(isInCreativeTab(par2CreativeTabs)) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if(isInCreativeTab(tab)) {
 			for(int var4 = 0; var4 < 10; ++var4) {
 				ItemStack min = new ItemStack(this, 1, var4);
 				ItemStack max = new ItemStack(this, 1, var4);
 				min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
 				max.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(maxMRU);
-				list.add(min);
-				list.add(max);
+				items.add(min);
+				items.add(max);
 			}
 		}
 	}

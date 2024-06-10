@@ -162,8 +162,8 @@ public class ItemSoulStone extends Item implements IItemColor, IModelRegisterer 
 	}
 
 	@Override
-	public int getColorFromItemstack(ItemStack p_82790_1_, int p_82790_2_) {
-		if(p_82790_1_.getItemDamage() == 1) {
+	public int getColorFromItemstack(ItemStack stack, int layer) {
+		if(stack.getItemDamage() == 1) {
 			return 0xFF0000;
 		}
 		return 0xFFFFFF;

@@ -46,14 +46,14 @@ public class ItemKnowledgeBook extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(isInCreativeTab(p_150895_2_)) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 5; ++i) {
 				ItemStack book = new ItemStack(this);
 				NBTTagCompound bookTag = new NBTTagCompound();
 				bookTag.setInteger("tier", i);
 				book.setTagCompound(bookTag);
-				p_150895_3_.add(book);
+				items.add(book);
 			}
 		}
 	}

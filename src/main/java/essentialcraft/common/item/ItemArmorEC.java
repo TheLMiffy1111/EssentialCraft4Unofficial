@@ -114,17 +114,17 @@ public class ItemArmorEC extends ItemArmor implements IVisDiscountGear, IReveale
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if(aType != 1) {
-			super.getSubItems(par2CreativeTabs, list);
+			super.getSubItems(tab, items);
 		}
-		else if(isInCreativeTab(par2CreativeTabs)) {
+		else if(isInCreativeTab(tab)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
 			max.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(maxMRU);
-			list.add(min);
-			list.add(max);
+			items.add(min);
+			items.add(max);
 		}
 	}
 

@@ -70,10 +70,10 @@ public class ItemMRUMatrixProjection extends Item implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs p_150895_2_, NonNullList<ItemStack> p_150895_3_) {
-		if(isInCreativeTab(p_150895_2_)) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 5; ++i) {
-				p_150895_3_.add(new ItemStack(this, 1, i));
+				items.add(new ItemStack(this, 1, i));
 			}
 		}
 	}

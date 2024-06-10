@@ -21,14 +21,14 @@ public class ItemBlockFancy extends ItemBlock {
 	}
 
 	@Override
-	public int getMetadata(int par1) {
-		return par1;
+	public int getMetadata(int damage) {
+		return damage;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> list, ITooltipFlag par4) {
-		super.addInformation(stack, player, list, par4);
-		list.add(I18n.translateToLocal("essentialcraft.desc.fancy."+BlockFancy.overlays[stack.getItemDamage()]));
+	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag isAdvanced) {
+		super.addInformation(stack, player, tooltip, isAdvanced);
+		tooltip.add(I18n.translateToLocal("essentialcraft.desc.fancy."+BlockFancy.overlays[stack.getItemDamage()]));
 	}
 }

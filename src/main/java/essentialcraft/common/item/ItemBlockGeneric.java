@@ -12,7 +12,7 @@ public class ItemBlockGeneric extends ItemBlock {
 	}
 
 	@Override
-	public int getMetadata(int par1) {
-		return par1;
+	public int getMetadata(int damage) {
+		return damage;
 	}
 }

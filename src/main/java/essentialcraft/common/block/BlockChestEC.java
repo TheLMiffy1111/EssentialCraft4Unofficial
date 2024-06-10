@@ -59,9 +59,9 @@ public class BlockChestEC extends BlockContainer implements IModelRegisterer {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 1));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+		items.add(new ItemStack(this, 1, 0));
+		items.add(new ItemStack(this, 1, 1));
 	}
 
 	@Override

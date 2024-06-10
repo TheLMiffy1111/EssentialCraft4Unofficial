@@ -75,13 +75,13 @@ public class BlockRightClicker extends BlockContainer implements IModelRegistere
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 1));
-		list.add(new ItemStack(this, 1, 2));
-		list.add(new ItemStack(this, 1, 3));
-		list.add(new ItemStack(this, 1, 4));
-		list.add(new ItemStack(this, 1, 5));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+		items.add(new ItemStack(this, 1, 0));
+		items.add(new ItemStack(this, 1, 1));
+		items.add(new ItemStack(this, 1, 2));
+		items.add(new ItemStack(this, 1, 3));
+		items.add(new ItemStack(this, 1, 4));
+		items.add(new ItemStack(this, 1, 5));
 	}
 
 	@Override

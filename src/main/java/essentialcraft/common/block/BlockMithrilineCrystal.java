@@ -60,12 +60,12 @@ public class BlockMithrilineCrystal extends BlockContainer implements IModelRegi
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 3));
-		list.add(new ItemStack(this, 1, 6));
-		list.add(new ItemStack(this, 1, 9));
-		list.add(new ItemStack(this, 1, 12));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+		items.add(new ItemStack(this, 1, 0));
+		items.add(new ItemStack(this, 1, 3));
+		items.add(new ItemStack(this, 1, 6));
+		items.add(new ItemStack(this, 1, 9));
+		items.add(new ItemStack(this, 1, 12));
 	}
 
 	@Override

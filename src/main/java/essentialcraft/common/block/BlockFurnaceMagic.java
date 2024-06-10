@@ -71,11 +71,11 @@ public class BlockFurnaceMagic extends BlockContainer implements IModelRegistere
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 4));
-		list.add(new ItemStack(this, 1, 8));
-		list.add(new ItemStack(this, 1, 12));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+		items.add(new ItemStack(this, 1, 0));
+		items.add(new ItemStack(this, 1, 4));
+		items.add(new ItemStack(this, 1, 8));
+		items.add(new ItemStack(this, 1, 12));
 	}
 
 	@Override

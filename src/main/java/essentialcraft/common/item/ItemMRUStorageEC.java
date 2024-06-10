@@ -47,15 +47,15 @@ public class ItemMRUStorageEC extends Item implements IBauble, IItemColor, IMode
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if(isInCreativeTab(tab)) {
 			for(int i = 0; i < 5; ++i) {
 				ItemStack min = new ItemStack(this, 1, i);
 				ItemStack max = new ItemStack(this, 1, i);
 				min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
 				max.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(maxMRU[i]);
-				list.add(min);
-				list.add(max);
+				items.add(min);
+				items.add(max);
 			}
 		}
 	}

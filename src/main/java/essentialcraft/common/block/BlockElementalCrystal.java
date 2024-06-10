@@ -177,8 +177,8 @@ public class BlockElementalCrystal extends BlockContainer implements IModelRegis
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(this, 1));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+		items.add(new ItemStack(this, 1));
 		for(int i = 0; i < 5; ++i) {
 			for(int j = 0; j < 4; ++j) {
 				ItemStack crystalStack = new ItemStack(this, 1);
@@ -191,7 +191,7 @@ public class BlockElementalCrystal extends BlockContainer implements IModelRegis
 				tag.setDouble("earth", elements[2]);
 				tag.setDouble("air", elements[3]);
 				crystalStack.setTagCompound(tag);
-				list.add(crystalStack);
+				items.add(crystalStack);
 			}{
 				ItemStack crystalStack = new ItemStack(this, 1);
 				NBTTagCompound tag = new NBTTagCompound();
@@ -202,7 +202,7 @@ public class BlockElementalCrystal extends BlockContainer implements IModelRegis
 				tag.setDouble("earth", elements[2]);
 				tag.setDouble("air", elements[3]);
 				crystalStack.setTagCompound(tag);
-				list.add(crystalStack);
+				items.add(crystalStack);
 			}{
 				ItemStack crystalStack = new ItemStack(this, 1);
 				NBTTagCompound tag = new NBTTagCompound();
@@ -213,7 +213,7 @@ public class BlockElementalCrystal extends BlockContainer implements IModelRegis
 				tag.setDouble("earth", elements[2]);
 				tag.setDouble("air", elements[3]);
 				crystalStack.setTagCompound(tag);
-				list.add(crystalStack);
+				items.add(crystalStack);
 			}
 		}
 	}

@@ -125,14 +125,14 @@ public class ItemComputerArmor extends ItemArmor implements IVisDiscountGear, IR
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> list) {
-		if(isInCreativeTab(par2CreativeTabs)) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if(isInCreativeTab(tab)) {
 			ItemStack min = new ItemStack(this, 1, 0);
 			ItemStack max = new ItemStack(this, 1, 0);
 			min.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(0);
 			max.getCapability(MRU_HANDLER_ITEM_CAPABILITY, null).setMRU(maxMRU);
-			list.add(min);
-			list.add(max);
+			items.add(min);
+			items.add(max);
 		}
 	}
 

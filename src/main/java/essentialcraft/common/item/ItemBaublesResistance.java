@@ -27,13 +27,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBaublesResistance extends Item implements IBauble, IModelRegisterer {
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h) {
-		ItemStack stack = p.getHeldItem(h);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound bTag = MiscUtils.getStackTag(stack);
 		if(!bTag.hasKey("type")) {
-			initRandomTag(stack, w.rand);
+			initRandomTag(stack, world.rand);
 		}
-		return super.onItemRightClick(w, p, h);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	public static void initRandomTag(ItemStack stk, Random rand) {
