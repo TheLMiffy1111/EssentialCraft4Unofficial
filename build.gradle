@@ -1,5 +1,5 @@
 plugins {
-	id "com.crystaelix.loom" version "jitpack-39f2e017"
+	id "com.crystaelix.loom" version "jitpack-6453f0f4"
 	id "eclipse"
 	id "idea"
 	id "maven-publish"
@@ -143,9 +143,9 @@ dependencies {
     modImplementation "team.chisel.ctm:CTM:MC1.12.2-1.0.2.31"
 	modImplementation "curse.maven:hwyla-253449:2568751"
 
-	modImplementation("CraftTweaker2:ZenScript:4.1.20.698") {transitive = false}
-	modImplementation("CraftTweaker2:CraftTweaker2-API:4.1.20.698") {transitive = false}
-	modImplementation("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.698") {transitive = false}
+	modImplementation("CraftTweaker2:ZenScript:4.1.20.699") {transitive = false}
+	modImplementation("CraftTweaker2:CraftTweaker2-API:4.1.20.699") {transitive = false}
+	modImplementation("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.699") {transitive = false}
 
 	modImplementation "slimeknights.mantle:Mantle:1.12-1.3.3.55"
 	modImplementation "slimeknights:TConstruct:1.12.2-2.13.0.183"
@@ -162,9 +162,9 @@ dependencies {
 
 	// Performance
 	implementation("zone.rong:mixinbooter:9.1") {transitive = false}
-	modImplementation "curse.maven:reid-629017:5143492"
-	modImplementation "curse.maven:vintagefix-871198:5175094"
-	modImplementation "curse.maven:lolasm-460609:5120166"
+	modImplementation "curse.maven:reid-629017:5272391"
+	modImplementation "curse.maven:vintagefix-871198:5348800"
+	modImplementation "curse.maven:lolasm-460609:5257348"
 }
 
 def replacements = [
